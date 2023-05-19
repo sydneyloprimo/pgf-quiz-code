@@ -59,5 +59,12 @@ module.exports = {
       colors,
     },
   },
+  zIndex: {
+    header: '60',
+    dropdown: '70',
+    'hamburger-menu': '80',
+    navDrawer: '90',
+    modal: '100',
+  },
   plugins: [],
 }
