@@ -7,8 +7,9 @@ import HamburgerMenu from './HamburgerMenu'
 
 const images = {
   logoWhite: '/icons/logo-white.svg',
+  chevronDown: '/icons/chevron-down.svg',
   cartIcon: '/icons/cart.svg',
-  hamburgerIcon: 'hamburger icon',
+  hamburgerIcon: '/icons/hamburger.svg',
 }
 
 const Header = () => {
@@ -42,29 +43,48 @@ const Header = () => {
       </div>
 
       <div className="hidden md:flex">
-        <button className="mx-2 outline outline-1 text-white rounded-md px-4 py-1">
+        <button className="mx-2 text-sm h-10 outline outline-1 text-white rounded-md px-5 flex items-center">
           My Account
+          <Image
+            className="ms-3"
+            src={images.chevronDown}
+            alt=""
+            width={16}
+            height={14}
+          />
         </button>
-        <button className="mx-2 flex outline outline-1 text-white rounded-md px-4 py-1">
+        <button className="mx-2 text-sm h-10 flex outline outline-1 text-white rounded-md px-5 flex items-center">
           Shopping cart
           <Image
             className="ms-3"
             src={images.cartIcon}
-            alt="shopping cart icon"
+            alt=""
             width={16}
             height={14}
           />
         </button>
       </div>
 
-      <div className="md:hidden">
+      <div className="flex md:hidden">
         <button
-          className="mx-2 outline outline-1 text-white rounded-md px-4 py-1"
+          className="mx-2 outline outline-1 text-white rounded-sm h-8 px-4"
           onClick={toggleMenu}
         >
           <Image
-            src="/icons/hamburger.svg"
-            alt={images.hamburgerIcon}
+            className="mr-1"
+            src={images.cartIcon}
+            alt="cart icon"
+            width={24}
+            height={24}
+          />
+        </button>
+        <button
+          className="mx-2 outline outline-1 text-white rounded-sm h-8 px-4"
+          onClick={toggleMenu}
+        >
+          <Image
+            alt="hamburger icon"
+            src={images.hamburgerIcon}
             width={24}
             height={24}
           />
