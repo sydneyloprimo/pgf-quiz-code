@@ -22,7 +22,7 @@ const Header = () => {
   return (
     <header
       className={cn(
-        'flex items-center justify-between p-5 bg-black container h-14 md:h-24'
+        'flex items-center justify-between p-5 bg-black container h-14 md:h-24 min-w-full'
       )}
     >
       <div>

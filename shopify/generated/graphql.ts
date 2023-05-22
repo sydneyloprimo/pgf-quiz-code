@@ -1,4 +1,5 @@
 import { GraphQLClient } from 'graphql-request';
+import { RequestInit } from 'graphql-request/dist/types.dom';
 import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -6921,21 +6922,33 @@ export type GetAllProductsQueryVariables = Exact<{
   query?: InputMaybe<Scalars['String']>;
   sortKey?: InputMaybe<ProductSortKeys>;
   reverse?: InputMaybe<Scalars['Boolean']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type GetAllProductsQuery = { __typename?: 'QueryRoot', products: { __typename?: 'ProductConnection', pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ProductEdge', node: { __typename?: 'Product', id: string, title: string, vendor: string, handle: string, priceRange: { __typename?: 'ProductPriceRange', minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, images: { __typename?: 'ImageConnection', pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ImageEdge', node: { __typename?: 'Image', url: any, altText?: string | null, width?: number | null, height?: number | null } }> } } }> } };
+export type GetAllProductsQuery = { __typename?: 'QueryRoot', products: { __typename?: 'ProductConnection', pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, endCursor?: string | null, startCursor?: string | null }, edges: Array<{ __typename?: 'ProductEdge', cursor: string, node: { __typename?: 'Product', id: string, title: string, vendor: string, handle: string, priceRange: { __typename?: 'ProductPriceRange', minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, images: { __typename?: 'ImageConnection', pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ImageEdge', node: { __typename?: 'Image', url: any, altText?: string | null, width?: number | null, height?: number | null } }> } } }> } };
 
 
 export const GetAllProductsDocument = /*#__PURE__*/ `
-    query getAllProducts($first: Int = 250, $query: String = "", $sortKey: ProductSortKeys = RELEVANCE, $reverse: Boolean = false) {
-  products(first: $first, sortKey: $sortKey, reverse: $reverse, query: $query) {
+    query getAllProducts($first: Int = 50, $query: String = "", $sortKey: ProductSortKeys = RELEVANCE, $reverse: Boolean = false, $after: String = null, $before: String = null) {
+  products(
+    first: $first
+    sortKey: $sortKey
+    reverse: $reverse
+    query: $query
+    after: $after
+    before: $before
+  ) {
     ... on ProductConnection {
       pageInfo {
         hasNextPage
         hasPreviousPage
+        endCursor
+        startCursor
       }
       edges {
+        cursor
         node {
           id
           title

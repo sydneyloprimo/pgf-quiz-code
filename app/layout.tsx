@@ -1,12 +1,8 @@
 import './globals.css'
-import cn from 'classnames'
-import { Inter } from 'next/font/google'
 
 import Providers from 'utils/provider'
 
 import Header from './components/Header'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Create Next App',
@@ -20,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cn(inter.className, 'flex items-center flex-col')}>
+      <body className='flex items-center flex-col'>
         <Providers>
           <Header />
           {children}

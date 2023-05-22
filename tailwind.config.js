@@ -6,6 +6,10 @@ const backgroundImage = {
     'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
 }
 
+const boxShadow = {
+  1: '0px 0px 18px rgba(0, 0, 0, 0.15)',
+}
+
 const colors = {
   active: '#254A96',
   'active-outline': '#9EBBF3',
@@ -57,6 +61,7 @@ module.exports = {
     extend: {
       backgroundImage,
       colors,
+      boxShadow,
     },
   },
   zIndex: {
