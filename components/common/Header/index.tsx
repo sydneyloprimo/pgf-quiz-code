@@ -43,7 +43,7 @@ const Header = () => {
       </div>
 
       <div className="hidden md:flex">
-        <button className="mx-2 text-sm h-10 outline outline-1 text-white rounded-md px-5 flex items-center">
+        <button className="mx-2 btn-primary !text-sm">
           My Account
           <Image
             className="ms-3"
@@ -53,7 +53,7 @@ const Header = () => {
             height={14}
           />
         </button>
-        <button className="mx-2 text-sm h-10 flex outline outline-1 text-white rounded-md px-5 flex items-center">
+        <button className="mx-2 btn-primary !text-sm">
           Shopping cart
           <Image
             className="ms-3"
@@ -67,7 +67,7 @@ const Header = () => {
 
       <div className="flex md:hidden">
         <button
-          className="mx-2 outline outline-1 text-white rounded-sm h-8 px-4"
+          className="mx-2 btn-primary !rounded-sm !h-8 !px-4"
           onClick={toggleMenu}
         >
           <Image
@@ -79,7 +79,7 @@ const Header = () => {
           />
         </button>
         <button
-          className="mx-2 outline outline-1 text-white rounded-sm h-8 px-4"
+          className="mx-2 btn-primary !rounded-sm !h-8 !px-4"
           onClick={toggleMenu}
         >
           <Image

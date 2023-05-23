@@ -12,7 +12,7 @@ interface ProductCardProps {
 const ProductCard = ({ product, className }: ProductCardProps) => (
   <button
     className={cn(
-      'bg-white flex hover:shadow-2 active:border-active-outline active:border-[3px] focus:border-dashed focus:border-2 focus:border-focus focus:outline-none md:h-auto md:focus:outline-dashed md:focus:outline-2 md:focus:outline-focus ',
+      'bg-white flex hover:shadow-2 active:border-active-outline active:border-[3px] focus:border-dashed focus:border-2 focus:border-focus focus:outline-none md:h-auto md:focus:border-none md:focus:outline-dashed md:focus:outline-2 md:focus:outline-focus ',
       className
     )}
   >
