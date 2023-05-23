@@ -1,8 +1,8 @@
 import './globals.css'
 
-import Providers from 'utils/provider'
+import Header from 'components/common/Header'
 
-import Header from './components/Header'
+import Providers from 'utils/provider'
 
 export const metadata = {
   title: 'Create Next App',
@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className='flex items-center flex-col'>
+      <body className="flex items-center flex-col">
         <Providers>
           <Header />
           {children}

@@ -6,37 +6,54 @@ import Image from 'next/image'
 import ChevronIcon from 'public/icons/chevron-left.svg'
 import { useState } from 'react'
 import { client } from 'shopify/client'
-import { useGetAllProductsQuery } from 'shopify/generated/graphql'
+import { useInfiniteGetAllProductsQuery } from 'shopify/generated/graphql'
 
 interface ProductListProps {
   className?: string
 }
 
+const PAGE_SIZE = 4
 const ProductList = ({ className }: ProductListProps) => {
-  const [variables, setVariables] = useState({})
+  const [page, setPage] = useState(0)
 
-  // TODO: Add pagination
-  const { data } = useGetAllProductsQuery(
+  const { data, fetchNextPage } = useInfiniteGetAllProductsQuery(
+    'first',
     client,
     {
-      first: 2,
-      ...variables,
+      first: PAGE_SIZE,
     },
-    { keepPreviousData: true }
+    {
+      getNextPageParam: (lastPage) =>
+        lastPage?.products?.pageInfo?.hasNextPage
+          ? { after: lastPage?.products?.pageInfo?.endCursor }
+          : null,
+      select: ({ pageParams, pages }) => ({
+        pageParams: pageParams,
+        pages: pages.map(({ products: { edges, pageInfo } }) => ({
+          edges,
+          pageInfo,
+        })),
+      }),
+      keepPreviousData: true,
+    }
   )
 
-  const { pageInfo, edges } = data?.products || {}
+  const { edges, pageInfo } = data?.pages[page] || {}
 
   const onNextClick = () => {
-    setVariables({ after: pageInfo?.endCursor })
+    const totalPages = data?.pages?.length
+    if (!totalPages || page === totalPages - 1) {
+      fetchNextPage()
+    }
+    setPage(page + 1)
   }
 
   const onPreviousClick = () => {
-    // TODO: Add previous page click
+    setPage(page - 1)
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col flex-1 justify-between md:flex-none md:justify-normal">
       <div
         className={cn(
           'flex-initial shadow-1 rounded-lg md:shadow-none md:rounded-0',
@@ -59,16 +76,17 @@ const ProductList = ({ className }: ProductListProps) => {
       </div>
       <div className="flex justify-between">
         <button
-          className="flex hover:opacity-80 disabled:opacity-80"
+          className="flex hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={onPreviousClick}
+          disabled={page === 0}
         >
           <Image src={ChevronIcon} className="m-auto mr-5" alt="" />
           <p>Previous Page</p>
         </button>
-        <span>Page 1 of 7</span>
         <button
-          className="flex hover:opacity-80 disabled:opacity-80"
+          className="flex hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={onNextClick}
+          disabled={!pageInfo?.hasNextPage}
         >
           <p> Next Page </p>
           <Image
