@@ -1,11 +1,11 @@
 import { dehydrate } from '@tanstack/query-core'
-import ProductList from 'components/products/ProductList'
 import Image from 'next/image'
+
+import Hydrate from '@/utils/hydrate.client'
+import ProductList from 'components/products/ProductList'
 import FilterIcon from 'public/icons/filter.svg'
 import { client } from 'shopify/client'
 import { useGetAllProductsQuery } from 'shopify/generated/graphql'
-
-import Hydrate from '@/utils/hydrate.client'
 import getQueryClient from 'utils/getQueryClient'
 
 export default async function ProductPage() {

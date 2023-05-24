@@ -1,7 +1,9 @@
 import './globals.css'
 
-import Header from 'components/common/Header'
+import { notFound } from 'next/navigation';
+import { useLocale } from 'next-intl'
 
+import Header from 'components/common/Header'
 import Providers from 'utils/provider'
 
 export const metadata = {
@@ -11,11 +13,21 @@ export const metadata = {
 
 export default function RootLayout({
   children,
+  params
 }: {
-  children: React.ReactNode
+  children: React.ReactNode,
+  params: {
+    locale: string;
+  };
 }) {
+  const locale = useLocale();
+
+  if (params.locale !== locale) {
+    notFound();
+  }
+
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body className="flex items-center flex-col">
         <Providers>
           <Header />

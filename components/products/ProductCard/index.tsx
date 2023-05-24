@@ -1,6 +1,7 @@
 'use client'
 import cn from 'classnames'
 import Image from 'next/image'
+
 import { GetAllProductsQuery } from 'shopify/generated/graphql'
 
 // TODO: Change the product card props

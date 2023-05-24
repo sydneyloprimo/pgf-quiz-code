@@ -1,10 +1,11 @@
 'use client'
 
 import cn from 'classnames'
-import ProductCard from 'components/products/ProductCard'
 import Image from 'next/image'
-import ChevronIcon from 'public/icons/chevron-left.svg'
 import { useState } from 'react'
+
+import ProductCard from 'components/products/ProductCard'
+import ChevronIcon from 'public/icons/chevron-left.svg'
 import { client } from 'shopify/client'
 import { useInfiniteGetAllProductsQuery } from 'shopify/generated/graphql'
 
