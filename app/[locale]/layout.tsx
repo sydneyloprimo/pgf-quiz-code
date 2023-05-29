@@ -1,6 +1,6 @@
 import './globals.css'
 
-import { notFound } from 'next/navigation';
+import { notFound } from 'next/navigation'
 import { useLocale } from 'next-intl'
 
 import Header from 'components/common/Header'
@@ -13,17 +13,17 @@ export const metadata = {
 
 export default function RootLayout({
   children,
-  params
+  params,
 }: {
-  children: React.ReactNode,
+  children: React.ReactNode
   params: {
-    locale: string;
-  };
+    locale: string
+  }
 }) {
-  const locale = useLocale();
+  const locale = useLocale()
 
   if (params.locale !== locale) {
-    notFound();
+    notFound()
   }
 
   return (
