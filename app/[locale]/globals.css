@@ -57,5 +57,5 @@ body {
 }
 
 .btn-primary {
-  @apply text-white rounded-md outline outline-white outline-1 bg-dark-violet text-base h-10 px-5 flex items-center disabled:bg-light-grey disabled:cursor-not-allowed disabled:text-dark-grey disabled:outline-none hover:bg-hover hover:outline-none focus:outline-dashed focus:outline-2 focus:outline-focus active:bg-active active:outline-active-outline active:outline;
+  @apply text-white rounded-md outline outline-white outline-1 bg-dark-violet text-base h-10 px-5 flex items-center justify-center disabled:bg-light-grey disabled:cursor-not-allowed disabled:text-dark-grey disabled:outline-none hover:bg-hover hover:outline-none focus:outline-dashed focus:outline-2 focus:outline-focus active:bg-active active:outline-active-outline active:outline;
 }
