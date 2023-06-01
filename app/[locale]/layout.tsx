@@ -4,8 +4,6 @@ import { notFound } from 'next/navigation'
 import { useLocale } from 'next-intl'
 import { PropsWithChildren } from 'react'
 
-import Header from '@/components/common/Header'
-import LocaleWrapper from '@/components/common/LocaleWrapper'
 import { Locale } from '@/i18n'
 import Providers from 'utils/provider'
 
@@ -29,9 +27,6 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
     <html lang={locale}>
       <body className="flex items-center flex-col">
         <Providers>
-          <LocaleWrapper params={params} localeGroup="Header">
-            <Header />
-          </LocaleWrapper>
           {children}
         </Providers>
       </body>
