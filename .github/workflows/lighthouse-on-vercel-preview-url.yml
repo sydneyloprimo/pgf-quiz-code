@@ -20,13 +20,13 @@ jobs:
             Running Lighthouse audit...
       - name: Capture Vercel preview URL
         id: vercel_preview_url
-        uses: aaron-binary/vercel-preview-url-action@v0.0.3
+        uses: aaimio/vercel-preview-url-action@v2.2.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v2
       - name: Audit preview URL with Lighthouse
         id: lighthouse_audit
-        uses: treosh/lighthouse-ci-action@v3
+        uses: treosh/lighthouse-ci-action@v10
         with:
           urls: |
             ${{ steps.vercel_preview_url.outputs.vercel_preview_url }}
