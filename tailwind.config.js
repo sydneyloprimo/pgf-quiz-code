@@ -4,6 +4,7 @@ const backgroundImage = {
   'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
   'gradient-conic':
     'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+  auth_bg_image: "url('/auth-background.png')",
 }
 
 const boxShadow = {
