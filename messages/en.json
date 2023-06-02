@@ -1,5 +1,19 @@
 {
+  "Header": {
+    "myAccount": "My account",
+    "shoppingCart": "Shopping cart",
+    "cartIcon": "cart icon",
+    "hamburgerIcon": "hamburger icon",
+    "logoDesktop": "logo desktop",
+    "logoMobile": "logo mobile"
+  },
   "Home": {
     "title": "Hello world!"
+  },
+  "Detail": {
+    "productDescription": "Product description",
+    "quantity": "Quantity",
+    "addToCart": "Add to cart",
+    "availability": "Availability: {count} items"
   }
 }

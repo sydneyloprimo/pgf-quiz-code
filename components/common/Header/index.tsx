@@ -1,6 +1,9 @@
 'use client'
+
 import cn from 'classnames'
 import Image from 'next/image'
+import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import React, { useState } from 'react'
 
 import HamburgerMenu from './HamburgerMenu'
@@ -14,6 +17,7 @@ const images = {
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const t = useTranslations('Header')
 
   const toggleMenu = () => {
     setIsOpen((isOpen) => !isOpen)
@@ -22,29 +26,31 @@ const Header = () => {
   return (
     <header
       className={cn(
-        'flex items-center justify-between p-5 bg-black container h-14 md:h-24 min-w-full'
+        'flex items-center justify-between px-5 md:px-0 py-5 bg-black container h-14 md:h-24'
       )}
     >
       <div>
-        <Image
-          className="hidden md:block"
-          src={images.logoWhite}
-          alt="Logo desktop"
-          width={192}
-          height={34}
-        />
-        <Image
-          className="md:hidden"
-          src={images.logoWhite}
-          alt="Logo mobile"
-          width={112}
-          height={19}
-        />
+        <Link href="/">
+          <Image
+            className="hidden md:block"
+            src={images.logoWhite}
+            alt={t('logoDesktop')}
+            width={192}
+            height={34}
+          />
+          <Image
+            className="md:hidden"
+            src={images.logoWhite}
+            alt={t('logoMobile')}
+            width={112}
+            height={19}
+          />
+        </Link>
       </div>
 
       <div className="hidden md:flex">
         <button className="mx-2 btn-primary !text-sm">
-          My Account
+          {t('myAccount')}
           <Image
             className="ms-3"
             src={images.chevronDown}
@@ -53,8 +59,8 @@ const Header = () => {
             height={14}
           />
         </button>
-        <button className="mx-2 btn-primary !text-sm">
-          Shopping cart
+        <button className="ml-2 btn-primary !text-sm">
+          {t('shoppingCart')}
           <Image
             className="ms-3"
             src={images.cartIcon}
@@ -73,17 +79,17 @@ const Header = () => {
           <Image
             className="mr-1"
             src={images.cartIcon}
-            alt="cart icon"
+            alt={t('cartIcon')}
             width={24}
             height={24}
           />
         </button>
         <button
-          className="mx-2 btn-primary !rounded-sm !h-8 !px-4"
+          className="ml-2 btn-primary !rounded-sm !h-8 !px-4"
           onClick={toggleMenu}
         >
           <Image
-            alt="hamburger icon"
+            alt={t('hamburgerIcon')}
             src={images.hamburgerIcon}
             width={24}
             height={24}

@@ -1,0 +1,53 @@
+query GetProductDetail($handle: String!) {
+  product(handle: $handle) {
+    id
+    title
+    vendor
+    handle
+    description
+    availableForSale
+    priceRange {
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+      maxVariantPrice {
+        amount
+        currencyCode
+      }
+    }
+    images(first: 1) {
+      edges {
+        node {
+          url
+          width
+          height
+          altText
+        }
+      }
+    }
+    variants(first: 50) {
+      edges {
+        node {
+          id
+          title
+          image {
+            url
+            width
+            height
+            altText
+          }
+          quantityAvailable
+          price {
+            amount
+            currencyCode
+          }
+          selectedOptions {
+            name
+            value
+          }
+        }
+      }
+    }
+  }
+}

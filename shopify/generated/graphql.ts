@@ -6929,6 +6929,13 @@ export type GetAllProductsQueryVariables = Exact<{
 
 export type GetAllProductsQuery = { __typename?: 'QueryRoot', products: { __typename?: 'ProductConnection', pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, endCursor?: string | null, startCursor?: string | null }, edges: Array<{ __typename?: 'ProductEdge', cursor: string, node: { __typename?: 'Product', id: string, title: string, vendor: string, handle: string, priceRange: { __typename?: 'ProductPriceRange', minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, images: { __typename?: 'ImageConnection', pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean }, edges: Array<{ __typename?: 'ImageEdge', node: { __typename?: 'Image', url: any, altText?: string | null, width?: number | null, height?: number | null } }> } } }> } };
 
+export type GetProductDetailQueryVariables = Exact<{
+  handle: Scalars['String'];
+}>;
+
+
+export type GetProductDetailQuery = { __typename?: 'QueryRoot', product?: { __typename?: 'Product', id: string, title: string, vendor: string, handle: string, description: string, availableForSale: boolean, priceRange: { __typename?: 'ProductPriceRange', minVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, maxVariantPrice: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode } }, images: { __typename?: 'ImageConnection', edges: Array<{ __typename?: 'ImageEdge', node: { __typename?: 'Image', url: any, width?: number | null, height?: number | null, altText?: string | null } }> }, variants: { __typename?: 'ProductVariantConnection', edges: Array<{ __typename?: 'ProductVariantEdge', node: { __typename?: 'ProductVariant', id: string, title: string, quantityAvailable?: number | null, image?: { __typename?: 'Image', url: any, width?: number | null, height?: number | null, altText?: string | null } | null, price: { __typename?: 'MoneyV2', amount: any, currencyCode: CurrencyCode }, selectedOptions: Array<{ __typename?: 'SelectedOption', name: string, value: string }> } }> } } | null };
+
 
 export const GetAllProductsDocument = /*#__PURE__*/ `
     query getAllProducts($first: Int = 50, $query: String = "", $sortKey: ProductSortKeys = RELEVANCE, $reverse: Boolean = false, $after: String = null, $before: String = null) {
@@ -7019,3 +7026,97 @@ useInfiniteGetAllProductsQuery.getKey = (variables?: GetAllProductsQueryVariable
 ;
 
 useGetAllProductsQuery.fetcher = (client: GraphQLClient, variables?: GetAllProductsQueryVariables, headers?: RequestInit['headers']) => fetcher<GetAllProductsQuery, GetAllProductsQueryVariables>(client, GetAllProductsDocument, variables, headers);
+export const GetProductDetailDocument = /*#__PURE__*/ `
+    query GetProductDetail($handle: String!) {
+  product(handle: $handle) {
+    id
+    title
+    vendor
+    handle
+    description
+    availableForSale
+    priceRange {
+      minVariantPrice {
+        amount
+        currencyCode
+      }
+      maxVariantPrice {
+        amount
+        currencyCode
+      }
+    }
+    images(first: 1) {
+      edges {
+        node {
+          url
+          width
+          height
+          altText
+        }
+      }
+    }
+    variants(first: 50) {
+      edges {
+        node {
+          id
+          title
+          image {
+            url
+            width
+            height
+            altText
+          }
+          quantityAvailable
+          price {
+            amount
+            currencyCode
+          }
+          selectedOptions {
+            name
+            value
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const useGetProductDetailQuery = <
+      TData = GetProductDetailQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient,
+      variables: GetProductDetailQueryVariables,
+      options?: UseQueryOptions<GetProductDetailQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useQuery<GetProductDetailQuery, TError, TData>(
+      ['GetProductDetail', variables],
+      fetcher<GetProductDetailQuery, GetProductDetailQueryVariables>(client, GetProductDetailDocument, variables, headers),
+      options
+    );
+
+useGetProductDetailQuery.getKey = (variables: GetProductDetailQueryVariables) => ['GetProductDetail', variables];
+;
+
+export const useInfiniteGetProductDetailQuery = <
+      TData = GetProductDetailQuery,
+      TError = unknown
+    >(
+      pageParamKey: keyof GetProductDetailQueryVariables,
+      client: GraphQLClient,
+      variables: GetProductDetailQueryVariables,
+      options?: UseInfiniteQueryOptions<GetProductDetailQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) =>
+    useInfiniteQuery<GetProductDetailQuery, TError, TData>(
+      ['GetProductDetail.infinite', variables],
+      (metaData) => fetcher<GetProductDetailQuery, GetProductDetailQueryVariables>(client, GetProductDetailDocument, {...variables, ...(metaData.pageParam ?? {})}, headers)(),
+      options
+    );
+
+
+useInfiniteGetProductDetailQuery.getKey = (variables: GetProductDetailQueryVariables) => ['GetProductDetail.infinite', variables];
+;
+
+useGetProductDetailQuery.fetcher = (client: GraphQLClient, variables: GetProductDetailQueryVariables, headers?: RequestInit['headers']) => fetcher<GetProductDetailQuery, GetProductDetailQueryVariables>(client, GetProductDetailDocument, variables, headers);
