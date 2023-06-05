@@ -15,5 +15,11 @@
     "quantity": "Quantity",
     "addToCart": "Add to cart",
     "availability": "Availability: {count} items"
+  },
+  "SignUp": {
+    "email": "Email",
+    "password": "Password",
+    "loginRedirectMessage": "Already have an account?",
+    "loginRedirectLink": "Login"
   }
 }

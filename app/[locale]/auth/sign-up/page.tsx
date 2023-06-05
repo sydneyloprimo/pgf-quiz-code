@@ -2,11 +2,14 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 import { isEmailValid, isPasswordValid } from '@/utils/utils'
 
 export default function SignUp() {
+  const t = useTranslations('SignUp')
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [, setEmailError] = useState('')
@@ -40,7 +43,7 @@ export default function SignUp() {
       </div>
       <form>
         <div className="flex flex-col mb-3">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">{t('email')}</label>
           <input
             className="h-[44px] rounded-lg border border-solid border-black p-3"
             placeholder="Type your email"
@@ -51,7 +54,7 @@ export default function SignUp() {
           />
         </div>
         <div className="flex flex-col mb-3">
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">{t('password')}</label>
           <input
             className="h-[44px] rounded-lg border border-solid border-black p-3"
             placeholder="Type your password"
@@ -66,9 +69,9 @@ export default function SignUp() {
         </button>
       </form>
       <div className="flex justify-center gap-1">
-        <span>Already have an account? </span>
+        <span>{t('loginRedirectMessage')}</span>
         <Link className="text-links" href="/">
-          Login
+          {t('loginRedirectLink')}
         </Link>
       </div>
     </div>

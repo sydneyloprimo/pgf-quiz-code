@@ -26,9 +26,7 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
   return (
     <html lang={locale}>
       <body className="flex items-center flex-col">
-        <Providers>
-          {children}
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   )

@@ -4,9 +4,9 @@ import Header from 'components/common/Header'
 
 export default function RootLayout({
   children,
-  params
+  params,
 }: {
-  children: React.ReactNode,
+  children: React.ReactNode
   params: { locale: Locale }
 }) {
   return (
