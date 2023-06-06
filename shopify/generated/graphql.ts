@@ -6888,6 +6888,46 @@ export type CartCreateMutation = {
   } | null
 }
 
+export type CustomerCreateMutationVariables = Exact<{
+  input: CustomerCreateInput
+}>
+
+export type CustomerCreateMutation = {
+  __typename?: 'Mutation'
+  customerCreate?: {
+    __typename?: 'CustomerCreatePayload'
+    customerUserErrors: Array<{
+      __typename?: 'CustomerUserError'
+      code?: CustomerErrorCode | null
+      field?: Array<string> | null
+      message: string
+    }>
+    customer?: { __typename?: 'Customer'; id: string } | null
+  } | null
+}
+
+export type CustomerAccessTokenCreateMutationVariables = Exact<{
+  input: CustomerAccessTokenCreateInput
+}>
+
+export type CustomerAccessTokenCreateMutation = {
+  __typename?: 'Mutation'
+  customerAccessTokenCreate?: {
+    __typename?: 'CustomerAccessTokenCreatePayload'
+    customerUserErrors: Array<{
+      __typename?: 'CustomerUserError'
+      code?: CustomerErrorCode | null
+      field?: Array<string> | null
+      message: string
+    }>
+    customerAccessToken?: {
+      __typename?: 'CustomerAccessToken'
+      accessToken: string
+      expiresAt: any
+    } | null
+  } | null
+}
+
 export type GetAllProductsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>
   query?: InputMaybe<Scalars['String']>
@@ -7154,6 +7194,108 @@ useCartCreateMutation.fetcher = (
     variables,
     headers
   )
+export const CustomerCreateDocument = /*#__PURE__*/ `
+    mutation customerCreate($input: CustomerCreateInput!) {
+  customerCreate(input: $input) {
+    customerUserErrors {
+      code
+      field
+      message
+    }
+    customer {
+      id
+    }
+  }
+}
+    `
+export const useCustomerCreateMutation = <TError = unknown, TContext = unknown>(
+  client: GraphQLClient,
+  options?: UseMutationOptions<
+    CustomerCreateMutation,
+    TError,
+    CustomerCreateMutationVariables,
+    TContext
+  >,
+  headers?: RequestInit['headers']
+) =>
+  useMutation<
+    CustomerCreateMutation,
+    TError,
+    CustomerCreateMutationVariables,
+    TContext
+  >(
+    ['customerCreate'],
+    (variables?: CustomerCreateMutationVariables) =>
+      fetcher<CustomerCreateMutation, CustomerCreateMutationVariables>(
+        client,
+        CustomerCreateDocument,
+        variables,
+        headers
+      )(),
+    options
+  )
+useCustomerCreateMutation.fetcher = (
+  client: GraphQLClient,
+  variables: CustomerCreateMutationVariables,
+  headers?: RequestInit['headers']
+) =>
+  fetcher<CustomerCreateMutation, CustomerCreateMutationVariables>(
+    client,
+    CustomerCreateDocument,
+    variables,
+    headers
+  )
+export const CustomerAccessTokenCreateDocument = /*#__PURE__*/ `
+    mutation customerAccessTokenCreate($input: CustomerAccessTokenCreateInput!) {
+  customerAccessTokenCreate(input: $input) {
+    customerUserErrors {
+      code
+      field
+      message
+    }
+    customerAccessToken {
+      accessToken
+      expiresAt
+    }
+  }
+}
+    `
+export const useCustomerAccessTokenCreateMutation = <
+  TError = unknown,
+  TContext = unknown
+>(
+  client: GraphQLClient,
+  options?: UseMutationOptions<
+    CustomerAccessTokenCreateMutation,
+    TError,
+    CustomerAccessTokenCreateMutationVariables,
+    TContext
+  >,
+  headers?: RequestInit['headers']
+) =>
+  useMutation<
+    CustomerAccessTokenCreateMutation,
+    TError,
+    CustomerAccessTokenCreateMutationVariables,
+    TContext
+  >(
+    ['customerAccessTokenCreate'],
+    (variables?: CustomerAccessTokenCreateMutationVariables) =>
+      fetcher<
+        CustomerAccessTokenCreateMutation,
+        CustomerAccessTokenCreateMutationVariables
+      >(client, CustomerAccessTokenCreateDocument, variables, headers)(),
+    options
+  )
+useCustomerAccessTokenCreateMutation.fetcher = (
+  client: GraphQLClient,
+  variables: CustomerAccessTokenCreateMutationVariables,
+  headers?: RequestInit['headers']
+) =>
+  fetcher<
+    CustomerAccessTokenCreateMutation,
+    CustomerAccessTokenCreateMutationVariables
+  >(client, CustomerAccessTokenCreateDocument, variables, headers)
 export const GetAllProductsDocument = /*#__PURE__*/ `
     query getAllProducts($first: Int = 50, $query: String = "", $sortKey: ProductSortKeys = RELEVANCE, $reverse: Boolean = false, $after: String = null, $before: String = null) {
   products(
