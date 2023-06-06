@@ -1,33 +1,66 @@
 'use client'
-
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { FormEvent, useCallback, useEffect, useState } from 'react'
 
+import Input from '@/components/common/Input/Input'
+import { client } from '@/shopify/client'
+import { useCustomerCreateMutation } from '@/shopify/generated/graphql'
 import { isEmailValid, isPasswordValid } from '@/utils/utils'
 
 export default function SignUp() {
+  const { push } = useRouter()
   const t = useTranslations('SignUp')
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [, setEmailError] = useState('')
-  const [, setPasswordError] = useState('')
+  const [emailError, setEmailError] = useState('')
+  const [passwordError, setPasswordError] = useState('')
+  const [passwordVisibility, setPasswordVisibility] = useState(false)
 
-  function isValid() {
-    setEmailError(!isEmailValid(email) ? 'Your email is invalid' : '')
+  const {
+    mutate: createCustomer,
+    isLoading,
+    data,
+  } = useCustomerCreateMutation(client, {
+    onSuccess: (data) => {
+      if (!data.customerCreate?.customerUserErrors.length) {
+        push('/auth/sign-in')
+      }
+    },
+  })
 
-    setPasswordError(
-      !isPasswordValid(password) ? 'Your password is invalid.' : ''
-    )
+  const getInputValidations = useCallback(() => {
+    if (email) {
+      setEmailError(!isEmailValid(email) ? 'Your email is invalid' : '')
+    } else {
+      setEmailError('')
+    }
 
-    return !!isEmailValid(email) && !!isPasswordValid(password)
-  }
+    if (password) {
+      setPasswordError(
+        !isPasswordValid(password) ? 'Your password is invalid.' : ''
+      )
+    } else {
+      setPasswordError('')
+    }
+  }, [email, password])
 
-  const handleSubmit = () => {
-    if (isValid()) {
-      //TODO api call and redirect to signin
+  useEffect(() => {
+    getInputValidations()
+  }, [getInputValidations])
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (!!isEmailValid(email) && !!isPasswordValid(password)) {
+      createCustomer({
+        input: {
+          email: email,
+          password: password,
+        },
+      })
     }
   }
 
@@ -41,37 +74,62 @@ export default function SignUp() {
           height={30}
         />
       </div>
-      <form>
-        <div className="flex flex-col mb-3">
-          <label htmlFor="email">{t('email')}</label>
-          <input
-            className="h-[44px] rounded-lg border border-solid border-black p-3"
-            placeholder="Type your email"
-            type="text"
-            id="email"
-            name="email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="flex flex-col mb-3">
-          <label htmlFor="password">{t('password')}</label>
-          <input
-            className="h-[44px] rounded-lg border border-solid border-black p-3"
-            placeholder="Type your password"
-            type="text"
-            id="password"
-            name="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button className="btn-primary w-full mt-3 mb-5" onClick={handleSubmit}>
-          Sign up
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <Input
+          label={t('email')}
+          error={emailError}
+          type="text"
+          placeholder={t('emailPlaceholder')}
+          id="email"
+          name="email"
+          onChange={(e) => setEmail(e.target.value)}
+          autoComplete="on"
+        />
+
+        <Input
+          label={t('password')}
+          error={passwordError}
+          type={passwordVisibility ? 'text' : 'password'}
+          placeholder={t('passwordPlaceholder')}
+          id="password"
+          name="password"
+          onChange={(e) => setPassword(e.target.value)}
+          icon={
+            <Image
+              src={
+                passwordVisibility
+                  ? '/icons/visibility_off.svg'
+                  : '/icons/visibility.svg'
+              }
+              alt=""
+              width={20}
+              height={19}
+              onClick={() => setPasswordVisibility(!passwordVisibility)}
+            />
+          }
+          iconPosition="end"
+          autoComplete="on"
+        />
+
+        {data?.customerCreate?.customerUserErrors.length ? (
+          <div className="text-red-500 text-md">
+            {data.customerCreate?.customerUserErrors[0].message}
+          </div>
+        ) : null}
+
+        <button
+          className="btn-primary w-full mt-3 mb-5 h-[44px]"
+          type="submit"
+          disabled={!email || !password || isLoading}
+        >
+          {t('buttonText')}
         </button>
       </form>
+
       <div className="flex justify-center gap-1">
-        <span>{t('loginRedirectMessage')}</span>
-        <Link className="text-links" href="/">
-          {t('loginRedirectLink')}
+        <span>{t('signinRedirectMessage')}</span>
+        <Link className="text-links" href="/auth/sign-in">
+          {t('signinRedirectLink')}
         </Link>
       </div>
     </div>
