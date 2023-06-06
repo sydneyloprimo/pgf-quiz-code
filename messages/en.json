@@ -17,9 +17,12 @@
     "availability": "Availability: {count} items"
   },
   "SignUp": {
+    "buttonText": "Sign up",
     "email": "Email",
+    "emailPlaceholder": "Type your email",
     "password": "Password",
-    "loginRedirectMessage": "Already have an account?",
-    "loginRedirectLink": "Login"
+    "passwordPlaceholder": "Type your password",
+    "signinRedirectMessage": "Already have an account?",
+    "signinRedirectLink": "Sign in"
   }
 }
