@@ -3,15 +3,19 @@ import cn from 'classnames'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
-import { GetAllProductsQuery } from 'shopify/generated/graphql'
-
-// TODO: Change the product card props
+// TODO: Change the product type
 interface ProductCardProps {
-  product: GetAllProductsQuery['products']['edges'][0]['node']
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  product: any
   className?: string
+  isVariant?: boolean
 }
 
-const ProductCard = ({ product, className }: ProductCardProps) => {
+const ProductCard = ({
+  product,
+  className,
+  isVariant = false,
+}: ProductCardProps) => {
   const { push } = useRouter()
 
   return (
@@ -24,8 +28,10 @@ const ProductCard = ({ product, className }: ProductCardProps) => {
     >
       <div className="w-[79px] h-[120px] rounded-lg relative md:w-[197px] md:h-[182px]">
         <Image
-          className="md:rounded-lg"
-          src={product.images.edges?.[0]?.node?.url}
+          className="md:rounded-l-lg"
+          src={
+            isVariant ? product.image.url : product.images.edges?.[0]?.node?.url
+          }
           fill
           style={{ objectFit: 'cover' }}
           sizes="(max-width: 768px) 120px, (min-width: 768px) 182pxw"
@@ -37,7 +43,9 @@ const ProductCard = ({ product, className }: ProductCardProps) => {
           {product.title}
         </h3>
         <h3 className="text-sm text-start md:text-xl">
-          ${product.priceRange.minVariantPrice.amount}
+          {isVariant
+            ? `${product.priceV2.currencyCode} ${product.priceV2.amount}`
+            : `${product.priceRange.minVariantPrice.currencyCode} ${product.priceRange.minVariantPrice.amount}`}
         </h3>
       </div>
     </button>

@@ -1,0 +1,31 @@
+mutation cartCreate {
+  cartCreate {
+    cart {
+      id
+      updatedAt
+      checkoutUrl
+      totalQuantity
+      note
+      lines(first: 10) {
+        nodes {
+          id
+          quantity
+        }
+      }
+      cost {
+        subtotalAmount {
+          amount
+          currencyCode
+        }
+        totalAmount {
+          amount
+          currencyCode
+        }
+      }
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}

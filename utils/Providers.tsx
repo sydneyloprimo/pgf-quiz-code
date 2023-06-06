@@ -3,6 +3,7 @@
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { PropsWithChildren, useState } from 'react'
+import { CookiesProvider } from 'react-cookie'
 
 function Providers({ children }: PropsWithChildren) {
   const [client] = useState(
@@ -11,7 +12,7 @@ function Providers({ children }: PropsWithChildren) {
 
   return (
     <QueryClientProvider client={client}>
-      {children}
+      <CookiesProvider>{children}</CookiesProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )

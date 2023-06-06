@@ -5,7 +5,8 @@ import { useLocale } from 'next-intl'
 import { PropsWithChildren } from 'react'
 
 import { Locale } from '@/i18n'
-import Providers from 'utils/provider'
+import Providers from 'utils/Providers'
+import Session from 'utils/Session'
 
 export const metadata = {
   title: 'Create Next App',
@@ -26,7 +27,9 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
   return (
     <html lang={locale}>
       <body className="flex items-center flex-col">
-        <Providers>{children}</Providers>
+        <Providers>
+          <Session>{children}</Session>
+        </Providers>
       </body>
     </html>
   )

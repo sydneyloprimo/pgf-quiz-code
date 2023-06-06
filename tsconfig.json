@@ -22,8 +22,10 @@
     "paths": {
       "@/*": ["./*"],
       "components/*": ["./components/*"],
+      "hooks/*": ["./hooks/*"],
       "public/*": ["./public/*"],
       "shopify/*": ["./shopify/*"],
+      "types/*": ["./types/*"],
       "utils/*": ["./utils/*"]
     }
   },
