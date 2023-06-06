@@ -8,7 +8,12 @@ import { FormEvent, useCallback, useEffect, useState } from 'react'
 import Input from '@/components/common/Input/Input'
 import { client } from '@/shopify/client'
 import { useCustomerCreateMutation } from '@/shopify/generated/graphql'
+import { InputIconPosition } from '@/types/enums/constants'
+import { Routes } from '@/types/enums/routes'
 import { isEmailValid, isPasswordValid } from '@/utils/utils'
+import blackLogo from 'public/icons/logo-black.svg'
+import passwordVisibility from 'public/icons/visibility.svg'
+import passwordVisibilityOff from 'public/icons/visibility_off.svg'
 
 export default function SignUp() {
   const { push } = useRouter()
@@ -18,7 +23,7 @@ export default function SignUp() {
   const [password, setPassword] = useState('')
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
-  const [passwordVisibility, setPasswordVisibility] = useState(false)
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
 
   const {
     mutate: createCustomer,
@@ -27,33 +32,33 @@ export default function SignUp() {
   } = useCustomerCreateMutation(client, {
     onSuccess: (data) => {
       if (!data.customerCreate?.customerUserErrors.length) {
-        push('/auth/sign-in')
+        push(Routes.signin)
       }
     },
   })
 
   const getInputValidations = useCallback(() => {
     if (email) {
-      setEmailError(!isEmailValid(email) ? 'Your email is invalid' : '')
+      setEmailError(!isEmailValid(email) ? t('emailValidation') : '')
     } else {
       setEmailError('')
     }
 
     if (password) {
       setPasswordError(
-        !isPasswordValid(password) ? 'Your password is invalid.' : ''
+        !isPasswordValid(password) ? t('passwordValidation') : ''
       )
     } else {
       setPasswordError('')
     }
-  }, [email, password])
+  }, [email, password, t])
 
   useEffect(() => {
     getInputValidations()
   }, [getInputValidations])
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
     if (!!isEmailValid(email) && !!isPasswordValid(password)) {
       createCustomer({
         input: {
@@ -67,14 +72,9 @@ export default function SignUp() {
   return (
     <div className="w-[360px] h-[556px] bg-white text-black mx-4 mt-9 md:mt-28 md:mx-32 px-8 py-10 rounded-lg">
       <div className="flex justify-center mb-10">
-        <Image
-          src="/icons/logo-black.svg"
-          alt="Logo black"
-          width={173}
-          height={30}
-        />
+        <Image src={blackLogo} alt="Logo black" width={173} height={30} />
       </div>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <form onSubmit={handleSubmit}>
         <Input
           label={t('email')}
           error={emailError}
@@ -82,32 +82,30 @@ export default function SignUp() {
           placeholder={t('emailPlaceholder')}
           id="email"
           name="email"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(event) => setEmail(event.target.value)}
           autoComplete="on"
         />
 
         <Input
           label={t('password')}
           error={passwordError}
-          type={passwordVisibility ? 'text' : 'password'}
+          type={isPasswordVisible ? 'text' : 'password'}
           placeholder={t('passwordPlaceholder')}
           id="password"
           name="password"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(event) => setPassword(event.target.value)}
           icon={
             <Image
               src={
-                passwordVisibility
-                  ? '/icons/visibility_off.svg'
-                  : '/icons/visibility.svg'
+                isPasswordVisible ? passwordVisibilityOff : passwordVisibility
               }
               alt=""
               width={20}
               height={19}
-              onClick={() => setPasswordVisibility(!passwordVisibility)}
+              onClick={() => setIsPasswordVisible((prev) => !prev)}
             />
           }
-          iconPosition="end"
+          iconPosition={InputIconPosition.END}
           autoComplete="on"
         />
 

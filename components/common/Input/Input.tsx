@@ -1,13 +1,15 @@
 'use client'
 import cn from 'classnames'
-import React, { ChangeEvent, InputHTMLAttributes, ReactNode } from 'react'
+import { ChangeEvent, InputHTMLAttributes, ReactNode } from 'react'
+
+import { InputIconPosition } from '@/types/enums/constants'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label: string | React.ReactNode
+  label: string | ReactNode
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
   error?: string
   icon?: ReactNode
-  iconPosition?: 'start' | 'end'
+  iconPosition?: InputIconPosition.START | InputIconPosition.END
 }
 
 const Input = ({
@@ -19,19 +21,15 @@ const Input = ({
   placeholder,
   type,
   icon,
-  iconPosition = 'start',
+  iconPosition = InputIconPosition.START,
   name,
   ...props
 }: InputProps) => {
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange(event)
-  }
-
   return (
     <div className="flex flex-col mb-3">
       {label && <label htmlFor={name}>{label}</label>}
       <div className="flex flex-col relative items-center">
-        {icon && iconPosition === 'start' && (
+        {icon && iconPosition === InputIconPosition.START && (
           <div className="absolute top-[0.9rem] left-4">{icon}</div>
         )}
         <input
@@ -44,10 +42,10 @@ const Input = ({
           name={name}
           value={value}
           placeholder={placeholder}
-          onChange={handleInputChange}
+          onChange={onChange}
           {...props}
         />
-        {icon && iconPosition === 'end' && (
+        {icon && iconPosition === InputIconPosition.END && (
           <div className="absolute top-[0.9rem] right-4">{icon}</div>
         )}
       </div>

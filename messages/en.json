@@ -23,6 +23,8 @@
     "password": "Password",
     "passwordPlaceholder": "Type your password",
     "signinRedirectMessage": "Already have an account?",
-    "signinRedirectLink": "Sign in"
+    "signinRedirectLink": "Sign in",
+    "emailValidation": "Your email is invalid",
+    "passwordValidation": "Your password is invalid"
   }
 }
