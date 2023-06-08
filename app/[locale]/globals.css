@@ -56,6 +56,14 @@ body {
   }
 }
 
+.btn {
+  @apply rounded-md text-base px-5 flex items-center justify-center outline outline-1 focus:outline-dashed focus:outline-2 focus:outline-focus hover:bg-hover hover:outline-none disabled:cursor-not-allowed disabled:bg-light-grey disabled:text-dark-grey disabled:outline-none active:bg-active active:outline-active-outline active:outline;
+}
+
 .btn-primary {
-  @apply text-white rounded-md outline outline-white outline-1 bg-dark-violet text-base px-5 flex items-center justify-center disabled:bg-light-grey disabled:cursor-not-allowed disabled:text-dark-grey disabled:outline-none hover:bg-hover hover:outline-none focus:outline-dashed focus:outline-2 focus:outline-focus active:bg-active active:outline-active-outline active:outline;
+  @apply btn text-white outline-white bg-dark-violet;
+}
+
+.btn-secondary {
+  @apply btn text-black outline-black bg-white hover:text-white active:text-white;
 }
