@@ -4,9 +4,13 @@ import { PropsWithChildren } from 'react'
 
 import { Locale } from '@/i18n'
 
+interface Messages {
+  [key: string]: Record<string, string> | Messages
+}
+
 type LocaleWrapperProps = PropsWithChildren<{
   params: { locale: Locale }
-  localeGroup?: string
+  localeGroup?: string[] | string
 }>
 
 const LocaleWrapper = async ({
@@ -14,12 +18,22 @@ const LocaleWrapper = async ({
   params: { locale },
   localeGroup,
 }: LocaleWrapperProps) => {
-  let messages
+  let messages: Messages
   try {
     messages = (await import(`../../../messages/${locale}.json`)).default
 
-    if (localeGroup && messages[localeGroup]) {
-      messages = { [localeGroup]: { ...messages[localeGroup] } }
+    if (Array.isArray(localeGroup)) {
+      const filteredMessages: Partial<Messages> = {}
+      for (const group of localeGroup) {
+        if (messages[group]) {
+          filteredMessages[group] = { ...messages[group] }
+        }
+      }
+      messages = filteredMessages as Messages
+    } else if (typeof localeGroup === 'string') {
+      if (messages[localeGroup]) {
+        messages = { [localeGroup]: { ...messages[localeGroup] } }
+      }
     }
   } catch (error) {
     console.log(error)
