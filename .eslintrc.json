@@ -13,6 +13,12 @@
   ],
   "ignorePatterns": ["shopify/generated/*"],
   "rules": {
+    "no-restricted-imports": [
+      "error",
+      {
+        "patterns": ["../*"]
+      }
+    ],
     "prefer-const": "error",
     "unused-imports/no-unused-imports": "error",
     "import/order": [

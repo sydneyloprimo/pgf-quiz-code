@@ -2,15 +2,14 @@
 
 import React from 'react'
 
+import ImageGallery from '@/components/detail/ImageGallery'
+import ProductDescription from '@/components/detail/ProductDescription'
 import { client } from 'shopify/client'
 import {
   useGetProductDetailQuery,
   ProductVariantConnection,
   ImageConnection,
 } from 'shopify/generated/graphql'
-
-import ImageGallery from '../ImageGallery'
-import ProductDescription from '../ProductDescription'
 
 export interface ProductDetail {
   description: string

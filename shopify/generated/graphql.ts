@@ -1,4 +1,5 @@
 import { GraphQLClient } from 'graphql-request'
+import { RequestInit } from 'graphql-request/dist/types.dom'
 import {
   useMutation,
   useQuery,

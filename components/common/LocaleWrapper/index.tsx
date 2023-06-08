@@ -20,16 +20,16 @@ const LocaleWrapper = async ({
 }: LocaleWrapperProps) => {
   let messages: Messages
   try {
-    messages = (await import(`../../../messages/${locale}.json`)).default
+    messages = (await import(`/messages/${locale}.json`)).default
 
     if (Array.isArray(localeGroup)) {
-      const filteredMessages: Partial<Messages> = {}
-      for (const group of localeGroup) {
+      const filteredMessages: Messages = localeGroup.reduce((result, group) => {
         if (messages[group]) {
-          filteredMessages[group] = { ...messages[group] }
+          result[group] = { ...messages[group] }
         }
-      }
-      messages = filteredMessages as Messages
+        return result
+      }, {} as Messages)
+      messages = filteredMessages
     } else if (typeof localeGroup === 'string') {
       if (messages[localeGroup]) {
         messages = { [localeGroup]: { ...messages[localeGroup] } }

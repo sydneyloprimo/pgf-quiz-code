@@ -28,7 +28,8 @@ export default function SignIn() {
       if (data.customerAccessTokenCreate?.customerAccessToken?.accessToken) {
         setCookie(
           Cookies.customerAccessToken,
-          data.customerAccessTokenCreate?.customerAccessToken?.accessToken
+          data.customerAccessTokenCreate?.customerAccessToken?.accessToken,
+          { secure: true }
         )
         push(Routes.home)
       }

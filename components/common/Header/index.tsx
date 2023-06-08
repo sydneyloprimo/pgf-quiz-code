@@ -6,7 +6,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import React, { useState } from 'react'
+import { useCookies } from 'react-cookie'
 
+import { Cookies } from '@/types/enums/cookies'
 import { Routes } from '@/types/enums/routes'
 
 import HamburgerMenu from './HamburgerMenu'
@@ -19,6 +21,7 @@ const images = {
 }
 
 const Header = () => {
+  const [cookies] = useCookies([Cookies.customerAccessToken])
   const [isOpen, setIsOpen] = useState(false)
   const t = useTranslations('Header')
   const router = useRouter()
@@ -33,7 +36,11 @@ const Header = () => {
   }
 
   const onAccountClick = () => {
-    toggleMenu()
+    if (cookies[Cookies.customerAccessToken]) {
+      toggleMenu()
+    } else {
+      router.push(Routes.signin)
+    }
   }
 
   return (
@@ -62,7 +69,10 @@ const Header = () => {
       </div>
 
       <div className="hidden md:flex">
-        <button className="mx-2 btn-primary h-10 !text-sm">
+        <button
+          className="mx-2 btn-primary h-10 !text-sm"
+          onClick={onAccountClick}
+        >
           {t('myAccount')}
           <Image
             className="ms-3"

@@ -4,12 +4,11 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { FormEvent, useCallback, useEffect, useState } from 'react'
 
+import Input from '@/components/common/Input'
 import { InputIconPosition } from '@/types/enums/constants'
 import { isEmailValid, isPasswordValid } from '@/utils/utils'
 import passwordVisibility from 'public/icons/visibility.svg'
 import passwordVisibilityOff from 'public/icons/visibility_off.svg'
-
-import Input from '../../common/Input'
 
 interface AuthFormProps {
   handleSubmit: (email: string, password: string) => Promise<void>

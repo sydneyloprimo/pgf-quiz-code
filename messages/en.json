@@ -1,20 +1,20 @@
 {
   "Header": {
-    "myAccount": "My account",
-    "shoppingCart": "Shopping cart",
     "cartIcon": "cart icon",
     "hamburgerIcon": "hamburger icon",
     "logoDesktop": "logo desktop",
-    "logoMobile": "logo mobile"
+    "logoMobile": "logo mobile",
+    "myAccount": "My account",
+    "shoppingCart": "Shopping cart"
   },
   "Home": {
     "title": "Hello world!"
   },
   "Detail": {
-    "productDescription": "Product description",
-    "quantity": "Quantity",
     "addToCart": "Add to cart",
-    "availability": "Availability: {count} items"
+    "availability": "Availability: {count} items",
+    "productDescription": "Product description",
+    "quantity": "Quantity"
   },
   "Cart": {
     "checkoutButton": "Go to checkout",
@@ -38,20 +38,20 @@
   },
   "SignUp": {
     "buttonText": "Sign up",
-    "signinRedirectMessage": "Already have an account?",
-    "signinRedirectLink": "Sign in"
+    "signinRedirectLink": "Sign in",
+    "signinRedirectMessage": "Already have an account?"
   },
   "Auth": {
     "email": "Email",
     "emailPlaceholder": "Type your email",
+    "emailValidation": "Your email is invalid",
     "password": "Password",
     "passwordPlaceholder": "Type your password",
-    "emailValidation": "Your email is invalid",
     "passwordValidation": "Your password is invalid"
   },
   "SignIn": {
     "buttonText": "Sign in",
-    "signupRedirectMessage": "Don't have an account?",
-    "signupRedirectLink": "Sign up"
+    "signupRedirectLink": "Sign up",
+    "signupRedirectMessage": "Don't have an account?"
   }
 }
