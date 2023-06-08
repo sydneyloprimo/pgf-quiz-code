@@ -16,17 +16,6 @@
     "addToCart": "Add to cart",
     "availability": "Availability: {count} items"
   },
-  "SignUp": {
-    "buttonText": "Sign up",
-    "email": "Email",
-    "emailPlaceholder": "Type your email",
-    "password": "Password",
-    "passwordPlaceholder": "Type your password",
-    "signinRedirectMessage": "Already have an account?",
-    "signinRedirectLink": "Sign in",
-    "emailValidation": "Your email is invalid",
-    "passwordValidation": "Your password is invalid"
-  },
   "Cart": {
     "checkoutButton": "Go to checkout",
     "emptyState": {
@@ -46,5 +35,23 @@
       "nextButton": "Next Page",
       "previousButton": "Previous Page"
     }
+  },
+  "SignUp": {
+    "buttonText": "Sign up",
+    "signinRedirectMessage": "Already have an account?",
+    "signinRedirectLink": "Sign in"
+  },
+  "Auth": {
+    "email": "Email",
+    "emailPlaceholder": "Type your email",
+    "password": "Password",
+    "passwordPlaceholder": "Type your password",
+    "emailValidation": "Your email is invalid",
+    "passwordValidation": "Your password is invalid"
+  },
+  "SignIn": {
+    "buttonText": "Sign in",
+    "signupRedirectMessage": "Don't have an account?",
+    "signupRedirectLink": "Sign up"
   }
 }
