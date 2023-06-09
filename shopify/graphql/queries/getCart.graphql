@@ -8,10 +8,11 @@ query getCart($id: ID!) {
           merchandise {
             ... on ProductVariant {
               id
+              __typename
               image {
                 url
               }
-              priceV2 {
+              price {
                 amount
                 currencyCode
               }

@@ -28,6 +28,7 @@ query getAllProducts(
           title
           vendor
           handle
+          __typename
           priceRange {
             minVariantPrice {
               amount

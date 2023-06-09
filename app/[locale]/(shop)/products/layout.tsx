@@ -1,7 +1,17 @@
 import { PropsWithChildren } from 'react'
 
-type ProductsLayoutProps = PropsWithChildren
+import LocaleWrapper from '@/components/common/LocaleWrapper'
+import { Locale } from '@/i18n'
 
-export default function ProductsLayout({ children }: ProductsLayoutProps) {
-  return <div className="min-h-screen min-w-full">{children}</div>
+type ProductsLayoutProps = PropsWithChildren<{ params: { locale: Locale } }>
+
+export default function ProductsLayout({
+  children,
+  params,
+}: ProductsLayoutProps) {
+  return (
+    <LocaleWrapper localeGroup="Products" params={params}>
+      <div className="min-h-screen min-w-full">{children}</div>
+    </LocaleWrapper>
+  )
 }

@@ -1,5 +1,4 @@
 import { GraphQLClient } from 'graphql-request'
-import { RequestInit } from 'graphql-request/dist/types.dom'
 import {
   useMutation,
   useQuery,
@@ -6952,7 +6951,7 @@ export type GetAllProductsQuery = {
       __typename?: 'ProductEdge'
       cursor: string
       node: {
-        __typename?: 'Product'
+        __typename: 'Product'
         id: string
         title: string
         vendor: string
@@ -7008,11 +7007,11 @@ export type GetCartQuery = {
           id: string
           quantity: number
           merchandise: {
-            __typename?: 'ProductVariant'
+            __typename: 'ProductVariant'
             id: string
             title: string
             image?: { __typename?: 'Image'; url: any } | null
-            priceV2: {
+            price: {
               __typename?: 'MoneyV2'
               amount: any
               currencyCode: CurrencyCode
@@ -7320,6 +7319,7 @@ export const GetAllProductsDocument = /*#__PURE__*/ `
           title
           vendor
           handle
+          __typename
           priceRange {
             minVariantPrice {
               amount
@@ -7422,10 +7422,11 @@ export const GetCartDocument = /*#__PURE__*/ `
           merchandise {
             ... on ProductVariant {
               id
+              __typename
               image {
                 url
               }
-              priceV2 {
+              price {
                 amount
                 currencyCode
               }

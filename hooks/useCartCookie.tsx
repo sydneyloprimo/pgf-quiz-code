@@ -9,7 +9,6 @@ const useCartCookie = () => {
   const [cookies, setCookie] = useCookies([Cookies.cart])
   const { mutate: createCart } = useCartCreateMutation(client, {
     onSuccess: (data) => {
-      console.log(data)
       setCookie(Cookies.cart, data.cartCreate?.cart?.id, {
         path: '/',
       })

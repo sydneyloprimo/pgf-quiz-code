@@ -26,5 +26,25 @@
     "signinRedirectLink": "Sign in",
     "emailValidation": "Your email is invalid",
     "passwordValidation": "Your password is invalid"
+  },
+  "Cart": {
+    "checkoutButton": "Go to checkout",
+    "emptyState": {
+      "description": "Looks like you have not added anything to your cart.",
+      "exploreButton": "Go explore products",
+      "title": "Your cart is empty"
+    },
+    "title": "My shopping cart",
+    "total": "Total"
+  },
+  "Products": {
+    "fitlerPanel": {
+      "buttonAlt": "Select filter",
+      "title": "Your filters will appear here."
+    },
+    "list": {
+      "nextButton": "Next Page",
+      "previousButton": "Previous Page"
+    }
   }
 }

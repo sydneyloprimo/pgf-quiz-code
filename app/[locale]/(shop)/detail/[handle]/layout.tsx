@@ -3,9 +3,9 @@ import React, { PropsWithChildren } from 'react'
 import LocaleWrapper from '@/components/common/LocaleWrapper'
 import { Locale } from '@/i18n'
 
-type ProductsLayoutProps = PropsWithChildren<{ params: { locale: Locale } }>
+type DetailLayoutProps = PropsWithChildren<{ params: { locale: Locale } }>
 
-const ProductsLayout = ({ children, params }: ProductsLayoutProps) => (
+const DetailLayout = ({ children, params }: DetailLayoutProps) => (
   <LocaleWrapper localeGroup="Detail" params={params}>
     <div className="min-h-screen min-w-full text-black extended-header flex justify-center">
       {children}
@@ -13,4 +13,4 @@ const ProductsLayout = ({ children, params }: ProductsLayoutProps) => (
   </LocaleWrapper>
 )
 
-export default ProductsLayout
+export default DetailLayout

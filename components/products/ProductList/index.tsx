@@ -2,12 +2,18 @@
 
 import cn from 'classnames'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
+import { Routes } from '@/types/enums/routes'
 import ProductCard from 'components/products/ProductCard'
 import ChevronIcon from 'public/icons/chevron-left.svg'
 import { client } from 'shopify/client'
-import { useInfiniteGetAllProductsQuery } from 'shopify/generated/graphql'
+import {
+  Product,
+  useInfiniteGetAllProductsQuery,
+} from 'shopify/generated/graphql'
 
 interface ProductListProps {
   className?: string
@@ -16,6 +22,8 @@ interface ProductListProps {
 const PAGE_SIZE = 4
 const ProductList = ({ className }: ProductListProps) => {
   const [page, setPage] = useState(0)
+  const router = useRouter()
+  const t = useTranslations('Products.list')
 
   const { data, fetchNextPage } = useInfiniteGetAllProductsQuery(
     'first',
@@ -64,7 +72,8 @@ const ProductList = ({ className }: ProductListProps) => {
         {edges?.map(({ node: product }, index) => (
           <ProductCard
             key={`${product.id}-${product.title}`}
-            product={product}
+            product={product as Product}
+            onClick={() => router.push(`${Routes.detail}${product.handle}`)}
             className={cn(
               'w-full overflow-hidden border-b-dark-grey border-b border-solid border-t-transparent border-x-transparent md:mb-5 md:shadow-1 md:rounded-lg md:border-none md:border-transparent',
               {
@@ -82,14 +91,14 @@ const ProductList = ({ className }: ProductListProps) => {
           disabled={page === 0}
         >
           <Image src={ChevronIcon} className="m-auto mr-5" alt="" />
-          <p>Previous Page</p>
+          <p>{t('previousButton')}</p>
         </button>
         <button
           className="flex hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={onNextClick}
           disabled={!pageInfo?.hasNextPage}
         >
-          <p> Next Page </p>
+          <p>{t('nextButton')}</p>
           <Image
             src={ChevronIcon}
             className="m-auto ml-5"
