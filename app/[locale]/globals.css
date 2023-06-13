@@ -67,3 +67,11 @@ body {
 .btn-secondary {
   @apply btn text-black outline-black bg-white hover:text-white active:text-white;
 }
+
+.dropdown-menu {
+  @apply text-white outline-white bg-dark-violet px-4 flex items-center justify-between outline outline-1 focus:outline-dashed focus:outline-2 focus:outline-focus hover:bg-hover hover:outline-none disabled:cursor-not-allowed disabled:bg-light-grey disabled:text-dark-grey disabled:outline-none active:bg-active active:outline-active-outline active:outline;
+}
+
+.dropdown-menu-item {
+  @apply h-[40px] w-full text-white bg-dark-violet px-4 focus:outline-offset-[-3px] hover:outline-offset-[-3px] active:outline-offset-[-3px] disabled:outline-offset-[-3px] flex items-center focus:outline-dashed focus:outline-2 focus:outline-focus hover:bg-hover hover:outline-none disabled:cursor-not-allowed disabled:bg-light-grey disabled:text-dark-grey disabled:outline-none active:bg-active active:outline-active-outline active:outline;
+}

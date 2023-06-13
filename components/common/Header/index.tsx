@@ -3,15 +3,12 @@
 import cn from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import React, { useState } from 'react'
-import { useCookies } from 'react-cookie'
 
-import { Cookies } from '@/types/enums/cookies'
 import { Routes } from '@/types/enums/routes'
 
-import HamburgerMenu from './HamburgerMenu'
+import HeaderDropdownMenu from './HeaderDropdownMenu'
 
 const images = {
   logoWhite: '/icons/logo-white.svg',
@@ -21,27 +18,8 @@ const images = {
 }
 
 const Header = () => {
-  const [cookies] = useCookies([Cookies.customerAccessToken])
   const [isOpen, setIsOpen] = useState(false)
   const t = useTranslations('Header')
-  const router = useRouter()
-
-  const toggleMenu = () => {
-    setIsOpen((isOpen) => !isOpen)
-  }
-
-  const onShoppingClick = () => {
-    router.push(Routes.cart)
-    toggleMenu()
-  }
-
-  const onAccountClick = () => {
-    if (cookies[Cookies.customerAccessToken]) {
-      toggleMenu()
-    } else {
-      router.push(Routes.signin)
-    }
-  }
 
   return (
     <header
@@ -68,62 +46,15 @@ const Header = () => {
         </Link>
       </div>
 
-      <div className="hidden md:flex">
-        <button
-          className="mx-2 btn-primary h-10 !text-sm"
-          onClick={onAccountClick}
+      <div className="flex md:flex-row-reverse">
+        <Link
+          href={Routes.cart}
+          className="btn-primary mx-2 !text-sm h-8 md:h-10 !rounded-sm md:!rounded-md flex gap-2"
         >
-          {t('myAccount')}
-          <Image
-            className="ms-3"
-            src={images.chevronDown}
-            alt=""
-            width={16}
-            height={14}
-          />
-        </button>
-        <Link href={Routes.cart} className="mx-2 btn-primary h-10 !text-sm">
-          {t('shoppingCart')}
-          <Image
-            className="ms-3"
-            src={images.cartIcon}
-            alt=""
-            width={16}
-            height={14}
-          />
+          <span className="hidden md:inline">{t('shoppingCart')}</span>
+          <Image src={images.cartIcon} alt="" width={16} height={14} />
         </Link>
-      </div>
-
-      <div className="flex md:hidden">
-        <button
-          className="mx-2 btn-primary !rounded-sm h-8 !px-4"
-          onClick={toggleMenu}
-        >
-          <Image
-            className="mr-1"
-            src={images.cartIcon}
-            alt={t('cartIcon')}
-            width={24}
-            height={24}
-          />
-        </button>
-        <button
-          className="mx-2 btn-primary !rounded-sm h-8 !px-4"
-          onClick={toggleMenu}
-        >
-          <Image
-            alt={t('hamburgerIcon')}
-            src={images.hamburgerIcon}
-            width={24}
-            height={24}
-          />
-        </button>
-        {isOpen && (
-          <HamburgerMenu
-            handleAccountClick={onAccountClick}
-            handleCartClick={onShoppingClick}
-          />
-        )}
+        <HeaderDropdownMenu isOpen={isOpen} onMenuChange={setIsOpen} />
       </div>
     </header>
   )

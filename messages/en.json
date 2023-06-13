@@ -4,7 +4,9 @@
     "hamburgerIcon": "hamburger icon",
     "logoDesktop": "logo desktop",
     "logoMobile": "logo mobile",
-    "myAccount": "My account",
+    "logout": "Log out",
+    "myAccount": "My Account",
+    "myProfile": "My Profile",
     "shoppingCart": "Shopping cart"
   },
   "Home": {
