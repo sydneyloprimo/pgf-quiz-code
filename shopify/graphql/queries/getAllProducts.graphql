@@ -1,5 +1,6 @@
 query getAllProducts(
-  $first: Int = 50
+  $first: Int = null
+  $last: Int = null
   $query: String = ""
   $sortKey: ProductSortKeys = RELEVANCE
   $reverse: Boolean = false
@@ -8,6 +9,7 @@ query getAllProducts(
 ) {
   products(
     first: $first
+    last: $last
     sortKey: $sortKey
     reverse: $reverse
     query: $query

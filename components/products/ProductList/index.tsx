@@ -2,7 +2,7 @@
 
 import cn from 'classnames'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
@@ -21,21 +21,23 @@ interface ProductListProps {
 
 const PAGE_SIZE = 4
 const ProductList = ({ className }: ProductListProps) => {
+  const searchParams = useSearchParams()
+  const cursor = searchParams.get('cursor')
+  const isBefore = searchParams.get('before')
+
   const [page, setPage] = useState(0)
   const router = useRouter()
   const t = useTranslations('Products.list')
 
-  const { data, fetchNextPage } = useInfiniteGetAllProductsQuery(
-    'first',
-    client,
-    {
-      first: PAGE_SIZE,
-    },
-    {
-      getNextPageParam: (lastPage) =>
-        lastPage?.products?.pageInfo?.hasNextPage
-          ? { after: lastPage?.products?.pageInfo?.endCursor }
-          : null,
+  const variables = !!isBefore
+    ? { before: cursor, last: PAGE_SIZE }
+    : {
+        after: cursor,
+        first: PAGE_SIZE,
+      }
+
+  const { data, fetchNextPage, fetchPreviousPage } =
+    useInfiniteGetAllProductsQuery('first', client, variables, {
       select: ({ pageParams, pages }) => ({
         pageParams: pageParams,
         pages: pages.map(({ products: { edges, pageInfo } }) => ({
@@ -44,21 +46,56 @@ const ProductList = ({ className }: ProductListProps) => {
         })),
       }),
       keepPreviousData: true,
-    }
-  )
+    })
 
   const { edges, pageInfo } = data?.pages[page] || {}
 
   const onNextClick = () => {
     const totalPages = data?.pages?.length
+
     if (!totalPages || page === totalPages - 1) {
-      fetchNextPage()
+      fetchNextPage({
+        pageParam: {
+          before: null,
+          last: null,
+          after: pageInfo?.endCursor,
+          first: PAGE_SIZE,
+        },
+      })
     }
+
+    // Shallow redirection is not possible with next.js v13.4.5
+    window.history.replaceState(
+      null,
+      '',
+      `${Routes.products}?cursor=${pageInfo?.endCursor}`
+    )
     setPage(page + 1)
   }
 
   const onPreviousClick = () => {
-    setPage(page - 1)
+    let newCursor
+    if (page == 0) {
+      newCursor = data?.pages[0].pageInfo.startCursor
+      fetchPreviousPage({
+        pageParam: {
+          before: newCursor,
+          last: PAGE_SIZE,
+          first: null,
+          after: null,
+        },
+      })
+    } else {
+      newCursor = pageInfo?.startCursor
+      setPage(page - 1)
+    }
+
+    // Shallow redirection is not possible with next.js v13.4.5
+    window.history.replaceState(
+      null,
+      '',
+      `${Routes.products}?cursor=${newCursor}&before=1`
+    )
   }
 
   return (
@@ -88,7 +125,7 @@ const ProductList = ({ className }: ProductListProps) => {
         <button
           className="flex hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={onPreviousClick}
-          disabled={page === 0}
+          disabled={!pageInfo?.hasPreviousPage}
         >
           <Image src={ChevronIcon} className="m-auto mr-5" alt="" />
           <p>{t('previousButton')}</p>

@@ -6930,6 +6930,7 @@ export type CustomerAccessTokenCreateMutation = {
 
 export type GetAllProductsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
   query?: InputMaybe<Scalars['String']>
   sortKey?: InputMaybe<ProductSortKeys>
   reverse?: InputMaybe<Scalars['Boolean']>
@@ -7297,9 +7298,10 @@ useCustomerAccessTokenCreateMutation.fetcher = (
     CustomerAccessTokenCreateMutationVariables
   >(client, CustomerAccessTokenCreateDocument, variables, headers)
 export const GetAllProductsDocument = /*#__PURE__*/ `
-    query getAllProducts($first: Int = 50, $query: String = "", $sortKey: ProductSortKeys = RELEVANCE, $reverse: Boolean = false, $after: String = null, $before: String = null) {
+    query getAllProducts($first: Int = null, $last: Int = null, $query: String = "", $sortKey: ProductSortKeys = RELEVANCE, $reverse: Boolean = false, $after: String = null, $before: String = null) {
   products(
     first: $first
+    last: $last
     sortKey: $sortKey
     reverse: $reverse
     query: $query
