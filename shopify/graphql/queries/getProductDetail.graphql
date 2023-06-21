@@ -37,6 +37,7 @@ query GetProductDetail($handle: String!) {
             height
             altText
           }
+          availableForSale
           quantityAvailable
           price {
             amount

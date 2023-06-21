@@ -1,14 +1,30 @@
 import Image from 'next/image'
+import { useMemo } from 'react'
 
-import { ProductDetail } from '@/components/detail/ProductDetail'
+import {
+  ProductVariantConnection,
+  ImageConnection,
+} from 'shopify/generated/graphql'
 
+interface ImageGalleryProps {
+  title: string
+  variants: ProductVariantConnection
+  images: ImageConnection
+}
 const selectedVariant = 0
 const selectedImage = 0
 
-const ImageGallery = ({ variants, images, title }: ProductDetail) => {
-  const variant = variants.edges[selectedVariant].node
+const ImageGallery = ({ variants, images, title }: ImageGalleryProps) => {
+  const { variant, image } = useMemo(() => {
+    const variant = variants.edges[selectedVariant].node
+    const image = variant?.image || images.edges[selectedImage]?.node
 
-  const image = variant?.image || images.edges[selectedImage].node
+    return { variant, image }
+  }, [variants, images])
+
+  if (!image) {
+    return null
+  }
 
   return (
     <div className="px-4 md:px-7">

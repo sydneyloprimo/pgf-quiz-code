@@ -13,3 +13,6 @@ export const isEmailValid = (value: string) => {
 
   return emailRegex.test(value)
 }
+
+export const formatCurrency = (currencyCode: string, amount: number) =>
+  `${currencyCode} ${amount.toFixed(2)}`

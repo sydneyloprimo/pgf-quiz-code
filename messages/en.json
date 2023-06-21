@@ -16,7 +16,8 @@
     "addToCart": "Add to cart",
     "availability": "Availability: {count} items",
     "productDescription": "Product description",
-    "quantity": "Quantity"
+    "quantity": "Quantity",
+    "variant": "Variant"
   },
   "Cart": {
     "checkoutButton": "Go to checkout",

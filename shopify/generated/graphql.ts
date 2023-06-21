@@ -7101,6 +7101,7 @@ export type GetProductDetailQuery = {
           __typename?: 'ProductVariant'
           id: string
           title: string
+          availableForSale: boolean
           quantityAvailable?: number | null
           image?: {
             __typename?: 'Image'
@@ -7562,6 +7563,7 @@ export const GetProductDetailDocument = /*#__PURE__*/ `
             height
             altText
           }
+          availableForSale
           quantityAvailable
           price {
             amount
