@@ -6928,6 +6928,24 @@ export type CustomerAccessTokenCreateMutation = {
   } | null
 }
 
+export type CartLinesRemoveMutationVariables = Exact<{
+  cartId: Scalars['ID']
+  lineIds: Array<Scalars['ID']> | Scalars['ID']
+}>
+
+export type CartLinesRemoveMutation = {
+  __typename?: 'Mutation'
+  cartLinesRemove?: {
+    __typename?: 'CartLinesRemovePayload'
+    cart?: { __typename?: 'Cart'; id: string } | null
+    userErrors: Array<{
+      __typename?: 'CartUserError'
+      field?: Array<string> | null
+      message: string
+    }>
+  } | null
+}
+
 export type GetAllProductsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>
   last?: InputMaybe<Scalars['Int']>
@@ -7298,6 +7316,59 @@ useCustomerAccessTokenCreateMutation.fetcher = (
     CustomerAccessTokenCreateMutation,
     CustomerAccessTokenCreateMutationVariables
   >(client, CustomerAccessTokenCreateDocument, variables, headers)
+export const CartLinesRemoveDocument = /*#__PURE__*/ `
+    mutation cartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
+  cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
+    cart {
+      id
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}
+    `
+export const useCartLinesRemoveMutation = <
+  TError = unknown,
+  TContext = unknown
+>(
+  client: GraphQLClient,
+  options?: UseMutationOptions<
+    CartLinesRemoveMutation,
+    TError,
+    CartLinesRemoveMutationVariables,
+    TContext
+  >,
+  headers?: RequestInit['headers']
+) =>
+  useMutation<
+    CartLinesRemoveMutation,
+    TError,
+    CartLinesRemoveMutationVariables,
+    TContext
+  >(
+    ['cartLinesRemove'],
+    (variables?: CartLinesRemoveMutationVariables) =>
+      fetcher<CartLinesRemoveMutation, CartLinesRemoveMutationVariables>(
+        client,
+        CartLinesRemoveDocument,
+        variables,
+        headers
+      )(),
+    options
+  )
+useCartLinesRemoveMutation.fetcher = (
+  client: GraphQLClient,
+  variables: CartLinesRemoveMutationVariables,
+  headers?: RequestInit['headers']
+) =>
+  fetcher<CartLinesRemoveMutation, CartLinesRemoveMutationVariables>(
+    client,
+    CartLinesRemoveDocument,
+    variables,
+    headers
+  )
 export const GetAllProductsDocument = /*#__PURE__*/ `
     query getAllProducts($first: Int = null, $last: Int = null, $query: String = "", $sortKey: ProductSortKeys = RELEVANCE, $reverse: Boolean = false, $after: String = null, $before: String = null) {
   products(

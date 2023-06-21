@@ -4,10 +4,14 @@ import { useTranslations } from 'next-intl'
 import { useCookies } from 'react-cookie'
 
 import { Cookies } from '@/types/enums/cookies'
+import CartProductCard from 'components/cart/CartProductCard'
 import EmptyState from 'components/cart/EmptyState'
-import ProductCard from 'components/products/ProductCard'
 import { client } from 'shopify/client'
-import { ProductVariant, useGetCartQuery } from 'shopify/generated/graphql'
+import {
+  ProductVariant,
+  useGetCartQuery,
+  useCartLinesRemoveMutation,
+} from 'shopify/generated/graphql'
 
 interface CartProps {
   className?: string
@@ -16,13 +20,32 @@ interface CartProps {
 const Cart = ({ className }: CartProps) => {
   const t = useTranslations('Cart')
   const [cookies] = useCookies([Cookies.cart])
+  const cartId = cookies[Cookies.cart]
 
-  const { data } = useGetCartQuery(client, {
-    id: cookies[Cookies.cart],
+  const {
+    data,
+    refetch: getCartRefetch,
+    isLoading: isGetCartLoading,
+  } = useGetCartQuery(client, {
+    id: cartId,
   })
+
+  const { mutate: removeLine, isLoading: isRemoveLoading } =
+    useCartLinesRemoveMutation(client, {
+      onSuccess: () => {
+        getCartRefetch()
+      },
+    })
 
   const handleCheckoutClick = () => {
     window.location.assign(cart?.checkoutUrl)
+  }
+
+  const onDeleteClick = (productId: string) => {
+    removeLine({
+      cartId,
+      lineIds: [productId],
+    })
   }
 
   const { cart } = data || {}
@@ -45,12 +68,14 @@ const Cart = ({ className }: CartProps) => {
               )}
             >
               <div>
-                {edges?.map(({ node: { merchandise: product } }, index) => (
-                  <ProductCard
+                {edges?.map(({ node: { id, merchandise: product } }, index) => (
+                  <CartProductCard
                     key={`${product.id}-${product.title}`}
                     product={product as ProductVariant}
+                    onDeleteClick={() => onDeleteClick(id)}
+                    deleteDisabled={isGetCartLoading || isRemoveLoading}
                     className={cn(
-                      'w-full overflow-hidden border-b-dark-grey border-b border-solid border-t-transparent md:border border-x-transparent md:mb-5 md:rounded-lg md:border-dark-grey hover:shadow-none hover:opacity-90',
+                      'w-full overflow-hidden border-b-dark-grey border-b border-solid border-t-transparent md:border border-x-transparent md:mb-5 md:rounded-lg md:border-dark-grey',
                       {
                         'rounded-t-lg': index === 0,
                       }

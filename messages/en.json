@@ -26,6 +26,7 @@
       "exploreButton": "Go explore products",
       "title": "Your cart is empty"
     },
+    "deleteButton": "Remove item",
     "title": "My shopping cart",
     "total": "Total"
   },

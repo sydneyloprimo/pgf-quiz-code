@@ -12,7 +12,11 @@ interface ProductCardProps {
 
 const ProductCard = ({ product, className, onClick }: ProductCardProps) => {
   const children = (
-    <div className="bg-white flex hover:shadow-2 active:border-active-outline active:border-[3px] focus:border-dashed focus:border-2 focus:border-focus focus:outline-none md:h-auto md:focus:border-none md:focus:outline-dashed md:focus:outline-2 md:focus:outline-focus ">
+    <div
+      className={
+        'bg-white flex hover:shadow-2 active:border-active-outline active:border-[3px] focus:border-dashed focus:border-2 focus:border-focus focus:outline-none md:h-auto md:focus:border-none md:focus:outline-dashed md:focus:outline-2 md:focus:outline-focus'
+      }
+    >
       <div className="w-[79px] h-[120px] rounded-lg relative md:w-[197px] md:h-[182px]">
         <Image
           className="md:rounded-l-lg"
@@ -45,7 +49,7 @@ const ProductCard = ({ product, className, onClick }: ProductCardProps) => {
       {children}
     </button>
   ) : (
-    <div>{children}</div>
+    <div className={className}>{children}</div>
   )
 }
 

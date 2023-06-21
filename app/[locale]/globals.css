@@ -75,3 +75,7 @@ body {
 .dropdown-menu-item {
   @apply h-[40px] w-full text-white bg-dark-violet px-4 focus:outline-offset-[-3px] hover:outline-offset-[-3px] active:outline-offset-[-3px] disabled:outline-offset-[-3px] flex items-center focus:outline-dashed focus:outline-2 focus:outline-focus hover:bg-hover hover:outline-none disabled:cursor-not-allowed disabled:bg-light-grey disabled:text-dark-grey disabled:outline-none active:bg-active active:outline-active-outline active:outline;
 }
+
+.link-primary {
+  @apply text-links text-sm font-bold md:text-base disabled:text-dark-grey hover:underline active:underline active:text-active focus:outline-dashed focus:outline-2 focus:outline-focus focus:rounded-lg focus:px-1.5;
+}

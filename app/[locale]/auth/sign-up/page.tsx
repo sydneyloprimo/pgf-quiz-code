@@ -43,7 +43,7 @@ export default function SignUp() {
       footer={
         <div className="flex justify-center gap-1">
           <span>{t('signinRedirectMessage')}</span>
-          <Link className="text-links" href={Routes.signin}>
+          <Link className="link-primary" href={Routes.signin}>
             {t('signinRedirectLink')}
           </Link>
         </div>
