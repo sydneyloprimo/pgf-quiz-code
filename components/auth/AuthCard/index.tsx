@@ -9,7 +9,7 @@ interface AuthCardProps extends PropsWithChildren {
 }
 
 const AuthCard = ({ children, footer }: AuthCardProps) => (
-  <Card className="mx-4 mt-9 md:mt-28 md:mx-32">
+  <Card className="mx-4 mt-9 md:mt-28 md:mx-32 h-fit">
     <div className="flex justify-center mb-10">
       <Image src={blackLogo} alt="Logo black" width={173} height={30} />
     </div>

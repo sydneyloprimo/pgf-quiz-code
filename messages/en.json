@@ -43,19 +43,23 @@
   "SignUp": {
     "buttonText": "Sign up",
     "signinRedirectLink": "Sign in",
-    "signinRedirectMessage": "Already have an account?"
+    "signinRedirectMessage": "Already have an account?",
+    "emailPattern": "Must be a valid email",
+    "emailRequired": "Email is required",
+    "passwordLength": "Password must be atleast 8 characters",
+    "passwordPattern": "Password should have at least one number, one uppercase letter and one lowercase letter"
   },
   "Auth": {
     "email": "Email",
     "emailPlaceholder": "Type your email",
-    "emailValidation": "Your email is invalid",
     "password": "Password",
-    "passwordPlaceholder": "Type your password",
-    "passwordValidation": "Your password is invalid"
+    "passwordPlaceholder": "Type your password"
   },
   "SignIn": {
     "buttonText": "Sign in",
+    "emailRequired": "Email is required",
     "signupRedirectLink": "Sign up",
-    "signupRedirectMessage": "Don't have an account?"
+    "signupRedirectMessage": "Don't have an account?",
+    "passwordRequired": "Password is required"
   }
 }

@@ -1,12 +1,14 @@
 'use client'
 
+import { zodResolver } from '@hookform/resolvers/zod'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import { FormEvent, useCallback, useEffect, useState } from 'react'
+import { useState } from 'react'
+import { useForm, SubmitHandler, Controller } from 'react-hook-form'
+import { z } from 'zod'
 
 import Input from '@/components/common/Input'
 import { InputIconPosition } from '@/types/enums/constants'
-import { isEmailValid, isPasswordValid } from '@/utils/utils'
 import passwordVisibility from 'public/icons/visibility.svg'
 import passwordVisibilityOff from 'public/icons/visibility_off.svg'
 
@@ -14,88 +16,107 @@ interface AuthFormProps {
   handleSubmit: (email: string, password: string) => Promise<void>
   isLoading: boolean
   buttonText: string
-  error?: string
+  apiError?: string
+  validationSchema: z.ZodObject<{
+    email: z.ZodString
+    password: z.ZodString
+  }>
 }
 
 const AuthForm = ({
   handleSubmit,
   isLoading,
   buttonText,
-  error,
+  apiError,
+  validationSchema,
 }: AuthFormProps) => {
   const t = useTranslations('Auth')
-
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [emailError, setEmailError] = useState('')
-  const [passwordError, setPasswordError] = useState('')
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
 
-  const getInputValidations = useCallback(() => {
-    if (email) {
-      setEmailError(!isEmailValid(email) ? t('emailValidation') : '')
-    } else {
-      setEmailError('')
-    }
+  type ValidationSchema = z.infer<typeof validationSchema>
 
-    if (password) {
-      setPasswordError(
-        !isPasswordValid(password) ? t('passwordValidation') : ''
-      )
-    } else {
-      setPasswordError('')
-    }
-  }, [email, password, t])
+  const {
+    control,
+    formState: { errors },
+    handleSubmit: rhfHandleSubmit,
+  } = useForm<ValidationSchema>({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+    resolver: zodResolver(validationSchema),
+  })
 
-  useEffect(() => {
-    getInputValidations()
-  }, [getInputValidations])
-
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+  const onSubmit: SubmitHandler<ValidationSchema> = ({ email, password }) => {
     handleSubmit(email, password)
   }
 
   return (
-    <form onSubmit={onSubmit}>
-      <Input
-        label={t('email')}
-        error={emailError}
-        type="text"
-        placeholder={t('emailPlaceholder')}
-        id="email"
+    <form onSubmit={rhfHandleSubmit(onSubmit)}>
+      <Controller
         name="email"
-        onChange={(event) => setEmail(event.target.value)}
-        autoComplete="on"
-      />
-
-      <Input
-        label={t('password')}
-        error={passwordError}
-        type={isPasswordVisible ? 'text' : 'password'}
-        placeholder={t('passwordPlaceholder')}
-        id="password"
-        name="password"
-        onChange={(event) => setPassword(event.target.value)}
-        icon={
-          <Image
-            src={isPasswordVisible ? passwordVisibilityOff : passwordVisibility}
-            alt=""
-            width={20}
-            height={19}
-            onClick={() => setIsPasswordVisible((prev) => !prev)}
+        control={control}
+        render={({
+          field: { ref, name, value, onChange, onBlur },
+          fieldState: { error },
+        }) => (
+          <Input
+            ref={ref}
+            label={t('email')}
+            value={value}
+            name={name}
+            onChange={onChange}
+            onBlur={onBlur}
+            placeholder={t('emailPlaceholder')}
+            autoComplete="on"
+            id="email"
+            error={error?.message}
           />
-        }
-        iconPosition={InputIconPosition.END}
-        autoComplete="on"
+        )}
+      />
+      <Controller
+        name="password"
+        control={control}
+        render={({
+          field: { ref, name, value, onChange, onBlur },
+          fieldState: { error },
+        }) => (
+          <Input
+            ref={ref}
+            label={t('password')}
+            value={value}
+            name={name}
+            onChange={onChange}
+            onBlur={onBlur}
+            placeholder={t('passwordPlaceholder')}
+            autoComplete="on"
+            id="password"
+            iconPosition={InputIconPosition.END}
+            type={isPasswordVisible ? 'text' : 'password'}
+            icon={
+              <Image
+                src={
+                  isPasswordVisible ? passwordVisibilityOff : passwordVisibility
+                }
+                alt=""
+                width={20}
+                height={19}
+                onClick={() => setIsPasswordVisible((prev) => !prev)}
+              />
+            }
+            error={error?.message}
+          />
+        )}
       />
 
-      <div className="text-red-500 text-md">{error}</div>
+      <div className="text-red-500 text-md">{apiError}</div>
 
       <button
         className="btn-primary w-full mt-3 mb-5 h-[44px]"
         type="submit"
-        disabled={!email || !password || isLoading}
+        disabled={
+          !!errors.email?.message || !!errors.password?.message || isLoading
+        }
       >
         {buttonText}
       </button>

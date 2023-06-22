@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useCookies } from 'react-cookie'
+import { z } from 'zod'
 
 import AuthCard from '@/components/auth/AuthCard'
 import AuthForm from '@/components/auth/AuthForm'
@@ -12,7 +13,6 @@ import { client } from '@/shopify/client'
 import { useCustomerAccessTokenCreateMutation } from '@/shopify/generated/graphql'
 import { Cookies } from '@/types/enums/cookies'
 import { Routes } from '@/types/enums/routes'
-import { isEmailValid, isPasswordValid } from '@/utils/utils'
 
 export default function SignIn() {
   const t = useTranslations('SignIn')
@@ -37,15 +37,18 @@ export default function SignIn() {
   })
 
   const handleSubmit = async (email: string, password: string) => {
-    if (!!isEmailValid(email) && !!isPasswordValid(password)) {
-      createAccessToken({
-        input: {
-          email: email,
-          password: password,
-        },
-      })
-    }
+    createAccessToken({
+      input: {
+        email: email,
+        password: password,
+      },
+    })
   }
+
+  const validationSchema = z.object({
+    email: z.string().min(1, { message: t('emailRequired') }),
+    password: z.string().min(1, { message: t('passwordRequired') }),
+  })
 
   return (
     <div className="flex flex-col gap-4">
@@ -54,10 +57,11 @@ export default function SignIn() {
           handleSubmit={handleSubmit}
           isLoading={isLoading}
           buttonText={t('buttonText')}
-          error={
+          apiError={
             data?.customerAccessTokenCreate?.customerUserErrors[0]?.message ||
             ''
           }
+          validationSchema={validationSchema}
         />
       </AuthCard>
       <Card className="mx-4 md:mx-32">

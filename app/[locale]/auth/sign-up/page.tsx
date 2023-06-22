@@ -3,13 +3,14 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import { z } from 'zod'
 
 import AuthCard from '@/components/auth/AuthCard'
 import AuthForm from '@/components/auth/AuthForm'
 import { client } from '@/shopify/client'
 import { useCustomerCreateMutation } from '@/shopify/generated/graphql'
 import { Routes } from '@/types/enums/routes'
-import { isEmailValid, isPasswordValid } from '@/utils/utils'
+import { passwordRegExp } from '@/utils/utils'
 
 export default function SignUp() {
   const t = useTranslations('SignUp')
@@ -28,15 +29,26 @@ export default function SignUp() {
   })
 
   const handleSubmit = async (email: string, password: string) => {
-    if (!!isEmailValid(email) && !!isPasswordValid(password)) {
-      createCustomer({
-        input: {
-          email: email,
-          password: password,
-        },
-      })
-    }
+    createCustomer({
+      input: {
+        email: email,
+        password: password,
+      },
+    })
   }
+
+  const validationSchema = z.object({
+    email: z
+      .string()
+      .min(1, { message: t('emailRequired') })
+      .email({
+        message: t('emailPattern'),
+      }),
+    password: z
+      .string()
+      .regex(passwordRegExp, t('passwordPattern'))
+      .min(8, { message: t('passwordLength') }),
+  })
 
   return (
     <AuthCard
@@ -53,7 +65,8 @@ export default function SignUp() {
         handleSubmit={handleSubmit}
         isLoading={isLoading}
         buttonText={t('buttonText')}
-        error={data?.customerCreate?.customerUserErrors[0]?.message || ''}
+        apiError={data?.customerCreate?.customerUserErrors[0]?.message || ''}
+        validationSchema={validationSchema}
       />
     </AuthCard>
   )
