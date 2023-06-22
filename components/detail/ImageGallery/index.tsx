@@ -19,7 +19,7 @@ const ImageGallery = ({ variants, images, title }: ImageGalleryProps) => {
     const variant = variants.edges[selectedVariant].node
     const image = variant?.image || images.edges[selectedImage]?.node
 
-    return { variant, image }
+    return { image, variant }
   }, [variants, images])
 
   if (!image) {

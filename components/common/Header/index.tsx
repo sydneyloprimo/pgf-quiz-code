@@ -11,10 +11,10 @@ import { Routes } from '@/types/enums/routes'
 import HeaderDropdownMenu from './HeaderDropdownMenu'
 
 const images = {
-  logoWhite: '/icons/logo-white.svg',
-  chevronDown: '/icons/chevron-down.svg',
   cartIcon: '/icons/cart.svg',
+  chevronDown: '/icons/chevron-down.svg',
   hamburgerIcon: '/icons/hamburger.svg',
+  logoWhite: '/icons/logo-white.svg',
 }
 
 const Header = () => {

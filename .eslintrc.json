@@ -1,6 +1,7 @@
 {
   "extends": [
     "next/core-web-vitals",
+    "plugin:i18n-json/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@tanstack/eslint-plugin-query/recommended",
     "prettier"
@@ -13,6 +14,18 @@
   ],
   "ignorePatterns": ["shopify/generated/*"],
   "rules": {
+    "i18n-json/sorted-keys": [
+      2,
+      {
+        "order": "asc",
+        "indentSpaces": 2
+      }
+    ],
+    "sort-keys": [
+      "error",
+      "asc",
+      { "caseSensitive": true, "natural": false, "minKeys": 2 }
+    ],
     "no-restricted-imports": [
       "error",
       {

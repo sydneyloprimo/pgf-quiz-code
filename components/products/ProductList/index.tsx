@@ -39,13 +39,13 @@ const ProductList = ({ className }: ProductListProps) => {
   const { data, fetchNextPage, fetchPreviousPage } =
     useInfiniteGetAllProductsQuery('first', client, variables, {
       select: ({ pageParams, pages }) => ({
+        keepPreviousData: true,
         pageParams: pageParams,
         pages: pages.map(({ products: { edges, pageInfo } }) => ({
           edges,
           pageInfo,
         })),
       }),
-      keepPreviousData: true,
     })
 
   const { edges, pageInfo } = data?.pages[page] || {}
@@ -56,10 +56,10 @@ const ProductList = ({ className }: ProductListProps) => {
     if (!totalPages || page === totalPages - 1) {
       fetchNextPage({
         pageParam: {
-          before: null,
-          last: null,
           after: pageInfo?.endCursor,
+          before: null,
           first: PAGE_SIZE,
+          last: null,
         },
       })
     }
@@ -79,10 +79,10 @@ const ProductList = ({ className }: ProductListProps) => {
       newCursor = data?.pages[0].pageInfo.startCursor
       fetchPreviousPage({
         pageParam: {
-          before: newCursor,
-          last: PAGE_SIZE,
-          first: null,
           after: null,
+          before: newCursor,
+          first: null,
+          last: PAGE_SIZE,
         },
       })
     } else {
@@ -114,8 +114,8 @@ const ProductList = ({ className }: ProductListProps) => {
             className={cn(
               'w-full overflow-hidden border-b-dark-grey border-b border-solid border-t-transparent border-x-transparent md:mb-5 md:shadow-1 md:rounded-lg md:border-none md:border-transparent',
               {
-                'rounded-t-lg': index === 0,
                 'rounded-b-lg border-b-0': index === edges.length - 1,
+                'rounded-t-lg': index === 0,
               }
             )}
           />

@@ -1,4 +1,28 @@
 {
+  "Auth": {
+    "email": "Email",
+    "emailPlaceholder": "Type your email",
+    "password": "Password",
+    "passwordPlaceholder": "Type your password"
+  },
+  "Cart": {
+    "checkoutButton": "Go to checkout",
+    "deleteButton": "Remove item",
+    "emptyState": {
+      "description": "Looks like you have not added anything to your cart.",
+      "exploreButton": "Go explore products",
+      "title": "Your cart is empty"
+    },
+    "title": "My shopping cart",
+    "total": "Total"
+  },
+  "Detail": {
+    "addToCart": "Add to cart",
+    "availability": "Availability: {count} items",
+    "productDescription": "Product description",
+    "quantity": "Quantity",
+    "variant": "Variant"
+  },
   "Header": {
     "cartIcon": "cart icon",
     "hamburgerIcon": "hamburger icon",
@@ -12,24 +36,6 @@
   "Home": {
     "title": "Hello world!"
   },
-  "Detail": {
-    "addToCart": "Add to cart",
-    "availability": "Availability: {count} items",
-    "productDescription": "Product description",
-    "quantity": "Quantity",
-    "variant": "Variant"
-  },
-  "Cart": {
-    "checkoutButton": "Go to checkout",
-    "emptyState": {
-      "description": "Looks like you have not added anything to your cart.",
-      "exploreButton": "Go explore products",
-      "title": "Your cart is empty"
-    },
-    "deleteButton": "Remove item",
-    "title": "My shopping cart",
-    "total": "Total"
-  },
   "Products": {
     "fitlerPanel": {
       "buttonAlt": "Select filter",
@@ -40,26 +46,20 @@
       "previousButton": "Previous Page"
     }
   },
-  "SignUp": {
-    "buttonText": "Sign up",
-    "signinRedirectLink": "Sign in",
-    "signinRedirectMessage": "Already have an account?",
-    "emailPattern": "Must be a valid email",
-    "emailRequired": "Email is required",
-    "passwordLength": "Password must be atleast 8 characters",
-    "passwordPattern": "Password should have at least one number, one uppercase letter and one lowercase letter"
-  },
-  "Auth": {
-    "email": "Email",
-    "emailPlaceholder": "Type your email",
-    "password": "Password",
-    "passwordPlaceholder": "Type your password"
-  },
   "SignIn": {
     "buttonText": "Sign in",
     "emailRequired": "Email is required",
+    "passwordRequired": "Password is required",
     "signupRedirectLink": "Sign up",
-    "signupRedirectMessage": "Don't have an account?",
-    "passwordRequired": "Password is required"
+    "signupRedirectMessage": "Don't have an account?"
+  },
+  "SignUp": {
+    "buttonText": "Sign up",
+    "emailPattern": "Must be a valid email",
+    "emailRequired": "Email is required",
+    "passwordLength": "Password must be at least 8 characters",
+    "passwordPattern": "Password should have at least one number, one uppercase letter and one lowercase letter",
+    "signinRedirectLink": "Sign in",
+    "signinRedirectMessage": "Already have an account?"
   }
 }
