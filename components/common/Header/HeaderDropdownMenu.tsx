@@ -27,9 +27,10 @@ const HeaderDropdownMenu = ({
   const router = useRouter()
   const t = useTranslations('Header')
   const [cookies, , removeCookie] = useCookies([Cookies.customerAccessToken])
+  const isLoggedIn = !!cookies[Cookies.customerAccessToken]
 
   const handleProfileClick = () => {
-    if (cookies[Cookies.customerAccessToken]) {
+    if (isLoggedIn) {
       // TODO: redirect to profile page
     } else {
       router.push(Routes.signin)
@@ -72,13 +73,23 @@ const HeaderDropdownMenu = ({
         sideOffset={5}
         className="p-px bg-white rounded-b-sm md:rounded-b-md w-[calc(var(--radix-dropdown-menu-trigger-width)*2)] md:w-[calc(var(--radix-dropdown-menu-trigger-width)+2px)] max-g-[var(--radix-dropdown-menu-content-available-height)]"
       >
-        <DropdownItem className="dropdown-menu-item text-sm last-of-type:rounded-b-sm md:last-of-type:rounded-b-md">
+        <DropdownItem
+          asChild
+          className="dropdown-menu-item text-sm last-of-type:rounded-b-sm md:last-of-type:rounded-b-md"
+        >
           <button onClick={handleProfileClick}>{t('myProfile')}</button>
         </DropdownItem>
-        <DropdownMenuSeparator className="h-[1px] bg-white" />
-        <DropdownItem className="dropdown-menu-item text-sm last-of-type:rounded-b-sm md:last-of-type:rounded-b-md">
-          <button onClick={handleLogout}>{t('logout')}</button>
-        </DropdownItem>
+        {isLoggedIn && (
+          <>
+            <DropdownMenuSeparator className="h-[1px] bg-white" />
+            <DropdownItem
+              asChild
+              className="dropdown-menu-item text-sm last-of-type:rounded-b-sm md:last-of-type:rounded-b-md"
+            >
+              <button onClick={handleLogout}>{t('logout')}</button>
+            </DropdownItem>
+          </>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   )
