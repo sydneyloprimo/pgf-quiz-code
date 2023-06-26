@@ -19,7 +19,7 @@ interface ProductListProps {
   className?: string
 }
 
-const PAGE_SIZE = 4
+const PAGE_SIZE = 6
 const ProductList = ({ className }: ProductListProps) => {
   const searchParams = useSearchParams()
   const cursor = searchParams.get('cursor')
