@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl'
 import { useCookies } from 'react-cookie'
 
 import { Cookies } from '@/types/enums/cookies'
+import { findProductLine } from '@/utils/utils'
 import CartProductCard from 'components/cart/CartProductCard'
 import EmptyState from 'components/cart/EmptyState'
 import { client } from 'shopify/client'
@@ -11,6 +12,8 @@ import {
   ProductVariant,
   useGetCartQuery,
   useCartLinesRemoveMutation,
+  useCartLinesUpdateMutation,
+  CartLineEdge,
 } from 'shopify/generated/graphql'
 
 interface CartProps {
@@ -30,12 +33,25 @@ const Cart = ({ className }: CartProps) => {
     id: cartId,
   })
 
+  const { mutate: updateLine, isLoading: isUpdateLoading } =
+    useCartLinesUpdateMutation(client, {
+      onSuccess: () => {
+        getCartRefetch()
+      },
+    })
+
   const { mutate: removeLine, isLoading: isRemoveLoading } =
     useCartLinesRemoveMutation(client, {
       onSuccess: () => {
         getCartRefetch()
       },
     })
+
+  const { cart } = data || {}
+  const { edges } = cart?.lines || {}
+
+  const isEmpty = !edges?.length
+  const isDisabled = isGetCartLoading || isRemoveLoading || isUpdateLoading
 
   const handleCheckoutClick = () => {
     window.location.assign(cart?.checkoutUrl)
@@ -48,10 +64,37 @@ const Cart = ({ className }: CartProps) => {
     })
   }
 
-  const { cart } = data || {}
-  const { edges } = cart?.lines || {}
+  const onDecreaseClick = (productId: string) => {
+    const line = edges && findProductLine(edges as CartLineEdge[], productId)
 
-  const isEmpty = !edges?.length
+    if (line) {
+      updateLine({
+        cartId,
+        lines: [
+          {
+            id: line.node.id,
+            quantity: line.node.quantity - 1,
+          },
+        ],
+      })
+    }
+  }
+
+  const onIncreaseClick = (productId: string) => {
+    const line = edges?.find(({ node: { id } }) => id === productId)
+
+    if (line) {
+      updateLine({
+        cartId,
+        lines: [
+          {
+            id: line.node.id,
+            quantity: line.node.quantity + 1,
+          },
+        ],
+      })
+    }
+  }
 
   return (
     <>
@@ -68,20 +111,25 @@ const Cart = ({ className }: CartProps) => {
               )}
             >
               <div>
-                {edges?.map(({ node: { id, merchandise: product } }, index) => (
-                  <CartProductCard
-                    key={`${product.id}-${product.title}`}
-                    product={product as ProductVariant}
-                    onDeleteClick={() => onDeleteClick(id)}
-                    deleteDisabled={isGetCartLoading || isRemoveLoading}
-                    className={cn(
-                      'w-full overflow-hidden border-b-dark-grey border-b border-solid border-t-transparent md:border border-x-transparent md:mb-5 md:rounded-lg md:border-dark-grey',
-                      {
-                        'rounded-t-lg': index === 0,
-                      }
-                    )}
-                  />
-                ))}
+                {edges?.map(
+                  ({ node: { id, merchandise: product, quantity } }, index) => (
+                    <CartProductCard
+                      key={`${product.id}-${product.title}`}
+                      product={product as ProductVariant}
+                      quantity={quantity}
+                      onDeleteClick={() => onDeleteClick(id)}
+                      onDecreaseClick={() => onDecreaseClick(id)}
+                      onIncreaseClick={() => onIncreaseClick(id)}
+                      disabled={isDisabled}
+                      className={cn(
+                        'w-full overflow-hidden border-b-dark-grey border-b border-solid border-t-transparent md:border border-x-transparent md:mb-5 md:rounded-lg md:border-dark-grey',
+                        {
+                          'rounded-t-lg': index === 0,
+                        }
+                      )}
+                    />
+                  )
+                )}
               </div>
             </div>
             <div className="flex justify-between pb-3.5 pt-4 px-3 md:p-0">
@@ -94,7 +142,7 @@ const Cart = ({ className }: CartProps) => {
               </h3>
               <button
                 className="h-7 btn-primary md:h-10 ml-5 md:ml-6"
-                disabled={isEmpty}
+                disabled={isEmpty || isDisabled}
                 onClick={handleCheckoutClick}
               >
                 {t('checkoutButton')}

@@ -57,15 +57,15 @@ body {
 }
 
 .btn {
-  @apply rounded-md text-base px-5 flex items-center justify-center outline outline-1 focus:outline-dashed focus:outline-2 focus:outline-focus hover:bg-hover hover:outline-none disabled:cursor-not-allowed disabled:bg-light-grey disabled:text-dark-grey disabled:outline-none active:bg-active active:outline-active-outline active:outline;
+  @apply rounded-md text-base flex items-center justify-center  outline-1 focus:outline-dashed focus:outline-2 focus:outline-focus hover:bg-hover hover:outline-none disabled:cursor-not-allowed  disabled:text-dark-grey disabled:outline-none active:bg-active active:outline-active-outline active:outline;
 }
 
 .btn-primary {
-  @apply btn text-white outline-white bg-dark-violet;
+  @apply btn px-5 outline text-white outline-white bg-dark-violet disabled:bg-light-grey;
 }
 
 .btn-secondary {
-  @apply btn text-black outline-black bg-white hover:text-white active:text-white;
+  @apply btn px-5 outline text-black outline-black bg-white hover:text-white active:text-white disabled:bg-light-grey;
 }
 
 .dropdown-menu {

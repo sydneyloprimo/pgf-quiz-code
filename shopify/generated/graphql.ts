@@ -6946,6 +6946,24 @@ export type CartLinesRemoveMutation = {
   } | null
 }
 
+export type CartLinesUpdateMutationVariables = Exact<{
+  cartId: Scalars['ID']
+  lines: Array<CartLineUpdateInput> | CartLineUpdateInput
+}>
+
+export type CartLinesUpdateMutation = {
+  __typename?: 'Mutation'
+  cartLinesUpdate?: {
+    __typename?: 'CartLinesUpdatePayload'
+    cart?: { __typename?: 'Cart'; id: string } | null
+    userErrors: Array<{
+      __typename?: 'CartUserError'
+      field?: Array<string> | null
+      message: string
+    }>
+  } | null
+}
+
 export type GetAllProductsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['Int']>
   last?: InputMaybe<Scalars['Int']>
@@ -7030,6 +7048,7 @@ export type GetCartQuery = {
             __typename: 'ProductVariant'
             id: string
             title: string
+            quantityAvailable?: number | null
             image?: { __typename?: 'Image'; url: any } | null
             price: {
               __typename?: 'MoneyV2'
@@ -7369,6 +7388,59 @@ useCartLinesRemoveMutation.fetcher = (
     variables,
     headers
   )
+export const CartLinesUpdateDocument = /*#__PURE__*/ `
+    mutation cartLinesUpdate($cartId: ID!, $lines: [CartLineUpdateInput!]!) {
+  cartLinesUpdate(cartId: $cartId, lines: $lines) {
+    cart {
+      id
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}
+    `
+export const useCartLinesUpdateMutation = <
+  TError = unknown,
+  TContext = unknown
+>(
+  client: GraphQLClient,
+  options?: UseMutationOptions<
+    CartLinesUpdateMutation,
+    TError,
+    CartLinesUpdateMutationVariables,
+    TContext
+  >,
+  headers?: RequestInit['headers']
+) =>
+  useMutation<
+    CartLinesUpdateMutation,
+    TError,
+    CartLinesUpdateMutationVariables,
+    TContext
+  >(
+    ['cartLinesUpdate'],
+    (variables?: CartLinesUpdateMutationVariables) =>
+      fetcher<CartLinesUpdateMutation, CartLinesUpdateMutationVariables>(
+        client,
+        CartLinesUpdateDocument,
+        variables,
+        headers
+      )(),
+    options
+  )
+useCartLinesUpdateMutation.fetcher = (
+  client: GraphQLClient,
+  variables: CartLinesUpdateMutationVariables,
+  headers?: RequestInit['headers']
+) =>
+  fetcher<CartLinesUpdateMutation, CartLinesUpdateMutationVariables>(
+    client,
+    CartLinesUpdateDocument,
+    variables,
+    headers
+  )
 export const GetAllProductsDocument = /*#__PURE__*/ `
     query getAllProducts($first: Int = null, $last: Int = null, $query: String = "", $sortKey: ProductSortKeys = RELEVANCE, $reverse: Boolean = false, $after: String = null, $before: String = null) {
   products(
@@ -7510,6 +7582,7 @@ export const GetCartDocument = /*#__PURE__*/ `
                 amount
                 currencyCode
               }
+              quantityAvailable
             }
           }
           quantity
