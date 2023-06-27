@@ -31,7 +31,7 @@ const HeaderDropdownMenu = ({
 
   const handleProfileClick = () => {
     if (isLoggedIn) {
-      // TODO: redirect to profile page
+      router.push(Routes.profile)
     } else {
       router.push(Routes.signin)
     }

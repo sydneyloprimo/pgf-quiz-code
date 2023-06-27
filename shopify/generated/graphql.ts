@@ -7090,6 +7090,31 @@ export type GetCartQuery = {
   } | null
 }
 
+export type GetCustomerQueryVariables = Exact<{
+  customerAccessToken: Scalars['String']
+}>
+
+export type GetCustomerQuery = {
+  __typename?: 'QueryRoot'
+  customer?: {
+    __typename?: 'Customer'
+    id: string
+    firstName?: string | null
+    acceptsMarketing: boolean
+    email?: string | null
+    phone?: string | null
+    defaultAddress?: {
+      __typename?: 'MailingAddress'
+      address1?: string | null
+      city?: string | null
+      country?: string | null
+      address2?: string | null
+      formattedArea?: string | null
+      zip?: string | null
+    } | null
+  } | null
+}
+
 export type GetProductDetailQueryVariables = Exact<{
   handle: Scalars['String']
 }>
@@ -7664,6 +7689,83 @@ useGetCartQuery.fetcher = (
   fetcher<GetCartQuery, GetCartQueryVariables>(
     client,
     GetCartDocument,
+    variables,
+    headers
+  )
+export const GetCustomerDocument = /*#__PURE__*/ `
+    query getCustomer($customerAccessToken: String!) {
+  customer(customerAccessToken: $customerAccessToken) {
+    id
+    firstName
+    acceptsMarketing
+    email
+    phone
+    defaultAddress {
+      address1
+      city
+      country
+      address2
+      formattedArea
+      zip
+    }
+  }
+}
+    `
+export const useGetCustomerQuery = <TData = GetCustomerQuery, TError = unknown>(
+  client: GraphQLClient,
+  variables: GetCustomerQueryVariables,
+  options?: UseQueryOptions<GetCustomerQuery, TError, TData>,
+  headers?: RequestInit['headers']
+) =>
+  useQuery<GetCustomerQuery, TError, TData>(
+    ['getCustomer', variables],
+    fetcher<GetCustomerQuery, GetCustomerQueryVariables>(
+      client,
+      GetCustomerDocument,
+      variables,
+      headers
+    ),
+    options
+  )
+
+useGetCustomerQuery.getKey = (variables: GetCustomerQueryVariables) => [
+  'getCustomer',
+  variables,
+]
+export const useInfiniteGetCustomerQuery = <
+  TData = GetCustomerQuery,
+  TError = unknown
+>(
+  pageParamKey: keyof GetCustomerQueryVariables,
+  client: GraphQLClient,
+  variables: GetCustomerQueryVariables,
+  options?: UseInfiniteQueryOptions<GetCustomerQuery, TError, TData>,
+  headers?: RequestInit['headers']
+) =>
+  useInfiniteQuery<GetCustomerQuery, TError, TData>(
+    ['getCustomer.infinite', variables],
+    (metaData) =>
+      fetcher<GetCustomerQuery, GetCustomerQueryVariables>(
+        client,
+        GetCustomerDocument,
+        { ...variables, ...(metaData.pageParam ?? {}) },
+        headers
+      )(),
+    options
+  )
+
+useInfiniteGetCustomerQuery.getKey = (variables: GetCustomerQueryVariables) => [
+  'getCustomer.infinite',
+  variables,
+]
+useGetCustomerQuery.fetcher = (
+  client: GraphQLClient,
+  variables: GetCustomerQueryVariables,
+  headers?: RequestInit['headers']
+) =>
+  fetcher<GetCustomerQuery, GetCustomerQueryVariables>(
+    client,
+    GetCustomerDocument,
     variables,
     headers
   )

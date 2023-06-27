@@ -62,6 +62,27 @@
     "search": "Search",
     "searchTerms": "You searched for: \"{terms}\""
   },
+  "Profile": {
+    "address": "Address",
+    "addressPlaceholder": "Address",
+    "cancelButtonText": "Cancel",
+    "city": "City",
+    "cityPlaceholder": "City",
+    "country": "Country",
+    "countryPlaceholder": "Country",
+    "editSettings": "Edit my personal settings",
+    "email": "Mail address",
+    "emailPlaceholder": "Email",
+    "name": "Name",
+    "namePlaceholder": "Name",
+    "phone": "Phone",
+    "phonePlaceholder": "Phone number",
+    "submitButtonText": "Save",
+    "subtitle": "Personal Data",
+    "title": "Account Settings",
+    "zip": "Zip",
+    "zipPlaceholder": "Zip"
+  },
   "SignIn": {
     "buttonText": "Sign in",
     "emailRequired": "Email is required",

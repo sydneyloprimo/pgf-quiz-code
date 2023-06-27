@@ -79,3 +79,15 @@ body {
 .link-primary {
   @apply text-links text-sm font-bold md:text-base disabled:text-dark-grey hover:underline active:underline active:text-active focus:outline-dashed focus:outline-2 focus:outline-focus focus:rounded-lg focus:px-1.5;
 }
+
+.h1 {
+  @apply font-bold text-3xl;
+}
+
+.h2 {
+  @apply font-bold text-xl;
+}
+
+.h3 {
+  @apply text-xl;
+}
