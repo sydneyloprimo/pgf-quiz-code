@@ -1,0 +1,17 @@
+query getCustomer($customerAccessToken: String!) {
+  customer(customerAccessToken: $customerAccessToken) {
+    id
+    firstName
+    acceptsMarketing
+    email
+    phone
+    defaultAddress {
+      address1
+      city
+      country
+      address2
+      formattedArea
+      zip
+    }
+  }
+}
