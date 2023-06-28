@@ -37,14 +37,30 @@
     "title": "Hello world!"
   },
   "Products": {
-    "fitlerPanel": {
-      "buttonAlt": "Select filter",
-      "title": "Your filters will appear here."
-    },
     "list": {
       "nextButton": "Next Page",
       "previousButton": "Previous Page"
     }
+  },
+  "Search": {
+    "FilterPanel": {
+      "buttonAlt": "Select filter",
+      "category": "Category",
+      "condition": "Condition",
+      "filters": "Filters",
+      "max": "Max",
+      "min": "Min",
+      "new": "New",
+      "price": "Price",
+      "refurbished": "Refurbished",
+      "seeResults": "See results",
+      "title": "Your filters will appear here.",
+      "typeMax": "Type maximum",
+      "typeMin": "Type minimum",
+      "used": "Used"
+    },
+    "search": "Search",
+    "searchTerms": "You searched for: \"{terms}\""
   },
   "SignIn": {
     "buttonText": "Sign in",

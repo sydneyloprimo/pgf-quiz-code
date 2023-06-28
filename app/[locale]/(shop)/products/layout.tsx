@@ -10,8 +10,8 @@ export default function ProductsLayout({
   params,
 }: ProductsLayoutProps) {
   return (
-    <LocaleWrapper localeGroup="Products" params={params}>
-      <div className="min-h-screen min-w-full">{children}</div>
+    <LocaleWrapper localeGroup={['Products', 'Search']} params={params}>
+      <div className="min-h-screen min-w-full text-black">{children}</div>
     </LocaleWrapper>
   )
 }
