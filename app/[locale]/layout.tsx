@@ -27,7 +27,7 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
   return (
     <html lang={locale}>
       <body className="flex items-center flex-col">
-        <Providers>
+        <Providers params={params}>
           <Session>{children}</Session>
         </Providers>
       </body>

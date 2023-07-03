@@ -1,12 +1,21 @@
+'use client'
 import { useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useEffect, useMemo, useState } from 'react'
+import { useCookies } from 'react-cookie'
+import { toast } from 'react-toastify'
+import { useMediaQuery } from 'usehooks-ts'
 
-import { formatCurrency } from '@/utils/utils'
+import Toast, { ToastTypes } from '@/components/common/Toast'
+import { MediaQuery } from '@/constants'
+import { Cookies } from '@/types/enums/cookies'
+import { client } from 'shopify/client'
 import {
+  useCartLinesAddMutation,
   ProductVariantConnection,
   ImageConnection,
 } from 'shopify/generated/graphql'
+import { formatCurrency } from 'utils/utils'
 
 export const VARIANT = 'variant'
 
@@ -20,21 +29,63 @@ interface ProductDescriptionProps {
 }
 
 const ProductDescription = ({
-  title,
   description,
   handleSetVariant,
+  title,
   variantId,
   variants,
 }: ProductDescriptionProps) => {
   const [quantity, setQuantity] = useState(1)
-
   const searchParams = useSearchParams()
+  const isMobile = useMediaQuery(MediaQuery.mobile)
+  const [cookies] = useCookies([Cookies.cart])
+
   const t = useTranslations('Detail')
+
+  const { mutate: addLine, isLoading: isAddLineLoading } =
+    useCartLinesAddMutation(client, {
+      onError: () => {
+        toast(
+          <Toast type={ToastTypes.error} description={t('errorMessage')} />,
+          {
+            className: 'border-error border rounded-lg',
+            position: 'bottom-center',
+          }
+        )
+      },
+      onSuccess: () => {
+        toast(
+          <Toast
+            type={ToastTypes.success}
+            description={t('successMessage', { title })}
+          />,
+          {
+            className: 'border-restored border rounded-lg w-max',
+            position: isMobile ? 'top-center' : 'bottom-center',
+          }
+        )
+      },
+    })
 
   const variantInfo = useMemo(
     () => variants.edges.find(({ node: { id } }) => id === variantId)?.node,
     [variantId, variants]
   )
+
+  const onAddLineClick = () => {
+    toast.dismiss()
+    if (variantInfo) {
+      addLine({
+        cartId: cookies[Cookies.cart],
+        lines: [
+          {
+            merchandiseId: variantInfo.id,
+            quantity,
+          },
+        ],
+      })
+    }
+  }
 
   useEffect(() => {
     setQuantity(1)
@@ -76,7 +127,8 @@ const ProductDescription = ({
             id="variant"
             value={variantId as string}
             onChange={(e) => handleSetVariant(e.target.value)}
-            className="w-20 border border-gray-500 h-10 rounded px-3 py-2"
+            className="w-20 border border-gray-500 h-10 rounded px-3 py-2 bg-white cursor-pointer"
+            disabled={isAddLineLoading}
           >
             {variants.edges.map((variant) => (
               <option key={variant.node.id} value={variant.node.id}>
@@ -85,40 +137,50 @@ const ProductDescription = ({
             ))}
           </select>
         </div>
-        <div className="pl-3">
-          <label htmlFor="quantity" className="block mb-4 font-bold">
-            {t('quantity')}
-          </label>
-          <select
-            id="quantity"
-            value={quantity}
-            onChange={(e) => setQuantity(Number(e.target.value))}
-            disabled={!Boolean(variantInfo.quantityAvailable)}
-            className="w-20 border border-gray-500 h-10 rounded px-3 py-2"
-          >
-            {Array.from(
-              { length: Number(variantInfo.quantityAvailable) },
-              (_, i) => (
-                <option key={i} value={i + 1}>
-                  {i + 1}
-                </option>
-              )
-            )}
-          </select>
-        </div>
-        <div className="flex-1 pl-3">
-          <p className="mb-4 text-center font-bold">
-            {t('availability', {
-              count: Number(variantInfo.quantityAvailable),
-            })}
-          </p>
-          <button
-            type="button"
-            className="btn-primary w-full py-2 justify-center"
-          >
-            {t('addToCart')}
-          </button>
-        </div>
+        {variantInfo.quantityAvailable === 0 ? (
+          <div className="ml-8 mb-2 md:mb-1">
+            <p className="text-error text-base md:text-xl">{t('outOfStock')}</p>
+          </div>
+        ) : (
+          <>
+            <div className="pl-3">
+              <label htmlFor="quantity" className="block mb-4 font-bold">
+                {t('quantity')}
+              </label>
+              <select
+                id="quantity"
+                value={quantity}
+                onChange={(e) => setQuantity(Number(e.target.value))}
+                disabled={!variantInfo.quantityAvailable || isAddLineLoading}
+                className="w-20 border border-gray-500 h-10 rounded px-3 py-2 bg-white cursor-pointer"
+              >
+                {Array.from(
+                  { length: Number(variantInfo.quantityAvailable) },
+                  (_, i) => (
+                    <option key={i} value={i + 1}>
+                      {i + 1}
+                    </option>
+                  )
+                )}
+              </select>
+            </div>
+            <div className="flex-1 pl-3">
+              <p className="mb-4 text-center font-bold">
+                {t('availability', {
+                  count: Number(variantInfo.quantityAvailable),
+                })}
+              </p>
+              <button
+                type="button"
+                className="btn-primary w-full py-2 justify-center"
+                onClick={onAddLineClick}
+                disabled={isAddLineLoading}
+              >
+                {t('addToCart')}
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   )

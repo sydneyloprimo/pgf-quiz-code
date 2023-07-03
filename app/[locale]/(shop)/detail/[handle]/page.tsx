@@ -23,7 +23,7 @@ export default async function Detail({ params }: ProductDetailProps) {
 
   return (
     <Hydrate state={dehydratedState}>
-      <div className="container flex min-h-screen bg-background flex-col md:px-4 py-2.5 md:flex-row md:px-7 md:py-14 md:mb-24 md:justify-center rounded-lg bg-white shadow-1">
+      <div className="container flex min-h-screen flex-col md:px-4 py-2.5 md:flex-row md:px-7 md:py-14 md:mb-24 md:justify-center rounded-lg bg-white shadow-1">
         <ProductDetail handle={params.handle} />
       </div>
     </Hydrate>

@@ -1,5 +1,4 @@
 import { GraphQLClient } from 'graphql-request'
-import { RequestInit } from 'graphql-request/dist/types.dom'
 import {
   useMutation,
   useQuery,
@@ -6849,6 +6848,24 @@ export enum WeightUnit {
   Pounds = 'POUNDS',
 }
 
+export type CartLinesAddMutationVariables = Exact<{
+  cartId: Scalars['ID']
+  lines: Array<CartLineInput> | CartLineInput
+}>
+
+export type CartLinesAddMutation = {
+  __typename?: 'Mutation'
+  cartLinesAdd?: {
+    __typename?: 'CartLinesAddPayload'
+    cart?: { __typename?: 'Cart'; id: string } | null
+    userErrors: Array<{
+      __typename?: 'CartUserError'
+      field?: Array<string> | null
+      message: string
+    }>
+  } | null
+}
+
 export type CartCreateMutationVariables = Exact<{ [key: string]: never }>
 
 export type CartCreateMutation = {
@@ -7188,6 +7205,56 @@ export type GetProductDetailQuery = {
   } | null
 }
 
+export const CartLinesAddDocument = /*#__PURE__*/ `
+    mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
+  cartLinesAdd(cartId: $cartId, lines: $lines) {
+    cart {
+      id
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}
+    `
+export const useCartLinesAddMutation = <TError = unknown, TContext = unknown>(
+  client: GraphQLClient,
+  options?: UseMutationOptions<
+    CartLinesAddMutation,
+    TError,
+    CartLinesAddMutationVariables,
+    TContext
+  >,
+  headers?: RequestInit['headers']
+) =>
+  useMutation<
+    CartLinesAddMutation,
+    TError,
+    CartLinesAddMutationVariables,
+    TContext
+  >(
+    ['cartLinesAdd'],
+    (variables?: CartLinesAddMutationVariables) =>
+      fetcher<CartLinesAddMutation, CartLinesAddMutationVariables>(
+        client,
+        CartLinesAddDocument,
+        variables,
+        headers
+      )(),
+    options
+  )
+useCartLinesAddMutation.fetcher = (
+  client: GraphQLClient,
+  variables: CartLinesAddMutationVariables,
+  headers?: RequestInit['headers']
+) =>
+  fetcher<CartLinesAddMutation, CartLinesAddMutationVariables>(
+    client,
+    CartLinesAddDocument,
+    variables,
+    headers
+  )
 export const CartCreateDocument = /*#__PURE__*/ `
     mutation cartCreate {
   cartCreate {

@@ -16,11 +16,26 @@
     "title": "My shopping cart",
     "total": "Total"
   },
+  "Common": {
+    "Toast": {
+      "Error": {
+        "iconAlt": "Error icon",
+        "title": "Error"
+      },
+      "Success": {
+        "iconAlt": "Success icon",
+        "title": "Success"
+      }
+    }
+  },
   "Detail": {
     "addToCart": "Add to cart",
     "availability": "Availability: {count} items",
+    "errorMessage": "There was an error, try again later.",
+    "outOfStock": "Out of stock",
     "productDescription": "Product description",
     "quantity": "Quantity",
+    "successMessage": "{title} was added to your cart.",
     "variant": "Variant"
   },
   "Header": {

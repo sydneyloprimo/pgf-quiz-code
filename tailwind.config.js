@@ -1,10 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 
 const backgroundImage = {
-  'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+  auth_bg_image: "url('/images/auth-background.png')",
   'gradient-conic':
     'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-  auth_bg_image: "url('/images/auth-background.png')",
+  'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
 }
 
 const boxShadow = {
@@ -35,20 +35,20 @@ const fontFamily = {
 }
 
 const fontSize = {
-  '3xl': '36px',
   '2xl': '28px',
-  xl: '24px',
-  lg: '20px',
+  '3xl': '36px',
   base: '16px',
+  lg: '20px',
   sm: '14px',
+  xl: '24px',
   xs: '12px',
 }
 
 const fontWeight = {
-  regular: 400,
-  medium: 500,
-  bold: 700,
-  extraBold: 800,
+  bold: '700',
+  extraBold: '800',
+  medium: '500',
+  regular: '400',
 }
 
 module.exports = {
@@ -57,22 +57,22 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  plugins: [],
   theme: {
+    extend: {
+      backgroundImage,
+      boxShadow,
+      colors,
+    },
     fontFamily,
     fontSize,
     fontWeight,
-    extend: {
-      backgroundImage,
-      colors,
-      boxShadow,
-    },
   },
   zIndex: {
-    header: '60',
     dropdown: '70',
     'hamburger-menu': '80',
-    navDrawer: '90',
+    header: '60',
     modal: '100',
+    navDrawer: '90',
   },
-  plugins: [],
 }
