@@ -7009,6 +7009,7 @@ export type GetAllProductsQuery = {
         __typename: 'Product'
         id: string
         title: string
+        tags: Array<string>
         vendor: string
         handle: string
         priceRange: {
@@ -7556,6 +7557,7 @@ export const GetAllProductsDocument = /*#__PURE__*/ `
         node {
           id
           title
+          tags
           vendor
           handle
           __typename

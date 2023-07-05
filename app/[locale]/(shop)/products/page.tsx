@@ -1,8 +1,7 @@
 import { dehydrate } from '@tanstack/query-core'
 
-import FilterPanel from '@/components/products/FilterPanel'
+import ProductCatalog from '@/components/products/ProductCatalog'
 import Hydrate from '@/utils/hydrate.client'
-import ProductList from 'components/products/ProductList'
 import { client } from 'shopify/client'
 import { useGetAllProductsQuery } from 'shopify/generated/graphql'
 import getQueryClient from 'utils/getQueryClient'
@@ -19,8 +18,7 @@ export default async function ProductPage() {
   return (
     <Hydrate state={dehydratedState}>
       <div className="flex min-h-screen bg-background flex-col px-4 py-2.5 md:flex-row md:pb-[106px] md:justify-center md:pt-[25px] md:px-0">
-        <FilterPanel />
-        <ProductList className="min-h-full md:w-[840px]" />
+        <ProductCatalog />
       </div>
     </Hydrate>
   )

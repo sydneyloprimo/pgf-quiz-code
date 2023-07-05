@@ -6,8 +6,8 @@ import { useFormContext } from 'react-hook-form'
 import Input from '@/components/common/Input'
 
 export interface PriceForm {
-  minPrice: string
-  maxPrice: string
+  priceMin: string
+  priceMax: string
 }
 
 const Price = () => {
@@ -24,7 +24,7 @@ const Price = () => {
         type="text"
         className="h-[40px]"
         labelClassName="my-2"
-        {...register('minPrice')}
+        {...register('priceMin')}
       />
       <Input
         label={t('max')}
@@ -32,7 +32,7 @@ const Price = () => {
         type="text"
         className="h-[40px]"
         labelClassName="my-2"
-        {...register('maxPrice')}
+        {...register('priceMax')}
       />
     </fieldset>
   )

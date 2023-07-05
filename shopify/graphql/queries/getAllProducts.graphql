@@ -28,6 +28,7 @@ query getAllProducts(
         node {
           id
           title
+          tags
           vendor
           handle
           __typename

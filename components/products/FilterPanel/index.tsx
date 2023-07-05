@@ -1,10 +1,12 @@
 'use client'
 
 import Image from 'next/image'
+import { useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 
+import { Filters } from '@/hooks/useProductSearch'
 import FilterIcon from 'public/icons/filter.svg'
 
 import Category, { CategoryForm } from './Filters/Category'
@@ -13,22 +15,57 @@ import Price, { PriceForm } from './Filters/Price'
 
 type FilterForm = ConditionForm & CategoryForm & PriceForm
 
-const defaultValues: FilterForm = {
-  category: [],
-  condition: '',
-  maxPrice: '',
-  minPrice: '',
+interface FilterPanelProps {
+  handleSetFilters: (filters: Filters) => void
 }
 
-const FilterPanel = () => {
+const FilterPanel = ({ handleSetFilters }: FilterPanelProps) => {
   const t = useTranslations('Search.FilterPanel')
   const [isOpen, setIsOpen] = useState(false)
+  const searchParams = useSearchParams()
 
-  const onSubmit = (data: FilterForm) => {
-    console.log(data)
-  }
+  const defaultValues: FilterForm = useMemo(() => {
+    const condition = searchParams.get('condition') || ''
+    const priceMax = searchParams.get('priceMax') || ''
+    const priceMin = searchParams.get('priceMin') || ''
+    const category =
+      searchParams
+        .get('category')
+        ?.split(',')
+        .map((category) => ({ category, id: category } as Category)) || []
 
-  const methods = useForm({ defaultValues })
+    return {
+      category,
+      condition,
+      priceMax,
+      priceMin,
+    }
+  }, [searchParams])
+
+  const onSubmit = useCallback(
+    (data: FilterForm) =>
+      handleSetFilters({
+        condition: data.condition,
+        priceMax: data.priceMax,
+        priceMin: data.priceMin,
+        tags: data.category.map(({ category }) => category),
+      }),
+    [handleSetFilters]
+  )
+
+  const filterForm = useForm({ defaultValues })
+
+  const category = filterForm.watch('category')
+
+  useEffect(() => {
+    const values = filterForm.getValues()
+    handleSetFilters({
+      condition: values.condition,
+      priceMax: values.priceMax,
+      priceMin: values.priceMin,
+      tags: values.category.map(({ category }) => category),
+    })
+  }, [category, filterForm, handleSetFilters])
 
   return (
     <div>
@@ -42,9 +79,9 @@ const FilterPanel = () => {
         </button>
       </div>
 
-      <FormProvider {...methods}>
+      <FormProvider {...filterForm}>
         <form
-          onSubmit={methods.handleSubmit(onSubmit)}
+          onSubmit={filterForm.handleSubmit(onSubmit)}
           className={`${
             isOpen ? 'max-h-screen' : 'max-h-0'
           } md:max-h-screen transition-all duration-500 ease flex flex-col md:mr-8 md:w-[262px] overflow-hidden`}

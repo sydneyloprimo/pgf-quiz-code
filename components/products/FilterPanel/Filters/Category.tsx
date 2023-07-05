@@ -31,6 +31,7 @@ const Category = () => {
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
       if (event.key !== 'Enter') return
+      event.preventDefault()
       categoryArray.append({ category: categoryInput })
       setCategoryInput('')
     },
@@ -38,11 +39,14 @@ const Category = () => {
   )
 
   const handleDeleteCategory = useCallback(
-    (id: string) =>
+    (id: string) => {
+      const categories: CategoryForm['category'] = watch('category')
+
       categoryArray.remove(
         categories.findIndex((category) => category.id === id)
-      ),
-    [categories, categoryArray]
+      )
+    },
+    [categoryArray, watch]
   )
 
   return (
