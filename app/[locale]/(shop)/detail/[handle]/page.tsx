@@ -47,7 +47,7 @@ export async function generateMetadata({
       description,
       openGraph: {
         description,
-        image: variant.image?.url,
+        images: variant.image?.url,
         title: `${variant.title} ${title}`,
       },
       title: `${variant.title} ${title} `,
@@ -58,7 +58,7 @@ export async function generateMetadata({
     description,
     openGraph: {
       description,
-      image: images.edges[0]?.node.url,
+      images: images.edges[0]?.node.url,
       title,
     },
     title,
