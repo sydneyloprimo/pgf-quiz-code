@@ -1,4 +1,5 @@
 import { GraphQLClient } from 'graphql-request'
+import { RequestInit } from 'graphql-request/dist/types.dom'
 import {
   useMutation,
   useQuery,
@@ -7133,6 +7134,48 @@ export type GetCustomerQuery = {
   } | null
 }
 
+export type GetOrdersQueryVariables = Exact<{
+  customerAccessToken: Scalars['String']
+  first?: InputMaybe<Scalars['Int']>
+  last?: InputMaybe<Scalars['Int']>
+  after?: InputMaybe<Scalars['String']>
+  before?: InputMaybe<Scalars['String']>
+}>
+
+export type GetOrdersQuery = {
+  __typename?: 'QueryRoot'
+  customer?: {
+    __typename?: 'Customer'
+    orders: {
+      __typename?: 'OrderConnection'
+      pageInfo: {
+        __typename?: 'PageInfo'
+        hasNextPage: boolean
+        hasPreviousPage: boolean
+        endCursor?: string | null
+        startCursor?: string | null
+      }
+      edges: Array<{
+        __typename?: 'OrderEdge'
+        node: {
+          __typename?: 'Order'
+          id: string
+          orderNumber: number
+          fulfillmentStatus: OrderFulfillmentStatus
+          financialStatus?: OrderFinancialStatus | null
+          name: string
+          statusUrl: any
+          totalPrice: {
+            __typename?: 'MoneyV2'
+            amount: any
+            currencyCode: CurrencyCode
+          }
+        }
+      }>
+    }
+  } | null
+}
+
 export type GetProductDetailQueryVariables = Exact<{
   handle: Scalars['String']
 }>
@@ -7835,6 +7878,92 @@ useGetCustomerQuery.fetcher = (
   fetcher<GetCustomerQuery, GetCustomerQueryVariables>(
     client,
     GetCustomerDocument,
+    variables,
+    headers
+  )
+export const GetOrdersDocument = /*#__PURE__*/ `
+    query getOrders($customerAccessToken: String!, $first: Int = null, $last: Int = null, $after: String = null, $before: String = null) {
+  customer(customerAccessToken: $customerAccessToken) {
+    orders(first: $first, after: $after, before: $before, last: $last) {
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        endCursor
+        startCursor
+      }
+      edges {
+        node {
+          id
+          orderNumber
+          totalPrice {
+            amount
+            currencyCode
+          }
+          fulfillmentStatus
+          financialStatus
+          name
+          statusUrl
+        }
+      }
+    }
+  }
+}
+    `
+export const useGetOrdersQuery = <TData = GetOrdersQuery, TError = unknown>(
+  client: GraphQLClient,
+  variables: GetOrdersQueryVariables,
+  options?: UseQueryOptions<GetOrdersQuery, TError, TData>,
+  headers?: RequestInit['headers']
+) =>
+  useQuery<GetOrdersQuery, TError, TData>(
+    ['getOrders', variables],
+    fetcher<GetOrdersQuery, GetOrdersQueryVariables>(
+      client,
+      GetOrdersDocument,
+      variables,
+      headers
+    ),
+    options
+  )
+
+useGetOrdersQuery.getKey = (variables: GetOrdersQueryVariables) => [
+  'getOrders',
+  variables,
+]
+export const useInfiniteGetOrdersQuery = <
+  TData = GetOrdersQuery,
+  TError = unknown
+>(
+  pageParamKey: keyof GetOrdersQueryVariables,
+  client: GraphQLClient,
+  variables: GetOrdersQueryVariables,
+  options?: UseInfiniteQueryOptions<GetOrdersQuery, TError, TData>,
+  headers?: RequestInit['headers']
+) =>
+  useInfiniteQuery<GetOrdersQuery, TError, TData>(
+    ['getOrders.infinite', variables],
+    (metaData) =>
+      fetcher<GetOrdersQuery, GetOrdersQueryVariables>(
+        client,
+        GetOrdersDocument,
+        { ...variables, ...(metaData.pageParam ?? {}) },
+        headers
+      )(),
+    options
+  )
+
+useInfiniteGetOrdersQuery.getKey = (variables: GetOrdersQueryVariables) => [
+  'getOrders.infinite',
+  variables,
+]
+useGetOrdersQuery.fetcher = (
+  client: GraphQLClient,
+  variables: GetOrdersQueryVariables,
+  headers?: RequestInit['headers']
+) =>
+  fetcher<GetOrdersQuery, GetOrdersQueryVariables>(
+    client,
+    GetOrdersDocument,
     variables,
     headers
   )

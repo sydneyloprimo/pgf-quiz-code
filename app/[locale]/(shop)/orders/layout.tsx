@@ -3,14 +3,11 @@ import { PropsWithChildren } from 'react'
 import LocaleWrapper from '@/components/common/LocaleWrapper'
 import { Locale } from '@/i18n'
 
-type ProductsLayoutProps = PropsWithChildren<{ params: { locale: Locale } }>
+type OrdersLayoutProps = PropsWithChildren<{ params: { locale: Locale } }>
 
-export default function ProductsLayout({
-  children,
-  params,
-}: ProductsLayoutProps) {
+export default function OrdersLayout({ children, params }: OrdersLayoutProps) {
   return (
-    <LocaleWrapper localeGroup={['Common', 'Search']} params={params}>
+    <LocaleWrapper localeGroup={['Orders', 'Common']} params={params}>
       <div className="min-h-screen min-w-full text-black">{children}</div>
     </LocaleWrapper>
   )

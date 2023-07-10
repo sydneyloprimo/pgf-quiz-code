@@ -1,0 +1,32 @@
+query getOrders(
+  $customerAccessToken: String!
+  $first: Int = null
+  $last: Int = null
+  $after: String = null
+  $before: String = null
+) {
+  customer(customerAccessToken: $customerAccessToken) {
+    orders(first: $first, after: $after, before: $before, last: $last) {
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+        endCursor
+        startCursor
+      }
+      edges {
+        node {
+          id
+          orderNumber
+          totalPrice {
+            amount
+            currencyCode
+          }
+          fulfillmentStatus
+          financialStatus
+          name
+          statusUrl
+        }
+      }
+    }
+  }
+}

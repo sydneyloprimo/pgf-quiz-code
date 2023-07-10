@@ -2,7 +2,7 @@
   @apply inline-block relative w-[80px] h-[80px];
 }
 .lds-ring div {
-  @apply block w-[64px] h-[64px] absolute m-2 box-border;
+  @apply block w-[54px] h-[54px] absolute m-2 box-border;
   border: 8px solid #000;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;

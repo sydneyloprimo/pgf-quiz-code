@@ -1,14 +1,14 @@
 'use client'
 
 import cn from 'classnames'
-import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useTranslations } from 'next-intl'
 
+import ListNextButton, {
+  ListNextButtonTypes,
+} from '@/components/common/ListNextButton'
 import { Filters, useProductSearch } from '@/hooks/useProductSearch'
 import { Routes } from '@/types/enums/routes'
 import ProductCard from 'components/products/ProductCard'
-import ChevronIcon from 'public/icons/chevron-left.svg'
 import { Product } from 'shopify/generated/graphql'
 
 interface ProductListProps {
@@ -18,7 +18,6 @@ interface ProductListProps {
 
 const ProductList = ({ className, filters }: ProductListProps) => {
   const router = useRouter()
-  const t = useTranslations('Products.list')
 
   const { onNextClick, onPreviousClick, products, pageInfo } =
     useProductSearch(filters)
@@ -47,27 +46,16 @@ const ProductList = ({ className, filters }: ProductListProps) => {
         ))}
       </div>
       <div className="flex justify-between">
-        <button
-          className="flex hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed"
-          onClick={onPreviousClick}
+        <ListNextButton
+          type={ListNextButtonTypes.previous}
           disabled={!pageInfo?.hasPreviousPage}
-        >
-          <Image src={ChevronIcon} className="m-auto mr-5" alt="" />
-          <p>{t('previousButton')}</p>
-        </button>
-        <button
-          className="flex hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed"
-          onClick={onNextClick}
+          onClick={onPreviousClick}
+        />
+        <ListNextButton
+          type={ListNextButtonTypes.next}
           disabled={!pageInfo?.hasNextPage}
-        >
-          <p>{t('nextButton')}</p>
-          <Image
-            src={ChevronIcon}
-            className="m-auto ml-5"
-            style={{ transform: 'rotate(180deg)' }}
-            alt=""
-          />
-        </button>
+          onClick={onNextClick}
+        />
       </div>
     </div>
   )

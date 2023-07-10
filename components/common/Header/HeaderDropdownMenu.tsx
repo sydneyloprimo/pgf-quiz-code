@@ -1,5 +1,6 @@
 import cn from 'classnames'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import React, { Dispatch, SetStateAction } from 'react'
@@ -78,6 +79,12 @@ const HeaderDropdownMenu = ({
           className="dropdown-menu-item text-sm last-of-type:rounded-b-sm md:last-of-type:rounded-b-md"
         >
           <button onClick={handleProfileClick}>{t('myProfile')}</button>
+        </DropdownItem>
+        <DropdownItem
+          asChild
+          className="dropdown-menu-item text-sm last-of-type:rounded-b-sm md:last-of-type:rounded-b-md"
+        >
+          <Link href={Routes.orders}>{t('myOrders')}</Link>
         </DropdownItem>
         {isLoggedIn && (
           <>

@@ -17,6 +17,10 @@
     "total": "Total"
   },
   "Common": {
+    "List": {
+      "nextButton": "Next Page",
+      "previousButton": "Previous Page"
+    },
     "Toast": {
       "Error": {
         "iconAlt": "Error icon",
@@ -45,37 +49,20 @@
     "logoMobile": "logo mobile",
     "logout": "Log out",
     "myAccount": "My Account",
+    "myOrders": "My Orders",
     "myProfile": "My Profile",
     "shoppingCart": "Shopping cart"
   },
   "Home": {
     "title": "Hello world!"
   },
-  "Products": {
-    "list": {
-      "nextButton": "Next Page",
-      "previousButton": "Previous Page"
-    }
-  },
-  "Search": {
-    "FilterPanel": {
-      "buttonAlt": "Select filter",
-      "category": "Category",
-      "condition": "Condition",
-      "filters": "Filters",
-      "max": "Max",
-      "min": "Min",
-      "new": "New",
-      "price": "Price",
-      "refurbished": "Refurbished",
-      "seeResults": "See results",
-      "title": "Your filters will appear here.",
-      "typeMax": "Type maximum",
-      "typeMin": "Type minimum",
-      "used": "Used"
+  "Orders": {
+    "emptyState": {
+      "description": "Looks like you have not ordered anything yet.",
+      "exploreButton": "Go explore products",
+      "title": "Your orders are empty"
     },
-    "search": "Search",
-    "searchTerms": "You searched for: \"{terms}\""
+    "title": "My orders"
   },
   "Profile": {
     "address": "Address",
@@ -97,6 +84,26 @@
     "title": "Account Settings",
     "zip": "Zip",
     "zipPlaceholder": "Zip"
+  },
+  "Search": {
+    "FilterPanel": {
+      "buttonAlt": "Select filter",
+      "category": "Category",
+      "condition": "Condition",
+      "filters": "Filters",
+      "max": "Max",
+      "min": "Min",
+      "new": "New",
+      "price": "Price",
+      "refurbished": "Refurbished",
+      "seeResults": "See results",
+      "title": "Your filters will appear here.",
+      "typeMax": "Type maximum",
+      "typeMin": "Type minimum",
+      "used": "Used"
+    },
+    "search": "Search",
+    "searchTerms": "You searched for: \"{terms}\""
   },
   "SignIn": {
     "buttonText": "Sign in",

@@ -1,4 +1,4 @@
-import './styles.css'
+import './styles.modules.css'
 
 const Loader = () => (
   <div className="lds-ring m-auto">
