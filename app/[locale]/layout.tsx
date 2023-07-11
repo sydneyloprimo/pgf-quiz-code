@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     description:
       'Discover the best in online shopping at RS Blackmarket! We offer a wide range of products from furniture, tech gadgets to home decor. Enjoy great deals, fast shipping, and top-notch customer service. Explore now and experience effortless shopping at your fingertips.',
-    images: '/images/logo-black.svg',
+    images: '/images/temporary-metadata-image.png',
     title: 'RS Blackmarket',
   },
   title: 'RS Blackmarket',
