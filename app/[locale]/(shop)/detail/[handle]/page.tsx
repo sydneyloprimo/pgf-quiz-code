@@ -14,8 +14,8 @@ interface ProductDetailProps {
 }
 
 interface MetadataProps {
-  params: { [key: string]: string }
-  searchParams: { [key: string]: string | string[] | undefined }
+  params: { handle: string }
+  searchParams: { variant?: string }
 }
 
 export async function generateMetadata({
