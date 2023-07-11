@@ -1,7 +1,7 @@
 'use client'
 import { useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { toast } from 'react-toastify'
 import { useMediaQuery } from 'usehooks-ts'
@@ -14,6 +14,7 @@ import {
   useCartLinesAddMutation,
   ProductVariantConnection,
   ImageConnection,
+  ProductVariantEdge,
 } from 'shopify/generated/graphql'
 import { formatCurrency } from 'utils/utils'
 
@@ -24,6 +25,7 @@ interface ProductDescriptionProps {
   title: string
   variants: ProductVariantConnection
   images: ImageConnection
+  variant?: ProductVariantEdge['node']
   handleSetVariant: (variantId: string) => void
   variantId: string
 }
@@ -34,6 +36,7 @@ const ProductDescription = ({
   title,
   variantId,
   variants,
+  variant,
 }: ProductDescriptionProps) => {
   const [quantity, setQuantity] = useState(1)
   const searchParams = useSearchParams()
@@ -67,19 +70,14 @@ const ProductDescription = ({
       },
     })
 
-  const variantInfo = useMemo(
-    () => variants.edges.find(({ node: { id } }) => id === variantId)?.node,
-    [variantId, variants]
-  )
-
   const onAddLineClick = () => {
     toast.dismiss()
-    if (variantInfo) {
+    if (variant) {
       addLine({
         cartId: cookies[Cookies.cart],
         lines: [
           {
-            merchandiseId: variantInfo.id,
+            merchandiseId: variant.id,
             quantity,
           },
         ],
@@ -91,16 +89,6 @@ const ProductDescription = ({
     setQuantity(1)
   }, [searchParams])
 
-  useEffect(() => {
-    if (!searchParams.get(VARIANT) && variantId) {
-      handleSetVariant(variantId)
-    }
-  }, [])
-
-  if (!variantInfo) {
-    return null
-  }
-
   return (
     <div className="px-4 md:px-7 flex flex-col">
       <h2 className="text-3xl font-bold mb-2 hidden md:block order-1">
@@ -108,8 +96,8 @@ const ProductDescription = ({
       </h2>
       <p className="text-3xl font-bold mb-24 hidden md:block order-2">
         {formatCurrency(
-          variantInfo.price.currencyCode,
-          variantInfo.price.amount * quantity
+          `${variant?.price.currencyCode}`,
+          variant?.price?.amount * quantity
         )}
       </p>
       {description && (
@@ -137,7 +125,7 @@ const ProductDescription = ({
             ))}
           </select>
         </div>
-        {variantInfo.quantityAvailable === 0 ? (
+        {variant?.quantityAvailable === 0 ? (
           <div className="ml-8 mb-2 md:mb-1">
             <p className="text-error text-base md:text-xl">{t('outOfStock')}</p>
           </div>
@@ -151,11 +139,13 @@ const ProductDescription = ({
                 id="quantity"
                 value={quantity}
                 onChange={(e) => setQuantity(Number(e.target.value))}
-                disabled={!variantInfo.quantityAvailable || isAddLineLoading}
+                disabled={!variant?.quantityAvailable || isAddLineLoading}
                 className="w-20 border border-gray-500 h-10 rounded px-3 py-2 bg-white cursor-pointer"
               >
                 {Array.from(
-                  { length: Number(variantInfo.quantityAvailable) },
+                  {
+                    length: Math.min(10, Number(variant?.quantityAvailable)),
+                  },
                   (_, i) => (
                     <option key={i} value={i + 1}>
                       {i + 1}
@@ -167,7 +157,7 @@ const ProductDescription = ({
             <div className="flex-1 pl-3">
               <p className="mb-4 text-center font-bold">
                 {t('availability', {
-                  count: Number(variantInfo.quantityAvailable),
+                  count: Number(variant?.quantityAvailable),
                 })}
               </p>
               <button

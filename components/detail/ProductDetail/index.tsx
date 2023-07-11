@@ -1,8 +1,7 @@
 'use client'
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import React from 'react'
-import { useCallback } from 'react'
+import { useSearchParams } from 'next/navigation'
+import React, { useMemo, useState } from 'react'
 
 import ImageGallery from '@/components/detail/ImageGallery'
 import ProductDescription, {
@@ -13,6 +12,7 @@ import {
   useGetProductDetailQuery,
   ProductVariantConnection,
   ImageConnection,
+  Product,
 } from 'shopify/generated/graphql'
 
 interface ProductDetailProps {
@@ -20,34 +20,37 @@ interface ProductDetailProps {
 }
 
 const ProductDetail = ({ handle }: ProductDetailProps) => {
-  const router = useRouter()
-  const pathname = usePathname()
   const searchParams = useSearchParams()
-
   const { data, isError } = useGetProductDetailQuery(client, {
     handle,
   })
 
-  const handleSetVariant = useCallback(
-    (variantId: string) => {
-      const params = new URLSearchParams(searchParams.toString())
-      params.set(VARIANT, variantId)
-      router.replace(`${pathname}?${params}`)
-    },
-    [searchParams, router, pathname]
+  const {
+    description = '',
+    images: productImages,
+    title,
+    variants,
+  } = data?.product as Product
+
+  const [variantId, setVariantId] = useState(
+    searchParams.get(VARIANT) ||
+      variants.edges.find(({ node }) => node.availableForSale)?.node.id ||
+      variants.edges[0]?.node.id
   )
 
-  if (isError || !data?.product) {
-    return null // product probably not found
-  }
-  const { description, images, title, variants } = data?.product
+  const { variant, images } = useMemo(() => {
+    const variant = variants.edges.find(({ node }) => node.id === variantId)
+    const images = variant?.node.image
+      ? { edges: [{ node: variant.node.image }] }
+      : productImages
 
-  const variantId =
-    searchParams.get(VARIANT) ||
-    variants.edges.find(({ node }) => node.availableForSale)?.node.id ||
-    variants.edges[0].node.id
+    return {
+      images,
+      variant,
+    }
+  }, [variants, variantId, productImages])
 
-  if (!variants.edges.length && !images.edges.length) {
+  if (isError || !data?.product || !variant || !images.edges.length) {
     return null
   }
 
@@ -56,6 +59,7 @@ const ProductDetail = ({ handle }: ProductDetailProps) => {
       <div className="w-full md:w-1/2">
         <ImageGallery
           title={title}
+          variant={variant?.node}
           variants={variants as ProductVariantConnection}
           images={images as ImageConnection}
         />
@@ -66,8 +70,9 @@ const ProductDetail = ({ handle }: ProductDetailProps) => {
           description={description}
           variants={variants as ProductVariantConnection}
           images={images as ImageConnection}
-          handleSetVariant={handleSetVariant}
+          handleSetVariant={setVariantId}
           variantId={variantId}
+          variant={variant?.node}
         />
       </div>
     </>
