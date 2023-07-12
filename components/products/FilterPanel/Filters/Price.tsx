@@ -22,7 +22,8 @@ const Price = () => {
         label={t('min')}
         placeholder={t('typeMin')}
         type="text"
-        className="h-[40px]"
+        className="mb-3"
+        inputClassName="h-[40px]"
         labelClassName="my-2"
         {...register('priceMin')}
       />
@@ -30,7 +31,8 @@ const Price = () => {
         label={t('max')}
         placeholder={t('typeMax')}
         type="text"
-        className="h-[40px]"
+        className="mb-3"
+        inputClassName="h-[40px]"
         labelClassName="my-2"
         {...register('priceMax')}
       />

@@ -1,10 +1,27 @@
 import { useSearchParams } from 'next/navigation'
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { Routes } from '@/types/enums/routes'
-import { buildQueryUrl } from '@/utils/utils'
+import { buildFiltersFromQuery, buildQueryUrl } from '@/utils/utils'
 import { client } from 'shopify/client'
-import { useInfiniteGetAllProductsQuery } from 'shopify/generated/graphql'
+import {
+  ProductEdge,
+  useInfiniteGetAllProductsQuery,
+} from 'shopify/generated/graphql'
+
+export enum FilterParams {
+  productTitle = 'productTitle',
+  priceMin = 'priceMin',
+  priceMax = 'priceMax',
+  productType = 'productType',
+  available = 'available',
+  condition = 'condition',
+  vendor = 'vendor',
+  tags = 'tags',
+  cursor = 'cursor',
+  before = 'before',
+  page = 'page',
+}
 
 export type Filters = {
   productTitle?: string
@@ -29,7 +46,7 @@ const constructSearchQuery = ({
 }: Filters): string => {
   const queryParts: string[] = []
 
-  if (productTitle) queryParts.push(`product_title:${productTitle}`)
+  if (productTitle) queryParts.push(`title:${productTitle}`)
   if (priceMin) queryParts.push(`variants.price:>${priceMin}`)
   if (priceMax) queryParts.push(`variants.price:<${priceMax}`)
   if (productType) queryParts.push(`product_type:${productType}`)
@@ -46,12 +63,14 @@ const constructSearchQuery = ({
 
 const PAGE_SIZE = 6
 
-export const useProductSearch = (filters: Filters) => {
+export const useProductSearch = () => {
+  const [filters, setFilters] = useState<Filters>({})
   const searchParams = useSearchParams()
-  const cursor = searchParams.get('cursor')
-  const isBefore = searchParams.get('before')
-
-  const [page, setPage] = useState(0)
+  const [page, setPage] = useState<number>(
+    Number(searchParams.get(FilterParams.page))
+  )
+  const cursor = searchParams.get(FilterParams.cursor)
+  const isBefore = searchParams.get(FilterParams.before)
 
   const query = useMemo(() => constructSearchQuery(filters), [filters])
 
@@ -71,10 +90,10 @@ export const useProductSearch = (filters: Filters) => {
       }),
     })
 
-  const products = data?.pages[page]?.edges || []
+  const products = (data?.pages[page]?.edges || []) as ProductEdge[]
   const pageInfo = data?.pages[page]?.pageInfo
 
-  const onNextClick = () => {
+  const onNextClick = useCallback(() => {
     const totalPages = data?.pages?.length
 
     if (!totalPages || page === totalPages - 1) {
@@ -88,7 +107,7 @@ export const useProductSearch = (filters: Filters) => {
       })
     }
 
-    setPage(page + 1)
+    setPage((page) => page + 1)
 
     // Shallow redirection is not possible with next.js v13.4.5
     window.history.replaceState(
@@ -97,12 +116,11 @@ export const useProductSearch = (filters: Filters) => {
       buildQueryUrl(Routes.products, {
         ...filters,
         cursor: pageInfo?.endCursor,
-        tags: filters.tags?.join(','),
       })
     )
-  }
+  }, [page, data?.pages, fetchNextPage, filters, pageInfo?.endCursor])
 
-  const onPreviousClick = () => {
+  const onPreviousClick = useCallback(() => {
     let newCursor
     if (page == 0) {
       newCursor = data?.pages[0].pageInfo.startCursor
@@ -116,7 +134,7 @@ export const useProductSearch = (filters: Filters) => {
       })
     } else {
       newCursor = data?.pages[page]?.pageInfo?.startCursor
-      setPage(page - 1)
+      setPage((page) => page - 1)
     }
 
     // Shallow redirection is not possible with next.js v13.4.5
@@ -127,26 +145,35 @@ export const useProductSearch = (filters: Filters) => {
         ...filters,
         before: 1,
         cursor: newCursor,
-        tags: filters.tags?.join(','),
       })
     )
+  }, [page, data?.pages, fetchPreviousPage, filters])
+
+  const onQueryChange = useCallback((newFilters: Filters) => {
+    setFilters((filters: Filters) => {
+      const updatedFilters = { ...filters, ...newFilters }
+
+      window.history.replaceState(
+        null,
+        '',
+        buildQueryUrl(Routes.products, updatedFilters)
+      )
+      return updatedFilters
+    })
+  }, [])
+
+  useEffect(() => {
+    const newFilters = buildFiltersFromQuery(searchParams)
+
+    onQueryChange(newFilters)
+    setPage(Number(searchParams.get(FilterParams.page)))
+  }, [searchParams, onQueryChange])
+
+  return {
+    onNextClick,
+    onPreviousClick,
+    onQueryChange,
+    pageInfo,
+    products,
   }
-
-  useEffect(() => {
-    setPage(0)
-    if (!query) window.history.replaceState(null, '', Routes.products)
-  }, [query])
-
-  useEffect(() => {
-    window.history.replaceState(
-      null,
-      '',
-      buildQueryUrl(Routes.products, {
-        ...filters,
-        tags: filters.tags?.join(','),
-      })
-    )
-  }, [filters])
-
-  return { onNextClick, onPreviousClick, pageInfo, products }
 }

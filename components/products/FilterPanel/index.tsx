@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 
-import { Filters } from '@/hooks/useProductSearch'
+import { FilterParams, Filters } from '@/hooks/useProductSearch'
 import FilterIcon from 'public/icons/filter.svg'
 
 import Category, { CategoryForm } from './Filters/Category'
@@ -25,12 +25,12 @@ const FilterPanel = ({ handleSetFilters }: FilterPanelProps) => {
   const searchParams = useSearchParams()
 
   const defaultValues: FilterForm = useMemo(() => {
-    const condition = searchParams.get('condition') || ''
-    const priceMax = searchParams.get('priceMax') || ''
-    const priceMin = searchParams.get('priceMin') || ''
+    const condition = searchParams.get(FilterParams.condition) || ''
+    const priceMax = searchParams.get(FilterParams.priceMax) || ''
+    const priceMin = searchParams.get(FilterParams.priceMin) || ''
     const category =
       searchParams
-        .get('category')
+        .get(FilterParams.tags)
         ?.split(',')
         .map((category) => ({ category, id: category } as Category)) || []
 

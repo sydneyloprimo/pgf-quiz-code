@@ -6,8 +6,9 @@ import React from 'react'
 import { InputIconPosition } from '@/types/enums/constants'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label: string | ReactNode
+  label?: string | ReactNode
   labelClassName?: string
+  inputClassName?: string
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
   error?: string
   icon?: ReactNode
@@ -23,6 +24,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       value,
       onChange,
       className,
+      inputClassName,
       onBlur,
       error,
       placeholder,
@@ -35,7 +37,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     ref
   ) => {
     return (
-      <div className="flex flex-col mb-3">
+      <div className={cn('flex flex-col', className)}>
         {label && (
           <label className={labelClassName} htmlFor={name}>
             {label}
@@ -51,7 +53,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             className={cn(
               'h-[44px] rounded-lg border border-solid border-black p-3 w-full',
               error && 'border-red-500',
-              className
+              inputClassName
             )}
             type={type}
             name={name}

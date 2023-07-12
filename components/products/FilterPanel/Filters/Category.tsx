@@ -54,9 +54,10 @@ const Category = () => {
       <h5 className="font-bold my-2">{t('category')}</h5>
 
       <Input
-        className="h-[40px] "
+        inputClassName="h-[40px] "
         label
         onKeyDown={onKeyDown}
+        className="mb-3"
         type="text"
         value={categoryInput}
         onChange={(event) => setCategoryInput(event.target.value)}
