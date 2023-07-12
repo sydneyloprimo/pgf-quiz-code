@@ -42,6 +42,11 @@
     "successMessage": "{title} was added to your cart.",
     "variant": "Variant"
   },
+  "Footer": {
+    "altIcon": "BlackMarket icon",
+    "altInstagram": "Instagram icon",
+    "altLinkedin": "Linkedin icon"
+  },
   "Header": {
     "cartIcon": "cart icon",
     "hamburgerIcon": "hamburger icon",

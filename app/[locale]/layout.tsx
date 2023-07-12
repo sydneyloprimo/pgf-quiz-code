@@ -33,7 +33,7 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
   }
 
   return (
-    <html lang={locale}>
+    <html className="bg-dark-violet" lang={locale}>
       <body className="flex items-center flex-col">
         <Providers params={params}>
           <Session>{children}</Session>

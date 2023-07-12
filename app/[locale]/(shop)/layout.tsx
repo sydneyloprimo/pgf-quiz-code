@@ -1,3 +1,4 @@
+import Footer from '@/components/common/Footer'
 import LocaleWrapper from '@/components/common/LocaleWrapper'
 import { Locale } from '@/i18n'
 import Header from 'components/common/Header'
@@ -15,6 +16,7 @@ export default function RootLayout({
         <Header />
       </LocaleWrapper>
       {children}
+      <Footer />
     </>
   )
 }
