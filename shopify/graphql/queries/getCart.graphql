@@ -48,5 +48,13 @@ query getCart($id: ID!) {
       }
     }
     checkoutUrl
+    buyerIdentity {
+      email
+      customer {
+        id
+        firstName
+        email
+      }
+    }
   }
 }

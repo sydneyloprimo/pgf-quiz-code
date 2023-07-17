@@ -10,22 +10,39 @@ import AuthCard from '@/components/auth/AuthCard'
 import AuthForm from '@/components/auth/AuthForm'
 import Card from '@/components/common/Card'
 import { client } from '@/shopify/client'
-import { useCustomerAccessTokenCreateMutation } from '@/shopify/generated/graphql'
+import {
+  useCustomerAccessTokenCreateMutation,
+  useCartBuyerIdentityUpdateMutation,
+} from '@/shopify/generated/graphql'
 import { Cookies } from '@/types/enums/cookies'
 import { Routes } from '@/types/enums/routes'
 
 export default function SignIn() {
   const t = useTranslations('SignIn')
   const { push } = useRouter()
-  const [, setCookie] = useCookies([Cookies.customerAccessToken])
+  const [cookies, setCookie] = useCookies([
+    Cookies.customerAccessToken,
+    Cookies.cart,
+  ])
+
+  const { mutate: updateCartIdentity } =
+    useCartBuyerIdentityUpdateMutation(client)
 
   const {
     mutate: createAccessToken,
     isLoading,
     data,
   } = useCustomerAccessTokenCreateMutation(client, {
-    onSuccess: (data) => {
+    onSuccess: (data, { input }) => {
       if (data.customerAccessTokenCreate?.customerAccessToken?.accessToken) {
+        updateCartIdentity({
+          buyerIdentity: {
+            customerAccessToken:
+              data.customerAccessTokenCreate?.customerAccessToken?.accessToken,
+            email: input.email,
+          },
+          cartId: cookies[Cookies.cart],
+        })
         setCookie(
           Cookies.customerAccessToken,
           data.customerAccessTokenCreate?.customerAccessToken?.accessToken,

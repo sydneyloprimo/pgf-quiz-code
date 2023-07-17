@@ -6867,6 +6867,24 @@ export type CartLinesAddMutation = {
   } | null
 }
 
+export type CartBuyerIdentityUpdateMutationVariables = Exact<{
+  buyerIdentity: CartBuyerIdentityInput
+  cartId: Scalars['ID']
+}>
+
+export type CartBuyerIdentityUpdateMutation = {
+  __typename?: 'Mutation'
+  cartBuyerIdentityUpdate?: {
+    __typename?: 'CartBuyerIdentityUpdatePayload'
+    cart?: { __typename?: 'Cart'; id: string; checkoutUrl: any } | null
+    userErrors: Array<{
+      __typename?: 'CartUserError'
+      field?: Array<string> | null
+      message: string
+    }>
+  } | null
+}
+
 export type CartCreateMutationVariables = Exact<{ [key: string]: never }>
 
 export type CartCreateMutation = {
@@ -7106,6 +7124,16 @@ export type GetCartQuery = {
         currencyCode: CurrencyCode
       } | null
     }
+    buyerIdentity: {
+      __typename?: 'CartBuyerIdentity'
+      email?: string | null
+      customer?: {
+        __typename?: 'Customer'
+        id: string
+        firstName?: string | null
+        email?: string | null
+      } | null
+    }
   } | null
 }
 
@@ -7299,6 +7327,56 @@ useCartLinesAddMutation.fetcher = (
     variables,
     headers
   )
+export const CartBuyerIdentityUpdateDocument = /*#__PURE__*/ `
+    mutation cartBuyerIdentityUpdate($buyerIdentity: CartBuyerIdentityInput!, $cartId: ID!) {
+  cartBuyerIdentityUpdate(buyerIdentity: $buyerIdentity, cartId: $cartId) {
+    cart {
+      id
+      checkoutUrl
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}
+    `
+export const useCartBuyerIdentityUpdateMutation = <
+  TError = unknown,
+  TContext = unknown
+>(
+  client: GraphQLClient,
+  options?: UseMutationOptions<
+    CartBuyerIdentityUpdateMutation,
+    TError,
+    CartBuyerIdentityUpdateMutationVariables,
+    TContext
+  >,
+  headers?: RequestInit['headers']
+) =>
+  useMutation<
+    CartBuyerIdentityUpdateMutation,
+    TError,
+    CartBuyerIdentityUpdateMutationVariables,
+    TContext
+  >(
+    ['cartBuyerIdentityUpdate'],
+    (variables?: CartBuyerIdentityUpdateMutationVariables) =>
+      fetcher<
+        CartBuyerIdentityUpdateMutation,
+        CartBuyerIdentityUpdateMutationVariables
+      >(client, CartBuyerIdentityUpdateDocument, variables, headers)(),
+    options
+  )
+useCartBuyerIdentityUpdateMutation.fetcher = (
+  client: GraphQLClient,
+  variables: CartBuyerIdentityUpdateMutationVariables,
+  headers?: RequestInit['headers']
+) =>
+  fetcher<
+    CartBuyerIdentityUpdateMutation,
+    CartBuyerIdentityUpdateMutationVariables
+  >(client, CartBuyerIdentityUpdateDocument, variables, headers)
 export const CartCreateDocument = /*#__PURE__*/ `
     mutation cartCreate {
   cartCreate {
@@ -7746,6 +7824,14 @@ export const GetCartDocument = /*#__PURE__*/ `
       }
     }
     checkoutUrl
+    buyerIdentity {
+      email
+      customer {
+        id
+        firstName
+        email
+      }
+    }
   }
 }
     `
