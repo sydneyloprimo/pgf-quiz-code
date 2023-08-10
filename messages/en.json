@@ -60,7 +60,12 @@
     "shoppingCart": "Shopping cart"
   },
   "Home": {
-    "title": "Hello world!"
+    "HeroBanner": {
+      "alt": "Banner image",
+      "button": "Explore now",
+      "subtitle": "HIGH-END GEAR",
+      "title": "Top brands affordable prices"
+    }
   },
   "Orders": {
     "emptyState": {

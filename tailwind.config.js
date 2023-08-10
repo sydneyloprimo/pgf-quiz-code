@@ -37,6 +37,7 @@ const fontFamily = {
 const fontSize = {
   '2xl': '28px',
   '3xl': '36px',
+  '4xl': '72px',
   base: '16px',
   lg: '20px',
   sm: '14px',
@@ -69,6 +70,7 @@ module.exports = {
     fontWeight,
   },
   zIndex: {
+    banner: '60',
     dropdown: '70',
     'hamburger-menu': '80',
     header: '60',
