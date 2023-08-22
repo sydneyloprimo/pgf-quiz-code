@@ -60,6 +60,12 @@
     "shoppingCart": "Shopping cart"
   },
   "Home": {
+    "ExploreCategories": {
+      "alt": "Category image",
+      "button": "Explore all categories",
+      "subtitle": "Good as new",
+      "title": "Explore our store"
+    },
     "HeroBanner": {
       "alt": "Banner image",
       "button": "Explore now",

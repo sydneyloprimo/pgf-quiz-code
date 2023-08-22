@@ -11,6 +11,7 @@ const boxShadow = {
   1: '0px 0px 18px rgba(0, 0, 0, 0.15)',
   2: '0px 4px 29px rgba(0, 0, 0, 0.25)',
   3: '0px 0px 18px rgba(0, 0, 0, 0.05)',
+  4: '0px 0px 6px 0px rgba(0, 0, 0, 0.15)',
 }
 
 const colors = {

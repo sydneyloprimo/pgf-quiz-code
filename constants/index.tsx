@@ -10,6 +10,9 @@ export const MediaQuery = {
   mobile: `(max-width: ${fullConfig.theme.screens.md})`,
 }
 
+// fullConfig.theme.screens.md value is 768px
+export const MOBILE_WIDTH = 768
+
 export const instagramUrl = 'https://www.instagram.com/rootstrap'
 
 export const linkedinUrl = 'https://www.linkedin.com/company/rootstrap-it'

@@ -1,0 +1,7 @@
+query getProductTypes($first: Int = 10) {
+  productTypes(first: $first) {
+    edges {
+      node
+    }
+  }
+}

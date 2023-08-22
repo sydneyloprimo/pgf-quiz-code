@@ -7277,6 +7277,18 @@ export type GetProductDetailQuery = {
   } | null
 }
 
+export type GetProductTypesQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['Int']>
+}>
+
+export type GetProductTypesQuery = {
+  __typename?: 'QueryRoot'
+  productTypes: {
+    __typename?: 'StringConnection'
+    edges: Array<{ __typename?: 'StringEdge'; node: string }>
+  }
+}
+
 export const CartLinesAddDocument = /*#__PURE__*/ `
     mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
   cartLinesAdd(cartId: $cartId, lines: $lines) {
@@ -8165,6 +8177,80 @@ useGetProductDetailQuery.fetcher = (
   fetcher<GetProductDetailQuery, GetProductDetailQueryVariables>(
     client,
     GetProductDetailDocument,
+    variables,
+    headers
+  )
+export const GetProductTypesDocument = /*#__PURE__*/ `
+    query getProductTypes($first: Int = 10) {
+  productTypes(first: $first) {
+    edges {
+      node
+    }
+  }
+}
+    `
+export const useGetProductTypesQuery = <
+  TData = GetProductTypesQuery,
+  TError = unknown
+>(
+  client: GraphQLClient,
+  variables?: GetProductTypesQueryVariables,
+  options?: UseQueryOptions<GetProductTypesQuery, TError, TData>,
+  headers?: RequestInit['headers']
+) =>
+  useQuery<GetProductTypesQuery, TError, TData>(
+    variables === undefined
+      ? ['getProductTypes']
+      : ['getProductTypes', variables],
+    fetcher<GetProductTypesQuery, GetProductTypesQueryVariables>(
+      client,
+      GetProductTypesDocument,
+      variables,
+      headers
+    ),
+    options
+  )
+
+useGetProductTypesQuery.getKey = (variables?: GetProductTypesQueryVariables) =>
+  variables === undefined ? ['getProductTypes'] : ['getProductTypes', variables]
+export const useInfiniteGetProductTypesQuery = <
+  TData = GetProductTypesQuery,
+  TError = unknown
+>(
+  pageParamKey: keyof GetProductTypesQueryVariables,
+  client: GraphQLClient,
+  variables?: GetProductTypesQueryVariables,
+  options?: UseInfiniteQueryOptions<GetProductTypesQuery, TError, TData>,
+  headers?: RequestInit['headers']
+) =>
+  useInfiniteQuery<GetProductTypesQuery, TError, TData>(
+    variables === undefined
+      ? ['getProductTypes.infinite']
+      : ['getProductTypes.infinite', variables],
+    (metaData) =>
+      fetcher<GetProductTypesQuery, GetProductTypesQueryVariables>(
+        client,
+        GetProductTypesDocument,
+        { ...variables, ...(metaData.pageParam ?? {}) },
+        headers
+      )(),
+    options
+  )
+
+useInfiniteGetProductTypesQuery.getKey = (
+  variables?: GetProductTypesQueryVariables
+) =>
+  variables === undefined
+    ? ['getProductTypes.infinite']
+    : ['getProductTypes.infinite', variables]
+useGetProductTypesQuery.fetcher = (
+  client: GraphQLClient,
+  variables?: GetProductTypesQueryVariables,
+  headers?: RequestInit['headers']
+) =>
+  fetcher<GetProductTypesQuery, GetProductTypesQueryVariables>(
+    client,
+    GetProductTypesDocument,
     variables,
     headers
   )
