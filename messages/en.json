@@ -71,6 +71,17 @@
       "button": "Explore now",
       "subtitle": "HIGH-END GEAR",
       "title": "Top brands affordable prices"
+    },
+    "ShopProducts": {
+      "button": "Shop products",
+      "description_one": "Everything you need for your dream home",
+      "description_two": "office without breaking the bank.",
+      "image_alt": "Shop products image",
+      "quality": "Product quality control",
+      "quality_alt": "Product quality control image",
+      "returns": "No-hassle returns",
+      "returns_alt": "No-hassle returns image",
+      "title": "Elegant & Affordable"
     }
   },
   "Orders": {

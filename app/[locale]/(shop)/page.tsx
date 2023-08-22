@@ -2,6 +2,7 @@ import { dehydrate } from '@tanstack/query-core'
 
 import ExploreCategories from '@/components/home/ExploreCategories'
 import HeroBanner from '@/components/home/HeroBanner'
+import ShopProducts from '@/components/home/ShopProducts'
 import { useGetProductTypesQuery } from '@/shopify/generated/graphql'
 import getQueryClient from '@/utils/getQueryClient'
 import Hydrate from '@/utils/hydrate.client'
@@ -26,6 +27,7 @@ export default async function Home() {
         <ExploreCategories
           categories={edges.map(({ node }) => ({ name: node }))}
         />
+        <ShopProducts />
       </main>
     </Hydrate>
   )
