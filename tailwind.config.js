@@ -53,6 +53,15 @@ const fontWeight = {
   regular: '400',
 }
 
+const zIndex = {
+  banner: '60',
+  dropdown: '70',
+  'hamburger-menu': '80',
+  header: '60',
+  modal: '100',
+  navDrawer: '90',
+}
+
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -65,17 +74,10 @@ module.exports = {
       backgroundImage,
       boxShadow,
       colors,
+      zIndex,
     },
     fontFamily,
     fontSize,
     fontWeight,
-  },
-  zIndex: {
-    banner: '60',
-    dropdown: '70',
-    'hamburger-menu': '80',
-    header: '60',
-    modal: '100',
-    navDrawer: '90',
   },
 }

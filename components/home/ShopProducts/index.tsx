@@ -20,7 +20,7 @@ const ShopProducts = () => {
         <h1 className="text-dark-violet font-bold text-xl md:text-4xl md:max-w-md leading-8 md:leading-[88px] mb-2">
           {t('title')}
         </h1>
-        <span className="text-dark-grey md:text-dark-violet text-[16px] md:text-xl text-center md:text-left leading-8 font-regular">
+        <span className="text-dark-grey md:text-dark-violet text-base md:text-xl text-center md:text-left leading-8 font-regular">
           {t('description_one')}
           <br />
           {t('description_two')}
