@@ -72,6 +72,11 @@
       "subtitle": "HIGH-END GEAR",
       "title": "Top brands affordable prices"
     },
+    "LatestProducts": {
+      "button": "View products",
+      "description": "See what's trending in the market. Explore a wide variety of newly released products in our featured catalog.",
+      "title": "Our latest products"
+    },
     "ShopProducts": {
       "button": "Shop products",
       "description_one": "Everything you need for your dream home",

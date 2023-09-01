@@ -16,7 +16,7 @@ import {
   ImageConnection,
   ProductVariantEdge,
 } from 'shopify/generated/graphql'
-import { formatCurrency } from 'utils/utils'
+import { formatCurrency } from 'utils/helpers'
 
 export const VARIANT = 'variant'
 

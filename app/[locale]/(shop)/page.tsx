@@ -2,8 +2,13 @@ import { dehydrate } from '@tanstack/query-core'
 
 import ExploreCategories from '@/components/home/ExploreCategories'
 import HeroBanner from '@/components/home/HeroBanner'
+import LatestProducts from '@/components/home/LatestProducts'
 import ShopProducts from '@/components/home/ShopProducts'
-import { useGetProductTypesQuery } from '@/shopify/generated/graphql'
+import {
+  useGetProductTypesQuery,
+  useGetLatestProductsQuery,
+  ProductEdge,
+} from '@/shopify/generated/graphql'
 import getQueryClient from '@/utils/getQueryClient'
 import Hydrate from '@/utils/hydrate.client'
 import { client } from 'shopify/client'
@@ -18,6 +23,14 @@ export default async function Home() {
     useGetProductTypesQuery.fetcher(client)
   )
 
+  const { collection } = await queryClient.fetchQuery(
+    useGetLatestProductsQuery.getKey(),
+    useGetLatestProductsQuery.fetcher(client, {
+      first: 4,
+      handle: process.env.NEXT_PUBLIC_LATEST_PRODUCTS_HANDLE,
+    })
+  )
+
   const dehydratedState = dehydrate(queryClient)
 
   return (
@@ -28,6 +41,9 @@ export default async function Home() {
           categories={edges.map(({ node }) => ({ name: node }))}
         />
         <ShopProducts />
+        <LatestProducts
+          products={collection?.products.edges as ProductEdge[]}
+        />
       </main>
     </Hydrate>
   )

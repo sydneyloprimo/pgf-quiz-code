@@ -24,14 +24,14 @@ const CategoryCard = ({ name, className }: CategoryCardProps) => {
 
   return (
     <div className={cn(className, 'flex flex-row justify-center pr-3 md:pr-0')}>
-      <div className="rounded shadow-4 h-[99%]">
+      <div className="rounded-lg shadow-4 h-[99%]">
         <Image
           src={
             CATEGORY_IMAGES[name as keyof typeof CATEGORY_IMAGES] ||
             CATEGORY_IMAGES.Electronics
           }
           alt={t('alt')}
-          className="overflow-hidden"
+          className="overflow-hidden rounded-t-lg"
         />
         <div className="w-full flex justify-center align-middle py-4">
           <h3 className="text-lg text-dark-grey font-bold">{name}</h3>

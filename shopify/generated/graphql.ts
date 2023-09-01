@@ -7162,6 +7162,65 @@ export type GetCustomerQuery = {
   } | null
 }
 
+export type GetLatestProductsQueryVariables = Exact<{
+  handle?: InputMaybe<Scalars['String']>
+  first?: InputMaybe<Scalars['Int']>
+}>
+
+export type GetLatestProductsQuery = {
+  __typename?: 'QueryRoot'
+  collection?: {
+    __typename?: 'Collection'
+    products: {
+      __typename: 'ProductConnection'
+      pageInfo: {
+        __typename?: 'PageInfo'
+        hasNextPage: boolean
+        hasPreviousPage: boolean
+        endCursor?: string | null
+        startCursor?: string | null
+      }
+      edges: Array<{
+        __typename?: 'ProductEdge'
+        cursor: string
+        node: {
+          __typename: 'Product'
+          id: string
+          title: string
+          vendor: string
+          handle: string
+          priceRange: {
+            __typename?: 'ProductPriceRange'
+            minVariantPrice: {
+              __typename?: 'MoneyV2'
+              amount: any
+              currencyCode: CurrencyCode
+            }
+          }
+          images: {
+            __typename?: 'ImageConnection'
+            pageInfo: {
+              __typename?: 'PageInfo'
+              hasNextPage: boolean
+              hasPreviousPage: boolean
+            }
+            edges: Array<{
+              __typename?: 'ImageEdge'
+              node: {
+                __typename?: 'Image'
+                url: any
+                altText?: string | null
+                width?: number | null
+                height?: number | null
+              }
+            }>
+          }
+        }
+      }>
+    }
+  } | null
+}
+
 export type GetOrdersQueryVariables = Exact<{
   customerAccessToken: Scalars['String']
   first?: InputMaybe<Scalars['Int']>
@@ -7976,6 +8035,122 @@ useGetCustomerQuery.fetcher = (
   fetcher<GetCustomerQuery, GetCustomerQueryVariables>(
     client,
     GetCustomerDocument,
+    variables,
+    headers
+  )
+export const GetLatestProductsDocument = /*#__PURE__*/ `
+    query getLatestProducts($handle: String, $first: Int) {
+  collection(handle: $handle) {
+    products(first: $first) {
+      ... on ProductConnection {
+        __typename
+        pageInfo {
+          hasNextPage
+          hasPreviousPage
+          endCursor
+          startCursor
+        }
+        edges {
+          cursor
+          node {
+            id
+            title
+            vendor
+            handle
+            __typename
+            priceRange {
+              minVariantPrice {
+                amount
+                currencyCode
+              }
+            }
+            images(first: 1) {
+              pageInfo {
+                hasNextPage
+                hasPreviousPage
+              }
+              edges {
+                node {
+                  url
+                  altText
+                  width
+                  height
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `
+export const useGetLatestProductsQuery = <
+  TData = GetLatestProductsQuery,
+  TError = unknown
+>(
+  client: GraphQLClient,
+  variables?: GetLatestProductsQueryVariables,
+  options?: UseQueryOptions<GetLatestProductsQuery, TError, TData>,
+  headers?: RequestInit['headers']
+) =>
+  useQuery<GetLatestProductsQuery, TError, TData>(
+    variables === undefined
+      ? ['getLatestProducts']
+      : ['getLatestProducts', variables],
+    fetcher<GetLatestProductsQuery, GetLatestProductsQueryVariables>(
+      client,
+      GetLatestProductsDocument,
+      variables,
+      headers
+    ),
+    options
+  )
+
+useGetLatestProductsQuery.getKey = (
+  variables?: GetLatestProductsQueryVariables
+) =>
+  variables === undefined
+    ? ['getLatestProducts']
+    : ['getLatestProducts', variables]
+export const useInfiniteGetLatestProductsQuery = <
+  TData = GetLatestProductsQuery,
+  TError = unknown
+>(
+  pageParamKey: keyof GetLatestProductsQueryVariables,
+  client: GraphQLClient,
+  variables?: GetLatestProductsQueryVariables,
+  options?: UseInfiniteQueryOptions<GetLatestProductsQuery, TError, TData>,
+  headers?: RequestInit['headers']
+) =>
+  useInfiniteQuery<GetLatestProductsQuery, TError, TData>(
+    variables === undefined
+      ? ['getLatestProducts.infinite']
+      : ['getLatestProducts.infinite', variables],
+    (metaData) =>
+      fetcher<GetLatestProductsQuery, GetLatestProductsQueryVariables>(
+        client,
+        GetLatestProductsDocument,
+        { ...variables, ...(metaData.pageParam ?? {}) },
+        headers
+      )(),
+    options
+  )
+
+useInfiniteGetLatestProductsQuery.getKey = (
+  variables?: GetLatestProductsQueryVariables
+) =>
+  variables === undefined
+    ? ['getLatestProducts.infinite']
+    : ['getLatestProducts.infinite', variables]
+useGetLatestProductsQuery.fetcher = (
+  client: GraphQLClient,
+  variables?: GetLatestProductsQueryVariables,
+  headers?: RequestInit['headers']
+) =>
+  fetcher<GetLatestProductsQuery, GetLatestProductsQueryVariables>(
+    client,
+    GetLatestProductsDocument,
     variables,
     headers
   )
