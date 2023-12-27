@@ -3,6 +3,7 @@ import Image from 'next/image'
 
 import { Product, ProductVariant } from '@/shopify/generated/graphql'
 import { isProduct } from '@/types/guards/products'
+import { formatCurrency } from '@/utils/helpers'
 
 interface ProductCardProps {
   product: Product | ProductVariant
@@ -37,8 +38,11 @@ const ProductCard = ({ product, className, onClick }: ProductCardProps) => {
         </h3>
         <h3 className="text-sm text-start md:text-xl">
           {isProduct(product)
-            ? `${product.priceRange.minVariantPrice.currencyCode} ${product.priceRange.minVariantPrice.amount}`
-            : `${product.price.currencyCode} ${product.price.amount}`}
+            ? formatCurrency(
+                product.priceRange.minVariantPrice.currencyCode,
+                product.priceRange.minVariantPrice.amount
+              )
+            : formatCurrency(product.price.currencyCode, product.price.amount)}
         </h3>
       </div>
     </div>

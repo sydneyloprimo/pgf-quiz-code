@@ -1,9 +1,11 @@
 import Image from 'next/image'
 
+import { formatCurrency } from '@/utils/helpers'
 import {
   ProductVariantConnection,
   ImageConnection,
   ProductVariantEdge,
+  CurrencyCode,
 } from 'shopify/generated/graphql'
 
 interface ImageGalleryProps {
@@ -23,7 +25,12 @@ const ImageGallery = ({ images, title, variant }: ImageGalleryProps) => {
   return (
     <div className="px-4 md:px-7">
       <h2 className="text-3xl font-bold mb-2 md:hidden">{title}</h2>
-      <p className="text-3xl font-bold mb-2 md:hidden">{`${variant?.price.currencyCode} ${variant?.price.amount}`}</p>
+      <p className="text-3xl font-bold mb-2 md:hidden">
+        {formatCurrency(
+          variant?.price.currencyCode || CurrencyCode.Usd,
+          variant?.price.amount
+        )}
+      </p>
       <Image
         src={image.url}
         alt={image?.altText || title}

@@ -2,6 +2,7 @@
 import cn from 'classnames'
 
 import { Order } from '@/shopify/generated/graphql'
+import { formatCurrency } from '@/utils/helpers'
 
 interface OrderCardProps {
   className?: string
@@ -22,7 +23,7 @@ const OrderCard = ({ className, order }: OrderCardProps) => (
     </div>
     <div className="flex flex-col justify-between">
       <h3 className="text-sm text-end font-bold md:font-regular md:text-lg">
-        {`${order.totalPrice.currencyCode}${order.totalPrice.amount}`}
+        {formatCurrency(order.totalPrice.currencyCode, order.totalPrice.amount)}
       </h3>
     </div>
   </a>

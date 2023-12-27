@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import { ProductVariant } from '@/shopify/generated/graphql'
+import { formatCurrency } from '@/utils/helpers'
 import PlusIcon from 'public/icons/plus.svg'
 import SubtractIcon from 'public/icons/subtract.svg'
 import TrashIcon from 'public/icons/trash.svg'
@@ -61,7 +62,7 @@ const CartProductCard = ({
         </div>
         <div className="flex flex-col justify-between">
           <h3 className="text-sm text-end font-bold md:font-regular md:text-xl">
-            {`${product.price.currencyCode} ${product.price.amount}`}
+            {formatCurrency(product.price.currencyCode, product.price.amount)}
           </h3>
           <div className="flex justify-end">
             {quantity == 1 ? (

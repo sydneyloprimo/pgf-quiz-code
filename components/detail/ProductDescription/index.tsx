@@ -15,6 +15,7 @@ import {
   ProductVariantConnection,
   ImageConnection,
   ProductVariantEdge,
+  CurrencyCode,
 } from 'shopify/generated/graphql'
 import { formatCurrency } from 'utils/helpers'
 
@@ -96,7 +97,7 @@ const ProductDescription = ({
       </h2>
       <p className="text-3xl font-bold mb-24 hidden md:block order-2">
         {formatCurrency(
-          `${variant?.price.currencyCode}`,
+          variant?.price.currencyCode || CurrencyCode.Usd,
           variant?.price?.amount * quantity
         )}
       </p>
