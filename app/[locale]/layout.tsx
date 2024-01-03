@@ -6,6 +6,7 @@ import { useLocale } from 'next-intl'
 import { PropsWithChildren } from 'react'
 
 import { Locale } from '@/i18n'
+import AllScripts from '@/scripts/AllScripts'
 import Providers from 'utils/Providers'
 import Session from 'utils/Session'
 
@@ -35,6 +36,7 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
   return (
     <html className="bg-dark-violet" lang={locale}>
       <body className="flex items-center flex-col">
+        <AllScripts />
         <Providers params={params}>
           <Session>{children}</Session>
         </Providers>
