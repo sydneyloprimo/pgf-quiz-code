@@ -9,12 +9,14 @@ import { z } from 'zod'
 import AuthCard from '@/components/auth/AuthCard'
 import AuthForm from '@/components/auth/AuthForm'
 import Card from '@/components/common/Card'
+import event from '@/scripts/GoogleTagManager/event'
 import { client } from '@/shopify/client'
 import {
   useCustomerAccessTokenCreateMutation,
   useCartBuyerIdentityUpdateMutation,
 } from '@/shopify/generated/graphql'
 import { Cookies } from '@/types/enums/cookies'
+import { Events, AuthenticationMethods } from '@/types/enums/events'
 import { Routes } from '@/types/enums/routes'
 
 export default function SignIn() {
@@ -54,6 +56,7 @@ export default function SignIn() {
   })
 
   const handleSubmit = async (email: string, password: string) => {
+    event(Events.login, { method: AuthenticationMethods.email })
     createAccessToken({
       input: {
         email: email,

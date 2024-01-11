@@ -7,8 +7,10 @@ import { z } from 'zod'
 
 import AuthCard from '@/components/auth/AuthCard'
 import AuthForm from '@/components/auth/AuthForm'
+import event from '@/scripts/GoogleTagManager/event'
 import { client } from '@/shopify/client'
 import { useCustomerCreateMutation } from '@/shopify/generated/graphql'
+import { Events, AuthenticationMethods } from '@/types/enums/events'
 import { Routes } from '@/types/enums/routes'
 import { passwordRegExp } from '@/utils/utils'
 
@@ -22,6 +24,7 @@ export default function SignUp() {
     data,
   } = useCustomerCreateMutation(client, {
     onSuccess: (data) => {
+      event(Events.signUp, { method: AuthenticationMethods.email })
       if (data.customerCreate?.customer?.id) {
         push(Routes.signin)
       }

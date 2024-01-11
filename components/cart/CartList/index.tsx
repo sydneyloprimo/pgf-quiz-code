@@ -3,7 +3,9 @@ import cn from 'classnames'
 import { useTranslations } from 'next-intl'
 import { useCookies } from 'react-cookie'
 
+import event from '@/scripts/GoogleTagManager/event'
 import { Cookies } from '@/types/enums/cookies'
+import { Events } from '@/types/enums/events'
 import { findProductLine } from '@/utils/utils'
 import CartProductCard from 'components/cart/CartProductCard'
 import EmptyState from 'components/cart/EmptyState'
@@ -54,10 +56,19 @@ const Cart = ({ className }: CartProps) => {
   const isDisabled = isGetCartLoading || isRemoveLoading || isUpdateLoading
 
   const handleCheckoutClick = () => {
+    event(Events.goCheckout)
     window.location.assign(cart?.checkoutUrl)
   }
 
   const onDeleteClick = (productId: string) => {
+    const productFound = edges?.find(({ node }) => node.id === productId)?.node
+
+    event(Events.removeFromCart, {
+      id: productFound?.merchandise?.id,
+      price: { ...productFound?.merchandise?.price },
+      title: productFound?.merchandise?.title,
+    })
+
     removeLine({
       cartId,
       lineIds: [productId],

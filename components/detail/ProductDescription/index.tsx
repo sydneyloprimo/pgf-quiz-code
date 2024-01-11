@@ -8,7 +8,9 @@ import { useMediaQuery } from 'usehooks-ts'
 
 import Toast, { ToastTypes } from '@/components/common/Toast'
 import { MediaQuery } from '@/constants'
+import event from '@/scripts/GoogleTagManager/event'
 import { Cookies } from '@/types/enums/cookies'
+import { Events } from '@/types/enums/events'
 import { client } from 'shopify/client'
 import {
   useCartLinesAddMutation,
@@ -58,6 +60,12 @@ const ProductDescription = ({
         )
       },
       onSuccess: () => {
+        event(Events.addProduct, {
+          quantity,
+          title,
+          variant_id: variantId,
+          variant_name: variant?.title || '',
+        })
         toast(
           <Toast
             type={ToastTypes.success}

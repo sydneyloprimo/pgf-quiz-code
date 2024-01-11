@@ -1,12 +1,14 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
-import React, { useMemo, useState } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 
 import ImageGallery from '@/components/detail/ImageGallery'
 import ProductDescription, {
   VARIANT,
 } from '@/components/detail/ProductDescription'
+import event from '@/scripts/GoogleTagManager/event'
+import { Events } from '@/types/enums/events'
 import { client } from 'shopify/client'
 import {
   useGetProductDetailQuery,
@@ -49,6 +51,13 @@ const ProductDetail = ({ handle }: ProductDetailProps) => {
       variant,
     }
   }, [variants, variantId, productImages])
+
+  useEffect(() => {
+    event(Events.viewVariant, {
+      variant_id: variantId,
+      variant_name: variant?.node.title || '',
+    })
+  }, [variant?.node.title, variantId])
 
   if (isError || !data?.product || !variant || !images.edges.length) {
     return null
