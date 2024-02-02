@@ -30,6 +30,7 @@ const ProductCard = ({ product, className, onClick }: ProductCardProps) => {
           style={{ objectFit: 'cover' }}
           sizes="(max-width: 768px) 120px, (min-width: 768px) 182pxw"
           alt={`${product.title} image`}
+          priority
         />
       </div>
       <div className="p-[26px] flex flex-col justify-between md:p-10">

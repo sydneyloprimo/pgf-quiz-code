@@ -1,6 +1,7 @@
 'use client'
-import useCartCookie from 'hooks/useCartCookie'
 import { PropsWithChildren } from 'react'
+
+import useCartCookie from 'hooks/useCartCookie'
 
 const Session = ({ children }: PropsWithChildren) => {
   useCartCookie()

@@ -4,17 +4,32 @@ import FilterPanel from '@/components/products/FilterPanel'
 import { useProductSearch } from '@/hooks/useProductSearch'
 import ProductList from 'components/products/ProductList'
 
-const ProductCatalog = () => {
-  const { onNextClick, onPreviousClick, pageInfo, products, onQueryChange } =
-    useProductSearch()
+export type ProductType = { name: string }
+
+interface ProductCatalogProps {
+  productTypes: ProductType[]
+}
+
+const ProductCatalog = ({ productTypes }: ProductCatalogProps) => {
+  const {
+    onNextClick,
+    onPreviousClick,
+    pageInfo,
+    products,
+    handleQueryChange,
+  } = useProductSearch()
 
   return (
     <>
-      <FilterPanel handleSetFilters={onQueryChange} />
+      <FilterPanel
+        onFiltersChange={handleQueryChange}
+        productTypes={productTypes}
+      />
       <ProductList
         className="min-h-full md:w-[840px]"
         onNextClick={onNextClick}
         onPreviousClick={onPreviousClick}
+        onSortChange={handleQueryChange}
         pageInfo={pageInfo}
         products={products}
       />

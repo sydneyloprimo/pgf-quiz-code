@@ -69,6 +69,7 @@ const Header = () => {
               alt={t('logoDesktop')}
               width={192}
               height={34}
+              priority
             />
             <Image
               src={images.logoWhite}
@@ -76,6 +77,7 @@ const Header = () => {
               alt={t('logoMobile')}
               height={19}
               width={112}
+              priority
             />
           </Link>
         </div>

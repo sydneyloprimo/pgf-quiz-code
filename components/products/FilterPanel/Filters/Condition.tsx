@@ -3,11 +3,17 @@
 import { useTranslations } from 'next-intl'
 import { useFormContext } from 'react-hook-form'
 
+import { ProductConditions } from '@/types/enums/constants'
+
 export interface ConditionForm {
   condition: string
 }
 
-const OPTIONS = ['new', 'used', 'refurbished'] as const
+const OPTIONS = [
+  ProductConditions.New,
+  ProductConditions.Used,
+  ProductConditions.Refurbished,
+]
 
 const classes = {
   new: {
@@ -31,15 +37,20 @@ const Condition = () => {
   return (
     <fieldset>
       <h5 className="font-bold my-2">{t('condition')}</h5>
-
       {OPTIONS.map((option) => (
         <div className="my-2" key={option}>
           <input
+            id={option}
             className={`mx-2 accent-dark-violet ${classes[option].input}`}
             type="radio"
+            value={option}
             {...register('condition')}
           />
-          <label className={classes[option].label} key={option}>
+          <label
+            htmlFor={option}
+            className={classes[option].label}
+            key={option}
+          >
             {t(option)}
           </label>
         </div>

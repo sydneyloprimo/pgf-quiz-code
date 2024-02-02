@@ -1,12 +1,12 @@
-import { useSearchParams } from 'next/navigation'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useSearchParams, usePathname } from 'next/navigation'
+import { useCallback, useMemo, useState } from 'react'
 
-import { Routes } from '@/types/enums/routes'
-import { buildFiltersFromQuery, buildQueryUrl } from '@/utils/utils'
+import { formatProductsParams, buildQueryUrl } from '@/utils/utils'
 import { client } from 'shopify/client'
 import {
   ProductEdge,
   useInfiniteGetAllProductsQuery,
+  ProductSortKeys,
 } from 'shopify/generated/graphql'
 
 export enum FilterParams {
@@ -21,6 +21,8 @@ export enum FilterParams {
   cursor = 'cursor',
   before = 'before',
   page = 'page',
+  sortKey = 'sortKey',
+  reverse = 'reverse',
 }
 
 export type Filters = {
@@ -31,8 +33,18 @@ export type Filters = {
   available?: boolean
   condition?: string
   vendor?: string
+  cursor?: string
+  before?: string
+  page?: number
   tags?: string[]
+  sortKey?: ProductSortKeys
+  reverse?: boolean
 }
+
+export type ProductURLParameters = Record<
+  string,
+  string | number | undefined | null | boolean | string[]
+>
 
 const constructSearchQuery = ({
   productTitle,
@@ -42,7 +54,7 @@ const constructSearchQuery = ({
   condition,
   available,
   vendor,
-  tags = [],
+  tags,
 }: Filters): string => {
   const queryParts: string[] = []
 
@@ -54,7 +66,7 @@ const constructSearchQuery = ({
   if (vendor) queryParts.push(`vendor:${vendor}`)
   if (condition) queryParts.push(`tag:${condition}`)
 
-  if (tags.length) {
+  if (tags && tags.length > 0) {
     tags.forEach((tag) => queryParts.push(`tag:${tag}`))
   }
 
@@ -64,22 +76,35 @@ const constructSearchQuery = ({
 const PAGE_SIZE = 6
 
 export const useProductSearch = () => {
-  const [filters, setFilters] = useState<Filters>({})
   const searchParams = useSearchParams()
+  const currentPath = usePathname()
+  const [filters, setFilters] = useState<Filters>(
+    formatProductsParams(searchParams)
+  )
   const [page, setPage] = useState<number>(
     Number(searchParams.get(FilterParams.page))
   )
   const cursor = searchParams.get(FilterParams.cursor)
-  const isBefore = searchParams.get(FilterParams.before)
+  const beforeParam = searchParams.get(FilterParams.before)
+  const sortKeyParam = searchParams.get(FilterParams.sortKey) as ProductSortKeys
+  const reverseParam = Boolean(searchParams.get(FilterParams.reverse))
 
   const query = useMemo(() => constructSearchQuery(filters), [filters])
 
-  const variables = !!isBefore
-    ? { before: cursor, last: PAGE_SIZE, query }
-    : { after: cursor, first: PAGE_SIZE, query }
+  const pagingVariables = !!beforeParam
+    ? { before: cursor, last: PAGE_SIZE }
+    : { after: cursor, first: PAGE_SIZE }
 
-  const { data, fetchNextPage, fetchPreviousPage } =
+  const variables = {
+    ...pagingVariables,
+    query,
+    reverse: filters.reverse || reverseParam,
+    sortKey: filters.sortKey || sortKeyParam || ProductSortKeys.CreatedAt,
+  }
+
+  const { data, isFetching, fetchNextPage, fetchPreviousPage } =
     useInfiniteGetAllProductsQuery('first', client, variables, {
+      keepPreviousData: true,
       select: ({ pageParams, pages }) => ({
         keepPreviousData: true,
         pageParams: pageParams,
@@ -90,8 +115,16 @@ export const useProductSearch = () => {
       }),
     })
 
-  const products = (data?.pages[page]?.edges || []) as ProductEdge[]
+  const products = data?.pages[page]?.edges as ProductEdge[]
   const pageInfo = data?.pages[page]?.pageInfo
+
+  const updateURL = useCallback(
+    (params: ProductURLParameters) => {
+      const newURL = buildQueryUrl(currentPath, params)
+      window.history.replaceState(null, '', newURL)
+    },
+    [currentPath]
+  )
 
   const onNextClick = useCallback(() => {
     const totalPages = data?.pages?.length
@@ -109,16 +142,19 @@ export const useProductSearch = () => {
 
     setPage((page) => page + 1)
 
-    // Shallow redirection is not possible with next.js v13.4.5
-    window.history.replaceState(
-      null,
-      '',
-      buildQueryUrl(Routes.products, {
-        ...filters,
-        cursor: pageInfo?.endCursor,
-      })
-    )
-  }, [page, data?.pages, fetchNextPage, filters, pageInfo?.endCursor])
+    updateURL({
+      ...filters,
+      cursor: pageInfo?.endCursor,
+      page,
+    })
+  }, [
+    data?.pages?.length,
+    page,
+    updateURL,
+    filters,
+    pageInfo?.endCursor,
+    fetchNextPage,
+  ])
 
   const onPreviousClick = useCallback(() => {
     let newCursor
@@ -137,42 +173,30 @@ export const useProductSearch = () => {
       setPage((page) => page - 1)
     }
 
-    // Shallow redirection is not possible with next.js v13.4.5
-    window.history.replaceState(
-      null,
-      '',
-      buildQueryUrl(Routes.products, {
-        ...filters,
-        before: 1,
-        cursor: newCursor,
-      })
-    )
-  }, [page, data?.pages, fetchPreviousPage, filters])
-
-  const onQueryChange = useCallback((newFilters: Filters) => {
-    setFilters((filters: Filters) => {
-      const updatedFilters = { ...filters, ...newFilters }
-
-      window.history.replaceState(
-        null,
-        '',
-        buildQueryUrl(Routes.products, updatedFilters)
-      )
-      return updatedFilters
+    updateURL({
+      ...filters,
+      before: 1,
+      cursor: newCursor,
+      page,
     })
-  }, [])
+  }, [page, updateURL, filters, data?.pages, fetchPreviousPage])
 
-  useEffect(() => {
-    const newFilters = buildFiltersFromQuery(searchParams)
-
-    onQueryChange(newFilters)
-    setPage(Number(searchParams.get(FilterParams.page)))
-  }, [searchParams, onQueryChange])
+  const handleQueryChange = useCallback(
+    (newFilters: Filters) => {
+      setFilters((filters) => {
+        setPage(0)
+        updateURL({ ...filters, ...newFilters })
+        return newFilters
+      })
+    },
+    [updateURL]
+  )
 
   return {
+    handleQueryChange,
+    isFetching,
     onNextClick,
     onPreviousClick,
-    onQueryChange,
     pageInfo,
     products,
   }

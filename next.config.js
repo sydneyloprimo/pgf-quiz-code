@@ -7,6 +7,7 @@ const withNextIntl = require('next-intl/plugin')(
 const nextConfig = {
   images: {
     domains: [`cdn.shopify.com`],
+    unoptimized: true,
   },
 }
 

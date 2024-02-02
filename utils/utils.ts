@@ -1,6 +1,10 @@
 import { ReadonlyURLSearchParams } from 'next/navigation'
 
-import { FilterParams, Filters } from '@/hooks/useProductSearch'
+import {
+  FilterParams,
+  Filters,
+  ProductURLParameters,
+} from '@/hooks/useProductSearch'
 import { CartLineEdge } from '@/shopify/generated/graphql'
 
 /* eslint-disable max-len */
@@ -10,9 +14,7 @@ export const passwordRegExp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])/
 export const findProductLine = (edges: CartLineEdge[], productId: string) =>
   edges.find(({ node: { id } }) => id === productId)
 
-export const buildQueryString = (params: {
-  [key: string]: string | number | undefined | null | boolean | string[]
-}) =>
+export const buildQueryString = (params: ProductURLParameters) =>
   Object.keys(params)
     .filter((param) => params[param])
     .map(
@@ -25,31 +27,36 @@ export const buildQueryString = (params: {
     )
     .join('&')
 
-export const buildQueryUrl = (
-  path: string,
-  params: {
-    [key: string]: string | number | undefined | null | boolean | string[]
-  }
-) => `${path}?${buildQueryString(params)}`
+export const buildQueryUrl = (path: string, params: ProductURLParameters) => {
+  const URLParams = buildQueryString(params)
+  if (URLParams === '') return path
+  else return `${path}?${URLParams}`
+}
 
-export const buildFiltersFromQuery = (
+export const formatProductsParams = (
   searchParams: ReadonlyURLSearchParams
-) => {
+): Filters => {
   const entries = [...searchParams.entries()] as Array<
-    [key: FilterParams | 'page', value: string]
+    [key: FilterParams, value: string]
   >
-  return entries.reduce((acc, [key, value]) => {
-    if (key === FilterParams.tags) acc[key] = value.split(',')
-    if (key === FilterParams.available) acc[key] = value === 'true'
-    if (
-      key === FilterParams.condition ||
-      key === FilterParams.productType ||
-      key === FilterParams.vendor ||
-      key === FilterParams.productTitle ||
-      key === FilterParams.priceMin ||
-      key === FilterParams.priceMax
-    )
-      acc[key] = value
+
+  const { available, tags, condition, reverse, page } = FilterParams
+  return entries.reduce((acc: Filters, [key, value]) => {
+    switch (key) {
+      case tags || condition:
+        acc[tags] = value.split(',')
+        break
+      case available || reverse:
+        acc[key] = Boolean(value)
+        break
+      case page:
+        acc[key] = Number(value)
+        break
+      default:
+        ;(acc[key] as string) = value || ''
+        break
+    }
+
     return acc
-  }, {} as Filters)
+  }, {})
 }

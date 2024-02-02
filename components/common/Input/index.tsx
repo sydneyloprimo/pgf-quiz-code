@@ -12,7 +12,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
   error?: string
   icon?: ReactNode
-  iconPosition?: InputIconPosition.START | InputIconPosition.END
+  iconPosition?: InputIconPosition.Start | InputIconPosition.End
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -30,51 +30,56 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       placeholder,
       type,
       icon,
-      iconPosition = InputIconPosition.START,
+      iconPosition = InputIconPosition.Start,
       name,
       ...props
     }: InputProps,
     ref
-  ) => {
-    return (
-      <div className={cn('flex flex-col', className)}>
-        {label && (
-          <label className={labelClassName} htmlFor={name}>
-            {label}
-          </label>
-        )}
-        <div className="flex flex-col relative items-center">
-          {icon && iconPosition === InputIconPosition.START && (
-            <div className="absolute top-[0.9rem] left-4">{icon}</div>
-          )}
-          <input
-            ref={ref}
-            id={id}
+  ) => (
+    <div className={cn('flex flex-col', className)}>
+      {label && (
+        <label className={labelClassName} htmlFor={name}>
+          {label}
+        </label>
+      )}
+      <div className="flex flex-col relative items-center">
+        {icon && (
+          <div
             className={cn(
-              'h-[44px] rounded-lg border border-solid border-black p-3 w-full',
-              error && 'border-red-500',
-              inputClassName
+              'absolute top-[0.5rem] cursor-pointer p-1',
+              iconPosition === InputIconPosition.End ? 'right-3' : ' left-3'
             )}
-            type={type}
-            name={name}
-            value={value}
-            placeholder={placeholder}
-            onChange={onChange}
-            onBlur={onBlur}
-            {...props}
-          />
-          {icon && iconPosition === InputIconPosition.END && (
-            <div className="absolute top-[0.9rem] right-4">{icon}</div>
-          )}
-        </div>
-        {error && (
-          <span role="alert" className="text-red-500 text-sm">
-            {error}
-          </span>
+          >
+            {icon}
+          </div>
         )}
+        <input
+          ref={ref}
+          id={id}
+          className={cn(
+            'h-[44px] rounded-lg border border-solid border-black p-3 w-full',
+            error && 'border-red-500',
+            iconPosition === InputIconPosition.End
+              ? icon && 'pr-9'
+              : icon && 'pl-9',
+            inputClassName
+          )}
+          type={type}
+          name={name}
+          value={value}
+          placeholder={placeholder}
+          onChange={onChange}
+          onBlur={onBlur}
+          {...props}
+        />
       </div>
-    )
-  }
+      {error && (
+        <span role="alert" className="text-red-500 text-sm">
+          {error}
+        </span>
+      )}
+    </div>
+  )
 )
 
 Input.displayName = 'Input'

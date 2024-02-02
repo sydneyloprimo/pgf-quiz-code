@@ -1,4 +1,10 @@
 export enum InputIconPosition {
-  START = 'start',
-  END = 'end',
+  Start = 'start',
+  End = 'end',
+}
+
+export enum ProductConditions {
+  New = 'new',
+  Used = 'used',
+  Refurbished = 'refurbished',
 }

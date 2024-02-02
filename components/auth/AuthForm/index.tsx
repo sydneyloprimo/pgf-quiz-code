@@ -94,7 +94,7 @@ const AuthForm = ({
             placeholder={t('passwordPlaceholder')}
             autoComplete="on"
             id="password"
-            iconPosition={InputIconPosition.END}
+            iconPosition={InputIconPosition.End}
             type={isPasswordVisible ? 'text' : 'password'}
             icon={
               <Image
