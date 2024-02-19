@@ -20,6 +20,8 @@ const useCartCookie = () => {
       createCart({})
     }
   }, [cookies, createCart])
+
+  return { cartId: cookies[Cookies.cart] || '' }
 }
 
 export default useCartCookie

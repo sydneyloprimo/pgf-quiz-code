@@ -2,15 +2,14 @@
 import { useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
-import { useCookies } from 'react-cookie'
 import { toast } from 'react-toastify'
 import { useMediaQuery } from 'usehooks-ts'
 
 import Toast, { ToastTypes } from '@/components/common/Toast'
 import { MediaQuery } from '@/constants'
 import event from '@/scripts/GoogleTagManager/event'
-import { Cookies } from '@/types/enums/cookies'
 import { Events } from '@/types/enums/events'
+import useCartCookie from 'hooks/useCartCookie'
 import { client } from 'shopify/client'
 import {
   useCartLinesAddMutation,
@@ -44,7 +43,7 @@ const ProductDescription = ({
   const [quantity, setQuantity] = useState(1)
   const searchParams = useSearchParams()
   const isMobile = useMediaQuery(MediaQuery.mobile)
-  const [cookies] = useCookies([Cookies.cart])
+  const { cartId } = useCartCookie()
 
   const t = useTranslations('Detail')
 
@@ -83,7 +82,7 @@ const ProductDescription = ({
     toast.dismiss()
     if (variant) {
       addLine({
-        cartId: cookies[Cookies.cart],
+        cartId,
         lines: [
           {
             merchandiseId: variant.id,

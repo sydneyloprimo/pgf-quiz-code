@@ -49,7 +49,7 @@ const CartProductCard = ({
       </div>
       <div className="p-[26px] md:p-10 flex justify-between flex-1">
         <div className="flex flex-col justify-between">
-          <h3 className="text-sm text-start font-bold md:text-xl">
+          <h3 className="text-black text-sm text-start font-bold md:text-xl">
             {product.title}
           </h3>
           <button
@@ -61,7 +61,7 @@ const CartProductCard = ({
           </button>
         </div>
         <div className="flex flex-col justify-between">
-          <h3 className="text-sm text-end font-bold md:font-regular md:text-xl">
+          <h3 className="text-black text-sm text-end font-bold md:font-regular md:text-xl">
             {formatCurrency(product.price.currencyCode, product.price.amount)}
           </h3>
           <div className="flex justify-end">

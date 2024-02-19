@@ -1,20 +1,20 @@
 'use client'
 import cn from 'classnames'
 import { useTranslations } from 'next-intl'
-import { useCookies } from 'react-cookie'
+import { useEffect, useState } from 'react'
 
 import event from '@/scripts/GoogleTagManager/event'
-import { Cookies } from '@/types/enums/cookies'
 import { Events } from '@/types/enums/events'
 import { findProductLine } from '@/utils/utils'
 import CartProductCard from 'components/cart/CartProductCard'
 import EmptyState from 'components/cart/EmptyState'
+import useCartCookie from 'hooks/useCartCookie'
 import { client } from 'shopify/client'
 import {
   ProductVariant,
   useGetCartQuery,
-  useCartLinesRemoveMutation,
   useCartLinesUpdateMutation,
+  useCartLinesRemoveMutation,
   CartLineEdge,
 } from 'shopify/generated/graphql'
 
@@ -24,8 +24,7 @@ interface CartProps {
 
 const Cart = ({ className }: CartProps) => {
   const t = useTranslations('Cart')
-  const [cookies] = useCookies([Cookies.cart])
-  const cartId = cookies[Cookies.cart]
+  const { cartId } = useCartCookie()
 
   const {
     data,
@@ -34,6 +33,8 @@ const Cart = ({ className }: CartProps) => {
   } = useGetCartQuery(client, {
     id: cartId,
   })
+
+  const [hasMounted, setHasMounted] = useState(false)
 
   const { mutate: updateLine, isLoading: isUpdateLoading } =
     useCartLinesUpdateMutation(client, {
@@ -48,6 +49,14 @@ const Cart = ({ className }: CartProps) => {
         getCartRefetch()
       },
     })
+
+  useEffect(() => {
+    setHasMounted(true)
+  }, [])
+
+  if (!hasMounted) {
+    return null
+  }
 
   const { cart } = data || {}
   const { edges } = cart?.lines || {}
