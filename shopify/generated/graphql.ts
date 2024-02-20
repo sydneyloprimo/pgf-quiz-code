@@ -7064,6 +7064,7 @@ export type GetAllProductsQuery = {
 
 export type GetCartQueryVariables = Exact<{
   id: Scalars['ID']
+  first?: InputMaybe<Scalars['Int']>
 }>
 
 export type GetCartQuery = {
@@ -7845,10 +7846,10 @@ useGetAllProductsQuery.fetcher = (
     headers
   )
 export const GetCartDocument = /*#__PURE__*/ `
-    query getCart($id: ID!) {
+    query getCart($id: ID!, $first: Int = 100) {
   cart(id: $id) {
     id
-    lines(first: 10) {
+    lines(first: $first) {
       edges {
         node {
           id

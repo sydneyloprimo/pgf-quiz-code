@@ -1,7 +1,7 @@
-query getCart($id: ID!) {
+query getCart($id: ID!, $first: Int = 100) {
   cart(id: $id) {
     id
-    lines(first: 10) {
+    lines(first: $first) {
       edges {
         node {
           id

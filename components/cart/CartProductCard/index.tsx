@@ -84,7 +84,7 @@ const CartProductCard = ({
                 <Image src={SubtractIcon} alt="" />
               </button>
             )}
-            <p className="text-sm md:text-base font-bold hover:opacity-80">
+            <p className="text-black text-sm md:text-base font-bold hover:opacity-80">
               {quantity}
             </p>
             <button

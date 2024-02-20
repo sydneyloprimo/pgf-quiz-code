@@ -30,9 +30,7 @@ const Cart = ({ className }: CartProps) => {
     data,
     refetch: getCartRefetch,
     isLoading: isGetCartLoading,
-  } = useGetCartQuery(client, {
-    id: cartId,
-  })
+  } = useGetCartQuery(client, { id: cartId })
 
   const [hasMounted, setHasMounted] = useState(false)
 

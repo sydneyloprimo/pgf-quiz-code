@@ -43,10 +43,12 @@ export const formatProductsParams = (
   const { available, tags, condition, reverse, page } = FilterParams
   return entries.reduce((acc: Filters, [key, value]) => {
     switch (key) {
-      case tags || condition:
+      case tags:
+      case condition:
         acc[tags] = value.split(',')
         break
-      case available || reverse:
+      case available:
+      case reverse:
         acc[key] = Boolean(value)
         break
       case page:
