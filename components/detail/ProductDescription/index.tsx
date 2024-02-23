@@ -58,7 +58,22 @@ const ProductDescription = ({
           }
         )
       },
-      onSuccess: () => {
+      onSuccess: (data) => {
+        if (
+          data?.cartLinesAdd?.userErrors &&
+          data?.cartLinesAdd?.userErrors.length > 0
+        ) {
+          return toast(
+            <Toast
+              type={ToastTypes.error}
+              description={data.cartLinesAdd?.userErrors[0].message}
+            />,
+            {
+              className: 'border-error border rounded-lg w-max',
+              position: isMobile ? 'top-center' : 'bottom-center',
+            }
+          )
+        }
         event(Events.addProduct, {
           quantity,
           title,

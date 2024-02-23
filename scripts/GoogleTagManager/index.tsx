@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-before-interactive-script-outside-document */
 'use client'
 import Script from 'next/script'
 
@@ -15,7 +16,7 @@ export const GoogleTagManager = () => (
     </noscript>
     <Script
       id="gtm-data-layer"
-      strategy="afterInteractive"
+      strategy="beforeInteractive"
       dangerouslySetInnerHTML={{
         __html: `window.dataLayer = window.dataLayer || [];`,
       }}
