@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 
 import event from '@/scripts/GoogleTagManager/event'
 import { Events } from '@/types/enums/events'
+import { formatCurrency } from '@/utils/helpers'
 import { findProductLine } from '@/utils/utils'
 import CartProductCard from 'components/cart/CartProductCard'
 import EmptyState from 'components/cart/EmptyState'
@@ -116,7 +117,9 @@ const Cart = ({ className }: CartProps) => {
 
   return (
     <>
-      <h3 className="text-base mb-4 md:mb-0 md:text-xl">{t('title')}</h3>
+      <h1 className="text-black text-base mb-4 md:mb-0 md:text-xl">
+        {t('title')}
+      </h1>
       <div className="bg-white md:bg-transparent rounded-lg border-dark-grey border border-solid md:border-0">
         {isEmpty ? (
           <EmptyState className="mb-[70px] md:my-40" />
@@ -128,12 +131,15 @@ const Cart = ({ className }: CartProps) => {
                 'flex flex-col flex-1 justify-between md:flex-none md:justify-normal'
               )}
             >
-              <div>
+              <ul>
                 {edges?.map(
-                  ({ node: { id, merchandise: product, quantity } }, index) => (
+                  (
+                    { node: { id, merchandise: productVariant, quantity } },
+                    index
+                  ) => (
                     <CartProductCard
-                      key={`${product.id}-${product.title}`}
-                      product={product as ProductVariant}
+                      key={`${productVariant.id}-${productVariant.title}`}
+                      productVariant={productVariant as ProductVariant}
                       quantity={quantity}
                       onDeleteClick={() => onDeleteClick(id)}
                       onDecreaseClick={() => onDecreaseClick(id)}
@@ -148,15 +154,18 @@ const Cart = ({ className }: CartProps) => {
                     />
                   )
                 )}
-              </div>
+              </ul>
             </div>
             <div className="flex justify-between pb-3.5 pt-4 px-3 md:p-0">
               <h3 className="text-sm uppercase m-auto md:text-xl">
                 {t('total')}
               </h3>
               <div className="border-black border-b border-solid flex-1 h-[1px] my-auto mx-3.5 md:mx-[21px]" />
-              <h3 className="text-sm font-bold m-auto md:text-xl">
-                {`${cart?.cost?.subtotalAmount?.currencyCode}${cart?.cost?.subtotalAmount?.amount}`}
+              <h3 className="text-black text-sm font-bold m-auto md:text-xl">
+                {formatCurrency(
+                  cart?.cost?.subtotalAmount?.currencyCode,
+                  cart?.cost?.subtotalAmount?.amount
+                )}
               </h3>
               <button
                 className="h-7 btn-primary md:h-10 ml-5 md:ml-6"

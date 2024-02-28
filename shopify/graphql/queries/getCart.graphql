@@ -16,6 +16,9 @@ query getCart($id: ID!, $first: Int = 100) {
                 amount
                 currencyCode
               }
+              product {
+                title
+              }
               title
               compareAtPriceV2 {
                 amount

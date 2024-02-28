@@ -10,7 +10,7 @@ import SubtractIcon from 'public/icons/subtract.svg'
 import TrashIcon from 'public/icons/trash.svg'
 
 interface CartProductCardProps {
-  product: ProductVariant
+  productVariant: ProductVariant
   className?: string
   onDecreaseClick: () => void
   onDeleteClick: () => void
@@ -20,7 +20,7 @@ interface CartProductCardProps {
 }
 
 const CartProductCard = ({
-  product,
+  productVariant,
   className,
   onDecreaseClick,
   onIncreaseClick,
@@ -30,7 +30,7 @@ const CartProductCard = ({
 }: CartProductCardProps) => {
   const t = useTranslations('Cart')
   return (
-    <div
+    <li
       className={cn(
         'bg-white flex focus:border-dashed focus:border-2 focus:border-focus focus:outline-none md:h-auto md:focus:border-none md:focus:outline-dashed md:focus:outline-2 md:focus:outline-focus',
         className,
@@ -40,18 +40,25 @@ const CartProductCard = ({
       <div className="w-[79px] h-[120px] rounded-lg relative md:w-[197px] md:h-[182px]">
         <Image
           className="md:rounded-l-lg"
-          src={product.image?.url}
+          src={productVariant.image?.url}
           fill
           style={{ objectFit: 'cover' }}
           sizes="(max-width: 768px) 120px, (min-width: 768px) 182pxw"
-          alt={`${product.title} image`}
+          alt={`${productVariant.title} image`}
         />
       </div>
-      <div className="p-[26px] md:p-10 flex justify-between flex-1">
+      <div className="p-[20px] md:p-8 flex justify-between flex-1">
         <div className="flex flex-col justify-between">
-          <h3 className="text-black text-sm text-start font-bold md:text-xl">
-            {product.title}
-          </h3>
+          <div>
+            <h2 className="text-black text-sm text-start font-bold md:text-xl">
+              {productVariant.product.title}
+            </h2>
+            {productVariant.title !== 'Default Title' && (
+              <p className="text-black text-sm text-start md:text-lg">
+                {productVariant.title}
+              </p>
+            )}
+          </div>
           <button
             className="text-start w-max link-primary"
             onClick={onDeleteClick}
@@ -62,7 +69,10 @@ const CartProductCard = ({
         </div>
         <div className="flex flex-col justify-between">
           <h3 className="text-black text-sm text-end font-bold md:font-regular md:text-xl">
-            {formatCurrency(product.price.currencyCode, product.price.amount)}
+            {formatCurrency(
+              productVariant.price.currencyCode,
+              productVariant.price.amount
+            )}
           </h3>
           <div className="flex justify-end">
             {quantity == 1 ? (
@@ -91,14 +101,16 @@ const CartProductCard = ({
               className="ml-3 btn"
               onClick={onIncreaseClick}
               type="button"
-              disabled={product.quantityAvailable == quantity || disabled}
+              disabled={
+                productVariant.quantityAvailable == quantity || disabled
+              }
             >
               <Image src={PlusIcon} alt="" />
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </li>
   )
 }
 

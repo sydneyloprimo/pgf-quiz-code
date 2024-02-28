@@ -7093,6 +7093,7 @@ export type GetCartQuery = {
               amount: any
               currencyCode: CurrencyCode
             }
+            product: { __typename?: 'Product'; title: string }
             compareAtPriceV2?: {
               __typename?: 'MoneyV2'
               amount: any
@@ -7863,6 +7864,9 @@ export const GetCartDocument = /*#__PURE__*/ `
               price {
                 amount
                 currencyCode
+              }
+              product {
+                title
               }
               title
               compareAtPriceV2 {
