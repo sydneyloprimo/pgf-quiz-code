@@ -19,7 +19,7 @@ query GetProductDetail($handle: String!) {
     images(first: 1) {
       edges {
         node {
-          url
+          url: url(transform: { maxWidth: 600, crop: CENTER })
           width
           height
           altText
@@ -32,7 +32,7 @@ query GetProductDetail($handle: String!) {
           id
           title
           image {
-            url
+            url: url(transform: { maxWidth: 600, crop: CENTER })
             width
             height
             altText

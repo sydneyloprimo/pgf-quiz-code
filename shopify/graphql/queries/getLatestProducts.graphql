@@ -30,7 +30,7 @@ query getLatestProducts($handle: String, $first: Int) {
               }
               edges {
                 node {
-                  url
+                  url: url(transform: { maxWidth: 400, crop: CENTER })
                   altText
                   width
                   height
