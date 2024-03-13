@@ -7050,10 +7050,10 @@ export type GetAllProductsQuery = {
             __typename?: 'ImageEdge'
             node: {
               __typename?: 'Image'
-              url: any
               altText?: string | null
               width?: number | null
               height?: number | null
+              url: any
             }
           }>
         }
@@ -7210,10 +7210,10 @@ export type GetLatestProductsQuery = {
               __typename?: 'ImageEdge'
               node: {
                 __typename?: 'Image'
-                url: any
                 altText?: string | null
                 width?: number | null
                 height?: number | null
+                url: any
               }
             }>
           }
@@ -7298,10 +7298,10 @@ export type GetProductDetailQuery = {
         __typename?: 'ImageEdge'
         node: {
           __typename?: 'Image'
-          url: any
           width?: number | null
           height?: number | null
           altText?: string | null
+          url: any
         }
       }>
     }
@@ -7317,10 +7317,10 @@ export type GetProductDetailQuery = {
           quantityAvailable?: number | null
           image?: {
             __typename?: 'Image'
-            url: any
             width?: number | null
             height?: number | null
             altText?: string | null
+            url: any
           } | null
           price: {
             __typename?: 'MoneyV2'
@@ -7768,7 +7768,7 @@ export const GetAllProductsDocument = /*#__PURE__*/ `
             }
             edges {
               node {
-                url
+                url: url(transform: {maxWidth: 400, crop: CENTER})
                 altText
                 width
                 height
@@ -8076,7 +8076,7 @@ export const GetLatestProductsDocument = /*#__PURE__*/ `
               }
               edges {
                 node {
-                  url
+                  url: url(transform: {maxWidth: 400, crop: CENTER})
                   altText
                   width
                   height
@@ -8267,7 +8267,7 @@ export const GetProductDetailDocument = /*#__PURE__*/ `
     images(first: 1) {
       edges {
         node {
-          url
+          url: url(transform: {maxWidth: 600, crop: CENTER})
           width
           height
           altText
@@ -8280,7 +8280,7 @@ export const GetProductDetailDocument = /*#__PURE__*/ `
           id
           title
           image {
-            url
+            url: url(transform: {maxWidth: 600, crop: CENTER})
             width
             height
             altText
