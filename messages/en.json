@@ -136,7 +136,7 @@
       "used": "Used"
     },
     "search": "Search",
-    "searchTerms": "You searched for: \"{terms}\""
+    "searchTerms": "You searched for: {term}"
   },
   "SignIn": {
     "buttonText": "Sign in",
