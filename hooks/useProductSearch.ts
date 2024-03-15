@@ -1,5 +1,5 @@
 import { useSearchParams, usePathname } from 'next/navigation'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { formatProductsParams, buildQueryUrl } from '@/utils/utils'
 import { client } from 'shopify/client'
@@ -191,6 +191,10 @@ export const useProductSearch = () => {
     },
     [updateURL]
   )
+
+  useEffect(() => {
+    setFilters(formatProductsParams(searchParams))
+  }, [searchParams])
 
   return {
     handleQueryChange,

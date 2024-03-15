@@ -21,14 +21,14 @@ const images = {
   logoWhite: '/icons/logo-white.svg',
 }
 
-const DEBOUNCE_WAIT_TIME = 1000
+const DEBOUNCE_WAIT_TIME = 800
 const MINIMUM_SEARCH_LENGTH = 3
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
   const searchParams = useSearchParams()
   const [searchTerm, setSearchTerm] = useState(
-    searchParams.get(FilterParams.productTitle) || ''
+    searchParams.get(FilterParams.productTitle) ?? ''
   )
   const { push } = useRouter()
   const t = useTranslations('Header')
@@ -36,7 +36,7 @@ const Header = () => {
   const debouncedSearch = useCallback(
     debounce(
       (value: string) => {
-        if (value.length >= MINIMUM_SEARCH_LENGTH) {
+        if (value.length >= MINIMUM_SEARCH_LENGTH || value.length === 0) {
           push(buildQueryUrl(Routes.products, { productTitle: value }))
         }
       },
@@ -84,7 +84,7 @@ const Header = () => {
 
         <Input
           onChange={onDebounceSearch}
-          className="hidden md:block lg:w-1/3"
+          className="hidden md:block lg:w-1/3 text-black"
           placeholder={t('searchPlaceholder')}
           value={searchTerm}
         />
@@ -108,7 +108,7 @@ const Header = () => {
 
       <Input
         onChange={onDebounceSearch}
-        className="md:hidden w-full px-4 my-3"
+        className="md:hidden w-full px-4 my-3 text-black"
         inputClassName="border-0"
         placeholder={t('searchPlaceholder')}
         value={searchTerm}
