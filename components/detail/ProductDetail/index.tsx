@@ -1,6 +1,7 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
+import Image from 'next/image'
+import { useSearchParams, useRouter } from 'next/navigation'
 import React, { useMemo, useState, useEffect } from 'react'
 
 import ImageGallery from '@/components/detail/ImageGallery'
@@ -9,6 +10,8 @@ import ProductDescription, {
 } from '@/components/detail/ProductDescription'
 import event from '@/scripts/GoogleTagManager/event'
 import { Events } from '@/types/enums/events'
+import { Routes } from '@/types/enums/routes'
+import CrossIcon from 'public/icons/cross.svg'
 import { client } from 'shopify/client'
 import {
   useGetProductDetailQuery,
@@ -22,6 +25,7 @@ interface ProductDetailProps {
 }
 
 const ProductDetail = ({ handle }: ProductDetailProps) => {
+  const router = useRouter()
   const searchParams = useSearchParams()
   const { data, isError } = useGetProductDetailQuery(client, {
     handle,
@@ -52,6 +56,14 @@ const ProductDetail = ({ handle }: ProductDetailProps) => {
     }
   }, [variants, variantId, productImages])
 
+  const goBack = () => {
+    if (window.history.length > 1) {
+      router.back()
+    } else {
+      router.push(Routes.products)
+    }
+  }
+
   useEffect(() => {
     event(Events.viewVariant, {
       variant_id: variantId,
@@ -64,7 +76,10 @@ const ProductDetail = ({ handle }: ProductDetailProps) => {
   }
 
   return (
-    <>
+    <div className="flex flex-col w-full relative md:flex-row py-2.5 px-7 md:py-14">
+      <button className="absolute top-5 right-5" onClick={goBack}>
+        <Image src={CrossIcon} className="" alt="" />
+      </button>
       <div className="w-full md:w-1/2">
         <ImageGallery
           title={title}
@@ -84,7 +99,7 @@ const ProductDetail = ({ handle }: ProductDetailProps) => {
           variant={variant?.node}
         />
       </div>
-    </>
+    </div>
   )
 }
 
