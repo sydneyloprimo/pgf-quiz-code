@@ -6,7 +6,13 @@ const withNextIntl = require('next-intl/plugin')(
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [`cdn.shopify.com`],
+    remotePatterns: [
+      {
+        hostname: 'cdn.shopify.com',
+        pathname: '/**/**',
+        protocol: 'https',
+      },
+    ],
   },
 }
 
