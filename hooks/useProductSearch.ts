@@ -81,9 +81,6 @@ export const useProductSearch = () => {
   const [filters, setFilters] = useState<Filters>(
     formatProductsParams(searchParams)
   )
-  const [page, setPage] = useState<number>(
-    Number(searchParams.get(FilterParams.page))
-  )
   const cursor = searchParams.get(FilterParams.cursor)
   const beforeParam = searchParams.get(FilterParams.before)
   const sortKeyParam = searchParams.get(FilterParams.sortKey) as ProductSortKeys
@@ -102,8 +99,11 @@ export const useProductSearch = () => {
     sortKey: filters.sortKey || sortKeyParam || ProductSortKeys.CreatedAt,
   }
 
-  const { data, isFetching, fetchNextPage, fetchPreviousPage } =
-    useInfiniteGetAllProductsQuery('first', client, variables, {
+  const { data, isFetching, fetchNextPage } = useInfiniteGetAllProductsQuery(
+    'first',
+    client,
+    variables,
+    {
       keepPreviousData: true,
       select: ({ pageParams, pages }) => ({
         keepPreviousData: true,
@@ -113,10 +113,11 @@ export const useProductSearch = () => {
           pageInfo,
         })),
       }),
-    })
+    }
+  )
 
-  const products = data?.pages[page]?.edges as ProductEdge[]
-  const pageInfo = data?.pages[page]?.pageInfo
+  const products = data?.pages[0]?.edges as ProductEdge[]
+  const pageInfo = data?.pages[0]?.pageInfo
 
   const updateURL = useCallback(
     (params: ProductURLParameters) => {
@@ -126,11 +127,11 @@ export const useProductSearch = () => {
     [currentPath]
   )
 
-  const onNextClick = useCallback(() => {
+  const onNextClick = useCallback(async () => {
     const totalPages = data?.pages?.length
 
-    if (!totalPages || page === totalPages - 1) {
-      fetchNextPage({
+    if (!totalPages) {
+      await fetchNextPage({
         pageParam: {
           after: pageInfo?.endCursor,
           before: null,
@@ -140,16 +141,13 @@ export const useProductSearch = () => {
       })
     }
 
-    setPage((page) => page + 1)
-
     updateURL({
       ...filters,
+      before: null,
       cursor: pageInfo?.endCursor,
-      page,
     })
   }, [
     data?.pages?.length,
-    page,
     updateURL,
     filters,
     pageInfo?.endCursor,
@@ -157,34 +155,16 @@ export const useProductSearch = () => {
   ])
 
   const onPreviousClick = useCallback(() => {
-    let newCursor
-    if (page == 0) {
-      newCursor = data?.pages[0].pageInfo.startCursor
-      fetchPreviousPage({
-        pageParam: {
-          after: null,
-          before: newCursor,
-          first: null,
-          last: PAGE_SIZE,
-        },
-      })
-    } else {
-      newCursor = data?.pages[page]?.pageInfo?.startCursor
-      setPage((page) => page - 1)
-    }
-
     updateURL({
       ...filters,
       before: 1,
-      cursor: newCursor,
-      page,
+      cursor: data?.pages[0]?.pageInfo?.startCursor,
     })
-  }, [page, updateURL, filters, data?.pages, fetchPreviousPage])
+  }, [updateURL, filters, data?.pages])
 
   const handleQueryChange = useCallback(
     (newFilters: Filters) => {
       setFilters((filters) => {
-        setPage(0)
         updateURL({ ...filters, ...newFilters })
         return newFilters
       })
