@@ -3,10 +3,14 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import { toast } from 'react-toastify'
+import { useMediaQuery } from 'usehooks-ts'
 import { z } from 'zod'
 
 import AuthCard from '@/components/auth/AuthCard'
 import AuthForm from '@/components/auth/AuthForm'
+import Toast, { ToastTypes } from '@/components/common/Toast'
+import { MediaQuery } from '@/constants'
 import event from '@/scripts/GoogleTagManager/event'
 import { client } from '@/shopify/client'
 import { useCustomerCreateMutation } from '@/shopify/generated/graphql'
@@ -17,6 +21,7 @@ import { passwordRegExp } from '@/utils/utils'
 export default function SignUp() {
   const t = useTranslations('SignUp')
   const { push } = useRouter()
+  const isMobile = useMediaQuery(MediaQuery.mobile)
 
   const {
     mutate: createCustomer,
@@ -27,6 +32,16 @@ export default function SignUp() {
       event(Events.signUp, { method: AuthenticationMethods.email })
       if (data.customerCreate?.customer?.id) {
         push(Routes.signin)
+        toast(
+          <Toast
+            type={ToastTypes.success}
+            description={t('successfulRegistration')}
+          />,
+          {
+            className: 'md:max-w-lg border-restored border rounded-lg',
+            position: isMobile ? 'top-center' : 'bottom-center',
+          }
+        )
       }
     },
   })

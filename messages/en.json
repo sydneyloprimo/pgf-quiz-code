@@ -152,6 +152,7 @@
     "passwordLength": "Password must be at least 8 characters",
     "passwordPattern": "Password should have at least one number, one uppercase letter and one lowercase letter",
     "signinRedirectLink": "Sign in",
-    "signinRedirectMessage": "Already have an account?"
+    "signinRedirectMessage": "Already have an account?",
+    "successfulRegistration": "Congratulations! Your account has been successfully created.\nWe have sent a confirmation email to your registered email address."
   }
 }
