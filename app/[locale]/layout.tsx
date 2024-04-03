@@ -7,6 +7,7 @@ import { PropsWithChildren } from 'react'
 
 import { Locale } from '@/i18n'
 import BodyScripts from '@/scripts/BodyScripts'
+import HeadScripts from '@/scripts/HeadScripts'
 import Providers from 'utils/Providers'
 import Session from 'utils/Session'
 
@@ -35,6 +36,9 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
 
   return (
     <html className="bg-dark-violet" lang={locale}>
+      <head>
+        <HeadScripts />
+      </head>
       <body className="flex items-center flex-col">
         <BodyScripts />
         <Providers params={params}>
