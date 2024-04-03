@@ -2,12 +2,12 @@ import './globals.css'
 
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import Script from 'next/script'
 import { useLocale } from 'next-intl'
 import { PropsWithChildren } from 'react'
 
 import { Locale } from '@/i18n'
 import BodyScripts from '@/scripts/BodyScripts'
+import HeadScripts from '@/scripts/HeadScripts'
 import Providers from 'utils/Providers'
 import Session from 'utils/Session'
 
@@ -37,15 +37,7 @@ export default function RootLayout({ children, params }: RootLayoutProps) {
   return (
     <html className="bg-dark-violet" lang={locale}>
       <head>
-        <Script id="clarity-analytics">
-          {`
-            (function(c,l,a,r,i,t,y){
-                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-            })(window, document, "clarity", "script", "lqcfxk6bco");
-            `}
-        </Script>
+        <HeadScripts />
       </head>
       <body className="flex items-center flex-col">
         <BodyScripts />
