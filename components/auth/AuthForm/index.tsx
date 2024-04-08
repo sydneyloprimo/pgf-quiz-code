@@ -21,6 +21,7 @@ interface AuthFormProps {
     email: z.ZodString
     password: z.ZodString
   }>
+  clearApiError: () => void
 }
 
 const AuthForm = ({
@@ -29,9 +30,11 @@ const AuthForm = ({
   buttonText,
   apiError,
   validationSchema,
+  clearApiError,
 }: AuthFormProps) => {
   const t = useTranslations('Auth')
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
+  const [apiEmail, setApiEmail] = useState<string>('')
 
   type ValidationSchema = z.infer<typeof validationSchema>
 
@@ -39,6 +42,7 @@ const AuthForm = ({
     control,
     formState: { errors },
     handleSubmit: rhfHandleSubmit,
+    watch,
   } = useForm<ValidationSchema>({
     defaultValues: {
       email: '',
@@ -48,8 +52,12 @@ const AuthForm = ({
     resolver: zodResolver(validationSchema),
   })
 
+  const email = watch('email')
+
   const onSubmit: SubmitHandler<ValidationSchema> = ({ email, password }) => {
     handleSubmit(email, password)
+    setApiEmail(email)
+    clearApiError()
   }
 
   return (
@@ -112,7 +120,9 @@ const AuthForm = ({
         )}
       />
 
-      <div className="text-red-500 text-md">{apiError}</div>
+      {!isLoading && apiError && apiEmail === email && (
+        <div className="text-red-500 text-md">{apiError}</div>
+      )}
 
       <button
         className="btn-primary w-full mt-3 mb-5 h-[44px]"

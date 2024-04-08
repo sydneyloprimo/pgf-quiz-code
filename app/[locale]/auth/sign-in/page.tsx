@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import { useState } from 'react'
 import { useCookies } from 'react-cookie'
 import { z } from 'zod'
 
@@ -26,34 +27,40 @@ export default function SignIn() {
     Cookies.customerAccessToken,
     Cookies.cart,
   ])
+  const [apiError, setApiError] = useState<string>('')
 
   const { mutate: updateCartIdentity } =
     useCartBuyerIdentityUpdateMutation(client)
 
-  const {
-    mutate: createAccessToken,
-    isLoading,
-    data,
-  } = useCustomerAccessTokenCreateMutation(client, {
-    onSuccess: (data, { input }) => {
-      if (data.customerAccessTokenCreate?.customerAccessToken?.accessToken) {
-        updateCartIdentity({
-          buyerIdentity: {
-            customerAccessToken:
-              data.customerAccessTokenCreate?.customerAccessToken?.accessToken,
-            email: input.email,
-          },
-          cartId: cookies[Cookies.cart],
-        })
-        setCookie(
-          Cookies.customerAccessToken,
-          data.customerAccessTokenCreate?.customerAccessToken?.accessToken,
-          { secure: true }
-        )
-        push(Routes.home)
-      }
-    },
-  })
+  const { mutate: createAccessToken, isLoading } =
+    useCustomerAccessTokenCreateMutation(client, {
+      onSuccess: (data, { input }) => {
+        if (data.customerAccessTokenCreate?.customerAccessToken?.accessToken) {
+          setApiError('')
+          updateCartIdentity({
+            buyerIdentity: {
+              customerAccessToken:
+                data.customerAccessTokenCreate?.customerAccessToken
+                  ?.accessToken,
+              email: input.email,
+            },
+            cartId: cookies[Cookies.cart],
+          })
+          setCookie(
+            Cookies.customerAccessToken,
+            data.customerAccessTokenCreate?.customerAccessToken?.accessToken,
+            { secure: true }
+          )
+          push(Routes.home)
+        } else if (data?.customerAccessTokenCreate?.customerUserErrors) {
+          setApiError(
+            data?.customerAccessTokenCreate?.customerUserErrors[0]?.message
+          )
+        }
+      },
+    })
+
+  const clearApiError = () => setApiError('')
 
   const handleSubmit = async (email: string, password: string) => {
     event(Events.login, { method: AuthenticationMethods.email })
@@ -77,10 +84,8 @@ export default function SignIn() {
           handleSubmit={handleSubmit}
           isLoading={isLoading}
           buttonText={t('buttonText')}
-          apiError={
-            data?.customerAccessTokenCreate?.customerUserErrors[0]?.message ||
-            ''
-          }
+          apiError={apiError}
+          clearApiError={clearApiError}
           validationSchema={validationSchema}
         />
       </AuthCard>
