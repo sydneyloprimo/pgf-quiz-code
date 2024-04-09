@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useMediaQuery } from 'usehooks-ts'
 import { z } from 'zod'
@@ -22,29 +23,34 @@ export default function SignUp() {
   const t = useTranslations('SignUp')
   const { push } = useRouter()
   const isMobile = useMediaQuery(MediaQuery.mobile)
+  const [apiError, setApiError] = useState<string>('')
 
-  const {
-    mutate: createCustomer,
-    isLoading,
-    data,
-  } = useCustomerCreateMutation(client, {
-    onSuccess: (data) => {
-      event(Events.signUp, { method: AuthenticationMethods.email })
-      if (data.customerCreate?.customer?.id) {
-        push(Routes.signin)
-        toast(
-          <Toast
-            type={ToastTypes.success}
-            description={t('successfulRegistration')}
-          />,
-          {
-            className: 'md:max-w-lg border-restored border rounded-lg',
-            position: isMobile ? 'top-center' : 'bottom-center',
-          }
-        )
-      }
-    },
-  })
+  const { mutate: createCustomer, isLoading } = useCustomerCreateMutation(
+    client,
+    {
+      onSuccess: (data) => {
+        event(Events.signUp, { method: AuthenticationMethods.email })
+        if (data.customerCreate?.customer?.id) {
+          setApiError('')
+          push(Routes.signin)
+          toast(
+            <Toast
+              type={ToastTypes.success}
+              description={t('successfulRegistration')}
+            />,
+            {
+              className: 'md:max-w-lg border-restored border rounded-lg',
+              position: isMobile ? 'top-center' : 'bottom-center',
+            }
+          )
+        } else if (data?.customerCreate?.customerUserErrors) {
+          setApiError(data?.customerCreate?.customerUserErrors[0]?.message)
+        }
+      },
+    }
+  )
+
+  const clearApiError = () => setApiError('')
 
   const handleSubmit = async (email: string, password: string) => {
     createCustomer({
@@ -83,8 +89,9 @@ export default function SignUp() {
         handleSubmit={handleSubmit}
         isLoading={isLoading}
         buttonText={t('buttonText')}
-        apiError={data?.customerCreate?.customerUserErrors[0]?.message || ''}
+        apiError={apiError}
         validationSchema={validationSchema}
+        clearApiError={clearApiError}
       />
     </AuthCard>
   )
