@@ -171,6 +171,7 @@ const Cart = ({ className }: CartProps) => {
                 className="h-7 btn-primary md:h-10 ml-5 md:ml-6"
                 disabled={isEmpty || isDisabled}
                 onClick={handleCheckoutClick}
+                data-qa="checkout-button"
               >
                 {t('checkoutButton')}
               </button>

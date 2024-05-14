@@ -88,6 +88,7 @@ const FilterPanel = ({ onFiltersChange, productTypes }: FilterPanelProps) => {
           <button
             className="btn-primary w-full mt-3 mb-5 h-[44px]"
             type="submit"
+            data-qa="submit-filter-button"
           >
             {t('seeResults')}
             <Image

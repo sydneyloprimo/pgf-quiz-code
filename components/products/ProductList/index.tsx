@@ -104,6 +104,7 @@ const ProductList = ({
             defaultSelectedItem={URLSelectedSortOption}
             options={options}
             onSelectedItemChange={handleSortChange}
+            data-qa="product-sort-select"
           />
         </div>
       </div>
@@ -126,6 +127,7 @@ const ProductList = ({
                   'rounded-t-lg': index === 0,
                 }
               )}
+              data-qa="product-card"
             />
           ))}
       </div>

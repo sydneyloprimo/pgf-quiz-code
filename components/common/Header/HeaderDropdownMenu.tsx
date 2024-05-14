@@ -45,6 +45,7 @@ const HeaderDropdownMenu = ({
   return (
     <DropdownMenu open={isOpen} onOpenChange={onMenuChange}>
       <DropdownMenuTrigger
+        data-qa="header-dropdown-menu"
         className={cn(
           'dropdown-menu md:w-[168px] text-sm h-8 md:h-10',
           isOpen

@@ -21,6 +21,9 @@ const ListNextButton = ({ onClick, type, disabled }: ListNextButtonProps) => {
       className="flex hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed"
       onClick={onClick}
       disabled={disabled}
+      data-qa={
+        type === ListNextButtonTypes.next ? 'next-button' : 'previous-button'
+      }
     >
       {type === ListNextButtonTypes.previous && (
         <Image src={ChevronIcon} className="m-auto mr-5" alt="" />
