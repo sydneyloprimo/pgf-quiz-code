@@ -45,6 +45,7 @@ const Condition = () => {
             type="radio"
             value={option}
             {...register('condition')}
+            data-qa="condition-radio"
           />
           <label
             htmlFor={option}

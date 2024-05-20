@@ -52,6 +52,7 @@ const TypeFilter = ({
           <Input
             {...getInputProps({ ...register('productType') })}
             inputClassName="h-[40px]"
+            data-qa="product-type-input"
           />
         </div>
         <ul
@@ -69,6 +70,7 @@ const TypeFilter = ({
                 )}
                 key={item.name}
                 {...getItemProps({ index, item })}
+                data-qa="product-type-option"
               >
                 <span>{item.name}</span>
               </li>

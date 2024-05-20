@@ -32,6 +32,7 @@ const CategoryCard = ({ name, className }: CategoryCardProps) => {
           }
           alt={t('alt')}
           className="overflow-hidden rounded-t-lg"
+          data-qa="category-image"
         />
         <div className="w-full flex justify-center align-middle py-4">
           <h3 className="text-lg text-dark-grey font-bold">{name}</h3>

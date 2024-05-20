@@ -63,6 +63,7 @@ const CartProductCard = ({
             className="text-start w-max link-primary"
             onClick={onDeleteClick}
             disabled={disabled}
+            data-qa="delete-cart-product-button"
           >
             {t('deleteButton')}
           </button>
@@ -81,6 +82,7 @@ const CartProductCard = ({
                 type="button"
                 onClick={onDeleteClick}
                 disabled={disabled}
+                data-qa="delete-cart-product-trash-icon-button"
               >
                 <Image src={TrashIcon} alt="" />
               </button>
@@ -90,6 +92,7 @@ const CartProductCard = ({
                 onClick={onDecreaseClick}
                 type="button"
                 disabled={disabled}
+                data-qa="decrease-cart-product-button"
               >
                 <Image src={SubtractIcon} alt="" />
               </button>
@@ -104,6 +107,7 @@ const CartProductCard = ({
               disabled={
                 productVariant.quantityAvailable == quantity || disabled
               }
+              data-qa="increase-cart-product-button"
             >
               <Image src={PlusIcon} alt="" />
             </button>

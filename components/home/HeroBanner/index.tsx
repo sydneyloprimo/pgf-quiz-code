@@ -32,6 +32,7 @@ const HeroBanner = () => {
         </h1>
         <Link
           href={Routes.products}
+          data-qa="hero-banner-button"
           className="btn-primary w-max p-[10px] !outline-dark-violet mt-4 z-banner"
         >
           {t('button')}

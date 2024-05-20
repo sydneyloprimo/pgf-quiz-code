@@ -67,6 +67,7 @@ export default function ProfilePage() {
             <button
               className="link-primary flex"
               onClick={() => setIsReadOnly(!isReadOnly)}
+              data-qa="edit-settings"
             >
               {t('editSettings')}
             </button>
@@ -96,6 +97,7 @@ export default function ProfilePage() {
                   onChange={onChange}
                   onBlur={onBlur}
                   autoComplete="on"
+                  data-qa="name-input"
                   id="name"
                   error={error?.message}
                 />
@@ -120,6 +122,7 @@ export default function ProfilePage() {
                   autoComplete="on"
                   id="email"
                   error={error?.message}
+                  data-qa="email-input"
                 />
               )}
             />
@@ -142,6 +145,7 @@ export default function ProfilePage() {
                   autoComplete="on"
                   id="phone"
                   error={error?.message}
+                  data-qa="phone-input"
                 />
               )}
             />
@@ -166,6 +170,7 @@ export default function ProfilePage() {
                   autoComplete="on"
                   id="address"
                   error={error?.message}
+                  data-qa="address-input"
                 />
               )}
             />
@@ -188,6 +193,7 @@ export default function ProfilePage() {
                   autoComplete="on"
                   id="city"
                   error={error?.message}
+                  data-qa="city-input"
                 />
               )}
             />
@@ -210,6 +216,7 @@ export default function ProfilePage() {
                   autoComplete="on"
                   id="country"
                   error={error?.message}
+                  data-qa="country-input"
                 />
               )}
             />
@@ -232,6 +239,7 @@ export default function ProfilePage() {
                   autoComplete="on"
                   id="zip"
                   error={error?.message}
+                  data-qa="zip-input"
                 />
               )}
             />
@@ -243,10 +251,15 @@ export default function ProfilePage() {
                 <button
                   onClick={() => setIsReadOnly(!isReadOnly)}
                   className="btn-secondary h-[44px]"
+                  data-qa="cancel-button"
                 >
                   {t('cancelButtonText')}
                 </button>
-                <button type="submit" className="btn-primary h-[44px]">
+                <button
+                  type="submit"
+                  className="btn-primary h-[44px]"
+                  data-qa="submit-button"
+                >
                   {t('submitButtonText')}
                 </button>
               </div>

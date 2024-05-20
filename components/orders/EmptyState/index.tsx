@@ -32,6 +32,7 @@ const EmptyState = ({ className }: EmptyStateProps) => {
         <Link
           className="btn-primary py-3 px-[18px] w-max m-auto mt-8 md:ml-0"
           href={Routes.products}
+          data-qa="empty-orders-state-explore-button"
         >
           {t('exploreButton')}
         </Link>

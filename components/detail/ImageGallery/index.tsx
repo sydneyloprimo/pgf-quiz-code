@@ -37,6 +37,7 @@ const ImageGallery = ({ images, title, variant }: ImageGalleryProps) => {
         width={Number(image.width)}
         height={Number(image.height)}
         className="w-full h-auto m-auto object-cover max-h-full max-w-[500px] rounded-2xl"
+        data-qa="product-image"
       />
     </div>
   )

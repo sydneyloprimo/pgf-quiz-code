@@ -114,7 +114,10 @@ const ProductDescription = ({
 
   return (
     <div className="px-4 md:px-7 flex flex-col">
-      <h2 className="text-3xl font-bold mb-2 hidden md:block order-1">
+      <h2
+        className="text-3xl font-bold mb-2 hidden md:block order-1"
+        data-qa="product-title"
+      >
         {title}
       </h2>
       <p className="text-3xl font-bold mb-24 hidden md:block order-2">
@@ -126,7 +129,9 @@ const ProductDescription = ({
       {description && (
         <div className="order-4 md:order-3">
           <h3 className="text-lg font-bold mb-3">{t('productDescription')}</h3>
-          <p className="mb-4 text-base">{description}</p>
+          <p className="mb-4 text-base" data-qa="product-description">
+            {description}
+          </p>
         </div>
       )}
       <div className="flex flex-1 order-3 md:order-4 my-4 md:m-0">
@@ -140,9 +145,14 @@ const ProductDescription = ({
             onChange={(e) => handleSetVariant(e.target.value)}
             className="w-20 border border-gray-500 h-10 rounded px-3 py-2 bg-white cursor-pointer"
             disabled={isAddLineLoading}
+            data-qa="variant-select"
           >
             {variants.edges.map((variant) => (
-              <option key={variant.node.id} value={variant.node.id}>
+              <option
+                key={variant.node.id}
+                value={variant.node.id}
+                data-qa="product-variant-option"
+              >
                 {variant.node.title}
               </option>
             ))}
@@ -164,13 +174,18 @@ const ProductDescription = ({
                 onChange={(e) => setQuantity(Number(e.target.value))}
                 disabled={!variant?.quantityAvailable || isAddLineLoading}
                 className="w-20 border border-gray-500 h-10 rounded px-3 py-2 bg-white cursor-pointer"
+                data-qa="quantity-select"
               >
                 {Array.from(
                   {
                     length: Math.min(10, Number(variant?.quantityAvailable)),
                   },
                   (_, i) => (
-                    <option key={i} value={i + 1}>
+                    <option
+                      key={i}
+                      value={i + 1}
+                      data-qa="product-quantity-option"
+                    >
                       {i + 1}
                     </option>
                   )
@@ -188,6 +203,7 @@ const ProductDescription = ({
                 className="btn-primary w-full py-2 justify-center"
                 onClick={onAddLineClick}
                 disabled={isAddLineLoading}
+                data-qa="add-to-cart-button"
               >
                 {t('addToCart')}
               </button>

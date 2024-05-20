@@ -26,6 +26,7 @@ const Price = () => {
         inputClassName="h-[40px]"
         labelClassName="my-2"
         {...register('priceMin')}
+        data-qa="min-price-input"
       />
       <Input
         label={t('max')}
@@ -35,6 +36,7 @@ const Price = () => {
         inputClassName="h-[40px]"
         labelClassName="my-2"
         {...register('priceMax')}
+        data-qa="max-price-input"
       />
     </fieldset>
   )
