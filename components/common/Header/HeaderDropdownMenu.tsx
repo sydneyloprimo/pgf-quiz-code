@@ -79,7 +79,9 @@ const HeaderDropdownMenu = ({
           asChild
           className="dropdown-menu-item text-sm last-of-type:rounded-b-sm md:last-of-type:rounded-b-md"
         >
-          <button onClick={handleProfileClick}>{t('myProfile')}</button>
+          <button onClick={handleProfileClick} data-qa="dropdown-option">
+            {t('myProfile')}
+          </button>
         </DropdownItem>
         <DropdownItem
           asChild
@@ -94,7 +96,9 @@ const HeaderDropdownMenu = ({
               asChild
               className="dropdown-menu-item text-sm last-of-type:rounded-b-sm md:last-of-type:rounded-b-md"
             >
-              <button onClick={handleLogout}>{t('logout')}</button>
+              <button data-qa="dropdown-option" onClick={handleLogout}>
+                {t('logout')}
+              </button>
             </DropdownItem>
           </>
         )}

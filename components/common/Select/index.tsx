@@ -59,6 +59,7 @@ const Toast = ({
               )}
               key={item.value}
               {...getItemProps({ index, item })}
+              data-qa="select-item"
             >
               <span>{item.label}</span>
             </li>

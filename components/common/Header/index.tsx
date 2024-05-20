@@ -83,7 +83,7 @@ const Header = () => {
         </div>
 
         <Input
-          data-qa="search-input"
+          data-qa="header-search-input"
           onChange={onDebounceSearch}
           className="hidden md:block lg:w-1/3 text-black"
           placeholder={t('searchPlaceholder')}
@@ -92,7 +92,7 @@ const Header = () => {
 
         <div className="flex md:flex-row-reverse">
           <Link
-            data-qa="shopping-cart"
+            data-qa="header-shopping-cart-link"
             href={Routes.cart}
             className="btn-primary mx-2 !text-sm h-8 md:h-10 !rounded-sm md:!rounded-md flex gap-2"
           >
@@ -109,7 +109,7 @@ const Header = () => {
       </header>
 
       <Input
-        data-qa="search-input"
+        data-qa="header-search-input"
         onChange={onDebounceSearch}
         className="md:hidden w-full px-4 my-3 text-black"
         inputClassName="border-0"
