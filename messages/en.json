@@ -34,7 +34,7 @@
   },
   "Detail": {
     "addToCart": "Add to cart",
-    "availability": "Availability: {count} items",
+    "availability": "({count} available)",
     "errorMessage": "There was an error, try again later.",
     "outOfStock": "Out of stock",
     "productDescription": "Product description",
