@@ -1,5 +1,4 @@
 'use client'
-import cn from 'classnames'
 import { useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
@@ -136,8 +135,8 @@ const ProductDescription = ({
           </p>
         </div>
       )}
-      <div className="flex flex-1 order-3 md:order-4 my-4 md:m-0">
-        {hasVariants ? (
+      {hasVariants ? (
+        <div className="flex flex-1 order-3 md:order-4 my-4">
           <div className="flex-1">
             <label htmlFor="variant" className="block mb-4 font-bold">
               {t('variant')}
@@ -161,14 +160,16 @@ const ProductDescription = ({
               ))}
             </select>
           </div>
-        ) : null}
+        </div>
+      ) : null}
+      <div className="flex flex-1 order-3 md:order-4 my-4 md:m-0">
         {variant?.quantityAvailable === 0 ? (
-          <div className={cn('mb-2 md:mb-1 mt-auto', { 'ml-8': hasVariants })}>
+          <div className="mb-2 md:mb-1">
             <p className="text-error text-base md:text-xl">{t('outOfStock')}</p>
           </div>
         ) : (
           <>
-            <div className="pl-3">
+            <div>
               <label htmlFor="quantity" className="block mb-4 font-bold">
                 {t('quantity')}
               </label>
@@ -197,7 +198,7 @@ const ProductDescription = ({
               </select>
             </div>
             <div className="flex-1 pl-3">
-              <p className="mb-4 text-center font-bold">
+              <p className="mb-4 text-left italic">
                 {t('availability', {
                   count: Number(variant?.quantityAvailable),
                 })}
