@@ -1,4 +1,5 @@
 'use client'
+import cn from 'classnames'
 import { useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
@@ -44,6 +45,7 @@ const ProductDescription = ({
   const searchParams = useSearchParams()
   const isMobile = useMediaQuery(MediaQuery.mobile)
   const { cartId } = useCartCookie()
+  const hasVariants = variants.edges.length > 1
 
   const t = useTranslations('Detail')
 
@@ -135,31 +137,33 @@ const ProductDescription = ({
         </div>
       )}
       <div className="flex flex-1 order-3 md:order-4 my-4 md:m-0">
-        <div>
-          <label htmlFor="variant" className="block mb-4 font-bold">
-            {t('variant')}
-          </label>
-          <select
-            id="variant"
-            value={variantId as string}
-            onChange={(e) => handleSetVariant(e.target.value)}
-            className="w-20 border border-gray-500 h-10 rounded px-3 py-2 bg-white cursor-pointer"
-            disabled={isAddLineLoading}
-            data-qa="variant-select"
-          >
-            {variants.edges.map((variant) => (
-              <option
-                key={variant.node.id}
-                value={variant.node.id}
-                data-qa="product-variant-option"
-              >
-                {variant.node.title}
-              </option>
-            ))}
-          </select>
-        </div>
+        {hasVariants ? (
+          <div className="flex-1">
+            <label htmlFor="variant" className="block mb-4 font-bold">
+              {t('variant')}
+            </label>
+            <select
+              id="variant"
+              value={variantId as string}
+              onChange={(e) => handleSetVariant(e.target.value)}
+              className="w-full border border-gray-500 h-10 rounded px-3 py-2 bg-white cursor-pointer"
+              disabled={isAddLineLoading}
+              data-qa="variant-select"
+            >
+              {variants.edges.map((variant) => (
+                <option
+                  key={variant.node.id}
+                  value={variant.node.id}
+                  data-qa="product-variant-option"
+                >
+                  {variant.node.title}
+                </option>
+              ))}
+            </select>
+          </div>
+        ) : null}
         {variant?.quantityAvailable === 0 ? (
-          <div className="ml-8 mb-2 md:mb-1">
+          <div className={cn('mb-2 md:mb-1 mt-auto', { 'ml-8': hasVariants })}>
             <p className="text-error text-base md:text-xl">{t('outOfStock')}</p>
           </div>
         ) : (
