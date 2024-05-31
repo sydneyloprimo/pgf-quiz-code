@@ -1,7 +1,7 @@
 'use client'
 import { useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { toast } from 'react-toastify'
 import { useMediaQuery } from 'usehooks-ts'
 
@@ -47,6 +47,15 @@ const ProductDescription = ({
   const hasVariants = variants.edges.length > 1
 
   const t = useTranslations('Detail')
+
+  const variantsLabel = useMemo(() => {
+    if (!variants.edges.length) {
+      return t('variant')
+    }
+
+    const variant = variants.edges[0].node
+    return variant.selectedOptions.map(({ name }) => name).join(' / ')
+  }, [t, variants])
 
   const { mutate: addLine, isLoading: isAddLineLoading } =
     useCartLinesAddMutation(client, {
@@ -139,7 +148,7 @@ const ProductDescription = ({
         <div className="flex flex-1 order-3 md:order-4 my-4">
           <div className="flex-1">
             <label htmlFor="variant" className="block mb-4 font-bold">
-              {t('variant')}
+              {variantsLabel}
             </label>
             <select
               id="variant"
