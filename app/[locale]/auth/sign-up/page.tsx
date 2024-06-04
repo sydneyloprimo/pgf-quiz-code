@@ -12,6 +12,7 @@ import AuthCard from '@/components/auth/AuthCard'
 import AuthForm from '@/components/auth/AuthForm'
 import Toast, { ToastTypes } from '@/components/common/Toast'
 import { MediaQuery } from '@/constants'
+import { useSignIn } from '@/hooks/useSignIn'
 import event from '@/scripts/GoogleTagManager/event'
 import { client } from '@/shopify/client'
 import { useCustomerCreateMutation } from '@/shopify/generated/graphql'
@@ -24,15 +25,34 @@ export default function SignUp() {
   const { push } = useRouter()
   const isMobile = useMediaQuery(MediaQuery.mobile)
   const [apiError, setApiError] = useState<string>('')
+  const {
+    apiError: signInApiError,
+    clearApiError: clearSignInApiError,
+    createAccessToken,
+    isLoading: isSignInLoading,
+  } = useSignIn()
 
-  const { mutate: createCustomer, isLoading } = useCustomerCreateMutation(
-    client,
-    {
+  const [credentials, setCredentials] = useState<{
+    email: string
+    password: string
+  } | null>(null)
+
+  const clearApiError = () => {
+    setApiError('')
+    clearSignInApiError()
+  }
+
+  const { mutate: createCustomer, isLoading: isSignUpLoading } =
+    useCustomerCreateMutation(client, {
       onSuccess: (data) => {
         event(Events.signUp, { method: AuthenticationMethods.email })
         if (data.customerCreate?.customer?.id) {
           setApiError('')
-          push(Routes.signin)
+          if (credentials) {
+            createAccessToken({ input: credentials })
+          } else {
+            push(Routes.signin)
+          }
           toast(
             <Toast
               type={ToastTypes.success}
@@ -47,12 +67,10 @@ export default function SignUp() {
           setApiError(data?.customerCreate?.customerUserErrors[0]?.message)
         }
       },
-    }
-  )
-
-  const clearApiError = () => setApiError('')
+    })
 
   const handleSubmit = async (email: string, password: string) => {
+    setCredentials({ email, password })
     createCustomer({
       input: {
         email: email,
@@ -87,9 +105,9 @@ export default function SignUp() {
     >
       <AuthForm
         handleSubmit={handleSubmit}
-        isLoading={isLoading}
+        isLoading={isSignUpLoading || isSignInLoading}
         buttonText={t('buttonText')}
-        apiError={apiError}
+        apiError={apiError || signInApiError}
         validationSchema={validationSchema}
         clearApiError={clearApiError}
       />
