@@ -7,12 +7,15 @@
   },
   "Cart": {
     "checkoutButton": "Go to checkout",
+    "decreaseQuantity": "Decrease quantity",
     "deleteButton": "Remove item",
     "emptyState": {
       "description": "Looks like you have not added anything to your cart.",
       "exploreButton": "Go explore products",
       "title": "Your cart is empty"
     },
+    "increaseQuantity": "Increase quantity",
+    "maxStock": "There's no more stock available",
     "title": "My shopping cart",
     "total": "Total"
   },

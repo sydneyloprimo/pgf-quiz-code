@@ -2,7 +2,11 @@
 import cn from 'classnames'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { toast } from 'react-toastify'
+import { useMediaQuery } from 'usehooks-ts'
 
+import Toast, { ToastTypes } from '@/components/common/Toast'
+import { MediaQuery } from '@/constants'
 import { ProductVariant } from '@/shopify/generated/graphql'
 import { formatCurrency } from '@/utils/helpers'
 import PlusIcon from 'public/icons/plus.svg'
@@ -29,6 +33,24 @@ const CartProductCard = ({
   quantity,
 }: CartProductCardProps) => {
   const t = useTranslations('Cart')
+  const isMobile = useMediaQuery(MediaQuery.mobile)
+
+  const onIncreaseHandler = () => {
+    if (
+      !!productVariant.quantityAvailable &&
+      (disabled || quantity == productVariant.quantityAvailable)
+    ) {
+      toast(<Toast type={ToastTypes.error} description={t('maxStock')} />, {
+        className: 'md:max-w-lg border-error border rounded-lg',
+        position: isMobile ? 'top-center' : 'bottom-center',
+      })
+
+      return
+    }
+
+    onIncreaseClick()
+  }
+
   return (
     <li
       className={cn(
@@ -94,7 +116,7 @@ const CartProductCard = ({
                 disabled={disabled}
                 data-qa="decrease-cart-product-button"
               >
-                <Image src={SubtractIcon} alt="" />
+                <Image src={SubtractIcon} alt={t('decreaseQuantity')} />
               </button>
             )}
             <p className="text-black text-sm md:text-base font-bold hover:opacity-80">
@@ -102,14 +124,11 @@ const CartProductCard = ({
             </p>
             <button
               className="ml-3 btn"
-              onClick={onIncreaseClick}
+              onClick={onIncreaseHandler}
               type="button"
-              disabled={
-                productVariant.quantityAvailable == quantity || disabled
-              }
               data-qa="increase-cart-product-button"
             >
-              <Image src={PlusIcon} alt="" />
+              <Image src={PlusIcon} alt={t('increaseQuantity')} />
             </button>
           </div>
         </div>
