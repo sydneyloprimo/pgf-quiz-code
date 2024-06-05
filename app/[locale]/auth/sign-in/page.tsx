@@ -7,14 +7,15 @@ import { z } from 'zod'
 import AuthCard from '@/components/auth/AuthCard'
 import AuthForm from '@/components/auth/AuthForm'
 import Card from '@/components/common/Card'
-import { useSignIn } from '@/hooks/useSignIn'
+import { useUserAccess } from '@/hooks/useUserAccess'
 import event from '@/scripts/GoogleTagManager/event'
 import { Events, AuthenticationMethods } from '@/types/enums/events'
 import { Routes } from '@/types/enums/routes'
 
 export default function SignIn() {
   const t = useTranslations('SignIn')
-  const { apiError, clearApiError, createAccessToken, isLoading } = useSignIn()
+  const { apiError, clearApiError, createAccessToken, isLoading } =
+    useUserAccess()
 
   const handleSubmit = async (email: string, password: string) => {
     event(Events.login, { method: AuthenticationMethods.email })
