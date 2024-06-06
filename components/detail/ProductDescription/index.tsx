@@ -192,7 +192,7 @@ const ProductDescription = ({
               >
                 {Array.from(
                   {
-                    length: Math.min(10, Number(variant?.quantityAvailable)),
+                    length: Number(variant?.quantityAvailable),
                   },
                   (_, i) => (
                     <option
