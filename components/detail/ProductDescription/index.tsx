@@ -133,7 +133,7 @@ const ProductDescription = ({
       <p className="text-3xl font-bold mb-24 hidden md:block order-2">
         {formatCurrency(
           variant?.price.currencyCode || CurrencyCode.Usd,
-          variant?.price?.amount * quantity
+          variant?.price?.amount
         )}
       </p>
       {description && (
