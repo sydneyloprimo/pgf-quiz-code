@@ -94,7 +94,7 @@ const ProductList = ({
   )
 
   return (
-    <div className="flex flex-col flex-1 justify-between md:flex-none md:justify-normal">
+    <div className="flex flex-col flex-1 flex-start md:flex-none md:justify-normal">
       <div className="flex justify-between place-items-center mb-4">
         <p>{term ? t('searchTerms', { term }) : ''} </p>
 
@@ -131,7 +131,7 @@ const ProductList = ({
             />
           ))}
       </div>
-      <div className="flex justify-between">
+      <div className="flex justify-between pt-2">
         <ListNextButton
           type={ListNextButtonTypes.previous}
           disabled={!pageInfo?.hasPreviousPage}
