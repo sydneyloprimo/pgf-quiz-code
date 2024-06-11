@@ -138,6 +138,7 @@
       "typeMin": "Type minimum",
       "used": "Used"
     },
+    "noResults": "No results found for search term {term}",
     "search": "Search",
     "searchTerms": "You searched for: {term}"
   },
