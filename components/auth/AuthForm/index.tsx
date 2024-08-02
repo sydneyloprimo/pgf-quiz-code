@@ -8,6 +8,7 @@ import { useForm, SubmitHandler, Controller } from 'react-hook-form'
 import { z } from 'zod'
 
 import Input from '@/components/common/Input'
+import Spinner from '@/components/common/Spinner'
 import { InputIconPosition } from '@/types/enums/constants'
 import passwordVisibility from 'public/icons/visibility.svg'
 import passwordVisibilityOff from 'public/icons/visibility_off.svg'
@@ -131,7 +132,7 @@ const AuthForm = ({
           !!errors.email?.message || !!errors.password?.message || isLoading
         }
       >
-        {buttonText}
+        {isLoading ? <Spinner /> : buttonText}
       </button>
     </form>
   )

@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import React, { Dispatch, SetStateAction } from 'react'
 import { useCookies } from 'react-cookie'
+import { toast } from 'react-toastify'
+import { useMediaQuery } from 'usehooks-ts'
 
 import {
   DropdownItem,
@@ -13,6 +15,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/common/DropdownMenu'
+import Toast, { ToastTypes } from '@/components/common/Toast'
+import { MediaQuery } from '@/constants'
 import { Cookies } from '@/types/enums/cookies'
 import { Routes } from '@/types/enums/routes'
 
@@ -29,6 +33,31 @@ const HeaderDropdownMenu = ({
   const t = useTranslations('Header')
   const [cookies, , removeCookie] = useCookies([Cookies.customerAccessToken])
   const isLoggedIn = !!cookies[Cookies.customerAccessToken]
+  const isMobile = useMediaQuery(MediaQuery.mobile)
+
+  const createLogoutToast = (success: boolean) => {
+    const description = success ? t('successfulLogout') : t('failedLogout')
+
+    toast(
+      <Toast
+        type={success ? ToastTypes.success : ToastTypes.error}
+        description={description}
+      />,
+      {
+        className: 'md:max-w-lg border-restored border rounded-lg',
+        position: isMobile ? 'top-center' : 'bottom-center',
+      }
+    )
+  }
+
+  const handleLogout = () => {
+    try {
+      removeCookie(Cookies.customerAccessToken, { path: '/' })
+      createLogoutToast(true)
+    } catch (error) {
+      createLogoutToast(false)
+    }
+  }
 
   const handleProfileClick = () => {
     if (isLoggedIn) {
@@ -36,10 +65,6 @@ const HeaderDropdownMenu = ({
     } else {
       router.push(Routes.signin)
     }
-  }
-
-  const handleLogout = () => {
-    removeCookie(Cookies.customerAccessToken, { path: '/' })
   }
 
   return (
