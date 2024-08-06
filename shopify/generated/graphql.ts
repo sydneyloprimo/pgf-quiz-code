@@ -7229,6 +7229,7 @@ export type GetOrdersQueryVariables = Exact<{
   last?: InputMaybe<Scalars['Int']>
   after?: InputMaybe<Scalars['String']>
   before?: InputMaybe<Scalars['String']>
+  reverse?: InputMaybe<Scalars['Boolean']>
 }>
 
 export type GetOrdersQuery = {
@@ -8160,9 +8161,15 @@ useGetLatestProductsQuery.fetcher = (
     headers
   )
 export const GetOrdersDocument = /*#__PURE__*/ `
-    query getOrders($customerAccessToken: String!, $first: Int = null, $last: Int = null, $after: String = null, $before: String = null) {
+    query getOrders($customerAccessToken: String!, $first: Int = null, $last: Int = null, $after: String = null, $before: String = null, $reverse: Boolean = true) {
   customer(customerAccessToken: $customerAccessToken) {
-    orders(first: $first, after: $after, before: $before, last: $last) {
+    orders(
+      first: $first
+      after: $after
+      before: $before
+      last: $last
+      reverse: $reverse
+    ) {
       pageInfo {
         hasNextPage
         hasPreviousPage

@@ -4,9 +4,10 @@ query getOrders(
   $last: Int = null
   $after: String = null
   $before: String = null
+  $reverse: Boolean = true
 ) {
   customer(customerAccessToken: $customerAccessToken) {
-    orders(first: $first, after: $after, before: $before, last: $last) {
+    orders(first: $first, after: $after, before: $before, last: $last, reverse: $reverse) {
       pageInfo {
         hasNextPage
         hasPreviousPage
