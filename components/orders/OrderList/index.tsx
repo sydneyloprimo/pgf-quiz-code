@@ -55,16 +55,28 @@ const OrderList = ({ className }: OrderListProps) => {
       }
     )
 
-  const { edges, pageInfo } = data?.pages[page] || {}
-  const isEmpty = !edges?.length
+  const hasData = data && Array.isArray(data.pages) && data.pages.length > 0
+
+  const {
+    edges = [],
+    pageInfo = {
+      endCursor: null,
+      hasNextPage: false,
+      hasPreviousPage: false,
+      startCursor: null,
+    },
+  } = hasData ? data.pages[0] : {}
+  const isEmpty = edges.length === 0
 
   const onNextClick = () => {
-    const totalPages = data?.pages?.length
+    if (!hasData) return
 
-    if (!totalPages || page === totalPages - 1) {
+    const totalPages = data.pages.length
+
+    if (page === totalPages - 1) {
       fetchNextPage({
         pageParam: {
-          after: pageInfo?.endCursor,
+          after: pageInfo.endCursor,
           before: null,
           first: PAGE_SIZE,
           last: null,
@@ -76,15 +88,19 @@ const OrderList = ({ className }: OrderListProps) => {
     window.history.replaceState(
       null,
       '',
-      `${Routes.orders}?cursor=${pageInfo?.endCursor}`
+      `${Routes.orders}?cursor=${pageInfo.endCursor}`
     )
     setPage(page + 1)
   }
 
   const onPreviousClick = () => {
+    if (!hasData) return
+
     let newCursor
-    if (page == 0 && data?.pages[0].pageInfo) {
-      newCursor = data?.pages[0].pageInfo.startCursor
+    const firstPageInfo = data.pages[0].pageInfo
+
+    if (page === 0) {
+      newCursor = firstPageInfo?.startCursor
       fetchPreviousPage({
         pageParam: {
           after: null,
@@ -94,7 +110,7 @@ const OrderList = ({ className }: OrderListProps) => {
         },
       })
     } else {
-      newCursor = pageInfo?.startCursor
+      newCursor = pageInfo.startCursor
       setPage(page - 1)
     }
 
@@ -117,19 +133,19 @@ const OrderList = ({ className }: OrderListProps) => {
               <EmptyState className="b-[70px] md:my-40" />
             ) : (
               <>
-                {edges?.map(({ node }) => (
+                {edges.map(({ node }) => (
                   <OrderCard key={node.id} order={node as Order} />
                 ))}
                 <div className="flex justify-between">
                   <ListNextButton
                     type={ListNextButtonTypes.previous}
                     onClick={onPreviousClick}
-                    disabled={!pageInfo?.hasPreviousPage}
+                    disabled={!pageInfo.hasPreviousPage}
                   />
                   <ListNextButton
                     type={ListNextButtonTypes.next}
                     onClick={onNextClick}
-                    disabled={!pageInfo?.hasNextPage}
+                    disabled={!pageInfo.hasNextPage}
                   />
                 </div>
               </>
