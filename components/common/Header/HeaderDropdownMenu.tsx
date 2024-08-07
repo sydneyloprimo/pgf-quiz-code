@@ -35,20 +35,17 @@ const HeaderDropdownMenu = ({
   const isLoggedIn = !!cookies[Cookies.customerAccessToken]
   const isMobile = useMediaQuery(MediaQuery.mobile)
 
-  const createLogoutToast = (success: boolean) => {
-    const description = success ? t('successfulLogout') : t('failedLogout')
-
+  const createLogoutToast = (success: boolean) =>
     toast(
       <Toast
         type={success ? ToastTypes.success : ToastTypes.error}
-        description={description}
+        description={success ? t('successfulLogout') : t('failedLogout')}
       />,
       {
         className: 'md:max-w-lg border-restored border rounded-lg',
         position: isMobile ? 'top-center' : 'bottom-center',
       }
     )
-  }
 
   const handleLogout = () => {
     try {
