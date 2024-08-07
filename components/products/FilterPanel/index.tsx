@@ -57,6 +57,16 @@ const FilterPanel = ({ onFiltersChange, productTypes }: FilterPanelProps) => {
     [onFiltersChange, productTypes]
   )
 
+  const clearFilters = useCallback(() => {
+    filterForm.reset(defaultValues)
+    onFiltersChange({
+      condition: '',
+      priceMax: '',
+      priceMin: '',
+      productType: '',
+    })
+  }, [filterForm, onFiltersChange, defaultValues])
+
   return (
     <div>
       <div className="flex-initial mb-4 flex justify-between md:hidden">
@@ -98,6 +108,15 @@ const FilterPanel = ({ onFiltersChange, productTypes }: FilterPanelProps) => {
               width={24}
               height={24}
             />
+          </button>
+
+          <button
+            className="h-[44px]"
+            type="button"
+            onClick={clearFilters}
+            data-qa="clear-filter-button"
+          >
+            {t('clearFilters')}
           </button>
         </form>
       </FormProvider>

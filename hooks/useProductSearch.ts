@@ -59,8 +59,8 @@ const constructSearchQuery = ({
   const queryParts: string[] = []
 
   if (productTitle) queryParts.push(`title:${productTitle}`)
-  if (priceMin) queryParts.push(`variants.price:>${priceMin}`)
-  if (priceMax) queryParts.push(`variants.price:<${priceMax}`)
+  if (priceMin) queryParts.push(`variants.price:>=${priceMin}`)
+  if (priceMax) queryParts.push(`variants.price:<=${priceMax}`)
   if (productType) queryParts.push(`product_type:${productType}`)
   if (available) queryParts.push(`available:${available}`)
   if (vendor) queryParts.push(`vendor:${vendor}`)

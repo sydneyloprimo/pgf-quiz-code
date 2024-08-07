@@ -127,6 +127,7 @@
     "FilterPanel": {
       "buttonAlt": "Select filter",
       "category": "Category",
+      "clearFilters": "Clear Filters",
       "condition": "Condition",
       "filters": "Filters",
       "max": "Max",
