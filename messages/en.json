@@ -52,6 +52,7 @@
   },
   "Header": {
     "cartIcon": "cart icon",
+    "failedLogout": "Logout failed. Please try again",
     "hamburgerIcon": "hamburger icon",
     "logoDesktop": "logo desktop",
     "logoMobile": "logo mobile",
@@ -60,7 +61,8 @@
     "myOrders": "My Orders",
     "myProfile": "My Profile",
     "searchPlaceholder": "Search for products",
-    "shoppingCart": "Shopping cart"
+    "shoppingCart": "Shopping cart",
+    "successfulLogout": "You have been logged out successfully"
   },
   "Home": {
     "ExploreCategories": {

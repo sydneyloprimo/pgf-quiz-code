@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useCallback } from 'react'
 
+import Loader from '@/components/cart/Loader'
 import ListNextButton, {
   ListNextButtonTypes,
 } from '@/components/common/ListNextButton'
@@ -19,7 +20,7 @@ import {
 } from 'shopify/generated/graphql'
 
 interface ProductListProps {
-  products: ProductEdge[]
+  products: ProductEdge[] | undefined
   className?: string
   onPreviousClick: () => void
   onNextClick: () => void
@@ -114,24 +115,26 @@ const ProductList = ({
           className
         )}
       >
-        {products && products.length ? (
-          <>
-            {products?.map(({ node: product }, index) => (
-              <ProductCard
-                key={`${product.id}-${product.title}`}
-                product={product}
-                onClick={() => router.push(`${Routes.detail}${product.handle}`)}
-                className={cn(
-                  'w-full overflow-hidden border-b-dark-grey border-b border-solid border-t-transparent border-x-transparent md:mb-5 md:shadow-1 md:rounded-lg md:border-none md:border-transparent',
-                  {
-                    'rounded-b-lg border-b-0': index === products.length - 1,
-                    'rounded-t-lg': index === 0,
-                  }
-                )}
-                data-qa="product-card"
-              />
-            ))}
-          </>
+        {products === undefined ? (
+          <div className="flex min-h-full">
+            <Loader />
+          </div>
+        ) : products.length > 0 ? (
+          products.map(({ node: product }, index) => (
+            <ProductCard
+              key={`${product.id}-${product.title}`}
+              product={product}
+              onClick={() => router.push(`${Routes.detail}${product.handle}`)}
+              className={cn(
+                'w-full overflow-hidden border-b-dark-grey border-b border-solid border-t-transparent border-x-transparent md:mb-5 md:shadow-1 md:rounded-lg md:border-none md:border-transparent',
+                {
+                  'rounded-b-lg border-b-0': index === products.length - 1,
+                  'rounded-t-lg': index === 0,
+                }
+              )}
+              data-qa="product-card"
+            />
+          ))
         ) : (
           <div className="w-full flex justify-center pt-10 md:pt-40">
             <p className="font-bold mb-10">{t('noResults', { term })}</p>
