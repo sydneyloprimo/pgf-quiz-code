@@ -1,6 +1,6 @@
 import { GraphQLClient } from 'graphql-request'
 
-const API_URL = `https://${process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN}/api/2024-10/graphql.json`
+const API_URL = `https://${process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN}/api/${process.env.NEXT_PUBLIC_SHOPIFY_API_VERSION}/graphql.json`
 
 const client = new GraphQLClient(API_URL, {
   headers: {
