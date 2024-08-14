@@ -7,7 +7,13 @@ query getOrders(
   $reverse: Boolean = true
 ) {
   customer(customerAccessToken: $customerAccessToken) {
-    orders(first: $first, after: $after, before: $before, last: $last, reverse: $reverse) {
+    orders(
+      first: $first
+      after: $after
+      before: $before
+      last: $last
+      reverse: $reverse
+    ) {
       pageInfo {
         hasNextPage
         hasPreviousPage
