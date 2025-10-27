@@ -4,7 +4,6 @@ import {
   DropdownMenuContentProps,
   Portal,
   Content,
-  MenuItemProps,
   Item,
   Separator,
 } from '@radix-ui/react-dropdown-menu'
@@ -27,15 +26,16 @@ export const DropdownMenuContent = React.forwardRef<
 })
 DropdownMenuContent.displayName = 'DropdownMenuContent'
 
-export const DropdownItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
-  ({ children, ...props }: MenuItemProps, forwardedRef) => {
-    return (
-      <Item ref={forwardedRef} {...props}>
-        {children}
-      </Item>
-    )
-  }
-)
+export const DropdownItem = React.forwardRef<
+  HTMLDivElement,
+  React.ComponentProps<typeof Item>
+>(({ children, ...props }, forwardedRef) => {
+  return (
+    <Item ref={forwardedRef} {...props}>
+      {children}
+    </Item>
+  )
+})
 DropdownItem.displayName = 'DropdownItem'
 
 export const DropdownMenuSeparator = ({ className }: { className: string }) => {

@@ -1,5 +1,7 @@
 'use client'
 import cn from 'classnames'
+import EmptyState from 'components/orders/EmptyState'
+import OrderCard from 'components/orders/OrderCard'
 import { useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import { useCookies } from 'react-cookie'
@@ -9,11 +11,9 @@ import ListNextButton, {
   ListNextButtonTypes,
 } from '@/components/common/ListNextButton'
 import { client } from '@/shopify/client'
-import { Order, useInfiniteGetOrdersQuery } from '@/shopify/generated/graphql'
+import { Order, useGetOrdersQuery } from '@/shopify/generated/graphql'
 import { Cookies } from '@/types/enums/cookies'
 import { Routes } from '@/types/enums/routes'
-import EmptyState from 'components/orders/EmptyState'
-import OrderCard from 'components/orders/OrderCard'
 
 interface OrderListProps {
   className?: string
@@ -28,34 +28,19 @@ const OrderList = ({ className }: OrderListProps) => {
   const isBefore = searchParams.get('before')
   const [page, setPage] = useState(0)
 
-  const cursorVariables = !!isBefore
+  const cursorVariables = isBefore
     ? { before: cursor, last: PAGE_SIZE }
     : {
         after: cursor,
         first: PAGE_SIZE,
       }
 
-  const { data, isLoading, fetchNextPage, fetchPreviousPage } =
-    useInfiniteGetOrdersQuery(
-      !!isBefore ? 'last' : 'first',
-      client,
-      {
-        ...cursorVariables,
-        customerAccessToken: cookies[Cookies.customerAccessToken],
-      },
-      {
-        keepPreviousData: true,
-        select: ({ pageParams, pages }) => ({
-          pageParams: pageParams,
-          pages: pages.map(({ customer }) => ({
-            edges: customer?.orders?.edges,
-            pageInfo: customer?.orders?.pageInfo,
-          })),
-        }),
-      }
-    )
+  const { data, isLoading } = useGetOrdersQuery(client, {
+    ...cursorVariables,
+    customerAccessToken: cookies[Cookies.customerAccessToken],
+  })
 
-  const hasData = data && Array.isArray(data.pages) && data.pages.length > 0
+  const hasData = data && data.customer?.orders
 
   const {
     edges = [],
@@ -65,24 +50,11 @@ const OrderList = ({ className }: OrderListProps) => {
       hasPreviousPage: false,
       startCursor: null,
     },
-  } = hasData ? data.pages[0] : {}
+  } = data?.customer?.orders || {}
   const isEmpty = edges.length === 0
 
   const onNextClick = () => {
     if (!hasData) return
-
-    const totalPages = data.pages.length
-
-    if (page === totalPages - 1) {
-      fetchNextPage({
-        pageParam: {
-          after: pageInfo.endCursor,
-          before: null,
-          first: PAGE_SIZE,
-          last: null,
-        },
-      })
-    }
 
     // Shallow redirection is not possible with next.js v13.4.5
     window.history.replaceState(
@@ -96,23 +68,8 @@ const OrderList = ({ className }: OrderListProps) => {
   const onPreviousClick = () => {
     if (!hasData) return
 
-    let newCursor
-    const firstPageInfo = data.pages[0].pageInfo
-
-    if (page === 0) {
-      newCursor = firstPageInfo?.startCursor
-      fetchPreviousPage({
-        pageParam: {
-          after: null,
-          before: newCursor,
-          first: null,
-          last: PAGE_SIZE,
-        },
-      })
-    } else {
-      newCursor = pageInfo.startCursor
-      setPage(page - 1)
-    }
+    const newCursor = pageInfo.startCursor
+    setPage(page - 1)
 
     // Shallow redirection is not possible with next.js v13.4.5
     window.history.replaceState(

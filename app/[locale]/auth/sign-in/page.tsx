@@ -18,6 +18,12 @@ export default function SignIn() {
     useUserAccess()
 
   const handleSubmit = async (email: string, password: string) => {
+    // Validate inputs before submission
+    if (!email || !password) {
+      console.error('Form submitted with empty values:', { email, password })
+      return
+    }
+
     event(Events.login, { method: AuthenticationMethods.email })
     createAccessToken({
       input: {
@@ -28,8 +34,14 @@ export default function SignIn() {
   }
 
   const validationSchema = z.object({
-    email: z.string().min(1, { message: t('emailRequired') }),
-    password: z.string().min(1, { message: t('passwordRequired') }),
+    email: z
+      .string()
+      .trim()
+      .min(1, { message: t('emailRequired') }),
+    password: z
+      .string()
+      .trim()
+      .min(1, { message: t('passwordRequired') }),
   })
 
   return (

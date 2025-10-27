@@ -2,16 +2,8 @@
 
 import Image from 'next/image'
 import { useSearchParams, useRouter } from 'next/navigation'
-import React, { useMemo, useState, useEffect } from 'react'
-
-import ImageGallery from '@/components/detail/ImageGallery'
-import ProductDescription, {
-  VARIANT,
-} from '@/components/detail/ProductDescription'
-import event from '@/scripts/GoogleTagManager/event'
-import { Events } from '@/types/enums/events'
-import { Routes } from '@/types/enums/routes'
 import CrossIcon from 'public/icons/cross.svg'
+import React, { useMemo, useState, useEffect } from 'react'
 import { client } from 'shopify/client'
 import {
   useGetProductDetailQuery,
@@ -20,6 +12,14 @@ import {
   Product,
 } from 'shopify/generated/graphql'
 
+import ImageGallery from '@/components/detail/ImageGallery'
+import ProductDescription, {
+  VARIANT,
+} from '@/components/detail/ProductDescription'
+import event from '@/scripts/GoogleTagManager/event'
+import { Events } from '@/types/enums/events'
+import { Routes } from '@/types/enums/routes'
+
 interface ProductDetailProps {
   handle: string
 }
@@ -27,7 +27,7 @@ interface ProductDetailProps {
 const ProductDetail = ({ handle }: ProductDetailProps) => {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const { data, isError } = useGetProductDetailQuery(client, {
+  const { data, isError, isLoading, error } = useGetProductDetailQuery(client, {
     handle,
   })
 
@@ -71,8 +71,23 @@ const ProductDetail = ({ handle }: ProductDetailProps) => {
     })
   }, [variant?.node.title, variantId])
 
-  if (isError || !data?.product || !variant || !images.edges.length) {
-    return null
+  if (isError) {
+    console.error('ProductDetail Error:', error)
+    return <div>Error loading product: {String(error)}</div>
+  }
+
+  if (isLoading) {
+    return <div>Loading product...</div>
+  }
+
+  if (!data?.product) {
+    console.error('No product data found for handle:', handle)
+    return <div>Product not found</div>
+  }
+
+  if (!variant || !images.edges.length) {
+    console.error('Missing variant or images:', { variant, images })
+    return <div>Product data incomplete</div>
   }
 
   return (

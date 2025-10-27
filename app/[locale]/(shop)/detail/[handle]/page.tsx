@@ -1,21 +1,21 @@
-import { dehydrate } from '@tanstack/query-core'
-import { Hydrate } from '@tanstack/react-query'
+import { dehydrate } from '@tanstack/react-query'
+import { HydrationBoundary } from '@tanstack/react-query'
 import { Metadata } from 'next'
-
-import ProductDetail from '@/components/detail/ProductDetail'
 import { client } from 'shopify/client'
 import { useGetProductDetailQuery } from 'shopify/generated/graphql'
 import getQueryClient from 'utils/getQueryClient'
 
+import ProductDetail from '@/components/detail/ProductDetail'
+
 interface ProductDetailProps {
-  params: {
+  params: Promise<{
     handle: string
-  }
+  }>
 }
 
 interface MetadataProps {
-  params: { handle: string }
-  searchParams: { variant?: string }
+  params: Promise<{ handle: string }>
+  searchParams: Promise<{ variant?: string }>
 }
 
 export async function generateMetadata({
@@ -23,18 +23,20 @@ export async function generateMetadata({
   searchParams,
 }: MetadataProps) {
   const queryClient = getQueryClient()
+  const { handle } = await params
+  const searchParamsResolved = await searchParams
 
-  const data = await queryClient.fetchQuery(
-    useGetProductDetailQuery.getKey({ handle: params.handle }),
-    useGetProductDetailQuery.fetcher(client, { handle: params.handle })
-  )
+  const data = await queryClient.fetchQuery({
+    queryKey: useGetProductDetailQuery.getKey({ handle }),
+    queryFn: () => useGetProductDetailQuery.fetcher(client, { handle })(),
+  })
 
   if (!data?.product) return null
 
   const { description, images, title, variants } = data.product
 
   const variantId =
-    searchParams.variant ||
+    searchParamsResolved.variant ||
     variants.edges.find(({ node }) => node.availableForSale)?.node.id ||
     variants.edges[0].node.id
 
@@ -67,18 +69,24 @@ export async function generateMetadata({
 
 export default async function Detail({ params }: ProductDetailProps) {
   const queryClient = getQueryClient()
+  const { handle } = await params
 
-  await queryClient.prefetchQuery(
-    useGetProductDetailQuery.getKey({ handle: params.handle }),
-    useGetProductDetailQuery.fetcher(client, { handle: params.handle })
-  )
+  try {
+    await queryClient.prefetchQuery({
+      queryKey: useGetProductDetailQuery.getKey({ handle }),
+      queryFn: () => useGetProductDetailQuery.fetcher(client, { handle })(),
+    })
+  } catch (error) {
+    console.error('Server-side fetch error:', error)
+  }
+
   const dehydratedState = dehydrate(queryClient)
 
   return (
-    <Hydrate state={dehydratedState}>
+    <HydrationBoundary state={dehydratedState}>
       <div className="container flex min-h-screen flex-col md:flex-row md:mb-24 md:justify-center rounded-lg bg-white shadow-1">
-        <ProductDetail handle={params.handle} />
+        <ProductDetail handle={handle} />
       </div>
-    </Hydrate>
+    </HydrationBoundary>
   )
 }

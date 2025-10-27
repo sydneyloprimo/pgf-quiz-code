@@ -40,6 +40,8 @@ const HeaderDropdownMenu = ({
       <Toast
         type={success ? ToastTypes.success : ToastTypes.error}
         description={success ? t('successfulLogout') : t('failedLogout')}
+        iconAlt={success ? t('successIconAlt') : t('errorIconAlt')}
+        title={success ? t('successTitle') : t('errorTitle')}
       />,
       {
         className: 'md:max-w-lg border-restored border rounded-lg',

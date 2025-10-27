@@ -1,23 +1,23 @@
 import { dehydrate } from '@tanstack/query-core'
-import { cookies } from 'next/headers'
-
-import { Cookies } from '@/types/enums/cookies'
-import Hydrate from '@/utils/hydrate.client'
 import Cart from 'components/cart/CartList'
+import { cookies } from 'next/headers'
 import { client } from 'shopify/client'
 import { useGetCartQuery } from 'shopify/generated/graphql'
 import getQueryClient from 'utils/getQueryClient'
 
+import { Cookies } from '@/types/enums/cookies'
+import Hydrate from '@/utils/hydrate.client'
+
 export default async function CartPage() {
-  const cookieStore = cookies()
+  const cookieStore = await cookies()
   const cartId = cookieStore.get(Cookies.cart)?.value || ''
 
   const queryClient = getQueryClient()
 
-  await queryClient.prefetchQuery(
-    useGetCartQuery.getKey({ id: cartId }),
-    useGetCartQuery.fetcher(client, { id: cartId })
-  )
+  await queryClient.prefetchQuery({
+    queryKey: useGetCartQuery.getKey({ id: cartId }),
+    queryFn: () => useGetCartQuery.fetcher(client, { id: cartId })(),
+  })
   const dehydratedState = dehydrate(queryClient)
 
   return (

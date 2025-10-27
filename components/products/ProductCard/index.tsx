@@ -19,19 +19,31 @@ const ProductCard = ({ product, className, onClick }: ProductCardProps) => {
       }
     >
       <div className="w-[79px] h-[120px] rounded-lg relative md:w-[197px] md:h-[182px]">
-        <Image
-          className="md:rounded-l-lg"
-          src={
-            isProduct(product)
-              ? product.images.edges?.[0]?.node?.url
-              : product.image?.url
+        {(() => {
+          const imageUrl = isProduct(product)
+            ? product.images.edges?.[0]?.node?.url
+            : product.image?.url
+
+          if (!imageUrl) {
+            return (
+              <div className="w-full h-full bg-gray-200 flex items-center justify-center md:rounded-l-lg">
+                <span className="text-gray-400 text-sm">No Image</span>
+              </div>
+            )
           }
-          fill
-          style={{ objectFit: 'cover' }}
-          sizes="(max-width: 768px) 120px, (min-width: 768px) 182pxw"
-          alt={`${product.title} image`}
-          priority
-        />
+
+          return (
+            <Image
+              className="md:rounded-l-lg"
+              src={imageUrl}
+              fill
+              style={{ objectFit: 'cover' }}
+              sizes="(max-width: 768px) 120px, (min-width: 768px) 182pxw"
+              alt={`${product.title} image`}
+              priority
+            />
+          )
+        })()}
       </div>
       <div className="p-[26px] flex flex-col justify-between md:p-10">
         <h3 className="text-sm text-start font-bold md:text-xl">

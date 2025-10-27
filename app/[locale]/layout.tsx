@@ -1,15 +1,13 @@
 import './globals.css'
 
 import { Metadata } from 'next'
-import { notFound } from 'next/navigation'
-import { useLocale } from 'next-intl'
 import { PropsWithChildren } from 'react'
+import Providers from 'utils/Providers'
+import Session from 'utils/Session'
 
 import { Locale } from '@/i18n'
 import BodyScripts from '@/scripts/BodyScripts'
 import HeadScripts from '@/scripts/HeadScripts'
-import Providers from 'utils/Providers'
-import Session from 'utils/Session'
 
 export const metadata: Metadata = {
   description:
@@ -24,15 +22,14 @@ export const metadata: Metadata = {
 }
 
 type RootLayoutProps = PropsWithChildren<{
-  params: { locale: Locale }
+  params: Promise<{ locale: Locale }>
 }>
 
-export default function RootLayout({ children, params }: RootLayoutProps) {
-  const locale = useLocale()
-
-  if (params.locale !== locale) {
-    notFound()
-  }
+export default async function RootLayout({
+  children,
+  params,
+}: RootLayoutProps) {
+  const { locale } = await params
 
   return (
     <html className="bg-dark-violet" lang={locale}>

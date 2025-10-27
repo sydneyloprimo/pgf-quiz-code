@@ -1,15 +1,10 @@
 'use client'
 import cn from 'classnames'
-import { useTranslations } from 'next-intl'
-import { useEffect, useState } from 'react'
-
-import event from '@/scripts/GoogleTagManager/event'
-import { Events } from '@/types/enums/events'
-import { formatCurrency } from '@/utils/helpers'
-import { findProductLine } from '@/utils/utils'
 import CartProductCard from 'components/cart/CartProductCard'
 import EmptyState from 'components/cart/EmptyState'
 import useCartCookie from 'hooks/useCartCookie'
+import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
 import { client } from 'shopify/client'
 import {
   ProductVariant,
@@ -18,6 +13,11 @@ import {
   useCartLinesRemoveMutation,
   CartLineEdge,
 } from 'shopify/generated/graphql'
+
+import event from '@/scripts/GoogleTagManager/event'
+import { Events } from '@/types/enums/events'
+import { formatCurrency } from '@/utils/helpers'
+import { findProductLine } from '@/utils/utils'
 
 interface CartProps {
   className?: string
@@ -35,14 +35,14 @@ const Cart = ({ className }: CartProps) => {
 
   const [hasMounted, setHasMounted] = useState(false)
 
-  const { mutate: updateLine, isLoading: isUpdateLoading } =
+  const { mutate: updateLine, isPending: isUpdateLoading } =
     useCartLinesUpdateMutation(client, {
       onSuccess: () => {
         getCartRefetch()
       },
     })
 
-  const { mutate: removeLine, isLoading: isRemoveLoading } =
+  const { mutate: removeLine, isPending: isRemoveLoading } =
     useCartLinesRemoveMutation(client, {
       onSuccess: () => {
         getCartRefetch()

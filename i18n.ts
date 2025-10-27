@@ -5,6 +5,16 @@ export enum Locale {
   ES = 'es',
 }
 
-export default getRequestConfig(async ({ locale }) => ({
-  messages: (await import(`./messages/${locale}.json`)).default,
-}))
+export default getRequestConfig(async ({ requestLocale }) => {
+  const locale = await requestLocale
+
+  // Ensure locale is defined and valid
+  if (!locale || (locale !== Locale.EN && locale !== Locale.ES)) {
+    throw new Error(`Invalid locale: ${locale}`)
+  }
+
+  return {
+    locale,
+    messages: (await import(`./messages/${locale}.json`)).default,
+  }
+})

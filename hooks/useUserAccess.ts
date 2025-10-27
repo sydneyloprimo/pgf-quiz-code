@@ -29,7 +29,7 @@ export const useUserAccess = (createSuccessCallback?: () => void) => {
   const { mutate: updateCartIdentity } =
     useCartBuyerIdentityUpdateMutation(client)
 
-  const { mutate: createAccessToken, isLoading: isSignInLoading } =
+  const { mutate: createAccessToken, isPending: isSignInLoading } =
     useCustomerAccessTokenCreateMutation(client, {
       onSuccess: (data, { input }) => {
         if (data.customerAccessTokenCreate?.customerAccessToken?.accessToken) {
@@ -57,7 +57,7 @@ export const useUserAccess = (createSuccessCallback?: () => void) => {
       },
     })
 
-  const { mutate: createCustomer, isLoading: isSignUpLoading } =
+  const { mutate: createCustomer, isPending: isSignUpLoading } =
     useCustomerCreateMutation(client, {
       onSuccess: (data) => {
         event(Events.signUp, { method: AuthenticationMethods.email })

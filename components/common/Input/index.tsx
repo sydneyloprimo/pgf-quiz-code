@@ -58,10 +58,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           id={id}
           className={cn(
             'h-[44px] rounded-lg border border-solid border-black p-3 w-full',
-            error && 'border-red-500',
+            error ? 'border-red-500' : undefined,
             iconPosition === InputIconPosition.End
-              ? icon && 'pr-9'
-              : icon && 'pl-9',
+              ? icon
+                ? 'pr-9'
+                : undefined
+              : icon
+                ? 'pl-9'
+                : undefined,
             inputClassName
           )}
           type={type}
