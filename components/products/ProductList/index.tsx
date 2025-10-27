@@ -138,7 +138,7 @@ const ProductList = ({
         ) : (
           <div className="w-full flex justify-center pt-10 md:pt-40">
             <p className="font-bold mb-10">
-              {t('noResults', { term: term || '' })}
+              {term ? t('noResults', { term }) : t('noResultsGeneric')}
             </p>
           </div>
         )}

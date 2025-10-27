@@ -146,6 +146,7 @@
       "used": "Used"
     },
     "noResults": "No results found for search term {term}",
+    "noResultsGeneric": "No results found",
     "search": "Search",
     "searchTerms": "You searched for: {term}"
   },

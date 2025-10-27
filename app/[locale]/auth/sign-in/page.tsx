@@ -18,12 +18,6 @@ export default function SignIn() {
     useUserAccess()
 
   const handleSubmit = async (email: string, password: string) => {
-    // Validate inputs before submission
-    if (!email || !password) {
-      console.error('Form submitted with empty values:', { email, password })
-      return
-    }
-
     event(Events.login, { method: AuthenticationMethods.email })
     createAccessToken({
       input: {
