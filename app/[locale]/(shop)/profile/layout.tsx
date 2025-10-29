@@ -3,7 +3,9 @@ import { PropsWithChildren } from 'react'
 import LocaleWrapper from '@/components/common/LocaleWrapper'
 import { Locale } from '@/i18n'
 
-type ProfileLayoutProps = PropsWithChildren<{ params: { locale: Locale } }>
+type ProfileLayoutProps = PropsWithChildren<{
+  params: Promise<{ locale: Locale }>
+}>
 
 export default function ProfileLayout({
   children,

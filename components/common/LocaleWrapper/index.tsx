@@ -5,22 +5,29 @@ import { PropsWithChildren } from 'react'
 import { Locale } from '@/i18n'
 
 interface Messages {
-  [key: string]: Record<string, string> | Messages
+  [key: string]: any
 }
 
 type LocaleWrapperProps = PropsWithChildren<{
-  params: { locale: Locale }
+  params: Promise<{ locale: Locale }>
   localeGroup?: string[] | string
 }>
 
 const LocaleWrapper = async ({
   children,
-  params: { locale },
+  params,
   localeGroup,
 }: LocaleWrapperProps) => {
+  const { locale } = await params
   let messages: Messages
   try {
-    messages = (await import(`/messages/${locale}.json`)).default
+    if (locale === Locale.EN) {
+      messages = (await import('@/messages/en.json')).default
+    } else if (locale === Locale.ES) {
+      messages = (await import('@/messages/es.json')).default
+    } else {
+      throw new Error(`Unsupported locale: ${locale}`)
+    }
 
     if (Array.isArray(localeGroup)) {
       const filteredMessages: Messages = localeGroup.reduce((result, group) => {
@@ -46,6 +53,4 @@ const LocaleWrapper = async ({
     </NextIntlClientProvider>
   )
 }
-export default LocaleWrapper as unknown as (
-  props: LocaleWrapperProps
-) => JSX.Element
+export default LocaleWrapper

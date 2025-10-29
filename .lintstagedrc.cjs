@@ -4,13 +4,12 @@ const lintAndPrettify = (filenames) => [
   `yarn prettier --write ${filenames
     .map((f) => path.relative(process.cwd(), f))
     .join(' ')}`,
-  `next lint --fix --file ${filenames
+  `npx eslint --fix ${filenames
     .map((f) => path.relative(process.cwd(), f))
-    .join(' --file ')}`,
+    .join(' ')}`,
 ]
 
 module.exports = {
   '**/*.(ts|tsx)': () => 'yarn tsc --noEmit',
-  '**/*.{json}': () => 'yarn lint:i18n',
   '**/*.{js,jsx,ts,tsx}': [lintAndPrettify],
 }

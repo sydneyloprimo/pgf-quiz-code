@@ -1,9 +1,15 @@
 'use client'
 
 import cn from 'classnames'
+import ProductCard from 'components/products/ProductCard'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useCallback } from 'react'
+import {
+  PageInfo,
+  ProductEdge,
+  ProductSortKeys,
+} from 'shopify/generated/graphql'
 
 import Loader from '@/components/cart/Loader'
 import ListNextButton, {
@@ -12,12 +18,6 @@ import ListNextButton, {
 import Select from '@/components/common/Select'
 import { FilterParams, Filters } from '@/hooks/useProductSearch'
 import { Routes } from '@/types/enums/routes'
-import ProductCard from 'components/products/ProductCard'
-import {
-  PageInfo,
-  ProductEdge,
-  ProductSortKeys,
-} from 'shopify/generated/graphql'
 
 interface ProductListProps {
   products: ProductEdge[] | undefined
@@ -137,7 +137,9 @@ const ProductList = ({
           ))
         ) : (
           <div className="w-full flex justify-center pt-10 md:pt-40">
-            <p className="font-bold mb-10">{t('noResults', { term })}</p>
+            <p className="font-bold mb-10">
+              {term ? t('noResults', { term }) : t('noResultsGeneric')}
+            </p>
           </div>
         )}
       </div>

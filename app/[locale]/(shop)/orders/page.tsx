@@ -1,18 +1,18 @@
 import { dehydrate } from '@tanstack/query-core'
-
-import OrderList from '@/components/orders/OrderList'
-import Hydrate from '@/utils/hydrate.client'
 import { client } from 'shopify/client'
 import { useGetAllProductsQuery } from 'shopify/generated/graphql'
 import getQueryClient from 'utils/getQueryClient'
 
+import OrderList from '@/components/orders/OrderList'
+import Hydrate from '@/utils/hydrate.client'
+
 export default async function OrdersPage() {
   const queryClient = getQueryClient()
 
-  await queryClient.prefetchQuery(
-    useGetAllProductsQuery.getKey(),
-    useGetAllProductsQuery.fetcher(client)
-  )
+  await queryClient.prefetchQuery({
+    queryKey: useGetAllProductsQuery.getKey(),
+    queryFn: () => useGetAllProductsQuery.fetcher(client)(),
+  })
   const dehydratedState = dehydrate(queryClient)
 
   return (

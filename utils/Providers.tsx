@@ -5,15 +5,16 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { PropsWithChildren, useState } from 'react'
 import { CookiesProvider } from 'react-cookie'
 
-import { Locale } from '@/i18n'
-
 import ToastProvider from './ToasterProvider'
 
+import { Locale } from '@/i18n'
+
+
 interface ProviderProps extends PropsWithChildren {
-  params: { locale: Locale }
+  params: Promise<{ locale: Locale }>
 }
 
-function Providers({ children, params }: ProviderProps) {
+function Providers({ children }: ProviderProps) {
   const [client] = useState(
     new QueryClient({ defaultOptions: { queries: { staleTime: 5000 } } })
   )
@@ -21,7 +22,7 @@ function Providers({ children, params }: ProviderProps) {
   return (
     <QueryClientProvider client={client}>
       <CookiesProvider>
-        <ToastProvider params={params}>{children}</ToastProvider>
+        <ToastProvider>{children}</ToastProvider>
       </CookiesProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

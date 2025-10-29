@@ -3,7 +3,9 @@ import React, { PropsWithChildren } from 'react'
 import LocaleWrapper from '@/components/common/LocaleWrapper'
 import { Locale } from '@/i18n'
 
-type DetailLayoutProps = PropsWithChildren<{ params: { locale: Locale } }>
+type DetailLayoutProps = PropsWithChildren<{
+  params: Promise<{ locale: Locale }>
+}>
 
 const DetailLayout = ({ children, params }: DetailLayoutProps) => (
   <LocaleWrapper localeGroup="Detail" params={params}>

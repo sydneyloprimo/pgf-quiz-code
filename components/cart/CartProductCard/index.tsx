@@ -2,6 +2,9 @@
 import cn from 'classnames'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import PlusIcon from 'public/icons/plus.svg'
+import SubtractIcon from 'public/icons/subtract.svg'
+import TrashIcon from 'public/icons/trash.svg'
 import { toast } from 'react-toastify'
 import { useMediaQuery } from 'usehooks-ts'
 
@@ -9,9 +12,6 @@ import Toast, { ToastTypes } from '@/components/common/Toast'
 import { MediaQuery } from '@/constants'
 import { ProductVariant } from '@/shopify/generated/graphql'
 import { formatCurrency } from '@/utils/helpers'
-import PlusIcon from 'public/icons/plus.svg'
-import SubtractIcon from 'public/icons/subtract.svg'
-import TrashIcon from 'public/icons/trash.svg'
 
 interface CartProductCardProps {
   productVariant: ProductVariant
@@ -40,10 +40,18 @@ const CartProductCard = ({
       !!productVariant.quantityAvailable &&
       (disabled || quantity == productVariant.quantityAvailable)
     ) {
-      toast(<Toast type={ToastTypes.error} description={t('maxStock')} />, {
-        className: 'md:max-w-lg border-error border rounded-lg',
-        position: isMobile ? 'top-center' : 'bottom-center',
-      })
+      toast(
+        <Toast
+          type={ToastTypes.error}
+          description={t('maxStock')}
+          iconAlt="Error icon"
+          title="Error"
+        />,
+        {
+          className: 'md:max-w-lg border-error border rounded-lg',
+          position: isMobile ? 'top-center' : 'bottom-center',
+        }
+      )
 
       return
     }

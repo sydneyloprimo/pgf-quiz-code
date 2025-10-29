@@ -28,8 +28,14 @@ export default function SignIn() {
   }
 
   const validationSchema = z.object({
-    email: z.string().min(1, { message: t('emailRequired') }),
-    password: z.string().min(1, { message: t('passwordRequired') }),
+    email: z
+      .string()
+      .trim()
+      .min(1, { message: t('emailRequired') }),
+    password: z
+      .string()
+      .trim()
+      .min(1, { message: t('passwordRequired') }),
   })
 
   return (

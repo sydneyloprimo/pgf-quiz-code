@@ -1,13 +1,13 @@
 import { useSearchParams, usePathname } from 'next/navigation'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-
-import { formatProductsParams, buildQueryUrl } from '@/utils/utils'
 import { client } from 'shopify/client'
 import {
   ProductEdge,
-  useInfiniteGetAllProductsQuery,
+  useGetAllProductsQuery,
   ProductSortKeys,
 } from 'shopify/generated/graphql'
+
+import { formatProductsParams, buildQueryUrl } from '@/utils/utils'
 
 export enum FilterParams {
   productTitle = 'productTitle',
@@ -88,7 +88,7 @@ export const useProductSearch = () => {
 
   const query = useMemo(() => constructSearchQuery(filters), [filters])
 
-  const pagingVariables = !!beforeParam
+  const pagingVariables = beforeParam
     ? { before: cursor, last: PAGE_SIZE }
     : { after: cursor, first: PAGE_SIZE }
 
@@ -99,25 +99,10 @@ export const useProductSearch = () => {
     sortKey: filters.sortKey || sortKeyParam || ProductSortKeys.CreatedAt,
   }
 
-  const { data, isFetching, fetchNextPage } = useInfiniteGetAllProductsQuery(
-    'first',
-    client,
-    variables,
-    {
-      keepPreviousData: true,
-      select: ({ pageParams, pages }) => ({
-        keepPreviousData: true,
-        pageParams: pageParams,
-        pages: pages.map(({ products: { edges, pageInfo } }) => ({
-          edges,
-          pageInfo,
-        })),
-      }),
-    }
-  )
+  const { data, isFetching } = useGetAllProductsQuery(client, variables)
 
-  const products = data?.pages[0]?.edges as ProductEdge[]
-  const pageInfo = data?.pages[0]?.pageInfo
+  const products = data?.products?.edges as ProductEdge[]
+  const pageInfo = data?.products?.pageInfo
 
   const updateURL = useCallback(
     (params: ProductURLParameters) => {
@@ -128,39 +113,20 @@ export const useProductSearch = () => {
   )
 
   const onNextClick = useCallback(async () => {
-    const totalPages = data?.pages?.length
-
-    if (!totalPages) {
-      await fetchNextPage({
-        pageParam: {
-          after: pageInfo?.endCursor,
-          before: null,
-          first: PAGE_SIZE,
-          last: null,
-        },
-      })
-    }
-
     updateURL({
       ...filters,
       before: null,
       cursor: pageInfo?.endCursor,
     })
-  }, [
-    data?.pages?.length,
-    updateURL,
-    filters,
-    pageInfo?.endCursor,
-    fetchNextPage,
-  ])
+  }, [updateURL, filters, pageInfo?.endCursor])
 
   const onPreviousClick = useCallback(() => {
     updateURL({
       ...filters,
       before: 1,
-      cursor: data?.pages[0]?.pageInfo?.startCursor,
+      cursor: data?.products?.pageInfo?.startCursor,
     })
-  }, [updateURL, filters, data?.pages])
+  }, [updateURL, filters, data?.products?.pageInfo?.startCursor])
 
   const handleQueryChange = useCallback(
     (newFilters: Filters) => {

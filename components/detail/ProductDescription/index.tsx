@@ -1,15 +1,9 @@
 'use client'
+import useCartCookie from 'hooks/useCartCookie'
 import { useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useEffect, useMemo, useState } from 'react'
 import { toast } from 'react-toastify'
-import { useMediaQuery } from 'usehooks-ts'
-
-import Toast, { ToastTypes } from '@/components/common/Toast'
-import { MediaQuery } from '@/constants'
-import event from '@/scripts/GoogleTagManager/event'
-import { Events } from '@/types/enums/events'
-import useCartCookie from 'hooks/useCartCookie'
 import { client } from 'shopify/client'
 import {
   useCartLinesAddMutation,
@@ -18,7 +12,13 @@ import {
   ProductVariantEdge,
   CurrencyCode,
 } from 'shopify/generated/graphql'
+import { useMediaQuery } from 'usehooks-ts'
 import { formatCurrency } from 'utils/helpers'
+
+import Toast, { ToastTypes } from '@/components/common/Toast'
+import { MediaQuery } from '@/constants'
+import event from '@/scripts/GoogleTagManager/event'
+import { Events } from '@/types/enums/events'
 
 export const VARIANT = 'variant'
 
@@ -57,11 +57,16 @@ const ProductDescription = ({
     return variant.selectedOptions.map(({ name }) => name).join(' / ')
   }, [t, variants])
 
-  const { mutate: addLine, isLoading: isAddLineLoading } =
+  const { mutate: addLine, isPending: isAddLineLoading } =
     useCartLinesAddMutation(client, {
       onError: () => {
         toast(
-          <Toast type={ToastTypes.error} description={t('errorMessage')} />,
+          <Toast
+            type={ToastTypes.error}
+            description={t('errorMessage')}
+            iconAlt="Error icon"
+            title="Error"
+          />,
           {
             className: 'border-error border rounded-lg',
             position: 'bottom-center',
@@ -77,6 +82,8 @@ const ProductDescription = ({
             <Toast
               type={ToastTypes.error}
               description={data.cartLinesAdd?.userErrors[0].message}
+              iconAlt="Error icon"
+              title="Error"
             />,
             {
               className: 'border-error border rounded-lg w-max',
@@ -94,6 +101,8 @@ const ProductDescription = ({
           <Toast
             type={ToastTypes.success}
             description={t('successMessage', { title })}
+            iconAlt="Success icon"
+            title="Success"
           />,
           {
             className: 'border-restored border rounded-lg w-max',

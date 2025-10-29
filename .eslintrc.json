@@ -1,72 +1,17 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "plugin:i18n-json/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@tanstack/eslint-plugin-query/recommended",
-    "prettier"
-  ],
-  "plugins": [
-    "@typescript-eslint",
-    "unused-imports",
-    "import",
-    "@tanstack/query"
-  ],
-  "ignorePatterns": ["shopify/generated/*"],
-  "rules": {
-    "i18n-json/sorted-keys": [
-      2,
-      {
-        "order": "asc",
-        "indentSpaces": 2
+  "overrides": [
+    {
+      "files": ["messages/**/*.json"],
+      "plugins": ["i18n-json"],
+      "rules": {
+        "i18n-json/sorted-keys": [
+          2,
+          {
+            "order": "asc",
+            "indentSpaces": 2
+          }
+        ]
       }
-    ],
-    "sort-keys": [
-      "error",
-      "asc",
-      { "caseSensitive": true, "natural": false, "minKeys": 2 }
-    ],
-    "no-restricted-imports": [
-      "error",
-      {
-        "patterns": ["../*"]
-      }
-    ],
-    "prefer-const": "error",
-    "unused-imports/no-unused-imports": "error",
-    "import/order": [
-      "error",
-      {
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          ["sibling", "parent"],
-          "index",
-          "unknown"
-        ],
-        "newlines-between": "always",
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        }
-      }
-    ],
-    "react/no-unescaped-entities": "off",
-    "@typescript-eslint/no-unused-vars": "error",
-    "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/no-var-requires": "off",
-    "@tanstack/query/exhaustive-deps": "error",
-    "@tanstack/query/prefer-query-object-syntax": "error",
-    "max-len": [
-      "error",
-      {
-        "code": 80,
-        "ignoreComments": true,
-        "ignoreTemplateLiterals": true,
-        "ignoreUrls": true,
-        "ignoreStrings": true
-      }
-    ]
-  }
+    }
+  ]
 }

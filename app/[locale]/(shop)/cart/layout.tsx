@@ -4,7 +4,7 @@ import LocaleWrapper from '@/components/common/LocaleWrapper'
 import { Locale } from '@/i18n'
 
 interface CartLayoutProps extends PropsWithChildren {
-  params: { locale: Locale }
+  params: Promise<{ locale: Locale }>
 }
 
 export default function CartLayout({ children, params }: CartLayoutProps) {

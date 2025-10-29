@@ -52,6 +52,8 @@
   },
   "Header": {
     "cartIcon": "cart icon",
+    "errorIconAlt": "Error icon",
+    "errorTitle": "Error",
     "failedLogout": "Logout failed. Please try again",
     "hamburgerIcon": "hamburger icon",
     "logoDesktop": "logo desktop",
@@ -62,6 +64,8 @@
     "myProfile": "My Profile",
     "searchPlaceholder": "Search for products",
     "shoppingCart": "Shopping cart",
+    "successIconAlt": "Success icon",
+    "successTitle": "Success",
     "successfulLogout": "You have been logged out successfully"
   },
   "Home": {
@@ -142,6 +146,7 @@
       "used": "Used"
     },
     "noResults": "No results found for search term {term}",
+    "noResultsGeneric": "No results found",
     "search": "Search",
     "searchTerms": "You searched for: {term}"
   },

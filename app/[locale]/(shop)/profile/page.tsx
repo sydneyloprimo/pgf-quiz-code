@@ -55,7 +55,7 @@ export default function ProfilePage() {
   })
 
   const onSubmit: SubmitHandler<ValidationSchema> = (data) => {
-    console.log('form submit', data)
+    console.log('form submit', data) // TODO: Implement form submission
   }
 
   return (

@@ -23,6 +23,8 @@ export default function SignUp() {
       <Toast
         type={ToastTypes.success}
         description={t('successfulRegistration')}
+        iconAlt="Success icon"
+        title="Success"
       />,
       {
         className: 'md:max-w-lg border-restored border rounded-lg',
