@@ -6,6 +6,134 @@ This document outlines the coding standards, patterns, and best practices for wo
 
 **For all new work, use the bd tool instead of markdown.** When creating documentation, writing guides, or generating any text-based content, prioritize using the bd tool over markdown files.
 
+### Using bd (Beads)
+
+[Beads](https://github.com/steveyegge/beads) (`bd`) is a dependency-aware issue tracker designed for coding agents. Use it to track work items, dependencies, and progress instead of creating markdown files for task tracking.
+
+#### Setup
+
+The `bd` tool is already initialized in this repository. The binary is located at `~/.local/bin/bd`. If it's not in your PATH, use the full path or add it to your PATH:
+
+```bash
+# Add to PATH (add to ~/.zshrc or ~/.bashrc)
+export PATH="$HOME/.local/bin:$PATH"
+
+# Or use full path
+~/.local/bin/bd --version
+```
+
+#### Common Commands for Agents
+
+**Creating Work Items:**
+
+```bash
+# Create a new issue/task
+bd create "Description of work" -p 1 -t feature
+
+# Create with dependencies (blocked by another issue)
+bd create "Implement feature X" -p 1 -t feature --blocked-by bd-abc123
+
+# Create with labels
+bd create "Fix bug" -t bug -p 1 -l urgent,backend
+
+# Create with priority (1=highest, 5=lowest)
+bd create "Refactor component" -p 3 -t refactor
+```
+
+**Tracking Progress:**
+
+```bash
+# List all issues
+bd list
+
+# List ready work (no blockers)
+bd ready
+
+# Update issue status
+bd status bd-abc123 in-progress
+bd status bd-abc123 done
+
+# View issue details
+bd show bd-abc123
+```
+
+**Managing Dependencies:**
+
+```bash
+# Mark an issue as blocked by another
+bd block bd-abc123 bd-def456
+
+# Unblock an issue
+bd unblock bd-abc123 bd-def456
+
+# View dependencies
+bd deps bd-abc123
+
+# List blocked issues
+bd blocked
+```
+
+**For Agents (JSON output):**
+
+```bash
+# Get ready work in JSON format (for programmatic access)
+bd ready --json
+
+# Get issue details in JSON
+bd show bd-abc123 --json
+
+# List all issues in JSON
+bd list --json
+```
+
+**Labels and Organization:**
+
+```bash
+# Add labels during creation
+bd create "Fix auth bug" -t bug -p 1 -l auth,backend,urgent
+
+# Add/remove labels to existing issues
+bd label add bd-abc123 security
+bd label remove bd-abc123 urgent
+
+# Filter by labels
+bd list --label backend,auth     # AND: must have ALL labels
+bd list --label-any frontend,ui  # OR: must have AT LEAST ONE
+```
+
+**Statistics:**
+
+```bash
+# View project statistics
+bd stats
+```
+
+#### Best Practices
+
+- **Create issues for all significant work items** - Don't create markdown files for task tracking
+- **Use dependencies** - Track blocking relationships with `--blocked-by` or `bd block`
+- **Update status** - Keep status current as work progresses (`todo`, `in-progress`, `done`)
+- **Use labels** - Categorize with labels (`-l feature,bug,refactor,frontend,backend`)
+- **Set priorities** - Use `-p 1` (highest) to `-p 5` (lowest)
+- **Use JSON output** - For programmatic access, always use `--json` flag
+- **Check ready work** - Use `bd ready` or `bd ready --json` to find unblocked tasks
+
+#### Integration with Development Workflow
+
+Instead of creating markdown files like `TODO.md` or `TASKS.md`, use `bd`:
+
+```bash
+# ❌ Don't create markdown files for tasks
+# ✅ Do create bd issues
+bd create "Implement user authentication" -p 1 -t feature -l auth,backend
+
+# ❌ Don't track dependencies in markdown
+# ✅ Do use bd dependencies
+bd create "Add login form" -p 1 -t feature --blocked-by bd-abc123
+```
+
+**See the [Beads documentation](https://github.com/steveyegge/beads) for complete command reference.**
+
 ## Table of Contents
 
 - [File Organization](#file-organization)
