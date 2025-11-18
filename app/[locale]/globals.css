@@ -1,56 +1,178 @@
 @import 'tailwindcss';
+@import './utilities.css';
 
 @theme {
-  --color-active: #254a96;
-  --color-active-outline: #9ebbf3;
-  --color-background: #f4f7fa;
-  --color-black: #000000;
-  --color-dark-grey: #636363;
-  --color-dark-violet: #00031a;
-  --color-error: #d42f1a;
-  --color-focus: #1d76ef;
-  --color-grey: #c4c4c4;
-  --color-hover: #446cbc;
-  --color-light-grey: #e0e0e0;
-  --color-links: #076ce0;
-  --color-restored: #559f21;
-  --color-white: #ffffff;
+  /* Colors - Primary */
+  --color-primary-100: #eef6f8;
+  --color-primary-200: #cfe3e7;
+  --color-primary-300: #9fc6d0;
+  --color-primary-400: #6faab8;
+  --color-primary-500: #3f8da1;
+  --color-primary-600: #0f7189;
+  --color-primary-700: #0c5a6e;
+  --color-primary-800: #094452;
+  --color-primary-900: #062d37;
+  --color-primary-950: #03171b;
 
-  --font-DMSans: DMSans;
+  /* Colors - Secondary */
+  --color-secondary-100: #fff7ee;
+  --color-secondary-200: #fae7d3;
+  --color-secondary-300: #f5cfa7;
+  --color-secondary-400: #f1b77c;
+  --color-secondary-500: #ec9f50;
+  --color-secondary-600: #e78724;
+  --color-secondary-700: #b96c1d;
+  --color-secondary-800: #8b5116;
+  --color-secondary-900: #5c360e;
+  --color-secondary-950: #28211b;
 
-  --font-size-xs: 12px;
-  --font-size-sm: 14px;
-  --font-size-base: 16px;
-  --font-size-lg: 20px;
-  --font-size-xl: 24px;
-  --font-size-2xl: 28px;
-  --font-size-3xl: 36px;
-  --font-size-4xl: 72px;
+  /* Colors - Tertiary */
+  --color-tertiary-50: #f9f5f1;
+  --color-tertiary-100: #f4ede6;
+  --color-tertiary-200: #f0e6dc;
+  --color-tertiary-300: #d3b597;
+  --color-tertiary-500: #b3804c;
+  --color-tertiary-700: #845e39;
+  --color-tertiary-800: #6e4f30;
+  --color-tertiary-800-70: #6e4f30b2;
+  --color-tertiary-900: #47331f;
 
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
-  --font-weight-bold: 700;
-  --font-weight-extra-bold: 800;
+  /* Colors - Quaternary */
+  --color-quaternary-100: #dcd8cc;
+  --color-quaternary-200: #c3bda7;
+  --color-quaternary-500: #9d9471;
+  --color-quaternary-800: #5d5740;
 
-  --shadow-1: 0px 0px 18px rgba(0, 0, 0, 0.15);
-  --shadow-2: 0px 4px 29px rgba(0, 0, 0, 0.25);
-  --shadow-3: 0px 0px 18px rgba(0, 0, 0, 0.05);
-  --shadow-4: 0px 0px 6px 0px rgba(0, 0, 0, 0.15);
+  /* Colors - Neutrals */
+  --color-neutral-100: #fbfaf9;
+  --color-neutral-200: #f7f5f3;
+  --color-neutral-300: #f3f0ed;
+  --color-neutral-400: #eae5e1;
+  --color-neutral-500: #e2dad5;
+  --color-neutral-600: #bcb6b1;
+  --color-neutral-700: #a7a29f;
+  --color-neutral-800: #8d8a88;
+  --color-neutral-900: #5e5c5a;
+  --color-neutral-950: #2f2e2d;
+  --color-neutral-black: #000000;
+  --color-neutral-white: #ffffff;
 
-  --z-index-banner: 60;
-  --z-index-dropdown: 70;
-  --z-index-hamburger-menu: 80;
-  --z-index-header: 60;
-  --z-index-modal: 100;
-  --z-index-nav-drawer: 90;
+  /* Colors - Feedback Success */
+  --color-feedback-success-100: #c9f3da;
+  --color-feedback-success-500: #067503;
+  --color-feedback-success-900: #194d2e;
 
-  --background-image-auth-bg-image: url('/images/auth-background.png');
-  --background-image-gradient-conic: conic-gradient(
-    from 180deg at 50% 50%,
-    var(--tw-gradient-stops)
-  );
-  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
+  /* Colors - Feedback Error */
+  --color-feedback-error-100: #fed7d7;
+  --color-feedback-error-500: #ac3333;
+  --color-feedback-error-900: #ae1616;
+
+  /* Colors - Feedback Warning */
+  --color-feedback-warning-100: #fefcbf;
+  --color-feedback-warning-500: #cd8b28;
+  --color-feedback-warning-900: #9b6616;
+
+  /* Colors - Feedback Info */
+  --color-feedback-info-100: #e3f5ff;
+  --color-feedback-info-500: #0f62a8;
+  --color-feedback-info-900: #104979;
+
+  /* Colors - Backgrounds */
+  --color-bg-blue: #162b46;
+  --color-bg-orange: #953f10;
+  --color-bg-violet: #490002;
+
+  /* Colors - Opacity */
+  --color-opacity-elevation-700-7: #4f5e7112;
+  --color-opacity-neutral-900-10: #2223261a;
+  --color-opacity-neutral-900-50: #22232680;
+  --color-opacity-neutral-900-80: #222326cc;
+
+  /* Typography - Font Families */
+  --font-sans: Helvetica;
+  --font-body: Helvetica;
+  --font-display: 'Miller Banner';
+
+  /* Typography - Base Font Size */
+  --text-base: 1rem;
+
+  /* Border Radius */
+  --radius-xxs: 0.125rem;
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xxl: 3rem;
+  --radius-20xxl: 12.5rem;
+
+  /* Spacing */
+  --spacing-0: 0rem;
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-7: 1.75rem;
+  --spacing-8: 2rem;
+  --spacing-9: 2.25rem;
+  --spacing-10: 2.5rem;
+  --spacing-11: 2.75rem;
+  --spacing-12: 3rem;
+
+  /* Icons */
+  --icon-sm: 1rem;
+  --icon-md: 1.25rem;
+  --icon-lg: 1.5rem;
+
+  /* Semantic Colors - Text */
+  --text-primary: #000000;
+  --text-secondary: #a7a29f;
+  --text-invert: #ffffff;
+
+  /* Semantic Colors - Surface */
+  --surface-primary: #ffffff;
+  --surface-secondary: #fbfaf9;
+
+  /* Semantic Colors - Border */
+  --border-primary: #2f2e2d;
+
+  /* Semantic Colors - Elevations */
+  --elevation-primary: #4f5e7112;
+
+  /* Image Overlay */
+  --image-overlay: #44342469;
+
+  /* Breakpoints - Mobile */
+  --breakpoint-mobile-min: 375px;
+  --breakpoint-mobile-max: 600px;
+  --grid-columns-mobile: 4;
+  --grid-gutter-mobile: 16px;
+  --grid-margin-mobile: 20px;
+
+  /* Breakpoints - Tablet */
+  --breakpoint-tablet-min: 601px;
+  --breakpoint-tablet-max: 1135px;
+  --grid-columns-tablet: 6;
+  --grid-gutter-tablet: 32px;
+  --grid-margin-tablet: 32px;
+
+  /* Breakpoints - Desktop */
+  --breakpoint-desktop-min: 1136px;
+  --breakpoint-desktop-max: 5000px;
+  --grid-columns-desktop: 12;
+  --grid-gutter-desktop: 24px;
+  --grid-margin-desktop: 96px;
+
+  /* General */
+  --vertical-rhythm: 0.25rem;
+  --content-max-width: 90rem;
 }
+
+@custom-variant mobile (width >= 375px) and (width <= 600px);
+@custom-variant tablet (width >= 601px) and (width <= 1135px);
+@custom-variant desktop (width >= 1136px);
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -87,7 +209,7 @@
 }
 
 body {
-  @apply font-DMSans;
+  @apply font-sans;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -96,6 +218,7 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
 @media (min-width: 768px) {
   div.extended-header {
     background: linear-gradient(
@@ -107,27 +230,27 @@ body {
 }
 
 .btn {
-  @apply rounded-md text-base flex items-center justify-center  outline-1 focus:outline-dashed focus:outline-2 focus:outline-focus hover:bg-hover hover:outline-none disabled:cursor-not-allowed  disabled:text-dark-grey disabled:outline-none active:bg-active active:outline-active-outline active:outline;
+  @apply rounded-md text-base flex items-center justify-center  outline-1 focus:outline-dashed focus:outline-2 focus:outline-primary-600 hover:bg-primary-700 hover:outline-none disabled:cursor-not-allowed  disabled:text-neutral-700 disabled:outline-none active:bg-primary-600 active:outline-primary-400 active:outline;
 }
 
 .btn-primary {
-  @apply rounded-md text-base flex items-center justify-center outline-1 focus:outline-dashed focus:outline-2 focus:outline-focus hover:bg-hover hover:outline-none disabled:cursor-not-allowed disabled:text-dark-grey disabled:outline-none active:bg-active active:outline-active-outline active:outline px-5 outline text-white outline-white bg-dark-violet disabled:bg-light-grey;
+  @apply rounded-md text-base flex items-center justify-center outline-1 focus:outline-dashed focus:outline-2 focus:outline-primary-600 hover:bg-primary-700 hover:outline-none disabled:cursor-not-allowed disabled:text-neutral-700 disabled:outline-none active:bg-primary-600 active:outline-primary-400 active:outline px-5 outline text-white outline-white bg-neutral-950 disabled:bg-neutral-300;
 }
 
 .btn-secondary {
-  @apply rounded-md text-base flex items-center justify-center outline-1 focus:outline-dashed focus:outline-2 focus:outline-focus hover:bg-hover hover:outline-none disabled:cursor-not-allowed disabled:text-dark-grey disabled:outline-none active:bg-active active:outline-active-outline active:outline px-5 outline text-black outline-black bg-white hover:text-white active:text-white disabled:bg-light-grey;
+  @apply rounded-md text-base flex items-center justify-center outline-1 focus:outline-dashed focus:outline-2 focus:outline-primary-600 hover:bg-primary-700 hover:outline-none disabled:cursor-not-allowed disabled:text-neutral-700 disabled:outline-none active:bg-primary-600 active:outline-primary-400 active:outline px-5 outline text-black outline-black bg-white hover:text-white active:text-white disabled:bg-neutral-300;
 }
 
 .dropdown-menu {
-  @apply text-white outline-white bg-dark-violet px-4 flex items-center justify-between outline outline-1 focus:outline-dashed focus:outline-2 focus:outline-focus hover:bg-hover hover:outline-none disabled:cursor-not-allowed disabled:bg-light-grey disabled:text-dark-grey disabled:outline-none active:bg-active active:outline-active-outline active:outline;
+  @apply text-white outline-white bg-neutral-950 px-4 flex items-center justify-between outline outline-1 focus:outline-dashed focus:outline-2 focus:outline-primary-600 hover:bg-primary-700 hover:outline-none disabled:cursor-not-allowed disabled:bg-neutral-300 disabled:text-neutral-700 disabled:outline-none active:bg-primary-600 active:outline-primary-400 active:outline;
 }
 
 .dropdown-menu-item {
-  @apply h-[40px] w-full text-white bg-dark-violet px-4 focus:outline-offset-[-3px] hover:outline-offset-[-3px] active:outline-offset-[-3px] disabled:outline-offset-[-3px] flex items-center focus:outline-dashed focus:outline-2 focus:outline-focus hover:bg-hover hover:outline-none disabled:cursor-not-allowed disabled:bg-light-grey disabled:text-dark-grey disabled:outline-none active:bg-active active:outline-active-outline active:outline;
+  @apply h-[40px] w-full text-white bg-neutral-950 px-4 focus:outline-offset-[-3px] hover:outline-offset-[-3px] active:outline-offset-[-3px] disabled:outline-offset-[-3px] flex items-center focus:outline-dashed focus:outline-2 focus:outline-primary-600 hover:bg-primary-700 hover:outline-none disabled:cursor-not-allowed disabled:bg-neutral-300 disabled:text-neutral-700 disabled:outline-none active:bg-primary-600 active:outline-primary-400 active:outline;
 }
 
 .link-primary {
-  @apply text-links text-sm font-bold md:text-base disabled:text-dark-grey hover:underline active:underline active:text-active focus:outline-dashed focus:outline-2 focus:outline-focus focus:rounded-lg focus:px-1.5;
+  @apply text-primary-600 text-sm font-bold md:text-base disabled:text-neutral-700 hover:underline active:underline active:text-primary-600 focus:outline-dashed focus:outline-2 focus:outline-primary-600 focus:rounded-lg focus:px-1.5;
 }
 
 .h1 {

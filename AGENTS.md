@@ -140,6 +140,12 @@ bd create "Add login form" -p 1 -t feature --blocked-by bd-abc123
 - [Component Patterns](#component-patterns)
 - [TypeScript Guidelines](#typescript-guidelines)
 - [Styling Guidelines](#styling-guidelines)
+  - [Design System Tokens](#design-system-tokens)
+  - [Color Usage](#color-usage)
+  - [Spacing Usage](#spacing-usage)
+  - [Typography Usage](#typography-usage)
+  - [Border Radius Usage](#border-radius-usage)
+  - [Semantic Utilities](#semantic-utilities)
 - [Internationalization (i18n)](#internationalization-i18n)
 - [Import Organization](#import-organization)
 - [Performance Optimization](#performance-optimization)
@@ -305,18 +311,39 @@ export enum Routes {
 
 ## Styling Guidelines
 
+### Design System Tokens
+
+**ALWAYS use design system tokens** defined in `app/[locale]/globals.css`. The design system is sourced from Figma tokens and provides a complete set of colors, spacing, typography, and other design values.
+
+**Available Token Categories:**
+
+- **Colors**: Primary, Secondary, Tertiary, Quaternary, Neutrals, Feedback (Success/Error/Warning/Info)
+- **Typography**: Font families, sizes, line heights
+- **Spacing**: Consistent spacing scale (0x through 12x)
+- **Border Radius**: Standard radius values
+- **Icons**: Icon size tokens
+- **Breakpoints**: Mobile, Tablet, Desktop with grid configurations
+
+**Reference Files:**
+
+- Design tokens: `design-system/figma/figma-tokens.json`
+- Breakpoints: `design-system/figma/breakpoints.yaml`
+- Theme configuration: `app/[locale]/globals.css`
+- Utility classes: `app/[locale]/utilities.css`
+
 ### Tailwind CSS
 
 - **Primary Styling Method**: Use Tailwind CSS for all styling
-- **Custom Configuration**: Colors, fonts, shadows, and z-index values are defined in `app/[locale]/globals.css` using the `@theme` directive
+- **Design System First**: Always prefer design system tokens over custom values
+- **Custom Configuration**: All design tokens are defined in `app/[locale]/globals.css` using the `@theme` directive
 - **Variants Over Classes**: Prioritize Tailwind variants (`md:`, `hover:`, `focus:`, etc.) over extra classes
-- **Responsive Design**: Use mobile-first approach with `md:` breakpoint
+- **Responsive Design**: Use mobile-first approach with `mobile:`, `tablet:`, `desktop:` custom variants
 
 **Example:**
 
 ```typescript
-// ✅ Good - Using Tailwind variants
-<div className="text-sm md:text-xl font-bold hover:bg-hover focus:outline-focus">
+// ✅ Good - Using design system tokens and Tailwind variants
+<div className="text-sm tablet:text-xl font-bold hover:bg-primary-700 focus:outline-primary-600">
   Content
 </div>
 
@@ -329,18 +356,123 @@ export enum Routes {
 ### Color Usage
 
 - **No Hex Colors**: Never use explicit hex colors in components
-- **Use Tailwind Colors**: Use colors from the `@theme` configuration in `globals.css` (e.g., `bg-active`, `text-error`, `border-focus`)
-- **CSS Variables**: Use existing Tailwind/custom CSS variables
-- **Local Constants**: If a new color is needed, declare it as a constant locally or add to Tailwind config
+- **Use Design System Colors**: Always use colors from the design system tokens
+- **Color Families**: Use semantic color families (primary, secondary, neutral, feedback)
+- **No Custom Colors**: If a color is needed, check if it exists in the design system first
+
+**Available Color Utilities:**
+
+```typescript
+// Primary colors (100-950)
+;(bg - primary - 100,
+  bg - primary - 500,
+  bg - primary - 600,
+  text - primary - 600,
+  // Secondary colors
+  etc.bg -
+    secondary -
+    500,
+  text - secondary - 600,
+  // Neutral colors
+  etc.bg -
+    neutral -
+    100,
+  text - neutral - 700,
+  border - neutral - 950,
+  // Feedback colors
+  etc.bg -
+    feedback -
+    success -
+    100,
+  text - feedback - error - 500,
+  // Background colors
+  etc.bg -
+    bg -
+    blue,
+  bg - bg - orange,
+  bg - bg - violet)
+```
 
 **Example:**
 
 ```typescript
-// ✅ Good
-<div className="bg-active text-white border-focus">
+// ✅ Good - Using design system tokens
+<div className="bg-primary-600 text-neutral-white border-neutral-950">
+<div className="bg-feedback-success-100 text-feedback-success-500">
+<div className="hover:bg-primary-700 focus:outline-primary-600">
 
-// ❌ Bad
+// ❌ Bad - Hex colors or non-existent tokens
 <div className="bg-[#254A96]" style={{ color: '#FFFFFF' }}>
+<div className="bg-custom-blue text-active">
+```
+
+### Spacing Usage
+
+- **Use Design System Spacing**: Always use spacing tokens from the design system
+- **Spacing Scale**: Use `p-1` through `p-12`, `gap-4`, `m-6`, etc. which map to design system spacing
+- **No Arbitrary Values**: Avoid arbitrary spacing values like `p-[13px]`
+
+**Example:**
+
+```typescript
+// ✅ Good - Using design system spacing
+<div className="p-4 gap-6 m-8">
+<div className="px-5 py-2">
+
+// ❌ Bad - Arbitrary spacing
+<div className="p-[13px]" style={{ gap: '17px' }}>
+```
+
+### Typography Usage
+
+- **Use Design System Typography**: Use typography utilities from `utilities.css` or design system font tokens
+- **Heading Classes**: Use `.heading-h1` through `.heading-h6` for headings
+- **Body Text**: Use `.text-body-l`, `.text-body-m`, `.text-body-s` for body text
+- **Font Families**: Use `font-sans` (Helvetica) or semantic font utilities
+
+**Example:**
+
+```typescript
+// ✅ Good - Using design system typography
+<h1 className="heading-h1">Title</h1>
+<p className="text-body-m">Body text</p>
+<div className="font-sans text-base">
+
+// ❌ Bad - Custom typography
+<h1 style={{ fontSize: '48px', lineHeight: '60px' }}>
+```
+
+### Border Radius Usage
+
+- **Use Design System Radius**: Use radius tokens from the design system
+- **Available Values**: `rounded-xxs`, `rounded-xs`, `rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-2xxl`, `rounded-20xxl`
+
+**Example:**
+
+```typescript
+// ✅ Good - Using design system radius
+<div className="rounded-md">
+<button className="rounded-lg">
+
+// ❌ Bad - Arbitrary radius
+<div className="rounded-[7px]">
+```
+
+### Semantic Utilities
+
+- **Use Predefined Utilities**: Leverage semantic utility classes from `utilities.css`
+- **Available Utilities**: `.surface-default`, `.surface-secondary`, `.btn`, `.btn-primary`, `.btn-secondary`, `.text-primary`, `.text-secondary`, `.border-default`, `.elevation-sm`, etc.
+
+**Example:**
+
+```typescript
+// ✅ Good - Using semantic utilities
+<div className="surface-default">
+<button className="btn btn-primary">
+<div className="elevation-md">
+
+// ❌ Bad - Recreating styles manually
+<div className="bg-white text-black">
 ```
 
 ### Class Merging
@@ -619,7 +751,8 @@ Before submitting code, ensure:
 - ✅ **Use bd tool for all new documentation/work** (not markdown)
 - ✅ Files are named after exported components
 - ✅ No hardcoded text (use translations)
-- ✅ No explicit hex colors (use Tailwind config)
+- ✅ No explicit hex colors (use design system tokens)
+- ✅ Design system tokens used for colors, spacing, typography
 - ✅ No unnecessary type assertions
 - ✅ Tailwind variants used instead of extra classes
 - ✅ Rendering logic optimized (useMemo/useCallback)

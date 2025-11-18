@@ -1,0 +1,268 @@
+/* Typography - Headings */
+
+.heading-h1 {
+  font-family: var(--font-sans);
+  font-size: 3rem;
+  line-height: 3.75rem;
+  font-weight: 700;
+}
+
+.heading-h2 {
+  font-family: var(--font-sans);
+  font-size: 2.5rem;
+  line-height: 3rem;
+  font-weight: 700;
+}
+
+.heading-h3 {
+  font-family: var(--font-sans);
+  font-size: 2.25rem;
+  line-height: 3rem;
+  font-weight: 700;
+}
+
+.heading-h4 {
+  font-family: var(--font-sans);
+  font-size: 2rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+}
+
+.heading-h5 {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+
+.heading-h6 {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+}
+
+/* Typography - Responsive Headings */
+
+@media (width >= 601px) and (width <= 1135px) {
+  .heading-h1 {
+    font-size: 3rem;
+    line-height: 3.75rem;
+  }
+
+  .heading-h2 {
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
+
+  .heading-h3 {
+    font-size: 2.25rem;
+    line-height: 3rem;
+  }
+
+  .heading-h4 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+
+  .heading-h5 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+}
+
+@media (width >= 375px) and (width <= 600px) {
+  .heading-h1 {
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
+
+  .heading-h2 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+
+  .heading-h3 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+
+  .heading-h4 {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+  }
+
+  .heading-h5 {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+}
+
+/* Typography - Body Text */
+
+.text-body-l {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 400;
+}
+
+.text-body-m {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+}
+
+.text-body-s {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+}
+
+/* Semantic Helpers - Surfaces */
+
+.surface-default {
+  @apply bg-neutral-white text-neutral-black;
+}
+
+.surface-secondary {
+  @apply bg-neutral-100 text-neutral-black;
+}
+
+/* Semantic Helpers - Buttons */
+
+.btn {
+  @apply inline-flex items-center justify-center gap-2
+    px-4 py-2 rounded-md
+    text-white bg-primary-600
+    hover:bg-primary-700
+    disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2
+    px-4 py-2 rounded-md
+    text-neutral-black bg-secondary-500
+    hover:bg-secondary-600
+    disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.btn-tertiary {
+  @apply inline-flex items-center justify-center gap-2
+    px-4 py-2 rounded-md
+    text-white bg-tertiary-500
+    hover:bg-tertiary-700
+    disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.btn-outline {
+  @apply inline-flex items-center justify-center gap-2
+    px-4 py-2 rounded-md
+    border border-neutral-950
+    text-neutral-black bg-transparent
+    hover:bg-neutral-100
+    disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+/* Semantic Helpers - Text Colors */
+
+.text-primary {
+  @apply text-neutral-black;
+}
+
+.text-secondary {
+  @apply text-neutral-700;
+}
+
+.text-invert {
+  @apply text-neutral-white;
+}
+
+.text-success {
+  @apply text-feedback-success-500;
+}
+
+.text-error {
+  @apply text-feedback-error-500;
+}
+
+.text-warning {
+  @apply text-feedback-warning-500;
+}
+
+.text-info {
+  @apply text-feedback-info-500;
+}
+
+/* Semantic Helpers - Background Colors */
+
+.bg-success {
+  @apply bg-feedback-success-100;
+}
+
+.bg-error {
+  @apply bg-feedback-error-100;
+}
+
+.bg-warning {
+  @apply bg-feedback-warning-100;
+}
+
+.bg-info {
+  @apply bg-feedback-info-100;
+}
+
+/* Semantic Helpers - Borders */
+
+.border-default {
+  @apply border border-neutral-950;
+}
+
+/* Semantic Helpers - Elevations */
+
+.elevation-sm {
+  box-shadow: 0 1px 2px 0 var(--elevation-primary);
+}
+
+.elevation-md {
+  box-shadow: 0 4px 6px -1px var(--elevation-primary);
+}
+
+.elevation-lg {
+  box-shadow: 0 10px 15px -3px var(--elevation-primary);
+}
+
+/* Semantic Helpers - Image Overlay */
+
+.image-overlay {
+  background-color: var(--image-overlay);
+}
+
+/* Semantic Helpers - Grid */
+
+.grid-mobile {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns-mobile), 1fr);
+  gap: var(--grid-gutter-mobile);
+  padding-left: var(--grid-margin-mobile);
+  padding-right: var(--grid-margin-mobile);
+}
+
+.grid-tablet {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns-tablet), 1fr);
+  gap: var(--grid-gutter-tablet);
+  padding-left: var(--grid-margin-tablet);
+  padding-right: var(--grid-margin-tablet);
+}
+
+.grid-desktop {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns-desktop), 1fr);
+  gap: var(--grid-gutter-desktop);
+  padding-left: var(--grid-margin-desktop);
+  padding-right: var(--grid-margin-desktop);
+}
+
