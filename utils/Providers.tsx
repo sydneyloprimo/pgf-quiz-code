@@ -9,7 +9,6 @@ import ToastProvider from './ToasterProvider'
 
 import { Locale } from '@/i18n'
 
-
 interface ProviderProps extends PropsWithChildren {
   params: Promise<{ locale: Locale }>
 }
