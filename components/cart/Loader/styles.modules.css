@@ -1,3 +1,5 @@
+@reference "tailwindcss";
+
 .lds-ring {
   @apply inline-block relative w-[80px] h-[80px];
 }

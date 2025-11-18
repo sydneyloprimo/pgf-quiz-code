@@ -308,7 +308,7 @@ export enum Routes {
 ### Tailwind CSS
 
 - **Primary Styling Method**: Use Tailwind CSS for all styling
-- **Custom Configuration**: Colors, fonts, shadows, and z-index values are defined in `tailwind.config.js`
+- **Custom Configuration**: Colors, fonts, shadows, and z-index values are defined in `app/[locale]/globals.css` using the `@theme` directive
 - **Variants Over Classes**: Prioritize Tailwind variants (`md:`, `hover:`, `focus:`, etc.) over extra classes
 - **Responsive Design**: Use mobile-first approach with `md:` breakpoint
 
@@ -329,7 +329,7 @@ export enum Routes {
 ### Color Usage
 
 - **No Hex Colors**: Never use explicit hex colors in components
-- **Use Tailwind Colors**: Use colors from `tailwind.config.js` (e.g., `bg-active`, `text-error`, `border-focus`)
+- **Use Tailwind Colors**: Use colors from the `@theme` configuration in `globals.css` (e.g., `bg-active`, `text-error`, `border-focus`)
 - **CSS Variables**: Use existing Tailwind/custom CSS variables
 - **Local Constants**: If a new color is needed, declare it as a constant locally or add to Tailwind config
 

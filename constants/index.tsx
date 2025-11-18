@@ -1,16 +1,10 @@
-import resolveConfig from 'tailwindcss/resolveConfig'
-
-import tailwindConfig from '@/tailwind.config.js'
-
-const fullConfig = resolveConfig(tailwindConfig) as any
+// Tailwind default md breakpoint is 768px
+export const MOBILE_WIDTH = 768
 
 export const MediaQuery = {
-  desktop: `(min-width: ${fullConfig.theme.screens.md})`,
-  mobile: `(max-width: ${fullConfig.theme.screens.md})`,
+  desktop: `(min-width: ${MOBILE_WIDTH}px)`,
+  mobile: `(max-width: ${MOBILE_WIDTH}px)`,
 }
-
-// fullConfig.theme.screens.md value is 768px
-export const MOBILE_WIDTH = 768
 
 export const instagramUrl = 'https://www.instagram.com/rootstrap'
 
