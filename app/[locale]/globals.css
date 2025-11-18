@@ -1,20 +1,20 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
-  --color-active: #254A96;
-  --color-active-outline: #9EBBF3;
-  --color-background: #F4F7FA;
+  --color-active: #254a96;
+  --color-active-outline: #9ebbf3;
+  --color-background: #f4f7fa;
   --color-black: #000000;
   --color-dark-grey: #636363;
-  --color-dark-violet: #00031A;
-  --color-error: #D42F1A;
-  --color-focus: #1D76EF;
-  --color-grey: #C4C4C4;
-  --color-hover: #446CBC;
-  --color-light-grey: #E0E0E0;
-  --color-links: #076CE0;
-  --color-restored: #559F21;
-  --color-white: #FFFFFF;
+  --color-dark-violet: #00031a;
+  --color-error: #d42f1a;
+  --color-focus: #1d76ef;
+  --color-grey: #c4c4c4;
+  --color-hover: #446cbc;
+  --color-light-grey: #e0e0e0;
+  --color-links: #076ce0;
+  --color-restored: #559f21;
+  --color-white: #ffffff;
 
   --font-DMSans: DMSans;
 
@@ -45,7 +45,10 @@
   --z-index-nav-drawer: 90;
 
   --background-image-auth-bg-image: url('/images/auth-background.png');
-  --background-image-gradient-conic: conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops));
+  --background-image-gradient-conic: conic-gradient(
+    from 180deg at 50% 50%,
+    var(--tw-gradient-stops)
+  );
   --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
 }
 
