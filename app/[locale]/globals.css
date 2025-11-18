@@ -1,6 +1,53 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-active: #254A96;
+  --color-active-outline: #9EBBF3;
+  --color-background: #F4F7FA;
+  --color-black: #000000;
+  --color-dark-grey: #636363;
+  --color-dark-violet: #00031A;
+  --color-error: #D42F1A;
+  --color-focus: #1D76EF;
+  --color-grey: #C4C4C4;
+  --color-hover: #446CBC;
+  --color-light-grey: #E0E0E0;
+  --color-links: #076CE0;
+  --color-restored: #559F21;
+  --color-white: #FFFFFF;
+
+  --font-DMSans: DMSans;
+
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 28px;
+  --font-size-3xl: 36px;
+  --font-size-4xl: 72px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --font-weight-extra-bold: 800;
+
+  --shadow-1: 0px 0px 18px rgba(0, 0, 0, 0.15);
+  --shadow-2: 0px 4px 29px rgba(0, 0, 0, 0.25);
+  --shadow-3: 0px 0px 18px rgba(0, 0, 0, 0.05);
+  --shadow-4: 0px 0px 6px 0px rgba(0, 0, 0, 0.15);
+
+  --z-index-banner: 60;
+  --z-index-dropdown: 70;
+  --z-index-hamburger-menu: 80;
+  --z-index-header: 60;
+  --z-index-modal: 100;
+  --z-index-nav-drawer: 90;
+
+  --background-image-auth-bg-image: url('/images/auth-background.png');
+  --background-image-gradient-conic: conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops));
+  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
+}
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -46,7 +93,7 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
-@screen md {
+@media (min-width: 768px) {
   div.extended-header {
     background: linear-gradient(
       0deg,
@@ -61,11 +108,11 @@ body {
 }
 
 .btn-primary {
-  @apply btn px-5 outline text-white outline-white bg-dark-violet disabled:bg-light-grey;
+  @apply rounded-md text-base flex items-center justify-center outline-1 focus:outline-dashed focus:outline-2 focus:outline-focus hover:bg-hover hover:outline-none disabled:cursor-not-allowed disabled:text-dark-grey disabled:outline-none active:bg-active active:outline-active-outline active:outline px-5 outline text-white outline-white bg-dark-violet disabled:bg-light-grey;
 }
 
 .btn-secondary {
-  @apply btn px-5 outline text-black outline-black bg-white hover:text-white active:text-white disabled:bg-light-grey;
+  @apply rounded-md text-base flex items-center justify-center outline-1 focus:outline-dashed focus:outline-2 focus:outline-focus hover:bg-hover hover:outline-none disabled:cursor-not-allowed disabled:text-dark-grey disabled:outline-none active:bg-active active:outline-active-outline active:outline px-5 outline text-black outline-black bg-white hover:text-white active:text-white disabled:bg-light-grey;
 }
 
 .dropdown-menu {
