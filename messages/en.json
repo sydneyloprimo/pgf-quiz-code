@@ -127,6 +127,12 @@
     "zip": "Zip",
     "zipPlaceholder": "Zip"
   },
+  "Quiz": {
+    "backButton": "Back",
+    "closeButton": "Close",
+    "continueButton": "Continue",
+    "title": "Purely Golden Foods"
+  },
   "Search": {
     "FilterPanel": {
       "buttonAlt": "Select filter",
