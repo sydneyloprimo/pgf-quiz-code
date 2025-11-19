@@ -22,7 +22,7 @@ const QuizLayout = ({
   const t = useTranslations('Quiz')
 
   return (
-    <div className="flex flex-col min-h-screen bg-background">
+    <div className="flex flex-col min-h-screen bg-background w-full">
       <header className="flex items-center justify-between px-5 md:px-[119px] py-5 bg-white">
         <h1 className="text-xl md:text-2xl font-bold text-black">
           {t('title')}
