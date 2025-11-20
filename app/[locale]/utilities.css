@@ -131,44 +131,10 @@
   @apply bg-neutral-100 text-neutral-black;
 }
 
-/* Semantic Helpers - Buttons */
-
-.btn {
-  @apply inline-flex items-center justify-center gap-2
-    px-4 py-2 rounded-md
-    text-white bg-primary-600
-    hover:bg-primary-700
-    disabled:opacity-50 disabled:cursor-not-allowed;
-}
-
-.btn-secondary {
-  @apply inline-flex items-center justify-center gap-2
-    px-4 py-2 rounded-md
-    text-neutral-black bg-secondary-500
-    hover:bg-secondary-600
-    disabled:opacity-50 disabled:cursor-not-allowed;
-}
-
-.btn-tertiary {
-  @apply inline-flex items-center justify-center gap-2
-    px-4 py-2 rounded-md
-    text-white bg-tertiary-500
-    hover:bg-tertiary-700
-    disabled:opacity-50 disabled:cursor-not-allowed;
-}
-
-.btn-outline {
-  @apply inline-flex items-center justify-center gap-2
-    px-4 py-2 rounded-md
-    border border-neutral-950
-    text-neutral-black bg-transparent
-    hover:bg-neutral-100
-    disabled:opacity-50 disabled:cursor-not-allowed;
-}
 
 /* Semantic Helpers - Text Colors */
 
-.text-primary {
+.text-default {
   @apply text-neutral-black;
 }
 
@@ -180,58 +146,60 @@
   @apply text-neutral-white;
 }
 
-.text-success {
-  @apply text-feedback-success-500;
-}
+@layer utilities {
+  .text-success {
+    @apply text-feedback-success-500;
+  }
 
-.text-error {
-  @apply text-feedback-error-500;
-}
+  .text-error {
+    @apply text-feedback-error-500;
+  }
 
-.text-warning {
-  @apply text-feedback-warning-500;
-}
+  .text-warning {
+    @apply text-feedback-warning-500;
+  }
 
-.text-info {
-  @apply text-feedback-info-500;
-}
+  .text-info {
+    @apply text-feedback-info-500;
+  }
 
-/* Semantic Helpers - Background Colors */
+  /* Semantic Helpers - Background Colors */
 
-.bg-success {
-  @apply bg-feedback-success-100;
-}
+  .bg-success {
+    @apply bg-feedback-success-100;
+  }
 
-.bg-error {
-  @apply bg-feedback-error-100;
-}
+  .bg-error {
+    @apply bg-feedback-error-100;
+  }
 
-.bg-warning {
-  @apply bg-feedback-warning-100;
-}
+  .bg-warning {
+    @apply bg-feedback-warning-100;
+  }
 
-.bg-info {
-  @apply bg-feedback-info-100;
-}
+  .bg-info {
+    @apply bg-feedback-info-100;
+  }
 
-/* Semantic Helpers - Borders */
+  /* Semantic Helpers - Borders */
 
-.border-default {
-  @apply border border-neutral-950;
-}
+  .border-default {
+    @apply border border-neutral-950;
+  }
 
-/* Semantic Helpers - Elevations */
+  /* Semantic Helpers - Elevations */
 
-.elevation-sm {
-  box-shadow: 0 1px 2px 0 var(--elevation-primary);
-}
+  .elevation-sm {
+    box-shadow: 0 1px 2px 0 var(--elevation-primary);
+  }
 
-.elevation-md {
-  box-shadow: 0 4px 6px -1px var(--elevation-primary);
-}
+  .elevation-md {
+    box-shadow: 0 4px 6px -1px var(--elevation-primary);
+  }
 
-.elevation-lg {
-  box-shadow: 0 10px 15px -3px var(--elevation-primary);
+  .elevation-lg {
+    box-shadow: 0 10px 15px -3px var(--elevation-primary);
+  }
 }
 
 /* Semantic Helpers - Image Overlay */

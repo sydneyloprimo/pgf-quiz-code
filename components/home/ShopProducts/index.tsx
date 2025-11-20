@@ -1,7 +1,7 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 
+import { ButtonPrimary } from '@/components/common/Button'
 import QualityControl from '@/public/images/quality-control.png'
 import Returns from '@/public/images/returns.png'
 import Products from '@/public/images/shop-products.png'
@@ -43,12 +43,12 @@ const ShopProducts = () => {
           />
           <span>{t('quality')}</span>
         </div>
-        <Link
+        <ButtonPrimary
           href={'#'}
-          className="btn-primary w-max p-[10px] !outline-dark-violet md:mt-4"
+          className="w-max p-[10px] outline-dark-violet! md:mt-4"
         >
           {t('button')}
-        </Link>
+        </ButtonPrimary>
       </div>
     </div>
   )

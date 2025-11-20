@@ -90,7 +90,7 @@ const CartProductCard = ({
             )}
           </div>
           <button
-            className="text-start w-max link-primary"
+            className="text-start w-max text-primary-600 text-sm font-bold md:text-base disabled:text-neutral-700 hover:underline active:underline active:text-primary-600 focus:outline-dashed focus:outline-2 focus:outline-primary-600 focus:rounded-lg focus:px-1.5"
             onClick={onDeleteClick}
             disabled={disabled}
             data-qa="delete-cart-product-button"

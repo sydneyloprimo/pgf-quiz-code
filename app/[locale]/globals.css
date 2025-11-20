@@ -106,21 +106,6 @@
   --radius-2xxl: 3rem;
   --radius-20xxl: 12.5rem;
 
-  /* Spacing */
-  --spacing-0: 0rem;
-  --spacing-1: 0.25rem;
-  --spacing-2: 0.5rem;
-  --spacing-3: 0.75rem;
-  --spacing-4: 1rem;
-  --spacing-5: 1.25rem;
-  --spacing-6: 1.5rem;
-  --spacing-7: 1.75rem;
-  --spacing-8: 2rem;
-  --spacing-9: 2.25rem;
-  --spacing-10: 2.5rem;
-  --spacing-11: 2.75rem;
-  --spacing-12: 3rem;
-
   /* Icons */
   --icon-sm: 1rem;
   --icon-md: 1.25rem;
@@ -169,10 +154,6 @@
   --vertical-rhythm: 0.25rem;
   --content-max-width: 90rem;
 }
-
-@custom-variant mobile (width >= 375px) and (width <= 600px);
-@custom-variant tablet (width >= 601px) and (width <= 1135px);
-@custom-variant desktop (width >= 1136px);
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -227,30 +208,6 @@ body {
       black calc(100% - 290px)
     );
   }
-}
-
-.btn {
-  @apply rounded-md text-base flex items-center justify-center  outline-1 focus:outline-dashed focus:outline-2 focus:outline-primary-600 hover:bg-primary-700 hover:outline-none disabled:cursor-not-allowed  disabled:text-neutral-700 disabled:outline-none active:bg-primary-600 active:outline-primary-400 active:outline;
-}
-
-.btn-primary {
-  @apply rounded-md text-base flex items-center justify-center outline-1 focus:outline-dashed focus:outline-2 focus:outline-primary-600 hover:bg-primary-700 hover:outline-none disabled:cursor-not-allowed disabled:text-neutral-700 disabled:outline-none active:bg-primary-600 active:outline-primary-400 active:outline px-5 outline text-white outline-white bg-neutral-950 disabled:bg-neutral-300;
-}
-
-.btn-secondary {
-  @apply rounded-md text-base flex items-center justify-center outline-1 focus:outline-dashed focus:outline-2 focus:outline-primary-600 hover:bg-primary-700 hover:outline-none disabled:cursor-not-allowed disabled:text-neutral-700 disabled:outline-none active:bg-primary-600 active:outline-primary-400 active:outline px-5 outline text-black outline-black bg-white hover:text-white active:text-white disabled:bg-neutral-300;
-}
-
-.dropdown-menu {
-  @apply text-white outline-white bg-neutral-950 px-4 flex items-center justify-between outline outline-1 focus:outline-dashed focus:outline-2 focus:outline-primary-600 hover:bg-primary-700 hover:outline-none disabled:cursor-not-allowed disabled:bg-neutral-300 disabled:text-neutral-700 disabled:outline-none active:bg-primary-600 active:outline-primary-400 active:outline;
-}
-
-.dropdown-menu-item {
-  @apply h-[40px] w-full text-white bg-neutral-950 px-4 focus:outline-offset-[-3px] hover:outline-offset-[-3px] active:outline-offset-[-3px] disabled:outline-offset-[-3px] flex items-center focus:outline-dashed focus:outline-2 focus:outline-primary-600 hover:bg-primary-700 hover:outline-none disabled:cursor-not-allowed disabled:bg-neutral-300 disabled:text-neutral-700 disabled:outline-none active:bg-primary-600 active:outline-primary-400 active:outline;
-}
-
-.link-primary {
-  @apply text-primary-600 text-sm font-bold md:text-base disabled:text-neutral-700 hover:underline active:underline active:text-primary-600 focus:outline-dashed focus:outline-2 focus:outline-primary-600 focus:rounded-lg focus:px-1.5;
 }
 
 .h1 {

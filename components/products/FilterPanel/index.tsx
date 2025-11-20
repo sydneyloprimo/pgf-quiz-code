@@ -3,16 +3,17 @@
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import FilterIcon from 'public/icons/filter.svg'
 import { useCallback, useMemo, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-
-import { ProductType } from '@/components/products/ProductCatalog'
-import { FilterParams, Filters } from '@/hooks/useProductSearch'
-import FilterIcon from 'public/icons/filter.svg'
 
 import Condition, { ConditionForm } from './Filters/Condition'
 import Price, { PriceForm } from './Filters/Price'
 import TypeFilter from './Filters/Type'
+
+import { ButtonPrimary } from '@/components/common/Button'
+import { ProductType } from '@/components/products/ProductCatalog'
+import { FilterParams, Filters } from '@/hooks/useProductSearch'
 
 type FilterForm = ConditionForm & PriceForm & { productType: string }
 
@@ -95,8 +96,8 @@ const FilterPanel = ({ onFiltersChange, productTypes }: FilterPanelProps) => {
           />
           <Price />
 
-          <button
-            className="btn-primary w-full mt-3 mb-5 h-[44px]"
+          <ButtonPrimary
+            className="w-full mt-3 mb-5 h-[44px]"
             type="submit"
             data-qa="submit-filter-button"
           >
@@ -108,7 +109,7 @@ const FilterPanel = ({ onFiltersChange, productTypes }: FilterPanelProps) => {
               width={24}
               height={24}
             />
-          </button>
+          </ButtonPrimary>
 
           <button
             className="h-[44px]"

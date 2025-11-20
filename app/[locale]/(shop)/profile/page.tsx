@@ -60,7 +60,7 @@ export default function ProfilePage() {
 
   return (
     <div className="flex flex-col md:flex-row md:justify-center">
-      <Card className="w-full !rounded-none md:!rounded-lg">
+      <Card className="w-full rounded-none! md:rounded-lg!">
         <div className="flex flex-col justify-between md:items-center mb-6 md:flex-row">
           <h2 className="h2">{t('title')}</h2>
           {isReadOnly && (

@@ -369,26 +369,17 @@ export enum Routes {
   bg - primary - 600,
   text - primary - 600,
   // Secondary colors
-  etc.bg -
-    secondary -
-    500,
+  etc.bg - secondary - 500,
   text - secondary - 600,
   // Neutral colors
-  etc.bg -
-    neutral -
-    100,
+  etc.bg - neutral - 100,
   text - neutral - 700,
   border - neutral - 950,
   // Feedback colors
-  etc.bg -
-    feedback -
-    success -
-    100,
+  etc.bg - feedback - success - 100,
   text - feedback - error - 500,
   // Background colors
-  etc.bg -
-    bg -
-    blue,
+  etc.bg - bg - blue,
   bg - bg - orange,
   bg - bg - violet)
 ```
@@ -408,14 +399,14 @@ export enum Routes {
 
 ### Spacing Usage
 
-- **Use Design System Spacing**: Always use spacing tokens from the design system
-- **Spacing Scale**: Use `p-1` through `p-12`, `gap-4`, `m-6`, etc. which map to design system spacing
+- **Use Tailwind Default Spacing**: Tailwind provides a default spacing scale (0-12), no need to define custom spacing variables
+- **Spacing Scale**: Use `p-1` through `p-12`, `gap-4`, `m-6`, etc. which use Tailwind's default spacing scale
 - **No Arbitrary Values**: Avoid arbitrary spacing values like `p-[13px]`
 
 **Example:**
 
 ```typescript
-// ✅ Good - Using design system spacing
+// ✅ Good - Using Tailwind default spacing
 <div className="p-4 gap-6 m-8">
 <div className="px-5 py-2">
 
@@ -460,15 +451,22 @@ export enum Routes {
 
 ### Semantic Utilities
 
-- **Use Predefined Utilities**: Leverage semantic utility classes from `utilities.css`
-- **Available Utilities**: `.surface-default`, `.surface-secondary`, `.btn`, `.btn-primary`, `.btn-secondary`, `.text-primary`, `.text-secondary`, `.border-default`, `.elevation-sm`, etc.
+- **Use React Components**: Use React components for UI elements (Button, Link, DropdownMenu) instead of CSS classes
+- **Available Components**: `ButtonPrimary`, `ButtonSecondary`, `ButtonTertiary`, `ButtonOutline` from `@/components/common/Button`, `Link` from `@/components/common/Link`
+- **Semantic Text Utilities**: `.text-default`, `.text-secondary`, `.text-invert`, `.text-success`, `.text-error`, `.text-warning`, `.text-info` (defined in `utilities.css`)
+- **Other Utilities**: `.surface-default`, `.surface-secondary`, `.border-default`, `.elevation-sm`, etc.
 
 **Example:**
 
 ```typescript
-// ✅ Good - Using semantic utilities
-<div className="surface-default">
-<button className="btn btn-primary">
+// ✅ Good - Using React components
+import { ButtonPrimary } from '@/components/common/Button'
+import CustomLink from '@/components/common/Link'
+
+<ButtonPrimary className="w-full">
+  Submit
+</ButtonPrimary>
+<CustomLink href="/products">View Products</CustomLink>
 <div className="elevation-md">
 
 // ❌ Bad - Recreating styles manually
@@ -488,11 +486,57 @@ import cn from 'classnames'
 <div className={cn('base-styles', className, { 'opacity-50': disabled })}>
 ```
 
+### Component-Based Styling
+
+- **Components Over CSS Classes**: Create React components for reusable UI elements (Button, DropdownMenu, Link) and put Tailwind classes directly in JSX
+- **No @apply Directive**: Avoid using `@apply` to create custom CSS classes - this defeats the purpose of using Tailwind CSS
+- **Component Location**: Place component classes in React components located in `components/common/` directory
+- **Button Components**: Use `ButtonPrimary`, `ButtonSecondary`, `ButtonTertiary`, `ButtonOutline` from `@/components/common/Button` instead of CSS classes
+- **Link Component**: Use `Link` from `@/components/common/Link` for styled links
+- **Dropdown Components**: Use styled components from `@/components/common/DropdownMenu` which have styles applied directly in JSX
+
+**Example:**
+
+```typescript
+// ✅ Good - Classes in React component JSX
+import { ButtonPrimary } from '@/components/common/Button'
+
+<ButtonPrimary className="w-full mt-4">
+  Submit
+</ButtonPrimary>
+
+// ❌ Bad - Using @apply in CSS
+// utilities.css
+@layer components {
+  .btn-primary {
+    @apply bg-neutral-950 text-white px-5 py-2 rounded-md;
+  }
+}
+```
+
+### Custom Utilities (Limited Use)
+
+- **Custom Utilities Only**: Use `@layer utilities {}` sparingly for truly utility-like classes that work with Tailwind modifiers
+- **Avoid @apply**: Even for utilities, prefer defining styles directly in components when possible
+- **Semantic Helpers**: Text color utilities (`.text-success`, `.text-error`) and background utilities (`.bg-success`, `.bg-error`) can remain as custom utilities in `utilities.css` within `@layer utilities {}` since they represent semantic meaning
+
+**Example:**
+
+```css
+/* utilities.css - Only for semantic utilities */
+@layer utilities {
+  .text-success {
+    @apply text-feedback-success-500;
+  }
+}
+```
+
 ### Custom CSS
 
-- Use CSS modules (`styles.modules.css`) only when necessary
-- Prefer Tailwind utilities over custom CSS
-- Custom CSS classes are defined in `globals.css` (e.g., `.btn-primary`, `.link-primary`)
+- Use CSS modules (`styles.modules.css`) only when absolutely necessary
+- Prefer Tailwind utilities applied directly in JSX
+- Avoid creating component classes with `@apply` - use React components instead
+- Custom utility classes should be minimal and only for semantic purposes
 
 ---
 

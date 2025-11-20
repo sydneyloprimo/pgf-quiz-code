@@ -14,6 +14,7 @@ import {
   CartLineEdge,
 } from 'shopify/generated/graphql'
 
+import { ButtonPrimary } from '@/components/common/Button'
 import event from '@/scripts/GoogleTagManager/event'
 import { Events } from '@/types/enums/events'
 import { formatCurrency } from '@/utils/helpers'
@@ -160,21 +161,21 @@ const Cart = ({ className }: CartProps) => {
               <h3 className="text-sm uppercase m-auto md:text-xl">
                 {t('total')}
               </h3>
-              <div className="border-black border-b border-solid flex-1 h-[1px] my-auto mx-3.5 md:mx-[21px]" />
+              <div className="border-black border-b border-solid flex-1 h-px my-auto mx-3.5 md:mx-[21px]" />
               <h3 className="text-black text-sm font-bold m-auto md:text-xl">
                 {formatCurrency(
                   cart?.cost?.subtotalAmount?.currencyCode,
                   cart?.cost?.subtotalAmount?.amount
                 )}
               </h3>
-              <button
-                className="h-7 btn-primary md:h-10 ml-5 md:ml-6"
+              <ButtonPrimary
+                className="h-7 md:h-10 ml-5 md:ml-6"
                 disabled={isEmpty || isDisabled}
                 onClick={handleCheckoutClick}
                 data-qa="checkout-button"
               >
                 {t('checkoutButton')}
-              </button>
+              </ButtonPrimary>
             </div>
           </>
         )}
