@@ -131,7 +131,6 @@
   @apply bg-neutral-100 text-neutral-black;
 }
 
-
 /* Semantic Helpers - Text Colors */
 
 .text-default {
@@ -233,4 +232,3 @@
   padding-left: var(--grid-margin-desktop);
   padding-right: var(--grid-margin-desktop);
 }
-

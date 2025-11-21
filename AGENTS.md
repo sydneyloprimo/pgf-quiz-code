@@ -259,6 +259,58 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 ```
 
+### Using Existing Generic Components
+
+- **Always Check First**: Before building new UI elements, check if a generic-purpose component already exists in `components/common/`
+- **Reuse Over Rebuild**: Use existing components instead of creating new ones with similar functionality
+- **Component Discovery**: Browse `components/common/` directory to familiarize yourself with available components
+
+**Available Generic Components:**
+
+- **Buttons**: `ButtonPrimary`, `ButtonSecondary`, `ButtonTertiary`, `ButtonOutline` from `@/components/common/Button`
+- **Links**: `Link` (CustomLink) from `@/components/common/Link`
+- **Forms**: `Input` from `@/components/common/Input`, `Select` from `@/components/common/Select`
+- **Layout**: `Card` from `@/components/common/Card`, `Header` from `@/components/common/Header`, `Footer` from `@/components/common/Footer`
+- **Navigation**: `DropdownMenu` components from `@/components/common/DropdownMenu`
+- **Feedback**: `Toast` from `@/components/common/Toast`, `Spinner` from `@/components/common/Spinner`
+- **Content**: `Carousel` from `@/components/common/Carousel`, `ProductCard` from `@/components/common/ProductCard`, `CategoryCard` from `@/components/common/CategoryCard`
+- **Utilities**: `LocaleWrapper` from `@/components/common/LocaleWrapper`, `ListNextButton` from `@/components/common/ListNextButton`
+
+**Example:**
+
+```typescript
+// ✅ Good - Using existing components
+import { ButtonPrimary } from '@/components/common/Button'
+import CustomLink from '@/components/common/Link'
+import Card from '@/components/common/Card'
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent } from '@/components/common/DropdownMenu'
+
+const MyPage = () => (
+  <Card>
+    <ButtonPrimary onClick={handleSubmit}>Submit</ButtonPrimary>
+    <CustomLink href="/products">View Products</CustomLink>
+    <DropdownMenu>
+      <DropdownMenuTrigger>Menu</DropdownMenuTrigger>
+      <DropdownMenuContent>...</DropdownMenuContent>
+    </DropdownMenu>
+  </Card>
+)
+
+// ❌ Bad - Creating new components when existing ones work
+const MyPage = () => (
+  <div className="bg-white p-8 rounded-lg">
+    <button className="bg-black text-white px-5 py-2">Submit</button>
+    <a href="/products" className="text-blue-600">View Products</a>
+  </div>
+)
+```
+
+**When to Create New Components:**
+
+- Only create new components when existing ones don't meet your needs
+- If you need to extend functionality, consider wrapping existing components first
+- If creating a new component, follow the existing patterns and place it in the appropriate directory (`components/common/` for generic components, or feature-specific directories for domain-specific components)
+
 ---
 
 ## TypeScript Guidelines
@@ -452,6 +504,7 @@ export enum Routes {
 ### Semantic Utilities
 
 - **Use React Components**: Use React components for UI elements (Button, Link, DropdownMenu) instead of CSS classes
+- **Check Existing Components First**: Always check `components/common/` for existing components before creating new ones (see [Using Existing Generic Components](#using-existing-generic-components))
 - **Available Components**: `ButtonPrimary`, `ButtonSecondary`, `ButtonTertiary`, `ButtonOutline` from `@/components/common/Button`, `Link` from `@/components/common/Link`
 - **Semantic Text Utilities**: `.text-default`, `.text-secondary`, `.text-invert`, `.text-success`, `.text-error`, `.text-warning`, `.text-info` (defined in `utilities.css`)
 - **Other Utilities**: `.surface-default`, `.surface-secondary`, `.border-default`, `.elevation-sm`, etc.
@@ -793,6 +846,7 @@ const { register, handleSubmit } = useForm({
 Before submitting code, ensure:
 
 - ✅ **Use bd tool for all new documentation/work** (not markdown)
+- ✅ **Checked for existing generic components** in `components/common/` before creating new ones
 - ✅ Files are named after exported components
 - ✅ No hardcoded text (use translations)
 - ✅ No explicit hex colors (use design system tokens)
