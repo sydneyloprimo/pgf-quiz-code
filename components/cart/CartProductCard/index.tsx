@@ -1,5 +1,4 @@
 'use client'
-import cn from 'classnames'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import PlusIcon from 'public/icons/plus.svg'
@@ -11,6 +10,7 @@ import { useMediaQuery } from 'usehooks-ts'
 import Toast, { ToastTypes } from '@/components/common/Toast'
 import { MediaQuery } from '@/constants'
 import { ProductVariant } from '@/shopify/generated/graphql'
+import { cn } from '@/utils/cn'
 import { formatCurrency } from '@/utils/helpers'
 
 interface CartProductCardProps {
@@ -90,7 +90,7 @@ const CartProductCard = ({
             )}
           </div>
           <button
-            className="text-start w-max link-primary"
+            className="text-start w-max text-primary-600 text-sm font-bold md:text-base disabled:text-neutral-700 hover:underline active:underline active:text-primary-600 focus:outline-dashed focus:outline-2 focus:outline-primary-600 focus:rounded-lg focus:px-1.5"
             onClick={onDeleteClick}
             disabled={disabled}
             data-qa="delete-cart-product-button"

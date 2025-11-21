@@ -60,7 +60,7 @@ export default function ProfilePage() {
 
   return (
     <div className="flex flex-col md:flex-row md:justify-center">
-      <Card className="w-full !rounded-none md:!rounded-lg">
+      <Card className="w-full rounded-none md:rounded-lg">
         <div className="flex flex-col justify-between md:items-center mb-6 md:flex-row">
           <h2 className="h2">{t('title')}</h2>
           {isReadOnly && (
@@ -250,14 +250,14 @@ export default function ProfilePage() {
               <div className="w-full flex justify-end gap-5">
                 <button
                   onClick={() => setIsReadOnly(!isReadOnly)}
-                  className="btn-secondary h-[44px]"
+                  className="btn-secondary h-11"
                   data-qa="cancel-button"
                 >
                   {t('cancelButtonText')}
                 </button>
                 <button
                   type="submit"
-                  className="btn-primary h-[44px]"
+                  className="btn-primary h-11"
                   data-qa="submit-button"
                 >
                   {t('submitButtonText')}

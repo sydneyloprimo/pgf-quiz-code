@@ -140,6 +140,12 @@ bd create "Add login form" -p 1 -t feature --blocked-by bd-abc123
 - [Component Patterns](#component-patterns)
 - [TypeScript Guidelines](#typescript-guidelines)
 - [Styling Guidelines](#styling-guidelines)
+  - [Design System Tokens](#design-system-tokens)
+  - [Color Usage](#color-usage)
+  - [Spacing Usage](#spacing-usage)
+  - [Typography Usage](#typography-usage)
+  - [Border Radius Usage](#border-radius-usage)
+  - [Semantic Utilities](#semantic-utilities)
 - [Internationalization (i18n)](#internationalization-i18n)
 - [Import Organization](#import-organization)
 - [Performance Optimization](#performance-optimization)
@@ -193,9 +199,10 @@ import { Routes } from '@/types/enums/routes'
 
 ### Component Structure
 
-1. **Default Exports**: Components use default exports
+1. **Named Exports**: Components use named exports (not default exports) to ensure component names stay consistent and make refactoring easier
 2. **Functional Components**: Use function components (not class components)
 3. **PropsWithChildren**: Extend `PropsWithChildren` when components accept children
+4. **Barrel Files**: Use `export * from './Component'` in barrel files (index.tsx) to export both components and types
 
 **Example:**
 
@@ -212,18 +219,34 @@ const Card = ({ children, className }: CardProps) => (
   </div>
 )
 
-export default Card
+export { Card }
+```
+
+**Barrel File (index.tsx):**
+
+```typescript
+// ✅ Good - Using export * to export component and types
+export * from './Card'
+
+// ❌ Bad - Using default export with re-export
+export { default as Card } from './Card'
 ```
 
 ### Client Components
 
-- Add `'use client'` directive at the top of files that use:
-  - React hooks (`useState`, `useEffect`, etc.)
-  - Browser APIs (`window`, `localStorage`, etc.)
-  - Event handlers
-  - Third-party client libraries
+- **Only use `'use client'` when necessary**: Add `'use client'` directive at the top of files that use:
+  - React hooks (`useState`, `useEffect`, `useCallback`, `useMemo`, `useRef`, etc.)
+  - Browser APIs (`window`, `localStorage`, `sessionStorage`, `document`, etc.)
+  - Event handlers (`onClick`, `onChange`, `onSubmit`, `onBlur`, etc.)
+  - Client-side routing hooks (`useRouter`, `useSearchParams` from `next/navigation`)
+  - Third-party client libraries that require browser APIs
+- **Do NOT use `'use client'` for**:
+  - Components that only render JSX without hooks or event handlers
+  - Components that only use `useTranslations` from `next-intl` (works server-side)
+  - Simple presentational components that don't manage state or handle events
+  - Components that only wrap Next.js components like `Link` or `Image` without additional client-side logic
 
-**Example:**
+**Example - Needs `'use client'`:**
 
 ```typescript
 'use client'
@@ -234,6 +257,19 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
   // ...
 }
+```
+
+**Example - Does NOT need `'use client'`:**
+
+```typescript
+import Link from 'next/link'
+import { cn } from '@/utils/cn'
+
+const CustomLink = ({ href, children, className }) => (
+  <Link href={href} className={cn('text-primary-600', className)}>
+    {children}
+  </Link>
+)
 ```
 
 ### Component Props
@@ -252,6 +288,59 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: ReactNode
 }
 ```
+
+### Using Existing Generic Components
+
+- **Always Check First**: Before building new UI elements, check if a generic-purpose component already exists in `components/common/`
+- **Reuse Over Rebuild**: Use existing components instead of creating new ones with similar functionality
+- **Component Discovery**: Browse `components/common/` directory to familiarize yourself with available components
+
+**Available Generic Components:**
+
+- **Buttons**: `Button` with variants (`variant="primary"`, `variant="secondary"`, `variant="tertiary"`, `variant="outline"`) from `@/components/common/Button`
+- **Links**: `Link` from `@/components/common/Link`
+- **Forms**: `Input` from `@/components/common/Input`, `Select` from `@/components/common/Select`
+- **Layout**: `Card` from `@/components/common/Card`, `Header` from `@/components/common/Header`, `Footer` from `@/components/common/Footer`
+- **Navigation**: `DropdownMenu` components from `@/components/common/DropdownMenu`
+- **Feedback**: `Toast` from `@/components/common/Toast`, `Spinner` from `@/components/common/Spinner`
+- **Content**: `Carousel` from `@/components/common/Carousel`, `ProductCard` from `@/components/common/ProductCard`, `CategoryCard` from `@/components/common/CategoryCard`
+- **Utilities**: `LocaleWrapper` from `@/components/common/LocaleWrapper`, `ListNextButton` from `@/components/common/ListNextButton`
+
+**Example:**
+
+```typescript
+// ✅ Good - Using existing components with variants
+import { Button } from '@/components/common/Button'
+import { Link } from '@/components/common/Link'
+import Card from '@/components/common/Card'
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent } from '@/components/common/DropdownMenu'
+
+const MyPage = () => (
+  <Card>
+    <Button variant="primary" onClick={handleSubmit}>Submit</Button>
+    <Button variant="secondary" onClick={handleCancel}>Cancel</Button>
+    <Link href="/products">View Products</Link>
+    <DropdownMenu>
+      <DropdownMenuTrigger>Menu</DropdownMenuTrigger>
+      <DropdownMenuContent>...</DropdownMenuContent>
+    </DropdownMenu>
+  </Card>
+)
+
+// ❌ Bad - Creating new components when existing ones work
+const MyPage = () => (
+  <div className="bg-white p-8 rounded-lg">
+    <button className="bg-black text-white px-5 py-2">Submit</button>
+    <a href="/products" className="text-blue-600">View Products</a>
+  </div>
+)
+```
+
+**When to Create New Components:**
+
+- Only create new components when existing ones don't meet your needs
+- If you need to extend functionality, consider wrapping existing components first
+- If creating a new component, follow the existing patterns and place it in the appropriate directory (`components/common/` for generic components, or feature-specific directories for domain-specific components)
 
 ---
 
@@ -305,18 +394,40 @@ export enum Routes {
 
 ## Styling Guidelines
 
+### Design System Tokens
+
+**ALWAYS use design system tokens** defined in `app/[locale]/globals.css`. The design system is sourced from Figma tokens and provides a complete set of colors, spacing, typography, and other design values.
+
+**Available Token Categories:**
+
+- **Colors**: Primary, Secondary, Tertiary, Quaternary, Neutrals, Feedback (Success/Error/Warning/Info)
+- **Typography**: Font families, sizes, line heights
+- **Spacing**: Consistent spacing scale (0x through 12x)
+- **Border Radius**: Standard radius values
+- **Icons**: Icon size tokens
+- **Breakpoints**: Mobile, Tablet, Desktop with grid configurations
+
+**Reference Files:**
+
+- Design tokens: `design-system/figma/figma-tokens.json`
+- Breakpoints: `design-system/figma/breakpoints.yaml`
+- Theme configuration: `app/[locale]/globals.css`
+- Utility classes: `app/[locale]/utilities.css`
+
 ### Tailwind CSS
 
 - **Primary Styling Method**: Use Tailwind CSS for all styling
-- **Custom Configuration**: Colors, fonts, shadows, and z-index values are defined in `app/[locale]/globals.css` using the `@theme` directive
+- **Design System First**: Always prefer design system tokens over custom values
+- **Custom Configuration**: All design tokens are defined in `app/[locale]/globals.css` using the `@theme` directive
 - **Variants Over Classes**: Prioritize Tailwind variants (`md:`, `hover:`, `focus:`, etc.) over extra classes
-- **Responsive Design**: Use mobile-first approach with `md:` breakpoint
+- **Responsive Design**: Use mobile-first approach with `mobile:`, `tablet:`, `desktop:` custom variants
+- **Avoid Arbitrary Values**: Always prefer Tailwind's default utility classes over arbitrary values (e.g., `h-10` instead of `h-[40px]`, `w-6` instead of `w-[24px]`). Use arbitrary values only when there's no Tailwind equivalent and the value is design-specific
 
 **Example:**
 
 ```typescript
-// ✅ Good - Using Tailwind variants
-<div className="text-sm md:text-xl font-bold hover:bg-hover focus:outline-focus">
+// ✅ Good - Using design system tokens and Tailwind variants
+<div className="text-sm tablet:text-xl font-bold hover:bg-primary-700 focus:outline-primary-600">
   Content
 </div>
 
@@ -329,38 +440,220 @@ export enum Routes {
 ### Color Usage
 
 - **No Hex Colors**: Never use explicit hex colors in components
-- **Use Tailwind Colors**: Use colors from the `@theme` configuration in `globals.css` (e.g., `bg-active`, `text-error`, `border-focus`)
-- **CSS Variables**: Use existing Tailwind/custom CSS variables
-- **Local Constants**: If a new color is needed, declare it as a constant locally or add to Tailwind config
+- **Use Design System Colors**: Always use colors from the design system tokens
+- **Color Families**: Use semantic color families (primary, secondary, neutral, feedback)
+- **No Custom Colors**: If a color is needed, check if it exists in the design system first
+
+**Available Color Utilities:**
+
+```typescript
+// Primary colors (100-950)
+;(bg - primary - 100,
+  bg - primary - 500,
+  bg - primary - 600,
+  text - primary - 600,
+  // Secondary colors
+  etc.bg - secondary - 500,
+  text - secondary - 600,
+  // Neutral colors
+  etc.bg - neutral - 100,
+  text - neutral - 700,
+  border - neutral - 950,
+  // Feedback colors
+  etc.bg - feedback - success - 100,
+  text - feedback - error - 500,
+  // Background colors
+  etc.bg - bg - blue,
+  bg - bg - orange,
+  bg - bg - violet)
+```
 
 **Example:**
 
 ```typescript
-// ✅ Good
-<div className="bg-active text-white border-focus">
+// ✅ Good - Using design system tokens
+<div className="bg-primary-600 text-neutral-white border-neutral-950">
+<div className="bg-feedback-success-100 text-feedback-success-500">
+<div className="hover:bg-primary-700 focus:outline-primary-600">
 
-// ❌ Bad
+// ❌ Bad - Hex colors or non-existent tokens
 <div className="bg-[#254A96]" style={{ color: '#FFFFFF' }}>
+<div className="bg-custom-blue text-active">
+```
+
+### Spacing Usage
+
+- **Use Tailwind Default Spacing**: Tailwind provides a default spacing scale (0-12), no need to define custom spacing variables
+- **Spacing Scale**: Use `p-1` through `p-12`, `gap-4`, `m-6`, etc. which use Tailwind's default spacing scale
+- **Avoid Arbitrary Values**: Always prefer Tailwind's default spacing values over arbitrary values (e.g., `h-10` instead of `h-[40px]`, `h-11` instead of `h-[44px]`, `h-px` instead of `h-[1px]`)
+- **Use Closest Match**: When an exact match doesn't exist, use the closest Tailwind value (e.g., `p-3` for `10px` instead of `p-[10px]`)
+
+**Example:**
+
+```typescript
+// ✅ Good - Using Tailwind default spacing
+<div className="p-4 gap-6 m-8">
+<div className="px-5 py-2">
+<div className="h-10 w-6">  // h-10 = 40px, w-6 = 24px
+
+// ❌ Bad - Arbitrary spacing values
+<div className="p-[13px]" style={{ gap: '17px' }}>
+<div className="h-[40px] w-[24px]">  // Use h-10 w-6 instead
+```
+
+### Typography Usage
+
+- **Use Design System Typography**: Use typography utilities from `utilities.css` or design system font tokens
+- **Heading Classes**: Use `.heading-h1` through `.heading-h6` for headings
+- **Body Text**: Use `.text-body-l`, `.text-body-m`, `.text-body-s` for body text
+- **Font Families**: Use `font-sans` (Helvetica) or semantic font utilities
+
+**Example:**
+
+```typescript
+// ✅ Good - Using design system typography
+<h1 className="heading-h1">Title</h1>
+<p className="text-body-m">Body text</p>
+<div className="font-sans text-base">
+
+// ❌ Bad - Custom typography
+<h1 style={{ fontSize: '48px', lineHeight: '60px' }}>
+```
+
+### Border Radius Usage
+
+- **Use Design System Radius**: Use radius tokens from the design system
+- **Available Values**: `rounded-xxs`, `rounded-xs`, `rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-2xxl`, `rounded-20xxl`
+
+**Example:**
+
+```typescript
+// ✅ Good - Using design system radius
+<div className="rounded-md">
+<button className="rounded-lg">
+
+// ❌ Bad - Arbitrary radius
+<div className="rounded-[7px]">
+```
+
+### Semantic Utilities
+
+- **Use React Components**: Use React components for UI elements (Button, Link, DropdownMenu) instead of CSS classes
+- **Check Existing Components First**: Always check `components/common/` for existing components before creating new ones (see [Using Existing Generic Components](#using-existing-generic-components))
+- **Use Variants Over Separate Components**: Prefer using a single component with variants (e.g., `Button` with `variant="primary"`) rather than creating separate components for each variant. This scales better and maintains consistency.
+- **Available Components**: `Button` with variants from `@/components/common/Button`, `Link` from `@/components/common/Link`
+- **Semantic Text Utilities**: `.text-default`, `.text-secondary`, `.text-invert`, `.text-success`, `.text-error`, `.text-warning`, `.text-info` (defined in `utilities.css`)
+- **Other Utilities**: `.surface-default`, `.surface-secondary`, `.border-default`, `.elevation-sm`, etc.
+
+**Example:**
+
+```typescript
+// ✅ Good - Using React components with variants
+import { Button } from '@/components/common/Button'
+import { Link } from '@/components/common/Link'
+
+<Button variant="primary" className="w-full">
+  Submit
+</Button>
+<Button variant="secondary">Cancel</Button>
+<Link href="/products">View Products</Link>
+<div className="elevation-md">
+
+// ❌ Bad - Recreating styles manually
+<div className="bg-white text-black">
 ```
 
 ### Class Merging
 
-- Use `classnames` (imported as `cn`) for conditional classes
+- **Use `cn` utility**: Always use the `cn` utility from `@/utils/cn` which combines `clsx` and `tailwind-merge` for intelligent class merging
+- **Avoid `!important`**: Never use Tailwind's `!` modifier (e.g., `text-red-500!`) or CSS `!important`. Use `tailwind-merge` to resolve class conflicts intelligently
+- **Intelligent Merging**: `tailwind-merge` automatically resolves conflicts between Tailwind classes (e.g., `p-4 p-6` becomes just `p-6`)
 - Combine Tailwind classes with custom classes when needed
 
 **Example:**
 
 ```typescript
-import cn from 'classnames'
+import { cn } from '@/utils/cn'
 
-<div className={cn('base-styles', className, { 'opacity-50': disabled })}>
+// ✅ Good - tailwind-merge resolves conflicts automatically
+<div className={cn('p-4 p-6', className, { 'opacity-50': disabled })}>
+// Result: 'p-6' (conflict resolved, no !important needed)
+
+// ❌ Bad - Using !important
+<div className="p-4! p-6">  // Don't do this
 ```
+
+### Component-Based Styling
+
+- **Components Over CSS Classes**: Create React components for reusable UI elements (Button, DropdownMenu, Link) and put Tailwind classes directly in JSX
+- **No @apply Directive**: Avoid using `@apply` to create custom CSS classes - this defeats the purpose of using Tailwind CSS
+- **Component Location**: Place component classes in React components located in `components/common/` directory
+- **Variants Over Separate Components**: Use a single component with variants (e.g., `Button` with `variant` prop) rather than creating separate components for each variant. This approach scales better and is easier to maintain.
+- **Button Component**: Use `Button` with `variant="primary"`, `variant="secondary"`, `variant="tertiary"`, or `variant="outline"` from `@/components/common/Button` instead of CSS classes
+- **Link Component**: Use `Link` from `@/components/common/Link` for styled links
+- **Dropdown Components**: Use styled components from `@/components/common/DropdownMenu` which have styles applied directly in JSX
+
+**Example:**
+
+```typescript
+// ✅ Good - Classes in React component JSX with variants
+import { Button } from '@/components/common/Button'
+
+<Button variant="primary" className="w-full mt-4">
+  Submit
+</Button>
+<Button variant="secondary">Cancel</Button>
+
+// ❌ Bad - Using @apply in CSS
+// utilities.css
+@layer components {
+  .btn-primary {
+    @apply bg-neutral-950 text-white px-5 py-2 rounded-md;
+  }
+}
+```
+
+### Custom Utilities (Limited Use)
+
+- **Use `@utility` Directive**: In Tailwind v4, use the `@utility` directive to define custom utilities. This automatically inserts them into the utilities layer and works with all Tailwind variants (`hover:`, `lg:`, etc.)
+- **Custom Utilities Only**: Use `@utility` sparingly for truly utility-like classes that work with Tailwind modifiers
+- **Semantic Helpers**: Text color utilities (`.text-success`, `.text-error`), typography utilities (`.heading-h1`, `.text-body-m`), and other semantic utilities should be defined in `utilities.css` using `@utility` since they represent semantic meaning
+- **Complex Utilities**: For utilities with nested selectors or media queries, use nesting within the `@utility` block
+
+**Example:**
+
+```css
+/* utilities.css - Using @utility directive (Tailwind v4) */
+@utility text-success {
+  @apply text-feedback-success-500;
+}
+
+@utility heading-h1 {
+  font-family: var(--font-sans);
+  font-size: 3rem;
+  line-height: 3.75rem;
+  font-weight: 700;
+
+  @media (width >= 375px) and (width <= 600px) {
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
+}
+
+@utility elevation-sm {
+  box-shadow: 0 1px 2px 0 var(--elevation-primary);
+}
+```
+
+**Reference**: See [Tailwind v4 Custom Utilities Documentation](https://tailwindcss.com/docs/adding-custom-styles#adding-custom-utilities)
 
 ### Custom CSS
 
-- Use CSS modules (`styles.modules.css`) only when necessary
-- Prefer Tailwind utilities over custom CSS
-- Custom CSS classes are defined in `globals.css` (e.g., `.btn-primary`, `.link-primary`)
+- Use CSS modules (`styles.modules.css`) only when absolutely necessary
+- Prefer Tailwind utilities applied directly in JSX
+- Avoid creating component classes with `@apply` - use React components instead
+- **Custom Utilities**: Use `@utility` directive in `utilities.css` for semantic utility classes (typography, semantic colors, etc.)
+- Custom utility classes should be minimal and only for semantic purposes
 
 ---
 
@@ -426,8 +719,9 @@ ESLint enforces the following import order (alphabetically within groups):
 // External (alphabetically sorted)
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import { PropsWithChildren } from 'react'
-import cn from 'classnames'
+
+// Internal (@/)
+import { cn } from '@/utils/cn'
 
 // Internal (@/)
 import Card from '@/components/common/Card'
@@ -617,11 +911,15 @@ const { register, handleSubmit } = useForm({
 Before submitting code, ensure:
 
 - ✅ **Use bd tool for all new documentation/work** (not markdown)
+- ✅ **Checked for existing generic components** in `components/common/` before creating new ones
 - ✅ Files are named after exported components
 - ✅ No hardcoded text (use translations)
-- ✅ No explicit hex colors (use Tailwind config)
+- ✅ No explicit hex colors (use design system tokens)
+- ✅ Design system tokens used for colors, spacing, typography
 - ✅ No unnecessary type assertions
 - ✅ Tailwind variants used instead of extra classes
+- ✅ **No `!important` usage** - use `cn` from `@/utils/cn` with tailwind-merge to resolve conflicts
+- ✅ **No arbitrary values** - prefer Tailwind default utilities (e.g., `h-10` not `h-[40px]`)
 - ✅ Rendering logic optimized (useMemo/useCallback)
 - ✅ No unused variables or imports
 - ✅ Imports use path aliases (no `../`)

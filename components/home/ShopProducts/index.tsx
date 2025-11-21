@@ -1,7 +1,7 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 
+import { Button } from '@/components/common/Button'
 import QualityControl from '@/public/images/quality-control.png'
 import Returns from '@/public/images/returns.png'
 import Products from '@/public/images/shop-products.png'
@@ -30,7 +30,7 @@ const ShopProducts = () => {
             src={Returns}
             alt={t('returns_alt')}
             loading="eager"
-            className="w-[24px] h-[24px] md:w-[50px] md:h-[50px]"
+            className="w-6 h-6 md:w-12 md:h-12"
           />
           <span>{t('returns')}</span>
         </div>
@@ -39,16 +39,17 @@ const ShopProducts = () => {
             src={QualityControl}
             alt={t('quality_alt')}
             loading="eager"
-            className="w-[24px] h-[24px] md:w-[50px] md:h-[50px]"
+            className="w-6 h-6 md:w-12 md:h-12"
           />
           <span>{t('quality')}</span>
         </div>
-        <Link
+        <Button
+          variant="primary"
           href={'#'}
-          className="btn-primary w-max p-[10px] !outline-dark-violet md:mt-4"
+          className="w-max p-3 outline-dark-violet md:mt-4"
         >
           {t('button')}
-        </Link>
+        </Button>
       </div>
     </div>
   )

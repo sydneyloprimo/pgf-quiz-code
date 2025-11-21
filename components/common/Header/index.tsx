@@ -1,5 +1,4 @@
 'use client'
-import cn from 'classnames'
 import debounce from 'lodash/debounce'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -7,12 +6,13 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import React, { useCallback, useState } from 'react'
 
+import HeaderDropdownMenu from './HeaderDropdownMenu'
+
 import Input from '@/components/common/Input'
 import { FilterParams } from '@/hooks/useProductSearch'
 import { Routes } from '@/types/enums/routes'
+import { cn } from '@/utils/cn'
 import { buildQueryUrl } from '@/utils/utils'
-
-import HeaderDropdownMenu from './HeaderDropdownMenu'
 
 const images = {
   cartIcon: '/icons/cart.svg',

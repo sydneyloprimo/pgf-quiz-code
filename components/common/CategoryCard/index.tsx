@@ -1,11 +1,11 @@
-import cn from 'classnames'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-
 import BeautyImage from 'public/images/beauty.png'
 import ElectronicsImage from 'public/images/electronics.png'
 import FashionImage from 'public/images/fashion.png'
 import FurnitureImage from 'public/images/furniture.png'
+
+import { cn } from '@/utils/cn'
 
 interface CategoryCardProps {
   name: string

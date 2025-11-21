@@ -1,7 +1,8 @@
-import cn from 'classnames'
 import Image from 'next/image'
 import ErrorIcon from 'public/icons/error.svg'
 import SuccessIcon from 'public/icons/success.svg'
+
+import { cn } from '@/utils/cn'
 
 export enum ToastTypes {
   error = 'Error',
