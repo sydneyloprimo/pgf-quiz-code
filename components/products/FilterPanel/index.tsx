@@ -3,16 +3,17 @@
 import Image from 'next/image'
 import { useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
+import FilterIcon from 'public/icons/filter.svg'
 import { useCallback, useMemo, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-
-import { ProductType } from '@/components/products/ProductCatalog'
-import { FilterParams, Filters } from '@/hooks/useProductSearch'
-import FilterIcon from 'public/icons/filter.svg'
 
 import Condition, { ConditionForm } from './Filters/Condition'
 import Price, { PriceForm } from './Filters/Price'
 import TypeFilter from './Filters/Type'
+
+import { Button } from '@/components/common/Button'
+import { ProductType } from '@/components/products/ProductCatalog'
+import { FilterParams, Filters } from '@/hooks/useProductSearch'
 
 type FilterForm = ConditionForm & PriceForm & { productType: string }
 
@@ -95,8 +96,9 @@ const FilterPanel = ({ onFiltersChange, productTypes }: FilterPanelProps) => {
           />
           <Price />
 
-          <button
-            className="btn-primary w-full mt-3 mb-5 h-[44px]"
+          <Button
+            variant="primary"
+            className="w-full mt-3 mb-5 h-11"
             type="submit"
             data-qa="submit-filter-button"
           >
@@ -108,10 +110,10 @@ const FilterPanel = ({ onFiltersChange, productTypes }: FilterPanelProps) => {
               width={24}
               height={24}
             />
-          </button>
+          </Button>
 
           <button
-            className="h-[44px]"
+            className="h-11"
             type="button"
             onClick={clearFilters}
             data-qa="clear-filter-button"

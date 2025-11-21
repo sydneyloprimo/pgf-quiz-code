@@ -1,5 +1,6 @@
-import cn from 'classnames'
 import { PropsWithChildren } from 'react'
+
+import { cn } from '@/utils/cn'
 
 interface CardProps extends PropsWithChildren {
   className?: string

@@ -1,0 +1,226 @@
+/* Typography - Headings */
+
+@utility heading-h1 {
+  font-family: var(--font-sans);
+  font-size: 3rem;
+  line-height: 3.75rem;
+  font-weight: 700;
+
+  @media (width >= 601px) and (width <= 1135px) {
+    font-size: 3rem;
+    line-height: 3.75rem;
+  }
+
+  @media (width >= 375px) and (width <= 600px) {
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
+}
+
+@utility heading-h2 {
+  font-family: var(--font-sans);
+  font-size: 2.5rem;
+  line-height: 3rem;
+  font-weight: 700;
+
+  @media (width >= 601px) and (width <= 1135px) {
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
+
+  @media (width >= 375px) and (width <= 600px) {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+}
+
+@utility heading-h3 {
+  font-family: var(--font-sans);
+  font-size: 2.25rem;
+  line-height: 3rem;
+  font-weight: 700;
+
+  @media (width >= 601px) and (width <= 1135px) {
+    font-size: 2.25rem;
+    line-height: 3rem;
+  }
+
+  @media (width >= 375px) and (width <= 600px) {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+}
+
+@utility heading-h4 {
+  font-family: var(--font-sans);
+  font-size: 2rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+
+  @media (width >= 601px) and (width <= 1135px) {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+
+  @media (width >= 375px) and (width <= 600px) {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+  }
+}
+
+@utility heading-h5 {
+  font-family: var(--font-sans);
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+
+  @media (width >= 601px) and (width <= 1135px) {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  @media (width >= 375px) and (width <= 600px) {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+}
+
+@utility heading-h6 {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+}
+
+/* Typography - Body Text */
+
+@utility text-body-l {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 400;
+}
+
+@utility text-body-m {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+}
+
+@utility text-body-s {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+}
+
+/* Semantic Helpers - Surfaces */
+
+@utility surface-default {
+  @apply bg-neutral-white text-neutral-black;
+}
+
+@utility surface-secondary {
+  @apply bg-neutral-100 text-neutral-black;
+}
+
+/* Semantic Helpers - Text Colors */
+
+@utility text-default {
+  @apply text-neutral-black;
+}
+
+@utility text-secondary {
+  @apply text-neutral-700;
+}
+
+@utility text-invert {
+  @apply text-neutral-white;
+}
+
+@utility text-success {
+  @apply text-feedback-success-500;
+}
+
+@utility text-error {
+  @apply text-feedback-error-500;
+}
+
+@utility text-warning {
+  @apply text-feedback-warning-500;
+}
+
+@utility text-info {
+  @apply text-feedback-info-500;
+}
+
+/* Semantic Helpers - Background Colors */
+
+@utility bg-success {
+  @apply bg-feedback-success-100;
+}
+
+@utility bg-error {
+  @apply bg-feedback-error-100;
+}
+
+@utility bg-warning {
+  @apply bg-feedback-warning-100;
+}
+
+@utility bg-info {
+  @apply bg-feedback-info-100;
+}
+
+/* Semantic Helpers - Borders */
+
+@utility border-default {
+  @apply border border-neutral-950;
+}
+
+/* Semantic Helpers - Elevations */
+
+@utility elevation-sm {
+  box-shadow: 0 1px 2px 0 var(--elevation-primary);
+}
+
+@utility elevation-md {
+  box-shadow: 0 4px 6px -1px var(--elevation-primary);
+}
+
+@utility elevation-lg {
+  box-shadow: 0 10px 15px -3px var(--elevation-primary);
+}
+
+/* Semantic Helpers - Image Overlay */
+
+@utility image-overlay {
+  background-color: var(--image-overlay);
+}
+
+/* Semantic Helpers - Grid */
+
+@utility grid-mobile {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns-mobile), 1fr);
+  gap: var(--grid-gutter-mobile);
+  padding-left: var(--grid-margin-mobile);
+  padding-right: var(--grid-margin-mobile);
+}
+
+@utility grid-tablet {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns-tablet), 1fr);
+  gap: var(--grid-gutter-tablet);
+  padding-left: var(--grid-margin-tablet);
+  padding-right: var(--grid-margin-tablet);
+}
+
+@utility grid-desktop {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns-desktop), 1fr);
+  gap: var(--grid-gutter-desktop);
+  padding-left: var(--grid-margin-desktop);
+  padding-right: var(--grid-margin-desktop);
+}

@@ -1,9 +1,9 @@
 'use client'
-import cn from 'classnames'
 import { ChangeEvent, InputHTMLAttributes, ReactNode } from 'react'
 import React from 'react'
 
 import { InputIconPosition } from '@/types/enums/constants'
+import { cn } from '@/utils/cn'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string | ReactNode
@@ -46,7 +46,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {icon && (
           <div
             className={cn(
-              'absolute top-[0.5rem] cursor-pointer p-1',
+              'absolute top-2 cursor-pointer p-1',
               iconPosition === InputIconPosition.End ? 'right-3' : ' left-3'
             )}
           >
@@ -57,7 +57,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           id={id}
           className={cn(
-            'h-[44px] rounded-lg border border-solid border-black p-3 w-full',
+            'h-11 rounded-lg border border-solid border-black p-3 w-full',
             error ? 'border-red-500' : undefined,
             iconPosition === InputIconPosition.End
               ? icon

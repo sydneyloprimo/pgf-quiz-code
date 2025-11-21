@@ -1,10 +1,10 @@
-import cn from 'classnames'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-
 import EmptyCartIcon from 'public/icons/empty-cart.svg'
 import { Routes } from 'types/enums/routes'
+
+import { Button } from '@/components/common/Button'
+import { cn } from '@/utils/cn'
 
 interface EmptyStateProps {
   className?: string
@@ -29,13 +29,14 @@ const EmptyState = ({ className }: EmptyStateProps) => {
         <h4 className="text-lg mt-5 text-center md:text-start">
           {t('description')}
         </h4>
-        <Link
-          className="btn-primary py-3 px-[18px] w-max m-auto mt-8 md:ml-0"
+        <Button
+          variant="primary"
+          className="py-3 px-5 w-max m-auto mt-8 md:ml-0"
           href={Routes.products}
           data-qa="empty-cart-state-explore-button"
         >
           {t('exploreButton')}
-        </Link>
+        </Button>
       </div>
     </div>
   )

@@ -1,6 +1,5 @@
 'use client'
 
-import cn from 'classnames'
 import ProductCard from 'components/products/ProductCard'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
@@ -18,6 +17,7 @@ import ListNextButton, {
 import Select from '@/components/common/Select'
 import { FilterParams, Filters } from '@/hooks/useProductSearch'
 import { Routes } from '@/types/enums/routes'
+import { cn } from '@/utils/cn'
 
 interface ProductListProps {
   products: ProductEdge[] | undefined

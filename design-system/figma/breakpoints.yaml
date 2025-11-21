@@ -1,0 +1,23 @@
+mobile:
+  min: 375
+  max: 600
+  grid:
+    columns: 4
+    gutter: 16
+    margin: 20
+
+tablet:
+  min: 601
+  max: 1135
+  grid:
+    columns: 6
+    gutter: 32
+    margin: 32
+
+desktop:
+  min: 1136
+  max: 5000
+  grid:
+    columns: 12
+    gutter: 24
+    margin: 96
