@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl'
 
-import { ButtonPrimary } from '@/components/common/Button'
+import { Button } from '@/components/common/Button'
 import ProductCard from '@/components/common/ProductCard'
 import { Product, ProductEdge } from '@/shopify/generated/graphql'
 import { Routes } from '@/types/enums/routes'
@@ -21,12 +21,13 @@ const LatestProducts = ({ products }: LatestProductsProps) => {
         <span className="text-dark-grey text-base md:text-lg text-center md:text-left">
           {t('description')}
         </span>
-        <ButtonPrimary
+        <Button
+          variant="primary"
           href={Routes.products}
-          className="w-max p-[10px] outline-dark-violet! md:mt-4"
+          className="w-max p-3 outline-dark-violet md:mt-4"
         >
           {t('button')}
-        </ButtonPrimary>
+        </Button>
       </div>
       <div className="flex flex-row flex-1 justify-center">
         <div className="flex flex-row justify-center gap-4 md:gap-12 flex-wrap md:flex-nowrap">

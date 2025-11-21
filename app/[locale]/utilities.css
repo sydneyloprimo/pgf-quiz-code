@@ -1,120 +1,114 @@
 /* Typography - Headings */
 
-.heading-h1 {
+@utility heading-h1 {
   font-family: var(--font-sans);
   font-size: 3rem;
   line-height: 3.75rem;
   font-weight: 700;
+
+  @media (width >= 601px) and (width <= 1135px) {
+    font-size: 3rem;
+    line-height: 3.75rem;
+  }
+
+  @media (width >= 375px) and (width <= 600px) {
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
 }
 
-.heading-h2 {
+@utility heading-h2 {
   font-family: var(--font-sans);
   font-size: 2.5rem;
   line-height: 3rem;
   font-weight: 700;
+
+  @media (width >= 601px) and (width <= 1135px) {
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
+
+  @media (width >= 375px) and (width <= 600px) {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
 }
 
-.heading-h3 {
+@utility heading-h3 {
   font-family: var(--font-sans);
   font-size: 2.25rem;
   line-height: 3rem;
   font-weight: 700;
+
+  @media (width >= 601px) and (width <= 1135px) {
+    font-size: 2.25rem;
+    line-height: 3rem;
+  }
+
+  @media (width >= 375px) and (width <= 600px) {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
 }
 
-.heading-h4 {
+@utility heading-h4 {
   font-family: var(--font-sans);
   font-size: 2rem;
   line-height: 2.5rem;
   font-weight: 700;
+
+  @media (width >= 601px) and (width <= 1135px) {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+
+  @media (width >= 375px) and (width <= 600px) {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+  }
 }
 
-.heading-h5 {
+@utility heading-h5 {
   font-family: var(--font-sans);
   font-size: 1.5rem;
   line-height: 2rem;
   font-weight: 700;
+
+  @media (width >= 601px) and (width <= 1135px) {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  @media (width >= 375px) and (width <= 600px) {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
 }
 
-.heading-h6 {
+@utility heading-h6 {
   font-family: var(--font-sans);
   font-size: 1.25rem;
   line-height: 1.75rem;
   font-weight: 700;
 }
 
-/* Typography - Responsive Headings */
-
-@media (width >= 601px) and (width <= 1135px) {
-  .heading-h1 {
-    font-size: 3rem;
-    line-height: 3.75rem;
-  }
-
-  .heading-h2 {
-    font-size: 2.5rem;
-    line-height: 3rem;
-  }
-
-  .heading-h3 {
-    font-size: 2.25rem;
-    line-height: 3rem;
-  }
-
-  .heading-h4 {
-    font-size: 2rem;
-    line-height: 2.5rem;
-  }
-
-  .heading-h5 {
-    font-size: 1.5rem;
-    line-height: 2rem;
-  }
-}
-
-@media (width >= 375px) and (width <= 600px) {
-  .heading-h1 {
-    font-size: 2.5rem;
-    line-height: 3rem;
-  }
-
-  .heading-h2 {
-    font-size: 2rem;
-    line-height: 2.5rem;
-  }
-
-  .heading-h3 {
-    font-size: 2rem;
-    line-height: 2.5rem;
-  }
-
-  .heading-h4 {
-    font-size: 1.75rem;
-    line-height: 2.25rem;
-  }
-
-  .heading-h5 {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-  }
-}
-
 /* Typography - Body Text */
 
-.text-body-l {
+@utility text-body-l {
   font-family: var(--font-body);
   font-size: 1.125rem;
   line-height: 1.75rem;
   font-weight: 400;
 }
 
-.text-body-m {
+@utility text-body-m {
   font-family: var(--font-body);
   font-size: 1rem;
   line-height: 1.5rem;
   font-weight: 400;
 }
 
-.text-body-s {
+@utility text-body-s {
   font-family: var(--font-body);
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -123,93 +117,91 @@
 
 /* Semantic Helpers - Surfaces */
 
-.surface-default {
+@utility surface-default {
   @apply bg-neutral-white text-neutral-black;
 }
 
-.surface-secondary {
+@utility surface-secondary {
   @apply bg-neutral-100 text-neutral-black;
 }
 
 /* Semantic Helpers - Text Colors */
 
-.text-default {
+@utility text-default {
   @apply text-neutral-black;
 }
 
-.text-secondary {
+@utility text-secondary {
   @apply text-neutral-700;
 }
 
-.text-invert {
+@utility text-invert {
   @apply text-neutral-white;
 }
 
-@layer utilities {
-  .text-success {
-    @apply text-feedback-success-500;
-  }
+@utility text-success {
+  @apply text-feedback-success-500;
+}
 
-  .text-error {
-    @apply text-feedback-error-500;
-  }
+@utility text-error {
+  @apply text-feedback-error-500;
+}
 
-  .text-warning {
-    @apply text-feedback-warning-500;
-  }
+@utility text-warning {
+  @apply text-feedback-warning-500;
+}
 
-  .text-info {
-    @apply text-feedback-info-500;
-  }
+@utility text-info {
+  @apply text-feedback-info-500;
+}
 
-  /* Semantic Helpers - Background Colors */
+/* Semantic Helpers - Background Colors */
 
-  .bg-success {
-    @apply bg-feedback-success-100;
-  }
+@utility bg-success {
+  @apply bg-feedback-success-100;
+}
 
-  .bg-error {
-    @apply bg-feedback-error-100;
-  }
+@utility bg-error {
+  @apply bg-feedback-error-100;
+}
 
-  .bg-warning {
-    @apply bg-feedback-warning-100;
-  }
+@utility bg-warning {
+  @apply bg-feedback-warning-100;
+}
 
-  .bg-info {
-    @apply bg-feedback-info-100;
-  }
+@utility bg-info {
+  @apply bg-feedback-info-100;
+}
 
-  /* Semantic Helpers - Borders */
+/* Semantic Helpers - Borders */
 
-  .border-default {
-    @apply border border-neutral-950;
-  }
+@utility border-default {
+  @apply border border-neutral-950;
+}
 
-  /* Semantic Helpers - Elevations */
+/* Semantic Helpers - Elevations */
 
-  .elevation-sm {
-    box-shadow: 0 1px 2px 0 var(--elevation-primary);
-  }
+@utility elevation-sm {
+  box-shadow: 0 1px 2px 0 var(--elevation-primary);
+}
 
-  .elevation-md {
-    box-shadow: 0 4px 6px -1px var(--elevation-primary);
-  }
+@utility elevation-md {
+  box-shadow: 0 4px 6px -1px var(--elevation-primary);
+}
 
-  .elevation-lg {
-    box-shadow: 0 10px 15px -3px var(--elevation-primary);
-  }
+@utility elevation-lg {
+  box-shadow: 0 10px 15px -3px var(--elevation-primary);
 }
 
 /* Semantic Helpers - Image Overlay */
 
-.image-overlay {
+@utility image-overlay {
   background-color: var(--image-overlay);
 }
 
 /* Semantic Helpers - Grid */
 
-.grid-mobile {
+@utility grid-mobile {
   display: grid;
   grid-template-columns: repeat(var(--grid-columns-mobile), 1fr);
   gap: var(--grid-gutter-mobile);
@@ -217,7 +209,7 @@
   padding-right: var(--grid-margin-mobile);
 }
 
-.grid-tablet {
+@utility grid-tablet {
   display: grid;
   grid-template-columns: repeat(var(--grid-columns-tablet), 1fr);
   gap: var(--grid-gutter-tablet);
@@ -225,7 +217,7 @@
   padding-right: var(--grid-margin-tablet);
 }
 
-.grid-desktop {
+@utility grid-desktop {
   display: grid;
   grid-template-columns: repeat(var(--grid-columns-desktop), 1fr);
   gap: var(--grid-gutter-desktop);

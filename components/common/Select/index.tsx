@@ -1,5 +1,6 @@
-import cn from 'classnames'
 import { useSelect } from 'downshift'
+
+import { cn } from '@/utils/cn'
 
 type SelectOptionType = { label: string; value: string }
 

@@ -1,7 +1,6 @@
 'use client'
-import cn from 'classnames'
-
 import { Order } from '@/shopify/generated/graphql'
+import { cn } from '@/utils/cn'
 import { formatCurrency } from '@/utils/helpers'
 
 interface OrderCardProps {

@@ -1,6 +1,5 @@
 'use client'
 
-import cn from 'classnames'
 import { useCombobox } from 'downshift'
 import { useTranslations } from 'next-intl'
 import { useState, useEffect } from 'react'
@@ -8,6 +7,7 @@ import { useFormContext } from 'react-hook-form'
 
 import Input from '@/components/common/Input'
 import { ProductType } from '@/components/products/ProductCatalog'
+import { cn } from '@/utils/cn'
 
 interface TypeFilterProps {
   productTypes: ProductType[]
@@ -51,7 +51,7 @@ const TypeFilter = ({
         <div>
           <Input
             {...getInputProps({ ...register('productType') })}
-            inputClassName="h-[40px]"
+            inputClassName="h-10"
             data-qa="product-type-input"
           />
         </div>

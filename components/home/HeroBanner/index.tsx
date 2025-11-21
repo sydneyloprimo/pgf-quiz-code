@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import BannerImage from 'public/images/banner.png'
 
-import { ButtonPrimary } from '@/components/common/Button'
+import { Button } from '@/components/common/Button'
 import { Routes } from '@/types/enums/routes'
 import './styles.modules.css'
 
@@ -30,13 +30,14 @@ const HeroBanner = () => {
         <h1 className="text-3xl md:text-4xl text-white font-bold">
           {t('title')}
         </h1>
-        <ButtonPrimary
+        <Button
+          variant="primary"
           href={Routes.products}
-          className="w-max p-[10px] outline-dark-violet! mt-4 z-banner"
+          className="w-max p-3 outline-dark-violet mt-4 z-banner"
           data-qa="hero-banner-button"
         >
           {t('button')}
-        </ButtonPrimary>
+        </Button>
       </div>
       <Image
         src={BannerImage}

@@ -1,5 +1,4 @@
 'use client'
-import cn from 'classnames'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import PlusIcon from 'public/icons/plus.svg'
@@ -11,6 +10,7 @@ import { useMediaQuery } from 'usehooks-ts'
 import Toast, { ToastTypes } from '@/components/common/Toast'
 import { MediaQuery } from '@/constants'
 import { ProductVariant } from '@/shopify/generated/graphql'
+import { cn } from '@/utils/cn'
 import { formatCurrency } from '@/utils/helpers'
 
 interface CartProductCardProps {

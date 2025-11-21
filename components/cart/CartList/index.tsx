@@ -1,5 +1,5 @@
 'use client'
-import cn from 'classnames'
+
 import CartProductCard from 'components/cart/CartProductCard'
 import EmptyState from 'components/cart/EmptyState'
 import useCartCookie from 'hooks/useCartCookie'
@@ -14,9 +14,10 @@ import {
   CartLineEdge,
 } from 'shopify/generated/graphql'
 
-import { ButtonPrimary } from '@/components/common/Button'
+import { Button } from '@/components/common/Button'
 import event from '@/scripts/GoogleTagManager/event'
 import { Events } from '@/types/enums/events'
+import { cn } from '@/utils/cn'
 import { formatCurrency } from '@/utils/helpers'
 import { findProductLine } from '@/utils/utils'
 
@@ -168,14 +169,15 @@ const Cart = ({ className }: CartProps) => {
                   cart?.cost?.subtotalAmount?.amount
                 )}
               </h3>
-              <ButtonPrimary
+              <Button
+                variant="primary"
                 className="h-7 md:h-10 ml-5 md:ml-6"
                 disabled={isEmpty || isDisabled}
                 onClick={handleCheckoutClick}
                 data-qa="checkout-button"
               >
                 {t('checkoutButton')}
-              </ButtonPrimary>
+              </Button>
             </div>
           </>
         )}

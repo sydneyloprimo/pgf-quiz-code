@@ -1,11 +1,11 @@
 'use client'
-import cn from 'classnames'
 import { useKeenSlider } from 'keen-slider/react'
 import { useEffect, useState } from 'react'
 import { useWindowSize } from 'usehooks-ts'
 
 import CategoryCard from '@/components/common/CategoryCard'
 import { MOBILE_WIDTH } from '@/constants'
+import { cn } from '@/utils/cn'
 import 'keen-slider/keen-slider.min.css'
 
 interface CarouselProps {

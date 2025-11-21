@@ -9,7 +9,7 @@ import { useState } from 'react'
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
 import { z } from 'zod'
 
-import { ButtonPrimary } from '@/components/common/Button'
+import { Button } from '@/components/common/Button'
 import Input from '@/components/common/Input'
 import Spinner from '@/components/common/Spinner'
 import { InputIconPosition } from '@/types/enums/constants'
@@ -126,15 +126,16 @@ const AuthForm = ({
         <div className="text-red-500 text-md">{apiError}</div>
       )}
 
-      <ButtonPrimary
-        className="w-full mt-3 mb-5 h-[44px]"
+      <Button
+        variant="primary"
+        className="w-full mt-3 mb-5 h-11"
         type="submit"
         disabled={
           !!errors.email?.message || !!errors.password?.message || isLoading
         }
       >
         {isLoading ? <Spinner /> : buttonText}
-      </ButtonPrimary>
+      </Button>
     </form>
   )
 }

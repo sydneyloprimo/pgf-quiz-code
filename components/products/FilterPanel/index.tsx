@@ -11,7 +11,7 @@ import Condition, { ConditionForm } from './Filters/Condition'
 import Price, { PriceForm } from './Filters/Price'
 import TypeFilter from './Filters/Type'
 
-import { ButtonPrimary } from '@/components/common/Button'
+import { Button } from '@/components/common/Button'
 import { ProductType } from '@/components/products/ProductCatalog'
 import { FilterParams, Filters } from '@/hooks/useProductSearch'
 
@@ -96,8 +96,9 @@ const FilterPanel = ({ onFiltersChange, productTypes }: FilterPanelProps) => {
           />
           <Price />
 
-          <ButtonPrimary
-            className="w-full mt-3 mb-5 h-[44px]"
+          <Button
+            variant="primary"
+            className="w-full mt-3 mb-5 h-11"
             type="submit"
             data-qa="submit-filter-button"
           >
@@ -109,10 +110,10 @@ const FilterPanel = ({ onFiltersChange, productTypes }: FilterPanelProps) => {
               width={24}
               height={24}
             />
-          </ButtonPrimary>
+          </Button>
 
           <button
-            className="h-[44px]"
+            className="h-11"
             type="button"
             onClick={clearFilters}
             data-qa="clear-filter-button"

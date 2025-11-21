@@ -1,8 +1,9 @@
 'use client'
 
-import cn from 'classnames'
 import Link from 'next/link'
 import { ComponentProps, PropsWithChildren } from 'react'
+
+import { cn } from '@/utils/cn'
 
 interface LinkProps extends PropsWithChildren {
   href: string
