@@ -1,5 +1,3 @@
-'use client'
-
 import Link from 'next/link'
 import { ComponentProps, PropsWithChildren } from 'react'
 
@@ -35,4 +33,4 @@ const CustomLink = ({
   )
 }
 
-export default CustomLink
+export { CustomLink as Link }

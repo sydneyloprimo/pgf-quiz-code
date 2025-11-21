@@ -1,5 +1,3 @@
-'use client'
-
 import { cva, type VariantProps } from 'class-variance-authority'
 import Link from 'next/link'
 import { ComponentProps, PropsWithChildren } from 'react'

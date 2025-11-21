@@ -234,13 +234,19 @@ export { default as Card } from './Card'
 
 ### Client Components
 
-- Add `'use client'` directive at the top of files that use:
-  - React hooks (`useState`, `useEffect`, etc.)
-  - Browser APIs (`window`, `localStorage`, etc.)
-  - Event handlers
-  - Third-party client libraries
+- **Only use `'use client'` when necessary**: Add `'use client'` directive at the top of files that use:
+  - React hooks (`useState`, `useEffect`, `useCallback`, `useMemo`, `useRef`, etc.)
+  - Browser APIs (`window`, `localStorage`, `sessionStorage`, `document`, etc.)
+  - Event handlers (`onClick`, `onChange`, `onSubmit`, `onBlur`, etc.)
+  - Client-side routing hooks (`useRouter`, `useSearchParams` from `next/navigation`)
+  - Third-party client libraries that require browser APIs
+- **Do NOT use `'use client'` for**:
+  - Components that only render JSX without hooks or event handlers
+  - Components that only use `useTranslations` from `next-intl` (works server-side)
+  - Simple presentational components that don't manage state or handle events
+  - Components that only wrap Next.js components like `Link` or `Image` without additional client-side logic
 
-**Example:**
+**Example - Needs `'use client'`:**
 
 ```typescript
 'use client'
@@ -251,6 +257,19 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
   // ...
 }
+```
+
+**Example - Does NOT need `'use client'`:**
+
+```typescript
+import Link from 'next/link'
+import { cn } from '@/utils/cn'
+
+const CustomLink = ({ href, children, className }) => (
+  <Link href={href} className={cn('text-primary-600', className)}>
+    {children}
+  </Link>
+)
 ```
 
 ### Component Props
@@ -279,7 +298,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 **Available Generic Components:**
 
 - **Buttons**: `Button` with variants (`variant="primary"`, `variant="secondary"`, `variant="tertiary"`, `variant="outline"`) from `@/components/common/Button`
-- **Links**: `Link` (CustomLink) from `@/components/common/Link`
+- **Links**: `Link` from `@/components/common/Link`
 - **Forms**: `Input` from `@/components/common/Input`, `Select` from `@/components/common/Select`
 - **Layout**: `Card` from `@/components/common/Card`, `Header` from `@/components/common/Header`, `Footer` from `@/components/common/Footer`
 - **Navigation**: `DropdownMenu` components from `@/components/common/DropdownMenu`
@@ -292,7 +311,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 ```typescript
 // ✅ Good - Using existing components with variants
 import { Button } from '@/components/common/Button'
-import CustomLink from '@/components/common/Link'
+import { Link } from '@/components/common/Link'
 import Card from '@/components/common/Card'
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent } from '@/components/common/DropdownMenu'
 
@@ -300,7 +319,7 @@ const MyPage = () => (
   <Card>
     <Button variant="primary" onClick={handleSubmit}>Submit</Button>
     <Button variant="secondary" onClick={handleCancel}>Cancel</Button>
-    <CustomLink href="/products">View Products</CustomLink>
+    <Link href="/products">View Products</Link>
     <DropdownMenu>
       <DropdownMenuTrigger>Menu</DropdownMenuTrigger>
       <DropdownMenuContent>...</DropdownMenuContent>
@@ -531,13 +550,13 @@ export enum Routes {
 ```typescript
 // ✅ Good - Using React components with variants
 import { Button } from '@/components/common/Button'
-import CustomLink from '@/components/common/Link'
+import { Link } from '@/components/common/Link'
 
 <Button variant="primary" className="w-full">
   Submit
 </Button>
 <Button variant="secondary">Cancel</Button>
-<CustomLink href="/products">View Products</CustomLink>
+<Link href="/products">View Products</Link>
 <div className="elevation-md">
 
 // ❌ Bad - Recreating styles manually
