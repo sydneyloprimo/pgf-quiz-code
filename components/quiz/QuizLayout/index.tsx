@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl'
 import { PropsWithChildren } from 'react'
 
 import { Routes } from '@/types/enums/routes'
+import { cn } from '@/utils/cn'
 
 interface QuizLayoutProps extends PropsWithChildren {
   stepNumber: number
@@ -22,30 +23,56 @@ const QuizLayout = ({
   const t = useTranslations('Quiz')
 
   return (
-    <div className="flex flex-col min-h-screen bg-background w-full">
-      <header className="flex items-center justify-between px-5 md:px-[119px] py-5 bg-white">
-        <h1 className="text-xl md:text-2xl font-bold text-black">
-          {t('title')}
-        </h1>
+    <div className="flex flex-col min-h-screen bg-neutral-300 w-full">
+      <header
+        className={cn(
+          'flex items-center justify-between',
+          'px-5 md:px-28 py-5',
+          'bg-neutral-300'
+        )}
+      >
+        <Link href={Routes.home} data-qa="quiz-logo">
+          <Image
+            src="/icons/logo-quiz.png"
+            alt={t('title')}
+            width={232}
+            height={36}
+            className="h-9 w-56"
+            priority
+          />
+        </Link>
         <Link
           href={Routes.home}
           data-qa="quiz-close-button"
-          className="btn-secondary h-10! w-10! p-0!"
+          className={cn(
+            'bg-neutral-white border border-secondary-900',
+            'flex items-center justify-center',
+            'h-10 w-10 p-3',
+            'cursor-pointer'
+          )}
           aria-label={t('closeButton')}
         >
           <Image
             src="/icons/cross.svg"
             alt={t('closeButton')}
-            width={16}
-            height={16}
+            width={24}
+            height={24}
           />
         </Link>
       </header>
 
-      <main className="flex-1">{children}</main>
+      <main className="flex-1 flex items-center justify-center px-5 md:px-28">
+        {children}
+      </main>
 
-      <footer className="flex items-center justify-between gap-4 px-5 md:px-[119px] py-5 bg-white border-t border-light-grey">
-        {stepNumber > 1 && (
+      {stepNumber > 1 && (
+        <footer
+          className={cn(
+            'flex items-center justify-between gap-4',
+            'px-5 md:px-28 py-5',
+            'bg-neutral-300 border-t border-neutral-600'
+          )}
+        >
           <button
             type="button"
             onClick={onBack}
@@ -54,16 +81,16 @@ const QuizLayout = ({
           >
             {t('backButton')}
           </button>
-        )}
-        <button
-          type="button"
-          onClick={onNext}
-          data-qa="quiz-continue-button"
-          className={stepNumber === 1 ? 'btn-primary ml-auto' : 'btn-primary'}
-        >
-          {t('continueButton')}
-        </button>
-      </footer>
+          <button
+            type="button"
+            onClick={onNext}
+            data-qa="quiz-continue-button"
+            className="btn-primary"
+          >
+            {t('continueButton')}
+          </button>
+        </footer>
+      )}
     </div>
   )
 }
