@@ -1,9 +1,11 @@
 'use client'
 
 import { cva, type VariantProps } from 'class-variance-authority'
-import { ReactNode, useState } from 'react'
+import { ReactNode, useCallback, useState } from 'react'
 
 import { CheckIcon, ChevronIcon } from '@/components/common/Icon'
+import { getInputDropdownDisplayState } from '@/components/common/Input'
+import { InputDropdownState } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 
 const inputDropdownVariants = cva(
@@ -11,14 +13,16 @@ const inputDropdownVariants = cva(
   {
     variants: {
       state: {
-        default: 'bg-neutral-white border border-neutral-950 text-neutral-800',
-        filled:
+        [InputDropdownState.Default]:
+          'bg-neutral-white border border-neutral-950 text-neutral-800',
+        [InputDropdownState.Filled]:
           'bg-neutral-white border border-secondary-900 text-secondary-950',
-        open: 'bg-neutral-white border-2 border-primary-800 text-neutral-800',
+        [InputDropdownState.Open]:
+          'bg-neutral-white border-2 border-primary-800 text-neutral-800',
       },
     },
     defaultVariants: {
-      state: 'default',
+      state: InputDropdownState.Default,
     },
   }
 )
@@ -55,20 +59,33 @@ const InputDropdown = ({
 }: InputDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const selectedOption = options.find((opt) => opt.value === value)
-  const displayState = disabled
-    ? 'default'
-    : isOpen
-      ? 'open'
-      : selectedOption
-        ? 'filled'
-        : state || 'default'
+  const displayState = getInputDropdownDisplayState(
+    disabled,
+    isOpen,
+    Boolean(selectedOption),
+    state
+  )
+
+  const handleToggle = useCallback(() => {
+    if (!disabled) {
+      setIsOpen(!isOpen)
+    }
+  }, [disabled, isOpen])
+
+  const handleOptionSelect = useCallback(
+    (optionValue: string) => {
+      onSelect?.(optionValue)
+      setIsOpen(false)
+    },
+    [onSelect]
+  )
 
   return (
     <div className={cn('relative flex flex-col', className)}>
       <button
         type="button"
         className={cn(inputDropdownVariants({ state: displayState }))}
-        onClick={() => !disabled && setIsOpen(!isOpen)}
+        onClick={handleToggle}
         disabled={disabled}
       >
         <p
@@ -76,7 +93,10 @@ const InputDropdown = ({
             'flex-1 min-w-0 font-semibold leading-6 text-base',
             'text-neutral-800 overflow-ellipsis overflow-hidden',
             'whitespace-nowrap text-left',
-            selectedOption && displayState === 'filled' && 'text-secondary-950'
+            {
+              'text-secondary-950':
+                selectedOption && displayState === InputDropdownState.Filled,
+            }
           )}
         >
           {selectedOption?.label || placeholder}
@@ -98,10 +118,7 @@ const InputDropdown = ({
                 'hover:bg-secondary-100',
                 'text-base font-semibold leading-6 text-neutral-800'
               )}
-              onClick={() => {
-                onSelect?.(option.value)
-                setIsOpen(false)
-              }}
+              onClick={() => handleOptionSelect(option.value)}
             >
               <div className="flex-1 min-w-0 text-left">
                 <p className="leading-6 whitespace-pre-wrap">{option.label}</p>
