@@ -5,22 +5,28 @@ import { ComponentProps, PropsWithChildren } from 'react'
 import { cn } from '@/utils/cn'
 
 const buttonVariants = cva(
-  'rounded-md text-base flex items-center justify-center outline-1 focus:outline-dashed focus:outline-2 focus:outline-primary-600 hover:bg-primary-700 hover:outline-none disabled:cursor-not-allowed disabled:text-neutral-700 disabled:outline-none active:bg-primary-600 active:outline-primary-400 active:outline',
+  'flex items-center justify-center gap-2 font-bold font-sans disabled:cursor-not-allowed',
   {
     variants: {
       variant: {
         primary:
-          'px-5 outline text-white outline-white bg-neutral-950 disabled:bg-neutral-300',
+          'bg-primary-800 text-neutral-white hover:bg-primary-600 active:bg-primary-900 focus:bg-primary-600 disabled:bg-neutral-700 disabled:border disabled:border-neutral-900 disabled:text-neutral-900',
         secondary:
-          'px-5 outline text-black outline-black bg-white hover:text-white active:text-white disabled:bg-neutral-300',
+          'bg-tertiary-800 text-neutral-white hover:bg-tertiary-900 hover:text-tertiary-100 focus:bg-tertiary-900 focus:text-neutral-white disabled:bg-neutral-700 disabled:border disabled:border-neutral-900 disabled:text-neutral-900',
         tertiary:
-          'inline-flex gap-2 px-4 py-2 text-white bg-tertiary-500 hover:bg-tertiary-700 disabled:opacity-50',
-        outline:
-          'inline-flex gap-2 px-4 py-2 border border-neutral-950 text-neutral-black bg-transparent hover:bg-neutral-100 disabled:opacity-50',
+          'bg-neutral-white border border-secondary-900 text-secondary-900 hover:bg-secondary-900 hover:text-neutral-white active:bg-secondary-950 active:text-neutral-white focus:bg-secondary-900 focus:text-neutral-white disabled:bg-neutral-700 disabled:border disabled:border-neutral-900 disabled:text-neutral-900',
+        ghost:
+          'bg-transparent text-secondary-950 hover:text-primary-800 focus:border-2 focus:border-primary-500 focus:text-primary-600 disabled:bg-neutral-100 disabled:text-neutral-500',
+      },
+      size: {
+        large: 'px-4 py-4 text-base leading-5 tracking-[0.4px]',
+        medium: 'px-4 py-3 text-sm leading-5 tracking-[0.35px]',
+        small: 'px-2 py-1 text-xs leading-5 tracking-[0.3px]',
       },
     },
     defaultVariants: {
       variant: 'primary',
+      size: 'large',
     },
   }
 )
@@ -36,18 +42,19 @@ interface ButtonProps extends PropsWithChildren, ButtonVariantProps {
 
 type ButtonHTMLProps = Omit<
   ComponentProps<'button'>,
-  'variant' | 'href' | 'disabled' | 'className' | 'type'
+  'variant' | 'size' | 'href' | 'disabled' | 'className' | 'type'
 >
 
 const Button = ({
   children,
   className,
   variant,
+  size,
   disabled,
   href,
   ...props
 }: ButtonProps & ButtonHTMLProps) => {
-  const classes = cn(buttonVariants({ variant }), className)
+  const classes = cn(buttonVariants({ variant, size }), className)
 
   if (href) {
     const { type, ...linkProps } = props as any
