@@ -10,15 +10,15 @@ const linkVariants = cva(
     variants: {
       variant: {
         primary:
-          'text-primary-800 hover:text-primary-600 active:text-primary-900 focus:text-primary-600 focus:border focus:border-primary-900 focus:rounded-[2px] disabled:text-neutral-800',
+          'text-primary-800 hover:text-primary-600 active:text-primary-900 focus:text-primary-600 focus:border focus:border-primary-900 focus:rounded-sm disabled:text-neutral-800',
         secondary:
-          'text-secondary-900 hover:text-secondary-700 focus:text-secondary-500 focus:border focus:border-secondary-900 focus:rounded-[2px] disabled:text-neutral-800',
+          'text-secondary-900 hover:text-secondary-700 focus:text-secondary-500 focus:border focus:border-secondary-900 focus:rounded-sm disabled:text-neutral-800',
         tertiary:
-          'text-quaternary-100 hover:text-quaternary-500 active:text-neutral-900 focus:text-neutral-700 focus:border focus:border-neutral-700 focus:rounded-[2px] disabled:text-neutral-800',
+          'text-quaternary-100 hover:text-quaternary-500 active:text-neutral-900 focus:text-neutral-700 focus:border focus:border-neutral-700 focus:rounded-sm disabled:text-neutral-800',
       },
       size: {
         large: 'text-base leading-4 font-bold',
-        small: 'text-sm leading-[14px] font-normal',
+        small: 'text-sm leading-none font-normal',
       },
     },
     defaultVariants: {

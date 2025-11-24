@@ -144,9 +144,9 @@ const RadioCheckbox = ({
           )}
         >
           {checked && (
-            <div className="relative shrink-0 size-[10px]">
+            <div className="relative shrink-0 size-2">
               <svg
-                className="size-[10px]"
+                className="size-2"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

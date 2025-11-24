@@ -87,13 +87,13 @@ const InputDropdown = ({
         </div>
       </button>
       {isOpen && !disabled && (
-        <div className="absolute top-[46px] left-0 right-0 z-10 bg-neutral-100 border-2 border-primary-800 flex flex-col">
+        <div className="absolute top-12 left-0 right-0 z-10 bg-neutral-100 border-2 border-primary-800 flex flex-col">
           {options.map((option) => (
             <button
               key={option.value}
               type="button"
               className={cn(
-                'bg-neutral-white flex gap-[10px] items-center',
+                'bg-neutral-white flex gap-2 items-center',
                 'px-4 py-3 w-full cursor-pointer',
                 'hover:bg-secondary-100',
                 'text-base font-semibold leading-6 text-neutral-800'
