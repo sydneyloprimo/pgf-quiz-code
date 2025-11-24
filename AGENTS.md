@@ -422,6 +422,7 @@ export enum Routes {
 - **Variants Over Classes**: Prioritize Tailwind variants (`md:`, `hover:`, `focus:`, etc.) over extra classes
 - **Responsive Design**: Use mobile-first approach with `mobile:`, `tablet:`, `desktop:` custom variants
 - **Avoid Arbitrary Values**: Always prefer Tailwind's default utility classes over arbitrary values (e.g., `h-10` instead of `h-[40px]`, `w-6` instead of `w-[24px]`). Use arbitrary values only when there's no Tailwind equivalent and the value is design-specific
+- **Prefer Tailwind Utilities Over JavaScript**: Always prefer Tailwind utilities and pseudo-classes over JavaScript conditionals for styling. Use Tailwind's built-in pseudo-classes (e.g., `:placeholder-shown`, `:hover`, `:focus`, `:disabled`) instead of JavaScript state checks when possible
 
 **Example:**
 
@@ -435,6 +436,23 @@ export enum Routes {
 <div className="text-sm custom-large-text" style={{ fontWeight: 'bold' }}>
   Content
 </div>
+```
+
+**Example - Tailwind Utilities Over JavaScript:**
+
+```typescript
+// ✅ Good - Using Tailwind pseudo-classes
+<input
+  className="text-secondary-950 placeholder-shown:text-neutral-800"
+  placeholder="Enter text"
+/>
+
+// ❌ Bad - Using JavaScript conditionals for styling
+const isFilled = Boolean(value)
+<input
+  className={isFilled ? 'text-secondary-950' : 'text-neutral-800'}
+  placeholder="Enter text"
+/>
 ```
 
 ### Color Usage
@@ -654,6 +672,41 @@ import { Button } from '@/components/common/Button'
 - Avoid creating component classes with `@apply` - use React components instead
 - **Custom Utilities**: Use `@utility` directive in `utilities.css` for semantic utility classes (typography, semantic colors, etc.)
 - Custom utility classes should be minimal and only for semantic purposes
+
+### Icon Usage
+
+- **Always Use Icon Pack**: Always use icons from the existing icon pack in `public/icons/` instead of downloading or creating new icons from Figma
+- **Import Pattern**: Import icons from `public/icons/` and use them with Next.js `Image` component
+- **Icon Location**: All icons are located in `public/icons/` directory
+- **No Inline SVGs**: Avoid creating inline SVG elements when an icon exists in the icon pack
+- **Check Existing Icons First**: Before using any icon, check if a similar icon already exists in `public/icons/`
+
+**Example:**
+
+```typescript
+// ✅ Good - Using icon from icon pack
+import Image from 'next/image'
+import chevronDown from 'public/icons/chevron-down.svg'
+
+<Image src={chevronDown} alt="" width={24} height={24} />
+
+// ❌ Bad - Creating inline SVG or downloading from Figma
+<svg viewBox="0 0 24 24" fill="none">
+  <path d="M19 9l-7 7-7-7" />
+</svg>
+```
+
+**Available Icons:**
+
+Common icons available in `public/icons/` include:
+
+- `chevron-down.svg`, `chevron-up.svg`, `chevron-left.svg`
+- `cart.svg`, `hamburger.svg`, `magnifying-glass.svg`
+- `plus.svg`, `subtract.svg`, `cross.svg`
+- `visibility.svg`, `visibility_off.svg`
+- `trash.svg`, `filter.svg`
+- `success.svg`, `error.svg`
+- And more...
 
 ---
 
@@ -921,6 +974,8 @@ Before submitting code, ensure:
 - ✅ Tailwind variants used instead of extra classes
 - ✅ **No `!important` usage** - use `cn` from `@/utils/cn` with tailwind-merge to resolve conflicts
 - ✅ **No arbitrary values** - prefer Tailwind default utilities (e.g., `h-10` not `h-[40px]`)
+- ✅ **Prefer Tailwind utilities over JavaScript** - use pseudo-classes (e.g., `:placeholder-shown`, `:hover`) instead of JS conditionals for styling
+- ✅ **Use icons from icon pack** - always use icons from `public/icons/` instead of downloading from Figma or creating inline SVGs
 - ✅ Rendering logic optimized (useMemo/useCallback)
 - ✅ No unused variables or imports
 - ✅ Imports use path aliases (no `../`)

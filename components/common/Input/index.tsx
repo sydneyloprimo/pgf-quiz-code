@@ -38,8 +38,6 @@ interface InputProps
   error?: string
   icon?: ReactNode
   iconPosition?: InputIconPosition.Start | InputIconPosition.End
-  prefix?: string
-  suffix?: string
   className?: string
 }
 
@@ -61,8 +59,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       icon,
       iconPosition = InputIconPosition.Start,
       name,
-      prefix,
-      suffix,
       state,
       disabled,
       ...props
@@ -109,13 +105,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               inputClassName
             )}
           >
-            {prefix && (
-              <div className="border border-neutral-300 flex gap-[10px] items-start px-2 py-0 rounded">
-                <p className="font-medium leading-6 text-sm text-neutral-600">
-                  {prefix}
-                </p>
-              </div>
-            )}
             {icon && iconPosition === InputIconPosition.Start && (
               <div className="relative shrink-0 size-6">{icon}</div>
             )}
@@ -124,13 +113,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               id={id}
               className={cn(
                 'flex-1 min-w-0 font-semibold leading-6 text-base',
-                'text-neutral-800 overflow-ellipsis overflow-hidden',
+                'text-secondary-950 placeholder-shown:text-neutral-800',
+                'overflow-ellipsis overflow-hidden',
                 'whitespace-nowrap bg-transparent border-0 outline-0',
-                'placeholder:text-neutral-800',
-                disabled && 'cursor-not-allowed',
-                prefix && 'pl-0',
-                suffix && 'pr-0',
-                !prefix && !suffix && 'px-0'
+                'placeholder:text-neutral-800 px-0',
+                disabled && 'cursor-not-allowed'
               )}
               type={type}
               name={name}
@@ -142,13 +129,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               disabled={disabled}
               {...props}
             />
-            {suffix && (
-              <div className="border border-neutral-300 flex gap-[10px] items-start px-2 py-0 rounded">
-                <p className="font-medium leading-6 text-sm text-neutral-600">
-                  {suffix}
-                </p>
-              </div>
-            )}
             {icon && iconPosition === InputIconPosition.End && (
               <div className="relative shrink-0 size-6">{icon}</div>
             )}

@@ -9,7 +9,6 @@ import { Button } from '@/components/common/Button'
 import Input from '@/components/common/Input'
 import { InputDropdown } from '@/components/common/InputDropdown'
 import { InputNumber } from '@/components/common/InputNumber'
-import { OptionSelect } from '@/components/common/OptionSelect'
 import { RadioCheckbox } from '@/components/common/RadioCheckbox'
 import { Routes } from '@/types/enums/routes'
 import './styles.modules.css'
@@ -75,11 +74,7 @@ const HeroBanner = () => {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="Enter text"
-            prefix="R$"
-            suffix="kg"
           />
-
-          <OptionSelect state="default">Option Select</OptionSelect>
 
           <InputDropdown
             value={dropdownValue}
