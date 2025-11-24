@@ -675,40 +675,35 @@ import { Button } from '@/components/common/Button'
 
 ### Icon Usage
 
-- **Always Use Icon Pack**: Always use icons from the existing icon pack in `public/icons/` instead of downloading or creating new icons from Figma
-- **Import Pattern**: Import icons from `public/icons/` and use them with Next.js `Image` component
-- **Icon Location**: All icons are located in `public/icons/` directory
-- **No Inline SVGs**: Avoid creating inline SVG elements when an icon exists in the icon pack
-- **Check Existing Icons First**: Before using any icon, check if a similar icon already exists in `public/icons/`
+- **TSX Icons for Colorable Icons**: For icons that need to be colored dynamically (using `currentColor` or Tailwind color classes), use TSX icon components from `components/common/Icon/`
+- **Icon Location**: 
+  - TSX icons: `components/common/Icon/` (e.g., `CheckIcon`, `ChevronIcon`, `DecrementIcon`, `IncrementIcon`)
+- **Import Pattern**: Import TSX icons from `@/components/common/Icon`
+- **Check Existing Icons First**: Before creating a new icon, check if it already exists in either location
 
-**Example:**
+**Example - TSX Icons (Colorable):**
 
 ```typescript
-// ✅ Good - Using icon from icon pack
-import Image from 'next/image'
-import chevronDown from 'public/icons/chevron-down.svg'
+// ✅ Good - Using TSX icon component for colorable icons
+import { CheckIcon, ChevronIcon } from '@/components/common/Icon'
 
-<Image src={chevronDown} alt="" width={24} height={24} />
+<CheckIcon className="size-6 text-feedback-success-500" />
+<ChevronIcon direction="down" className="size-6 text-primary-600" />
 
-// ❌ Bad - Creating inline SVG or downloading from Figma
-<svg viewBox="0 0 24 24" fill="none">
-  <path d="M19 9l-7 7-7-7" />
-</svg>
+// ✅ Good - TSX icons use currentColor, so they inherit text color
+<CheckIcon className="text-primary-600" />
 ```
 
-**Available Icons:**
 
-Common icons available in `public/icons/` include:
+**Available TSX Icons:**
 
-- `chevron-down.svg`, `chevron-up.svg`, `chevron-left.svg`
-- `cart.svg`, `hamburger.svg`, `magnifying-glass.svg`
-- `plus.svg`, `subtract.svg`, `cross.svg`
-- `visibility.svg`, `visibility_off.svg`
-- `trash.svg`, `filter.svg`
-- `success.svg`, `error.svg`
-- And more...
+TSX icon components available in `components/common/Icon/` include:
 
----
+- `CheckIcon` - Checkmark icon (uses `currentColor`)
+- `ChevronIcon` - Chevron icon with direction prop (uses `currentColor`)
+- `DecrementIcon` - Left arrow icon (uses `currentColor`)
+- `IncrementIcon` - Right arrow icon (uses `currentColor`)
+
 
 ## Internationalization (i18n)
 

@@ -3,8 +3,7 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import { ReactNode, useState } from 'react'
 
-import { CheckIcon } from '@/components/common/CheckIcon'
-import { ChevronIcon } from '@/components/common/ChevronIcon'
+import { CheckIcon, ChevronIcon } from '@/components/common/Icon'
 import { cn } from '@/utils/cn'
 
 const inputDropdownVariants = cva(

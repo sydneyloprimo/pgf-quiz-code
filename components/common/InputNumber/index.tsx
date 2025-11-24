@@ -3,8 +3,7 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import { InputHTMLAttributes, ReactNode } from 'react'
 
-import { DecrementIcon } from '@/components/common/DecrementIcon'
-import { IncrementIcon } from '@/components/common/IncrementIcon'
+import { DecrementIcon, IncrementIcon } from '@/components/common/Icon'
 import { cn } from '@/utils/cn'
 
 const inputNumberVariants = cva('flex gap-4 items-center', {
