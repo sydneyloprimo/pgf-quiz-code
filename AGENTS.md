@@ -676,7 +676,7 @@ import { Button } from '@/components/common/Button'
 ### Icon Usage
 
 - **TSX Icons for Colorable Icons**: For icons that need to be colored dynamically (using `currentColor` or Tailwind color classes), use TSX icon components from `components/common/Icon/`
-- **Icon Location**: 
+- **Icon Location**:
   - TSX icons: `components/common/Icon/` (e.g., `CheckIcon`, `ChevronIcon`, `DecrementIcon`, `IncrementIcon`)
 - **Import Pattern**: Import TSX icons from `@/components/common/Icon`
 - **Check Existing Icons First**: Before creating a new icon, check if it already exists in either location
@@ -694,7 +694,6 @@ import { CheckIcon, ChevronIcon } from '@/components/common/Icon'
 <CheckIcon className="text-primary-600" />
 ```
 
-
 **Available TSX Icons:**
 
 TSX icon components available in `components/common/Icon/` include:
@@ -703,7 +702,6 @@ TSX icon components available in `components/common/Icon/` include:
 - `ChevronIcon` - Chevron icon with direction prop (uses `currentColor`)
 - `DecrementIcon` - Left arrow icon (uses `currentColor`)
 - `IncrementIcon` - Right arrow icon (uses `currentColor`)
-
 
 ## Internationalization (i18n)
 
