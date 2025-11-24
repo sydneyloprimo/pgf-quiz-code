@@ -19,9 +19,9 @@ const buttonVariants = cva(
           'bg-transparent text-secondary-950 hover:text-primary-800 focus:border-2 focus:border-primary-500 focus:text-primary-600 disabled:bg-neutral-100 disabled:text-neutral-500',
       },
       size: {
-        large: 'px-4 py-4 text-base leading-5 tracking-[0.4px]',
-        medium: 'px-4 py-3 text-sm leading-5 tracking-[0.35px]',
-        small: 'px-2 py-1 text-xs leading-5 tracking-[0.3px]',
+        large: 'px-4 py-4 text-base leading-5 tracking-wide',
+        medium: 'px-4 py-3 text-sm leading-5 tracking-wide',
+        small: 'px-2 py-1 text-xs leading-5 tracking-wide',
       },
     },
     defaultVariants: {
