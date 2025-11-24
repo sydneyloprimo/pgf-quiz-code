@@ -12,6 +12,21 @@
       "button": "Crea el plan de tu perro",
       "link": "Habla directamente con nuestro Concierge"
     },
+    "step2": {
+      "heading": "Conozcamos a tu perro.",
+      "description": "Usaremos esta información para crear un plan respaldado por la ciencia que se adapte a las necesidades exactas de tu perro.",
+      "namePrefix": "El nombre de mi perro es",
+      "nameSuffix": "un",
+      "gender": {
+        "male": "Macho",
+        "female": "Hembra"
+      },
+      "genderSuffix": "perro",
+      "agePrefix": "que tiene",
+      "ageSuffix": "años y pesa",
+      "weightPrefix": "",
+      "weightSuffix": "lbs"
+    },
     "title": "Purely Golden Foods"
   }
 }

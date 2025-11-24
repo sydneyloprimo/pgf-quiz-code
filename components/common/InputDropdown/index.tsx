@@ -41,6 +41,9 @@ interface InputDropdownProps extends InputDropdownVariantProps {
   className?: string
   icon?: ReactNode
   disabled?: boolean
+  textClassName?: string
+  onOpen?: () => void
+  onClose?: () => void
 }
 
 const InputDropdown = ({
@@ -52,6 +55,9 @@ const InputDropdown = ({
   icon,
   state,
   disabled,
+  textClassName,
+  onOpen,
+  onClose,
 }: InputDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const selectedOption = options.find((opt) => opt.value === value)
@@ -63,12 +69,29 @@ const InputDropdown = ({
         ? 'filled'
         : state || 'default'
 
+  const handleToggle = () => {
+    if (disabled) return
+    const newIsOpen = !isOpen
+    setIsOpen(newIsOpen)
+    if (newIsOpen) {
+      onOpen?.()
+    } else {
+      onClose?.()
+    }
+  }
+
+  const handleSelect = (optionValue: string) => {
+    onSelect?.(optionValue)
+    setIsOpen(false)
+    onClose?.()
+  }
+
   return (
     <div className={cn('relative flex flex-col', className)}>
       <button
         type="button"
         className={cn(inputDropdownVariants({ state: displayState }))}
-        onClick={() => !disabled && setIsOpen(!isOpen)}
+        onClick={handleToggle}
         disabled={disabled}
       >
         <p
@@ -76,7 +99,8 @@ const InputDropdown = ({
             'flex-1 min-w-0 font-semibold leading-6 text-base',
             'text-neutral-800 overflow-ellipsis overflow-hidden',
             'whitespace-nowrap text-left',
-            selectedOption && displayState === 'filled' && 'text-secondary-950'
+            selectedOption && displayState === 'filled' && 'text-secondary-950',
+            textClassName
           )}
         >
           {selectedOption?.label || placeholder}
@@ -98,10 +122,7 @@ const InputDropdown = ({
                 'hover:bg-secondary-100',
                 'text-base font-semibold leading-6 text-neutral-800'
               )}
-              onClick={() => {
-                onSelect?.(option.value)
-                setIsOpen(false)
-              }}
+              onClick={() => handleSelect(option.value)}
             >
               <div className="flex-1 min-w-0 text-left">
                 <p className="leading-6 whitespace-pre-wrap">{option.label}</p>

@@ -137,6 +137,21 @@
       "button": "Build your dog's plan",
       "link": "Speak directly to our Concierge"
     },
+    "step2": {
+      "heading": "Let's get to know your dog.",
+      "description": "We'll use this information to tailor a science-backed plan that fits your dog's exact needs.",
+      "namePrefix": "My dog's name is",
+      "nameSuffix": "a",
+      "gender": {
+        "male": "Male",
+        "female": "Female"
+      },
+      "genderSuffix": "dog",
+      "agePrefix": "who is",
+      "ageSuffix": "years old and weighs",
+      "weightPrefix": "",
+      "weightSuffix": "lbs"
+    },
     "title": "Purely Golden Foods"
   },
   "Search": {
