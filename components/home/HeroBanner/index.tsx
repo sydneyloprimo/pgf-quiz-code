@@ -119,6 +119,7 @@ const HeroBanner = () => {
             value={numberValue}
             onDecrement={() => setNumberValue((prev) => Math.max(0, prev - 1))}
             onIncrement={() => setNumberValue((prev) => prev + 1)}
+            buttonVariant="tertiary"
           />
         </div>
       </div>
