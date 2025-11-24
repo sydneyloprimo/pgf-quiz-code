@@ -1,11 +1,9 @@
 'use client'
 
-import Image from 'next/image'
-import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { PropsWithChildren } from 'react'
 
-import { Routes } from '@/types/enums/routes'
+import { QuizHeader } from '@/components/quiz/QuizHeader'
 import { cn } from '@/utils/cn'
 
 interface QuizLayoutProps extends PropsWithChildren {
@@ -22,46 +20,13 @@ const QuizLayout = ({
 }: QuizLayoutProps) => {
   const t = useTranslations('Quiz')
 
-  return (
-    <div className="flex flex-col min-h-screen bg-neutral-300 w-full">
-      <header
-        className={cn(
-          'flex items-center justify-between',
-          'px-5 md:px-28 py-5',
-          'bg-neutral-300'
-        )}
-      >
-        <Link href={Routes.home} data-qa="quiz-logo">
-          <Image
-            src="/icons/logo-quiz.png"
-            alt={t('title')}
-            width={232}
-            height={36}
-            className="h-9 w-56"
-            priority
-          />
-        </Link>
-        <Link
-          href={Routes.home}
-          data-qa="quiz-close-button"
-          className={cn(
-            'bg-neutral-white border border-secondary-900',
-            'flex items-center justify-center',
-            'h-10 w-10 p-3',
-            'cursor-pointer'
-          )}
-          aria-label={t('closeButton')}
-        >
-          <Image
-            src="/icons/cross.svg"
-            alt={t('closeButton')}
-            width={24}
-            height={24}
-          />
-        </Link>
-      </header>
+  const TOTAL_STEPS = 8
 
-      <main className="flex-1 flex items-center justify-center px-5 md:px-28">
+  return (
+    <div className="flex flex-col min-h-screen bg-neutral-300 w-full py-10 px-5 md:px-24">
+      <QuizHeader currentStep={stepNumber} totalSteps={TOTAL_STEPS} />
+
+      <main className="flex-1 flex items-center justify-center px-0">
         {children}
       </main>
 
@@ -69,7 +34,7 @@ const QuizLayout = ({
         <footer
           className={cn(
             'flex items-center justify-between gap-4',
-            'px-5 md:px-28 py-5',
+            'px-5 sm:px-24 py-5',
             'bg-neutral-300 border-t border-neutral-600'
           )}
         >

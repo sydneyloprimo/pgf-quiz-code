@@ -1,4 +1,6 @@
 export * from './CheckIcon'
 export * from './ChevronIcon'
+export * from './CloseIcon'
 export * from './DecrementIcon'
 export * from './IncrementIcon'
+export * from './PGFTextLogo'

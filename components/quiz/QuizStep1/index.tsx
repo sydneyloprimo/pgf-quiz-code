@@ -18,12 +18,11 @@ const QuizStep1 = ({ onNext }: QuizStep1Props) => {
     <div
       className={cn(
         'flex flex-col items-center justify-center',
-        'gap-16 min-h-[700px] max-w-[900px]',
-        'pb-12 pt-0 px-0 w-full'
+        'pt-0 px-0 w-full'
       )}
     >
-      <div className="flex flex-col gap-4 items-center w-full">
-        <div className="relative shrink-0 w-64 h-64">
+      <div className="flex flex-col gap-4 items-center w-full pb-[60px]">
+        <div className="relative shrink-0">
           <Image
             src="/images/quiz-dog-illustration.png"
             alt="Dog illustration"
