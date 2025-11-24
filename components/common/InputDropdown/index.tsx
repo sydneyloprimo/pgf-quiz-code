@@ -3,6 +3,8 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import { ReactNode, useState } from 'react'
 
+import { CheckIcon } from '@/components/common/CheckIcon'
+import { ChevronIcon } from '@/components/common/ChevronIcon'
 import { cn } from '@/utils/cn'
 
 const inputDropdownVariants = cva(
@@ -81,6 +83,9 @@ const InputDropdown = ({
           {selectedOption?.label || placeholder}
         </p>
         {icon && <div className="relative shrink-0 size-6">{icon}</div>}
+        <div className="relative shrink-0 size-6">
+          <ChevronIcon direction={isOpen ? 'up' : 'down'} className="size-6" />
+        </div>
       </button>
       {isOpen && !disabled && (
         <div className="absolute top-[46px] left-0 right-0 z-10 bg-neutral-100 border-2 border-primary-800 flex flex-col">
@@ -102,22 +107,9 @@ const InputDropdown = ({
               <div className="flex-1 min-w-0 text-left">
                 <p className="leading-6 whitespace-pre-wrap">{option.label}</p>
               </div>
-              {option.checked && (
+              {option.value === value && (
                 <div className="relative shrink-0 size-6">
-                  <svg
-                    className="size-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 13l4 4L19 7"
-                      className="text-feedback-success-500"
-                    />
-                  </svg>
+                  <CheckIcon className="size-6 text-feedback-success-500" />
                 </div>
               )}
             </button>

@@ -59,8 +59,13 @@ const RadioCheckbox = ({
 
   if (type === 'radio') {
     return (
-      <div
-        className={cn(radioCheckboxVariants({ type, size, state }), className)}
+      <label
+        htmlFor={id}
+        className={cn(
+          radioCheckboxVariants({ type, size, state }),
+          !isDisabled && 'cursor-pointer',
+          className
+        )}
       >
         <div className="flex flex-col gap-2 items-center p-1">
           <div
@@ -90,17 +95,16 @@ const RadioCheckbox = ({
           </div>
         </div>
         {label && (
-          <label
-            htmlFor={id}
+          <span
             className={cn(
-              'font-normal leading-5 whitespace-nowrap cursor-pointer',
+              'font-normal leading-5 whitespace-nowrap',
               textSize,
               textColor,
               labelClassName
             )}
           >
             {label}
-          </label>
+          </span>
         )}
         <input
           type="radio"
@@ -111,13 +115,18 @@ const RadioCheckbox = ({
           className="sr-only"
           {...props}
         />
-      </div>
+      </label>
     )
   }
 
   return (
-    <div
-      className={cn(radioCheckboxVariants({ type, size, state }), className)}
+    <label
+      htmlFor={id}
+      className={cn(
+        radioCheckboxVariants({ type, size, state }),
+        !isDisabled && 'cursor-pointer',
+        className
+      )}
     >
       <div className="flex flex-col gap-2 items-center p-1">
         <div
@@ -155,17 +164,16 @@ const RadioCheckbox = ({
         </div>
       </div>
       {label && (
-        <label
-          htmlFor={id}
+        <span
           className={cn(
-            'font-normal leading-5 whitespace-nowrap cursor-pointer',
+            'font-normal leading-5 whitespace-nowrap',
             textSize,
             textColor,
             labelClassName
           )}
         >
           {label}
-        </label>
+        </span>
       )}
       <input
         type="checkbox"
@@ -176,7 +184,7 @@ const RadioCheckbox = ({
         className="sr-only"
         {...props}
       />
-    </div>
+    </label>
   )
 }
 
