@@ -1,8 +1,8 @@
-import cn from 'classnames'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import { Product } from '@/shopify/generated/graphql'
+import { cn } from '@/utils/cn'
 import { formatCurrency } from '@/utils/helpers'
 
 interface ProductCardProps {

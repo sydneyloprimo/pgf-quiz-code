@@ -1,0 +1,1323 @@
+[
+  {
+    "name": "Primitives",
+    "values": [
+      {
+        "mode": {
+          "name": "Value",
+          "id": "1333:0"
+        },
+        "color": [
+          {
+            "name": "Colors/bgs/blue",
+            "value": "#162b46",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/bgs/orange",
+            "value": "#953f10",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/bgs/violet",
+            "value": "#490002",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/feedback/error/100",
+            "value": "#fed7d7",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/feedback/error/500",
+            "value": "#ac3333",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/feedback/error/900",
+            "value": "#ae1616",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/feedback/info/100",
+            "value": "#e3f5ff",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/feedback/info/500",
+            "value": "#0f62a8",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/feedback/info/900",
+            "value": "#104979",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/feedback/opacity/elevation/700--7%",
+            "value": "#4f5e7112",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/feedback/opacity/neutral/900--10%",
+            "value": "#2223261a",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/feedback/opacity/neutral/900--50%",
+            "value": "#22232680",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/feedback/opacity/neutral/900--80%",
+            "value": "#222326cc",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/feedback/success/100",
+            "value": "#c9f3da",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/feedback/success/500",
+            "value": "#067503",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/feedback/success/900",
+            "value": "#194d2e",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/feedback/warning/100",
+            "value": "#fefcbf",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/feedback/warning/500",
+            "value": "#cd8b28",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/feedback/warning/900",
+            "value": "#9b6616",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/neutrals/100",
+            "value": "#fbfaf9",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/neutrals/200",
+            "value": "#f7f5f3",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/neutrals/300",
+            "value": "#f3f0ed",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/neutrals/400",
+            "value": "#eae5e1",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/neutrals/500",
+            "value": "#e2dad5",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/neutrals/600",
+            "value": "#bcb6b1",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/neutrals/700",
+            "value": "#a7a29f",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/neutrals/800",
+            "value": "#8d8a88",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/neutrals/900",
+            "value": "#5e5c5a",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/neutrals/950",
+            "value": "#2f2e2d",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/neutrals/black",
+            "value": "#000000",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/neutrals/white",
+            "value": "#ffffff",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/primary/100",
+            "value": "#eef6f8",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/primary/200",
+            "value": "#cfe3e7",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/primary/300",
+            "value": "#9fc6d0",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/primary/400",
+            "value": "#6faab8",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/primary/500",
+            "value": "#3f8da1",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/primary/600",
+            "value": "#0f7189",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/primary/700",
+            "value": "#0c5a6e",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/primary/800",
+            "value": "#094452",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/primary/900",
+            "value": "#062d37",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/primary/950",
+            "value": "#03171b",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/quaternary/100",
+            "value": "#dcd8cc",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/quaternary/200",
+            "value": "#c3bda7",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/quaternary/500",
+            "value": "#9d9471",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/quaternary/800",
+            "value": "#5d5740",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/secondary/100",
+            "value": "#fff7ee",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/secondary/200",
+            "value": "#fae7d3",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/secondary/300",
+            "value": "#f5cfa7",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/secondary/400",
+            "value": "#f1b77c",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/secondary/500",
+            "value": "#ec9f50",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/secondary/600",
+            "value": "#e78724",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/secondary/700",
+            "value": "#b96c1d",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/secondary/800",
+            "value": "#8b5116",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/secondary/900",
+            "value": "#5c360e",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/secondary/950",
+            "value": "#28211b",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/tertiary/100",
+            "value": "#f4ede6",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/tertiary/200",
+            "value": "#f0e6dc",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/tertiary/300",
+            "value": "#d3b597",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/tertiary/50",
+            "value": "#f9f5f1",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/tertiary/500",
+            "value": "#b3804c",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/tertiary/700",
+            "value": "#845e39",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/tertiary/800",
+            "value": "#6e4f30",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/tertiary/800-70%",
+            "value": "#6e4f30b2",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Colors/tertiary/900",
+            "value": "#47331f",
+            "var": "",
+            "rootAlias": ""
+          }
+        ],
+        "number": [
+          {
+            "name": "Border/border-radius/xxs",
+            "value": "0.125rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Border/border-radius/xs",
+            "value": "0.25rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Border/border-radius/sm",
+            "value": "0.5rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Border/border-radius/md",
+            "value": "0.75rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Border/border-radius/lg",
+            "value": "1rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Border/border-radius/xl",
+            "value": "1.5rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Border/border-radius/2xxl",
+            "value": "3rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Border/border-radius/20xxl",
+            "value": "12.5rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "General/vertical-rhythm",
+            "value": "0.25rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "General/base-font-size",
+            "value": "1rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "General/Content max-width",
+            "value": "90rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Spacing/0x",
+            "value": "0rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Spacing/1x",
+            "value": "0.25rem",
+            "var": "General/vertical-rhythm",
+            "rootAlias": "General/vertical-rhythm"
+          },
+          {
+            "name": "Spacing/2x",
+            "value": "0.5rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Spacing/3x",
+            "value": "0.75rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Spacing/4x",
+            "value": "1rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Spacing/5x",
+            "value": "1.25rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Spacing/6x",
+            "value": "1.5rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Spacing/7x",
+            "value": "1.75rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Spacing/8x",
+            "value": "2rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Spacing/9x",
+            "value": "2.25rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Spacing/10x",
+            "value": "2.5rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Spacing/11x",
+            "value": "2.75rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Spacing/12x",
+            "value": "3rem",
+            "var": "",
+            "rootAlias": ""
+          }
+        ],
+        "string": [
+          {
+            "name": "General/body-family",
+            "value": "Helvetica",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "General/font-family",
+            "value": "Miller Banner",
+            "var": "",
+            "rootAlias": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "State",
+    "values": [
+      {
+        "mode": {
+          "name": "Mode 1",
+          "id": "1344:0"
+        },
+        "color": [],
+        "number": [],
+        "string": []
+      }
+    ]
+  },
+  {
+    "name": "Tokens",
+    "values": [
+      {
+        "mode": {
+          "name": "Value",
+          "id": "1344:1"
+        },
+        "color": [
+          {
+            "name": "Image Overlay",
+            "value": "#44342469",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Border/color/primary",
+            "value": "#2f2e2d",
+            "var": "Colors/neutrals/950",
+            "rootAlias": "Colors/neutrals/950"
+          },
+          {
+            "name": "Elevations/color--primary",
+            "value": "#4f5e7112",
+            "var": "Colors/feedback/opacity/elevation/700--7%",
+            "rootAlias": "Colors/feedback/opacity/elevation/700--7%"
+          },
+          {
+            "name": "Surface/color/primary",
+            "value": "#ffffff",
+            "var": "Colors/neutrals/white",
+            "rootAlias": "Colors/neutrals/white"
+          },
+          {
+            "name": "Surface/color/secondary",
+            "value": "#fbfaf9",
+            "var": "Colors/neutrals/100",
+            "rootAlias": "Colors/neutrals/100"
+          },
+          {
+            "name": "Text/color/invert",
+            "value": "#ffffff",
+            "var": "Colors/neutrals/white",
+            "rootAlias": "Colors/neutrals/white"
+          },
+          {
+            "name": "Text/color/primary",
+            "value": "#000000",
+            "var": "Colors/neutrals/black",
+            "rootAlias": "Colors/neutrals/black"
+          },
+          {
+            "name": "Text/color/secondary",
+            "value": "#a7a29f",
+            "var": "Colors/neutrals/700",
+            "rootAlias": "Colors/neutrals/700"
+          }
+        ],
+        "number": [
+          {
+            "name": "Icons/size--sm",
+            "value": "1rem",
+            "var": "Spacing/4x",
+            "rootAlias": "Spacing/4x"
+          },
+          {
+            "name": "Icons/size--md",
+            "value": "1.25rem",
+            "var": "Spacing/5x",
+            "rootAlias": "Spacing/5x"
+          },
+          {
+            "name": "Icons/size--lg",
+            "value": "1.5rem",
+            "var": "Spacing/6x",
+            "rootAlias": "Spacing/6x"
+          }
+        ],
+        "string": []
+      }
+    ]
+  },
+  {
+    "name": "Responsive",
+    "values": [
+      {
+        "mode": {
+          "name": "Desktop",
+          "id": "1390:0"
+        },
+        "color": [],
+        "number": [
+          {
+            "name": "Breakpoints/grid-columns",
+            "value": "0.75rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Breakpoints/grid-gutter",
+            "value": "1.5rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Breakpoints/grid-margin",
+            "value": "6rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Breakpoints/min",
+            "value": "71rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Breakpoints/max",
+            "value": "312.5rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Font/Titles/h1/size",
+            "value": "3rem",
+            "var": "Spacing/12x",
+            "rootAlias": "Spacing/12x"
+          },
+          {
+            "name": "Font/Titles/h1/line height",
+            "value": "3.75rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Font/Titles/h2/size",
+            "value": "2.5rem",
+            "var": "Spacing/10x",
+            "rootAlias": "Spacing/10x"
+          },
+          {
+            "name": "Font/Titles/h2/line height",
+            "value": "3rem",
+            "var": "Spacing/12x",
+            "rootAlias": "Spacing/12x"
+          },
+          {
+            "name": "Font/Titles/h3/size",
+            "value": "2.25rem",
+            "var": "Spacing/9x",
+            "rootAlias": "Spacing/9x"
+          },
+          {
+            "name": "Font/Titles/h3/line height",
+            "value": "3rem",
+            "var": "Spacing/12x",
+            "rootAlias": "Spacing/12x"
+          },
+          {
+            "name": "Font/Titles/h4/size",
+            "value": "2rem",
+            "var": "Spacing/8x",
+            "rootAlias": "Spacing/8x"
+          },
+          {
+            "name": "Font/Titles/h4/line height",
+            "value": "2.5rem",
+            "var": "Spacing/10x",
+            "rootAlias": "Spacing/10x"
+          },
+          {
+            "name": "Font/Titles/h5/size",
+            "value": "1.5rem",
+            "var": "Spacing/6x",
+            "rootAlias": "Spacing/6x"
+          },
+          {
+            "name": "Font/Titles/h5/line height",
+            "value": "2rem",
+            "var": "Spacing/8x",
+            "rootAlias": "Spacing/8x"
+          },
+          {
+            "name": "Spacing/Screen min height",
+            "value": "56.25rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Spacing/Landing/margin sides",
+            "value": "2.75rem",
+            "var": "Spacing/11x",
+            "rootAlias": "Spacing/11x"
+          },
+          {
+            "name": "Spacing/Quizz/main cta min-width",
+            "value": "16.25rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Spacing/general/0x",
+            "value": "0rem",
+            "var": "Spacing/0x",
+            "rootAlias": "Spacing/0x"
+          },
+          {
+            "name": "Spacing/general/1x",
+            "value": "0.25rem",
+            "var": "Spacing/1x",
+            "rootAlias": "General/vertical-rhythm"
+          },
+          {
+            "name": "Spacing/general/2x",
+            "value": "0.5rem",
+            "var": "Spacing/2x",
+            "rootAlias": "Spacing/2x"
+          },
+          {
+            "name": "Spacing/general/3x",
+            "value": "0.75rem",
+            "var": "Spacing/3x",
+            "rootAlias": "Spacing/3x"
+          },
+          {
+            "name": "Spacing/general/4x",
+            "value": "1rem",
+            "var": "Spacing/4x",
+            "rootAlias": "Spacing/4x"
+          },
+          {
+            "name": "Spacing/general/5x",
+            "value": "1.25rem",
+            "var": "Spacing/5x",
+            "rootAlias": "Spacing/5x"
+          },
+          {
+            "name": "Spacing/general/6x",
+            "value": "1.5rem",
+            "var": "Spacing/6x",
+            "rootAlias": "Spacing/6x"
+          },
+          {
+            "name": "Spacing/general/7x",
+            "value": "1.75rem",
+            "var": "Spacing/7x",
+            "rootAlias": "Spacing/7x"
+          },
+          {
+            "name": "Spacing/general/8x",
+            "value": "2rem",
+            "var": "Spacing/8x",
+            "rootAlias": "Spacing/8x"
+          },
+          {
+            "name": "Spacing/general/9x",
+            "value": "2.25rem",
+            "var": "Spacing/9x",
+            "rootAlias": "Spacing/9x"
+          },
+          {
+            "name": "Spacing/general/10x",
+            "value": "2.5rem",
+            "var": "Spacing/10x",
+            "rootAlias": "Spacing/10x"
+          },
+          {
+            "name": "Spacing/general/11x",
+            "value": "2.75rem",
+            "var": "Spacing/11x",
+            "rootAlias": "Spacing/11x"
+          },
+          {
+            "name": "Spacing/general/12x",
+            "value": "3rem",
+            "var": "Spacing/12x",
+            "rootAlias": "Spacing/12x"
+          },
+          {
+            "name": "Spacing/login/form padding sides",
+            "value": "2rem",
+            "var": "Spacing/8x",
+            "rootAlias": "Spacing/8x"
+          },
+          {
+            "name": "Spacing/login/form padding top",
+            "value": "3.75rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Spacing/login/gap",
+            "value": "6.25rem",
+            "var": "",
+            "rootAlias": ""
+          }
+        ],
+        "string": [
+          {
+            "name": "Components/size",
+            "value": "large",
+            "var": "",
+            "rootAlias": ""
+          }
+        ]
+      },
+      {
+        "mode": {
+          "name": "Tablet",
+          "id": "1390:1"
+        },
+        "color": [],
+        "number": [
+          {
+            "name": "Breakpoints/grid-columns",
+            "value": "0.375rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Breakpoints/grid-gutter",
+            "value": "2rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Breakpoints/grid-margin",
+            "value": "2rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Breakpoints/min",
+            "value": "37.5625rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Breakpoints/max",
+            "value": "70.9375rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Font/Titles/h1/size",
+            "value": "3rem",
+            "var": "Spacing/12x",
+            "rootAlias": "Spacing/12x"
+          },
+          {
+            "name": "Font/Titles/h1/line height",
+            "value": "3.75rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Font/Titles/h2/size",
+            "value": "2.5rem",
+            "var": "Spacing/10x",
+            "rootAlias": "Spacing/10x"
+          },
+          {
+            "name": "Font/Titles/h2/line height",
+            "value": "3rem",
+            "var": "Spacing/12x",
+            "rootAlias": "Spacing/12x"
+          },
+          {
+            "name": "Font/Titles/h3/size",
+            "value": "2.25rem",
+            "var": "Spacing/9x",
+            "rootAlias": "Spacing/9x"
+          },
+          {
+            "name": "Font/Titles/h3/line height",
+            "value": "3rem",
+            "var": "Spacing/12x",
+            "rootAlias": "Spacing/12x"
+          },
+          {
+            "name": "Font/Titles/h4/size",
+            "value": "2rem",
+            "var": "Spacing/8x",
+            "rootAlias": "Spacing/8x"
+          },
+          {
+            "name": "Font/Titles/h4/line height",
+            "value": "2.5rem",
+            "var": "Spacing/10x",
+            "rootAlias": "Spacing/10x"
+          },
+          {
+            "name": "Font/Titles/h5/size",
+            "value": "1.5rem",
+            "var": "Spacing/6x",
+            "rootAlias": "Spacing/6x"
+          },
+          {
+            "name": "Font/Titles/h5/line height",
+            "value": "2rem",
+            "var": "Spacing/8x",
+            "rootAlias": "Spacing/8x"
+          },
+          {
+            "name": "Spacing/Screen min height",
+            "value": "56.25rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Spacing/Landing/margin sides",
+            "value": "2.25rem",
+            "var": "Spacing/9x",
+            "rootAlias": "Spacing/9x"
+          },
+          {
+            "name": "Spacing/Quizz/main cta min-width",
+            "value": "16.25rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Spacing/general/0x",
+            "value": "0rem",
+            "var": "Spacing/0x",
+            "rootAlias": "Spacing/0x"
+          },
+          {
+            "name": "Spacing/general/1x",
+            "value": "0.25rem",
+            "var": "Spacing/1x",
+            "rootAlias": "General/vertical-rhythm"
+          },
+          {
+            "name": "Spacing/general/2x",
+            "value": "0.5rem",
+            "var": "Spacing/2x",
+            "rootAlias": "Spacing/2x"
+          },
+          {
+            "name": "Spacing/general/3x",
+            "value": "0.75rem",
+            "var": "Spacing/3x",
+            "rootAlias": "Spacing/3x"
+          },
+          {
+            "name": "Spacing/general/4x",
+            "value": "1rem",
+            "var": "Spacing/4x",
+            "rootAlias": "Spacing/4x"
+          },
+          {
+            "name": "Spacing/general/5x",
+            "value": "1.25rem",
+            "var": "Spacing/5x",
+            "rootAlias": "Spacing/5x"
+          },
+          {
+            "name": "Spacing/general/6x",
+            "value": "1.5rem",
+            "var": "Spacing/6x",
+            "rootAlias": "Spacing/6x"
+          },
+          {
+            "name": "Spacing/general/7x",
+            "value": "1.75rem",
+            "var": "Spacing/7x",
+            "rootAlias": "Spacing/7x"
+          },
+          {
+            "name": "Spacing/general/8x",
+            "value": "2rem",
+            "var": "Spacing/8x",
+            "rootAlias": "Spacing/8x"
+          },
+          {
+            "name": "Spacing/general/9x",
+            "value": "2.25rem",
+            "var": "Spacing/9x",
+            "rootAlias": "Spacing/9x"
+          },
+          {
+            "name": "Spacing/general/10x",
+            "value": "2.5rem",
+            "var": "Spacing/10x",
+            "rootAlias": "Spacing/10x"
+          },
+          {
+            "name": "Spacing/general/11x",
+            "value": "2.75rem",
+            "var": "Spacing/11x",
+            "rootAlias": "Spacing/11x"
+          },
+          {
+            "name": "Spacing/general/12x",
+            "value": "3rem",
+            "var": "Spacing/12x",
+            "rootAlias": "Spacing/12x"
+          },
+          {
+            "name": "Spacing/login/form padding sides",
+            "value": "1.75rem",
+            "var": "Spacing/7x",
+            "rootAlias": "Spacing/7x"
+          },
+          {
+            "name": "Spacing/login/form padding top",
+            "value": "3rem",
+            "var": "Spacing/12x",
+            "rootAlias": "Spacing/12x"
+          },
+          {
+            "name": "Spacing/login/gap",
+            "value": "3.75rem",
+            "var": "",
+            "rootAlias": ""
+          }
+        ],
+        "string": [
+          {
+            "name": "Components/size",
+            "value": "medium",
+            "var": "",
+            "rootAlias": ""
+          }
+        ]
+      },
+      {
+        "mode": {
+          "name": "Mobile",
+          "id": "1390:2"
+        },
+        "color": [],
+        "number": [
+          {
+            "name": "Breakpoints/grid-columns",
+            "value": "0.25rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Breakpoints/grid-gutter",
+            "value": "1rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Breakpoints/grid-margin",
+            "value": "1.25rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Breakpoints/min",
+            "value": "23.4375rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Breakpoints/max",
+            "value": "37.5rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Font/Titles/h1/size",
+            "value": "2.5rem",
+            "var": "Spacing/10x",
+            "rootAlias": "Spacing/10x"
+          },
+          {
+            "name": "Font/Titles/h1/line height",
+            "value": "3rem",
+            "var": "Spacing/12x",
+            "rootAlias": "Spacing/12x"
+          },
+          {
+            "name": "Font/Titles/h2/size",
+            "value": "2rem",
+            "var": "Spacing/8x",
+            "rootAlias": "Spacing/8x"
+          },
+          {
+            "name": "Font/Titles/h2/line height",
+            "value": "2.5rem",
+            "var": "Spacing/10x",
+            "rootAlias": "Spacing/10x"
+          },
+          {
+            "name": "Font/Titles/h3/size",
+            "value": "2rem",
+            "var": "Spacing/8x",
+            "rootAlias": "Spacing/8x"
+          },
+          {
+            "name": "Font/Titles/h3/line height",
+            "value": "2.5rem",
+            "var": "Spacing/10x",
+            "rootAlias": "Spacing/10x"
+          },
+          {
+            "name": "Font/Titles/h4/size",
+            "value": "1.75rem",
+            "var": "Spacing/7x",
+            "rootAlias": "Spacing/7x"
+          },
+          {
+            "name": "Font/Titles/h4/line height",
+            "value": "2.25rem",
+            "var": "Spacing/9x",
+            "rootAlias": "Spacing/9x"
+          },
+          {
+            "name": "Font/Titles/h5/size",
+            "value": "1.25rem",
+            "var": "Spacing/5x",
+            "rootAlias": "Spacing/5x"
+          },
+          {
+            "name": "Font/Titles/h5/line height",
+            "value": "1.75rem",
+            "var": "Spacing/7x",
+            "rootAlias": "Spacing/7x"
+          },
+          {
+            "name": "Spacing/Screen min height",
+            "value": "50.75rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Spacing/Landing/margin sides",
+            "value": "1.25rem",
+            "var": "Spacing/5x",
+            "rootAlias": "Spacing/5x"
+          },
+          {
+            "name": "Spacing/Quizz/main cta min-width",
+            "value": "12.5rem",
+            "var": "",
+            "rootAlias": ""
+          },
+          {
+            "name": "Spacing/general/0x",
+            "value": "0rem",
+            "var": "Spacing/0x",
+            "rootAlias": "Spacing/0x"
+          },
+          {
+            "name": "Spacing/general/1x",
+            "value": "0.25rem",
+            "var": "Spacing/1x",
+            "rootAlias": "General/vertical-rhythm"
+          },
+          {
+            "name": "Spacing/general/2x",
+            "value": "0.5rem",
+            "var": "Spacing/2x",
+            "rootAlias": "Spacing/2x"
+          },
+          {
+            "name": "Spacing/general/3x",
+            "value": "0.75rem",
+            "var": "Spacing/3x",
+            "rootAlias": "Spacing/3x"
+          },
+          {
+            "name": "Spacing/general/4x",
+            "value": "1rem",
+            "var": "Spacing/4x",
+            "rootAlias": "Spacing/4x"
+          },
+          {
+            "name": "Spacing/general/5x",
+            "value": "1.25rem",
+            "var": "Spacing/5x",
+            "rootAlias": "Spacing/5x"
+          },
+          {
+            "name": "Spacing/general/6x",
+            "value": "1.5rem",
+            "var": "Spacing/6x",
+            "rootAlias": "Spacing/6x"
+          },
+          {
+            "name": "Spacing/general/7x",
+            "value": "1.75rem",
+            "var": "Spacing/7x",
+            "rootAlias": "Spacing/7x"
+          },
+          {
+            "name": "Spacing/general/8x",
+            "value": "2rem",
+            "var": "Spacing/8x",
+            "rootAlias": "Spacing/8x"
+          },
+          {
+            "name": "Spacing/general/9x",
+            "value": "2.25rem",
+            "var": "Spacing/9x",
+            "rootAlias": "Spacing/9x"
+          },
+          {
+            "name": "Spacing/general/10x",
+            "value": "2.5rem",
+            "var": "Spacing/10x",
+            "rootAlias": "Spacing/10x"
+          },
+          {
+            "name": "Spacing/general/11x",
+            "value": "2.75rem",
+            "var": "Spacing/11x",
+            "rootAlias": "Spacing/11x"
+          },
+          {
+            "name": "Spacing/general/12x",
+            "value": "3rem",
+            "var": "Spacing/12x",
+            "rootAlias": "Spacing/12x"
+          },
+          {
+            "name": "Spacing/login/form padding sides",
+            "value": "1.25rem",
+            "var": "Spacing/5x",
+            "rootAlias": "Spacing/5x"
+          },
+          {
+            "name": "Spacing/login/form padding top",
+            "value": "2rem",
+            "var": "Spacing/8x",
+            "rootAlias": "Spacing/8x"
+          },
+          {
+            "name": "Spacing/login/gap",
+            "value": "2rem",
+            "var": "Spacing/8x",
+            "rootAlias": "Spacing/8x"
+          }
+        ],
+        "string": [
+          {
+            "name": "Components/size",
+            "value": "small",
+            "var": "",
+            "rootAlias": ""
+          }
+        ]
+      }
+    ]
+  }
+]

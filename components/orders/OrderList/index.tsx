@@ -1,5 +1,4 @@
 'use client'
-import cn from 'classnames'
 import EmptyState from 'components/orders/EmptyState'
 import OrderCard from 'components/orders/OrderCard'
 import { useSearchParams } from 'next/navigation'
@@ -14,6 +13,7 @@ import { client } from '@/shopify/client'
 import { Order, useGetOrdersQuery } from '@/shopify/generated/graphql'
 import { Cookies } from '@/types/enums/cookies'
 import { Routes } from '@/types/enums/routes'
+import { cn } from '@/utils/cn'
 
 interface OrderListProps {
   className?: string

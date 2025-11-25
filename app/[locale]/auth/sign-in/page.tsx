@@ -54,7 +54,7 @@ export default function SignIn() {
         <div className="flex flex-col items-center gap-1">
           <div>{t('signupRedirectMessage')}</div>
           <Link className="w-full" href={Routes.signup}>
-            <button className="btn-secondary w-full h-[44px]">
+            <button className="btn-secondary w-full h-11">
               {t('signupRedirectLink')}
             </button>
           </Link>

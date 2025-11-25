@@ -23,7 +23,7 @@ const Price = () => {
         placeholder={t('typeMin')}
         type="text"
         className="mb-3"
-        inputClassName="h-[40px]"
+        inputClassName="h-10"
         labelClassName="my-2"
         {...register('priceMin')}
         data-qa="min-price-input"
@@ -33,7 +33,7 @@ const Price = () => {
         placeholder={t('typeMax')}
         type="text"
         className="mb-3"
-        inputClassName="h-[40px]"
+        inputClassName="h-10"
         labelClassName="my-2"
         {...register('priceMax')}
         data-qa="max-price-input"

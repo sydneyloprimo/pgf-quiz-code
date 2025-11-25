@@ -1,6 +1,6 @@
-import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 
+import { Button } from '@/components/common/Button'
 import Carousel from '@/components/common/Carousel'
 import { Routes } from '@/types/enums/routes'
 
@@ -18,12 +18,13 @@ const ExploreCategories = ({ categories }: ExploreCategoriesInterface) => {
         {t('title')}
       </h1>
       <Carousel items={categories} />
-      <Link
+      <Button
+        variant="primary"
         href={Routes.products}
-        className="btn-primary w-max p-[10px] !outline-dark-violet md:mt-4"
+        className="w-max p-3 outline-dark-violet md:mt-4"
       >
         {t('button')}
-      </Link>
+      </Button>
     </div>
   )
 }

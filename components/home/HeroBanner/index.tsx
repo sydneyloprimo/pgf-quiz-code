@@ -1,9 +1,9 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { useTranslations } from 'next-intl'
-
-import { Routes } from '@/types/enums/routes'
 import BannerImage from 'public/images/banner.png'
+
+import { Button } from '@/components/common/Button'
+import { Routes } from '@/types/enums/routes'
 import './styles.modules.css'
 
 const HeroBanner = () => {
@@ -30,13 +30,14 @@ const HeroBanner = () => {
         <h1 className="text-3xl md:text-4xl text-white font-bold">
           {t('title')}
         </h1>
-        <Link
+        <Button
+          variant="primary"
           href={Routes.products}
+          className="w-max p-3 outline-dark-violet mt-4 z-banner"
           data-qa="hero-banner-button"
-          className="btn-primary w-max p-[10px] !outline-dark-violet mt-4 z-banner"
         >
           {t('button')}
-        </Link>
+        </Button>
       </div>
       <Image
         src={BannerImage}

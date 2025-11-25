@@ -1,4 +1,3 @@
-import cn from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -19,6 +18,7 @@ import Toast, { ToastTypes } from '@/components/common/Toast'
 import { MediaQuery } from '@/constants'
 import { Cookies } from '@/types/enums/cookies'
 import { Routes } from '@/types/enums/routes'
+import { cn } from '@/utils/cn'
 
 interface HeaderDropdownMenuProps {
   isOpen: boolean
@@ -71,10 +71,8 @@ const HeaderDropdownMenu = ({
       <DropdownMenuTrigger
         data-qa="header-dropdown-menu"
         className={cn(
-          'dropdown-menu md:w-[168px] text-sm h-8 md:h-10',
-          isOpen
-            ? '!rounded-t-sm md:!rounded-t-md'
-            : '!rounded-sm md:!rounded-md'
+          'text-white outline-white bg-neutral-950 px-4 flex items-center justify-between outline outline-1 focus:outline-dashed focus:outline-2 focus:outline-primary-600 hover:bg-primary-700 hover:outline-none disabled:cursor-not-allowed disabled:bg-neutral-300 disabled:text-neutral-700 disabled:outline-none active:bg-primary-600 active:outline-primary-400 active:outline md:w-[168px] text-sm h-8 md:h-10',
+          isOpen ? 'rounded-t-sm md:rounded-t-md' : 'rounded-sm md:rounded-md'
         )}
       >
         <span className="hidden md:inline">{t('myAccount')}</span>
@@ -101,7 +99,7 @@ const HeaderDropdownMenu = ({
       >
         <DropdownItem
           asChild
-          className="dropdown-menu-item text-sm last-of-type:rounded-b-sm md:last-of-type:rounded-b-md"
+          className="text-sm last-of-type:rounded-b-sm md:last-of-type:rounded-b-md"
         >
           <button onClick={handleProfileClick} data-qa="dropdown-option">
             {t('myProfile')}
@@ -109,16 +107,16 @@ const HeaderDropdownMenu = ({
         </DropdownItem>
         <DropdownItem
           asChild
-          className="dropdown-menu-item text-sm last-of-type:rounded-b-sm md:last-of-type:rounded-b-md"
+          className="text-sm last-of-type:rounded-b-sm md:last-of-type:rounded-b-md"
         >
           <Link href={Routes.orders}>{t('myOrders')}</Link>
         </DropdownItem>
         {isLoggedIn && (
           <>
-            <DropdownMenuSeparator className="h-[1px] bg-white" />
+            <DropdownMenuSeparator className="h-px bg-white" />
             <DropdownItem
               asChild
-              className="dropdown-menu-item text-sm last-of-type:rounded-b-sm md:last-of-type:rounded-b-md"
+              className="text-sm last-of-type:rounded-b-sm md:last-of-type:rounded-b-md"
             >
               <button data-qa="dropdown-option" onClick={handleLogout}>
                 {t('logout')}
