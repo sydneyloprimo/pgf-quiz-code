@@ -89,9 +89,9 @@
   --color-opacity-neutral-900-80: #222326cc;
 
   /* Typography - Font Families */
-  --font-sans: Helvetica;
-  --font-body: Helvetica;
-  --font-display: 'Miller Banner';
+  --font-sans: 'helvetica-lt-pro', Helvetica, sans-serif;
+  --font-body: 'helvetica-lt-pro', Helvetica, sans-serif;
+  --font-display: 'miller-banner', 'Miller Banner', serif;
 
   /* Typography - Base Font Size */
   --text-base: 1rem;

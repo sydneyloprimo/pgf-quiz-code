@@ -1,14 +1,5 @@
-'use client'
-import { Suspense } from 'react'
-
-import { ClarityAnalytics } from './ClarityAnalytics'
-
 const HeadScripts = () => (
-  <>
-    <Suspense>
-      <ClarityAnalytics />
-    </Suspense>
-  </>
+  <link rel="stylesheet" href="https://use.typekit.net/dlw0pka.css" />
 )
 
 export default HeadScripts
