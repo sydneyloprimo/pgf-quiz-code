@@ -8,3 +8,17 @@ export enum ProductConditions {
   Used = 'used',
   Refurbished = 'refurbished',
 }
+
+export enum InputState {
+  Default = 'default',
+  Active = 'active',
+  Filled = 'filled',
+  Disabled = 'disabled',
+  Focus = 'focus',
+}
+
+export enum InputDropdownState {
+  Default = 'default',
+  Filled = 'filled',
+  Open = 'open',
+}
