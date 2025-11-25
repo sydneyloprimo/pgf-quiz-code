@@ -784,24 +784,22 @@ const Header = () => {
 ESLint enforces the following import order (alphabetically within groups):
 
 1. Built-in modules
-2. External packages
+2. External packages (alphabetically sorted)
 3. Internal imports (`@/`)
 4. Sibling/parent imports
 5. Index imports
 6. Unknown imports
 
+**Important**: Within the external packages group, imports must be sorted alphabetically. For example, `next-intl` comes before `react` alphabetically.
+
 **Example:**
 
 ```typescript
-// Built-in
-import { useState, useEffect } from 'react'
-
-// External
+// External (alphabetically sorted)
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-
-// Internal (@/)
-import { cn } from '@/utils/cn'
+import { PropsWithChildren } from 'react'
+import cn from 'classnames'
 
 // Internal (@/)
 import Card from '@/components/common/Card'

@@ -1,5 +1,11 @@
 {
   "Home": {
     "title": "Hola mundo!"
+  },
+  "Quiz": {
+    "backButton": "Atrás",
+    "closeButton": "Cerrar",
+    "continueButton": "Continuar",
+    "title": "Purely Golden Foods"
   }
 }
