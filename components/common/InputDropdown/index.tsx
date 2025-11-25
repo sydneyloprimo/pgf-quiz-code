@@ -7,7 +7,7 @@ import { CheckIcon, ChevronIcon } from '@/components/common/Icon'
 import { cn } from '@/utils/cn'
 
 const inputDropdownVariants = cva(
-  'flex gap-2 items-start overflow-clip p-3 w-full text-base font-semibold leading-6',
+  'flex gap-2 items-start overflow-clip p-3 w-full text-base font-body font-semibold leading-6',
   {
     variants: {
       state: {
@@ -96,7 +96,7 @@ const InputDropdown = ({
       >
         <p
           className={cn(
-            'flex-1 min-w-0 font-semibold leading-6 text-base',
+            'flex-1 min-w-0 font-body font-semibold leading-6 text-base',
             'text-neutral-800 overflow-ellipsis overflow-hidden',
             'whitespace-nowrap text-left',
             selectedOption && displayState === 'filled' && 'text-secondary-950',
@@ -120,12 +120,14 @@ const InputDropdown = ({
                 'bg-neutral-white flex gap-2 items-center',
                 'px-4 py-3 w-full cursor-pointer',
                 'hover:bg-secondary-100',
-                'text-base font-semibold leading-6 text-neutral-800'
+                'text-base font-body font-semibold leading-6 text-neutral-800'
               )}
               onClick={() => handleSelect(option.value)}
             >
               <div className="flex-1 min-w-0 text-left">
-                <p className="leading-6 whitespace-pre-wrap">{option.label}</p>
+                <p className="font-body leading-6 whitespace-pre-wrap">
+                  {option.label}
+                </p>
               </div>
               {option.value === value && (
                 <div className="relative shrink-0 size-6">

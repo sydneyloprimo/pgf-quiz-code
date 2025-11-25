@@ -1,14 +1,12 @@
 'use client'
 
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { PropsWithChildren } from 'react'
 
 import { Button } from '@/components/common/Button'
+import { ArrowLeftIcon } from '@/components/common/Icon'
 import { QuizHeader } from '@/components/quiz/QuizHeader'
 import { cn } from '@/utils/cn'
-
-import ChevronLeftIcon from 'public/icons/chevron-left.svg'
 
 interface QuizLayoutProps extends PropsWithChildren {
   stepNumber: number
@@ -47,15 +45,7 @@ const QuizLayout = ({
             onClick={onBack}
             data-qa="quiz-back-button"
             variant="tertiary"
-            leftIcon={
-              <Image
-                src={ChevronLeftIcon}
-                alt=""
-                className="size-3"
-                width={8}
-                height={13}
-              />
-            }
+            leftIcon={<ArrowLeftIcon className="size-3" />}
           >
             {t('backButton')}
           </Button>

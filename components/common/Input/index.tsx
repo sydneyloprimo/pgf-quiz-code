@@ -8,7 +8,7 @@ import { InputIconPosition } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 
 const inputVariants = cva(
-  'flex gap-2 items-start overflow-clip p-3 w-full text-base font-semibold leading-6',
+  'flex gap-2 items-start overflow-clip p-3 w-full text-base font-body font-semibold leading-6',
   {
     variants: {
       state: {
@@ -112,7 +112,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               ref={ref}
               id={id}
               className={cn(
-                'flex-1 min-w-0 font-semibold leading-6 text-base',
+                'flex-1 min-w-0 font-body font-semibold leading-6 text-base',
                 'text-secondary-950 placeholder-shown:text-neutral-800',
                 'overflow-ellipsis overflow-hidden',
                 'whitespace-nowrap bg-transparent border-0 outline-0',
