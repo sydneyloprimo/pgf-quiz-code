@@ -9,3 +9,6 @@ export const MediaQuery = {
 export const instagramUrl = 'https://www.instagram.com/rootstrap'
 
 export const linkedinUrl = 'https://www.linkedin.com/company/rootstrap-it'
+
+export const QUIZ_DOG_ILLUSTRATION_WIDTH = 268
+export const QUIZ_DOG_ILLUSTRATION_HEIGHT = 266
