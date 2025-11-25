@@ -9,10 +9,9 @@ import { cn } from '@/utils/cn'
 
 interface QuizStep2Props {
   onNext: () => void
-  onBack: () => void
 }
 
-const QuizStep2 = ({ onNext, onBack }: QuizStep2Props) => {
+const QuizStep2 = ({ onNext }: QuizStep2Props) => {
   const t = useTranslations('Quiz.step2')
   const [name, setName] = useState('Tommy')
   const [gender, setGender] = useState('male')

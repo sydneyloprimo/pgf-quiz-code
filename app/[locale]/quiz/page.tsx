@@ -1,12 +1,17 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
+import { Button } from '@/components/common/Button'
+import { ArrowLeftIcon } from '@/components/common/Icon'
 import QuizLayout from '@/components/quiz/QuizLayout'
 import { QuizStep1 } from '@/components/quiz/QuizStep1'
 import { QuizStep2 } from '@/components/quiz/QuizStep2'
+import { cn } from '@/utils/cn'
 
 export default function QuizPage() {
+  const t = useTranslations('Quiz')
   const [stepNumber, setStepNumber] = useState(1)
   const [answers, setAnswers] = useState<Record<number, unknown>>({})
 
@@ -23,7 +28,7 @@ export default function QuizPage() {
       case 1:
         return <QuizStep1 onNext={handleNext} />
       case 2:
-        return <QuizStep2 onNext={handleNext} onBack={handleBack} />
+        return <QuizStep2 onNext={handleNext} />
       default:
         return (
           <div className="flex items-center justify-center min-h-[calc(100vh-12rem)]">
@@ -34,8 +39,37 @@ export default function QuizPage() {
   }
 
   return (
-    <QuizLayout stepNumber={stepNumber} onNext={handleNext} onBack={handleBack}>
-      {renderStep()}
+    <QuizLayout stepNumber={stepNumber}>
+      <div className="flex flex-col items-center w-full">
+        {renderStep()}
+        {stepNumber > 1 && (
+          <div
+            className={cn(
+              'flex items-center justify-between gap-4',
+              'w-full max-w-2xl mt-8'
+            )}
+          >
+            <Button
+              type="button"
+              onClick={handleBack}
+              data-qa="quiz-back-button"
+              variant="tertiary"
+              leftIcon={<ArrowLeftIcon className="size-3" />}
+            >
+              {t('backButton')}
+            </Button>
+            <Button
+              type="button"
+              onClick={handleNext}
+              data-qa="quiz-continue-button"
+              variant="primary"
+              className="min-w-64"
+            >
+              {t('continueButton')}
+            </Button>
+          </div>
+        )}
+      </div>
     </QuizLayout>
   )
 }
