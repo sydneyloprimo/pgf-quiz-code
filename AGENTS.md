@@ -455,6 +455,39 @@ const isFilled = Boolean(value)
 />
 ```
 
+**Example - Conditional Classes with `cn`:**
+
+```typescript
+// ✅ Good - Using cn with conditional object syntax
+import { cn } from '@/utils/cn'
+
+<div
+  className={cn(
+    'base-classes',
+    { 'border-secondary-900': error },
+    { 'cursor-not-allowed': disabled }
+  )}
+/>
+
+// ✅ Good - Using Tailwind's disabled: variant
+<input
+  className={cn(
+    'base-classes',
+    'disabled:cursor-not-allowed'
+  )}
+  disabled={disabled}
+/>
+
+// ❌ Bad - Using JavaScript conditionals in className
+<div
+  className={cn(
+    'base-classes',
+    error && 'border-secondary-900',
+    disabled && 'cursor-not-allowed'
+  )}
+/>
+```
+
 ### Color Usage
 
 - **No Hex Colors**: Never use explicit hex colors in components
@@ -765,11 +798,10 @@ ESLint enforces the following import order (alphabetically within groups):
 // External (alphabetically sorted)
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { PropsWithChildren } from 'react'
 
 // Internal (@/)
 import { cn } from '@/utils/cn'
-
-// Internal (@/)
 import Card from '@/components/common/Card'
 import { Routes } from '@/types/enums/routes'
 import { useProductSearch } from '@/hooks/useProductSearch'
@@ -847,6 +879,93 @@ const { data, isFetching } = useGetAllProductsQuery(client, variables)
 ---
 
 ## Code Quality Standards
+
+### Avoid Nested Ternary Operators
+
+- **Use Helper Functions**: Extract complex conditional logic into helper functions instead of using nested ternary operators
+- **Improved Readability**: Helper functions make the code more readable and easier to maintain
+- **Location**: Place helper functions in the same file or a shared utility file (e.g., `components/common/Input/index.tsx` for input-related helpers)
+
+**Example:**
+
+```typescript
+// ❌ Bad - Nested ternary operators
+const displayState = disabled
+  ? 'default'
+  : isOpen
+    ? 'open'
+    : selectedOption
+      ? 'filled'
+      : state || 'default'
+
+// ✅ Good - Using helper function
+import { getInputDropdownDisplayState } from '@/components/common/Input'
+
+const displayState = getInputDropdownDisplayState(
+  disabled,
+  isOpen,
+  Boolean(selectedOption),
+  state
+)
+```
+
+**Helper Function Example:**
+
+```typescript
+// components/common/Input/index.tsx
+import { InputDropdownState } from '@/types/enums/constants'
+
+export const getInputDropdownDisplayState = (
+  disabled: boolean | undefined,
+  isOpen: boolean,
+  hasSelectedOption: boolean,
+  state?: InputDropdownState | null
+): InputDropdownState => {
+  if (disabled) {
+    return InputDropdownState.Default
+  }
+  if (isOpen) {
+    return InputDropdownState.Open
+  }
+  if (hasSelectedOption) {
+    return InputDropdownState.Filled
+  }
+  return state || InputDropdownState.Default
+}
+```
+
+### Avoid Anonymous Functions in JSX
+
+- **Use Named Handler Functions**: Extract event handlers to named functions instead of using anonymous functions in JSX
+- **Performance**: Named functions with `useCallback` avoid re-creating functions on every render
+- **Readability**: Named functions make the code more readable and easier to test
+- **Location**: Define handler functions within the component, using `useCallback` when the function depends on props or state
+
+**Example:**
+
+```typescript
+// ❌ Bad - Anonymous function in JSX
+<button onClick={() => !disabled && setIsOpen(!isOpen)}>
+  Toggle
+</button>
+
+// ✅ Good - Named handler function
+const handleToggle = useCallback(() => {
+  if (!disabled) {
+    setIsOpen(!isOpen)
+  }
+}, [disabled, isOpen])
+
+<button onClick={handleToggle}>
+  Toggle
+</button>
+```
+
+**When to Use `useCallback`:**
+
+- Use `useCallback` when the handler function depends on props or state
+- Use `useCallback` when passing the handler as a prop to child components
+- For simple handlers that don't depend on changing values, a regular function is acceptable
 
 ### Unused Code
 

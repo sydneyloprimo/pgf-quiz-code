@@ -5,6 +5,7 @@ import { useState } from 'react'
 
 import Input from '@/components/common/Input'
 import { InputDropdown } from '@/components/common/InputDropdown'
+import { InputState, InputDropdownState } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 
 interface QuizStep2Props {
@@ -74,7 +75,7 @@ const QuizStep2 = ({ onNext }: QuizStep2Props) => {
                 onChange={(e) => setName(e.target.value)}
                 className="w-full"
                 inputClassName="font-semibold leading-8 text-secondary-950"
-                state="filled"
+                state={InputState.Filled}
                 onFocus={() => setFocusedField('name')}
                 onBlur={() => setFocusedField(null)}
               />
@@ -89,7 +90,7 @@ const QuizStep2 = ({ onNext }: QuizStep2Props) => {
                 }}
                 options={genderOptions}
                 className="w-full"
-                state="filled"
+                state={InputDropdownState.Filled}
                 textClassName="font-semibold text-secondary-950"
                 onOpen={() => setFocusedField('gender')}
                 onClose={() => setFocusedField(null)}
@@ -113,7 +114,7 @@ const QuizStep2 = ({ onNext }: QuizStep2Props) => {
                 onChange={(e) => setAge(e.target.value)}
                 className="w-full"
                 inputClassName="text-2xl font-semibold leading-8 text-secondary-950"
-                state="filled"
+                state={InputState.Filled}
                 onFocus={() => setFocusedField('age')}
                 onBlur={() => setFocusedField(null)}
               />
@@ -127,7 +128,7 @@ const QuizStep2 = ({ onNext }: QuizStep2Props) => {
                 onChange={(e) => setWeight(e.target.value)}
                 className="w-full"
                 inputClassName="text-2xl font-semibold leading-8 text-secondary-950"
-                state="filled"
+                state={InputState.Filled}
                 onFocus={() => setFocusedField('weight')}
                 onBlur={() => setFocusedField(null)}
               />
