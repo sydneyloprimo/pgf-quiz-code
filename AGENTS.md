@@ -422,6 +422,7 @@ export enum Routes {
 - **Variants Over Classes**: Prioritize Tailwind variants (`md:`, `hover:`, `focus:`, etc.) over extra classes
 - **Responsive Design**: Use mobile-first approach with `mobile:`, `tablet:`, `desktop:` custom variants
 - **Avoid Arbitrary Values**: Always prefer Tailwind's default utility classes over arbitrary values (e.g., `h-10` instead of `h-[40px]`, `w-6` instead of `w-[24px]`). Use arbitrary values only when there's no Tailwind equivalent and the value is design-specific
+- **Prefer Tailwind Utilities Over JavaScript**: Always prefer Tailwind utilities and pseudo-classes over JavaScript conditionals for styling. Use Tailwind's built-in pseudo-classes (e.g., `:placeholder-shown`, `:hover`, `:focus`, `:disabled`) instead of JavaScript state checks when possible
 
 **Example:**
 
@@ -435,6 +436,56 @@ export enum Routes {
 <div className="text-sm custom-large-text" style={{ fontWeight: 'bold' }}>
   Content
 </div>
+```
+
+**Example - Tailwind Utilities Over JavaScript:**
+
+```typescript
+// ✅ Good - Using Tailwind pseudo-classes
+<input
+  className="text-secondary-950 placeholder-shown:text-neutral-800"
+  placeholder="Enter text"
+/>
+
+// ❌ Bad - Using JavaScript conditionals for styling
+const isFilled = Boolean(value)
+<input
+  className={isFilled ? 'text-secondary-950' : 'text-neutral-800'}
+  placeholder="Enter text"
+/>
+```
+
+**Example - Conditional Classes with `cn`:**
+
+```typescript
+// ✅ Good - Using cn with conditional object syntax
+import { cn } from '@/utils/cn'
+
+<div
+  className={cn(
+    'base-classes',
+    { 'border-secondary-900': error },
+    { 'cursor-not-allowed': disabled }
+  )}
+/>
+
+// ✅ Good - Using Tailwind's disabled: variant
+<input
+  className={cn(
+    'base-classes',
+    'disabled:cursor-not-allowed'
+  )}
+  disabled={disabled}
+/>
+
+// ❌ Bad - Using JavaScript conditionals in className
+<div
+  className={cn(
+    'base-classes',
+    error && 'border-secondary-900',
+    disabled && 'cursor-not-allowed'
+  )}
+/>
 ```
 
 ### Color Usage
@@ -655,7 +706,35 @@ import { Button } from '@/components/common/Button'
 - **Custom Utilities**: Use `@utility` directive in `utilities.css` for semantic utility classes (typography, semantic colors, etc.)
 - Custom utility classes should be minimal and only for semantic purposes
 
----
+### Icon Usage
+
+- **TSX Icons for Colorable Icons**: For icons that need to be colored dynamically (using `currentColor` or Tailwind color classes), use TSX icon components from `components/common/Icon/`
+- **Icon Location**:
+  - TSX icons: `components/common/Icon/` (e.g., `CheckIcon`, `ChevronIcon`, `DecrementIcon`, `IncrementIcon`)
+- **Import Pattern**: Import TSX icons from `@/components/common/Icon`
+- **Check Existing Icons First**: Before creating a new icon, check if it already exists in either location
+
+**Example - TSX Icons (Colorable):**
+
+```typescript
+// ✅ Good - Using TSX icon component for colorable icons
+import { CheckIcon, ChevronIcon } from '@/components/common/Icon'
+
+<CheckIcon className="size-6 text-feedback-success-500" />
+<ChevronIcon direction="down" className="size-6 text-primary-600" />
+
+// ✅ Good - TSX icons use currentColor, so they inherit text color
+<CheckIcon className="text-primary-600" />
+```
+
+**Available TSX Icons:**
+
+TSX icon components available in `components/common/Icon/` include:
+
+- `CheckIcon` - Checkmark icon (uses `currentColor`)
+- `ChevronIcon` - Chevron icon with direction prop (uses `currentColor`)
+- `DecrementIcon` - Left arrow icon (uses `currentColor`)
+- `IncrementIcon` - Right arrow icon (uses `currentColor`)
 
 ## Internationalization (i18n)
 
@@ -803,6 +882,93 @@ const { data, isFetching } = useGetAllProductsQuery(client, variables)
 
 ## Code Quality Standards
 
+### Avoid Nested Ternary Operators
+
+- **Use Helper Functions**: Extract complex conditional logic into helper functions instead of using nested ternary operators
+- **Improved Readability**: Helper functions make the code more readable and easier to maintain
+- **Location**: Place helper functions in the same file or a shared utility file (e.g., `components/common/Input/index.tsx` for input-related helpers)
+
+**Example:**
+
+```typescript
+// ❌ Bad - Nested ternary operators
+const displayState = disabled
+  ? 'default'
+  : isOpen
+    ? 'open'
+    : selectedOption
+      ? 'filled'
+      : state || 'default'
+
+// ✅ Good - Using helper function
+import { getInputDropdownDisplayState } from '@/components/common/Input'
+
+const displayState = getInputDropdownDisplayState(
+  disabled,
+  isOpen,
+  Boolean(selectedOption),
+  state
+)
+```
+
+**Helper Function Example:**
+
+```typescript
+// components/common/Input/index.tsx
+import { InputDropdownState } from '@/types/enums/constants'
+
+export const getInputDropdownDisplayState = (
+  disabled: boolean | undefined,
+  isOpen: boolean,
+  hasSelectedOption: boolean,
+  state?: InputDropdownState | null
+): InputDropdownState => {
+  if (disabled) {
+    return InputDropdownState.Default
+  }
+  if (isOpen) {
+    return InputDropdownState.Open
+  }
+  if (hasSelectedOption) {
+    return InputDropdownState.Filled
+  }
+  return state || InputDropdownState.Default
+}
+```
+
+### Avoid Anonymous Functions in JSX
+
+- **Use Named Handler Functions**: Extract event handlers to named functions instead of using anonymous functions in JSX
+- **Performance**: Named functions with `useCallback` avoid re-creating functions on every render
+- **Readability**: Named functions make the code more readable and easier to test
+- **Location**: Define handler functions within the component, using `useCallback` when the function depends on props or state
+
+**Example:**
+
+```typescript
+// ❌ Bad - Anonymous function in JSX
+<button onClick={() => !disabled && setIsOpen(!isOpen)}>
+  Toggle
+</button>
+
+// ✅ Good - Named handler function
+const handleToggle = useCallback(() => {
+  if (!disabled) {
+    setIsOpen(!isOpen)
+  }
+}, [disabled, isOpen])
+
+<button onClick={handleToggle}>
+  Toggle
+</button>
+```
+
+**When to Use `useCallback`:**
+
+- Use `useCallback` when the handler function depends on props or state
+- Use `useCallback` when passing the handler as a prop to child components
+- For simple handlers that don't depend on changing values, a regular function is acceptable
+
 ### Unused Code
 
 - **No Unused Variables**: Remove all unused variables and imports
@@ -921,6 +1087,8 @@ Before submitting code, ensure:
 - ✅ Tailwind variants used instead of extra classes
 - ✅ **No `!important` usage** - use `cn` from `@/utils/cn` with tailwind-merge to resolve conflicts
 - ✅ **No arbitrary values** - prefer Tailwind default utilities (e.g., `h-10` not `h-[40px]`)
+- ✅ **Prefer Tailwind utilities over JavaScript** - use pseudo-classes (e.g., `:placeholder-shown`, `:hover`) instead of JS conditionals for styling
+- ✅ **Use icons from icon pack** - always use icons from `public/icons/` instead of downloading from Figma or creating inline SVGs
 - ✅ Rendering logic optimized (useMemo/useCallback)
 - ✅ No unused variables or imports
 - ✅ Imports use path aliases (no `../`)

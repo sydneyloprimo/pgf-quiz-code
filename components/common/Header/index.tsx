@@ -14,7 +14,6 @@ import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
 import { buildQueryUrl } from '@/utils/utils'
 
-
 const images = {
   cartIcon: '/icons/cart.svg',
   chevronDown: '/icons/chevron-down.svg',
