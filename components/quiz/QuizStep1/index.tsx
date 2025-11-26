@@ -3,16 +3,23 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
-import { Button } from '@/components/common/Button'
 import { Link } from '@/components/common/Link'
+import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
+import { QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 
 interface QuizStep1Props {
-  onNext: () => void
+  goToStep: (step: QuizStep) => void
+  goBack: () => void
+  canGoBack: boolean
 }
 
-const QuizStep1 = ({ onNext }: QuizStep1Props) => {
+const QuizStep1 = ({ goToStep, goBack, canGoBack }: QuizStep1Props) => {
   const t = useTranslations('Quiz.step1')
+
+  const handleNext = () => {
+    goToStep(QuizStep.PetInfo)
+  }
 
   return (
     <div
@@ -53,14 +60,15 @@ const QuizStep1 = ({ onNext }: QuizStep1Props) => {
           </p>
         </div>
       </div>
-      <div className="flex flex-col gap-8 items-center w-full">
-        <Button variant="primary" className="max-w-sm w-full" onClick={onNext}>
-          {t('button')}
-        </Button>
-        <Link href="#" className="text-secondary-900">
-          {t('link')}
-        </Link>
-      </div>
+      <QuizNavigationFooter
+        goBack={goBack}
+        canGoBack={canGoBack}
+        onContinue={handleNext}
+        continueButtonText={t('button')}
+      />
+      <Link href="#" className="text-secondary-900 mt-8">
+        {t('link')}
+      </Link>
     </div>
   )
 }

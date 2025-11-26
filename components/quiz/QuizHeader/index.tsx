@@ -8,11 +8,10 @@ import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
 
 interface QuizHeaderProps {
-  currentStep: number
-  totalSteps: number
+  visitedSteps: number
 }
 
-const QuizHeader = ({ currentStep, totalSteps }: QuizHeaderProps) => {
+const QuizHeader = ({ visitedSteps }: QuizHeaderProps) => {
   const t = useTranslations('Quiz')
 
   return (
@@ -44,7 +43,7 @@ const QuizHeader = ({ currentStep, totalSteps }: QuizHeaderProps) => {
         </Link>
       </div>
       <div className="px-5 md:px-24 pb-4">
-        <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
+        <ProgressBar visitedSteps={visitedSteps} />
       </div>
     </header>
   )
