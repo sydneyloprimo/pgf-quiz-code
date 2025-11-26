@@ -29,7 +29,7 @@ const QuizStep1 = ({ onNext }: QuizStep1Props) => {
         <div className="relative shrink-0">
           <Image
             src="/images/quiz-dog-illustration.png"
-            alt="Dog illustration"
+            alt={t('imageAlt')}
             width={QUIZ_DOG_ILLUSTRATION_WIDTH}
             height={QUIZ_DOG_ILLUSTRATION_HEIGHT}
             className="object-contain"
