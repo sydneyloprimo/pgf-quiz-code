@@ -3,7 +3,8 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
-import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
+import { Button } from '@/components/common/Button'
+import { ArrowLeftIcon } from '@/components/common/Icon'
 import { QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 
@@ -20,47 +21,63 @@ const QuizPlus25Lbs = ({ goToStep, goBack, canGoBack }: QuizPlus25LbsProps) => {
     <div
       className={cn(
         'flex flex-col items-center justify-center',
-        'pt-0 px-0 w-full'
+        'px-0 py-12 w-full',
+        'gap-16'
       )}
     >
-      <div className="flex flex-col gap-6 items-center w-full pb-12">
-        <div className="relative shrink-0">
+      <div className="flex flex-col gap-3 items-center w-full">
+        <div className="relative shrink-0 h-36 w-48">
           <Image
             src="/images/quiz-dog-illustration.png"
-            alt="Dog illustration"
-            width={268}
-            height={266}
+            alt={t('imageAlt')}
+            width={1536}
+            height={1024}
             className="object-contain"
             priority
           />
         </div>
         <div
           className={cn(
-            'flex flex-col gap-4 items-center',
+            'flex flex-col gap-6 items-center',
             'text-center w-full',
-            'text-secondary-950'
+            'text-secondary-950',
+            'max-w-2xl'
           )}
         >
           <h2
             className={cn(
-              'font-display font-semibold',
+              'font-display',
               'text-4xl leading-12 tracking-tight',
               'w-full'
             )}
           >
             {t('heading')}
           </h2>
-          <p className={cn('font-body text-lg leading-8', 'w-full')}>
+          <p className={cn('font-body text-xl leading-8', 'w-full')}>
             {t('description')}
           </p>
         </div>
       </div>
-      <QuizNavigationFooter
-        goBack={goBack}
-        canGoBack={canGoBack}
-        onContinue={goBack}
-        continueButtonText={t('changeWeightsButton')}
-      />
+      <div className={cn('flex items-center justify-center gap-4', 'w-full')}>
+        <Button
+          type="button"
+          onClick={() => goToStep(QuizStep.PetInfo)}
+          variant="tertiary"
+          leftIcon={<ArrowLeftIcon className="size-5" />}
+        >
+          {t('changeWeightsButton')}
+        </Button>
+        <Button
+          type="button"
+          onClick={() => {
+            // TODO: Implement waitlist functionality
+          }}
+          variant="primary"
+          className="min-w-64"
+        >
+          {t('joinWaitlistButton')}
+        </Button>
+      </div>
     </div>
   )
 }

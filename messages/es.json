@@ -37,7 +37,8 @@
       "heading": "Nuestros planes de comidas actuales están diseñados para perros pequeños menores de 25 lbs.",
       "description": "Pronto ampliaremos a razas más grandes — únete a la lista de espera para ser el primero en saber cuándo se lancen los nuevos tamaños.",
       "changeWeightsButton": "Cambiar Peso",
-      "joinWaitlistButton": "Únete a la Lista de Espera"
+      "joinWaitlistButton": "Únete a la Lista de Espera",
+      "imageAlt": "Ilustración de perro"
     },
     "title": "Purely Golden Foods"
   }
