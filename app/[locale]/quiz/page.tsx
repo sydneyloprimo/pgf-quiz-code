@@ -5,9 +5,8 @@ import { useState } from 'react'
 
 import { Button } from '@/components/common/Button'
 import { ArrowLeftIcon } from '@/components/common/Icon'
+import { QuizStep1, QuizStep2 } from '@/components/quiz'
 import QuizLayout from '@/components/quiz/QuizLayout'
-import { QuizStep1 } from '@/components/quiz/QuizStep1'
-import { QuizStep2 } from '@/components/quiz/QuizStep2'
 import { cn } from '@/utils/cn'
 
 export default function QuizPage() {
