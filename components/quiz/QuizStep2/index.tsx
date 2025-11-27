@@ -6,7 +6,7 @@ import { useState } from 'react'
 import Input from '@/components/common/Input'
 import { InputDropdown } from '@/components/common/InputDropdown'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
-import { ADULT_DOG_MIN_AGE_YEARS, MAX_DOG_WEIGHT_LBS } from '@/constants'
+import { MAX_DOG_WEIGHT_LBS, PUPPY_MAX_AGE_YEARS } from '@/constants'
 import {
   InputDropdownState,
   InputState,
@@ -32,7 +32,7 @@ const QuizStep2 = ({ goToStep, goBack, canGoBack }: QuizStep2Props) => {
   const handleNext = () => {
     const ageNum = parseInt(age, 10)
     const weightNum = parseInt(weight, 10)
-    if (ageNum < ADULT_DOG_MIN_AGE_YEARS) {
+    if (ageNum <= PUPPY_MAX_AGE_YEARS) {
       goToStep(QuizStep.UnderAge)
     } else if (weightNum > MAX_DOG_WEIGHT_LBS) {
       goToStep(QuizStep.Plus25Lbs)

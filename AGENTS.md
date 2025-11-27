@@ -1156,7 +1156,7 @@ export const MediaQuery = {
 export const MOBILE_WIDTH = 768
 
 // Quiz thresholds
-export const ADULT_DOG_MIN_AGE_YEARS = 5
+export const PUPPY_MAX_AGE_YEARS = 1
 export const MAX_DOG_WEIGHT_LBS = 25
 ```
 
@@ -1171,9 +1171,9 @@ if (ageNum < 5) {
 }
 
 // ✅ Good - Using constants
-import { ADULT_DOG_MIN_AGE_YEARS, MAX_DOG_WEIGHT_LBS } from '@/constants'
+import { MAX_DOG_WEIGHT_LBS, PUPPY_MAX_AGE_YEARS } from '@/constants'
 
-if (ageNum < ADULT_DOG_MIN_AGE_YEARS) {
+if (ageNum <= PUPPY_MAX_AGE_YEARS) {
   goToStep(QuizStep.UnderAge)
 } else if (weightNum > MAX_DOG_WEIGHT_LBS) {
   goToStep(QuizStep.Plus25Lbs)

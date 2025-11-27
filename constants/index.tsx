@@ -14,5 +14,5 @@ export const QUIZ_DOG_ILLUSTRATION_WIDTH = 268
 export const QUIZ_DOG_ILLUSTRATION_HEIGHT = 266
 
 // Quiz thresholds
-export const ADULT_DOG_MIN_AGE_YEARS = 5
+export const PUPPY_MAX_AGE_YEARS = 1
 export const MAX_DOG_WEIGHT_LBS = 25
