@@ -45,7 +45,7 @@ const QuizStep1 = ({ onNext }: QuizStep1Props) => {
         >
           <h2
             className={cn(
-              'font-display font-semibold',
+              'font-display',
               'text-4xl leading-12 tracking-tight',
               'w-full'
             )}
