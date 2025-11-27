@@ -1,10 +1,9 @@
 interface ProgressBarProps {
-  currentStep: number
-  totalSteps: number
+  visitedSteps: number
 }
 
-const ProgressBar = ({ currentStep, totalSteps }: ProgressBarProps) => {
-  const percentage = Math.min((currentStep / totalSteps) * 100, 100)
+const ProgressBar = ({ visitedSteps }: ProgressBarProps) => {
+  const percentage = Math.min((visitedSteps / 8) * 100, 100)
 
   return (
     <div className="w-full">

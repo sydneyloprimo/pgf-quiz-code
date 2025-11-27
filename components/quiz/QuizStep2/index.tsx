@@ -5,15 +5,23 @@ import { useState } from 'react'
 
 import Input from '@/components/common/Input'
 import { InputDropdown } from '@/components/common/InputDropdown'
-import { InputState, InputDropdownState } from '@/types/enums/constants'
+import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
+import {
+  InputState,
+  InputDropdownState,
+  QuizStep,
+} from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 
 interface QuizStep2Props {
-  onNext: () => void
+  goToStep: (step: QuizStep) => void
+  goBack: () => void
+  canGoBack: boolean
 }
 
-const QuizStep2 = ({ onNext }: QuizStep2Props) => {
+const QuizStep2 = ({ goToStep, goBack, canGoBack }: QuizStep2Props) => {
   const t = useTranslations('Quiz.step2')
+  const tQuiz = useTranslations('Quiz')
   const [name, setName] = useState('Tommy')
   const [gender, setGender] = useState('male')
   const [age, setAge] = useState('8')
@@ -24,6 +32,10 @@ const QuizStep2 = ({ onNext }: QuizStep2Props) => {
     { label: t('gender.male'), value: 'male' },
     { label: t('gender.female'), value: 'female' },
   ]
+
+  const handleNext = () => {
+    goToStep(QuizStep.Step3)
+  }
 
   return (
     <div
@@ -137,6 +149,12 @@ const QuizStep2 = ({ onNext }: QuizStep2Props) => {
           </div>
         </div>
       </div>
+      <QuizNavigationFooter
+        goBack={goBack}
+        canGoBack={canGoBack}
+        onContinue={handleNext}
+        continueButtonText={tQuiz('continueButton')}
+      />
     </div>
   )
 }
