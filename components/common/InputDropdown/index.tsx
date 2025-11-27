@@ -1,7 +1,8 @@
 'use client'
 
 import { cva, type VariantProps } from 'class-variance-authority'
-import { ReactNode, useCallback, useState } from 'react'
+import { useTranslations } from 'next-intl'
+import { ReactNode, useCallback, useId, useState } from 'react'
 
 import { CheckIcon, ChevronIcon } from '@/components/common/Icon'
 import { getInputDropdownDisplayState } from '@/components/common/Input'
@@ -63,7 +64,9 @@ const InputDropdown = ({
   onOpen,
   onClose,
 }: InputDropdownProps) => {
+  const t = useTranslations('Common.InputDropdown')
   const [isOpen, setIsOpen] = useState(false)
+  const dropdownId = useId()
   const selectedOption = options.find((opt) => opt.value === value)
   const displayState = getInputDropdownDisplayState(
     disabled,
@@ -98,6 +101,10 @@ const InputDropdown = ({
         className={cn(inputDropdownVariants({ state: displayState }))}
         onClick={handleToggle}
         disabled={disabled}
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+        aria-controls={dropdownId}
+        aria-label={placeholder || t('selectOption')}
       >
         <p
           className={cn(
@@ -119,11 +126,17 @@ const InputDropdown = ({
         </div>
       </button>
       {isOpen && !disabled && (
-        <div className="absolute top-12 left-0 right-0 z-10 bg-neutral-100 border-2 border-primary-800 flex flex-col">
+        <div
+          id={dropdownId}
+          role="listbox"
+          className="absolute top-12 left-0 right-0 z-10 bg-neutral-100 border-2 border-primary-800 flex flex-col"
+        >
           {options.map((option) => (
             <button
               key={option.value}
               type="button"
+              role="option"
+              aria-selected={option.value === value}
               className={cn(
                 'bg-neutral-white flex gap-2 items-center',
                 'px-4 py-3 w-full cursor-pointer',

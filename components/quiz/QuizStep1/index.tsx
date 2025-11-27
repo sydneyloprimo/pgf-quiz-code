@@ -5,6 +5,10 @@ import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
 import { Link } from '@/components/common/Link'
+import {
+  QUIZ_DOG_ILLUSTRATION_HEIGHT,
+  QUIZ_DOG_ILLUSTRATION_WIDTH,
+} from '@/constants'
 import { cn } from '@/utils/cn'
 
 interface QuizStep1Props {
@@ -25,9 +29,9 @@ const QuizStep1 = ({ onNext }: QuizStep1Props) => {
         <div className="relative shrink-0">
           <Image
             src="/images/quiz-dog-illustration.png"
-            alt="Dog illustration"
-            width={268}
-            height={266}
+            alt={t('imageAlt')}
+            width={QUIZ_DOG_ILLUSTRATION_WIDTH}
+            height={QUIZ_DOG_ILLUSTRATION_HEIGHT}
             className="object-contain"
             priority
           />

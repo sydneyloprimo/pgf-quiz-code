@@ -138,6 +138,7 @@ bd create "Add login form" -p 1 -t feature --blocked-by bd-abc123
 
 - [File Organization](#file-organization)
 - [Component Patterns](#component-patterns)
+- [Accessibility](#accessibility)
 - [TypeScript Guidelines](#typescript-guidelines)
 - [Styling Guidelines](#styling-guidelines)
   - [Design System Tokens](#design-system-tokens)
@@ -341,6 +342,102 @@ const MyPage = () => (
 - Only create new components when existing ones don't meet your needs
 - If you need to extend functionality, consider wrapping existing components first
 - If creating a new component, follow the existing patterns and place it in the appropriate directory (`components/common/` for generic components, or feature-specific directories for domain-specific components)
+
+---
+
+## Accessibility
+
+### Accessibility First Approach
+
+**Accessibility is a core requirement for all work in this codebase.** All components, features, and interactions must be designed and implemented with accessibility in mind from the start.
+
+### ARIA Attributes
+
+- **Always include appropriate ARIA attributes** for interactive components:
+  - `aria-expanded` - For dropdowns, menus, and collapsible elements
+  - `aria-haspopup` - Indicates when an element has a popup (e.g., `"listbox"`, `"menu"`)
+  - `aria-controls` - Links controls to the elements they control
+  - `aria-label` or `aria-labelledby` - Provides accessible names for interactive elements
+  - `aria-selected` - For selectable items (options, tabs, etc.)
+  - `role` - Use semantic roles when native HTML elements aren't sufficient
+- **Use React's `useId` hook** to generate unique IDs for ARIA relationships
+- **Internationalize all accessibility strings** - All accessibility-related text (aria-labels, aria-describedby, alt text, etc.) must be internationalized using the translation system. Never hardcode accessibility strings.
+- **Test with screen readers** - Ensure components work with assistive technologies
+
+**Example - Dropdown Component:**
+
+```typescript
+import { useId } from 'react'
+import { useTranslations } from 'next-intl'
+
+const InputDropdown = ({ options, value, onSelect }) => {
+  const t = useTranslations('Common.InputDropdown')
+  const [isOpen, setIsOpen] = useState(false)
+  const dropdownId = useId()
+
+  return (
+    <div>
+      <button
+        type="button"
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+        aria-controls={dropdownId}
+        aria-label={placeholder || t('selectOption')}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {selectedOption?.label || placeholder}
+      </button>
+      {isOpen && (
+        <div id={dropdownId} role="listbox">
+          {options.map((option) => (
+            <button
+              key={option.value}
+              type="button"
+              role="option"
+              aria-selected={option.value === value}
+              onClick={() => onSelect(option.value)}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+```
+
+### Keyboard Navigation
+
+- **All interactive elements must be keyboard accessible**
+- **Tab order** should be logical and follow visual flow
+- **Focus management** - Ensure focus is properly managed for modals, dropdowns, and dynamic content
+- **Keyboard shortcuts** - Support standard keyboard interactions (Enter, Escape, Arrow keys where appropriate)
+
+### Semantic HTML
+
+- **Use semantic HTML elements** when possible (`<button>`, `<nav>`, `<main>`, `<header>`, `<footer>`, etc.)
+- **Avoid div/span for interactive elements** - Use proper semantic elements instead
+- **Form elements** - Always associate labels with form inputs using `htmlFor`/`id` or wrap inputs in `<label>` elements
+
+**Example:**
+
+```typescript
+// ✅ Good - Semantic HTML with proper labeling
+<label htmlFor="email-input">
+  Email Address
+  <input id="email-input" type="email" />
+</label>
+
+// ❌ Bad - Div with onClick and no label
+<div onClick={handleClick}>Click me</div>
+```
+
+### Resources
+
+- [WCAG 2.2 Guidelines](https://www.w3.org/WAI/WCAG22/quickref/)
+- [MDN Accessibility Guide](https://developer.mozilla.org/en-US/docs/Web/Accessibility)
+- [ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/)
 
 ---
 
@@ -741,6 +838,12 @@ TSX icon components available in `components/common/Icon/` include:
 ### Text Content
 
 - **No Hardcoded Text**: Never include explicit text strings in components
+- **All Strings Must Be Internationalized**: This includes:
+  - Visible text content (buttons, labels, headings, etc.)
+  - **Accessibility strings** (aria-labels, aria-describedby, alt attributes, title attributes, etc.)
+  - Placeholder text
+  - Error messages
+  - Success messages
 - **Use Translations**: Always use `useTranslations` hook from `next-intl`
 - **Translation Keys**: Use namespaced keys (e.g., `'Header.searchPlaceholder'`)
 
@@ -753,7 +856,38 @@ const Header = () => {
   const t = useTranslations('Header')
 
   return (
-    <input placeholder={t('searchPlaceholder')} />
+    <input
+      placeholder={t('searchPlaceholder')}
+      aria-label={t('searchPlaceholder')}
+    />
+  )
+}
+```
+
+**Example - Accessibility Strings:**
+
+```typescript
+import { useTranslations } from 'next-intl'
+import Image from 'next/image'
+
+const ProductCard = ({ product }) => {
+  const t = useTranslations('ProductCard')
+
+  return (
+    <div>
+      <Image
+        src={product.image}
+        alt={t('imageAlt', { name: product.name })}
+        aria-label={t('imageLabel', { name: product.name })}
+      />
+      <button
+        type="button"
+        aria-label={t('addToCartButton')}
+        onClick={handleAddToCart}
+      >
+        {t('addToCart')}
+      </button>
+    </div>
   )
 }
 ```
@@ -1077,6 +1211,7 @@ Before submitting code, ensure:
 
 - ✅ **Use bd tool for all new documentation/work** (not markdown)
 - ✅ **Checked for existing generic components** in `components/common/` before creating new ones
+- ✅ **Accessibility implemented** - ARIA attributes, keyboard navigation, semantic HTML
 - ✅ Files are named after exported components
 - ✅ No hardcoded text (use translations)
 - ✅ No explicit hex colors (use design system tokens)
