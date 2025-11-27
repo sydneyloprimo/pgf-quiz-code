@@ -1,3 +1,4 @@
+export * from './ArrowLeftIcon'
 export * from './CheckIcon'
 export * from './ChevronIcon'
 export * from './CloseIcon'

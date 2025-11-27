@@ -138,6 +138,7 @@ bd create "Add login form" -p 1 -t feature --blocked-by bd-abc123
 
 - [File Organization](#file-organization)
 - [Component Patterns](#component-patterns)
+- [Accessibility](#accessibility)
 - [TypeScript Guidelines](#typescript-guidelines)
 - [Styling Guidelines](#styling-guidelines)
   - [Design System Tokens](#design-system-tokens)
@@ -344,6 +345,102 @@ const MyPage = () => (
 
 ---
 
+## Accessibility
+
+### Accessibility First Approach
+
+**Accessibility is a core requirement for all work in this codebase.** All components, features, and interactions must be designed and implemented with accessibility in mind from the start.
+
+### ARIA Attributes
+
+- **Always include appropriate ARIA attributes** for interactive components:
+  - `aria-expanded` - For dropdowns, menus, and collapsible elements
+  - `aria-haspopup` - Indicates when an element has a popup (e.g., `"listbox"`, `"menu"`)
+  - `aria-controls` - Links controls to the elements they control
+  - `aria-label` or `aria-labelledby` - Provides accessible names for interactive elements
+  - `aria-selected` - For selectable items (options, tabs, etc.)
+  - `role` - Use semantic roles when native HTML elements aren't sufficient
+- **Use React's `useId` hook** to generate unique IDs for ARIA relationships
+- **Internationalize all accessibility strings** - All accessibility-related text (aria-labels, aria-describedby, alt text, etc.) must be internationalized using the translation system. Never hardcode accessibility strings.
+- **Test with screen readers** - Ensure components work with assistive technologies
+
+**Example - Dropdown Component:**
+
+```typescript
+import { useId } from 'react'
+import { useTranslations } from 'next-intl'
+
+const InputDropdown = ({ options, value, onSelect }) => {
+  const t = useTranslations('Common.InputDropdown')
+  const [isOpen, setIsOpen] = useState(false)
+  const dropdownId = useId()
+
+  return (
+    <div>
+      <button
+        type="button"
+        aria-expanded={isOpen}
+        aria-haspopup="listbox"
+        aria-controls={dropdownId}
+        aria-label={placeholder || t('selectOption')}
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {selectedOption?.label || placeholder}
+      </button>
+      {isOpen && (
+        <div id={dropdownId} role="listbox">
+          {options.map((option) => (
+            <button
+              key={option.value}
+              type="button"
+              role="option"
+              aria-selected={option.value === value}
+              onClick={() => onSelect(option.value)}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+```
+
+### Keyboard Navigation
+
+- **All interactive elements must be keyboard accessible**
+- **Tab order** should be logical and follow visual flow
+- **Focus management** - Ensure focus is properly managed for modals, dropdowns, and dynamic content
+- **Keyboard shortcuts** - Support standard keyboard interactions (Enter, Escape, Arrow keys where appropriate)
+
+### Semantic HTML
+
+- **Use semantic HTML elements** when possible (`<button>`, `<nav>`, `<main>`, `<header>`, `<footer>`, etc.)
+- **Avoid div/span for interactive elements** - Use proper semantic elements instead
+- **Form elements** - Always associate labels with form inputs using `htmlFor`/`id` or wrap inputs in `<label>` elements
+
+**Example:**
+
+```typescript
+// ✅ Good - Semantic HTML with proper labeling
+<label htmlFor="email-input">
+  Email Address
+  <input id="email-input" type="email" />
+</label>
+
+// ❌ Bad - Div with onClick and no label
+<div onClick={handleClick}>Click me</div>
+```
+
+### Resources
+
+- [WCAG 2.2 Guidelines](https://www.w3.org/WAI/WCAG22/quickref/)
+- [MDN Accessibility Guide](https://developer.mozilla.org/en-US/docs/Web/Accessibility)
+- [ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/)
+
+---
+
 ## TypeScript Guidelines
 
 ### Type Safety
@@ -452,6 +549,39 @@ const isFilled = Boolean(value)
 <input
   className={isFilled ? 'text-secondary-950' : 'text-neutral-800'}
   placeholder="Enter text"
+/>
+```
+
+**Example - Conditional Classes with `cn`:**
+
+```typescript
+// ✅ Good - Using cn with conditional object syntax
+import { cn } from '@/utils/cn'
+
+<div
+  className={cn(
+    'base-classes',
+    { 'border-secondary-900': error },
+    { 'cursor-not-allowed': disabled }
+  )}
+/>
+
+// ✅ Good - Using Tailwind's disabled: variant
+<input
+  className={cn(
+    'base-classes',
+    'disabled:cursor-not-allowed'
+  )}
+  disabled={disabled}
+/>
+
+// ❌ Bad - Using JavaScript conditionals in className
+<div
+  className={cn(
+    'base-classes',
+    error && 'border-secondary-900',
+    disabled && 'cursor-not-allowed'
+  )}
 />
 ```
 
@@ -708,6 +838,12 @@ TSX icon components available in `components/common/Icon/` include:
 ### Text Content
 
 - **No Hardcoded Text**: Never include explicit text strings in components
+- **All Strings Must Be Internationalized**: This includes:
+  - Visible text content (buttons, labels, headings, etc.)
+  - **Accessibility strings** (aria-labels, aria-describedby, alt attributes, title attributes, etc.)
+  - Placeholder text
+  - Error messages
+  - Success messages
 - **Use Translations**: Always use `useTranslations` hook from `next-intl`
 - **Translation Keys**: Use namespaced keys (e.g., `'Header.searchPlaceholder'`)
 
@@ -720,7 +856,38 @@ const Header = () => {
   const t = useTranslations('Header')
 
   return (
-    <input placeholder={t('searchPlaceholder')} />
+    <input
+      placeholder={t('searchPlaceholder')}
+      aria-label={t('searchPlaceholder')}
+    />
+  )
+}
+```
+
+**Example - Accessibility Strings:**
+
+```typescript
+import { useTranslations } from 'next-intl'
+import Image from 'next/image'
+
+const ProductCard = ({ product }) => {
+  const t = useTranslations('ProductCard')
+
+  return (
+    <div>
+      <Image
+        src={product.image}
+        alt={t('imageAlt', { name: product.name })}
+        aria-label={t('imageLabel', { name: product.name })}
+      />
+      <button
+        type="button"
+        aria-label={t('addToCartButton')}
+        onClick={handleAddToCart}
+      >
+        {t('addToCart')}
+      </button>
+    </div>
   )
 }
 ```
@@ -765,11 +932,10 @@ ESLint enforces the following import order (alphabetically within groups):
 // External (alphabetically sorted)
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { PropsWithChildren } from 'react'
 
 // Internal (@/)
 import { cn } from '@/utils/cn'
-
-// Internal (@/)
 import Card from '@/components/common/Card'
 import { Routes } from '@/types/enums/routes'
 import { useProductSearch } from '@/hooks/useProductSearch'
@@ -847,6 +1013,93 @@ const { data, isFetching } = useGetAllProductsQuery(client, variables)
 ---
 
 ## Code Quality Standards
+
+### Avoid Nested Ternary Operators
+
+- **Use Helper Functions**: Extract complex conditional logic into helper functions instead of using nested ternary operators
+- **Improved Readability**: Helper functions make the code more readable and easier to maintain
+- **Location**: Place helper functions in the same file or a shared utility file (e.g., `components/common/Input/index.tsx` for input-related helpers)
+
+**Example:**
+
+```typescript
+// ❌ Bad - Nested ternary operators
+const displayState = disabled
+  ? 'default'
+  : isOpen
+    ? 'open'
+    : selectedOption
+      ? 'filled'
+      : state || 'default'
+
+// ✅ Good - Using helper function
+import { getInputDropdownDisplayState } from '@/components/common/Input'
+
+const displayState = getInputDropdownDisplayState(
+  disabled,
+  isOpen,
+  Boolean(selectedOption),
+  state
+)
+```
+
+**Helper Function Example:**
+
+```typescript
+// components/common/Input/index.tsx
+import { InputDropdownState } from '@/types/enums/constants'
+
+export const getInputDropdownDisplayState = (
+  disabled: boolean | undefined,
+  isOpen: boolean,
+  hasSelectedOption: boolean,
+  state?: InputDropdownState | null
+): InputDropdownState => {
+  if (disabled) {
+    return InputDropdownState.Default
+  }
+  if (isOpen) {
+    return InputDropdownState.Open
+  }
+  if (hasSelectedOption) {
+    return InputDropdownState.Filled
+  }
+  return state || InputDropdownState.Default
+}
+```
+
+### Avoid Anonymous Functions in JSX
+
+- **Use Named Handler Functions**: Extract event handlers to named functions instead of using anonymous functions in JSX
+- **Performance**: Named functions with `useCallback` avoid re-creating functions on every render
+- **Readability**: Named functions make the code more readable and easier to test
+- **Location**: Define handler functions within the component, using `useCallback` when the function depends on props or state
+
+**Example:**
+
+```typescript
+// ❌ Bad - Anonymous function in JSX
+<button onClick={() => !disabled && setIsOpen(!isOpen)}>
+  Toggle
+</button>
+
+// ✅ Good - Named handler function
+const handleToggle = useCallback(() => {
+  if (!disabled) {
+    setIsOpen(!isOpen)
+  }
+}, [disabled, isOpen])
+
+<button onClick={handleToggle}>
+  Toggle
+</button>
+```
+
+**When to Use `useCallback`:**
+
+- Use `useCallback` when the handler function depends on props or state
+- Use `useCallback` when passing the handler as a prop to child components
+- For simple handlers that don't depend on changing values, a regular function is acceptable
 
 ### Unused Code
 
@@ -958,6 +1211,7 @@ Before submitting code, ensure:
 
 - ✅ **Use bd tool for all new documentation/work** (not markdown)
 - ✅ **Checked for existing generic components** in `components/common/` before creating new ones
+- ✅ **Accessibility implemented** - ARIA attributes, keyboard navigation, semantic HTML
 - ✅ Files are named after exported components
 - ✅ No hardcoded text (use translations)
 - ✅ No explicit hex colors (use design system tokens)

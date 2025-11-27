@@ -1,44 +1,49 @@
 'use client'
 
-import { useState } from 'react'
-
+import { QuizStep1, QuizStep2, QuizStep3 } from '@/components/quiz'
 import QuizLayout from '@/components/quiz/QuizLayout'
-import { QuizStep1 } from '@/components/quiz/QuizStep1'
-import { QuizStep2 } from '@/components/quiz/QuizStep2'
-import { QuizStep3 } from '@/components/quiz/QuizStep3'
+import { QuizStep } from '@/types/enums/constants'
 
 export default function QuizPage() {
-  const [stepNumber, setStepNumber] = useState(1)
-  const [answers, setAnswers] = useState<Record<number, unknown>>({})
-
-  const handleNext = () => {
-    setStepNumber((prev) => prev + 1)
-  }
-
-  const handleBack = () => {
-    setStepNumber((prev) => Math.max(1, prev - 1))
-  }
-
-  const renderStep = () => {
-    switch (stepNumber) {
-      case 1:
-        return <QuizStep1 onNext={handleNext} />
-      case 2:
-        return <QuizStep2 onNext={handleNext} onBack={handleBack} />
-      case 3:
-        return <QuizStep3 onNext={handleNext} onBack={handleBack} />
+  const renderStep = (
+    currentStep: QuizStep,
+    goToStep: (step: QuizStep) => void,
+    goBack: () => void,
+    canGoBack: boolean
+  ) => {
+    switch (currentStep) {
+      case QuizStep.Welcome:
+        return (
+          <QuizStep1
+            goToStep={goToStep}
+            goBack={goBack}
+            canGoBack={canGoBack}
+          />
+        )
+      case QuizStep.PetInfo:
+        return (
+          <QuizStep2
+            goToStep={goToStep}
+            goBack={goBack}
+            canGoBack={canGoBack}
+          />
+        )
+      case QuizStep.Step3:
+        return (
+          <QuizStep3
+            goToStep={goToStep}
+            goBack={goBack}
+            canGoBack={canGoBack}
+          />
+        )
       default:
         return (
           <div className="flex items-center justify-center min-h-[calc(100vh-12rem)]">
-            <p>Step number: {stepNumber}</p>
+            <p>Step: {currentStep}</p>
           </div>
         )
     }
   }
 
-  return (
-    <QuizLayout stepNumber={stepNumber} onNext={handleNext} onBack={handleBack}>
-      {renderStep()}
-    </QuizLayout>
-  )
+  return <QuizLayout renderStep={renderStep} />
 }

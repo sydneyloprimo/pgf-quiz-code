@@ -4,29 +4,77 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { ChangeEvent, InputHTMLAttributes, ReactNode } from 'react'
 import React from 'react'
 
-import { InputIconPosition } from '@/types/enums/constants'
+import {
+  InputDropdownState,
+  InputIconPosition,
+  InputState,
+} from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 
 const inputVariants = cva(
-  'flex gap-2 items-start overflow-clip p-3 w-full text-base font-semibold leading-6',
+  'flex gap-2 items-start overflow-clip p-3 w-full text-base font-body font-semibold leading-6',
   {
     variants: {
       state: {
-        default: 'bg-neutral-white border border-neutral-950 text-neutral-800',
-        active: 'bg-neutral-white border-2 border-primary-800 text-neutral-800',
-        filled:
+        [InputState.Default]:
+          'bg-neutral-white border border-neutral-950 text-neutral-800',
+        [InputState.Active]:
+          'bg-neutral-white border-2 border-primary-800 text-neutral-800',
+        [InputState.Filled]:
           'bg-neutral-white border border-secondary-900 text-secondary-950',
-        disabled: 'bg-neutral-600 border border-neutral-700 text-neutral-800',
-        focus: 'bg-neutral-white border-2 border-neutral-950 text-neutral-800',
+        [InputState.Disabled]:
+          'bg-neutral-600 border border-neutral-700 text-neutral-800',
+        [InputState.Focus]:
+          'bg-neutral-white border-2 border-neutral-950 text-neutral-800',
       },
     },
     defaultVariants: {
-      state: 'default',
+      state: InputState.Default,
     },
   }
 )
 
 export type InputVariantProps = VariantProps<typeof inputVariants>
+
+export const getInputDropdownDisplayState = (
+  disabled: boolean | undefined,
+  isOpen: boolean,
+  hasSelectedOption: boolean,
+  state?: InputDropdownState | null
+): InputDropdownState => {
+  if (disabled) {
+    return InputDropdownState.Default
+  }
+  if (isOpen) {
+    return InputDropdownState.Open
+  }
+  if (hasSelectedOption) {
+    return InputDropdownState.Filled
+  }
+  return state || InputDropdownState.Default
+}
+
+export const getInputDisplayState = (
+  disabled: boolean | undefined,
+  error: string | undefined,
+  isFocused: boolean,
+  isFilled: boolean,
+  state?: InputState | null
+): InputState => {
+  if (disabled) {
+    return InputState.Disabled
+  }
+  if (error) {
+    return InputState.Default
+  }
+  if (isFocused) {
+    return state === InputState.Focus ? InputState.Focus : InputState.Active
+  }
+  if (isFilled) {
+    return InputState.Filled
+  }
+  return state || InputState.Default
+}
 
 interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'className'>,
@@ -78,17 +126,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       onBlur?.(e)
     }
 
-    const displayState = disabled
-      ? 'disabled'
-      : error
-        ? 'default'
-        : isFocused
-          ? state === 'focus'
-            ? 'focus'
-            : 'active'
-          : isFilled
-            ? 'filled'
-            : state || 'default'
+    const displayState = getInputDisplayState(
+      disabled,
+      error,
+      isFocused,
+      isFilled,
+      state
+    )
 
     return (
       <div className={cn('flex flex-col gap-2', className)}>
@@ -101,7 +145,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <div
             className={cn(
               inputVariants({ state: displayState }),
-              error && 'border-secondary-900',
+              { 'border-secondary-900': error },
               inputClassName
             )}
           >
@@ -112,12 +156,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               ref={ref}
               id={id}
               className={cn(
-                'flex-1 min-w-0 font-semibold leading-6 text-base',
+                'flex-1 min-w-0 font-body font-semibold leading-6 text-base',
                 'text-secondary-950 placeholder-shown:text-neutral-800',
                 'overflow-ellipsis overflow-hidden',
                 'whitespace-nowrap bg-transparent border-0 outline-0',
                 'placeholder:text-neutral-800 px-0',
-                disabled && 'cursor-not-allowed'
+                'disabled:cursor-not-allowed'
               )}
               type={type}
               name={name}
@@ -133,7 +177,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               <div className="relative shrink-0 size-6">{icon}</div>
             )}
           </div>
-          {isFocused && displayState === 'focus' && (
+          {isFocused && displayState === InputState.Focus && (
             <div className="absolute border-2 border-secondary-900 inset-[-2px] pointer-events-none" />
           )}
         </div>

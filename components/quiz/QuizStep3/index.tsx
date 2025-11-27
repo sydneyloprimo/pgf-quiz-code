@@ -4,15 +4,19 @@ import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 
 import { OptionSelect } from '@/components/common/OptionSelect'
+import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
+import { QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 
 interface QuizStep3Props {
-  onNext: () => void
-  onBack: () => void
+  goToStep: (step: QuizStep) => void
+  goBack: () => void
+  canGoBack: boolean
 }
 
-const QuizStep3 = ({ onNext, onBack }: QuizStep3Props) => {
+const QuizStep3 = ({ goToStep, goBack, canGoBack }: QuizStep3Props) => {
   const t = useTranslations('Quiz.step3')
+  const tQuiz = useTranslations('Quiz')
   const [selectedValue, setSelectedValue] = useState<string>('')
 
   const dogName = 'Tommy'
@@ -21,6 +25,10 @@ const QuizStep3 = ({ onNext, onBack }: QuizStep3Props) => {
     { label: t('options.neutered'), value: 'neutered' },
     { label: t('options.intact'), value: 'intact' },
   ]
+
+  const handleNext = () => {
+    goToStep(QuizStep.Step4)
+  }
 
   return (
     <div
@@ -60,6 +68,12 @@ const QuizStep3 = ({ onNext, onBack }: QuizStep3Props) => {
           />
         </div>
       </div>
+      <QuizNavigationFooter
+        goBack={goBack}
+        canGoBack={canGoBack}
+        onContinue={handleNext}
+        continueButtonText={tQuiz('continueButton')}
+      />
     </div>
   )
 }

@@ -1,74 +1,47 @@
 'use client'
 
-import Image from 'next/image'
-import { useTranslations } from 'next-intl'
-import { PropsWithChildren } from 'react'
+import { useState, useCallback } from 'react'
 
-import { Button } from '@/components/common/Button'
 import { QuizHeader } from '@/components/quiz/QuizHeader'
-import { cn } from '@/utils/cn'
+import { QuizStep } from '@/types/enums/constants'
 
-import ChevronLeftIcon from 'public/icons/chevron-left.svg'
-
-interface QuizLayoutProps extends PropsWithChildren {
-  stepNumber: number
-  onNext: () => void
-  onBack: () => void
+interface QuizLayoutProps {
+  renderStep: (
+    currentStep: QuizStep,
+    goToStep: (step: QuizStep) => void,
+    goBack: () => void,
+    canGoBack: boolean
+  ) => React.ReactNode
 }
 
-const QuizLayout = ({
-  children,
-  stepNumber,
-  onNext,
-  onBack,
-}: QuizLayoutProps) => {
-  const t = useTranslations('Quiz')
+const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
+  const [currentStep, setCurrentStep] = useState<QuizStep>(QuizStep.Welcome)
+  const [stepHistory, setStepHistory] = useState<QuizStep[]>([QuizStep.Welcome])
 
-  const TOTAL_STEPS = 8
+  const goToStep = useCallback((step: QuizStep) => {
+    setCurrentStep(step)
+    setStepHistory((prev) => [...prev, step])
+  }, [])
+
+  const goBack = useCallback(() => {
+    if (stepHistory.length > 1) {
+      const newHistory = [...stepHistory]
+      newHistory.pop()
+      const previousStep = newHistory[newHistory.length - 1]
+      setCurrentStep(previousStep)
+      setStepHistory(newHistory)
+    }
+  }, [stepHistory])
+
+  const canGoBack = stepHistory.length > 1
 
   return (
     <div className="flex flex-col min-h-screen bg-neutral-300 w-full py-10 px-5 md:px-24">
-      <QuizHeader currentStep={stepNumber} totalSteps={TOTAL_STEPS} />
+      <QuizHeader visitedSteps={stepHistory.length} />
 
       <main className="flex-1 flex items-center justify-center px-0">
-        {children}
+        {renderStep(currentStep, goToStep, goBack, canGoBack)}
       </main>
-
-      {stepNumber > 1 && (
-        <footer
-          className={cn(
-            'flex items-center justify-between gap-4',
-            'px-5 sm:px-24 py-5',
-            'bg-neutral-300 border-t border-neutral-600'
-          )}
-        >
-          <Button
-            type="button"
-            onClick={onBack}
-            data-qa="quiz-back-button"
-            variant="tertiary"
-            leftIcon={
-              <Image
-                src={ChevronLeftIcon}
-                alt=""
-                className="size-3"
-                width={8}
-                height={13}
-              />
-            }
-          >
-            {t('backButton')}
-          </Button>
-          <Button
-            type="button"
-            onClick={onNext}
-            data-qa="quiz-continue-button"
-            variant="primary"
-          >
-            {t('continueButton')}
-          </Button>
-        </footer>
-      )}
     </div>
   )
 }
