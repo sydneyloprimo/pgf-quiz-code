@@ -42,16 +42,6 @@ const QuizStep2 = ({ goToStep, goBack, canGoBack }: QuizStep2Props) => {
     { label: t('gender.female'), value: 'female' },
   ]
 
-  const ageOptions = Array.from({ length: 20 }, (_, i) => ({
-    label: String(i + 1),
-    value: String(i + 1),
-  }))
-
-  const weightOptions = Array.from({ length: 200 }, (_, i) => ({
-    label: String(i + 1),
-    value: String(i + 1),
-  }))
-
   return (
     <div
       className={cn(
@@ -101,7 +91,7 @@ const QuizStep2 = ({ goToStep, goBack, canGoBack }: QuizStep2Props) => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="w-full"
-                inputClassName="text-2xl font-display font-semibold leading-8 text-secondary-950"
+                inputClassName="font-semibold leading-8 text-secondary-950"
                 state={InputState.Filled}
                 onFocus={() => setFocusedField('name')}
                 onBlur={() => setFocusedField(null)}
@@ -118,7 +108,7 @@ const QuizStep2 = ({ goToStep, goBack, canGoBack }: QuizStep2Props) => {
                 options={genderOptions}
                 className="w-full"
                 state={InputDropdownState.Filled}
-                textClassName="text-2xl font-display font-semibold leading-8 text-secondary-950"
+                textClassName="font-semibold text-secondary-950"
                 onOpen={() => setFocusedField('gender')}
                 onClose={() => setFocusedField(null)}
               />
@@ -135,35 +125,29 @@ const QuizStep2 = ({ goToStep, goBack, canGoBack }: QuizStep2Props) => {
           >
             <span>{t('agePrefix')}</span>
             <div className="w-24">
-              <InputDropdown
+              <Input
+                type="number"
                 value={age}
-                onSelect={(val) => {
-                  setAge(val)
-                  setFocusedField(null)
-                }}
-                options={ageOptions}
+                onChange={(e) => setAge(e.target.value)}
                 className="w-full"
-                state={InputDropdownState.Filled}
-                textClassName="text-2xl font-display font-semibold leading-8 text-secondary-950"
-                onOpen={() => setFocusedField('age')}
-                onClose={() => setFocusedField(null)}
+                inputClassName="text-2xl font-semibold leading-8 text-secondary-950"
+                state={InputState.Filled}
+                onFocus={() => setFocusedField('age')}
+                onBlur={() => setFocusedField(null)}
               />
             </div>
             <span>{t('ageSuffix')}</span>
             <span>{t('weightPrefix')}</span>
             <div className="w-24">
-              <InputDropdown
+              <Input
+                type="number"
                 value={weight}
-                onSelect={(val) => {
-                  setWeight(val)
-                  setFocusedField(null)
-                }}
-                options={weightOptions}
+                onChange={(e) => setWeight(e.target.value)}
                 className="w-full"
-                state={InputDropdownState.Filled}
-                textClassName="text-2xl font-display font-semibold leading-8 text-secondary-950"
-                onOpen={() => setFocusedField('weight')}
-                onClose={() => setFocusedField(null)}
+                inputClassName="text-2xl font-semibold leading-8 text-secondary-950"
+                state={InputState.Filled}
+                onFocus={() => setFocusedField('weight')}
+                onBlur={() => setFocusedField(null)}
               />
             </div>
             <span>{t('weightSuffix')}</span>
