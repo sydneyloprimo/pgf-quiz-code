@@ -20,6 +20,9 @@
     "total": "Total"
   },
   "Common": {
+    "InputDropdown": {
+      "selectOption": "Select an option"
+    },
     "List": {
       "nextButton": "Next Page",
       "previousButton": "Previous Page"

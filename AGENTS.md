@@ -361,14 +361,17 @@ const MyPage = () => (
   - `aria-selected` - For selectable items (options, tabs, etc.)
   - `role` - Use semantic roles when native HTML elements aren't sufficient
 - **Use React's `useId` hook** to generate unique IDs for ARIA relationships
+- **Internationalize all accessibility strings** - All accessibility-related text (aria-labels, aria-describedby, alt text, etc.) must be internationalized using the translation system. Never hardcode accessibility strings.
 - **Test with screen readers** - Ensure components work with assistive technologies
 
 **Example - Dropdown Component:**
 
 ```typescript
 import { useId } from 'react'
+import { useTranslations } from 'next-intl'
 
 const InputDropdown = ({ options, value, onSelect }) => {
+  const t = useTranslations('Common.InputDropdown')
   const [isOpen, setIsOpen] = useState(false)
   const dropdownId = useId()
 
@@ -379,10 +382,10 @@ const InputDropdown = ({ options, value, onSelect }) => {
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         aria-controls={dropdownId}
-        aria-label="Select an option"
+        aria-label={placeholder || t('selectOption')}
         onClick={() => setIsOpen(!isOpen)}
       >
-        {selectedOption?.label || 'Choose...'}
+        {selectedOption?.label || placeholder}
       </button>
       {isOpen && (
         <div id={dropdownId} role="listbox">
@@ -432,7 +435,7 @@ const InputDropdown = ({ options, value, onSelect }) => {
 
 ### Resources
 
-- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
+- [WCAG 2.2 Guidelines](https://www.w3.org/WAI/WCAG22/quickref/)
 - [MDN Accessibility Guide](https://developer.mozilla.org/en-US/docs/Web/Accessibility)
 - [ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/)
 
@@ -835,6 +838,12 @@ TSX icon components available in `components/common/Icon/` include:
 ### Text Content
 
 - **No Hardcoded Text**: Never include explicit text strings in components
+- **All Strings Must Be Internationalized**: This includes:
+  - Visible text content (buttons, labels, headings, etc.)
+  - **Accessibility strings** (aria-labels, aria-describedby, alt attributes, title attributes, etc.)
+  - Placeholder text
+  - Error messages
+  - Success messages
 - **Use Translations**: Always use `useTranslations` hook from `next-intl`
 - **Translation Keys**: Use namespaced keys (e.g., `'Header.searchPlaceholder'`)
 
@@ -847,7 +856,38 @@ const Header = () => {
   const t = useTranslations('Header')
 
   return (
-    <input placeholder={t('searchPlaceholder')} />
+    <input
+      placeholder={t('searchPlaceholder')}
+      aria-label={t('searchPlaceholder')}
+    />
+  )
+}
+```
+
+**Example - Accessibility Strings:**
+
+```typescript
+import { useTranslations } from 'next-intl'
+import Image from 'next/image'
+
+const ProductCard = ({ product }) => {
+  const t = useTranslations('ProductCard')
+
+  return (
+    <div>
+      <Image
+        src={product.image}
+        alt={t('imageAlt', { name: product.name })}
+        aria-label={t('imageLabel', { name: product.name })}
+      />
+      <button
+        type="button"
+        aria-label={t('addToCartButton')}
+        onClick={handleAddToCart}
+      >
+        {t('addToCart')}
+      </button>
+    </div>
   )
 }
 ```

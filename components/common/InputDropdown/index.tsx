@@ -1,6 +1,7 @@
 'use client'
 
 import { cva, type VariantProps } from 'class-variance-authority'
+import { useTranslations } from 'next-intl'
 import { ReactNode, useCallback, useId, useState } from 'react'
 
 import { CheckIcon, ChevronIcon } from '@/components/common/Icon'
@@ -63,6 +64,7 @@ const InputDropdown = ({
   onOpen,
   onClose,
 }: InputDropdownProps) => {
+  const t = useTranslations('Common.InputDropdown')
   const [isOpen, setIsOpen] = useState(false)
   const dropdownId = useId()
   const selectedOption = options.find((opt) => opt.value === value)
@@ -102,7 +104,7 @@ const InputDropdown = ({
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         aria-controls={dropdownId}
-        aria-label={placeholder || 'Select an option'}
+        aria-label={placeholder || t('selectOption')}
       >
         <p
           className={cn(
