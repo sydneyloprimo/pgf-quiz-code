@@ -131,6 +131,13 @@
     "backButton": "Back",
     "closeButton": "Close",
     "continueButton": "Continue",
+    "step1": {
+      "heading": "Let's build the everyday moments that shape your dog's wellbeing",
+      "description": "Tell us a bit about your dog's age, size, and habits so we can recommend the right meals — fresh, balanced, and made just for them.",
+      "button": "Build your dog's plan",
+      "imageAlt": "Dog illustration",
+      "link": "Speak directly to our Concierge"
+    },
     "title": "Purely Golden Foods"
   },
   "Search": {

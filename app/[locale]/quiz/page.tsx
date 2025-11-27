@@ -3,6 +3,7 @@
 import { useState } from 'react'
 
 import QuizLayout from '@/components/quiz/QuizLayout'
+import { QuizStep1 } from '@/components/quiz/QuizStep1'
 
 export default function QuizPage() {
   const [stepNumber, setStepNumber] = useState(1)
@@ -16,11 +17,22 @@ export default function QuizPage() {
     setStepNumber((prev) => Math.max(1, prev - 1))
   }
 
+  const renderStep = () => {
+    switch (stepNumber) {
+      case 1:
+        return <QuizStep1 onNext={handleNext} />
+      default:
+        return (
+          <div className="flex items-center justify-center min-h-[calc(100vh-12rem)]">
+            <p>Step number: {stepNumber}</p>
+          </div>
+        )
+    }
+  }
+
   return (
     <QuizLayout stepNumber={stepNumber} onNext={handleNext} onBack={handleBack}>
-      <div className="flex items-center justify-center min-h-[calc(100vh-200px)]">
-        <p>Step number: {stepNumber}</p>
-      </div>
+      {renderStep()}
     </QuizLayout>
   )
 }

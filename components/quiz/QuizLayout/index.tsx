@@ -1,11 +1,10 @@
 'use client'
 
-import Image from 'next/image'
-import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { PropsWithChildren } from 'react'
 
-import { Routes } from '@/types/enums/routes'
+import { QuizHeader } from '@/components/quiz/QuizHeader'
+import { cn } from '@/utils/cn'
 
 interface QuizLayoutProps extends PropsWithChildren {
   stepNumber: number
@@ -21,31 +20,24 @@ const QuizLayout = ({
 }: QuizLayoutProps) => {
   const t = useTranslations('Quiz')
 
+  const TOTAL_STEPS = 8
+
   return (
-    <div className="flex flex-col min-h-screen bg-background w-full">
-      <header className="flex items-center justify-between px-5 md:px-[119px] py-5 bg-white">
-        <h1 className="text-xl md:text-2xl font-bold text-black">
-          {t('title')}
-        </h1>
-        <Link
-          href={Routes.home}
-          data-qa="quiz-close-button"
-          className="btn-secondary h-10! w-10! p-0!"
-          aria-label={t('closeButton')}
+    <div className="flex flex-col min-h-screen bg-neutral-300 w-full py-10 px-5 md:px-24">
+      <QuizHeader currentStep={stepNumber} totalSteps={TOTAL_STEPS} />
+
+      <main className="flex-1 flex items-center justify-center px-0">
+        {children}
+      </main>
+
+      {stepNumber > 1 && (
+        <footer
+          className={cn(
+            'flex items-center justify-between gap-4',
+            'px-5 sm:px-24 py-5',
+            'bg-neutral-300 border-t border-neutral-600'
+          )}
         >
-          <Image
-            src="/icons/cross.svg"
-            alt={t('closeButton')}
-            width={16}
-            height={16}
-          />
-        </Link>
-      </header>
-
-      <main className="flex-1">{children}</main>
-
-      <footer className="flex items-center justify-between gap-4 px-5 md:px-[119px] py-5 bg-white border-t border-light-grey">
-        {stepNumber > 1 && (
           <button
             type="button"
             onClick={onBack}
@@ -54,16 +46,16 @@ const QuizLayout = ({
           >
             {t('backButton')}
           </button>
-        )}
-        <button
-          type="button"
-          onClick={onNext}
-          data-qa="quiz-continue-button"
-          className={stepNumber === 1 ? 'btn-primary ml-auto' : 'btn-primary'}
-        >
-          {t('continueButton')}
-        </button>
-      </footer>
+          <button
+            type="button"
+            onClick={onNext}
+            data-qa="quiz-continue-button"
+            className="btn-primary"
+          >
+            {t('continueButton')}
+          </button>
+        </footer>
+      )}
     </div>
   )
 }

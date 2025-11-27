@@ -799,9 +799,9 @@ ESLint enforces the following import order (alphabetically within groups):
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { PropsWithChildren } from 'react'
-import cn from 'classnames'
 
 // Internal (@/)
+import { cn } from '@/utils/cn'
 import Card from '@/components/common/Card'
 import { Routes } from '@/types/enums/routes'
 import { useProductSearch } from '@/hooks/useProductSearch'
