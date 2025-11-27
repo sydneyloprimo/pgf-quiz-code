@@ -26,6 +26,7 @@ export enum InputDropdownState {
 export enum QuizStep {
   Welcome = 'welcome',
   PetInfo = 'petInfo',
+  Plus25Lbs = 'plus25Lbs',
   Step3 = 'step3',
   Step4 = 'step4',
   Step5 = 'step5',
