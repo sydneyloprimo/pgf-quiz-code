@@ -5,6 +5,7 @@ import { useState } from 'react'
 import QuizLayout from '@/components/quiz/QuizLayout'
 import { QuizStep1 } from '@/components/quiz/QuizStep1'
 import { QuizStep2 } from '@/components/quiz/QuizStep2'
+import { QuizStep3 } from '@/components/quiz/QuizStep3'
 
 export default function QuizPage() {
   const [stepNumber, setStepNumber] = useState(1)
@@ -24,6 +25,8 @@ export default function QuizPage() {
         return <QuizStep1 onNext={handleNext} />
       case 2:
         return <QuizStep2 onNext={handleNext} onBack={handleBack} />
+      case 3:
+        return <QuizStep3 onNext={handleNext} onBack={handleBack} />
       default:
         return (
           <div className="flex items-center justify-center min-h-[calc(100vh-12rem)]">

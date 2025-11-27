@@ -152,6 +152,14 @@
       "weightPrefix": "",
       "weightSuffix": "lbs"
     },
+    "step3": {
+      "heading": "Is {name} neutered or intact?",
+      "description": "This helps us fine-tune {name}'s portion size and calorie needs — hormones can slightly affect metabolism.",
+      "options": {
+        "neutered": "Neutered",
+        "intact": "Intact"
+      }
+    },
     "title": "Purely Golden Foods"
   },
   "Search": {

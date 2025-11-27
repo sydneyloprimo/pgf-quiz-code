@@ -27,6 +27,14 @@
       "weightPrefix": "",
       "weightSuffix": "lbs"
     },
+    "step3": {
+      "heading": "¿{name} está castrado o intacto?",
+      "description": "Esto nos ayuda a ajustar el tamaño de la porción y las necesidades calóricas de {name} — las hormonas pueden afectar ligeramente el metabolismo.",
+      "options": {
+        "neutered": "Castrado",
+        "intact": "Intacto"
+      }
+    },
     "title": "Purely Golden Foods"
   }
 }
