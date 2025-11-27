@@ -11,6 +11,7 @@ interface QuizNavigationFooterProps {
   canGoBack: boolean
   onContinue: () => void
   continueButtonText: string
+  continueDisabled?: boolean
 }
 
 const QuizNavigationFooter = ({
@@ -18,6 +19,7 @@ const QuizNavigationFooter = ({
   canGoBack,
   onContinue,
   continueButtonText,
+  continueDisabled = false,
 }: QuizNavigationFooterProps) => {
   const t = useTranslations('Quiz')
 
@@ -28,6 +30,7 @@ const QuizNavigationFooter = ({
           variant="primary"
           className="max-w-sm w-full"
           onClick={onContinue}
+          disabled={continueDisabled}
         >
           {continueButtonText}
         </Button>
@@ -57,6 +60,7 @@ const QuizNavigationFooter = ({
         data-qa="quiz-continue-button"
         variant="primary"
         className="min-w-64"
+        disabled={continueDisabled}
       >
         {continueButtonText}
       </Button>

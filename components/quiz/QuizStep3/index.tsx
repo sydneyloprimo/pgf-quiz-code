@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { useState } from 'react'
 
 import { OptionSelect } from '@/components/common/OptionSelect'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
@@ -73,14 +73,10 @@ const QuizStep3 = ({ goToStep, goBack, canGoBack }: QuizStep3Props) => {
         canGoBack={canGoBack}
         onContinue={handleNext}
         continueButtonText={tQuiz('continueButton')}
+        continueDisabled={!selectedValue}
       />
     </div>
   )
 }
 
 export { QuizStep3 }
-
-
-
-
-

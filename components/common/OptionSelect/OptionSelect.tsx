@@ -33,11 +33,10 @@ const OptionSelect = ({
             onClick={() => onSelect(option.value)}
             className={cn(
               'w-full justify-center',
-              'font-display font-semibold text-2xl leading-8',
-              'rounded-md',
+              'font-semibold text-xl leading-8',
               isSelected
-                ? 'bg-secondary-200 border border-secondary-600 text-secondary-950'
-                : 'bg-neutral-white border border-tertiary-300 text-secondary-950 hover:bg-secondary-200 hover:border-secondary-600 hover:text-secondary-950 focus:bg-secondary-200 focus:border-secondary-600 focus:text-secondary-950'
+                ? 'bg-secondary-100 border-2 border-secondary-600 text-secondary-600'
+                : 'bg-neutral-white border border-tertiary-300 text-tertiary-800 hover:bg-secondary-200 hover:border-tertiary-300 hover:text-tertiary-800 focus:bg-secondary-200 focus:border-tertiary-300 focus:text-tertiary-800 active:bg-secondary-200 active:border-tertiary-300 active:text-tertiary-800'
             )}
             variant="ghost"
           >
@@ -51,8 +50,3 @@ const OptionSelect = ({
 
 export { OptionSelect }
 export type { OptionSelectProps, Option }
-
-
-
-
-
