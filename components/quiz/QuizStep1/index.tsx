@@ -5,6 +5,10 @@ import { useTranslations } from 'next-intl'
 
 import { Link } from '@/components/common/Link'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
+import {
+  QUIZ_DOG_ILLUSTRATION_HEIGHT,
+  QUIZ_DOG_ILLUSTRATION_WIDTH,
+} from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 
@@ -32,9 +36,9 @@ const QuizStep1 = ({ goToStep, goBack, canGoBack }: QuizStep1Props) => {
         <div className="relative shrink-0">
           <Image
             src="/images/quiz-dog-illustration.png"
-            alt="Dog illustration"
-            width={268}
-            height={266}
+            alt={t('imageAlt')}
+            width={QUIZ_DOG_ILLUSTRATION_WIDTH}
+            height={QUIZ_DOG_ILLUSTRATION_HEIGHT}
             className="object-contain"
             priority
           />

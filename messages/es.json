@@ -1,4 +1,9 @@
 {
+  "Common": {
+    "InputDropdown": {
+      "selectOption": "Seleccionar una opción"
+    }
+  },
   "Home": {
     "title": "Hola mundo!"
   },
@@ -10,6 +15,7 @@
       "heading": "Construyamos los momentos cotidianos que moldean el bienestar de tu perro",
       "description": "Cuéntanos un poco sobre la edad, el tamaño y los hábitos de tu perro para que podamos recomendar las comidas adecuadas: frescas, equilibradas y hechas especialmente para ellos.",
       "button": "Crea el plan de tu perro",
+      "imageAlt": "Ilustración de perro",
       "link": "Habla directamente con nuestro Concierge"
     },
     "step2": {

@@ -1,8 +1,7 @@
 'use client'
 
+import { QuizStep1, QuizStep2 } from '@/components/quiz'
 import QuizLayout from '@/components/quiz/QuizLayout'
-import { QuizStep1 } from '@/components/quiz/QuizStep1'
-import { QuizStep2 } from '@/components/quiz/QuizStep2'
 import { QuizStep } from '@/types/enums/constants'
 
 export default function QuizPage() {
