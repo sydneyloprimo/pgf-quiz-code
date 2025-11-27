@@ -163,7 +163,14 @@
       "joinWaitlistButton": "Join the Waitlist",
       "imageAlt": "Dog illustration"
     },
-    "title": "Purely Golden Foods"
+    "title": "Purely Golden Foods",
+    "underAge": {
+      "heading": "We're still perfecting our meals for puppies.",
+      "description": "Our current formulas are designed for adult dogs. We're developing a specialized line for growing pups — join the waitlist and be the first to know when it's ready.",
+      "changeAgeButton": "Change Age",
+      "joinWaitlistButton": "Join the Waitlist",
+      "imageAlt": "Dog illustration"
+    }
   },
   "Search": {
     "FilterPanel": {

@@ -40,6 +40,13 @@
       "joinWaitlistButton": "Únete a la Lista de Espera",
       "imageAlt": "Ilustración de perro"
     },
-    "title": "Purely Golden Foods"
+    "title": "Purely Golden Foods",
+    "underAge": {
+      "heading": "Todavía estamos perfeccionando nuestras comidas para cachorros.",
+      "description": "Nuestras fórmulas actuales están diseñadas para perros adultos. Estamos desarrollando una línea especializada para cachorros en crecimiento — únete a la lista de espera y sé el primero en saber cuando esté lista.",
+      "changeAgeButton": "Cambiar Edad",
+      "joinWaitlistButton": "Únete a la Lista de Espera",
+      "imageAlt": "Ilustración de perro"
+    }
   }
 }
