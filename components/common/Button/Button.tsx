@@ -1,6 +1,6 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import Link from 'next/link'
-import { ComponentProps, PropsWithChildren } from 'react'
+import { ComponentProps, PropsWithChildren, ReactNode } from 'react'
 
 import { cn } from '@/utils/cn'
 
@@ -38,6 +38,7 @@ interface ButtonProps extends PropsWithChildren, ButtonVariantProps {
   disabled?: boolean
   className?: string
   type?: 'button' | 'submit' | 'reset'
+  leftIcon?: ReactNode
 }
 
 type ButtonHTMLProps = Omit<
@@ -52,6 +53,7 @@ const Button = ({
   size,
   disabled,
   href,
+  leftIcon,
   ...props
 }: ButtonProps & ButtonHTMLProps) => {
   const classes = cn(buttonVariants({ variant, size }), className)
@@ -60,6 +62,7 @@ const Button = ({
     const { type, ...linkProps } = props as any
     return (
       <Link href={href} className={classes} {...linkProps}>
+        {leftIcon && <span className="shrink-0">{leftIcon}</span>}
         {children}
       </Link>
     )
@@ -67,6 +70,7 @@ const Button = ({
 
   return (
     <button className={classes} disabled={disabled} {...props}>
+      {leftIcon && <span className="shrink-0">{leftIcon}</span>}
       {children}
     </button>
   )

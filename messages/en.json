@@ -20,6 +20,9 @@
     "total": "Total"
   },
   "Common": {
+    "InputDropdown": {
+      "selectOption": "Select an option"
+    },
     "List": {
       "nextButton": "Next Page",
       "previousButton": "Previous Page"
@@ -137,6 +140,21 @@
       "button": "Build your dog's plan",
       "imageAlt": "Dog illustration",
       "link": "Speak directly to our Concierge"
+    },
+    "step2": {
+      "heading": "Let's get to know your dog.",
+      "description": "We'll use this information to tailor a science-backed plan that fits your dog's exact needs.",
+      "namePrefix": "My dog's name is",
+      "nameSuffix": "a",
+      "gender": {
+        "male": "Male",
+        "female": "Female"
+      },
+      "genderSuffix": "dog",
+      "agePrefix": "who is",
+      "ageSuffix": "years old and weighs",
+      "weightPrefix": "",
+      "weightSuffix": "lbs"
     },
     "title": "Purely Golden Foods"
   },
