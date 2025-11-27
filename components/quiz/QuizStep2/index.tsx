@@ -2,9 +2,11 @@
 
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
+import { Controller, UseFormReturn } from 'react-hook-form'
 
 import Input from '@/components/common/Input'
 import { InputDropdown } from '@/components/common/InputDropdown'
+import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
 import {
   InputState,
@@ -17,21 +19,31 @@ interface QuizStep2Props {
   goToStep: (step: QuizStep) => void
   goBack: () => void
   canGoBack: boolean
+  formMethods: UseFormReturn<QuizFormData>
 }
 
-const QuizStep2 = ({ goToStep, goBack, canGoBack }: QuizStep2Props) => {
+const QuizStep2 = ({
+  goToStep,
+  goBack,
+  canGoBack,
+  formMethods,
+}: QuizStep2Props) => {
   const t = useTranslations('Quiz.step2')
   const tQuiz = useTranslations('Quiz')
-  const [name, setName] = useState('Tommy')
-  const [gender, setGender] = useState('male')
-  const [age, setAge] = useState('8')
-  const [weight, setWeight] = useState('18')
+  const { control, watch } = formMethods
   const [focusedField, setFocusedField] = useState<string | null>(null)
+
+  const name = watch('name')
+  const gender = watch('gender')
+  const age = watch('age')
+  const weight = watch('weight')
 
   const genderOptions = [
     { label: t('gender.male'), value: 'male' },
     { label: t('gender.female'), value: 'female' },
   ]
+
+  const isFormValid = Boolean(name && age && weight)
 
   const handleNext = () => {
     goToStep(QuizStep.Step3)
@@ -82,30 +94,51 @@ const QuizStep2 = ({ goToStep, goBack, canGoBack }: QuizStep2Props) => {
           >
             <span>{t('namePrefix')}</span>
             <div className="w-32">
-              <Input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full"
-                inputClassName="font-semibold leading-8 text-secondary-950"
-                state={InputState.Filled}
-                onFocus={() => setFocusedField('name')}
-                onBlur={() => setFocusedField(null)}
+              <Controller
+                name="name"
+                control={control}
+                render={({
+                  field: { ref, name: fieldName, value, onChange, onBlur },
+                  fieldState: { error },
+                }) => (
+                  <Input
+                    ref={ref}
+                    value={value}
+                    onChange={onChange}
+                    onBlur={(e) => {
+                      onBlur()
+                      setFocusedField(null)
+                    }}
+                    className="w-full"
+                    inputClassName="font-semibold leading-8 text-secondary-950"
+                    state={InputState.Filled}
+                    onFocus={() => setFocusedField('name')}
+                    name={fieldName}
+                    error={error?.message}
+                  />
+                )}
               />
             </div>
             <span>{t('nameSuffix')}</span>
             <div className="w-32">
-              <InputDropdown
-                value={gender}
-                onSelect={(val) => {
-                  setGender(val)
-                  setFocusedField(null)
-                }}
-                options={genderOptions}
-                className="w-full"
-                state={InputDropdownState.Filled}
-                textClassName="font-semibold text-secondary-950"
-                onOpen={() => setFocusedField('gender')}
-                onClose={() => setFocusedField(null)}
+              <Controller
+                name="gender"
+                control={control}
+                render={({ field: { value, onChange } }) => (
+                  <InputDropdown
+                    value={value}
+                    onSelect={(val) => {
+                      onChange(val)
+                      setFocusedField(null)
+                    }}
+                    options={genderOptions}
+                    className="w-full"
+                    state={InputDropdownState.Filled}
+                    textClassName="font-semibold text-secondary-950"
+                    onOpen={() => setFocusedField('gender')}
+                    onClose={() => setFocusedField(null)}
+                  />
+                )}
               />
             </div>
             <span>{t('genderSuffix')}</span>
@@ -120,29 +153,59 @@ const QuizStep2 = ({ goToStep, goBack, canGoBack }: QuizStep2Props) => {
           >
             <span>{t('agePrefix')}</span>
             <div className="w-24">
-              <Input
-                type="number"
-                value={age}
-                onChange={(e) => setAge(e.target.value)}
-                className="w-full"
-                inputClassName="text-2xl font-semibold leading-8 text-secondary-950"
-                state={InputState.Filled}
-                onFocus={() => setFocusedField('age')}
-                onBlur={() => setFocusedField(null)}
+              <Controller
+                name="age"
+                control={control}
+                render={({
+                  field: { ref, name: fieldName, value, onChange, onBlur },
+                  fieldState: { error },
+                }) => (
+                  <Input
+                    ref={ref}
+                    type="number"
+                    value={value}
+                    onChange={onChange}
+                    onBlur={(e) => {
+                      onBlur()
+                      setFocusedField(null)
+                    }}
+                    className="w-full"
+                    inputClassName="text-2xl font-semibold leading-8 text-secondary-950"
+                    state={InputState.Filled}
+                    onFocus={() => setFocusedField('age')}
+                    name={fieldName}
+                    error={error?.message}
+                  />
+                )}
               />
             </div>
             <span>{t('ageSuffix')}</span>
             <span>{t('weightPrefix')}</span>
             <div className="w-24">
-              <Input
-                type="number"
-                value={weight}
-                onChange={(e) => setWeight(e.target.value)}
-                className="w-full"
-                inputClassName="text-2xl font-semibold leading-8 text-secondary-950"
-                state={InputState.Filled}
-                onFocus={() => setFocusedField('weight')}
-                onBlur={() => setFocusedField(null)}
+              <Controller
+                name="weight"
+                control={control}
+                render={({
+                  field: { ref, name: fieldName, value, onChange, onBlur },
+                  fieldState: { error },
+                }) => (
+                  <Input
+                    ref={ref}
+                    type="number"
+                    value={value}
+                    onChange={onChange}
+                    onBlur={(e) => {
+                      onBlur()
+                      setFocusedField(null)
+                    }}
+                    className="w-full"
+                    inputClassName="text-2xl font-semibold leading-8 text-secondary-950"
+                    state={InputState.Filled}
+                    onFocus={() => setFocusedField('weight')}
+                    name={fieldName}
+                    error={error?.message}
+                  />
+                )}
               />
             </div>
             <span>{t('weightSuffix')}</span>
@@ -154,6 +217,7 @@ const QuizStep2 = ({ goToStep, goBack, canGoBack }: QuizStep2Props) => {
         canGoBack={canGoBack}
         onContinue={handleNext}
         continueButtonText={tQuiz('continueButton')}
+        continueDisabled={!isFormValid}
       />
     </div>
   )

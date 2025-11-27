@@ -1,7 +1,9 @@
 'use client'
 
+import { UseFormReturn } from 'react-hook-form'
+
 import { QuizStep1, QuizStep2, QuizStep3 } from '@/components/quiz'
-import QuizLayout from '@/components/quiz/QuizLayout'
+import QuizLayout, { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizStep } from '@/types/enums/constants'
 
 export default function QuizPage() {
@@ -9,7 +11,8 @@ export default function QuizPage() {
     currentStep: QuizStep,
     goToStep: (step: QuizStep) => void,
     goBack: () => void,
-    canGoBack: boolean
+    canGoBack: boolean,
+    formMethods: UseFormReturn<QuizFormData>
   ) => {
     switch (currentStep) {
       case QuizStep.Welcome:
@@ -26,6 +29,7 @@ export default function QuizPage() {
             goToStep={goToStep}
             goBack={goBack}
             canGoBack={canGoBack}
+            formMethods={formMethods}
           />
         )
       case QuizStep.Step3:
@@ -34,6 +38,7 @@ export default function QuizPage() {
             goToStep={goToStep}
             goBack={goBack}
             canGoBack={canGoBack}
+            formMethods={formMethods}
           />
         )
       default:
