@@ -1,12 +1,18 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useState, useCallback } from 'react'
+import { useRouter, usePathname } from 'next/navigation'
+import { useState, useCallback, useEffect } from 'react'
 import { useForm, UseFormReturn } from 'react-hook-form'
 import { z } from 'zod'
 
 import { QuizHeader } from '@/components/quiz/QuizHeader'
 import { QuizStep } from '@/types/enums/constants'
+import {
+  getQuizStepPath,
+  getQuizStepFromPath,
+  getStepNumber,
+} from '@/utils/quizRoutes'
 
 export const quizFormSchema = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -39,8 +45,10 @@ interface QuizLayoutProps {
 }
 
 const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
+  const router = useRouter()
+  const pathname = usePathname()
   const [currentStep, setCurrentStep] = useState<QuizStep>(QuizStep.Welcome)
-  const [stepHistory, setStepHistory] = useState<QuizStep[]>([QuizStep.Welcome])
+  const [isInitialized, setIsInitialized] = useState(false)
 
   const formMethods = useForm<QuizFormData>({
     resolver: zodResolver(quizFormSchema),
@@ -54,26 +62,41 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
     mode: 'onChange',
   })
 
-  const goToStep = useCallback((step: QuizStep) => {
-    setCurrentStep(step)
-    setStepHistory((prev) => [...prev, step])
-  }, [])
+  useEffect(() => {
+    const stepFromPath = getQuizStepFromPath(pathname)
+    if (stepFromPath) {
+      setCurrentStep(stepFromPath)
+    }
+    setIsInitialized(true)
+  }, [pathname])
+
+  useEffect(() => {
+    if (!isInitialized) return
+
+    const stepFromPath = getQuizStepFromPath(pathname)
+    if (stepFromPath && stepFromPath !== currentStep) {
+      setCurrentStep(stepFromPath)
+    }
+  }, [pathname, currentStep, isInitialized])
+
+  const goToStep = useCallback(
+    (step: QuizStep) => {
+      setCurrentStep(step)
+      router.push(getQuizStepPath(step))
+    },
+    [router]
+  )
 
   const goBack = useCallback(() => {
-    if (stepHistory.length > 1) {
-      const newHistory = [...stepHistory]
-      newHistory.pop()
-      const previousStep = newHistory[newHistory.length - 1]
-      setCurrentStep(previousStep)
-      setStepHistory(newHistory)
-    }
-  }, [stepHistory])
+    router.back()
+  }, [router])
 
-  const canGoBack = stepHistory.length > 1
+  const canGoBack = currentStep !== QuizStep.Welcome
+  const visitedSteps = getStepNumber(currentStep)
 
   return (
     <div className="flex flex-col min-h-screen bg-neutral-300 w-full py-10 px-5 md:px-24">
-      <QuizHeader visitedSteps={stepHistory.length} />
+      <QuizHeader visitedSteps={visitedSteps} />
 
       <main className="flex-1 flex items-center justify-center px-0">
         {renderStep(currentStep, goToStep, goBack, canGoBack, formMethods)}
