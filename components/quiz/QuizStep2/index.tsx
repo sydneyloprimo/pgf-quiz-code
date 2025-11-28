@@ -7,8 +7,8 @@ import Input from '@/components/common/Input'
 import { InputDropdown } from '@/components/common/InputDropdown'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
 import {
-  InputState,
   InputDropdownState,
+  InputState,
   QuizStep,
 } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
@@ -28,14 +28,19 @@ const QuizStep2 = ({ goToStep, goBack, canGoBack }: QuizStep2Props) => {
   const [weight, setWeight] = useState('18')
   const [focusedField, setFocusedField] = useState<string | null>(null)
 
+  const handleNext = () => {
+    const weightNum = parseInt(weight, 10)
+    if (weightNum > 25) {
+      goToStep(QuizStep.Plus25Lbs)
+    } else {
+      goToStep(QuizStep.Step3)
+    }
+  }
+
   const genderOptions = [
     { label: t('gender.male'), value: 'male' },
     { label: t('gender.female'), value: 'female' },
   ]
-
-  const handleNext = () => {
-    goToStep(QuizStep.Step3)
-  }
 
   return (
     <div
