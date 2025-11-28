@@ -5,6 +5,10 @@ import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
 import { ArrowLeftIcon } from '@/components/common/Icon'
+import {
+  QUIZ_DOG_ILLUSTRATION_SOURCE_HEIGHT,
+  QUIZ_DOG_ILLUSTRATION_SOURCE_WIDTH,
+} from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 
@@ -30,8 +34,8 @@ const QuizPlus25Lbs = ({ goToStep, goBack, canGoBack }: QuizPlus25LbsProps) => {
           <Image
             src="/images/quiz-dog-illustration.png"
             alt={t('imageAlt')}
-            width={1536}
-            height={1024}
+            width={QUIZ_DOG_ILLUSTRATION_SOURCE_WIDTH}
+            height={QUIZ_DOG_ILLUSTRATION_SOURCE_HEIGHT}
             className="object-contain"
             priority
           />

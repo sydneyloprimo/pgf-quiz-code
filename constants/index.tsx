@@ -13,6 +13,9 @@ export const linkedinUrl = 'https://www.linkedin.com/company/rootstrap-it'
 export const QUIZ_DOG_ILLUSTRATION_WIDTH = 268
 export const QUIZ_DOG_ILLUSTRATION_HEIGHT = 266
 
+export const QUIZ_DOG_ILLUSTRATION_SOURCE_WIDTH = 1536
+export const QUIZ_DOG_ILLUSTRATION_SOURCE_HEIGHT = 1024
+
 // Quiz thresholds
 export const PUPPY_MAX_AGE_YEARS = 1
 export const MAX_DOG_WEIGHT_LBS = 25
