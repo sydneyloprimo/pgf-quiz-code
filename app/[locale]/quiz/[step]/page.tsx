@@ -2,7 +2,13 @@
 
 import { UseFormReturn } from 'react-hook-form'
 
-import { QuizStep1, QuizStep2, QuizStep3 } from '@/components/quiz'
+import {
+  QuizStep1,
+  QuizStep2,
+  QuizStep3,
+  QuizPlus25Lbs,
+  QuizStepUnderAge,
+} from '@/components/quiz'
 import QuizLayout, { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizStep } from '@/types/enums/constants'
 
@@ -39,6 +45,22 @@ export default function QuizStepPage() {
             goBack={goBack}
             canGoBack={canGoBack}
             formMethods={formMethods}
+          />
+        )
+      case QuizStep.Plus25Lbs:
+        return (
+          <QuizPlus25Lbs
+            goToStep={goToStep}
+            goBack={goBack}
+            canGoBack={canGoBack}
+          />
+        )
+      case QuizStep.UnderAge:
+        return (
+          <QuizStepUnderAge
+            goToStep={goToStep}
+            goBack={goBack}
+            canGoBack={canGoBack}
           />
         )
       default:
