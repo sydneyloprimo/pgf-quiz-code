@@ -190,7 +190,7 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
           'max-w-2xl': currentStep !== QuizStep.Step5,
         })}
       >
-        <div className="w-full py-8">{renderedStep}</div>
+        <div className="w-full pb-8">{renderedStep}</div>
       </main>
     </div>
   )

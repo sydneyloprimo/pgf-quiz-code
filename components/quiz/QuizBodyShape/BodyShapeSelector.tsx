@@ -3,15 +3,8 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
+import { BODY_SHAPE_OPTIONS } from '@/constants'
 import { cn } from '@/utils/cn'
-
-interface BodyShapeOption {
-  value: string
-  image: string
-  titleKey: string
-  descriptionKey: string
-  imageAltKey: string
-}
 
 interface BodyShapeSelectorProps {
   value?: string
@@ -26,40 +19,9 @@ const BodyShapeSelector = ({
 }: BodyShapeSelectorProps) => {
   const t = useTranslations('Quiz.bodyShape')
 
-  const options: BodyShapeOption[] = [
-    {
-      value: 'light-lean',
-      image: '/images/body-shape-light-lean.png',
-      titleKey: 'options.lightLean.title',
-      descriptionKey: 'options.lightLean.description',
-      imageAltKey: 'options.lightLean.imageAlt',
-    },
-    {
-      value: 'ideal-balanced',
-      image: '/images/body-shape-ideal-balanced.png',
-      titleKey: 'options.idealBalanced.title',
-      descriptionKey: 'options.idealBalanced.description',
-      imageAltKey: 'options.idealBalanced.imageAlt',
-    },
-    {
-      value: 'slightly-filled',
-      image: '/images/body-shape-slightly-filled.png',
-      titleKey: 'options.slightlyFilled.title',
-      descriptionKey: 'options.slightlyFilled.description',
-      imageAltKey: 'options.slightlyFilled.imageAlt',
-    },
-    {
-      value: 'full-round',
-      image: '/images/body-shape-full-round.png',
-      titleKey: 'options.fullRound.title',
-      descriptionKey: 'options.fullRound.description',
-      imageAltKey: 'options.fullRound.imageAlt',
-    },
-  ]
-
   return (
     <div className={cn('flex flex-wrap gap-4 items-start w-full', className)}>
-      {options.map((option) => {
+      {BODY_SHAPE_OPTIONS.map((option) => {
         const isSelected = value === option.value
 
         return (
@@ -70,8 +32,8 @@ const BodyShapeSelector = ({
             className={cn(
               'flex flex-1 flex-col gap-2 items-center',
               'bg-neutral-white border border-primary-950',
-              'min-h-[383px] min-w-[220px]',
-              'max-h-[383px] max-w-[220px]',
+              'min-h-[383px] min-w-[222px]',
+              'max-h-[383px] max-w-[222px]',
               'px-4 py-5',
               'text-center',
               'transition-colors',

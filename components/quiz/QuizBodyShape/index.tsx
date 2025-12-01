@@ -1,7 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { Controller, UseFormReturn } from 'react-hook-form'
+import { Controller, useWatch, UseFormReturn } from 'react-hook-form'
 
 import { BodyShapeSelector } from '@/components/quiz/QuizBodyShape/BodyShapeSelector'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
@@ -24,9 +24,12 @@ const QuizBodyShape = ({
 }: QuizBodyShapeProps) => {
   const t = useTranslations('Quiz.bodyShape')
   const tQuiz = useTranslations('Quiz')
-  const { control, watch } = formMethods
+  const { control } = formMethods
 
-  const selectedBodyShape = watch('bodyShape')
+  const selectedBodyShape = useWatch({
+    control,
+    name: 'bodyShape',
+  })
 
   const handleNext = () => {
     goToStep(QuizStep.Step6)
