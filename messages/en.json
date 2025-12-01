@@ -134,6 +134,13 @@
     "backButton": "Back",
     "closeButton": "Close",
     "continueButton": "Continue",
+    "validation": {
+      "nameRequired": "Name is required",
+      "ageRequired": "Age is required",
+      "ageMustBePositive": "Age must be a positive number",
+      "weightRequired": "Weight is required",
+      "weightMustBePositive": "Weight must be a positive number"
+    },
     "step1": {
       "heading": "Let's build the everyday moments that shape your dog's wellbeing",
       "description": "Tell us a bit about your dog's age, size, and habits so we can recommend the right meals — fresh, balanced, and made just for them.",

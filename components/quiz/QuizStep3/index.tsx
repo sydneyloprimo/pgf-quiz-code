@@ -1,9 +1,10 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { useState } from 'react'
+import { Controller, UseFormReturn } from 'react-hook-form'
 
 import { OptionSelect } from '@/components/common/OptionSelect'
+import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
 import { QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
@@ -12,14 +13,20 @@ interface QuizStep3Props {
   goToStep: (step: QuizStep) => void
   goBack: () => void
   canGoBack: boolean
+  formMethods: UseFormReturn<QuizFormData>
 }
 
-const QuizStep3 = ({ goToStep, goBack, canGoBack }: QuizStep3Props) => {
+const QuizStep3 = ({
+  goToStep,
+  goBack,
+  canGoBack,
+  formMethods,
+}: QuizStep3Props) => {
   const t = useTranslations('Quiz.step3')
   const tQuiz = useTranslations('Quiz')
-  const [selectedValue, setSelectedValue] = useState<string>('')
+  const { control, watch } = formMethods
 
-  const dogName = 'Tommy'
+  const dogName = watch('name') || ''
 
   const options = [
     { label: t('options.neutered'), value: 'neutered' },
@@ -60,11 +67,17 @@ const QuizStep3 = ({ goToStep, goBack, canGoBack }: QuizStep3Props) => {
         </div>
 
         <div className="flex flex-col gap-4 items-center w-full">
-          <OptionSelect
-            options={options}
-            value={selectedValue}
-            onSelect={setSelectedValue}
-            className="w-full"
+          <Controller
+            name="neuteredStatus"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <OptionSelect
+                options={options}
+                value={value || ''}
+                onSelect={onChange}
+                className="w-full"
+              />
+            )}
           />
         </div>
       </div>
@@ -73,7 +86,7 @@ const QuizStep3 = ({ goToStep, goBack, canGoBack }: QuizStep3Props) => {
         canGoBack={canGoBack}
         onContinue={handleNext}
         continueButtonText={tQuiz('continueButton')}
-        continueDisabled={!selectedValue}
+        continueDisabled={!watch('neuteredStatus')}
       />
     </div>
   )
