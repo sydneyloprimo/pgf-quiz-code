@@ -44,7 +44,7 @@ export const isValidQuizStepPath = (path: string): boolean => {
   return stepPath in PATH_TO_STEP
 }
 
-const STEP_ORDER: QuizStep[] = [
+export const STEP_ORDER: QuizStep[] = [
   QuizStep.Welcome,
   QuizStep.PetInfo,
   QuizStep.Step3,

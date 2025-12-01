@@ -13,6 +13,7 @@ import {
   getQuizStepPath,
   getQuizStepFromPath,
   getStepNumber,
+  STEP_ORDER,
 } from '@/utils/quizRoutes'
 
 const createQuizFormSchema = (t: (key: string) => string) =>
@@ -93,8 +94,25 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
   )
 
   const goBack = useCallback(() => {
-    router.back()
-  }, [router])
+    // Special handling for error pages - they should always go back to PetInfo
+    if (
+      currentStep === QuizStep.Plus25Lbs ||
+      currentStep === QuizStep.UnderAge
+    ) {
+      goToStep(QuizStep.PetInfo)
+      return
+    }
+
+    // For other steps, find the previous step in the logical flow
+    const currentIndex = STEP_ORDER.indexOf(currentStep)
+    if (currentIndex > 0) {
+      const previousStep = STEP_ORDER[currentIndex - 1]
+      goToStep(previousStep)
+    } else {
+      // Fallback to browser back if we can't determine previous step
+      router.back()
+    }
+  }, [currentStep, goToStep, router])
 
   const canGoBack = currentStep !== QuizStep.Welcome
   const visitedSteps = getStepNumber(currentStep)
