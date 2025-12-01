@@ -11,6 +11,13 @@
     "backButton": "Atrás",
     "closeButton": "Cerrar",
     "continueButton": "Continuar",
+    "validation": {
+      "nameRequired": "El nombre es obligatorio",
+      "ageRequired": "La edad es obligatoria",
+      "ageMustBePositive": "La edad debe ser un número positivo",
+      "weightRequired": "El peso es obligatorio",
+      "weightMustBePositive": "El peso debe ser un número positivo"
+    },
     "step1": {
       "heading": "Construyamos los momentos cotidianos que moldean el bienestar de tu perro",
       "description": "Cuéntanos un poco sobre la edad, el tamaño y los hábitos de tu perro para que podamos recomendar las comidas adecuadas: frescas, equilibradas y hechas especialmente para ellos.",
