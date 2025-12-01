@@ -54,7 +54,7 @@ const QuizStep2 = ({
     } else if (weightNum > MAX_DOG_WEIGHT_LBS) {
       goToStep(QuizStep.Plus25Lbs)
     } else {
-      goToStep(QuizStep.Step3)
+      goToStep(QuizStep.NeuteredStatus)
     }
   }
   return (

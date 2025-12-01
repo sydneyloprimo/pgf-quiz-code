@@ -33,6 +33,7 @@ const createQuizFormSchema = (t: (key: string) => string) =>
         message: t('validation.weightMustBePositive'),
       }),
     neuteredStatus: z.enum(['neutered', 'intact']).optional(),
+    breed: z.string().optional(),
   })
 
 export type QuizFormData = z.infer<ReturnType<typeof createQuizFormSchema>>
@@ -89,6 +90,7 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
       age: storedFormData?.age || '',
       weight: storedFormData?.weight || '',
       neuteredStatus: storedFormData?.neuteredStatus,
+      breed: storedFormData?.breed,
     }),
     [storedFormData]
   )
@@ -111,6 +113,7 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
         age: stored.age || '',
         weight: stored.weight || '',
         neuteredStatus: stored.neuteredStatus,
+        breed: stored.breed,
       })
     }
   }, [formMethods])

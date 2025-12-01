@@ -1,7 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { Controller, UseFormReturn } from 'react-hook-form'
+import { Controller, useWatch, UseFormReturn } from 'react-hook-form'
 
 import { OptionSelect } from '@/components/common/OptionSelect'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
@@ -9,24 +9,28 @@ import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
 import { QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 
-interface QuizStep3Props {
+interface QuizNeuteredStatusProps {
   goToStep: (step: QuizStep) => void
   goBack: () => void
   canGoBack: boolean
   formMethods: UseFormReturn<QuizFormData>
 }
 
-const QuizStep3 = ({
+const QuizNeuteredStatus = ({
   goToStep,
   goBack,
   canGoBack,
   formMethods,
-}: QuizStep3Props) => {
-  const t = useTranslations('Quiz.step3')
+}: QuizNeuteredStatusProps) => {
+  const t = useTranslations('Quiz.neuteredStatus')
   const tQuiz = useTranslations('Quiz')
   const { control, watch } = formMethods
 
   const dogName = watch('name') || ''
+  const selectedNeuteredStatus = useWatch({
+    control,
+    name: 'neuteredStatus',
+  })
 
   const options = [
     { label: t('options.neutered'), value: 'neutered' },
@@ -34,7 +38,7 @@ const QuizStep3 = ({
   ]
 
   const handleNext = () => {
-    goToStep(QuizStep.Step4)
+    goToStep(QuizStep.BreedSelection)
   }
 
   return (
@@ -86,10 +90,10 @@ const QuizStep3 = ({
         canGoBack={canGoBack}
         onContinue={handleNext}
         continueButtonText={tQuiz('continueButton')}
-        continueDisabled={!watch('neuteredStatus')}
+        continueDisabled={!selectedNeuteredStatus}
       />
     </div>
   )
 }
 
-export { QuizStep3 }
+export { QuizNeuteredStatus }
