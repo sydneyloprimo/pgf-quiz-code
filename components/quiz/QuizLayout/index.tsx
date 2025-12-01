@@ -3,7 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter, usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useForm, UseFormReturn } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -37,6 +37,31 @@ const createQuizFormSchema = (t: (key: string) => string) =>
 
 export type QuizFormData = z.infer<ReturnType<typeof createQuizFormSchema>>
 
+const QUIZ_FORM_STORAGE_KEY = 'quiz-form-data'
+
+const getStoredFormData = (): Partial<QuizFormData> | null => {
+  if (typeof window === 'undefined') {
+    return null
+  }
+  try {
+    const stored = window.localStorage.getItem(QUIZ_FORM_STORAGE_KEY)
+    return stored ? JSON.parse(stored) : null
+  } catch {
+    return null
+  }
+}
+
+const saveFormData = (data: Partial<QuizFormData>) => {
+  if (typeof window === 'undefined') {
+    return
+  }
+  try {
+    window.localStorage.setItem(QUIZ_FORM_STORAGE_KEY, JSON.stringify(data))
+  } catch {
+    // Ignore localStorage errors
+  }
+}
+
 interface QuizLayoutProps {
   renderStep: (
     currentStep: QuizStep,
@@ -53,17 +78,53 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
   const pathname = usePathname()
   const quizFormSchema = useMemo(() => createQuizFormSchema(t), [t])
 
+  const [isHydrated, setIsHydrated] = useState(false)
+  const [storedFormData, setStoredFormData] =
+    useState<Partial<QuizFormData> | null>(null)
+
+  const defaultValues = useMemo(
+    () => ({
+      name: storedFormData?.name || '',
+      gender: (storedFormData?.gender as 'male' | 'female') || 'male',
+      age: storedFormData?.age || '',
+      weight: storedFormData?.weight || '',
+      neuteredStatus: storedFormData?.neuteredStatus,
+    }),
+    [storedFormData]
+  )
+
   const formMethods = useForm<QuizFormData>({
     resolver: zodResolver(quizFormSchema),
-    defaultValues: {
-      name: '',
-      gender: 'male',
-      age: '',
-      weight: '',
-      neuteredStatus: undefined,
-    },
+    defaultValues,
     mode: 'onChange',
   })
+
+  // Load stored values on mount after hydration
+  useEffect(() => {
+    setIsHydrated(true)
+    const stored = getStoredFormData()
+    setStoredFormData(stored)
+    if (stored) {
+      formMethods.reset({
+        name: stored.name || '',
+        gender: (stored.gender as 'male' | 'female') || 'male',
+        age: stored.age || '',
+        weight: stored.weight || '',
+        neuteredStatus: stored.neuteredStatus,
+      })
+    }
+  }, [formMethods])
+
+  // Save form values to localStorage whenever they change
+  useEffect(() => {
+    if (!isHydrated) {
+      return
+    }
+    const subscription = formMethods.watch((value) => {
+      saveFormData(value)
+    })
+    return () => subscription.unsubscribe()
+  }, [formMethods, isHydrated])
 
   // Single source of truth: derive currentStep from pathname
   const currentStep = useMemo(() => {
