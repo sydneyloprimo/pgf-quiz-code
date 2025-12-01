@@ -4,6 +4,8 @@ import { Routes } from '@/types/enums/routes'
 const STEP_TO_PATH: Record<QuizStep, string> = {
   [QuizStep.Welcome]: 'welcome',
   [QuizStep.PetInfo]: 'pet-info',
+  [QuizStep.Plus25Lbs]: 'plus-25-lbs',
+  [QuizStep.UnderAge]: 'under-age',
   [QuizStep.Step3]: 'neutered-status',
   [QuizStep.Step4]: 'step4',
   [QuizStep.Step5]: 'step5',
