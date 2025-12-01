@@ -129,7 +129,7 @@ const InputDropdown = ({
         <div
           id={dropdownId}
           role="listbox"
-          className="absolute top-12 left-0 right-0 z-10 bg-neutral-100 border-2 border-primary-800 flex flex-col"
+          className="absolute top-12 left-0 right-0 z-10 bg-neutral-100 border-2 border-primary-800 flex flex-col max-h-60 overflow-y-auto"
         >
           {options.map((option) => (
             <button

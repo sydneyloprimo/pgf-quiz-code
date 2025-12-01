@@ -176,11 +176,13 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
   )
 
   return (
-    <div className="flex flex-col min-h-screen bg-neutral-300 w-full py-10 px-5 md:px-24">
-      <QuizHeader visitedSteps={visitedSteps} />
+    <div className="flex flex-col h-screen bg-neutral-300 w-full overflow-hidden">
+      <div className="shrink-0 py-10 px-5 md:px-24">
+        <QuizHeader visitedSteps={visitedSteps} />
+      </div>
 
-      <main className="flex-1 flex max-w-2xl mx-auto items-center justify-center px-0">
-        {renderedStep}
+      <main className="flex-1 flex max-w-2xl mx-auto items-center px-5 md:px-24 overflow-hidden">
+        <div className="w-full py-8">{renderedStep}</div>
       </main>
     </div>
   )
