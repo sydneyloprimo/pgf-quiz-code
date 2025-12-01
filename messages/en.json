@@ -216,6 +216,17 @@
       "changeAgeButton": "Change Age",
       "joinWaitlistButton": "Join the Waitlist",
       "imageAlt": "Dog illustration"
+    },
+    "diet": {
+      "heading": "{name}'s Diet",
+      "description": "Every dog has their own habits — this helps us personalize {name}'s plan for balanced nutrition and portion size.",
+      "mainFoodLabel": "{name} mainly eats",
+      "mainFoodPlaceholder": "Select food type",
+      "treatFrequencyLabel": "and gets",
+      "treatFrequencyPlaceholder": "Select frequency",
+      "treatFrequencySuffix": "treats or table scraps daily.",
+      "mealtimeBehaviorLabel": "At mealtimes, {name}",
+      "mealtimeBehaviorPlaceholder": "Select behavior"
     }
   },
   "Search": {

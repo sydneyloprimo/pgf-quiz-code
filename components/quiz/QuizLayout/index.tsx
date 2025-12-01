@@ -36,6 +36,9 @@ const createQuizFormSchema = (t: (key: string) => string) =>
     neuteredStatus: z.enum(['neutered', 'intact']).optional(),
     breed: z.string().optional(),
     bodyShape: z.string().optional(),
+    mainFood: z.string().optional(),
+    treatFrequency: z.string().optional(),
+    mealtimeBehavior: z.string().optional(),
   })
 
 export type QuizFormData = z.infer<ReturnType<typeof createQuizFormSchema>>
@@ -94,6 +97,9 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
       neuteredStatus: storedFormData?.neuteredStatus,
       breed: storedFormData?.breed,
       bodyShape: storedFormData?.bodyShape,
+      mainFood: storedFormData?.mainFood,
+      treatFrequency: storedFormData?.treatFrequency,
+      mealtimeBehavior: storedFormData?.mealtimeBehavior,
     }),
     [storedFormData]
   )
@@ -118,6 +124,9 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
         neuteredStatus: stored.neuteredStatus,
         breed: stored.breed,
         bodyShape: stored.bodyShape,
+        mainFood: stored.mainFood,
+        treatFrequency: stored.treatFrequency,
+        mealtimeBehavior: stored.mealtimeBehavior,
       })
     }
   }, [formMethods])
