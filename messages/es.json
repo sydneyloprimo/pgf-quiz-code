@@ -34,13 +34,21 @@
       "weightSuffix": "lbs"
     },
     "step3": {
+      "heading": "¿{name} está castrado o intacto?",
+      "description": "Esto nos ayuda a ajustar el tamaño de la porción y las necesidades calóricas de {name} — las hormonas pueden afectar ligeramente el metabolismo.",
+      "options": {
+        "neutered": "Castrado",
+        "intact": "Intacto"
+      }
+    },
+    "title": "Purely Golden Foods",
+    "plus25Lbs": {
       "heading": "Nuestros planes de comidas actuales están diseñados para perros pequeños menores de 25 lbs.",
       "description": "Pronto ampliaremos a razas más grandes — únete a la lista de espera para ser el primero en saber cuándo se lancen los nuevos tamaños.",
       "changeWeightsButton": "Cambiar Peso",
       "joinWaitlistButton": "Únete a la Lista de Espera",
       "imageAlt": "Ilustración de perro"
     },
-    "title": "Purely Golden Foods",
     "underAge": {
       "heading": "Todavía estamos perfeccionando nuestras comidas para cachorros.",
       "description": "Nuestras fórmulas actuales están diseñadas para perros adultos. Estamos desarrollando una línea especializada para cachorros en crecimiento — únete a la lista de espera y sé el primero en saber cuando esté lista.",

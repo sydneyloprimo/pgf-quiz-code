@@ -19,7 +19,7 @@ interface QuizPlus25LbsProps {
 }
 
 const QuizPlus25Lbs = ({ goToStep, goBack, canGoBack }: QuizPlus25LbsProps) => {
-  const t = useTranslations('Quiz.step3')
+  const t = useTranslations('Quiz.plus25Lbs')
 
   return (
     <div

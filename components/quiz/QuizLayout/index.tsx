@@ -39,7 +39,7 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
     <div className="flex flex-col min-h-screen bg-neutral-300 w-full py-10 px-5 md:px-24">
       <QuizHeader visitedSteps={stepHistory.length} />
 
-      <main className="flex-1 flex items-center justify-center px-0">
+      <main className="flex-1 flex max-w-2xl mx-auto items-center justify-center px-0">
         {renderStep(currentStep, goToStep, goBack, canGoBack)}
       </main>
     </div>
