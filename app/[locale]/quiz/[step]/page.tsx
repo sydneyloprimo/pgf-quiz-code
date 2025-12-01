@@ -6,7 +6,8 @@ import { UseFormReturn } from 'react-hook-form'
 import {
   QuizStep1,
   QuizStep2,
-  QuizStep3,
+  QuizNeuteredStatus,
+  QuizBreedSelection,
   QuizPlus25Lbs,
   QuizStepUnderAge,
 } from '@/components/quiz'
@@ -40,9 +41,18 @@ export default function QuizStepPage() {
               formMethods={formMethods}
             />
           )
-        case QuizStep.Step3:
+        case QuizStep.NeuteredStatus:
           return (
-            <QuizStep3
+            <QuizNeuteredStatus
+              goToStep={goToStep}
+              goBack={goBack}
+              canGoBack={canGoBack}
+              formMethods={formMethods}
+            />
+          )
+        case QuizStep.BreedSelection:
+          return (
+            <QuizBreedSelection
               goToStep={goToStep}
               goBack={goBack}
               canGoBack={canGoBack}

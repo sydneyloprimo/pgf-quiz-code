@@ -28,20 +28,20 @@ const inputDropdownVariants = cva(
   }
 )
 
-export type InputDropdownVariantProps = VariantProps<
+export type BreedDropdownVariantProps = VariantProps<
   typeof inputDropdownVariants
 >
 
-interface DropdownItem {
+interface BreedOption {
   label: string
   value: string
-  checked?: boolean
+  category: string
 }
 
-interface InputDropdownProps extends InputDropdownVariantProps {
+interface BreedDropdownProps extends BreedDropdownVariantProps {
   value?: string
   placeholder?: string
-  options: DropdownItem[]
+  breeds: BreedOption[]
   onSelect?: (value: string) => void
   className?: string
   icon?: ReactNode
@@ -51,10 +51,10 @@ interface InputDropdownProps extends InputDropdownVariantProps {
   onClose?: () => void
 }
 
-const InputDropdown = ({
+const BreedDropdown = ({
   value,
   placeholder,
-  options,
+  breeds,
   onSelect,
   className,
   icon,
@@ -63,15 +63,15 @@ const InputDropdown = ({
   textClassName,
   onOpen,
   onClose,
-}: InputDropdownProps) => {
+}: BreedDropdownProps) => {
   const t = useTranslations('Common.InputDropdown')
   const [isOpen, setIsOpen] = useState(false)
   const dropdownId = useId()
-  const selectedOption = options.find((opt) => opt.value === value)
+  const selectedBreed = breeds.find((breed) => breed.value === value)
   const displayState = getInputDropdownDisplayState(
     disabled,
     isOpen,
-    Boolean(selectedOption),
+    Boolean(selectedBreed),
     state
   )
 
@@ -94,6 +94,20 @@ const InputDropdown = ({
     }
   }
 
+  // Group breeds by category
+  const breedsByCategory = breeds.reduce(
+    (acc, breed) => {
+      if (!acc[breed.category]) {
+        acc[breed.category] = []
+      }
+      acc[breed.category].push(breed)
+      return acc
+    },
+    {} as Record<string, BreedOption[]>
+  )
+
+  const categories = Object.keys(breedsByCategory)
+
   return (
     <div className={cn('relative flex flex-col', className)}>
       <button
@@ -113,12 +127,12 @@ const InputDropdown = ({
             'whitespace-nowrap text-left',
             {
               'text-secondary-950':
-                selectedOption && displayState === InputDropdownState.Filled,
+                selectedBreed && displayState === InputDropdownState.Filled,
             },
             textClassName
           )}
         >
-          {selectedOption?.label || placeholder}
+          {selectedBreed?.label || placeholder}
         </p>
         {icon && <div className="relative shrink-0 size-6">{icon}</div>}
         <div className="relative shrink-0 size-6">
@@ -129,33 +143,42 @@ const InputDropdown = ({
         <div
           id={dropdownId}
           role="listbox"
-          className="absolute top-12 left-0 right-0 z-10 bg-neutral-100 border-2 border-primary-800 flex flex-col max-h-60 overflow-y-auto"
+          className="absolute top-12 left-0 right-0 z-10 bg-neutral-white border-2 border-primary-800 flex flex-col max-h-60 overflow-y-auto gap-1"
         >
-          {options.map((option) => (
-            <button
-              key={option.value}
-              type="button"
-              role="option"
-              aria-selected={option.value === value}
-              className={cn(
-                'bg-neutral-white flex gap-2 items-center',
-                'px-4 py-3 w-full cursor-pointer',
-                'hover:bg-secondary-100',
-                'text-base font-body font-semibold leading-6 text-neutral-800'
-              )}
-              onClick={() => handleOptionSelect(option.value)}
-            >
-              <div className="flex-1 min-w-0 text-left">
-                <p className="font-body leading-6 whitespace-pre-wrap">
-                  {option.label}
+          {categories.map((category) => (
+            <div key={category} className="flex flex-col">
+              <div className="px-4 pt-3">
+                <p className="font-body font-bold leading-5 text-base text-secondary-950 pb-2">
+                  {category}
                 </p>
               </div>
-              {option.value === value && (
-                <div className="relative shrink-0 size-6">
-                  <CheckIcon className="size-6 text-feedback-success-500" />
-                </div>
-              )}
-            </button>
+              {breedsByCategory[category].map((breed) => (
+                <button
+                  key={breed.value}
+                  type="button"
+                  role="option"
+                  aria-selected={breed.value === value}
+                  className={cn(
+                    'bg-neutral-white flex gap-2 items-center',
+                    'px-4 py-3 w-full cursor-pointer',
+                    'hover:bg-secondary-100',
+                    'text-base font-body leading-6 text-neutral-800'
+                  )}
+                  onClick={() => handleOptionSelect(breed.value)}
+                >
+                  <div className="flex-1 min-w-0 text-left">
+                    <p className="font-body leading-6 whitespace-pre-wrap">
+                      {breed.label}
+                    </p>
+                  </div>
+                  {breed.value === value && (
+                    <div className="relative shrink-0 size-6">
+                      <CheckIcon className="size-6 text-feedback-success-500" />
+                    </div>
+                  )}
+                </button>
+              ))}
+            </div>
           ))}
         </div>
       )}
@@ -163,4 +186,5 @@ const InputDropdown = ({
   )
 }
 
-export { InputDropdown }
+export { BreedDropdown }
+export type { BreedOption }

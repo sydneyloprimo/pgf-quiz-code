@@ -163,13 +163,18 @@
       "weightPrefix": "",
       "weightSuffix": "lbs"
     },
-    "step3": {
+    "neuteredStatus": {
       "heading": "Is {name} neutered or intact?",
       "description": "This helps us fine-tune {name}'s portion size and calorie needs — hormones can slightly affect metabolism.",
       "options": {
         "neutered": "Neutered",
         "intact": "Intact"
       }
+    },
+    "breedSelection": {
+      "heading": "Select {name}'s breed (or the closest match)",
+      "description": "Different breeds have different needs — this helps us fine-tune portion size and nutritional balance.",
+      "placeholder": "Choose a breed"
     },
     "title": "Purely Golden Foods",
     "plus25Lbs": {

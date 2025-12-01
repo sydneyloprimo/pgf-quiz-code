@@ -33,6 +33,7 @@ const createQuizFormSchema = (t: (key: string) => string) =>
         message: t('validation.weightMustBePositive'),
       }),
     neuteredStatus: z.enum(['neutered', 'intact']).optional(),
+    breed: z.string().optional(),
   })
 
 export type QuizFormData = z.infer<ReturnType<typeof createQuizFormSchema>>
@@ -89,6 +90,7 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
       age: storedFormData?.age || '',
       weight: storedFormData?.weight || '',
       neuteredStatus: storedFormData?.neuteredStatus,
+      breed: storedFormData?.breed,
     }),
     [storedFormData]
   )
@@ -111,6 +113,7 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
         age: stored.age || '',
         weight: stored.weight || '',
         neuteredStatus: stored.neuteredStatus,
+        breed: stored.breed,
       })
     }
   }, [formMethods])
@@ -173,11 +176,13 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
   )
 
   return (
-    <div className="flex flex-col min-h-screen bg-neutral-300 w-full py-10 px-5 md:px-24">
-      <QuizHeader visitedSteps={visitedSteps} />
+    <div className="flex flex-col h-screen bg-neutral-300 w-full overflow-hidden">
+      <div className="shrink-0 py-10 px-5 md:px-24">
+        <QuizHeader visitedSteps={visitedSteps} />
+      </div>
 
-      <main className="flex-1 flex max-w-2xl mx-auto items-center justify-center px-0">
-        {renderedStep}
+      <main className="flex-1 flex max-w-2xl mx-auto items-center justify-center px-0 overflow-hidden">
+        <div className="w-full py-8">{renderedStep}</div>
       </main>
     </div>
   )

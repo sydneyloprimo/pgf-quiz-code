@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 import { useState } from 'react'
-import { Controller, UseFormReturn } from 'react-hook-form'
+import { Controller, useWatch, UseFormReturn } from 'react-hook-form'
 
 import Input from '@/components/common/Input'
 import { InputDropdown } from '@/components/common/InputDropdown'
@@ -31,13 +31,13 @@ const QuizStep2 = ({
 }: QuizStep2Props) => {
   const t = useTranslations('Quiz.step2')
   const tQuiz = useTranslations('Quiz')
-  const { control, watch } = formMethods
+  const { control } = formMethods
   const [focusedField, setFocusedField] = useState<string | null>(null)
 
-  const name = watch('name')
-  const gender = watch('gender')
-  const age = watch('age')
-  const weight = watch('weight')
+  const name = useWatch({ control, name: 'name' })
+  const gender = useWatch({ control, name: 'gender' })
+  const age = useWatch({ control, name: 'age' })
+  const weight = useWatch({ control, name: 'weight' })
 
   const genderOptions = [
     { label: t('gender.male'), value: 'male' },
@@ -54,7 +54,7 @@ const QuizStep2 = ({
     } else if (weightNum > MAX_DOG_WEIGHT_LBS) {
       goToStep(QuizStep.Plus25Lbs)
     } else {
-      goToStep(QuizStep.Step3)
+      goToStep(QuizStep.NeuteredStatus)
     }
   }
   return (

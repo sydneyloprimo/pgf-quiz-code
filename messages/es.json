@@ -40,13 +40,18 @@
       "weightPrefix": "",
       "weightSuffix": "lbs"
     },
-    "step3": {
+    "neuteredStatus": {
       "heading": "¿{name} está castrado o intacto?",
       "description": "Esto nos ayuda a ajustar el tamaño de la porción y las necesidades calóricas de {name} — las hormonas pueden afectar ligeramente el metabolismo.",
       "options": {
         "neutered": "Castrado",
         "intact": "Intacto"
       }
+    },
+    "breedSelection": {
+      "heading": "Selecciona la raza de {name} (o la más cercana)",
+      "description": "Diferentes razas tienen diferentes necesidades — esto nos ayuda a ajustar el tamaño de la porción y el equilibrio nutricional.",
+      "placeholder": "Elige una raza"
     },
     "title": "Purely Golden Foods",
     "plus25Lbs": {
