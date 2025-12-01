@@ -8,7 +8,7 @@ const STEP_TO_PATH: Record<QuizStep, string> = {
   [QuizStep.UnderAge]: 'under-age',
   [QuizStep.NeuteredStatus]: 'neutered-status',
   [QuizStep.BreedSelection]: 'breed-selection',
-  [QuizStep.Step5]: 'step5',
+  [QuizStep.Step5]: 'body-shape',
   [QuizStep.Step6]: 'step6',
   [QuizStep.Step7]: 'step7',
   [QuizStep.Step8]: 'step8',

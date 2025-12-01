@@ -176,6 +176,32 @@
       "description": "Different breeds have different needs — this helps us fine-tune portion size and nutritional balance.",
       "placeholder": "Choose a breed"
     },
+    "bodyShape": {
+      "heading": "How would you describe your dog's body shape?",
+      "description": "This helps us fine-tune portion size and calorie balance to keep them in their healthiest shape.",
+      "options": {
+        "lightLean": {
+          "title": "Light and Lean",
+          "description": "You can see or easily feel their ribs and a clear waist.",
+          "imageAlt": "Light and lean dog body shape illustration"
+        },
+        "idealBalanced": {
+          "title": "Ideal & Balanced",
+          "description": "You can feel ribs under a gentle layer, and there's a natural waist when viewed from above.",
+          "imageAlt": "Ideal and balanced dog body shape illustration"
+        },
+        "slightlyFilled": {
+          "title": "Slightly Filled Out",
+          "description": "Their waistline is softening, and ribs are harder to feel with light pressure.",
+          "imageAlt": "Slightly filled out dog body shape illustration"
+        },
+        "fullRound": {
+          "title": "Full or Round",
+          "description": "No visible waist; their belly feels soft and hangs lower.",
+          "imageAlt": "Full or round dog body shape illustration"
+        }
+      }
+    },
     "title": "Purely Golden Foods",
     "plus25Lbs": {
       "heading": "Our current meal plans are tailored for small dogs under 25 lbs.",

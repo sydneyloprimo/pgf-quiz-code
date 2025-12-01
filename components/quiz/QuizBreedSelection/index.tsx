@@ -44,10 +44,10 @@ const QuizBreedSelection = ({
     <div
       className={cn(
         'flex flex-col items-center justify-center',
-        'pt-0 px-0 w-full'
+        'pt-0 px-0 w-full h-full'
       )}
     >
-      <div className="flex flex-col gap-12 items-center w-full pb-16">
+      <div className="flex-1 flex flex-col gap-12 items-center w-full pb-16">
         <div
           className={cn(
             'flex flex-col gap-6 items-center',
