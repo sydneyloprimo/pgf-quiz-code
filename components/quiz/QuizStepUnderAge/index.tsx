@@ -12,14 +12,18 @@ import {
 import { QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 
-interface QuizPlus25LbsProps {
+interface QuizStepUnderAgeProps {
   goToStep: (step: QuizStep) => void
   goBack: () => void
   canGoBack: boolean
 }
 
-const QuizPlus25Lbs = ({ goToStep, goBack, canGoBack }: QuizPlus25LbsProps) => {
-  const t = useTranslations('Quiz.step3')
+const QuizStepUnderAge = ({
+  goToStep,
+  goBack,
+  canGoBack,
+}: QuizStepUnderAgeProps) => {
+  const t = useTranslations('Quiz.underAge')
 
   return (
     <div
@@ -69,7 +73,7 @@ const QuizPlus25Lbs = ({ goToStep, goBack, canGoBack }: QuizPlus25LbsProps) => {
           variant="tertiary"
           leftIcon={<ArrowLeftIcon className="size-5" />}
         >
-          {t('changeWeightsButton')}
+          {t('changeAgeButton')}
         </Button>
         <Button
           type="button"
@@ -86,4 +90,4 @@ const QuizPlus25Lbs = ({ goToStep, goBack, canGoBack }: QuizPlus25LbsProps) => {
   )
 }
 
-export { QuizPlus25Lbs }
+export { QuizStepUnderAge }

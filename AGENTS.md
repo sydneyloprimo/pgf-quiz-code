@@ -1143,6 +1143,7 @@ const handleToggle = useCallback(() => {
 - Define constants in `constants/index.tsx`
 - Use descriptive names in UPPER_SNAKE_CASE
 - Group related constants together
+- **Always define constants for explicit values**: Never use magic numbers or hardcoded values in business logic. Define constants for thresholds, limits, sizes, and other explicit values used in comparisons or calculations
 
 **Example:**
 
@@ -1153,6 +1154,30 @@ export const MediaQuery = {
 }
 
 export const MOBILE_WIDTH = 768
+
+// Quiz thresholds
+export const PUPPY_MAX_AGE_YEARS = 1
+export const MAX_DOG_WEIGHT_LBS = 25
+```
+
+**Example - Using Constants:**
+
+```typescript
+// ❌ Bad - Magic numbers
+if (ageNum < 5) {
+  goToStep(QuizStep.UnderAge)
+} else if (weightNum > 25) {
+  goToStep(QuizStep.Plus25Lbs)
+}
+
+// ✅ Good - Using constants
+import { MAX_DOG_WEIGHT_LBS, PUPPY_MAX_AGE_YEARS } from '@/constants'
+
+if (ageNum <= PUPPY_MAX_AGE_YEARS) {
+  goToStep(QuizStep.UnderAge)
+} else if (weightNum > MAX_DOG_WEIGHT_LBS) {
+  goToStep(QuizStep.Plus25Lbs)
+}
 ```
 
 ### Hooks
