@@ -3,9 +3,10 @@
 import { useTranslations } from 'next-intl'
 import { Controller, useWatch, UseFormReturn } from 'react-hook-form'
 
-import { InputDropdown } from '@/components/common/InputDropdown'
+import { BreedDropdown } from '@/components/quiz/QuizBreedSelection/BreedDropdown'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
+import { BREEDS } from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
 import { InputDropdownState } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
@@ -16,33 +17,6 @@ interface QuizBreedSelectionProps {
   canGoBack: boolean
   formMethods: UseFormReturn<QuizFormData>
 }
-
-const BREEDS = [
-  'Shih Tzu',
-  'Maltese',
-  'Yorkshire Terrier',
-  'Pomeranian',
-  'Papillon',
-  'Toy Poodle',
-  'Chihuahua',
-  'Havanese',
-  'Japanese Chin',
-  'Miniature Schnauzer',
-  'Cavalier King Charles Spaniel',
-  'French Bulldog',
-  'Boston Terrier',
-  'Coton de Tuléar',
-  'Brussels Griffon',
-  'Bichon Frise',
-  'Lhasa Apso',
-  'Miniature Dachshund',
-  'Cocker Spaniel',
-  'Jack Russell Terrier',
-  'West Highland White Terrier',
-  'Miniature Pinscher',
-  'Italian Greyhound',
-  'Scottish Terrier',
-]
 
 const QuizBreedSelection = ({
   goToStep,
@@ -59,11 +33,6 @@ const QuizBreedSelection = ({
       control,
       name: 'name',
     }) || ''
-
-  const breedOptions = BREEDS.map((breed) => ({
-    label: breed,
-    value: breed.toLowerCase().replace(/\s+/g, '-'),
-  }))
 
   const selectedBreed = watch('breed')
 
@@ -106,10 +75,10 @@ const QuizBreedSelection = ({
               name="breed"
               control={control}
               render={({ field: { value, onChange } }) => (
-                <InputDropdown
+                <BreedDropdown
                   value={value}
                   onSelect={onChange}
-                  options={breedOptions}
+                  breeds={BREEDS}
                   placeholder={t('placeholder')}
                   className="w-full"
                   state={
