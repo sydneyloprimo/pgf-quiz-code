@@ -6,9 +6,10 @@ import { useState } from 'react'
 import Input from '@/components/common/Input'
 import { InputDropdown } from '@/components/common/InputDropdown'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
+import { MAX_DOG_WEIGHT_LBS, PUPPY_MAX_AGE_YEARS } from '@/constants'
 import {
-  InputState,
   InputDropdownState,
+  InputState,
   QuizStep,
 } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
@@ -28,14 +29,22 @@ const QuizStep2 = ({ goToStep, goBack, canGoBack }: QuizStep2Props) => {
   const [weight, setWeight] = useState('18')
   const [focusedField, setFocusedField] = useState<string | null>(null)
 
+  const handleNext = () => {
+    const ageNum = parseInt(age, 10)
+    const weightNum = parseInt(weight, 10)
+    if (ageNum <= PUPPY_MAX_AGE_YEARS) {
+      goToStep(QuizStep.UnderAge)
+    } else if (weightNum > MAX_DOG_WEIGHT_LBS) {
+      goToStep(QuizStep.Plus25Lbs)
+    } else {
+      goToStep(QuizStep.Step3)
+    }
+  }
+
   const genderOptions = [
     { label: t('gender.male'), value: 'male' },
     { label: t('gender.female'), value: 'female' },
   ]
-
-  const handleNext = () => {
-    goToStep(QuizStep.Step3)
-  }
 
   return (
     <div

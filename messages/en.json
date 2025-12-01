@@ -164,7 +164,21 @@
         "intact": "Intact"
       }
     },
-    "title": "Purely Golden Foods"
+    "title": "Purely Golden Foods",
+    "plus25Lbs": {
+      "heading": "Our current meal plans are tailored for small dogs under 25 lbs.",
+      "description": "We're expanding to larger breeds soon — join the waitlist to be the first to know when new sizes launch.",
+      "changeWeightsButton": "Change Weighs",
+      "joinWaitlistButton": "Join the Waitlist",
+      "imageAlt": "Dog illustration"
+    },
+    "underAge": {
+      "heading": "We're still perfecting our meals for puppies.",
+      "description": "Our current formulas are designed for adult dogs. We're developing a specialized line for growing pups — join the waitlist and be the first to know when it's ready.",
+      "changeAgeButton": "Change Age",
+      "joinWaitlistButton": "Join the Waitlist",
+      "imageAlt": "Dog illustration"
+    }
   },
   "Search": {
     "FilterPanel": {
