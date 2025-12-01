@@ -181,7 +181,7 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
         <QuizHeader visitedSteps={visitedSteps} />
       </div>
 
-      <main className="flex-1 flex max-w-2xl mx-auto items-center px-5 md:px-24 overflow-hidden">
+      <main className="flex-1 flex max-w-2xl mx-auto items-center justify-center px-0 overflow-hidden">
         <div className="w-full py-8">{renderedStep}</div>
       </main>
     </div>

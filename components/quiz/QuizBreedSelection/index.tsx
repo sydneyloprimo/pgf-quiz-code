@@ -1,7 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { Controller, UseFormReturn } from 'react-hook-form'
+import { Controller, useWatch, UseFormReturn } from 'react-hook-form'
 
 import { InputDropdown } from '@/components/common/InputDropdown'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
@@ -54,7 +54,11 @@ const QuizBreedSelection = ({
   const tQuiz = useTranslations('Quiz')
   const { control, watch } = formMethods
 
-  const dogName = watch('name') || ''
+  const dogName =
+    useWatch({
+      control,
+      name: 'name',
+    }) || ''
 
   const breedOptions = BREEDS.map((breed) => ({
     label: breed,
