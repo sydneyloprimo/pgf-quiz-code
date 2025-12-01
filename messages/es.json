@@ -41,6 +41,20 @@
         "intact": "Intacto"
       }
     },
-    "title": "Purely Golden Foods"
+    "title": "Purely Golden Foods",
+    "plus25Lbs": {
+      "heading": "Nuestros planes de comidas actuales están diseñados para perros pequeños menores de 25 lbs.",
+      "description": "Pronto ampliaremos a razas más grandes — únete a la lista de espera para ser el primero en saber cuándo se lancen los nuevos tamaños.",
+      "changeWeightsButton": "Cambiar Peso",
+      "joinWaitlistButton": "Únete a la Lista de Espera",
+      "imageAlt": "Ilustración de perro"
+    },
+    "underAge": {
+      "heading": "Todavía estamos perfeccionando nuestras comidas para cachorros.",
+      "description": "Nuestras fórmulas actuales están diseñadas para perros adultos. Estamos desarrollando una línea especializada para cachorros en crecimiento — únete a la lista de espera y sé el primero en saber cuando esté lista.",
+      "changeAgeButton": "Cambiar Edad",
+      "joinWaitlistButton": "Únete a la Lista de Espera",
+      "imageAlt": "Ilustración de perro"
+    }
   }
 }

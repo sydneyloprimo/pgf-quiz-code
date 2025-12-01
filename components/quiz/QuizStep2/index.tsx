@@ -8,9 +8,10 @@ import Input from '@/components/common/Input'
 import { InputDropdown } from '@/components/common/InputDropdown'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
+import { MAX_DOG_WEIGHT_LBS, PUPPY_MAX_AGE_YEARS } from '@/constants'
 import {
-  InputState,
   InputDropdownState,
+  InputState,
   QuizStep,
 } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
@@ -46,9 +47,16 @@ const QuizStep2 = ({
   const isFormValid = Boolean(name && age && weight)
 
   const handleNext = () => {
-    goToStep(QuizStep.Step3)
+    const ageNum = parseInt(age, 10)
+    const weightNum = parseInt(weight, 10)
+    if (ageNum <= PUPPY_MAX_AGE_YEARS) {
+      goToStep(QuizStep.UnderAge)
+    } else if (weightNum > MAX_DOG_WEIGHT_LBS) {
+      goToStep(QuizStep.Plus25Lbs)
+    } else {
+      goToStep(QuizStep.Step3)
+    }
   }
-
   return (
     <div
       className={cn(
