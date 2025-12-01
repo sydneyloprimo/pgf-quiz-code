@@ -3,7 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter, usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useState, useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { useForm, UseFormReturn } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -51,9 +51,6 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
   const t = useTranslations('Quiz')
   const router = useRouter()
   const pathname = usePathname()
-  const [currentStep, setCurrentStep] = useState<QuizStep>(QuizStep.Welcome)
-  const [isInitialized, setIsInitialized] = useState(false)
-
   const quizFormSchema = useMemo(() => createQuizFormSchema(t), [t])
 
   const formMethods = useForm<QuizFormData>({
@@ -68,26 +65,14 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
     mode: 'onChange',
   })
 
-  useEffect(() => {
+  // Single source of truth: derive currentStep from pathname
+  const currentStep = useMemo(() => {
     const stepFromPath = getQuizStepFromPath(pathname)
-    if (stepFromPath) {
-      setCurrentStep(stepFromPath)
-    }
-    setIsInitialized(true)
+    return stepFromPath || QuizStep.Welcome
   }, [pathname])
-
-  useEffect(() => {
-    if (!isInitialized) return
-
-    const stepFromPath = getQuizStepFromPath(pathname)
-    if (stepFromPath && stepFromPath !== currentStep) {
-      setCurrentStep(stepFromPath)
-    }
-  }, [pathname, currentStep, isInitialized])
 
   const goToStep = useCallback(
     (step: QuizStep) => {
-      setCurrentStep(step)
       router.push(getQuizStepPath(step))
     },
     [router]
@@ -114,15 +99,24 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
     }
   }, [currentStep, goToStep, router])
 
-  const canGoBack = currentStep !== QuizStep.Welcome
-  const visitedSteps = getStepNumber(currentStep)
+  const canGoBack = useMemo(
+    () => currentStep !== QuizStep.Welcome,
+    [currentStep]
+  )
+  const visitedSteps = useMemo(() => getStepNumber(currentStep), [currentStep])
+
+  // Memoize the rendered step to prevent unnecessary re-renders
+  const renderedStep = useMemo(
+    () => renderStep(currentStep, goToStep, goBack, canGoBack, formMethods),
+    [currentStep, goToStep, goBack, canGoBack, formMethods, renderStep]
+  )
 
   return (
     <div className="flex flex-col min-h-screen bg-neutral-300 w-full py-10 px-5 md:px-24">
       <QuizHeader visitedSteps={visitedSteps} />
 
       <main className="flex-1 flex max-w-2xl mx-auto items-center justify-center px-0">
-        {renderStep(currentStep, goToStep, goBack, canGoBack, formMethods)}
+        {renderedStep}
       </main>
     </div>
   )
