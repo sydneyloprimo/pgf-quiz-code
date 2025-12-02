@@ -93,6 +93,11 @@
       "changeAgeButton": "Cambiar Edad",
       "joinWaitlistButton": "Únete a la Lista de Espera",
       "imageAlt": "Ilustración de perro"
+    },
+    "howActive": {
+      "heading": "¿Qué tan activo es {name} día a día?",
+      "description": "Usaremos esto para ajustar su ingesta calórica y el tamaño de la porción a su nivel de energía diario.",
+      "placeholder": "Selecciona el nivel de actividad"
     }
   }
 }
