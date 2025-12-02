@@ -232,6 +232,10 @@
       "heading": "How active is {name} day-to-day?",
       "description": "We'll use this to match his calorie intake and portion size to his daily energy level.",
       "placeholder": "Select activity level"
+    },
+    "loading": {
+      "heading": "Creating the perfect meal plan for {name}…",
+      "description": "We're analyzing his details to balance nutrition, flavor, and portion — the way care and science should meet."
     }
   },
   "Search": {

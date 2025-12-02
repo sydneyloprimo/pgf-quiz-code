@@ -98,6 +98,10 @@
       "heading": "¿Qué tan activo es {name} día a día?",
       "description": "Usaremos esto para ajustar su ingesta calórica y el tamaño de la porción a su nivel de energía diario.",
       "placeholder": "Selecciona el nivel de actividad"
+    },
+    "loading": {
+      "heading": "Creando el plan de comidas perfecto para {name}…",
+      "description": "Estamos analizando sus detalles para equilibrar nutrición, sabor y porción — la forma en que el cuidado y la ciencia deben encontrarse."
     }
   }
 }
