@@ -18,25 +18,25 @@ interface QuizDietProps {
 }
 
 const MAIN_FOOD_OPTIONS = [
-  { label: 'Dry food', value: 'dry-food' },
-  { label: 'Wet food', value: 'wet-food' },
-  { label: 'Raw food', value: 'raw-food' },
-  { label: 'Dehydrated food', value: 'dehydrated-food' },
-  { label: 'Fresh food', value: 'fresh-food' },
-  { label: 'Homemade food', value: 'homemade-food' },
-  { label: 'Mixed (combination)', value: 'mixed-combination' },
+  { label: 'dry food', value: 'dry-food' },
+  { label: 'wet food', value: 'wet-food' },
+  { label: 'raw food', value: 'raw-food' },
+  { label: 'dehydrated food', value: 'dehydrated-food' },
+  { label: 'fresh food', value: 'fresh-food' },
+  { label: 'homemade food', value: 'homemade-food' },
+  { label: 'mixed (combination)', value: 'mixed-combination' },
 ]
 
 const TREAT_FREQUENCY_OPTIONS = [
-  { label: 'No', value: 'no' },
+  { label: 'no', value: 'no' },
   { label: '1-2 small', value: '1-2-small' },
   { label: 'several', value: 'several' },
-  { label: 'Lots (spoiled rotten)', value: 'lots-spoiled-rotten' },
+  { label: 'lots (spoiled rotten)', value: 'lots-spoiled-rotten' },
 ]
 
 const MEALTIME_BEHAVIOR_OPTIONS = [
-  { label: 'Very picky', value: 'very-picky' },
-  { label: 'Can be picky', value: 'can-be-picky' },
+  { label: 'very picky', value: 'very-picky' },
+  { label: 'can be picky', value: 'can-be-picky' },
   { label: 'good eater', value: 'good-eater' },
   { label: 'will eat anything', value: 'will-eat-anything' },
 ]
