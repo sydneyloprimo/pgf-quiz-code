@@ -22,6 +22,48 @@ export const QUIZ_DOG_ILLUSTRATION_SOURCE_HEIGHT = 1024
 export const PUPPY_MAX_AGE_YEARS = 1
 export const MAX_DOG_WEIGHT_LBS = 25
 
+// Quiz calculation constants
+export const RER_BASE = 70
+
+// Q3: Neutered status factors
+export const NEUTERED_STATUS_FACTORS = {
+  neutered: 1.6,
+  intact: 1.8,
+} as const
+
+// Q10: Activity level factors
+export const ACTIVITY_LEVEL_FACTORS = {
+  'couch-potato': -0.1,
+  'routine-walker': 0.0,
+  'actively-athletic': 0.25,
+} as const
+
+// Q6: Body shape factors
+export const BODY_SHAPE_FACTORS = {
+  'light-lean': 1.1,
+  'ideal-balanced': 1.0,
+  'slightly-filled': 0.95,
+  'full-round': 0.9,
+} as const
+
+// Recipe kcal/g values
+export const RECIPE_KCAL_PER_GRAM = {
+  turkey: 1.69,
+  lamb: 1.47,
+} as const
+
+// Mode multipliers
+export const MODE_MULTIPLIERS = {
+  full: 1.0,
+  topper: 0.25,
+} as const
+
+// Price per gram (placeholder values - should be fetched from product data)
+export const PRICE_PER_GRAM = {
+  turkey: 0.05,
+  lamb: 0.06,
+} as const
+
 // Quiz body shapes
 export interface BodyShapeOption {
   value: string

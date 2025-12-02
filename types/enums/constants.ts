@@ -34,4 +34,5 @@ export enum QuizStep {
   Step6 = 'step6',
   Step7 = 'step7',
   Step8 = 'step8',
+  Results = 'results',
 }

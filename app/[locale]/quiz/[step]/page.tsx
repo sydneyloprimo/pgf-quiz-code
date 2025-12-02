@@ -13,6 +13,7 @@ import {
   QuizHowActive,
   QuizLoading,
   QuizPlus25Lbs,
+  QuizResults,
   QuizStepUnderAge,
 } from '@/components/quiz'
 import QuizLayout, { QuizFormData } from '@/components/quiz/QuizLayout'
@@ -93,6 +94,15 @@ export default function QuizStepPage() {
         case QuizStep.Step8:
           return (
             <QuizLoading
+              goToStep={goToStep}
+              goBack={goBack}
+              canGoBack={canGoBack}
+              formMethods={formMethods}
+            />
+          )
+        case QuizStep.Results:
+          return (
+            <QuizResults
               goToStep={goToStep}
               goBack={goBack}
               canGoBack={canGoBack}

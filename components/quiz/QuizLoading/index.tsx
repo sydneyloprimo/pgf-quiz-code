@@ -1,20 +1,24 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
+import { useEffect } from 'react'
 import { useWatch, UseFormReturn } from 'react-hook-form'
 
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { FoodAnimation } from '@/components/quiz/QuizLoading/FoodAnimation'
+import { QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 
 interface QuizLoadingProps {
-  goToStep: (step: never) => void
+  goToStep: (step: QuizStep) => void
   goBack: () => void
   canGoBack: boolean
   formMethods: UseFormReturn<QuizFormData>
 }
 
-const QuizLoading = ({ formMethods }: QuizLoadingProps) => {
+const LOADING_DURATION_MS = 5000
+
+const QuizLoading = ({ formMethods, goToStep }: QuizLoadingProps) => {
   const t = useTranslations('Quiz.loading')
   const { control } = formMethods
 
@@ -23,6 +27,14 @@ const QuizLoading = ({ formMethods }: QuizLoadingProps) => {
       control,
       name: 'name',
     }) || ''
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      goToStep(QuizStep.Results)
+    }, LOADING_DURATION_MS)
+
+    return () => window.clearTimeout(timer)
+  }, [goToStep])
 
   return (
     <div

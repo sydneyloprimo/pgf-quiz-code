@@ -12,6 +12,7 @@ const STEP_TO_PATH: Record<QuizStep, string> = {
   [QuizStep.Step6]: 'step6',
   [QuizStep.Step7]: 'step7',
   [QuizStep.Step8]: 'step8',
+  [QuizStep.Results]: 'results',
 }
 
 const PATH_TO_STEP: Record<string, QuizStep> = Object.entries(
