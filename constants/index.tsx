@@ -22,6 +22,48 @@ export const QUIZ_DOG_ILLUSTRATION_SOURCE_HEIGHT = 1024
 export const PUPPY_MAX_AGE_YEARS = 1
 export const MAX_DOG_WEIGHT_LBS = 25
 
+// Quiz body shapes
+export const BODY_SHAPE_IMAGE_ASPECT_RATIO = '11/8' // Approximately 1.375 (close to actual 1.3731)
+
+export interface BodyShapeOption {
+  value: string
+  image: string
+  titleKey: string
+  descriptionKey: string
+  imageAltKey: string
+}
+
+export const BODY_SHAPE_OPTIONS: BodyShapeOption[] = [
+  {
+    value: 'light-lean',
+    image: '/images/body-shape-light-lean.png',
+    titleKey: 'options.lightLean.title',
+    descriptionKey: 'options.lightLean.description',
+    imageAltKey: 'options.lightLean.imageAlt',
+  },
+  {
+    value: 'ideal-balanced',
+    image: '/images/body-shape-ideal-balanced.png',
+    titleKey: 'options.idealBalanced.title',
+    descriptionKey: 'options.idealBalanced.description',
+    imageAltKey: 'options.idealBalanced.imageAlt',
+  },
+  {
+    value: 'slightly-filled',
+    image: '/images/body-shape-slightly-filled.png',
+    titleKey: 'options.slightlyFilled.title',
+    descriptionKey: 'options.slightlyFilled.description',
+    imageAltKey: 'options.slightlyFilled.imageAlt',
+  },
+  {
+    value: 'full-round',
+    image: '/images/body-shape-full-round.png',
+    titleKey: 'options.fullRound.title',
+    descriptionKey: 'options.fullRound.description',
+    imageAltKey: 'options.fullRound.imageAlt',
+  },
+]
+
 // Quiz breeds
 export const BREEDS: BreedOption[] = [
   { label: 'Shih Tzu', value: 'shih-tzu', category: 'Toy and Companion' },

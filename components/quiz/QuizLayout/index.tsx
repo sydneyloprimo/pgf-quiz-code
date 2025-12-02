@@ -9,6 +9,7 @@ import { z } from 'zod'
 
 import { QuizHeader } from '@/components/quiz/QuizHeader'
 import { QuizStep } from '@/types/enums/constants'
+import { cn } from '@/utils/cn'
 import {
   getQuizStepPath,
   getQuizStepFromPath,
@@ -34,6 +35,7 @@ const createQuizFormSchema = (t: (key: string) => string) =>
       }),
     neuteredStatus: z.enum(['neutered', 'intact']).optional(),
     breed: z.string().optional(),
+    bodyShape: z.string().optional(),
   })
 
 export type QuizFormData = z.infer<ReturnType<typeof createQuizFormSchema>>
@@ -91,6 +93,7 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
       weight: storedFormData?.weight || '',
       neuteredStatus: storedFormData?.neuteredStatus,
       breed: storedFormData?.breed,
+      bodyShape: storedFormData?.bodyShape,
     }),
     [storedFormData]
   )
@@ -114,6 +117,7 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
         weight: stored.weight || '',
         neuteredStatus: stored.neuteredStatus,
         breed: stored.breed,
+        bodyShape: stored.bodyShape,
       })
     }
   }, [formMethods])
@@ -176,13 +180,17 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
   )
 
   return (
-    <div className="flex flex-col h-screen bg-neutral-300 w-full overflow-hidden">
+    <div className="flex flex-col h-screen bg-neutral-300 w-full overflow-y-auto">
       <div className="shrink-0 py-10 px-5 md:px-24">
         <QuizHeader visitedSteps={visitedSteps} />
       </div>
 
-      <main className="flex-1 flex max-w-2xl mx-auto items-center justify-center px-0 overflow-hidden">
-        <div className="w-full py-8">{renderedStep}</div>
+      <main
+        className={cn('flex-1 flex mx-auto items-center justify-center px-0', {
+          'max-w-2xl': currentStep !== QuizStep.Step5,
+        })}
+      >
+        <div className="w-full pb-8">{renderedStep}</div>
       </main>
     </div>
   )

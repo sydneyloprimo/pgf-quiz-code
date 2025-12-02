@@ -53,6 +53,32 @@
       "description": "Diferentes razas tienen diferentes necesidades — esto nos ayuda a ajustar el tamaño de la porción y el equilibrio nutricional.",
       "placeholder": "Elige una raza"
     },
+    "bodyShape": {
+      "heading": "¿Cómo describirías la forma del cuerpo de tu perro?",
+      "description": "Esto nos ayuda a ajustar el tamaño de la porción y el equilibrio calórico para mantenerlos en su forma más saludable.",
+      "options": {
+        "lightLean": {
+          "title": "Ligero y Delgado",
+          "description": "Puedes ver o sentir fácilmente sus costillas y una cintura clara.",
+          "imageAlt": "Ilustración de forma corporal de perro ligero y delgado"
+        },
+        "idealBalanced": {
+          "title": "Ideal y Equilibrado",
+          "description": "Puedes sentir las costillas bajo una capa suave, y hay una cintura natural cuando se ve desde arriba.",
+          "imageAlt": "Ilustración de forma corporal de perro ideal y equilibrado"
+        },
+        "slightlyFilled": {
+          "title": "Ligeramente Relleno",
+          "description": "Su cintura se está suavizando y las costillas son más difíciles de sentir con presión ligera.",
+          "imageAlt": "Ilustración de forma corporal de perro ligeramente relleno"
+        },
+        "fullRound": {
+          "title": "Lleno o Redondo",
+          "description": "No hay cintura visible; su vientre se siente suave y cuelga más bajo.",
+          "imageAlt": "Ilustración de forma corporal de perro lleno o redondo"
+        }
+      }
+    },
     "title": "Purely Golden Foods",
     "plus25Lbs": {
       "heading": "Nuestros planes de comidas actuales están diseñados para perros pequeños menores de 25 lbs.",

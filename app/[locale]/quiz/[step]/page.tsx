@@ -8,6 +8,7 @@ import {
   QuizStep2,
   QuizNeuteredStatus,
   QuizBreedSelection,
+  QuizBodyShape,
   QuizPlus25Lbs,
   QuizStepUnderAge,
 } from '@/components/quiz'
@@ -53,6 +54,15 @@ export default function QuizStepPage() {
         case QuizStep.BreedSelection:
           return (
             <QuizBreedSelection
+              goToStep={goToStep}
+              goBack={goBack}
+              canGoBack={canGoBack}
+              formMethods={formMethods}
+            />
+          )
+        case QuizStep.Step5:
+          return (
+            <QuizBodyShape
               goToStep={goToStep}
               goBack={goBack}
               canGoBack={canGoBack}
