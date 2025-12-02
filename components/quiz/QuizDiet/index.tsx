@@ -6,6 +6,11 @@ import { Controller, useWatch, UseFormReturn } from 'react-hook-form'
 import { InputDropdown } from '@/components/common/InputDropdown'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
+import {
+  MAIN_FOOD_OPTIONS,
+  MEALTIME_BEHAVIOR_OPTIONS,
+  TREAT_FREQUENCY_OPTIONS,
+} from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
 import { InputDropdownState } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
@@ -16,30 +21,6 @@ interface QuizDietProps {
   canGoBack: boolean
   formMethods: UseFormReturn<QuizFormData>
 }
-
-const MAIN_FOOD_OPTIONS = [
-  { label: 'dry food', value: 'dry-food' },
-  { label: 'wet food', value: 'wet-food' },
-  { label: 'raw food', value: 'raw-food' },
-  { label: 'dehydrated food', value: 'dehydrated-food' },
-  { label: 'fresh food', value: 'fresh-food' },
-  { label: 'homemade food', value: 'homemade-food' },
-  { label: 'mixed (combination)', value: 'mixed-combination' },
-]
-
-const TREAT_FREQUENCY_OPTIONS = [
-  { label: 'no', value: 'no' },
-  { label: '1-2 small', value: '1-2-small' },
-  { label: 'several', value: 'several' },
-  { label: 'lots (spoiled rotten)', value: 'lots-spoiled-rotten' },
-]
-
-const MEALTIME_BEHAVIOR_OPTIONS = [
-  { label: 'very picky', value: 'very-picky' },
-  { label: 'can be picky', value: 'can-be-picky' },
-  { label: 'good eater', value: 'good-eater' },
-  { label: 'will eat anything', value: 'will-eat-anything' },
-]
 
 const QuizDiet = ({
   goToStep,
