@@ -23,6 +23,8 @@ export const PUPPY_MAX_AGE_YEARS = 1
 export const MAX_DOG_WEIGHT_LBS = 25
 
 // Quiz body shapes
+export const BODY_SHAPE_IMAGE_ASPECT_RATIO = '11/8' // Approximately 1.375 (close to actual 1.3731)
+
 export interface BodyShapeOption {
   value: string
   image: string
