@@ -18,31 +18,27 @@ interface QuizDietProps {
 }
 
 const MAIN_FOOD_OPTIONS = [
-  { label: 'Dehydrated Food', value: 'dehydrated-food' },
-  { label: 'Kibble', value: 'kibble' },
-  { label: 'Wet Food', value: 'wet-food' },
-  { label: 'Raw Food', value: 'raw-food' },
-  { label: 'Fresh Food', value: 'fresh-food' },
-  { label: 'Freeze-Dried Food', value: 'freeze-dried-food' },
-  { label: 'Mixed Diet', value: 'mixed-diet' },
+  { label: 'Dry food', value: 'dry-food' },
+  { label: 'Wet food', value: 'wet-food' },
+  { label: 'Raw food', value: 'raw-food' },
+  { label: 'Dehydrated food', value: 'dehydrated-food' },
+  { label: 'Fresh food', value: 'fresh-food' },
+  { label: 'Homemade food', value: 'homemade-food' },
+  { label: 'Mixed (combination)', value: 'mixed-combination' },
 ]
 
 const TREAT_FREQUENCY_OPTIONS = [
+  { label: 'No', value: 'no' },
   { label: '1-2 small', value: '1-2-small' },
-  { label: '3-5 small', value: '3-5-small' },
-  { label: '1-2 medium', value: '1-2-medium' },
-  { label: '3-5 medium', value: '3-5-medium' },
-  { label: '1-2 large', value: '1-2-large' },
-  { label: '3-5 large', value: '3-5-large' },
-  { label: 'None', value: 'none' },
+  { label: 'several', value: 'several' },
+  { label: 'Lots (spoiled rotten)', value: 'lots-spoiled-rotten' },
 ]
 
 const MEALTIME_BEHAVIOR_OPTIONS = [
-  { label: 'Will eat anything', value: 'will-eat-anything' },
-  { label: 'Eats quickly', value: 'eats-quickly' },
-  { label: 'Eats slowly', value: 'eats-slowly' },
-  { label: 'Picky eater', value: 'picky-eater' },
-  { label: 'Sometimes skips meals', value: 'sometimes-skips-meals' },
+  { label: 'Very picky', value: 'very-picky' },
+  { label: 'Can be picky', value: 'can-be-picky' },
+  { label: 'good eater', value: 'good-eater' },
+  { label: 'will eat anything', value: 'will-eat-anything' },
 ]
 
 const QuizDiet = ({
@@ -112,10 +108,10 @@ const QuizDiet = ({
         </div>
 
         <div className="flex flex-col gap-8 items-center w-full">
-          <div className="flex flex-wrap gap-6 items-center justify-center w-full">
+          <div className="flex flex-wrap gap-5 items-center justify-center w-full">
             <p
               className={cn(
-                'font-display font-semibold',
+                'font-display',
                 'text-3xl leading-10 tracking-tight',
                 'text-secondary-950'
               )}
@@ -144,10 +140,10 @@ const QuizDiet = ({
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-8 items-center justify-center w-full">
+          <div className="flex flex-wrap gap-5 items-center justify-center w-full">
             <p
               className={cn(
-                'font-display font-semibold',
+                'font-display',
                 'text-3xl leading-10 tracking-tight',
                 'text-secondary-950'
               )}
@@ -176,7 +172,7 @@ const QuizDiet = ({
             </div>
             <p
               className={cn(
-                'font-display font-semibold',
+                'font-display',
                 'text-3xl leading-10 tracking-tight',
                 'text-secondary-950'
               )}
@@ -185,10 +181,10 @@ const QuizDiet = ({
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-6 items-center justify-center w-full">
+          <div className="flex flex-wrap gap-5 items-center justify-center w-full">
             <p
               className={cn(
-                'font-display font-semibold',
+                'font-display',
                 'text-3xl leading-10 tracking-tight',
                 'text-secondary-950'
               )}
