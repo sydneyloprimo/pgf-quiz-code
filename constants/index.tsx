@@ -167,3 +167,33 @@ export const BREEDS: BreedOption[] = [
     category: 'Sporting & Adventurous',
   },
 ]
+
+// Quiz diet options
+export interface DietOption {
+  label: string
+  value: string
+}
+
+export const MAIN_FOOD_OPTIONS: DietOption[] = [
+  { label: 'dry food', value: 'dry-food' },
+  { label: 'wet food', value: 'wet-food' },
+  { label: 'raw food', value: 'raw-food' },
+  { label: 'dehydrated food', value: 'dehydrated-food' },
+  { label: 'fresh food', value: 'fresh-food' },
+  { label: 'homemade food', value: 'homemade-food' },
+  { label: 'mixed (combination)', value: 'mixed-combination' },
+]
+
+export const TREAT_FREQUENCY_OPTIONS: DietOption[] = [
+  { label: 'no', value: 'no' },
+  { label: '1-2 small', value: '1-2-small' },
+  { label: 'several', value: 'several' },
+  { label: 'lots (spoiled rotten)', value: 'lots-spoiled-rotten' },
+]
+
+export const MEALTIME_BEHAVIOR_OPTIONS: DietOption[] = [
+  { label: 'very picky', value: 'very-picky' },
+  { label: 'can be picky', value: 'can-be-picky' },
+  { label: 'good eater', value: 'good-eater' },
+  { label: 'will eat anything', value: 'will-eat-anything' },
+]
