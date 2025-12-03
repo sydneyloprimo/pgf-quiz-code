@@ -9,6 +9,7 @@ import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
 import { ACTIVITY_LEVEL_OPTIONS } from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
 import { InputDropdownState } from '@/types/enums/constants'
+import { getTranslatedOptions } from '@/utils/helpers'
 
 interface QuizHowActiveProps {
   goToStep: (step: QuizStep) => void
@@ -44,11 +45,9 @@ const QuizHowActive = ({
 
   const isFormValid = Boolean(activityLevel)
 
-  const translatedActivityLevelOptions = ACTIVITY_LEVEL_OPTIONS.map(
-    (option) => ({
-      label: t(option.labelKey),
-      value: option.value,
-    })
+  const translatedActivityLevelOptions = getTranslatedOptions(
+    ACTIVITY_LEVEL_OPTIONS,
+    t
   )
 
   return (

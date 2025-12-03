@@ -14,6 +14,7 @@ import {
 import { QuizStep } from '@/types/enums/constants'
 import { InputDropdownState } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
+import { getTranslatedOptions } from '@/utils/helpers'
 
 interface QuizDietProps {
   goToStep: (step: QuizStep) => void
@@ -59,23 +60,14 @@ const QuizDiet = ({
 
   const isFormValid = Boolean(mainFood && treatFrequency && mealtimeBehavior)
 
-  const translatedMainFoodOptions = MAIN_FOOD_OPTIONS.map((option) => ({
-    label: t(option.labelKey),
-    value: option.value,
-  }))
-
-  const translatedTreatFrequencyOptions = TREAT_FREQUENCY_OPTIONS.map(
-    (option) => ({
-      label: t(option.labelKey),
-      value: option.value,
-    })
+  const translatedMainFoodOptions = getTranslatedOptions(MAIN_FOOD_OPTIONS, t)
+  const translatedTreatFrequencyOptions = getTranslatedOptions(
+    TREAT_FREQUENCY_OPTIONS,
+    t
   )
-
-  const translatedMealtimeBehaviorOptions = MEALTIME_BEHAVIOR_OPTIONS.map(
-    (option) => ({
-      label: t(option.labelKey),
-      value: option.value,
-    })
+  const translatedMealtimeBehaviorOptions = getTranslatedOptions(
+    MEALTIME_BEHAVIOR_OPTIONS,
+    t
   )
 
   return (

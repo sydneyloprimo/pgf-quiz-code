@@ -10,3 +10,12 @@ export const formatCurrency = (
     minimumFractionDigits: 2,
     style: 'currency',
   }).format(amount)
+
+export const getTranslatedOptions = (
+  options: { labelKey: string; value: string }[],
+  t: (key: string) => string
+) =>
+  options.map((option) => ({
+    label: t(option.labelKey),
+    value: option.value,
+  }))
