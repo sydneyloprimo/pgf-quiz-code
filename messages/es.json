@@ -2,6 +2,18 @@
   "Common": {
     "InputDropdown": {
       "selectOption": "Seleccionar una opción"
+    },
+    "OptionSelectProduct": {
+      "animalWelfareCertified": "CERTIFICADO DE BIENESTAR ANIMAL",
+      "detailsButton": "Detalles",
+      "mostPopular": "Más Popular",
+      "recipeLabel": "Receta *",
+      "recipePlaceholder": "Seleccionar receta",
+      "selectOption": "Seleccionar {title}",
+      "shipmentFrequencyLabel": "Frecuencia de Envío:",
+      "shipmentFrequencyPlaceholder": "Seleccionar frecuencia",
+      "subscribeButton": "Suscribirse por {price} al día",
+      "whatYoullGetTitle": "Lo que obtendrás:"
     }
   },
   "Home": {
@@ -178,6 +190,35 @@
       "ageSuffix": "años",
       "defaultBreed": "perro",
       "imageAlt": "Ilustración de ingredientes de comida"
+    },
+    "results": {
+      "recipes": {
+        "turkey": "Pavo",
+        "lamb": "Cordero"
+      },
+      "shipmentFrequencies": {
+        "everyWeek": "Cada Semana",
+        "everyTwoWeeks": "Cada Dos Semanas"
+      },
+      "products": {
+        "topper": {
+          "title": "Complemento (50%)",
+          "description": "Las comidas favoritas de {name}, entregadas automáticamente — frescas, balanceadas y listas para servir."
+        },
+        "fullMeal": {
+          "title": "Caja de Recetas de {name}",
+          "description": "Las comidas favoritas de {name}, entregadas automáticamente — frescas, balanceadas y listas para servir."
+        },
+        "whatYoullGet": {
+          "everyWeek": "Recibirás siete comidas para {name}, entregadas frescas cada semana.",
+          "everyTwoWeeks": "Recibirás catorce comidas para {name}, entregadas frescas cada dos semanas."
+        },
+        "benefits": {
+          "saveOverheads": "Ahorra gastos cada mes — la forma más fácil de alimentar de forma saludable y ahorrar.",
+          "freshlyPortioned": "Porcionado fresco para el tamaño y actividad de {name}.",
+          "flexibleSchedule": "Horario flexible — pausa, omite o cancela en cualquier momento."
+        }
+      }
     }
   },
   "PromiseOfCareAlert": {

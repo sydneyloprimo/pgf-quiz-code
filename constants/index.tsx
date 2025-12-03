@@ -49,22 +49,30 @@ export const BODY_SHAPE_FACTORS = {
   'full-round': 0.9,
 } as const
 
-// Recipe kcal/g values
-export const RECIPE_KCAL_PER_GRAM = {
-  turkey: 1.69,
-  lamb: 1.47,
+// Products data
+export interface Product {
+  recipeName: string
+  pricePerGram: number
+  kcalPerGram: number
+}
+
+export const PRODUCTS: Record<'turkey' | 'lamb', Product> = {
+  turkey: {
+    recipeName: 'Turkey',
+    pricePerGram: 0.05,
+    kcalPerGram: 1.69,
+  },
+  lamb: {
+    recipeName: 'Lamb',
+    pricePerGram: 0.06,
+    kcalPerGram: 1.47,
+  },
 } as const
 
 // Mode multipliers
 export const MODE_MULTIPLIERS = {
   full: 1.0,
-  topper: 0.25,
-} as const
-
-// Price per gram (placeholder values - should be fetched from product data)
-export const PRICE_PER_GRAM = {
-  turkey: 0.05,
-  lamb: 0.06,
+  topper: 0.5,
 } as const
 
 // Quiz body shapes
