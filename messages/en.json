@@ -285,6 +285,10 @@
         "goodEater": "good eater",
         "willEatAnything": "will eat anything"
       }
+    },
+    "loading": {
+      "heading": "Creating the perfect meal plan for {name}…",
+      "description": "We're analyzing his details to balance nutrition, flavor, and portion — the way care and science should meet."
     }
   },
   "Search": {

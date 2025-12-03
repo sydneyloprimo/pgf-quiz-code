@@ -162,6 +162,10 @@
         "goodEater": "buen comedor",
         "willEatAnything": "come cualquier cosa"
       }
+    },
+    "loading": {
+      "heading": "Creando el plan de comidas perfecto para {name}…",
+      "description": "Estamos analizando sus detalles para equilibrar nutrición, sabor y porción — la forma en que el cuidado y la ciencia deben encontrarse."
     }
   }
 }

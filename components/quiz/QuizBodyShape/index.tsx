@@ -59,7 +59,7 @@ const QuizBodyShape = ({
           >
             {t('heading')}
           </h2>
-          <p className='font-body text-lg leading-8 w-full'>
+          <p className="font-body text-lg leading-8 w-full">
             {t('description')}
           </p>
         </div>
