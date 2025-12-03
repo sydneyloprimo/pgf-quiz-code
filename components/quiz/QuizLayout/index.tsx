@@ -39,6 +39,7 @@ const createQuizFormSchema = (t: (key: string) => string) =>
     mainFood: z.string().optional(),
     treatFrequency: z.string().optional(),
     mealtimeBehavior: z.string().optional(),
+    activityLevel: z.string().optional(),
   })
 
 export type QuizFormData = z.infer<ReturnType<typeof createQuizFormSchema>>
@@ -100,6 +101,7 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
       mainFood: storedFormData?.mainFood,
       treatFrequency: storedFormData?.treatFrequency,
       mealtimeBehavior: storedFormData?.mealtimeBehavior,
+      activityLevel: storedFormData?.activityLevel,
     }),
     [storedFormData]
   )
@@ -127,6 +129,7 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
         mainFood: stored.mainFood,
         treatFrequency: stored.treatFrequency,
         mealtimeBehavior: stored.mealtimeBehavior,
+        activityLevel: stored.activityLevel,
       })
     }
   }, [formMethods])

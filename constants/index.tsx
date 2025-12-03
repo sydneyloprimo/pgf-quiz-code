@@ -64,6 +64,18 @@ export const BODY_SHAPE_OPTIONS: BodyShapeOption[] = [
   },
 ]
 
+// Quiz activity levels
+export interface ActivityLevelOption {
+  label: string
+  value: string
+}
+
+export const ACTIVITY_LEVEL_OPTIONS: ActivityLevelOption[] = [
+  { label: 'Couch Potato', value: 'couch-potato' },
+  { label: 'Routine Walker', value: 'routine-walker' },
+  { label: 'Actively Athletic', value: 'actively-athletic' },
+]
+
 // Quiz breeds
 export const BREEDS: BreedOption[] = [
   { label: 'Shih Tzu', value: 'shih-tzu', category: 'Toy and Companion' },

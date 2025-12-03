@@ -227,6 +227,11 @@
       "treatFrequencySuffix": "treats or table scraps daily.",
       "mealtimeBehaviorLabel": "At mealtimes, {name}",
       "mealtimeBehaviorPlaceholder": "Select behavior"
+    },
+    "howActive": {
+      "heading": "How active is {name} day-to-day?",
+      "description": "We'll use this to match his calorie intake and portion size to his daily energy level.",
+      "placeholder": "Select activity level"
     }
   },
   "Search": {
