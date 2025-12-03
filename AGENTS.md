@@ -718,6 +718,23 @@ import { Link } from '@/components/common/Link'
 - **Intelligent Merging**: `tailwind-merge` automatically resolves conflicts between Tailwind classes (e.g., `p-4 p-6` becomes just `p-6`)
 - Combine Tailwind classes with custom classes when needed
 
+**When to Use `cn`:**
+
+- **Conditional classes**: When you need to conditionally apply classes based on props or state
+- **Merging with props**: When merging classes with a `className` prop from parent components
+- **Resolving conflicts**: When you have potential Tailwind class conflicts that need intelligent resolution
+- **Multiple class sources**: When combining classes from multiple sources (base classes, conditional classes, prop classes)
+
+**When NOT to Use `cn`:**
+
+- **Static strings only**: When all classes are static strings with no conditionals, props, or conflicts, use regular strings instead
+- **Single class string**: When you have a single class string with no merging needed
+
+**String Assignment:**
+
+- **Direct string assignment**: For static string literals, assign directly without curly braces
+- **Curly braces only for expressions**: Use curly braces `{}` only when you have a JavaScript expression (variables, function calls, template literals, etc.)
+
 **Example:**
 
 ```typescript
@@ -726,6 +743,25 @@ import { cn } from '@/utils/cn'
 // ✅ Good - tailwind-merge resolves conflicts automatically
 <div className={cn('p-4 p-6', className, { 'opacity-50': disabled })}>
 // Result: 'p-6' (conflict resolved, no !important needed)
+
+// ✅ Good - Conditional classes
+<div className={cn('base-classes', { 'border-red': error })}>
+
+// ✅ Good - Merging with props
+<div className={cn('base-classes', className)}>
+
+// ✅ Good - Direct string assignment (no braces needed)
+<div className="flex flex-col items-center">
+
+// ❌ Bad - Using cn with only static strings (unnecessary)
+<div className={cn('flex flex-col items-center')}>
+// Should be:
+<div className="flex flex-col items-center">
+
+// ❌ Bad - Unnecessary curly braces around string literal
+<div className={'flex flex-col items-center'}>
+// Should be:
+<div className="flex flex-col items-center">
 
 // ❌ Bad - Using !important
 <div className="p-4! p-6">  // Don't do this

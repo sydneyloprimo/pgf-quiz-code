@@ -65,6 +65,8 @@ export const PRICE_PER_GRAM = {
 } as const
 
 // Quiz body shapes
+export const BODY_SHAPE_IMAGE_ASPECT_RATIO = '11/8' // Approximately 1.375 (close to actual 1.3731)
+
 export interface BodyShapeOption {
   value: string
   image: string
@@ -106,116 +108,166 @@ export const BODY_SHAPE_OPTIONS: BodyShapeOption[] = [
 
 // Quiz activity levels
 export interface ActivityLevelOption {
-  label: string
+  labelKey: string
   value: string
 }
 
 export const ACTIVITY_LEVEL_OPTIONS: ActivityLevelOption[] = [
-  { label: 'Couch Potato', value: 'couch-potato' },
-  { label: 'Routine Walker', value: 'routine-walker' },
-  { label: 'Actively Athletic', value: 'actively-athletic' },
+  { labelKey: 'options.couchPotato', value: 'couch-potato' },
+  { labelKey: 'options.routineWalker', value: 'routine-walker' },
+  { labelKey: 'options.activelyAthletic', value: 'actively-athletic' },
 ]
 
 // Quiz breeds
 export const BREEDS: BreedOption[] = [
-  { label: 'Shih Tzu', value: 'shih-tzu', category: 'Toy and Companion' },
-  { label: 'Maltese', value: 'maltese', category: 'Toy and Companion' },
   {
-    label: 'Yorkshire Terrier',
+    labelKey: 'options.shihTzu',
+    value: 'shih-tzu',
+    categoryKey: 'categories.toyAndCompanion',
+  },
+  {
+    labelKey: 'options.maltese',
+    value: 'maltese',
+    categoryKey: 'categories.toyAndCompanion',
+  },
+  {
+    labelKey: 'options.yorkshireTerrier',
     value: 'yorkshire-terrier',
-    category: 'Toy and Companion',
+    categoryKey: 'categories.toyAndCompanion',
   },
   {
-    label: 'Pomeranian',
+    labelKey: 'options.pomeranian',
     value: 'pomeranian',
-    category: 'Toy and Companion',
+    categoryKey: 'categories.toyAndCompanion',
   },
-  { label: 'Papillon', value: 'papillon', category: 'Toy and Companion' },
   {
-    label: 'Toy Poodle',
+    labelKey: 'options.papillon',
+    value: 'papillon',
+    categoryKey: 'categories.toyAndCompanion',
+  },
+  {
+    labelKey: 'options.toyPoodle',
     value: 'toy-poodle',
-    category: 'Toy and Companion',
+    categoryKey: 'categories.toyAndCompanion',
   },
-  { label: 'Chihuahua', value: 'chihuahua', category: 'Toy and Companion' },
-  { label: 'Havanese', value: 'havanese', category: 'Toy and Companion' },
   {
-    label: 'Japanese Chin',
+    labelKey: 'options.chihuahua',
+    value: 'chihuahua',
+    categoryKey: 'categories.toyAndCompanion',
+  },
+  {
+    labelKey: 'options.havanese',
+    value: 'havanese',
+    categoryKey: 'categories.toyAndCompanion',
+  },
+  {
+    labelKey: 'options.japaneseChin',
     value: 'japanese-chin',
-    category: 'Toy and Companion',
+    categoryKey: 'categories.toyAndCompanion',
   },
   {
-    label: 'Miniature Schnauzer',
+    labelKey: 'options.miniatureSchnauzer',
     value: 'miniature-schnauzer',
-    category: 'Small and stylish',
+    categoryKey: 'categories.smallAndStylish',
   },
   {
-    label: 'Cavalier King Charles Spaniel',
+    labelKey: 'options.cavalierKingCharlesSpaniel',
     value: 'cavalier-king-charles-spaniel',
-    category: 'Small and stylish',
+    categoryKey: 'categories.smallAndStylish',
   },
   {
-    label: 'French Bulldog',
+    labelKey: 'options.frenchBulldog',
     value: 'french-bulldog',
-    category: 'Small and stylish',
+    categoryKey: 'categories.smallAndStylish',
   },
   {
-    label: 'Boston Terrier',
+    labelKey: 'options.bostonTerrier',
     value: 'boston-terrier',
-    category: 'Small and stylish',
+    categoryKey: 'categories.smallAndStylish',
   },
   {
-    label: 'Coton de Tuléar',
+    labelKey: 'options.cotonDeTulear',
     value: 'coton-de-tulear',
-    category: 'Small and stylish',
+    categoryKey: 'categories.smallAndStylish',
   },
   {
-    label: 'Brussels Griffon',
+    labelKey: 'options.brusselsGriffon',
     value: 'brussels-griffon',
-    category: 'Small and stylish',
+    categoryKey: 'categories.smallAndStylish',
   },
   {
-    label: 'Bichon Frise',
+    labelKey: 'options.bichonFrise',
     value: 'bichon-frise',
-    category: 'Small and stylish',
+    categoryKey: 'categories.smallAndStylish',
   },
   {
-    label: 'Lhasa Apso',
+    labelKey: 'options.lhasaApso',
     value: 'lhasa-apso',
-    category: 'Small and stylish',
+    categoryKey: 'categories.smallAndStylish',
   },
   {
-    label: 'Miniature Dachshund',
+    labelKey: 'options.miniatureDachshund',
     value: 'miniature-dachshund',
-    category: 'Sporting & Adventurous',
+    categoryKey: 'categories.sportingAndAdventurous',
   },
   {
-    label: 'Cocker Spaniel',
+    labelKey: 'options.cockerSpaniel',
     value: 'cocker-spaniel',
-    category: 'Sporting & Adventurous',
+    categoryKey: 'categories.sportingAndAdventurous',
   },
   {
-    label: 'Jack Russell Terrier',
+    labelKey: 'options.jackRussellTerrier',
     value: 'jack-russell-terrier',
-    category: 'Sporting & Adventurous',
+    categoryKey: 'categories.sportingAndAdventurous',
   },
   {
-    label: 'West Highland White Terrier',
+    labelKey: 'options.westHighlandWhiteTerrier',
     value: 'west-highland-white-terrier',
-    category: 'Sporting & Adventurous',
+    categoryKey: 'categories.sportingAndAdventurous',
   },
   {
-    label: 'Miniature Pinscher',
+    labelKey: 'options.miniaturePinscher',
     value: 'miniature-pinscher',
-    category: 'Sporting & Adventurous',
+    categoryKey: 'categories.sportingAndAdventurous',
   },
   {
-    label: 'Italian Greyhound',
+    labelKey: 'options.italianGreyhound',
     value: 'italian-greyhound',
-    category: 'Sporting & Adventurous',
+    categoryKey: 'categories.sportingAndAdventurous',
   },
   {
-    label: 'Scottish Terrier',
+    labelKey: 'options.scottishTerrier',
     value: 'scottish-terrier',
-    category: 'Sporting & Adventurous',
+    categoryKey: 'categories.sportingAndAdventurous',
   },
+]
+
+// Quiz diet options
+export interface DietOption {
+  labelKey: string
+  value: string
+}
+
+export const MAIN_FOOD_OPTIONS: DietOption[] = [
+  { labelKey: 'options.dryFood', value: 'dry-food' },
+  { labelKey: 'options.wetFood', value: 'wet-food' },
+  { labelKey: 'options.rawFood', value: 'raw-food' },
+  { labelKey: 'options.dehydratedFood', value: 'dehydrated-food' },
+  { labelKey: 'options.freshFood', value: 'fresh-food' },
+  { labelKey: 'options.homemadeFood', value: 'homemade-food' },
+  { labelKey: 'options.mixedCombination', value: 'mixed-combination' },
+]
+
+export const TREAT_FREQUENCY_OPTIONS: DietOption[] = [
+  { labelKey: 'options.no', value: 'no' },
+  { labelKey: 'options.oneToTwoSmall', value: '1-2-small' },
+  { labelKey: 'options.several', value: 'several' },
+  { labelKey: 'options.lotsSpoiledRotten', value: 'lots-spoiled-rotten' },
+]
+
+export const MEALTIME_BEHAVIOR_OPTIONS: DietOption[] = [
+  { labelKey: 'options.veryPicky', value: 'very-picky' },
+  { labelKey: 'options.canBePicky', value: 'can-be-picky' },
+  { labelKey: 'options.goodEater', value: 'good-eater' },
+  { labelKey: 'options.willEatAnything', value: 'will-eat-anything' },
 ]
