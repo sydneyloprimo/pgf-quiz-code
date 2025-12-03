@@ -14,6 +14,7 @@ import {
 import { QuizStep } from '@/types/enums/constants'
 import { InputDropdownState } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
+import { getTranslatedOptions } from '@/utils/helpers'
 
 interface QuizDietProps {
   goToStep: (step: QuizStep) => void
@@ -58,6 +59,16 @@ const QuizDiet = ({
   }
 
   const isFormValid = Boolean(mainFood && treatFrequency && mealtimeBehavior)
+
+  const translatedMainFoodOptions = getTranslatedOptions(MAIN_FOOD_OPTIONS, t)
+  const translatedTreatFrequencyOptions = getTranslatedOptions(
+    TREAT_FREQUENCY_OPTIONS,
+    t
+  )
+  const translatedMealtimeBehaviorOptions = getTranslatedOptions(
+    MEALTIME_BEHAVIOR_OPTIONS,
+    t
+  )
 
   return (
     <div
@@ -107,7 +118,7 @@ const QuizDiet = ({
                   <InputDropdown
                     value={value}
                     onSelect={onChange}
-                    options={MAIN_FOOD_OPTIONS}
+                    options={translatedMainFoodOptions}
                     placeholder={t('mainFoodPlaceholder')}
                     className="w-full"
                     state={
@@ -139,7 +150,7 @@ const QuizDiet = ({
                   <InputDropdown
                     value={value}
                     onSelect={onChange}
-                    options={TREAT_FREQUENCY_OPTIONS}
+                    options={translatedTreatFrequencyOptions}
                     placeholder={t('treatFrequencyPlaceholder')}
                     className="w-full"
                     state={
@@ -180,7 +191,7 @@ const QuizDiet = ({
                   <InputDropdown
                     value={value}
                     onSelect={onChange}
-                    options={MEALTIME_BEHAVIOR_OPTIONS}
+                    options={translatedMealtimeBehaviorOptions}
                     placeholder={t('mealtimeBehaviorPlaceholder')}
                     className="w-full"
                     state={

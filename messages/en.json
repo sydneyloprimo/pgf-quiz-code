@@ -171,11 +171,6 @@
         "intact": "Intact"
       }
     },
-    "breedSelection": {
-      "heading": "Select {name}'s breed (or the closest match)",
-      "description": "Different breeds have different needs — this helps us fine-tune portion size and nutritional balance.",
-      "placeholder": "Choose a breed"
-    },
     "bodyShape": {
       "heading": "How would you describe your dog's body shape?",
       "description": "This helps us fine-tune portion size and calorie balance to keep them in their healthiest shape.",
@@ -217,6 +212,52 @@
       "joinWaitlistButton": "Join the Waitlist",
       "imageAlt": "Dog illustration"
     },
+    "howActive": {
+      "heading": "How active is {name} day-to-day?",
+      "description": "We'll use this to match his calorie intake and portion size to his daily energy level.",
+      "placeholder": "Select activity level",
+      "options": {
+        "couchPotato": "Couch Potato",
+        "routineWalker": "Routine Walker",
+        "activelyAthletic": "Actively Athletic"
+      }
+    },
+    "breedSelection": {
+      "heading": "Select {name}'s breed (or the closest match)",
+      "description": "Different breeds have different needs — this helps us fine-tune portion size and nutritional balance.",
+      "placeholder": "Choose a breed",
+      "categories": {
+        "toyAndCompanion": "Toy and Companion",
+        "smallAndStylish": "Small and stylish",
+        "sportingAndAdventurous": "Sporting & Adventurous"
+      },
+      "options": {
+        "shihTzu": "Shih Tzu",
+        "maltese": "Maltese",
+        "yorkshireTerrier": "Yorkshire Terrier",
+        "pomeranian": "Pomeranian",
+        "papillon": "Papillon",
+        "toyPoodle": "Toy Poodle",
+        "chihuahua": "Chihuahua",
+        "havanese": "Havanese",
+        "japaneseChin": "Japanese Chin",
+        "miniatureSchnauzer": "Miniature Schnauzer",
+        "cavalierKingCharlesSpaniel": "Cavalier King Charles Spaniel",
+        "frenchBulldog": "French Bulldog",
+        "bostonTerrier": "Boston Terrier",
+        "cotonDeTulear": "Coton de Tuléar",
+        "brusselsGriffon": "Brussels Griffon",
+        "bichonFrise": "Bichon Frise",
+        "lhasaApso": "Lhasa Apso",
+        "miniatureDachshund": "Miniature Dachshund",
+        "cockerSpaniel": "Cocker Spaniel",
+        "jackRussellTerrier": "Jack Russell Terrier",
+        "westHighlandWhiteTerrier": "West Highland White Terrier",
+        "miniaturePinscher": "Miniature Pinscher",
+        "italianGreyhound": "Italian Greyhound",
+        "scottishTerrier": "Scottish Terrier"
+      }
+    },
     "diet": {
       "heading": "{name}'s Diet",
       "description": "Every dog has their own habits — this helps us personalize {name}'s plan for balanced nutrition and portion size.",
@@ -226,12 +267,24 @@
       "treatFrequencyPlaceholder": "Select frequency",
       "treatFrequencySuffix": "treats or table scraps daily.",
       "mealtimeBehaviorLabel": "At mealtimes, {name}",
-      "mealtimeBehaviorPlaceholder": "Select behavior"
-    },
-    "howActive": {
-      "heading": "How active is {name} day-to-day?",
-      "description": "We'll use this to match his calorie intake and portion size to his daily energy level.",
-      "placeholder": "Select activity level"
+      "mealtimeBehaviorPlaceholder": "Select behavior",
+      "options": {
+        "dryFood": "dry food",
+        "wetFood": "wet food",
+        "rawFood": "raw food",
+        "dehydratedFood": "dehydrated food",
+        "freshFood": "fresh food",
+        "homemadeFood": "homemade food",
+        "mixedCombination": "mixed (combination)",
+        "no": "no",
+        "oneToTwoSmall": "1-2 small",
+        "several": "several",
+        "lotsSpoiledRotten": "lots (spoiled rotten)",
+        "veryPicky": "very picky",
+        "canBePicky": "can be picky",
+        "goodEater": "good eater",
+        "willEatAnything": "will eat anything"
+      }
     },
     "loading": {
       "heading": "Creating the perfect meal plan for {name}…",

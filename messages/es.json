@@ -51,7 +51,38 @@
     "breedSelection": {
       "heading": "Selecciona la raza de {name} (o la más cercana)",
       "description": "Diferentes razas tienen diferentes necesidades — esto nos ayuda a ajustar el tamaño de la porción y el equilibrio nutricional.",
-      "placeholder": "Elige una raza"
+      "placeholder": "Elige una raza",
+      "categories": {
+        "toyAndCompanion": "Juguete y Compañía",
+        "smallAndStylish": "Pequeño y elegante",
+        "sportingAndAdventurous": "Deportivo y Aventurero"
+      },
+      "options": {
+        "shihTzu": "Shih Tzu",
+        "maltese": "Maltés",
+        "yorkshireTerrier": "Yorkshire Terrier",
+        "pomeranian": "Pomerania",
+        "papillon": "Papillón",
+        "toyPoodle": "Caniche Toy",
+        "chihuahua": "Chihuahua",
+        "havanese": "Habanero",
+        "japaneseChin": "Chin Japonés",
+        "miniatureSchnauzer": "Schnauzer Miniatura",
+        "cavalierKingCharlesSpaniel": "Cavalier King Charles Spaniel",
+        "frenchBulldog": "Bulldog Francés",
+        "bostonTerrier": "Boston Terrier",
+        "cotonDeTulear": "Coton de Tuléar",
+        "brusselsGriffon": "Griffón de Bruselas",
+        "bichonFrise": "Bichón Frisé",
+        "lhasaApso": "Lhasa Apso",
+        "miniatureDachshund": "Teckel Miniatura",
+        "cockerSpaniel": "Cocker Spaniel",
+        "jackRussellTerrier": "Jack Russell Terrier",
+        "westHighlandWhiteTerrier": "West Highland White Terrier",
+        "miniaturePinscher": "Pinscher Miniatura",
+        "italianGreyhound": "Greyhound Italiano",
+        "scottishTerrier": "Terrier Escocés"
+      }
     },
     "bodyShape": {
       "heading": "¿Cómo describirías la forma del cuerpo de tu perro?",
@@ -97,7 +128,40 @@
     "howActive": {
       "heading": "¿Qué tan activo es {name} día a día?",
       "description": "Usaremos esto para ajustar su ingesta calórica y el tamaño de la porción a su nivel de energía diario.",
-      "placeholder": "Selecciona el nivel de actividad"
+      "placeholder": "Selecciona el nivel de actividad",
+      "options": {
+        "couchPotato": "Perezoso",
+        "routineWalker": "Caminante Rutinario",
+        "activelyAthletic": "Activamente Atlético"
+      }
+    },
+    "diet": {
+      "heading": "La Dieta de {name}",
+      "description": "Cada perro tiene sus propios hábitos — esto nos ayuda a personalizar el plan de {name} para una nutrición equilibrada y el tamaño de la porción.",
+      "mainFoodLabel": "{name} principalmente come",
+      "mainFoodPlaceholder": "Selecciona el tipo de comida",
+      "treatFrequencyLabel": "y recibe",
+      "treatFrequencyPlaceholder": "Selecciona la frecuencia",
+      "treatFrequencySuffix": "golosinas o sobras de la mesa diariamente.",
+      "mealtimeBehaviorLabel": "A la hora de comer, {name}",
+      "mealtimeBehaviorPlaceholder": "Selecciona el comportamiento",
+      "options": {
+        "dryFood": "comida seca",
+        "wetFood": "comida húmeda",
+        "rawFood": "comida cruda",
+        "dehydratedFood": "comida deshidratada",
+        "freshFood": "comida fresca",
+        "homemadeFood": "comida casera",
+        "mixedCombination": "mixto (combinación)",
+        "no": "no",
+        "oneToTwoSmall": "1-2 pequeñas",
+        "several": "varias",
+        "lotsSpoiledRotten": "muchas (muy mimado)",
+        "veryPicky": "muy exigente",
+        "canBePicky": "puede ser exigente",
+        "goodEater": "buen comedor",
+        "willEatAnything": "come cualquier cosa"
+      }
     },
     "loading": {
       "heading": "Creando el plan de comidas perfecto para {name}…",
