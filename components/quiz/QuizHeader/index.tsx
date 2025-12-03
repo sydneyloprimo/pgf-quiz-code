@@ -9,16 +9,23 @@ import { cn } from '@/utils/cn'
 
 interface QuizHeaderProps {
   visitedSteps: number
+  showProgressBar?: boolean
+  centerLogo?: boolean
 }
 
-const QuizHeader = ({ visitedSteps }: QuizHeaderProps) => {
+const QuizHeader = ({
+  visitedSteps,
+  showProgressBar = true,
+  centerLogo = false,
+}: QuizHeaderProps) => {
   const t = useTranslations('Quiz')
 
   return (
     <header className="bg-neutral-300">
       <div
         className={cn(
-          'flex items-center justify-between',
+          'flex items-center',
+          centerLogo ? 'justify-center relative' : 'justify-between',
           'px-5 sm:px-24 pb-4'
         )}
       >
@@ -35,16 +42,19 @@ const QuizHeader = ({ visitedSteps }: QuizHeaderProps) => {
             'bg-neutral-white border border-secondary-900',
             'flex items-center justify-center',
             'h-10 w-10 p-3',
-            'cursor-pointer'
+            'cursor-pointer',
+            centerLogo && 'absolute right-5 sm:right-24'
           )}
           aria-label={t('closeButton')}
         >
           <CloseIcon className="size-6 text-secondary-900" />
         </Link>
       </div>
-      <div className="px-5 md:px-24 pb-4">
-        <ProgressBar visitedSteps={visitedSteps} />
-      </div>
+      {showProgressBar && (
+        <div className="px-5 md:px-24 pb-4">
+          <ProgressBar visitedSteps={visitedSteps} />
+        </div>
+      )}
     </header>
   )
 }

@@ -3,7 +3,9 @@
 import { useMemo } from 'react'
 import { useWatch, UseFormReturn } from 'react-hook-form'
 
+import { PromiseOfCareAlert } from '@/components/common/PromiseOfCareAlert'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
+import { QuizResultsHeader } from '@/components/quiz/QuizResultsHeader'
 import {
   ACTIVITY_LEVEL_FACTORS,
   BODY_SHAPE_FACTORS,
@@ -14,6 +16,7 @@ import {
   RECIPE_KCAL_PER_GRAM,
 } from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
+import { cn } from '@/utils/cn'
 
 interface QuizResultsProps {
   goToStep: (step: QuizStep) => void
@@ -106,8 +109,18 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
   const results = useMemo(() => calculateResults(formData), [formData])
 
   return (
-    <div className="p-8">
-      <h1 className="text-2xl font-bold mb-6">Quiz Results</h1>
+    <div
+      className={cn(
+        'flex flex-col items-center justify-center',
+        'px-0 pb-12 w-full',
+        'gap-16'
+      )}
+    >
+      <QuizResultsHeader formData={formData} />
+
+      <div className="w-full">
+        <PromiseOfCareAlert />
+      </div>
 
       <div className="mb-8">
         <h2 className="text-xl font-semibold mb-4">Input Data:</h2>

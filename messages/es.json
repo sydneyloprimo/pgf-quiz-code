@@ -166,6 +166,22 @@
     "loading": {
       "heading": "Creando el plan de comidas perfecto para {name}…",
       "description": "Estamos analizando sus detalles para equilibrar nutrición, sabor y porción — la forma en que el cuidado y la ciencia deben encontrarse."
+    },
+    "resultsHeader": {
+      "headingPrefix": "Tu Plan Recomendado para {name}",
+      "descriptionPrefix": "Porque",
+      "descriptionIs": "es un",
+      "descriptionWho": "que",
+      "descriptionAnd": "y recibe",
+      "descriptionSuffix": "premios, hemos diseñado su plan para un equilibrio y nutrición óptimos.",
+      "agePrefix": "de",
+      "ageSuffix": "años",
+      "defaultBreed": "perro",
+      "imageAlt": "Ilustración de ingredientes de comida"
     }
+  },
+  "PromiseOfCareAlert": {
+    "message": "Nuestra Promesa de Cuidado: Cada receta está formulada para cumplir con estándares de grado farmacéutico de calidad y digestibilidad. Si tu perro no responde como se espera, nuestro equipo de nutrición trabajará contigo para solucionarlo.",
+    "closeButton": "Cerrar alerta"
   }
 }

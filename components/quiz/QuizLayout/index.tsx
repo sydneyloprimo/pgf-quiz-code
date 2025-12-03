@@ -194,7 +194,11 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
   return (
     <div className="flex flex-col h-screen bg-neutral-300 w-full overflow-y-auto">
       <div className="shrink-0 py-10 px-5 md:px-24">
-        <QuizHeader visitedSteps={visitedSteps} />
+        <QuizHeader
+          visitedSteps={visitedSteps}
+          showProgressBar={currentStep !== QuizStep.Results}
+          centerLogo={currentStep === QuizStep.Results}
+        />
       </div>
 
       <main
