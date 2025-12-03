@@ -33,9 +33,9 @@ export type BreedDropdownVariantProps = VariantProps<
 >
 
 interface BreedOption {
-  label: string
+  labelKey: string
   value: string
-  category: string
+  categoryKey: string
 }
 
 interface BreedDropdownProps extends BreedDropdownVariantProps {
@@ -64,7 +64,8 @@ const BreedDropdown = ({
   onOpen,
   onClose,
 }: BreedDropdownProps) => {
-  const t = useTranslations('Common.InputDropdown')
+  const tCommon = useTranslations('Common.InputDropdown')
+  const t = useTranslations('Quiz.breedSelection')
   const [isOpen, setIsOpen] = useState(false)
   const dropdownId = useId()
   const selectedBreed = breeds.find((breed) => breed.value === value)
@@ -97,10 +98,11 @@ const BreedDropdown = ({
   // Group breeds by category
   const breedsByCategory = breeds.reduce(
     (acc, breed) => {
-      if (!acc[breed.category]) {
-        acc[breed.category] = []
+      const categoryLabel = t(breed.categoryKey)
+      if (!acc[categoryLabel]) {
+        acc[categoryLabel] = []
       }
-      acc[breed.category].push(breed)
+      acc[categoryLabel].push(breed)
       return acc
     },
     {} as Record<string, BreedOption[]>
@@ -118,7 +120,7 @@ const BreedDropdown = ({
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         aria-controls={dropdownId}
-        aria-label={placeholder || t('selectOption')}
+        aria-label={placeholder || tCommon('selectOption')}
       >
         <p
           className={cn(
@@ -132,7 +134,7 @@ const BreedDropdown = ({
             textClassName
           )}
         >
-          {selectedBreed?.label || placeholder}
+          {selectedBreed ? t(selectedBreed.labelKey) : placeholder}
         </p>
         {icon && <div className="relative shrink-0 size-6">{icon}</div>}
         <div className="relative shrink-0 size-6">
@@ -168,7 +170,7 @@ const BreedDropdown = ({
                 >
                   <div className="flex-1 min-w-0 text-left">
                     <p className="font-body leading-6 whitespace-pre-wrap">
-                      {breed.label}
+                      {t(breed.labelKey)}
                     </p>
                   </div>
                   {breed.value === value && (

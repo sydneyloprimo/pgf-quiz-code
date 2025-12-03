@@ -59,6 +59,25 @@ const QuizDiet = ({
 
   const isFormValid = Boolean(mainFood && treatFrequency && mealtimeBehavior)
 
+  const translatedMainFoodOptions = MAIN_FOOD_OPTIONS.map((option) => ({
+    label: t(option.labelKey),
+    value: option.value,
+  }))
+
+  const translatedTreatFrequencyOptions = TREAT_FREQUENCY_OPTIONS.map(
+    (option) => ({
+      label: t(option.labelKey),
+      value: option.value,
+    })
+  )
+
+  const translatedMealtimeBehaviorOptions = MEALTIME_BEHAVIOR_OPTIONS.map(
+    (option) => ({
+      label: t(option.labelKey),
+      value: option.value,
+    })
+  )
+
   return (
     <div
       className={cn(
@@ -107,7 +126,7 @@ const QuizDiet = ({
                   <InputDropdown
                     value={value}
                     onSelect={onChange}
-                    options={MAIN_FOOD_OPTIONS}
+                    options={translatedMainFoodOptions}
                     placeholder={t('mainFoodPlaceholder')}
                     className="w-full"
                     state={
@@ -139,7 +158,7 @@ const QuizDiet = ({
                   <InputDropdown
                     value={value}
                     onSelect={onChange}
-                    options={TREAT_FREQUENCY_OPTIONS}
+                    options={translatedTreatFrequencyOptions}
                     placeholder={t('treatFrequencyPlaceholder')}
                     className="w-full"
                     state={
@@ -180,7 +199,7 @@ const QuizDiet = ({
                   <InputDropdown
                     value={value}
                     onSelect={onChange}
-                    options={MEALTIME_BEHAVIOR_OPTIONS}
+                    options={translatedMealtimeBehaviorOptions}
                     placeholder={t('mealtimeBehaviorPlaceholder')}
                     className="w-full"
                     state={
