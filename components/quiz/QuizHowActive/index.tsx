@@ -9,7 +9,7 @@ import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
 import { ACTIVITY_LEVEL_OPTIONS } from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
 import { InputDropdownState } from '@/types/enums/constants'
-import { cn } from '@/utils/cn'
+import { getTranslatedOptions } from '@/utils/helpers'
 
 interface QuizHowActiveProps {
   goToStep: (step: QuizStep) => void
@@ -45,31 +45,19 @@ const QuizHowActive = ({
 
   const isFormValid = Boolean(activityLevel)
 
+  const translatedActivityLevelOptions = getTranslatedOptions(
+    ACTIVITY_LEVEL_OPTIONS,
+    t
+  )
+
   return (
-    <div
-      className={cn(
-        'flex flex-col items-center justify-center',
-        'pt-0 px-0 w-full'
-      )}
-    >
+    <div className="flex flex-col items-center justify-center pt-0 px-0 w-full">
       <div className="flex flex-col gap-12 items-center w-full pb-16">
-        <div
-          className={cn(
-            'flex flex-col gap-6 items-center',
-            'text-center w-full',
-            'text-secondary-950'
-          )}
-        >
-          <h2
-            className={cn(
-              'font-display',
-              'text-4xl leading-12 tracking-tight',
-              'w-full'
-            )}
-          >
+        <div className="flex flex-col gap-6 items-center text-center w-full text-secondary-950">
+          <h2 className="font-display text-4xl leading-12 tracking-tight w-full">
             {t('heading', { name: dogName })}
           </h2>
-          <p className={cn('font-body text-xl leading-8', 'w-full')}>
+          <p className="font-body text-xl leading-8 w-full">
             {t('description')}
           </p>
         </div>
@@ -83,7 +71,7 @@ const QuizHowActive = ({
                 <InputDropdown
                   value={value}
                   onSelect={onChange}
-                  options={ACTIVITY_LEVEL_OPTIONS}
+                  options={translatedActivityLevelOptions}
                   placeholder={t('placeholder')}
                   className="w-full"
                   state={
