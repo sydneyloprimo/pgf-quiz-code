@@ -138,7 +138,7 @@ const OptionSelectProduct = ({
       </button>
 
       <div className="flex flex-col px-4 pt-8 pb-4">
-        <div className="flex flex-row items-start gap-4 mb-6">
+        <div className="flex flex-row items-stretch gap-4 mb-6">
           <div className="relative size-32 shrink-0">
             <Image
               src={imageSrc}
@@ -158,8 +158,8 @@ const OptionSelectProduct = ({
             </div>
           </div>
 
-          <div className="flex flex-col flex-1">
-            <h3 className="text-2xl mb-2 font-serif">{title}</h3>
+          <div className="flex flex-col flex-1 justify-center px-4">
+            <h3 className="text-2xl mb-2 font-display">{title}</h3>
             <p className="text-base text-secondary-950 font-sans">
               {description}
             </p>
@@ -168,28 +168,30 @@ const OptionSelectProduct = ({
 
         {isSelected && (
           <div className="w-full flex flex-col gap-4">
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-semibold text-neutral-800">
-                {t('recipeLabel')}
-              </label>
-              <InputDropdown
-                value={recipeValue}
-                placeholder={t('recipePlaceholder')}
-                options={recipeOptions}
-                onSelect={onRecipeSelect}
-              />
-            </div>
+            <div className="flex flex-row gap-3">
+              <div className="flex flex-col gap-2 flex-1">
+                <label className="text-sm font-semibold text-neutral-800">
+                  {t('recipeLabel')}
+                </label>
+                <InputDropdown
+                  value={recipeValue}
+                  placeholder={t('recipePlaceholder')}
+                  options={recipeOptions}
+                  onSelect={onRecipeSelect}
+                />
+              </div>
 
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-semibold text-neutral-800">
-                {t('shipmentFrequencyLabel')}
-              </label>
-              <InputDropdown
-                value={shipmentFrequencyValue}
-                placeholder={t('shipmentFrequencyPlaceholder')}
-                options={shipmentFrequencyOptions}
-                onSelect={onShipmentFrequencySelect}
-              />
+              <div className="flex flex-col gap-2 flex-1">
+                <label className="text-sm font-semibold text-neutral-800">
+                  {t('shipmentFrequencyLabel')}
+                </label>
+                <InputDropdown
+                  value={shipmentFrequencyValue}
+                  placeholder={t('shipmentFrequencyPlaceholder')}
+                  options={shipmentFrequencyOptions}
+                  onSelect={onShipmentFrequencySelect}
+                />
+              </div>
             </div>
 
             <div
