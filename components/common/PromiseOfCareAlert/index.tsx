@@ -40,7 +40,7 @@ const PromiseOfCareAlert = ({ className }: PromiseOfCareAlertProps) => {
         </div>
         <p
           className={cn(
-            'font-sans font-semibold',
+            'font-sans font-normal',
             'text-base leading-6',
             'text-secondary-900',
             'flex-1 min-w-0'
