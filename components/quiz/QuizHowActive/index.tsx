@@ -1,10 +1,12 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
 import { Controller, useWatch, UseFormReturn } from 'react-hook-form'
 
 import { InputDropdown } from '@/components/common/InputDropdown'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
+import { FoodAnimation } from '@/components/quiz/QuizLoading/FoodAnimation'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
 import { ACTIVITY_LEVEL_OPTIONS } from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
@@ -18,6 +20,8 @@ interface QuizHowActiveProps {
   formMethods: UseFormReturn<QuizFormData>
 }
 
+const LOADING_DURATION_MS = 5000
+
 const QuizHowActive = ({
   goToStep,
   goBack,
@@ -26,7 +30,9 @@ const QuizHowActive = ({
 }: QuizHowActiveProps) => {
   const t = useTranslations('Quiz.howActive')
   const tQuiz = useTranslations('Quiz')
+  const tLoading = useTranslations('Quiz.loading')
   const { control } = formMethods
+  const [isLoading, setIsLoading] = useState(false)
 
   const dogName =
     useWatch({
@@ -40,8 +46,18 @@ const QuizHowActive = ({
   })
 
   const handleNext = () => {
-    goToStep(QuizStep.Step8)
+    setIsLoading(true)
   }
+
+  useEffect(() => {
+    if (isLoading) {
+      const timer = window.setTimeout(() => {
+        goToStep(QuizStep.Results)
+      }, LOADING_DURATION_MS)
+
+      return () => window.clearTimeout(timer)
+    }
+  }, [isLoading, goToStep])
 
   const isFormValid = Boolean(activityLevel)
 
@@ -49,6 +65,24 @@ const QuizHowActive = ({
     ACTIVITY_LEVEL_OPTIONS,
     t
   )
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center pt-0 px-0 w-full">
+        <div className="flex flex-col gap-[60px] items-center w-full py-12">
+          <FoodAnimation />
+          <div className="flex flex-col gap-6 items-center text-center w-full text-secondary-950">
+            <h2 className="font-display text-4xl leading-12 tracking-tight w-full">
+              {tLoading('heading', { name: dogName })}
+            </h2>
+            <p className="font-body text-xl leading-8 w-full">
+              {tLoading('description')}
+            </p>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="flex flex-col items-center justify-center pt-0 px-0 w-full">
