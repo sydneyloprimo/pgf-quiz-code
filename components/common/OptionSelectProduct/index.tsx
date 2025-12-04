@@ -91,6 +91,7 @@ const OptionSelectProduct = ({
           'flex items-center justify-center',
           'size-6 rounded-full',
           'border-2 transition-colors',
+          'cursor-pointer',
           'focus:outline-none focus:ring-2 focus:ring-primary-600',
           isSelected
             ? 'bg-secondary-600 border-secondary-600'
