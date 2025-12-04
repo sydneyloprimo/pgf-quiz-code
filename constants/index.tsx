@@ -282,3 +282,31 @@ export const MEALTIME_BEHAVIOR_OPTIONS: DietOption[] = [
   { labelKey: 'options.goodEater', value: 'good-eater' },
   { labelKey: 'options.willEatAnything', value: 'will-eat-anything' },
 ]
+
+// Quiz results product options
+export interface QuizResultProduct {
+  mode: 'topper' | 'fullMeal'
+  titleKey: 'products.fullMeal.title' | 'products.topper.title'
+  descriptionKey:
+    | 'products.fullMeal.description'
+    | 'products.topper.description'
+  imageSrc: string
+  isMostPopular: boolean
+}
+
+export const QUIZ_RESULT_PRODUCTS: QuizResultProduct[] = [
+  {
+    mode: 'fullMeal',
+    titleKey: 'products.fullMeal.title',
+    descriptionKey: 'products.fullMeal.description',
+    imageSrc: '/images/product-full-meal.png',
+    isMostPopular: true,
+  },
+  {
+    mode: 'topper',
+    titleKey: 'products.topper.title',
+    descriptionKey: 'products.topper.description',
+    imageSrc: '/images/product-topper.png',
+    isMostPopular: false,
+  },
+]

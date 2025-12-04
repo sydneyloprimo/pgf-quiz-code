@@ -14,6 +14,7 @@ import {
   MODE_MULTIPLIERS,
   NEUTERED_STATUS_FACTORS,
   PRODUCTS,
+  QUIZ_RESULT_PRODUCTS,
   RER_BASE,
 } from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
@@ -26,24 +27,27 @@ interface QuizResultsProps {
   formMethods: UseFormReturn<QuizFormData>
 }
 
+type ProductMode = 'topper' | 'fullMeal'
+type Recipe = 'turkey' | 'lamb'
+
 const QuizResults = ({ formMethods }: QuizResultsProps) => {
   const { control } = formMethods
   const t = useTranslations('Quiz.results')
-  const tCommon = useTranslations('Common.OptionSelectProduct')
 
   const formData = useWatch({ control }) as QuizFormData
 
-  const [selectedProductMode, setSelectedProductMode] = useState<
-    'topper' | 'fullMeal' | null
-  >('fullMeal')
-  const [topperRecipe, setTopperRecipe] = useState<'turkey' | 'lamb'>('turkey')
-  const [fullMealRecipe, setFullMealRecipe] = useState<'turkey' | 'lamb'>(
-    'turkey'
-  )
-  const [topperShipmentFrequency, setTopperShipmentFrequency] =
-    useState<string>('everyWeek')
-  const [fullMealShipmentFrequency, setFullMealShipmentFrequency] =
-    useState<string>('everyWeek')
+  const [selectedProductMode, setSelectedProductMode] =
+    useState<ProductMode>('fullMeal')
+  const [recipes, setRecipes] = useState<Record<ProductMode, Recipe>>({
+    topper: 'turkey',
+    fullMeal: 'turkey',
+  })
+  const [shipmentFrequencies, setShipmentFrequencies] = useState<
+    Record<ProductMode, string>
+  >({
+    topper: 'everyWeek',
+    fullMeal: 'everyWeek',
+  })
 
   const calculateDailyFoodAndPrice = useCallback(
     (
@@ -118,29 +122,20 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
     [t]
   )
 
-  const handleTopperSelect = useCallback(() => {
-    setSelectedProductMode('topper')
+  const handleProductModeSelect = useCallback((mode: ProductMode) => {
+    setSelectedProductMode(mode)
   }, [])
 
-  const handleFullMealSelect = useCallback(() => {
-    setSelectedProductMode('fullMeal')
+  const handleRecipeSelect = useCallback((mode: ProductMode, value: string) => {
+    setRecipes((prev) => ({ ...prev, [mode]: value as Recipe }))
   }, [])
 
-  const handleTopperRecipeSelect = useCallback((value: string) => {
-    setTopperRecipe(value as 'turkey' | 'lamb')
-  }, [])
-
-  const handleFullMealRecipeSelect = useCallback((value: string) => {
-    setFullMealRecipe(value as 'turkey' | 'lamb')
-  }, [])
-
-  const handleTopperShipmentFrequencySelect = useCallback((value: string) => {
-    setTopperShipmentFrequency(value)
-  }, [])
-
-  const handleFullMealShipmentFrequencySelect = useCallback((value: string) => {
-    setFullMealShipmentFrequency(value)
-  }, [])
+  const handleShipmentFrequencySelect = useCallback(
+    (mode: ProductMode, value: string) => {
+      setShipmentFrequencies((prev) => ({ ...prev, [mode]: value }))
+    },
+    []
+  )
 
   const handleDetailsClick = useCallback(() => {
     // TODO: Handle details click
@@ -150,75 +145,53 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
     // TODO: Handle subscribe click
   }, [])
 
-  const topperPrice = useMemo(() => {
-    const { pricePerDay } = calculateDailyFoodAndPrice(topperRecipe, 'topper')
-    return pricePerDay
-  }, [topperRecipe, calculateDailyFoodAndPrice])
-
-  const fullMealPrice = useMemo(() => {
-    const { pricePerDay } = calculateDailyFoodAndPrice(fullMealRecipe, 'full')
-    return pricePerDay
-  }, [fullMealRecipe, calculateDailyFoodAndPrice])
-
   const dogName = formData.name || ''
 
-  const topperBenefits = useMemo(() => {
-    const benefits = []
-    if (topperShipmentFrequency) {
-      const whatYoullGetKey =
-        topperShipmentFrequency === 'everyWeek'
-          ? 'products.whatYoullGet.everyWeek'
-          : 'products.whatYoullGet.everyTwoWeeks'
-      benefits.push({
-        icon: 'shipping' as const,
-        text: t(whatYoullGetKey, { name: dogName }),
-      })
-    }
-    benefits.push(
-      {
-        icon: 'check' as const,
-        text: t('products.benefits.saveOverheads', { name: dogName }),
-      },
-      {
-        icon: 'check' as const,
-        text: t('products.benefits.freshlyPortioned', { name: dogName }),
-      },
-      {
-        icon: 'check' as const,
-        text: t('products.benefits.flexibleSchedule', { name: dogName }),
-      }
-    )
-    return benefits
-  }, [topperShipmentFrequency, dogName, t])
+  const getPricePerDay = useCallback(
+    (mode: ProductMode): number => {
+      const recipe = recipes[mode]
+      const calculationMode = mode === 'topper' ? 'topper' : 'full'
+      const { pricePerDay } = calculateDailyFoodAndPrice(
+        recipe,
+        calculationMode
+      )
+      return pricePerDay
+    },
+    [recipes, calculateDailyFoodAndPrice]
+  )
 
-  const fullMealBenefits = useMemo(() => {
-    const benefits = []
-    if (fullMealShipmentFrequency) {
-      const whatYoullGetKey =
-        fullMealShipmentFrequency === 'everyWeek'
-          ? 'products.whatYoullGet.everyWeek'
-          : 'products.whatYoullGet.everyTwoWeeks'
-      benefits.push({
-        icon: 'shipping' as const,
-        text: t(whatYoullGetKey, { name: dogName }),
-      })
-    }
-    benefits.push(
-      {
-        icon: 'check' as const,
-        text: t('products.benefits.saveOverheads', { name: dogName }),
-      },
-      {
-        icon: 'check' as const,
-        text: t('products.benefits.freshlyPortioned', { name: dogName }),
-      },
-      {
-        icon: 'check' as const,
-        text: t('products.benefits.flexibleSchedule', { name: dogName }),
+  const getBenefits = useCallback(
+    (mode: ProductMode) => {
+      const shipmentFrequency = shipmentFrequencies[mode]
+      const benefits = []
+      if (shipmentFrequency) {
+        const whatYoullGetKey =
+          shipmentFrequency === 'everyWeek'
+            ? 'products.whatYoullGet.everyWeek'
+            : 'products.whatYoullGet.everyTwoWeeks'
+        benefits.push({
+          icon: 'shipping' as const,
+          text: t(whatYoullGetKey, { name: dogName }),
+        })
       }
-    )
-    return benefits
-  }, [fullMealShipmentFrequency, dogName, t])
+      benefits.push(
+        {
+          icon: 'check' as const,
+          text: t('products.benefits.saveOverheads', { name: dogName }),
+        },
+        {
+          icon: 'check' as const,
+          text: t('products.benefits.freshlyPortioned', { name: dogName }),
+        },
+        {
+          icon: 'check' as const,
+          text: t('products.benefits.flexibleSchedule', { name: dogName }),
+        }
+      )
+      return benefits
+    },
+    [shipmentFrequencies, dogName, t]
+  )
 
   return (
     <div
@@ -235,45 +208,45 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
       </div>
 
       <div className="w-full flex flex-col gap-6 mx-5">
-        <OptionSelectProduct
-          isSelected={selectedProductMode === 'fullMeal'}
-          onSelect={handleFullMealSelect}
-          title={t('products.fullMeal.title', { name: dogName })}
-          description={t('products.fullMeal.description', { name: dogName })}
-          imageSrc="/images/product-full-meal.png"
-          imageAlt={t('products.fullMeal.title', { name: dogName })}
-          isMostPopular={true}
-          recipeOptions={recipeOptions}
-          recipeValue={fullMealRecipe}
-          onRecipeSelect={handleFullMealRecipeSelect}
-          shipmentFrequencyOptions={shipmentFrequencyOptions}
-          shipmentFrequencyValue={fullMealShipmentFrequency}
-          onShipmentFrequencySelect={handleFullMealShipmentFrequencySelect}
-          benefits={fullMealBenefits}
-          pricePerDay={fullMealPrice}
-          onDetailsClick={handleDetailsClick}
-          onSubscribeClick={handleSubscribeClick}
-        />
+        {QUIZ_RESULT_PRODUCTS.map((product) => {
+          const isSelected = selectedProductMode === product.mode
+          const title =
+            product.mode === 'fullMeal'
+              ? t(product.titleKey, { name: dogName })
+              : t(product.titleKey)
+          const description = t(product.descriptionKey, { name: dogName })
+          const imageAlt =
+            product.mode === 'fullMeal'
+              ? t(product.titleKey, { name: dogName })
+              : t(product.titleKey)
 
-        <OptionSelectProduct
-          isSelected={selectedProductMode === 'topper'}
-          onSelect={handleTopperSelect}
-          title={t('products.topper.title')}
-          description={t('products.topper.description', { name: dogName })}
-          imageSrc="/images/product-topper.png"
-          imageAlt={t('products.topper.title')}
-          isMostPopular={false}
-          recipeOptions={recipeOptions}
-          recipeValue={topperRecipe}
-          onRecipeSelect={handleTopperRecipeSelect}
-          shipmentFrequencyOptions={shipmentFrequencyOptions}
-          shipmentFrequencyValue={topperShipmentFrequency}
-          onShipmentFrequencySelect={handleTopperShipmentFrequencySelect}
-          benefits={topperBenefits}
-          pricePerDay={topperPrice}
-          onDetailsClick={handleDetailsClick}
-          onSubscribeClick={handleSubscribeClick}
-        />
+          return (
+            <OptionSelectProduct
+              key={product.mode}
+              isSelected={isSelected}
+              onSelect={() => handleProductModeSelect(product.mode)}
+              title={title}
+              description={description}
+              imageSrc={product.imageSrc}
+              imageAlt={imageAlt}
+              isMostPopular={product.isMostPopular}
+              recipeOptions={recipeOptions}
+              recipeValue={recipes[product.mode]}
+              onRecipeSelect={(value) =>
+                handleRecipeSelect(product.mode, value)
+              }
+              shipmentFrequencyOptions={shipmentFrequencyOptions}
+              shipmentFrequencyValue={shipmentFrequencies[product.mode]}
+              onShipmentFrequencySelect={(value) =>
+                handleShipmentFrequencySelect(product.mode, value)
+              }
+              benefits={getBenefits(product.mode)}
+              pricePerDay={getPricePerDay(product.mode)}
+              onDetailsClick={handleDetailsClick}
+              onSubscribeClick={handleSubscribeClick}
+            />
+          )
+        })}
       </div>
     </div>
   )
