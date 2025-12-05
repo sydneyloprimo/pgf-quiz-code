@@ -31,7 +31,7 @@
       "animalWelfareCertified": "ANIMAL WELFARE CERTIFIED",
       "detailsButton": "Details",
       "mostPopular": "Most Popular",
-      "recipeLabel": "Recipe *",
+      "recipeLabel": "Recipe:",
       "recipePlaceholder": "Select recipe",
       "selectOption": "Select {title}",
       "shipmentFrequencyLabel": "Shipment Frequency:",

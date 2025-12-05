@@ -44,7 +44,7 @@ const OptionSelectProductCTAs = ({
         onClick={handleSubscribeClick}
         className="flex-1"
       >
-        {t('subscribeButton', { price: pricePerDay.toFixed(2) })}
+        {t('subscribeButton', { price: `$${pricePerDay.toFixed(2)}` })}
       </Button>
     </div>
   )

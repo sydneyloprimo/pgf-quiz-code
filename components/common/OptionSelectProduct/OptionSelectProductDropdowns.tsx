@@ -31,7 +31,7 @@ const OptionSelectProductDropdowns = ({
   return (
     <div className="flex flex-row gap-3">
       <div className="flex flex-col gap-2 flex-1">
-        <label className="text-sm font-semibold text-neutral-800">
+        <label className="text-sm font-semibold text-secondary-900">
           {t('recipeLabel')}
         </label>
         <InputDropdown
@@ -43,7 +43,7 @@ const OptionSelectProductDropdowns = ({
       </div>
 
       <div className="flex flex-col gap-2 flex-1">
-        <label className="text-sm font-semibold text-neutral-800">
+        <label className="text-sm font-semibold text-secondary-900">
           {t('shipmentFrequencyLabel')}
         </label>
         <InputDropdown
