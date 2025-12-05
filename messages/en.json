@@ -28,6 +28,7 @@
       "previousButton": "Previous Page"
     },
     "OptionSelectProduct": {
+      "addToCartButton": "Add to Cart",
       "animalWelfareCertified": "ANIMAL WELFARE CERTIFIED",
       "detailsButton": "Details",
       "mostPopular": "Most Popular",
@@ -326,6 +327,10 @@
       },
       "tryRecipeBeforeMembership": "Want to try a recipe before joining the membership?",
       "products": {
+        "alaCarte": {
+          "title": "Single Meal, A la Carte",
+          "description": "Perfect if you'd like to try one recipe before committing."
+        },
         "topper": {
           "title": "Topper (50%)",
           "description": "{name}'s favorite meals, delivered automatically — fresh, balanced, and ready to serve."
@@ -339,8 +344,11 @@
           "everyTwoWeeks": "You will get fourteen meals for {name}, freshly delivered every two weeks."
         },
         "benefits": {
-          "saveOverheads": "Save overheads every month — easiest way to feed healthy and save.",
+          "bestForFirstTimers": "Best for first-timers or occasional feeding.",
           "freshlyPortioned": "Freshly portioned for {name}'s size and activity.",
+          "noSubscriptionRequired": "Same great recipes, no subscription required.",
+          "oneTimeDelivery": "One-time delivery.",
+          "saveOverheads": "Save overheads every month — easiest way to feed healthy and save.",
           "flexibleSchedule": "Flexible schedule — pause, skip, or cancel anytime."
         }
       }

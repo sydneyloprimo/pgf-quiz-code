@@ -79,6 +79,25 @@ export const getQuizBenefits = (
   return benefits
 }
 
+export const getQuizBenefitsAlaCarte = (
+  t: (key: string) => string
+): Array<{ icon: 'check'; text: string }> => {
+  return [
+    {
+      icon: 'check',
+      text: t('products.benefits.noSubscriptionRequired'),
+    },
+    {
+      icon: 'check',
+      text: t('products.benefits.oneTimeDelivery'),
+    },
+    {
+      icon: 'check',
+      text: t('products.benefits.bestForFirstTimers'),
+    },
+  ]
+}
+
 export const getNextQuizStep = (age: string, weight: string): QuizStep => {
   const ageNum = parseInt(age, 10)
   const weightNum = parseInt(weight, 10)

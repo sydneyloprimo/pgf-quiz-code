@@ -9,6 +9,7 @@ import { PromiseOfCareAlert } from '@/components/common/PromiseOfCareAlert'
 import {
   calculateDailyFoodAndPrice,
   getQuizBenefits,
+  getQuizBenefitsAlaCarte,
 } from '@/components/quiz/helpers'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizResultsHeader } from '@/components/quiz/QuizResultsHeader'
@@ -23,7 +24,7 @@ interface QuizResultsProps {
   formMethods: UseFormReturn<QuizFormData>
 }
 
-type ProductMode = 'topper' | 'fullMeal'
+type ProductMode = 'topper' | 'fullMeal' | 'alaCarte'
 type Recipe = 'turkey' | 'lamb'
 
 const QuizResults = ({ formMethods }: QuizResultsProps) => {
@@ -37,9 +38,10 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
   const [recipes, setRecipes] = useState<Record<ProductMode, Recipe>>({
     topper: 'turkey',
     fullMeal: 'turkey',
+    alaCarte: 'turkey',
   })
   const [shipmentFrequencies, setShipmentFrequencies] = useState<
-    Record<ProductMode, string>
+    Record<'topper' | 'fullMeal', string>
   >({
     topper: 'everyWeek',
     fullMeal: 'everyWeek',
@@ -82,7 +84,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
   }, [])
 
   const handleShipmentFrequencySelect = useCallback(
-    (mode: ProductMode, value: string) => {
+    (mode: 'topper' | 'fullMeal', value: string) => {
       setShipmentFrequencies((prev) => ({ ...prev, [mode]: value }))
     },
     []
@@ -96,10 +98,17 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
     // TODO: Handle subscribe click
   }, [])
 
+  const handleAddToCartClick = useCallback(() => {
+    // TODO: Handle add to cart click
+  }, [])
+
   const dogName = formData.name || ''
 
   const getPricePerDay = useCallback(
     (mode: ProductMode): number => {
+      if (mode === 'alaCarte') {
+        return 0
+      }
       const recipe = recipes[mode]
       const calculationMode = mode === 'topper' ? 'topper' : 'full'
       const { pricePerDay } = calculateDailyFoodAndPrice(
@@ -113,7 +122,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
   )
 
   const getBenefits = useCallback(
-    (mode: ProductMode) => {
+    (mode: 'topper' | 'fullMeal') => {
       const shipmentFrequency = shipmentFrequencies[mode]
       return getQuizBenefits(shipmentFrequency, dogName, t)
     },
@@ -137,6 +146,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
       <div className="w-full flex flex-col gap-6 mx-5">
         {QUIZ_RESULT_PRODUCTS.map((product) => {
           const isSelected = selectedProductMode === product.mode
+          const mode = product.mode as 'topper' | 'fullMeal'
           const title =
             product.mode === 'fullMeal'
               ? t(product.titleKey, { name: dogName })
@@ -163,12 +173,12 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
                 handleRecipeSelect(product.mode, value)
               }
               shipmentFrequencyOptions={shipmentFrequencyOptions}
-              shipmentFrequencyValue={shipmentFrequencies[product.mode]}
+              shipmentFrequencyValue={shipmentFrequencies[mode]}
               onShipmentFrequencySelect={(value) =>
-                handleShipmentFrequencySelect(product.mode, value)
+                handleShipmentFrequencySelect(mode, value)
               }
-              benefits={getBenefits(product.mode)}
-              pricePerDay={getPricePerDay(product.mode)}
+              benefits={getBenefits(mode)}
+              pricePerDay={getPricePerDay(mode)}
               onDetailsClick={handleDetailsClick}
               onSubscribeClick={handleSubscribeClick}
             />
@@ -183,6 +193,25 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
         <h4 className="heading-h4 font-display font-normal text-neutral-950 tracking-tight">
           {t('purchaseAlaCarteHeading')}
         </h4>
+      </div>
+
+      <div className="w-full flex flex-col gap-6 mx-5">
+        <OptionSelectProduct
+          isSelected={selectedProductMode === 'alaCarte'}
+          onSelect={() => handleProductModeSelect('alaCarte')}
+          title={t('products.alaCarte.title')}
+          description={t('products.alaCarte.description')}
+          imageSrc="/images/product-full-meal.png"
+          imageAlt={t('products.alaCarte.title')}
+          isMostPopular={false}
+          isAlaCarte={true}
+          recipeOptions={recipeOptions}
+          recipeValue={recipes.alaCarte}
+          onRecipeSelect={(value) => handleRecipeSelect('alaCarte', value)}
+          benefits={getQuizBenefitsAlaCarte(t)}
+          onDetailsClick={handleDetailsClick}
+          onAddToCartClick={handleAddToCartClick}
+        />
       </div>
     </div>
   )

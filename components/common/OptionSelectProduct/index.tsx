@@ -4,8 +4,10 @@ import { useTranslations } from 'next-intl'
 import { useCallback } from 'react'
 
 import { OptionSelectProductBenefits } from './OptionSelectProductBenefits'
+import { OptionSelectProductBenefitsAlaCarte } from './OptionSelectProductBenefitsAlaCarte'
 import { OptionSelectProductCTAs } from './OptionSelectProductCTAs'
 import { OptionSelectProductDropdowns } from './OptionSelectProductDropdowns'
+import { OptionSelectProductDropdownsAlaCarte } from './OptionSelectProductDropdownsAlaCarte'
 import { OptionSelectProductHeader } from './OptionSelectProductHeader'
 
 import { cn } from '@/utils/cn'
@@ -21,16 +23,18 @@ interface OptionSelectProductProps {
   imageSrc: string
   imageAlt: string
   isMostPopular?: boolean
+  isAlaCarte?: boolean
   recipeOptions: Array<{ label: string; value: string }>
   recipeValue?: string
   onRecipeSelect?: (value: string) => void
-  shipmentFrequencyOptions: Array<{ label: string; value: string }>
+  shipmentFrequencyOptions?: Array<{ label: string; value: string }>
   shipmentFrequencyValue?: string
   onShipmentFrequencySelect?: (value: string) => void
   benefits: Array<{ icon?: 'check' | 'shipping'; text: string }>
-  pricePerDay: number
+  pricePerDay?: number
   onDetailsClick?: () => void
   onSubscribeClick?: () => void
+  onAddToCartClick?: () => void
   className?: string
 }
 
@@ -42,6 +46,7 @@ const OptionSelectProduct = ({
   imageSrc,
   imageAlt,
   isMostPopular = false,
+  isAlaCarte = false,
   recipeOptions,
   recipeValue,
   onRecipeSelect,
@@ -52,6 +57,7 @@ const OptionSelectProduct = ({
   pricePerDay,
   onDetailsClick,
   onSubscribeClick,
+  onAddToCartClick,
   className,
 }: OptionSelectProductProps) => {
   const t = useTranslations('Common.OptionSelectProduct')
@@ -114,24 +120,38 @@ const OptionSelectProduct = ({
 
         {isSelected && (
           <div className="w-full flex flex-col gap-4">
-            <OptionSelectProductDropdowns
-              recipeOptions={recipeOptions}
-              recipeValue={recipeValue}
-              onRecipeSelect={onRecipeSelect}
-              shipmentFrequencyOptions={shipmentFrequencyOptions}
-              shipmentFrequencyValue={shipmentFrequencyValue}
-              onShipmentFrequencySelect={onShipmentFrequencySelect}
-            />
+            {isAlaCarte ? (
+              <OptionSelectProductDropdownsAlaCarte
+                recipeOptions={recipeOptions}
+                recipeValue={recipeValue}
+                onRecipeSelect={onRecipeSelect}
+              />
+            ) : (
+              <OptionSelectProductDropdowns
+                recipeOptions={recipeOptions}
+                recipeValue={recipeValue}
+                onRecipeSelect={onRecipeSelect}
+                shipmentFrequencyOptions={shipmentFrequencyOptions || []}
+                shipmentFrequencyValue={shipmentFrequencyValue}
+                onShipmentFrequencySelect={onShipmentFrequencySelect}
+              />
+            )}
 
-            <OptionSelectProductBenefits
-              benefits={benefits}
-              shipmentFrequencyValue={shipmentFrequencyValue}
-            />
+            {isAlaCarte ? (
+              <OptionSelectProductBenefitsAlaCarte benefits={benefits} />
+            ) : (
+              <OptionSelectProductBenefits
+                benefits={benefits}
+                shipmentFrequencyValue={shipmentFrequencyValue}
+              />
+            )}
 
             <OptionSelectProductCTAs
               pricePerDay={pricePerDay}
               onDetailsClick={onDetailsClick}
               onSubscribeClick={onSubscribeClick}
+              onAddToCartClick={onAddToCartClick}
+              isAlaCarte={isAlaCarte}
             />
           </div>
         )}

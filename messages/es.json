@@ -4,6 +4,7 @@
       "selectOption": "Seleccionar una opción"
     },
     "OptionSelectProduct": {
+      "addToCartButton": "Agregar al Carrito",
       "animalWelfareCertified": "CERTIFICADO DE BIENESTAR ANIMAL",
       "detailsButton": "Detalles",
       "mostPopular": "Más Popular",
@@ -203,6 +204,10 @@
       },
       "tryRecipeBeforeMembership": "¿Quieres probar una receta antes de unirte a la membresía?",
       "products": {
+        "alaCarte": {
+          "title": "Comida Individual, A la Carta",
+          "description": "Perfecto si quieres probar una receta antes de comprometerte."
+        },
         "topper": {
           "title": "Complemento (50%)",
           "description": "Las comidas favoritas de {name}, entregadas automáticamente — frescas, balanceadas y listas para servir."
@@ -216,8 +221,11 @@
           "everyTwoWeeks": "Recibirás catorce comidas para {name}, entregadas frescas cada dos semanas."
         },
         "benefits": {
-          "saveOverheads": "Ahorra gastos cada mes — la forma más fácil de alimentar de forma saludable y ahorrar.",
+          "bestForFirstTimers": "Ideal para principiantes o alimentación ocasional.",
           "freshlyPortioned": "Porcionado fresco para el tamaño y actividad de {name}.",
+          "noSubscriptionRequired": "Las mismas excelentes recetas, sin suscripción requerida.",
+          "oneTimeDelivery": "Entrega única.",
+          "saveOverheads": "Ahorra gastos cada mes — la forma más fácil de alimentar de forma saludable y ahorrar.",
           "flexibleSchedule": "Horario flexible — pausa, omite o cancela en cualquier momento."
         }
       }
