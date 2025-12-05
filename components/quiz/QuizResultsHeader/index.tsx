@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { useLocale, useTranslations } from 'next-intl'
 
+import { formatAgeText } from '@/components/quiz/helpers'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import {
   MEALTIME_BEHAVIOR_OPTIONS,
@@ -45,10 +46,7 @@ const QuizResultsHeader = ({ formData }: QuizResultsHeaderProps) => {
       (option) => option.value === treatFrequency
     )?.label || tDiet('options.several')
 
-  const ageText =
-    locale === 'es'
-      ? `${t('agePrefix')} ${age} ${t('ageSuffix')}`
-      : `${age}-year-old`
+  const ageText = formatAgeText(age, locale, t)
 
   return (
     <div

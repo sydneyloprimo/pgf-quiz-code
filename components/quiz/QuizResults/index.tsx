@@ -6,17 +6,13 @@ import { useWatch, UseFormReturn } from 'react-hook-form'
 
 import { OptionSelectProduct } from '@/components/common/OptionSelectProduct'
 import { PromiseOfCareAlert } from '@/components/common/PromiseOfCareAlert'
+import {
+  calculateDailyFoodAndPrice,
+  getQuizBenefits,
+} from '@/components/quiz/helpers'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizResultsHeader } from '@/components/quiz/QuizResultsHeader'
-import {
-  ACTIVITY_LEVEL_FACTORS,
-  BODY_SHAPE_FACTORS,
-  MODE_MULTIPLIERS,
-  NEUTERED_STATUS_FACTORS,
-  PRODUCTS,
-  QUIZ_RESULT_PRODUCTS,
-  RER_BASE,
-} from '@/constants'
+import { QUIZ_RESULT_PRODUCTS } from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 
@@ -48,51 +44,6 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
     topper: 'everyWeek',
     fullMeal: 'everyWeek',
   })
-
-  const calculateDailyFoodAndPrice = useCallback(
-    (
-      recipe: 'turkey' | 'lamb',
-      mode: 'topper' | 'full'
-    ): { dailyFoodGrams: number; pricePerDay: number } => {
-      const weightLbs = Number(formData.weight) || 0
-      const weightKg = weightLbs / 2.20462
-
-      const rer = RER_BASE * Math.pow(weightKg, 0.75)
-
-      const neuteredFactor =
-        formData.neuteredStatus === 'neutered'
-          ? NEUTERED_STATUS_FACTORS.neutered
-          : NEUTERED_STATUS_FACTORS.intact
-
-      const activityFactor =
-        formData.activityLevel &&
-        formData.activityLevel in ACTIVITY_LEVEL_FACTORS
-          ? ACTIVITY_LEVEL_FACTORS[
-              formData.activityLevel as keyof typeof ACTIVITY_LEVEL_FACTORS
-            ]
-          : 0
-
-      const bodyShapeFactor =
-        formData.bodyShape && formData.bodyShape in BODY_SHAPE_FACTORS
-          ? BODY_SHAPE_FACTORS[
-              formData.bodyShape as keyof typeof BODY_SHAPE_FACTORS
-            ]
-          : 1.0
-
-      const dailyCalories =
-        rer * neuteredFactor * (1 + activityFactor) * bodyShapeFactor
-
-      const product = PRODUCTS[recipe]
-      const modeMultiplier = MODE_MULTIPLIERS[mode]
-
-      const dailyFoodGrams =
-        dailyCalories / (product.kcalPerGram * modeMultiplier)
-      const pricePerDay = dailyFoodGrams * product.pricePerGram
-
-      return { dailyFoodGrams, pricePerDay }
-    },
-    [formData]
-  )
 
   const recipeOptions = useMemo(
     () => [
@@ -152,43 +103,19 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
       const recipe = recipes[mode]
       const calculationMode = mode === 'topper' ? 'topper' : 'full'
       const { pricePerDay } = calculateDailyFoodAndPrice(
+        formData,
         recipe,
         calculationMode
       )
       return pricePerDay
     },
-    [recipes, calculateDailyFoodAndPrice]
+    [recipes, formData]
   )
 
   const getBenefits = useCallback(
     (mode: ProductMode) => {
       const shipmentFrequency = shipmentFrequencies[mode]
-      const benefits = []
-      if (shipmentFrequency) {
-        const whatYoullGetKey =
-          shipmentFrequency === 'everyWeek'
-            ? 'products.whatYoullGet.everyWeek'
-            : 'products.whatYoullGet.everyTwoWeeks'
-        benefits.push({
-          icon: 'shipping' as const,
-          text: t(whatYoullGetKey, { name: dogName }),
-        })
-      }
-      benefits.push(
-        {
-          icon: 'check' as const,
-          text: t('products.benefits.saveOverheads', { name: dogName }),
-        },
-        {
-          icon: 'check' as const,
-          text: t('products.benefits.freshlyPortioned', { name: dogName }),
-        },
-        {
-          icon: 'check' as const,
-          text: t('products.benefits.flexibleSchedule', { name: dogName }),
-        }
-      )
-      return benefits
+      return getQuizBenefits(shipmentFrequency, dogName, t)
     },
     [shipmentFrequencies, dogName, t]
   )

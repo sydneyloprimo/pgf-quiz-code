@@ -7,6 +7,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useForm, UseFormReturn } from 'react-hook-form'
 import { z } from 'zod'
 
+import { getStoredFormData, saveFormData } from '@/components/quiz/helpers'
 import { QuizHeader } from '@/components/quiz/QuizHeader'
 import { QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
@@ -43,31 +44,6 @@ const createQuizFormSchema = (t: (key: string) => string) =>
   })
 
 export type QuizFormData = z.infer<ReturnType<typeof createQuizFormSchema>>
-
-const QUIZ_FORM_STORAGE_KEY = 'quiz-form-data'
-
-const getStoredFormData = (): Partial<QuizFormData> | null => {
-  if (typeof window === 'undefined') {
-    return null
-  }
-  try {
-    const stored = window.localStorage.getItem(QUIZ_FORM_STORAGE_KEY)
-    return stored ? JSON.parse(stored) : null
-  } catch {
-    return null
-  }
-}
-
-const saveFormData = (data: Partial<QuizFormData>) => {
-  if (typeof window === 'undefined') {
-    return
-  }
-  try {
-    window.localStorage.setItem(QUIZ_FORM_STORAGE_KEY, JSON.stringify(data))
-  } catch {
-    // Ignore localStorage errors
-  }
-}
 
 interface QuizLayoutProps {
   renderStep: (

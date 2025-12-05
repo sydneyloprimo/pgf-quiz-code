@@ -6,9 +6,9 @@ import { Controller, useWatch, UseFormReturn } from 'react-hook-form'
 
 import Input from '@/components/common/Input'
 import { InputDropdown } from '@/components/common/InputDropdown'
+import { getNextQuizStep } from '@/components/quiz/helpers'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
-import { MAX_DOG_WEIGHT_LBS, PUPPY_MAX_AGE_YEARS } from '@/constants'
 import {
   InputDropdownState,
   InputState,
@@ -47,15 +47,8 @@ const QuizStep2 = ({
   const isFormValid = Boolean(name && age && weight)
 
   const handleNext = () => {
-    const ageNum = parseInt(age, 10)
-    const weightNum = parseInt(weight, 10)
-    if (ageNum <= PUPPY_MAX_AGE_YEARS) {
-      goToStep(QuizStep.UnderAge)
-    } else if (weightNum > MAX_DOG_WEIGHT_LBS) {
-      goToStep(QuizStep.Plus25Lbs)
-    } else {
-      goToStep(QuizStep.NeuteredStatus)
-    }
+    const nextStep = getNextQuizStep(age, weight)
+    goToStep(nextStep)
   }
   return (
     <div
