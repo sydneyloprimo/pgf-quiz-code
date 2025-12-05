@@ -315,6 +315,7 @@
       "imageAlt": "Food ingredients illustration"
     },
     "results": {
+      "purchaseAlaCarteHeading": "Purchase à la carte",
       "recipes": {
         "turkey": "Turkey",
         "lamb": "Lamb"
@@ -323,6 +324,7 @@
         "everyWeek": "Every Week",
         "everyTwoWeeks": "Every Two Weeks"
       },
+      "tryRecipeBeforeMembership": "Want to try a recipe before joining the membership?",
       "products": {
         "topper": {
           "title": "Topper (50%)",

@@ -192,6 +192,7 @@
       "imageAlt": "Ilustración de ingredientes de comida"
     },
     "results": {
+      "purchaseAlaCarteHeading": "Compra a la carta",
       "recipes": {
         "turkey": "Pavo",
         "lamb": "Cordero"
@@ -200,6 +201,7 @@
         "everyWeek": "Cada Semana",
         "everyTwoWeeks": "Cada Dos Semanas"
       },
+      "tryRecipeBeforeMembership": "¿Quieres probar una receta antes de unirte a la membresía?",
       "products": {
         "topper": {
           "title": "Complemento (50%)",

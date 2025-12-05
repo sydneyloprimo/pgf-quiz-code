@@ -175,6 +175,15 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
           )
         })}
       </div>
+
+      <div className="w-full flex flex-col gap-2 text-center">
+        <h4 className="heading-h4 font-display font-normal text-neutral-950 tracking-tight">
+          {t('tryRecipeBeforeMembership')}
+        </h4>
+        <h4 className="heading-h4 font-display font-normal text-neutral-950 tracking-tight">
+          {t('purchaseAlaCarteHeading')}
+        </h4>
+      </div>
     </div>
   )
 }
