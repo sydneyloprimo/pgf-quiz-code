@@ -29,9 +29,13 @@ const QuizHeader = ({
           'px-5 sm:px-24 pb-4'
         )}
       >
-        <Link href={Routes.home} data-qa="quiz-logo">
+        <Link
+          href={Routes.home}
+          data-qa="quiz-logo"
+          className="flex items-center"
+        >
           <PGFTextLogo
-            className="h-9 w-56 text-neutral-950"
+            className="h-auto w-full text-neutral-950"
             aria-label={t('title')}
           />
         </Link>
