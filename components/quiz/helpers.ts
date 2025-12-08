@@ -36,6 +36,17 @@ export const saveFormData = (data: Partial<QuizFormData>) => {
   }
 }
 
+export const clearFormData = () => {
+  if (typeof window === 'undefined') {
+    return
+  }
+  try {
+    window.localStorage.removeItem(QUIZ_FORM_STORAGE_KEY)
+  } catch {
+    // Ignore localStorage errors
+  }
+}
+
 export const formatAgeText = (
   age: string,
   locale: string,

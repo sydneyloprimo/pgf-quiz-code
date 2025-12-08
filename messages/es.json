@@ -228,6 +228,27 @@
           "saveOverheads": "Ahorra gastos cada mes — la forma más fácil de alimentar de forma saludable y ahorrar.",
           "flexibleSchedule": "Horario flexible — pausa, omite o cancela en cualquier momento."
         }
+      },
+      "footer": {
+        "title": "Beneficios",
+        "benefits": {
+          "improvedDigestion": {
+            "title": "Digestión y Energía Mejoradas",
+            "description": "Más suave para el estómago que el pienso — ayuda a Tommy a absorber más nutrientes y mantenerse activo."
+          },
+          "allergyWeightControl": {
+            "title": "Control de Alergias y Peso",
+            "description": "Apoya un peso saludable mientras alivia sensibilidades comunes."
+          },
+          "moreMealtimesTogether": {
+            "title": "Más Comidas Juntos",
+            "description": "Una dieta saludable probada para ayudar a los perros a vivir vidas más largas y felices."
+          }
+        },
+        "moreBuddies": {
+          "text": "¿Tienes más compañeros?",
+          "linkText": "¡Hagamos el quiz para ellos también!"
+        }
       }
     }
   },
