@@ -140,9 +140,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
     >
       <QuizResultsHeader formData={formData} />
 
-      <div className="w-full">
-        <PromiseOfCareAlert />
-      </div>
+      <PromiseOfCareAlert />
 
       <div className="w-full flex flex-col gap-6 mx-5">
         {QUIZ_RESULT_PRODUCTS.map((product) => {
