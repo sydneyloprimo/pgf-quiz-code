@@ -69,7 +69,7 @@ const FoodAnimation = ({ className }: FoodAnimationProps) => {
           'w-full h-full',
           'object-contain object-center',
           'will-change-opacity',
-          'transition-opacity duration-[800ms] ease-out',
+          'transition-opacity duration-800 ease-out',
           {
             'opacity-0': isFading,
             'opacity-100': !isFading,
@@ -84,7 +84,7 @@ const FoodAnimation = ({ className }: FoodAnimationProps) => {
           'w-full h-full',
           'object-contain object-center',
           'will-change-opacity',
-          'transition-opacity duration-[800ms] ease-out',
+          'transition-opacity duration-800 ease-out',
           {
             'opacity-100': isFading,
             'opacity-0': !isFading,
