@@ -19,7 +19,7 @@ const inputDropdownVariants = cva(
         [InputDropdownState.Filled]:
           'bg-neutral-white border border-secondary-900 text-secondary-950',
         [InputDropdownState.Open]:
-          'bg-neutral-white border-2 border-primary-800 text-neutral-800',
+          'bg-neutral-white border border-primary-800 shadow-[0_0_0_1px_#094452] text-neutral-800',
       },
     },
     defaultVariants: {
@@ -129,7 +129,7 @@ const InputDropdown = ({
         <div
           id={dropdownId}
           role="listbox"
-          className="absolute top-12 left-0 right-0 z-10 bg-neutral-100 border-2 border-primary-800 flex flex-col max-h-60 overflow-y-auto"
+          className="absolute top-12 left-0 right-0 z-10 bg-neutral-100 border border-primary-800 shadow-[0_0_0_1px_#094452] flex flex-col max-h-60 overflow-y-auto"
         >
           {options.map((option) => (
             <button
