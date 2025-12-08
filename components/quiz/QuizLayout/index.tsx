@@ -168,6 +168,12 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
       return
     }
 
+    // Results page should go back to Step7
+    if (currentStep === QuizStep.Results) {
+      goToStep(QuizStep.Step7)
+      return
+    }
+
     // For other steps, find the previous step in the logical flow
     const currentIndex = STEP_ORDER.indexOf(currentStep)
     if (currentIndex > 0) {
@@ -194,7 +200,13 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
   return (
     <div className="flex flex-col h-screen bg-neutral-300 w-full overflow-y-auto">
       <div className="shrink-0 py-10 px-5 md:px-24">
-        <QuizHeader visitedSteps={visitedSteps} />
+        <QuizHeader
+          visitedSteps={visitedSteps}
+          showProgressBar={currentStep !== QuizStep.Results}
+          centerLogo={currentStep === QuizStep.Results}
+          showBackButton={currentStep === QuizStep.Results}
+          onBack={goBack}
+        />
       </div>
 
       <main

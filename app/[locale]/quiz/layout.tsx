@@ -10,7 +10,7 @@ export default function QuizLayout({
   params: Promise<{ locale: Locale }>
 }>) {
   return (
-    <LocaleWrapper params={params} localeGroup="Quiz">
+    <LocaleWrapper params={params} localeGroup={['Quiz', 'PromiseOfCareAlert']}>
       {children}
     </LocaleWrapper>
   )

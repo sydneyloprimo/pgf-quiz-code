@@ -289,6 +289,18 @@
     "loading": {
       "heading": "Creating the perfect meal plan for {name}…",
       "description": "We're analyzing his details to balance nutrition, flavor, and portion — the way care and science should meet."
+    },
+    "resultsHeader": {
+      "headingPrefix": "Your Recommended Plan for {name}",
+      "descriptionPrefix": "Because",
+      "descriptionIs": "is a",
+      "descriptionWho": "who",
+      "descriptionAnd": "and gets",
+      "descriptionSuffix": "treats, we've tailored his plan for optimal balance and nutrition.",
+      "agePrefix": "",
+      "ageSuffix": "",
+      "defaultBreed": "dog",
+      "imageAlt": "Food ingredients illustration"
     }
   },
   "Search": {
@@ -330,5 +342,9 @@
     "signinRedirectLink": "Sign in",
     "signinRedirectMessage": "Already have an account?",
     "successfulRegistration": "Congratulations! Your account has been successfully created.\nWe have sent a confirmation email to your registered email address."
+  },
+  "PromiseOfCareAlert": {
+    "message": "Our Promise of Care: Every recipe is formulated to meet pharmaceutical grade standards for quality and digestibility. If your dog doesn't respond as expected, our nutrition team will work with you to make it right.",
+    "closeButton": "Close alert"
   }
 }
