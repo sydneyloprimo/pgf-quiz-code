@@ -49,22 +49,30 @@ export const BODY_SHAPE_FACTORS = {
   'full-round': 0.9,
 } as const
 
-// Recipe kcal/g values
-export const RECIPE_KCAL_PER_GRAM = {
-  turkey: 1.69,
-  lamb: 1.47,
+// Products data
+export interface Product {
+  recipeName: string
+  pricePerGram: number
+  kcalPerGram: number
+}
+
+export const PRODUCTS: Record<'turkey' | 'lamb', Product> = {
+  turkey: {
+    recipeName: 'Turkey',
+    pricePerGram: 0.05,
+    kcalPerGram: 1.69,
+  },
+  lamb: {
+    recipeName: 'Lamb',
+    pricePerGram: 0.06,
+    kcalPerGram: 1.47,
+  },
 } as const
 
 // Mode multipliers
 export const MODE_MULTIPLIERS = {
   full: 1.0,
-  topper: 0.25,
-} as const
-
-// Price per gram (placeholder values - should be fetched from product data)
-export const PRICE_PER_GRAM = {
-  turkey: 0.05,
-  lamb: 0.06,
+  topper: 0.5,
 } as const
 
 // Quiz body shapes
@@ -273,4 +281,32 @@ export const MEALTIME_BEHAVIOR_OPTIONS: DietOption[] = [
   { labelKey: 'options.canBePicky', value: 'can-be-picky' },
   { labelKey: 'options.goodEater', value: 'good-eater' },
   { labelKey: 'options.willEatAnything', value: 'will-eat-anything' },
+]
+
+// Quiz results product options
+export interface QuizResultProduct {
+  mode: 'topper' | 'fullMeal'
+  titleKey: 'products.fullMeal.title' | 'products.topper.title'
+  descriptionKey:
+    | 'products.fullMeal.description'
+    | 'products.topper.description'
+  imageSrc: string
+  isMostPopular: boolean
+}
+
+export const QUIZ_RESULT_PRODUCTS: QuizResultProduct[] = [
+  {
+    mode: 'fullMeal',
+    titleKey: 'products.fullMeal.title',
+    descriptionKey: 'products.fullMeal.description',
+    imageSrc: '/images/product-full-meal.png',
+    isMostPopular: true,
+  },
+  {
+    mode: 'topper',
+    titleKey: 'products.topper.title',
+    descriptionKey: 'products.topper.description',
+    imageSrc: '/images/product-topper.png',
+    isMostPopular: false,
+  },
 ]
