@@ -28,7 +28,7 @@ const PromiseOfCareAlert = ({ className }: PromiseOfCareAlertProps) => {
         'bg-secondary-300',
         'flex flex-col items-start',
         'py-4',
-        '-mx-12 px-12',
+        'lg:-mx-12 px-4 lg:px-12',
         className
       )}
     >

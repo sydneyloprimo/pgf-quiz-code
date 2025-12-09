@@ -134,7 +134,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
     <div
       className={cn(
         'flex flex-col items-center justify-center',
-        'px-0 pb-12 w-full',
+        'md:max-w-2xl mx-auto pb-12 w-full',
         'gap-16'
       )}
     >
@@ -142,7 +142,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
 
       <PromiseOfCareAlert />
 
-      <div className="w-full flex flex-col gap-6 mx-5">
+      <div className="w-full flex flex-col gap-6">
         {QUIZ_RESULT_PRODUCTS.map((product) => {
           const isSelected = selectedProductMode === product.mode
           const mode = product.mode as 'topper' | 'fullMeal'
@@ -194,7 +194,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
         </h4>
       </div>
 
-      <div className="w-full flex flex-col gap-6 mx-5">
+      <div className="w-full flex flex-col gap-6">
         <OptionSelectProduct
           isSelected={selectedProductMode === 'alaCarte'}
           onSelect={() => handleProductModeSelect('alaCarte')}

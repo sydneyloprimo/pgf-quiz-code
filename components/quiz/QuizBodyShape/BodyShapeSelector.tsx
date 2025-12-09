@@ -20,7 +20,12 @@ const BodyShapeSelector = ({
   const t = useTranslations('Quiz.bodyShape')
 
   return (
-    <div className={cn('flex flex-wrap gap-4 items-stretch w-full', className)}>
+    <div
+      className={cn(
+        'flex flex-wrap justify-center gap-4 items-stretch w-full',
+        className
+      )}
+    >
       {BODY_SHAPE_OPTIONS.map((option) => {
         const isSelected = value === option.value
 
@@ -30,12 +35,13 @@ const BodyShapeSelector = ({
             type="button"
             onClick={() => onSelect(option.value)}
             className={cn(
-              'flex flex-1 flex-col gap-2 items-center',
+              'flex flex-col gap-2 items-center',
               'bg-neutral-white border border-primary-950',
               'max-h-96 max-w-59',
               'px-4 py-5',
               'text-center',
               'transition-colors',
+              'w-full tablet:w-[calc(50%-0.5rem)]',
               'hover:bg-secondary-100 hover:border-secondary-600',
               'focus:bg-secondary-100 focus:border-secondary-600 focus:outline-none',
               'active:bg-secondary-200 active:border-secondary-600',

@@ -43,12 +43,9 @@ const QuizNeuteredStatus = ({
 
   return (
     <div
-      className={cn(
-        'flex flex-col items-center justify-center',
-        'pt-0 px-0 w-full'
-      )}
+      className={cn('flex flex-col items-center justify-center', 'pt-0 w-full')}
     >
-      <div className="flex flex-col gap-6 items-center w-full pb-12">
+      <div className="flex flex-col gap-6 items-center w-full md:max-w-2xl md:mx-auto pb-12">
         <div
           className={cn(
             'flex flex-col gap-4 items-center',

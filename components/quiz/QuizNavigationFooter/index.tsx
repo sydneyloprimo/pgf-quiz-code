@@ -41,8 +41,9 @@ const QuizNavigationFooter = ({
   return (
     <div
       className={cn(
-        'flex items-center justify-between gap-4',
-        'max-w-2xl mt-8'
+        'flex flex-col items-center gap-4',
+        'md:flex-row md:justify-between',
+        'max-w-2xl mt-8 w-full md:w-auto'
       )}
     >
       <Button
@@ -51,6 +52,7 @@ const QuizNavigationFooter = ({
         data-qa="quiz-back-button"
         variant="tertiary"
         leftIcon={<ArrowLeftIcon className="size-3" />}
+        className="order-2 md:order-1 w-full md:w-auto"
       >
         {t('backButton')}
       </Button>
@@ -59,7 +61,7 @@ const QuizNavigationFooter = ({
         onClick={onContinue}
         data-qa="quiz-continue-button"
         variant="primary"
-        className="min-w-64"
+        className="order-1 md:order-2 w-full md:w-auto md:min-w-64"
         disabled={continueDisabled}
       >
         {continueButtonText}

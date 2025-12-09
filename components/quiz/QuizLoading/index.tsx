@@ -36,7 +36,7 @@ const QuizLoading = ({ formMethods, goToStep }: QuizLoadingProps) => {
   }, [goToStep])
 
   return (
-    <div className="flex flex-col items-center justify-center pt-0 px-0 w-full">
+    <div className="flex flex-col items-center justify-center pt-0 w-full">
       <div className="flex flex-col gap-[60px] items-center w-full py-12">
         <FoodAnimation />
         <div className="flex flex-col gap-6 items-center text-center w-full text-secondary-950">

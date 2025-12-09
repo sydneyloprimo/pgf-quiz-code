@@ -29,8 +29,8 @@ const OptionSelectProductDropdowns = ({
   const t = useTranslations('Common.OptionSelectProduct')
 
   return (
-    <div className="flex flex-row gap-3">
-      <div className="flex flex-col gap-2 flex-1">
+    <div className="flex flex-col md:flex-row gap-3">
+      <div className="flex flex-col gap-2 w-full md:flex-1">
         <label className="text-sm font-semibold text-secondary-900">
           {t('recipeLabel')}
         </label>
@@ -42,7 +42,7 @@ const OptionSelectProductDropdowns = ({
         />
       </div>
 
-      <div className="flex flex-col gap-2 flex-1">
+      <div className="flex flex-col gap-2 w-full md:flex-1">
         <label className="text-sm font-semibold text-secondary-900">
           {t('shipmentFrequencyLabel')}
         </label>

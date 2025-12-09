@@ -72,10 +72,7 @@ const QuizDiet = ({
 
   return (
     <div
-      className={cn(
-        'flex flex-col items-center justify-center',
-        'pt-0 px-0 w-full'
-      )}
+      className={cn('flex flex-col items-center justify-center', 'pt-0 w-full')}
     >
       <div className="flex flex-col gap-12 items-center w-full pb-16">
         <div
@@ -101,13 +98,7 @@ const QuizDiet = ({
 
         <div className="flex flex-col gap-8 items-center w-full">
           <div className="flex flex-wrap gap-5 items-center justify-center w-full">
-            <p
-              className={cn(
-                'font-display',
-                'text-3xl leading-10 tracking-tight',
-                'text-secondary-950'
-              )}
-            >
+            <p className="heading-h5 font-display text-secondary-950">
               {t('mainFoodLabel', { name: dogName })}
             </p>
             <div className="w-52">
@@ -133,13 +124,7 @@ const QuizDiet = ({
           </div>
 
           <div className="flex flex-wrap gap-5 items-center justify-center w-full">
-            <p
-              className={cn(
-                'font-display',
-                'text-3xl leading-10 tracking-tight',
-                'text-secondary-950'
-              )}
-            >
+            <p className="font-display heading-h5 text-secondary-950">
               {t('treatFrequencyLabel')}
             </p>
             <div className="w-44">
@@ -162,25 +147,13 @@ const QuizDiet = ({
                 )}
               />
             </div>
-            <p
-              className={cn(
-                'font-display',
-                'text-3xl leading-10 tracking-tight',
-                'text-secondary-950'
-              )}
-            >
+            <p className="heading-h5 font-display text-secondary-950">
               {t('treatFrequencySuffix')}
             </p>
           </div>
 
           <div className="flex flex-wrap gap-5 items-center justify-center w-full">
-            <p
-              className={cn(
-                'font-display',
-                'text-3xl leading-10 tracking-tight',
-                'text-secondary-950'
-              )}
-            >
+            <p className="heading-h5 font-display text-secondary-950">
               {t('mealtimeBehaviorLabel', { name: dogName })}
             </p>
             <div className="w-56">

@@ -37,8 +37,8 @@ const OptionSelectProductHeader = ({
         </div>
       )}
 
-      <div className="flex flex-row items-stretch gap-4 mb-6">
-        <div className="relative size-32 shrink-0">
+      <div className="flex flex-col md:flex-row items-stretch gap-4 mb-6">
+        <div className="relative size-32 shrink-0 mx-auto md:mx-0">
           <Image
             src={imageSrc}
             alt={imageAlt}
@@ -57,7 +57,7 @@ const OptionSelectProductHeader = ({
           </div>
         </div>
 
-        <div className="flex flex-col flex-1 justify-center px-4">
+        <div className="flex flex-col flex-1 justify-center md:px-4 text-left">
           <h3 className="text-2xl mb-2 font-display">{title}</h3>
           <p className="text-base text-secondary-950 font-sans">
             {description}

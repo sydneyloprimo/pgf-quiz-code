@@ -21,12 +21,12 @@ const QuizHeader = ({
   const t = useTranslations('Quiz')
 
   return (
-    <header className="bg-neutral-300">
+    <header className="bg-neutral-300 py-10 px-5 lg:px-24">
       <div
         className={cn(
           'flex items-center',
           centerLogo ? 'justify-center relative' : 'justify-between',
-          'px-5 sm:px-24 pb-4'
+          'md:px-5 pb-4'
         )}
       >
         <Link
@@ -55,7 +55,7 @@ const QuizHeader = ({
         </Link>
       </div>
       {showProgressBar && (
-        <div className="px-5 md:px-24 pb-4">
+        <div className="md:px-5 pb-4">
           <ProgressBar visitedSteps={visitedSteps} />
         </div>
       )}
