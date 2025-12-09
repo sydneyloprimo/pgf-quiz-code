@@ -43,7 +43,7 @@ const QuizNavigationFooter = ({
       className={cn(
         'flex flex-col items-center gap-4',
         'md:flex-row md:justify-between',
-        'max-w-2xl mt-8 w-full md:w-auto'
+        'max-w-2xl w-full md:w-auto'
       )}
     >
       <Button
