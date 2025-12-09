@@ -11,7 +11,6 @@ import {
   QuizBodyShape,
   QuizDiet,
   QuizHowActive,
-  QuizLoading,
   QuizPlus25Lbs,
   QuizResults,
   QuizStepUnderAge,
@@ -85,15 +84,6 @@ export default function QuizStepPage() {
         case QuizStep.Step7:
           return (
             <QuizHowActive
-              goToStep={goToStep}
-              goBack={goBack}
-              canGoBack={canGoBack}
-              formMethods={formMethods}
-            />
-          )
-        case QuizStep.Step8:
-          return (
-            <QuizLoading
               goToStep={goToStep}
               goBack={goBack}
               canGoBack={canGoBack}

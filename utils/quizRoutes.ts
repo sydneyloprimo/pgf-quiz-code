@@ -1,7 +1,7 @@
 import { QuizStep } from '@/types/enums/constants'
 import { Routes } from '@/types/enums/routes'
 
-const STEP_TO_PATH: Record<QuizStep, string> = {
+const STEP_TO_PATH: Partial<Record<QuizStep, string>> = {
   [QuizStep.Welcome]: 'welcome',
   [QuizStep.PetInfo]: 'pet-info',
   [QuizStep.Plus25Lbs]: 'plus-25-lbs',
@@ -11,7 +11,7 @@ const STEP_TO_PATH: Record<QuizStep, string> = {
   [QuizStep.Step5]: 'body-shape',
   [QuizStep.Step6]: 'step6',
   [QuizStep.Step7]: 'step7',
-  [QuizStep.Step8]: 'step8',
+  // Step8 (loading) is not a route - shown inline during Step7 → Results transition
   [QuizStep.Results]: 'results',
 }
 
@@ -26,7 +26,16 @@ const PATH_TO_STEP: Record<string, QuizStep> = Object.entries(
 )
 
 export const getQuizStepPath = (step: QuizStep): string => {
-  return `${Routes.quiz}/${STEP_TO_PATH[step]}`
+  // Step8 is not a route - return Results path instead
+  if (step === QuizStep.Step8) {
+    return `${Routes.quiz}/${STEP_TO_PATH[QuizStep.Results]}`
+  }
+  const path = STEP_TO_PATH[step]
+  if (!path) {
+    // Fallback to welcome if step doesn't have a path
+    return `${Routes.quiz}/${STEP_TO_PATH[QuizStep.Welcome]}`
+  }
+  return `${Routes.quiz}/${path}`
 }
 
 export const getQuizStepFromPath = (path: string): QuizStep | null => {
@@ -53,7 +62,7 @@ export const STEP_ORDER: QuizStep[] = [
   QuizStep.Step5,
   QuizStep.Step6,
   QuizStep.Step7,
-  QuizStep.Step8,
+  // Step8 (loading) is not in the order - shown inline, not a separate step
 ]
 
 export const getStepNumber = (step: QuizStep): number => {
