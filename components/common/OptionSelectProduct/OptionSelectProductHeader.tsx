@@ -3,8 +3,6 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
-import { cn } from '@/utils/cn'
-
 interface OptionSelectProductHeaderProps {
   title: string
   description: string
@@ -25,14 +23,7 @@ const OptionSelectProductHeader = ({
   return (
     <>
       {isMostPopular && (
-        <div
-          className={cn(
-            'absolute top-0 left-4 -translate-y-1/2',
-            'bg-secondary-600 text-neutral-white',
-            'px-3 py-1 rounded-full',
-            'text-sm font-semibold'
-          )}
-        >
+        <div className="absolute top-0 left-4 -translate-y-1/2 bg-secondary-600 text-neutral-white px-3 py-1 rounded-full text-sm font-semibold">
           {t('mostPopular')}
         </div>
       )}

@@ -4,7 +4,6 @@ import { useTranslations } from 'next-intl'
 
 import { AlertSuccessIcon, ShippingIcon } from '@/components/common/Icon'
 import { formatShippingText } from '@/components/common/OptionSelectProduct/helpers'
-import { cn } from '@/utils/cn'
 
 interface Benefit {
   icon?: 'check' | 'shipping'
@@ -23,7 +22,7 @@ const OptionSelectProductBenefits = ({
   const t = useTranslations('Common.OptionSelectProduct')
 
   return (
-    <div className={cn('flex flex-col gap-3 bg-tertiary-100 p-4 mt-2')}>
+    <div className="flex flex-col gap-3 bg-tertiary-100 p-4 mt-2">
       <h4 className="text-base font-semibold text-tertiary-900">
         {t('whatYoullGetTitle')}
       </h4>
