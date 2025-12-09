@@ -2,10 +2,11 @@
 
 import { cva, type VariantProps } from 'class-variance-authority'
 import { useTranslations } from 'next-intl'
-import { ReactNode, useCallback, useId, useState } from 'react'
+import { ReactNode, useCallback, useEffect, useId, useRef } from 'react'
 
 import { CheckIcon, ChevronIcon } from '@/components/common/Icon'
 import { getInputDropdownDisplayState } from '@/components/common/Input'
+import { useInputDropdownContext } from '@/components/common/InputDropdown/InputDropdownContext'
 import { InputDropdownState } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 
@@ -65,9 +66,16 @@ const InputDropdown = ({
   onClose,
 }: InputDropdownProps) => {
   const t = useTranslations('Common.InputDropdown')
-  const [isOpen, setIsOpen] = useState(false)
+  const {
+    openDropdown,
+    closeDropdown,
+    isOpen: isDropdownOpen,
+  } = useInputDropdownContext()
   const dropdownId = useId()
+  const dropdownInstanceId = useId()
+  const containerRef = useRef<HTMLDivElement>(null)
   const selectedOption = options.find((opt) => opt.value === value)
+  const isOpen = isDropdownOpen(dropdownInstanceId)
   const displayState = getInputDropdownDisplayState(
     disabled,
     isOpen,
@@ -75,27 +83,57 @@ const InputDropdown = ({
     state
   )
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node) &&
+        isOpen
+      ) {
+        closeDropdown()
+        onClose?.()
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isOpen, closeDropdown, onClose])
+
   const handleOptionSelect = useCallback(
     (optionValue: string) => {
       onSelect?.(optionValue)
-      setIsOpen(false)
+      closeDropdown()
+      onClose?.()
     },
-    [onSelect]
+    [onSelect, closeDropdown, onClose]
   )
 
-  const handleToggle = () => {
+  const handleToggle = useCallback(() => {
     if (disabled) return
-    const newIsOpen = !isOpen
-    setIsOpen(newIsOpen)
-    if (newIsOpen) {
-      onOpen?.()
-    } else {
+    if (isOpen) {
+      closeDropdown()
       onClose?.()
+    } else {
+      openDropdown(dropdownInstanceId)
+      onOpen?.()
     }
-  }
+  }, [
+    disabled,
+    isOpen,
+    openDropdown,
+    closeDropdown,
+    dropdownInstanceId,
+    onOpen,
+    onClose,
+  ])
 
   return (
-    <div className={cn('relative flex flex-col', className)}>
+    <div ref={containerRef} className={cn('relative flex flex-col', className)}>
       <button
         type="button"
         className={cn(inputDropdownVariants({ state: displayState }))}
