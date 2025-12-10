@@ -215,7 +215,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
         />
       </div>
 
-      <QuizResultsFooter />
+      <QuizResultsFooter dogName={dogName} />
     </div>
   )
 }

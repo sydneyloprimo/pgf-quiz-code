@@ -14,7 +14,11 @@ import { QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 import { getQuizStepPath } from '@/utils/quizRoutes'
 
-const QuizResultsFooter = () => {
+interface QuizResultsFooterProps {
+  dogName: string
+}
+
+const QuizResultsFooter = ({ dogName }: QuizResultsFooterProps) => {
   const t = useTranslations('Quiz.results.footer')
 
   const handleQuizAgainClick = () => {
@@ -58,7 +62,7 @@ const QuizResultsFooter = () => {
               </h3>
             </div>
             <p className="text-body-m font-sans text-secondary-950 text-center">
-              {t(benefit.descriptionKey)}
+              {t(benefit.descriptionKey, { name: dogName })}
             </p>
           </div>
         ))}
