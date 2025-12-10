@@ -3,6 +3,10 @@ import type { BreedOption } from '@/components/quiz/QuizBreedSelection/BreedDrop
 // Tailwind default md breakpoint is 768px
 export const MOBILE_WIDTH = 768
 
+// Concierge contact information
+export const CONCIERGE_EMAIL = 'concierge@purelygoldenfoods.com'
+export const CONCIERGE_PHONE = '+1 111 111 1111'
+
 export const MediaQuery = {
   desktop: `(min-width: ${MOBILE_WIDTH}px)`,
   mobile: `(max-width: ${MOBILE_WIDTH}px)`,

@@ -20,6 +20,10 @@
     "total": "Total"
   },
   "Common": {
+    "ConciergeLink": {
+      "emailAriaLabel": "Send an email to our concierge",
+      "phoneAriaLabel": "Call our concierge"
+    },
     "InputDropdown": {
       "selectOption": "Select an option"
     },
