@@ -11,7 +11,6 @@ import { Link } from '@/components/common/Link'
 import { clearFormData } from '@/components/quiz/helpers'
 import { QUIZ_RESULTS_FOOTER_BENEFITS } from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
-import { cn } from '@/utils/cn'
 import { getQuizStepPath } from '@/utils/quizRoutes'
 
 interface QuizResultsFooterProps {
@@ -26,13 +25,7 @@ const QuizResultsFooter = ({ dogName }: QuizResultsFooterProps) => {
   }
 
   return (
-    <div
-      className={cn(
-        'flex flex-col items-center justify-center',
-        'w-full gap-8',
-        'px-5'
-      )}
-    >
+    <div className="flex flex-col items-center justify-center w-full gap-8 px-5">
       <div className="w-full flex items-center gap-6">
         <div className="flex-1 h-px bg-tertiary-300" />
         <Garlic1Icon
