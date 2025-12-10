@@ -285,11 +285,15 @@ export const MEALTIME_BEHAVIOR_OPTIONS: DietOption[] = [
 
 // Quiz results product options
 export interface QuizResultProduct {
-  mode: 'topper' | 'fullMeal'
-  titleKey: 'products.fullMeal.title' | 'products.topper.title'
+  mode: 'topper' | 'fullMeal' | 'alaCarte'
+  titleKey:
+    | 'products.fullMeal.title'
+    | 'products.topper.title'
+    | 'products.alaCarte.title'
   descriptionKey:
     | 'products.fullMeal.description'
     | 'products.topper.description'
+    | 'products.alaCarte.description'
   imageSrc: string
   isMostPopular: boolean
 }
