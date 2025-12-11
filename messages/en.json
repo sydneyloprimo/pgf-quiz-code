@@ -351,6 +351,27 @@
           "saveOverheads": "Save overheads every month — easiest way to feed healthy and save.",
           "flexibleSchedule": "Flexible schedule — pause, skip, or cancel anytime."
         }
+      },
+      "footer": {
+        "title": "Benefits",
+        "benefits": {
+          "improvedDigestion": {
+            "title": "Improved Digestion & Energy",
+            "description": "Gentler on the tummy than kibble — helps {name} absorb more nutrients and stay active."
+          },
+          "allergyWeightControl": {
+            "title": "Allergy & Weight Control",
+            "description": "Supports a healthy weight while easing common sensitivities."
+          },
+          "moreMealtimesTogether": {
+            "title": "More Mealtimes Together",
+            "description": "A wholesome diet proven to help dogs live longer, happier lives."
+          }
+        },
+        "moreBuddies": {
+          "text": "Do you have more buddies?",
+          "linkText": "Let's quiz them too!"
+        }
       }
     }
   },

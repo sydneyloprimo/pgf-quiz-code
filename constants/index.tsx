@@ -314,3 +314,24 @@ export const QUIZ_RESULT_PRODUCTS: QuizResultProduct[] = [
     isMostPopular: false,
   },
 ]
+
+// Quiz results footer benefits
+export interface QuizResultBenefit {
+  titleKey: string
+  descriptionKey: string
+}
+
+export const QUIZ_RESULTS_FOOTER_BENEFITS: QuizResultBenefit[] = [
+  {
+    titleKey: 'benefits.improvedDigestion.title',
+    descriptionKey: 'benefits.improvedDigestion.description',
+  },
+  {
+    titleKey: 'benefits.allergyWeightControl.title',
+    descriptionKey: 'benefits.allergyWeightControl.description',
+  },
+  {
+    titleKey: 'benefits.moreMealtimesTogether.title',
+    descriptionKey: 'benefits.moreMealtimesTogether.description',
+  },
+] as const

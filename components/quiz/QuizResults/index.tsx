@@ -12,6 +12,7 @@ import {
   getQuizBenefitsAlaCarte,
 } from '@/components/quiz/helpers'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
+import { QuizResultsFooter } from '@/components/quiz/QuizResultsFooter'
 import { QuizResultsHeader } from '@/components/quiz/QuizResultsHeader'
 import { QUIZ_RESULT_PRODUCTS } from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
@@ -213,6 +214,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
           onAddToCartClick={handleAddToCartClick}
         />
       </div>
+      <QuizResultsFooter dogName={dogName} />
     </div>
   )
 }
