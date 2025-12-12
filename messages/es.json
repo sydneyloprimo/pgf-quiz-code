@@ -234,7 +234,7 @@
         "benefits": {
           "improvedDigestion": {
             "title": "Digestión y Energía Mejoradas",
-            "description": "Más suave para el estómago que el pienso — ayuda a Tommy a absorber más nutrientes y mantenerse activo."
+            "description": "Más suave para el estómago que el pienso — ayuda a {name} a absorber más nutrientes y mantenerse activo."
           },
           "allergyWeightControl": {
             "title": "Control de Alergias y Peso",

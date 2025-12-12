@@ -212,8 +212,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
           onAddToCartClick={handleAddToCartClick}
         />
       </div>
-
-      <QuizResultsFooter />
+      <QuizResultsFooter dogName={dogName} />
     </div>
   )
 }

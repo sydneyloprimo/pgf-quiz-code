@@ -144,6 +144,12 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
       return
     }
 
+    // Results page should go back to Step7
+    if (currentStep === QuizStep.Results) {
+      goToStep(QuizStep.Step7)
+      return
+    }
+
     // For other steps, find the previous step in the logical flow
     const currentIndex = STEP_ORDER.indexOf(currentStep)
     if (currentIndex > 0) {
@@ -173,6 +179,8 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
         visitedSteps={visitedSteps}
         showProgressBar={currentStep !== QuizStep.Results}
         centerLogo={currentStep === QuizStep.Results}
+        showBackButton={currentStep === QuizStep.Results}
+        onBack={goBack}
       />
 
       <main

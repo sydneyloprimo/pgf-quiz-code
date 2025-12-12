@@ -3,7 +3,8 @@ import { useTranslations } from 'next-intl'
 
 import { ProgressBar } from './ProgressBar'
 
-import { CloseIcon, PGFTextLogo } from '@/components/common/Icon'
+import { Button } from '@/components/common/Button'
+import { ArrowLeftIcon, CloseIcon, PGFTextLogo } from '@/components/common/Icon'
 import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
 
@@ -11,14 +12,22 @@ interface QuizHeaderProps {
   visitedSteps: number
   showProgressBar?: boolean
   centerLogo?: boolean
+  showBackButton?: boolean
+  onBack?: () => void
 }
 
 const QuizHeader = ({
   visitedSteps,
   showProgressBar = true,
   centerLogo = false,
+  showBackButton = false,
+  onBack,
 }: QuizHeaderProps) => {
   const t = useTranslations('Quiz')
+
+  const handleBackClick = () => {
+    onBack?.()
+  }
 
   return (
     <header className="bg-neutral-300 py-10 px-5 lg:px-24">
@@ -29,30 +38,50 @@ const QuizHeader = ({
           'md:px-5 pb-4'
         )}
       >
-        <Link
-          href={Routes.home}
-          data-qa="quiz-logo"
-          className="flex items-center"
-        >
-          <PGFTextLogo
-            className="h-auto w-full text-neutral-950"
-            aria-label={t('title')}
+        {showBackButton ? (
+          <Button
+            type="button"
+            variant="tertiary"
+            onClick={handleBackClick}
+            data-qa="quiz-back-button"
+            leftIcon={<ArrowLeftIcon className="size-3.5" />}
+            className={cn(
+              'h-10 w-10 p-0 cursor-pointer',
+              'absolute left-5 sm:left-24'
+            )}
+            aria-label={t('backButton')}
           />
-        </Link>
-        <Link
+        ) : (
+          <Link
+            href={Routes.home}
+            className="flex items-center"
+            data-qa="quiz-logo"
+          >
+            <PGFTextLogo
+              className="h-auto w-full text-neutral-950"
+              aria-label={t('title')}
+            />
+          </Link>
+        )}
+        {centerLogo && (
+          <Link href={Routes.home} data-qa="quiz-logo">
+            <PGFTextLogo
+              className="h-auto w-full text-neutral-950"
+              aria-label={t('title')}
+            />
+          </Link>
+        )}
+        <Button
+          variant="tertiary"
           href={Routes.home}
           data-qa="quiz-close-button"
+          leftIcon={<CloseIcon className="size-3.5" />}
           className={cn(
-            'bg-neutral-white border border-secondary-900',
-            'flex items-center justify-center',
-            'h-10 w-10 p-3',
-            'cursor-pointer',
+            'h-10 w-10 p-0',
             centerLogo && 'absolute right-5 sm:right-24'
           )}
           aria-label={t('closeButton')}
-        >
-          <CloseIcon className="size-6 text-secondary-900" />
-        </Link>
+        />
       </div>
       {showProgressBar && (
         <div className="md:px-5 pb-4">

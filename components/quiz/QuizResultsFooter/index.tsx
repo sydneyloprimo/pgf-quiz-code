@@ -11,10 +11,13 @@ import { Link } from '@/components/common/Link'
 import { clearFormData } from '@/components/quiz/helpers'
 import { QUIZ_RESULTS_FOOTER_BENEFITS } from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
-import { cn } from '@/utils/cn'
 import { getQuizStepPath } from '@/utils/quizRoutes'
 
-const QuizResultsFooter = () => {
+interface QuizResultsFooterProps {
+  dogName: string
+}
+
+const QuizResultsFooter = ({ dogName }: QuizResultsFooterProps) => {
   const t = useTranslations('Quiz.results.footer')
 
   const handleQuizAgainClick = () => {
@@ -22,12 +25,7 @@ const QuizResultsFooter = () => {
   }
 
   return (
-    <div
-      className={cn(
-        'flex flex-col items-center justify-center',
-        'w-full gap-8'
-      )}
-    >
+    <div className="flex flex-col items-center justify-center w-full gap-8">
       <div className="w-full flex items-center gap-6">
         <div className="flex-1 h-px bg-tertiary-300" />
         <Garlic1Icon
@@ -57,7 +55,7 @@ const QuizResultsFooter = () => {
               </h5>
             </div>
             <p className="text-body-m font-sans text-secondary-950 text-center">
-              {t(benefit.descriptionKey)}
+              {t(benefit.descriptionKey, { name: dogName })}
             </p>
           </div>
         ))}
