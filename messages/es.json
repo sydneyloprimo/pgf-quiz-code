@@ -1,5 +1,17 @@
 {
   "Common": {
+    "EmailCustomer": {
+      "errors": {
+        "CUSTOMER_CREATION_FAILED": "Error al crear el cliente. Por favor, inténtalo de nuevo.",
+        "EMAIL_ALREADY_EXISTS": "Este correo electrónico ya está registrado.",
+        "EMAIL_REQUIRED": "Se requiere la dirección de correo electrónico.",
+        "INTERNAL_SERVER_ERROR": "Ocurrió un error inesperado. Por favor, inténtalo de nuevo.",
+        "INVALID_EMAIL": "Por favor, ingresa un correo electrónico válido.",
+        "NETWORK_ERROR": "Error de red. Por favor, verifica tu conexión.",
+        "SERVER_CONFIGURATION_ERROR": "Error de configuración del servidor. Por favor, inténtalo más tarde.",
+        "UNEXPECTED_RESPONSE": "Respuesta inesperada. Por favor, inténtalo de nuevo."
+      }
+    },
     "InputDropdown": {
       "selectOption": "Seleccionar una opción"
     },

@@ -20,6 +20,18 @@
     "total": "Total"
   },
   "Common": {
+    "EmailCustomer": {
+      "errors": {
+        "CUSTOMER_CREATION_FAILED": "Failed to create customer. Please try again.",
+        "EMAIL_ALREADY_EXISTS": "This email is already registered.",
+        "EMAIL_REQUIRED": "Email address is required.",
+        "INTERNAL_SERVER_ERROR": "An unexpected error occurred. Please try again.",
+        "INVALID_EMAIL": "Please enter a valid email address.",
+        "NETWORK_ERROR": "Network error. Please check your connection.",
+        "SERVER_CONFIGURATION_ERROR": "Server configuration error. Please try again later.",
+        "UNEXPECTED_RESPONSE": "Unexpected response. Please try again."
+      }
+    },
     "InputDropdown": {
       "selectOption": "Select an option"
     },

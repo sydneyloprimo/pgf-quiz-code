@@ -29,6 +29,7 @@ export default [
       },
       globals: {
         console: 'readonly',
+        fetch: 'readonly',
         process: 'readonly',
         window: 'readonly',
         React: 'readonly',
