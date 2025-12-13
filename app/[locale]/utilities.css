@@ -193,6 +193,16 @@
   box-shadow: 0 10px 15px -3px var(--elevation-primary);
 }
 
+/* Semantic Helpers - Focus Shadows */
+
+@utility shadow-focus-primary {
+  box-shadow: 0 0 0 1px var(--color-primary-800);
+}
+
+@utility shadow-focus-neutral {
+  box-shadow: 0 0 0 1px var(--color-neutral-950);
+}
+
 /* Semantic Helpers - Image Overlay */
 
 @utility image-overlay {

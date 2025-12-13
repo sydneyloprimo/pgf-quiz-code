@@ -9,8 +9,7 @@ import {
 } from 'react'
 
 interface InputDropdownContextType {
-  openDropdown: (id: string) => void
-  closeDropdown: () => void
+  toggleDropdown: (id: string) => void
   isOpen: (id: string) => boolean
 }
 
@@ -25,12 +24,8 @@ interface InputDropdownProviderProps {
 const InputDropdownProvider = ({ children }: InputDropdownProviderProps) => {
   const [openDropdownId, setOpenDropdownId] = useState<string | null>(null)
 
-  const openDropdown = useCallback((id: string) => {
-    setOpenDropdownId(id)
-  }, [])
-
-  const closeDropdown = useCallback(() => {
-    setOpenDropdownId(null)
+  const toggleDropdown = useCallback((id: string) => {
+    setOpenDropdownId((prevState) => (prevState === id ? null : id))
   }, [])
 
   const isOpen = useCallback(
@@ -41,9 +36,7 @@ const InputDropdownProvider = ({ children }: InputDropdownProviderProps) => {
   )
 
   return (
-    <InputDropdownContext.Provider
-      value={{ openDropdown, closeDropdown, isOpen }}
-    >
+    <InputDropdownContext.Provider value={{ toggleDropdown, isOpen }}>
       {children}
     </InputDropdownContext.Provider>
   )
