@@ -237,6 +237,21 @@
       "joinWaitlistButton": "Join the Waitlist",
       "imageAlt": "Dog illustration"
     },
+    "waitlistModal": {
+      "heading": "Join Our Waitlist",
+      "description": "Be the first to know when we expand our offerings. Enter your email below and we'll notify you as soon as new options are available.",
+      "emailPlaceholder": "Enter your email address",
+      "emailLabel": "Email address",
+      "submitButton": "Join Waitlist",
+      "submittingButton": "Joining...",
+      "closeButtonLabel": "Close waitlist modal",
+      "ariaLabel": "Join waitlist form",
+      "imageAlt": "Dog illustration",
+      "successHeading": "You're on the list!",
+      "successDescription": "Thanks for joining our waitlist. We'll send you an email as soon as new options are available for your pup.",
+      "successButton": "Got it",
+      "successAriaLabel": "Waitlist signup successful"
+    },
     "howActive": {
       "heading": "How active is {name} day-to-day?",
       "description": "We'll use this to match his calorie intake and portion size to his daily energy level.",
