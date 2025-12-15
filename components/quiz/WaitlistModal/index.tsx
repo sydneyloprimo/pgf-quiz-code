@@ -1,14 +1,14 @@
 'use client'
 
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { useCallback, useState } from 'react'
+
+import { WaitlistSuccessModal } from './WaitlistSuccessModal'
 
 import { Button } from '@/components/common/Button'
 import Input from '@/components/common/Input'
 import { Modal } from '@/components/common/Modal'
 import { useEmailCustomer } from '@/hooks/useEmailCustomer'
-import { Routes } from '@/types/enums/routes'
 
 interface WaitlistModalProps {
   isOpen: boolean
@@ -54,43 +54,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
   const translatedError = error ? tErrors(error) : undefined
 
   if (isSuccess) {
-    return (
-      <Modal
-        isOpen={isOpen}
-        onClose={handleClose}
-        closeButtonLabel={t('closeButtonLabel')}
-        ariaLabel={t('successAriaLabel')}
-      >
-        <div className="flex flex-col items-center gap-8 text-center">
-          <div className="relative shrink-0 h-16 w-16">
-            <Image
-              src="/images/waitlist-success.png"
-              alt={t('successImageAlt')}
-              width={64}
-              height={64}
-              className="object-contain"
-              priority
-            />
-          </div>
-          <div className="flex flex-col gap-4">
-            <h2 className="font-body text-xl text-secondary-950">
-              {t('successHeading')}
-            </h2>
-            <p className="font-body text-base text-neutral-900">
-              {t('successDescription')}
-            </p>
-          </div>
-          <Button
-            type="button"
-            variant="primary"
-            href={Routes.home}
-            className="min-w-48"
-          >
-            {t('successButton')}
-          </Button>
-        </div>
-      </Modal>
-    )
+    return <WaitlistSuccessModal isOpen={isOpen} onClose={handleClose} />
   }
 
   return (
