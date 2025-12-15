@@ -151,19 +151,21 @@
       "imageAlt": "Ilustración de perro"
     },
     "waitlistModal": {
-      "heading": "Únete a Nuestra Lista de Espera",
+      "ariaLabel": "Formulario para unirse a la lista de espera",
+      "cancelButton": "Cancelar",
+      "closeButtonLabel": "Cerrar modal de lista de espera",
       "description": "Sé el primero en saber cuando ampliemos nuestras ofertas. Ingresa tu correo electrónico y te notificaremos tan pronto como haya nuevas opciones disponibles.",
+      "emailLabel": "Correo electrónico:",
       "emailPlaceholder": "Ingresa tu correo electrónico",
-      "emailLabel": "Correo electrónico",
+      "heading": "Únete a Nuestra Lista de Espera",
+      "imageAlt": "Ilustración de perro",
       "submitButton": "Unirse a la Lista",
       "submittingButton": "Uniéndose...",
-      "closeButtonLabel": "Cerrar modal de lista de espera",
-      "ariaLabel": "Formulario para unirse a la lista de espera",
-      "imageAlt": "Ilustración de perro",
-      "successHeading": "¡Estás en la lista!",
-      "successDescription": "Gracias por unirte a nuestra lista de espera. Te enviaremos un correo electrónico tan pronto como haya nuevas opciones disponibles para tu mascota.",
-      "successButton": "Entendido",
-      "successAriaLabel": "Registro exitoso en la lista de espera"
+      "successAriaLabel": "Registro exitoso en la lista de espera",
+      "successButton": "Volver al Inicio",
+      "successDescription": "Te notificaremos tan pronto como lleguemos a tu área.",
+      "successHeading": "Hemos Guardado Tu Lugar",
+      "successImageAlt": "Icono de marca de verificación de éxito"
     },
     "howActive": {
       "heading": "¿Qué tan activo es {name} día a día?",

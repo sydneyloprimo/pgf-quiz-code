@@ -238,19 +238,21 @@
       "imageAlt": "Dog illustration"
     },
     "waitlistModal": {
-      "heading": "Join Our Waitlist",
+      "ariaLabel": "Join waitlist form",
+      "cancelButton": "Cancel",
+      "closeButtonLabel": "Close waitlist modal",
       "description": "Be the first to know when we expand our offerings. Enter your email below and we'll notify you as soon as new options are available.",
+      "emailLabel": "Email Address:",
       "emailPlaceholder": "Enter your email address",
-      "emailLabel": "Email address",
+      "heading": "Join Our Waitlist",
+      "imageAlt": "Dog illustration",
       "submitButton": "Join Waitlist",
       "submittingButton": "Joining...",
-      "closeButtonLabel": "Close waitlist modal",
-      "ariaLabel": "Join waitlist form",
-      "imageAlt": "Dog illustration",
-      "successHeading": "You're on the list!",
-      "successDescription": "Thanks for joining our waitlist. We'll send you an email as soon as new options are available for your pup.",
-      "successButton": "Got it",
-      "successAriaLabel": "Waitlist signup successful"
+      "successAriaLabel": "Waitlist signup successful",
+      "successButton": "Back to Home",
+      "successDescription": "We'll notify you as soon as we arrive in your area.",
+      "successHeading": "We've Saved Your Spot",
+      "successImageAlt": "Success checkmark icon"
     },
     "howActive": {
       "heading": "How active is {name} day-to-day?",

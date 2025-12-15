@@ -77,10 +77,10 @@ const Modal = ({
         className={cn(
           'relative',
           'bg-neutral-white',
-          'rounded-lg',
           'shadow-lg',
           'max-w-lg w-full mx-4',
           'max-h-[90vh] overflow-y-auto',
+          'p-5',
           className
         )}
         onClick={handleModalClick}
