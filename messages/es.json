@@ -1,5 +1,9 @@
 {
   "Common": {
+    "ConciergeLink": {
+      "emailAriaLabel": "Enviar un correo electrónico a nuestro concierge",
+      "phoneAriaLabel": "Llamar a nuestro concierge"
+    },
     "InputDropdown": {
       "selectOption": "Seleccionar una opción"
     },

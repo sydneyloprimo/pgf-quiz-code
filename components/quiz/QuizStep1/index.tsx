@@ -9,6 +9,7 @@ import {
   QUIZ_DOG_ILLUSTRATION_HEIGHT,
   QUIZ_DOG_ILLUSTRATION_WIDTH,
 } from '@/constants'
+import { useConciergeContact } from '@/hooks/useConciergeContact'
 import { QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 
@@ -20,6 +21,8 @@ interface QuizStep1Props {
 
 const QuizStep1 = ({ goToStep, goBack, canGoBack }: QuizStep1Props) => {
   const t = useTranslations('Quiz.step1')
+  const tConcierge = useTranslations('Common.ConciergeLink')
+  const { href: conciergeHref, isTabletOrLarger } = useConciergeContact()
 
   const handleNext = () => {
     goToStep(QuizStep.PetInfo)
@@ -67,7 +70,15 @@ const QuizStep1 = ({ goToStep, goBack, canGoBack }: QuizStep1Props) => {
         onContinue={handleNext}
         continueButtonText={t('button')}
       />
-      <Link href="#" className="text-secondary-900 mt-8">
+      <Link
+        href={conciergeHref}
+        aria-label={
+          isTabletOrLarger
+            ? tConcierge('emailAriaLabel')
+            : tConcierge('phoneAriaLabel')
+        }
+        className="text-secondary-900 mt-8"
+      >
         {t('link')}
       </Link>
     </div>
