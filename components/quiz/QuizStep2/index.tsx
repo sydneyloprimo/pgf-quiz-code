@@ -52,10 +52,7 @@ const QuizStep2 = ({
   }
   return (
     <div
-      className={cn(
-        'flex flex-col items-center justify-center',
-        'pt-0 px-0 w-full'
-      )}
+      className={cn('flex flex-col items-center justify-center', 'pt-0 w-full')}
     >
       <div className="flex flex-col gap-6 items-center w-full pb-12">
         <div
@@ -67,7 +64,7 @@ const QuizStep2 = ({
         >
           <h2
             className={cn(
-              'font-display font-semibold',
+              'font-display',
               'text-4xl leading-12 tracking-tight',
               'w-full'
             )}
@@ -88,8 +85,8 @@ const QuizStep2 = ({
         >
           <div
             className={cn(
-              'flex flex-wrap items-center justify-center gap-2',
-              'font-display font-semibold text-2xl leading-8',
+              'flex flex-wrap items-center justify-center gap-5 md:gap-2',
+              'font-display font-semibold text-xl md:text-2xl leading-8',
               'w-full'
             )}
           >
@@ -147,8 +144,8 @@ const QuizStep2 = ({
 
           <div
             className={cn(
-              'flex flex-wrap items-center justify-center gap-2',
-              'font-display font-semibold text-2xl leading-8',
+              'flex flex-wrap items-center justify-center gap-5 md:gap-2',
+              'font-display font-semibold text-xl md:text-2xl leading-8',
               'w-full'
             )}
           >

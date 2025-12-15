@@ -30,12 +30,12 @@ const QuizHeader = ({
   }
 
   return (
-    <header className="bg-neutral-300">
+    <header className="bg-neutral-300 py-10 px-5 lg:px-24">
       <div
         className={cn(
           'flex items-center',
           centerLogo ? 'justify-center relative' : 'justify-between',
-          'px-5 sm:px-24 pb-4'
+          'md:px-5 pb-4'
         )}
       >
         {showBackButton ? (
@@ -52,9 +52,13 @@ const QuizHeader = ({
             aria-label={t('backButton')}
           />
         ) : (
-          <Link href={Routes.home} data-qa="quiz-logo">
+          <Link
+            href={Routes.home}
+            className="flex items-center"
+            data-qa="quiz-logo"
+          >
             <PGFTextLogo
-              className="h-9 w-56 text-neutral-950"
+              className="h-auto w-full text-neutral-950"
               aria-label={t('title')}
             />
           </Link>
@@ -62,7 +66,7 @@ const QuizHeader = ({
         {centerLogo && (
           <Link href={Routes.home} data-qa="quiz-logo">
             <PGFTextLogo
-              className="h-9 w-56 text-neutral-950"
+              className="h-auto w-full text-neutral-950"
               aria-label={t('title')}
             />
           </Link>
@@ -80,7 +84,7 @@ const QuizHeader = ({
         />
       </div>
       {showProgressBar && (
-        <div className="px-5 md:px-24 pb-4">
+        <div className="md:px-5 pb-4">
           <ProgressBar visitedSteps={visitedSteps} />
         </div>
       )}

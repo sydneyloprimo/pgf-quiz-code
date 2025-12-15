@@ -47,15 +47,19 @@ const OptionSelectProductCTAs = ({
   )
 
   return (
-    <div className="flex flex-row gap-3 mt-2">
-      <Button variant="tertiary" onClick={handleDetailsClick} className="flex">
+    <div className="flex flex-col md:flex-row gap-3 mt-2">
+      <Button
+        variant="tertiary"
+        onClick={handleDetailsClick}
+        className="w-full md:w-auto md:flex"
+      >
         {t('detailsButton')}
       </Button>
       {isAlaCarte ? (
         <Button
           variant="primary"
           onClick={handleAddToCartClick}
-          className="flex-1"
+          className="w-full md:flex-1"
         >
           {t('addToCartButton')}
         </Button>
@@ -63,7 +67,7 @@ const OptionSelectProductCTAs = ({
         <Button
           variant="primary"
           onClick={handleSubscribeClick}
-          className="flex-1"
+          className="w-full md:flex-1"
         >
           {t('subscribeButton', {
             price: `$${pricePerDay?.toFixed(2) || '0.00'}`,

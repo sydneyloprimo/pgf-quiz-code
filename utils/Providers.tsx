@@ -7,6 +7,7 @@ import { CookiesProvider } from 'react-cookie'
 
 import ToastProvider from './ToasterProvider'
 
+import { InputDropdownProvider } from '@/components/common/InputDropdown/InputDropdownContext'
 import { Locale } from '@/i18n'
 
 interface ProviderProps extends PropsWithChildren {
@@ -21,7 +22,9 @@ function Providers({ children }: ProviderProps) {
   return (
     <QueryClientProvider client={client}>
       <CookiesProvider>
-        <ToastProvider>{children}</ToastProvider>
+        <InputDropdownProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </InputDropdownProvider>
       </CookiesProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

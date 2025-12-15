@@ -19,13 +19,13 @@ const inputVariants = cva(
         [InputState.Default]:
           'bg-neutral-white border border-neutral-950 text-neutral-800',
         [InputState.Active]:
-          'bg-neutral-white border-2 border-primary-800 text-neutral-800',
+          'bg-neutral-white border border-primary-800 shadow-focus-primary text-neutral-800',
         [InputState.Filled]:
           'bg-neutral-white border border-secondary-900 text-secondary-950',
         [InputState.Disabled]:
           'bg-neutral-600 border border-neutral-700 text-neutral-800',
         [InputState.Focus]:
-          'bg-neutral-white border-2 border-neutral-950 text-neutral-800',
+          'bg-neutral-white border border-neutral-950 shadow-focus-neutral text-neutral-800',
       },
     },
     defaultVariants: {
@@ -145,7 +145,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <div
             className={cn(
               inputVariants({ state: displayState }),
-              { 'border-secondary-900': error },
+              {
+                'border-secondary-900': error,
+              },
               inputClassName
             )}
           >

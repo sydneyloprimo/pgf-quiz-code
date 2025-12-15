@@ -37,10 +37,7 @@ const QuizBodyShape = ({
 
   return (
     <div
-      className={cn(
-        'flex flex-col items-center justify-center',
-        'pt-0 px-0 w-full'
-      )}
+      className={cn('flex flex-col items-center justify-center', 'pt-0 w-full')}
     >
       <div className="flex flex-col gap-12 items-center w-full pb-7">
         <div

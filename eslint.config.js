@@ -29,6 +29,9 @@ export default [
       },
       globals: {
         console: 'readonly',
+        document: 'readonly',
+        MouseEvent: 'readonly',
+        Node: 'readonly',
         process: 'readonly',
         window: 'readonly',
         React: 'readonly',
