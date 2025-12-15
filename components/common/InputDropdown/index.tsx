@@ -20,7 +20,7 @@ const inputDropdownVariants = cva(
         [InputDropdownState.Filled]:
           'bg-neutral-white border border-secondary-900 text-secondary-950',
         [InputDropdownState.Open]:
-          'bg-neutral-white border border-primary-800 shadow-[0_0_0_1px_#094452] text-neutral-800',
+          'bg-neutral-white border border-primary-800 shadow-focus-primary text-neutral-800',
       },
     },
     defaultVariants: {
@@ -66,11 +66,7 @@ const InputDropdown = ({
   onClose,
 }: InputDropdownProps) => {
   const t = useTranslations('Common.InputDropdown')
-  const {
-    openDropdown,
-    closeDropdown,
-    isOpen: isDropdownOpen,
-  } = useInputDropdownContext()
+  const { toggleDropdown, isOpen: isDropdownOpen } = useInputDropdownContext()
   const dropdownId = useId()
   const dropdownInstanceId = useId()
   const containerRef = useRef<HTMLDivElement>(null)
@@ -90,7 +86,7 @@ const InputDropdown = ({
         !containerRef.current.contains(event.target as Node) &&
         isOpen
       ) {
-        closeDropdown()
+        toggleDropdown(dropdownInstanceId)
         onClose?.()
       }
     }
@@ -102,35 +98,27 @@ const InputDropdown = ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [isOpen, closeDropdown, onClose])
+  }, [isOpen, toggleDropdown, dropdownInstanceId, onClose])
 
   const handleOptionSelect = useCallback(
     (optionValue: string) => {
       onSelect?.(optionValue)
-      closeDropdown()
+      toggleDropdown(dropdownInstanceId)
       onClose?.()
     },
-    [onSelect, closeDropdown, onClose]
+    [onSelect, toggleDropdown, dropdownInstanceId, onClose]
   )
 
   const handleToggle = useCallback(() => {
     if (disabled) return
-    if (isOpen) {
-      closeDropdown()
-      onClose?.()
-    } else {
-      openDropdown(dropdownInstanceId)
+    const willBeOpen = !isOpen
+    toggleDropdown(dropdownInstanceId)
+    if (willBeOpen) {
       onOpen?.()
+    } else {
+      onClose?.()
     }
-  }, [
-    disabled,
-    isOpen,
-    openDropdown,
-    closeDropdown,
-    dropdownInstanceId,
-    onOpen,
-    onClose,
-  ])
+  }, [disabled, isOpen, toggleDropdown, dropdownInstanceId, onOpen, onClose])
 
   return (
     <div ref={containerRef} className={cn('relative flex flex-col', className)}>
@@ -167,7 +155,7 @@ const InputDropdown = ({
         <div
           id={dropdownId}
           role="listbox"
-          className="absolute top-12 left-0 right-0 z-10 bg-neutral-100 border border-primary-800 shadow-[0_0_0_1px_#094452] flex flex-col max-h-60 overflow-y-auto"
+          className="absolute top-12 left-0 right-0 z-10 bg-neutral-100 border border-primary-800 shadow-focus-primary flex flex-col max-h-60 overflow-y-auto"
         >
           {options.map((option) => (
             <button

@@ -361,7 +361,7 @@
         "benefits": {
           "improvedDigestion": {
             "title": "Improved Digestion & Energy",
-            "description": "Gentler on the tummy than kibble — helps Tommy absorb more nutrients and stay active."
+            "description": "Gentler on the tummy than kibble — helps {name} absorb more nutrients and stay active."
           },
           "allergyWeightControl": {
             "title": "Allergy & Weight Control",
