@@ -1,5 +1,9 @@
 {
   "Common": {
+    "ConciergeLink": {
+      "emailAriaLabel": "Enviar un correo electrónico a nuestro concierge",
+      "phoneAriaLabel": "Llamar a nuestro concierge"
+    },
     "EmailCustomer": {
       "errors": {
         "CUSTOMER_CREATION_FAILED": "Error al crear el cliente. Por favor, inténtalo de nuevo.",

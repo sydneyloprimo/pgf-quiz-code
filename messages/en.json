@@ -20,6 +20,10 @@
     "total": "Total"
   },
   "Common": {
+    "ConciergeLink": {
+      "emailAriaLabel": "Send an email to our concierge",
+      "phoneAriaLabel": "Call our concierge"
+    },
     "EmailCustomer": {
       "errors": {
         "CUSTOMER_CREATION_FAILED": "Failed to create customer. Please try again.",
