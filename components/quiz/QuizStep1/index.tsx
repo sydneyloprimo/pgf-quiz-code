@@ -27,10 +27,7 @@ const QuizStep1 = ({ goToStep, goBack, canGoBack }: QuizStep1Props) => {
 
   return (
     <div
-      className={cn(
-        'flex flex-col items-center justify-center',
-        'pt-0 px-0 w-full'
-      )}
+      className={cn('flex flex-col items-center justify-center', 'pt-0 w-full')}
     >
       <div className="flex flex-col gap-4 items-center w-full pb-[60px]">
         <div className="relative shrink-0">

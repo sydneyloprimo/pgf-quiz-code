@@ -25,7 +25,7 @@ const QuizResultsFooter = ({ dogName }: QuizResultsFooterProps) => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center w-full gap-8 px-5">
+    <div className="flex flex-col items-center justify-center w-full gap-8">
       <div className="w-full flex items-center gap-6">
         <div className="flex-1 h-px bg-tertiary-300" />
         <Garlic1Icon
@@ -50,9 +50,9 @@ const QuizResultsFooter = ({ dogName }: QuizResultsFooterProps) => {
                 className="size-5 text-secondary-600 shrink-0 self-center"
                 aria-hidden="true"
               />
-              <h3 className="heading-h4 font-display font-normal text-secondary-900 text-center self-center">
+              <h5 className="heading-h5 font-display font-normal text-secondary-900 text-center self-center">
                 {t(benefit.titleKey)}
-              </h3>
+              </h5>
             </div>
             <p className="text-body-m font-sans text-secondary-950 text-center">
               {t(benefit.descriptionKey, { name: dogName })}
@@ -70,18 +70,18 @@ const QuizResultsFooter = ({ dogName }: QuizResultsFooterProps) => {
         <div className="flex-1 h-px bg-tertiary-300" />
       </div>
 
-      <div className="flex flex-col items-center gap-2 text-center">
+      <div className="flex flex-col md:flex-row items-center gap-2 text-center">
         <p className="text-body-m font-sans text-secondary-950">
-          {t('moreBuddies.text')}{' '}
-          <Link
-            href={getQuizStepPath(QuizStep.Welcome)}
-            variant="secondary"
-            size="small"
-            onClick={handleQuizAgainClick}
-          >
-            {t('moreBuddies.linkText')}
-          </Link>
+          {t('moreBuddies.text')}
         </p>
+        <Link
+          href={getQuizStepPath(QuizStep.Welcome)}
+          variant="secondary"
+          size="small"
+          onClick={handleQuizAgainClick}
+        >
+          {t('moreBuddies.linkText')}
+        </Link>
       </div>
     </div>
   )

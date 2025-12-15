@@ -41,7 +41,7 @@ const QuizStepUnderAge = ({
       <div
         className={cn(
           'flex flex-col items-center justify-center',
-          'px-0 py-12 w-full',
+          'py-12 w-full',
           'gap-16'
         )}
       >

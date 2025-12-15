@@ -36,6 +36,8 @@ export default [
         HTMLFormElement: 'readonly',
         HTMLInputElement: 'readonly',
         KeyboardEvent: 'readonly',
+        MouseEvent: 'readonly',
+        Node: 'readonly',
         process: 'readonly',
         React: 'readonly',
         window: 'readonly',

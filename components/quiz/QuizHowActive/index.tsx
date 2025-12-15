@@ -85,8 +85,8 @@ const QuizHowActive = ({
   }
 
   return (
-    <div className="flex flex-col items-center justify-center pt-0 px-0 w-full">
-      <div className="flex flex-col gap-12 items-center w-full pb-16">
+    <div className="flex flex-col items-center justify-center pt-0 w-full">
+      <div className="flex flex-col gap-12 items-center w-full md:max-w-2xl md:mx-auto pb-16">
         <div className="flex flex-col gap-6 items-center text-center w-full text-secondary-950">
           <h2 className="font-display text-4xl leading-12 tracking-tight w-full">
             {t('heading', { name: dogName })}

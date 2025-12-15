@@ -2,10 +2,11 @@
 
 import { cva, type VariantProps } from 'class-variance-authority'
 import { useTranslations } from 'next-intl'
-import { ReactNode, useCallback, useId, useState } from 'react'
+import { ReactNode, useCallback, useEffect, useId, useRef } from 'react'
 
 import { CheckIcon, ChevronIcon } from '@/components/common/Icon'
 import { getInputDropdownDisplayState } from '@/components/common/Input'
+import { useInputDropdownContext } from '@/components/common/InputDropdown/InputDropdownContext'
 import { InputDropdownState } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 
@@ -19,7 +20,7 @@ const inputDropdownVariants = cva(
         [InputDropdownState.Filled]:
           'bg-neutral-white border border-secondary-900 text-secondary-950',
         [InputDropdownState.Open]:
-          'bg-neutral-white border-2 border-primary-800 text-neutral-800',
+          'bg-neutral-white border border-primary-800 shadow-focus-primary text-neutral-800',
       },
     },
     defaultVariants: {
@@ -65,9 +66,12 @@ const InputDropdown = ({
   onClose,
 }: InputDropdownProps) => {
   const t = useTranslations('Common.InputDropdown')
-  const [isOpen, setIsOpen] = useState(false)
+  const { toggleDropdown, isOpen: isDropdownOpen } = useInputDropdownContext()
   const dropdownId = useId()
+  const dropdownInstanceId = useId()
+  const containerRef = useRef<HTMLDivElement>(null)
   const selectedOption = options.find((opt) => opt.value === value)
+  const isOpen = isDropdownOpen(dropdownInstanceId)
   const displayState = getInputDropdownDisplayState(
     disabled,
     isOpen,
@@ -75,27 +79,49 @@ const InputDropdown = ({
     state
   )
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node) &&
+        isOpen
+      ) {
+        toggleDropdown(dropdownInstanceId)
+        onClose?.()
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isOpen, toggleDropdown, dropdownInstanceId, onClose])
+
   const handleOptionSelect = useCallback(
     (optionValue: string) => {
       onSelect?.(optionValue)
-      setIsOpen(false)
+      toggleDropdown(dropdownInstanceId)
+      onClose?.()
     },
-    [onSelect]
+    [onSelect, toggleDropdown, dropdownInstanceId, onClose]
   )
 
-  const handleToggle = () => {
+  const handleToggle = useCallback(() => {
     if (disabled) return
-    const newIsOpen = !isOpen
-    setIsOpen(newIsOpen)
-    if (newIsOpen) {
+    const willBeOpen = !isOpen
+    toggleDropdown(dropdownInstanceId)
+    if (willBeOpen) {
       onOpen?.()
     } else {
       onClose?.()
     }
-  }
+  }, [disabled, isOpen, toggleDropdown, dropdownInstanceId, onOpen, onClose])
 
   return (
-    <div className={cn('relative flex flex-col', className)}>
+    <div ref={containerRef} className={cn('relative flex flex-col', className)}>
       <button
         type="button"
         className={cn(inputDropdownVariants({ state: displayState }))}
@@ -129,7 +155,7 @@ const InputDropdown = ({
         <div
           id={dropdownId}
           role="listbox"
-          className="absolute top-12 left-0 right-0 z-10 bg-neutral-100 border-2 border-primary-800 flex flex-col max-h-60 overflow-y-auto"
+          className="absolute top-12 left-0 right-0 z-10 bg-neutral-100 border border-primary-800 shadow-focus-primary flex flex-col max-h-60 overflow-y-auto"
         >
           {options.map((option) => (
             <button
