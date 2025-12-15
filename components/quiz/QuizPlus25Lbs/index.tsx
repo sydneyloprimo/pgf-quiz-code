@@ -2,7 +2,6 @@
 
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import { useCallback, useState } from 'react'
 
 import { Button } from '@/components/common/Button'
 import { ArrowLeftIcon } from '@/components/common/Icon'
@@ -11,6 +10,7 @@ import {
   QUIZ_DOG_ILLUSTRATION_SOURCE_HEIGHT,
   QUIZ_DOG_ILLUSTRATION_SOURCE_WIDTH,
 } from '@/constants'
+import { useModal } from '@/hooks/useModal'
 import { QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 
@@ -22,15 +22,7 @@ interface QuizPlus25LbsProps {
 
 const QuizPlus25Lbs = ({ goToStep, goBack, canGoBack }: QuizPlus25LbsProps) => {
   const t = useTranslations('Quiz.plus25Lbs')
-  const [isWaitlistModalOpen, setIsWaitlistModalOpen] = useState(false)
-
-  const handleOpenWaitlistModal = useCallback(() => {
-    setIsWaitlistModalOpen(true)
-  }, [])
-
-  const handleCloseWaitlistModal = useCallback(() => {
-    setIsWaitlistModalOpen(false)
-  }, [])
+  const { isOpen, openModal, closeModal } = useModal()
 
   return (
     <>
@@ -52,29 +44,16 @@ const QuizPlus25Lbs = ({ goToStep, goBack, canGoBack }: QuizPlus25LbsProps) => {
               priority
             />
           </div>
-          <div
-            className={cn(
-              'flex flex-col gap-6 items-center',
-              'text-center w-full',
-              'text-secondary-950',
-              'max-w-2xl'
-            )}
-          >
-            <h2
-              className={cn(
-                'font-display',
-                'text-4xl leading-12 tracking-tight',
-                'w-full'
-              )}
-            >
+          <div className="flex flex-col gap-6 items-center text-center w-full text-secondary-950 max-w-2xl">
+            <h2 className="font-display text-4xl leading-12 tracking-tight w-full">
               {t('heading')}
             </h2>
-            <p className={cn('font-body text-xl leading-8', 'w-full')}>
+            <p className="font-body text-xl leading-8 w-full">
               {t('description')}
             </p>
           </div>
         </div>
-        <div className={cn('flex items-center justify-center gap-4', 'w-full')}>
+        <div className="flex items-center justify-center gap-4 w-full">
           <Button
             type="button"
             onClick={() => goToStep(QuizStep.PetInfo)}
@@ -85,7 +64,7 @@ const QuizPlus25Lbs = ({ goToStep, goBack, canGoBack }: QuizPlus25LbsProps) => {
           </Button>
           <Button
             type="button"
-            onClick={handleOpenWaitlistModal}
+            onClick={openModal}
             variant="primary"
             className="min-w-64"
           >
@@ -93,10 +72,7 @@ const QuizPlus25Lbs = ({ goToStep, goBack, canGoBack }: QuizPlus25LbsProps) => {
           </Button>
         </div>
       </div>
-      <WaitlistModal
-        isOpen={isWaitlistModalOpen}
-        onClose={handleCloseWaitlistModal}
-      />
+      <WaitlistModal isOpen={isOpen} onClose={closeModal} />
     </>
   )
 }
