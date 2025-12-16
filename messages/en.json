@@ -108,6 +108,18 @@
       "subtitle": "Good as new",
       "title": "Explore our store"
     },
+    "GoldenMeals": {
+      "ctaButton": "Learn more about Our Recipe",
+      "description": "Lorem ipsum dolor sit amet. This is an example of a text box.",
+      "imageAlt": "Golden meals background with fresh ingredients",
+      "title": "Golden Meals"
+    },
+    "Hero": {
+      "ctaButton": "Build your Dog's Plan",
+      "ctaLink": "Speak directly to our Concierge",
+      "headline": "Vet-Formulated, Kitchen-Fresh Meals for Dogs.",
+      "imageAlt": "Fresh dog food preparation"
+    },
     "HeroBanner": {
       "alt": "Banner image",
       "button": "Explore now",
