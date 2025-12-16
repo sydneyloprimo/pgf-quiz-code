@@ -1,8 +1,9 @@
 'use client'
 
+import ProductList from 'components/products/ProductList'
+
 import FilterPanel from '@/components/products/FilterPanel'
 import { useProductSearch } from '@/hooks/useProductSearch'
-import ProductList from 'components/products/ProductList'
 
 export type ProductType = { name: string }
 

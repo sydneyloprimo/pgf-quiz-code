@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
 import { useCookies } from 'react-cookie'
-
-import { Cookies } from '@/types/enums/cookies'
 import { client } from 'shopify/client'
 import {
   useCartCreateMutation,
   useGetCartQuery,
 } from 'shopify/generated/graphql'
+
+import { Cookies } from '@/types/enums/cookies'
 
 const useCartCookie = () => {
   const [cookies, setCookie] = useCookies([Cookies.cart])

@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import blackLogo from 'public/icons/logo-black.svg'
 import { PropsWithChildren, ReactNode } from 'react'
 
 import Card from '@/components/common/Card'
 import { Routes } from '@/types/enums/routes'
-import blackLogo from 'public/icons/logo-black.svg'
 
 interface AuthCardProps extends PropsWithChildren {
   footer?: ReactNode

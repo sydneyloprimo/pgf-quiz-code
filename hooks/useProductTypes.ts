@@ -1,5 +1,6 @@
-import { useGetProductTypesQuery } from '@/shopify/generated/graphql'
 import { client } from 'shopify/client'
+
+import { useGetProductTypesQuery } from '@/shopify/generated/graphql'
 
 const NUMBER_OF_CATEGORIES = 8
 

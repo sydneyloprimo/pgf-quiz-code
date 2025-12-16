@@ -1,12 +1,12 @@
 import Image from 'next/image'
-
-import { formatCurrency } from '@/utils/helpers'
 import {
   ProductVariantConnection,
   ImageConnection,
   ProductVariantEdge,
   CurrencyCode,
 } from 'shopify/generated/graphql'
+
+import { formatCurrency } from '@/utils/helpers'
 
 interface ImageGalleryProps {
   title: string
