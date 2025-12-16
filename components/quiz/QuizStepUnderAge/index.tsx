@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
 import { ArrowLeftIcon } from '@/components/common/Icon'
-import { WaitlistModal } from '@/components/quiz/WaitlistModal'
+import { WaitlistModal } from '@/components/common/WaitlistModal'
 import {
   QUIZ_DOG_ILLUSTRATION_SOURCE_HEIGHT,
   QUIZ_DOG_ILLUSTRATION_SOURCE_WIDTH,

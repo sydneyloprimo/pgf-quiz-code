@@ -70,6 +70,23 @@
         "iconAlt": "Success icon",
         "title": "Success"
       }
+    },
+    "WaitlistModal": {
+      "ariaLabel": "Join waitlist form",
+      "cancelButton": "Cancel",
+      "closeButtonLabel": "Close waitlist modal",
+      "description": "Be the first to know when we expand our offerings. Enter your email below and we'll notify you as soon as new options are available.",
+      "emailLabel": "Email Address:",
+      "emailPlaceholder": "Enter your email address",
+      "heading": "Join Our Waitlist",
+      "imageAlt": "Dog illustration",
+      "submitButton": "Join Waitlist",
+      "submittingButton": "Joining...",
+      "successAriaLabel": "Waitlist signup successful",
+      "successButton": "Back to Home",
+      "successDescription": "We'll notify you as soon as we arrive in your area.",
+      "successHeading": "We've Saved Your Spot",
+      "successImageAlt": "Success checkmark icon"
     }
   },
   "Detail": {
@@ -145,6 +162,7 @@
     "logoAria": "Go to homepage",
     "openMenuAria": "Open menu",
     "ourFormulation": "Our Formulation",
+    "profileAria": "User profile",
     "searchAria": "Search"
   },
   "Orders": {
@@ -257,23 +275,6 @@
       "changeAgeButton": "Change Age",
       "joinWaitlistButton": "Join the Waitlist",
       "imageAlt": "Dog illustration"
-    },
-    "waitlistModal": {
-      "ariaLabel": "Join waitlist form",
-      "cancelButton": "Cancel",
-      "closeButtonLabel": "Close waitlist modal",
-      "description": "Be the first to know when we expand our offerings. Enter your email below and we'll notify you as soon as new options are available.",
-      "emailLabel": "Email Address:",
-      "emailPlaceholder": "Enter your email address",
-      "heading": "Join Our Waitlist",
-      "imageAlt": "Dog illustration",
-      "submitButton": "Join Waitlist",
-      "submittingButton": "Joining...",
-      "successAriaLabel": "Waitlist signup successful",
-      "successButton": "Back to Home",
-      "successDescription": "We'll notify you as soon as we arrive in your area.",
-      "successHeading": "We've Saved Your Spot",
-      "successImageAlt": "Success checkmark icon"
     },
     "howActive": {
       "heading": "How active is {name} day-to-day?",
