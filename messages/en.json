@@ -108,6 +108,18 @@
       "subtitle": "Good as new",
       "title": "Explore our store"
     },
+    "Features": {
+      "clinicalDescription": "Developed in partnership with university-led research to target gut health and long-term wellness.",
+      "clinicalTitle": "Clinically Validated Recipes",
+      "communityDescription": "Access expert workshops, wellness guides, and research updates to become your dog's healthiest ally.",
+      "communityTitle": "Community & Education",
+      "environmentDescription": "We craft every meal with a low-impact philosophy: responsibly sourced ingredients, reduced waste, and packaging designed to protect both your dog's health and the planet's future.",
+      "environmentTitle": "Environmental Commitment",
+      "pharmDescription": "We apply pharmaceutical quality control to every meal, from measured ingredients to batch testing.",
+      "pharmTitle": "Pharmaceutical-Grade Standards",
+      "transparentDescription": "Our kitchen is always visible, and our food is always fresh — made on-site and delivered same day.",
+      "transparentTitle": "Transparent Preparation"
+    },
     "GoldenMeals": {
       "ctaButton": "Learn more about Our Recipe",
       "description": "Lorem ipsum dolor sit amet. This is an example of a text box.",
@@ -125,6 +137,15 @@
       "button": "Explore now",
       "subtitle": "HIGH-END GEAR",
       "title": "Top brands affordable prices"
+    },
+    "HowItWorks": {
+      "step1Description": "Every great meal begins with understanding. We take the time to learn about your dog's personality, preferences, and needs — because true nourishment starts with knowing who we're feeding.",
+      "step1Title": "We meet your dog",
+      "step2Description": "With this insight, we design a personalized meal plan, curated from the finest ingredients. Each recipe is tailored to complement your dog's lifestyle, ensuring balance, flavor, and genuine well-being.",
+      "step2Title": "Craft a unique plan for him",
+      "step3Description": "Finally, we prepare and deliver each meal with care and precision. Fresh, wholesome, and beautifully crafted — ready to delight your dog and bring peace of mind to you.",
+      "step3Title": "Deliver his perfect meal",
+      "title": "How it Works"
     },
     "LatestProducts": {
       "button": "View products",
