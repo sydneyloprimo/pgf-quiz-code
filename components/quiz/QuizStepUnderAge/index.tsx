@@ -66,12 +66,19 @@ const QuizStepUnderAge = ({
           </p>
         </div>
       </div>
-      <div className={cn('flex items-center justify-center gap-4', 'w-full')}>
+      <div
+        className={cn(
+          'flex flex-col md:flex-row',
+          'items-center justify-center gap-4',
+          'w-full'
+        )}
+      >
         <Button
           type="button"
           onClick={() => goToStep(QuizStep.PetInfo)}
           variant="tertiary"
           leftIcon={<ArrowLeftIcon className="size-5" />}
+          className="w-full md:w-auto md:order-1 order-2"
         >
           {t('changeAgeButton')}
         </Button>
@@ -81,7 +88,7 @@ const QuizStepUnderAge = ({
             // TODO: Implement waitlist functionality
           }}
           variant="primary"
-          className="min-w-64"
+          className="w-full md:w-auto md:min-w-64 md:order-2 order-1"
         >
           {t('joinWaitlistButton')}
         </Button>
