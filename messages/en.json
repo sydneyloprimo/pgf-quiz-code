@@ -122,6 +122,12 @@
       "pointerNutrition": "BALANCED NUTRITION",
       "title": "Benefits"
     },
+    "BostonAnnouncement": {
+      "ctaButton": "Join the Waitlist",
+      "description1": "We're thrilled to bring wholesome, vet-crafted meals to Boston.",
+      "description2": "Make sure to join the waitlist to be the first to know when we expand to your area.",
+      "title": "We're now live in Boston!"
+    },
     "ClinicallyApproved": {
       "ctaButton": "Learn more about Our Recipe",
       "imageAlt": "Dog enjoying clinically approved meal",
@@ -136,6 +142,17 @@
       "button": "Explore all categories",
       "subtitle": "Good as new",
       "title": "Explore our store"
+    },
+    "FAQ": {
+      "faq1Answer": "Follow the feeding guide on the package and adjust based on your dog's weight and activity. Ask your vet if unsure.",
+      "faq1Question": "How can I determine the right portion size for my dog?",
+      "faq2Answer": "Gradually mix the new food with the old over 7-10 days, increasing the new food ratio each day.",
+      "faq2Question": "What is the best way to transition my dog to a new food?",
+      "faq3Answer": "Watch for symptoms like itching, digestive issues, or ear infections. Consult your vet for allergy testing.",
+      "faq3Question": "How can I tell if my dog is allergic to certain ingredients?",
+      "faq4Answer": "Try warming the food, adding toppers, or establishing a consistent feeding schedule. If issues persist, consult your vet.",
+      "faq4Question": "What should I do if my dog refuses to eat?",
+      "title": "Frequently Asked Questions"
     },
     "Features": {
       "clinicalDescription": "Developed in partnership with university-led research to target gut health and long-term wellness.",
@@ -180,6 +197,17 @@
       "button": "View products",
       "description": "See what's trending in the market. Explore a wide variety of newly released products in our featured catalog.",
       "title": "Our latest products"
+    },
+    "Reviews": {
+      "nextAria": "Next review",
+      "prevAria": "Previous review",
+      "review1Name": "David M.",
+      "review1Quote": "More energy and joy at mealtime.",
+      "review1Text": "My older dog was starting to get picky with his food and had lost some of his energy. Since switching to Purely Golden Foods, he's like a puppy again! He gobbles up his meals and has so much more pep in his step. Thank you for giving my furry friend a healthier and happier life!",
+      "review2Name": "Mark L.",
+      "review2Quote": "Healthy, human-grade meals my puppy loves.",
+      "review2Text": "I'm a new puppy parent and was worried about finding a food that was both healthy and appealing to my little guy. He absolutely loves the Purely Golden Foods meals! I love that it's human-grade and made with real ingredients I recognize. Plus, knowing it's good for him gives me such peace of mind.",
+      "title": "Trusted by Devoted Dog Parents"
     },
     "ShopProducts": {
       "button": "Shop products",
