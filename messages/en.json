@@ -102,6 +102,35 @@
     "successfulLogout": "You have been logged out successfully"
   },
   "Home": {
+    "Benefits": {
+      "benefit1Description": "Fresh, whole-food ingredients crafted to support steady energy and overall wellness.",
+      "benefit1Title": "Balanced Nutrition",
+      "benefit2Description": "Sustained vitality from quality proteins and healthy fats.",
+      "benefit2Title": "Energy",
+      "benefit3Description": "Antioxidant-rich ingredients to strengthen natural defenses.",
+      "benefit3Title": "Immunity",
+      "benefit4Description": "Omega fatty acids for a shiny, healthy coat.",
+      "benefit4Title": "Coat",
+      "benefit5Description": "Fiber and prebiotics for optimal gut health.",
+      "benefit5Title": "Digestion",
+      "description": "Human-grade, pumpkin-based meals for your furry friends. Includes one puree and pre-portioned, tailored ingredients to easily cook up fresh, nutritious meals.",
+      "imageAlt": "Golden retriever enjoying the benefits of our food",
+      "pointerCoat": "COAT",
+      "pointerDigestion": "DIGESTION",
+      "pointerEnergy": "ENERGY",
+      "pointerImmunity": "IMMUNITY",
+      "pointerNutrition": "BALANCED NUTRITION",
+      "title": "Benefits"
+    },
+    "ClinicallyApproved": {
+      "ctaButton": "Learn more about Our Recipe",
+      "imageAlt": "Dog enjoying clinically approved meal",
+      "stat1": "Lorem ipsum dolor sit amet this is a text example or sentence example.",
+      "stat2": "Lorem ipsum dolor sit amet this is a text example or sentence example.",
+      "stat3": "Lorem ipsum dolor sit amet this is a text example or sentence example.",
+      "stat4": "Lorem ipsum dolor sit amet this is a text example or sentence example.",
+      "title": "Clinically approved by veterinary and food specialists."
+    },
     "ExploreCategories": {
       "alt": "Category image",
       "button": "Explore all categories",
@@ -162,6 +191,12 @@
       "returns": "No-hassle returns",
       "returns_alt": "No-hassle returns image",
       "title": "Elegant & Affordable"
+    },
+    "VetNutritionist": {
+      "ctaButton": "Chat with Our Clinical Nutrition Concierge",
+      "description": "Speak with a veterinary nutrition expert for tailored insights into your dog's diet, wellness goals, and daily habits. Together, we'll ensure their meals are balanced, purposeful, and crafted with the care they deserve.",
+      "linkText": "Build your dog's plan",
+      "title": "Talk to a Vet-Nutritionist"
     }
   },
   "MainNav": {
