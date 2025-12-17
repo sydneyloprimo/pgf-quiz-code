@@ -29,6 +29,18 @@
       "emailAriaLabel": "Send an email to our concierge",
       "phoneAriaLabel": "Call our concierge"
     },
+    "EmailCustomer": {
+      "errors": {
+        "CUSTOMER_CREATION_FAILED": "Failed to create customer. Please try again.",
+        "EMAIL_ALREADY_EXISTS": "This email is already registered.",
+        "EMAIL_REQUIRED": "Email address is required.",
+        "INTERNAL_SERVER_ERROR": "An unexpected error occurred. Please try again.",
+        "INVALID_EMAIL": "Please enter a valid email address.",
+        "NETWORK_ERROR": "Network error. Please check your connection.",
+        "SERVER_CONFIGURATION_ERROR": "Server configuration error. Please try again later.",
+        "UNEXPECTED_RESPONSE": "Unexpected response. Please try again."
+      }
+    },
     "InputDropdown": {
       "selectOption": "Select an option"
     },
@@ -58,6 +70,23 @@
         "iconAlt": "Success icon",
         "title": "Success"
       }
+    },
+    "WaitlistModal": {
+      "ariaLabel": "Join waitlist form",
+      "cancelButton": "Cancel",
+      "closeButtonLabel": "Close waitlist modal",
+      "description": "Be the first to know when we expand our offerings. Enter your email below and we'll notify you as soon as new options are available.",
+      "emailLabel": "Email Address:",
+      "emailPlaceholder": "Enter your email address",
+      "heading": "Join Our Waitlist",
+      "imageAlt": "Dog illustration",
+      "submitButton": "Join Waitlist",
+      "submittingButton": "Joining...",
+      "successAriaLabel": "Waitlist signup successful",
+      "successButton": "Back to Home",
+      "successDescription": "We'll notify you as soon as we arrive in your area.",
+      "successHeading": "We've Saved Your Spot",
+      "successImageAlt": "Success checkmark icon"
     }
   },
   "Detail": {
@@ -81,7 +110,8 @@
     "logoAria": "Go to homepage",
     "newsletterDescription": "Get early access to clinical updates, expert insights, and exclusive product drops.",
     "newsletterTitle": "Join our waitlist and newsletter",
-    "subscribeButton": "Subscribe"
+    "subscribeButton": "Subscribe",
+    "subscribedButton": "Subscribed!"
   },
   "Header": {
     "cartIcon": "cart icon",
@@ -153,6 +183,7 @@
     "logoAria": "Go to homepage",
     "openMenuAria": "Open menu",
     "ourFormulation": "Our Formulation",
+    "profileAria": "User profile",
     "searchAria": "Search"
   },
   "Orders": {
