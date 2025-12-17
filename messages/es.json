@@ -31,6 +31,23 @@
       "shipmentFrequencyPlaceholder": "Seleccionar frecuencia",
       "subscribeButton": "Suscribirse por {price} al día",
       "whatYoullGetTitle": "Lo que obtendrás:"
+    },
+    "WaitlistModal": {
+      "ariaLabel": "Formulario para unirse a la lista de espera",
+      "cancelButton": "Cancelar",
+      "closeButtonLabel": "Cerrar modal de lista de espera",
+      "description": "Sé el primero en saber cuando ampliemos nuestras ofertas. Ingresa tu correo electrónico y te notificaremos tan pronto como haya nuevas opciones disponibles.",
+      "emailLabel": "Correo electrónico:",
+      "emailPlaceholder": "Ingresa tu correo electrónico",
+      "heading": "Únete a Nuestra Lista de Espera",
+      "imageAlt": "Ilustración de perro",
+      "submitButton": "Unirse a la Lista",
+      "submittingButton": "Uniéndose...",
+      "successAriaLabel": "Registro exitoso en la lista de espera",
+      "successButton": "Volver al Inicio",
+      "successDescription": "Te notificaremos tan pronto como lleguemos a tu área.",
+      "successHeading": "Hemos Guardado Tu Lugar",
+      "successImageAlt": "Icono de marca de verificación de éxito"
     }
   },
   "Home": {
@@ -153,23 +170,6 @@
       "changeAgeButton": "Cambiar Edad",
       "joinWaitlistButton": "Únete a la Lista de Espera",
       "imageAlt": "Ilustración de perro"
-    },
-    "waitlistModal": {
-      "ariaLabel": "Formulario para unirse a la lista de espera",
-      "cancelButton": "Cancelar",
-      "closeButtonLabel": "Cerrar modal de lista de espera",
-      "description": "Sé el primero en saber cuando ampliemos nuestras ofertas. Ingresa tu correo electrónico y te notificaremos tan pronto como haya nuevas opciones disponibles.",
-      "emailLabel": "Correo electrónico:",
-      "emailPlaceholder": "Ingresa tu correo electrónico",
-      "heading": "Únete a Nuestra Lista de Espera",
-      "imageAlt": "Ilustración de perro",
-      "submitButton": "Unirse a la Lista",
-      "submittingButton": "Uniéndose...",
-      "successAriaLabel": "Registro exitoso en la lista de espera",
-      "successButton": "Volver al Inicio",
-      "successDescription": "Te notificaremos tan pronto como lleguemos a tu área.",
-      "successHeading": "Hemos Guardado Tu Lugar",
-      "successImageAlt": "Icono de marca de verificación de éxito"
     },
     "howActive": {
       "heading": "¿Qué tan activo es {name} día a día?",

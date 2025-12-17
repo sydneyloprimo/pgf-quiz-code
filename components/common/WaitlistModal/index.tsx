@@ -16,7 +16,7 @@ interface WaitlistModalProps {
 }
 
 const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
-  const t = useTranslations('Quiz.waitlistModal')
+  const t = useTranslations('Common.WaitlistModal')
   const tErrors = useTranslations('Common.EmailCustomer.errors')
 
   const [email, setEmail] = useState('')

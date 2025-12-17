@@ -14,7 +14,7 @@ const WaitlistSuccessModal = ({
   isOpen,
   onClose,
 }: WaitlistSuccessModalProps) => {
-  const t = useTranslations('Quiz.waitlistModal')
+  const t = useTranslations('Common.WaitlistModal')
 
   return (
     <Modal
