@@ -110,7 +110,8 @@
     "logoAria": "Go to homepage",
     "newsletterDescription": "Get early access to clinical updates, expert insights, and exclusive product drops.",
     "newsletterTitle": "Join our waitlist and newsletter",
-    "subscribeButton": "Subscribe"
+    "subscribeButton": "Subscribe",
+    "subscribedButton": "Subscribed!"
   },
   "Header": {
     "cartIcon": "cart icon",

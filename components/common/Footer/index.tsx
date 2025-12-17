@@ -7,27 +7,49 @@ import { useCallback, useState } from 'react'
 
 import { Button } from '@/components/common/Button'
 import { PGFTextLogo } from '@/components/common/Icon'
+import { useEmailCustomer } from '@/hooks/useEmailCustomer'
 import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
 
 const Footer = () => {
   const t = useTranslations('Footer')
+  const tErrors = useTranslations('Common.EmailCustomer.errors')
   const [email, setEmail] = useState('')
+
+  const handleSuccess = useCallback(() => {
+    setEmail('')
+  }, [])
+
+  const {
+    createEmailCustomer,
+    isLoading,
+    error,
+    clearError,
+    customerId,
+    reset,
+  } = useEmailCustomer(handleSuccess)
+
+  const isSubscribed = Boolean(customerId)
 
   const handleEmailChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setEmail(e.target.value)
+      if (error) {
+        clearError()
+      }
+      if (customerId) {
+        reset()
+      }
     },
-    []
+    [error, clearError, customerId, reset]
   )
 
   const handleSubscribe = useCallback(
-    (e: React.FormEvent) => {
+    async (e: React.FormEvent) => {
       e.preventDefault()
-      // Handle subscription logic
-      console.log('Subscribe:', email)
+      await createEmailCustomer(email)
     },
-    [email]
+    [email, createEmailCustomer]
   )
 
   const navLinks = [
@@ -67,31 +89,47 @@ const Footer = () => {
 
         <form
           onSubmit={handleSubscribe}
-          className={cn(
-            'w-full',
-            'bg-neutral-100',
-            'flex items-center justify-between',
-            'pl-4 pr-2 py-2'
-          )}
+          className={cn('w-full', 'flex flex-col gap-2')}
         >
-          <input
-            type="email"
-            value={email}
-            onChange={handleEmailChange}
-            placeholder={t('emailPlaceholder')}
+          <div
             className={cn(
-              'flex-1',
-              'font-sans text-base leading-5',
-              'text-neutral-900',
-              'bg-transparent',
-              'outline-none',
-              'placeholder:text-neutral-900'
+              'w-full',
+              'bg-neutral-100',
+              'flex items-center justify-between',
+              'pl-4 pr-2 py-2'
             )}
-            aria-label={t('emailAria')}
-          />
-          <Button type="submit" variant="primary" className="px-4 py-3">
-            {t('subscribeButton')}
-          </Button>
+          >
+            <input
+              type="email"
+              value={email}
+              onChange={handleEmailChange}
+              placeholder={t('emailPlaceholder')}
+              disabled={isLoading}
+              className={cn(
+                'flex-1',
+                'font-sans text-base leading-5',
+                'text-neutral-900',
+                'bg-transparent',
+                'outline-none',
+                'placeholder:text-neutral-900',
+                'disabled:opacity-50'
+              )}
+              aria-label={t('emailAria')}
+            />
+            <Button
+              type="submit"
+              variant="primary"
+              className="px-4 py-3"
+              disabled={isLoading || !email.trim() || isSubscribed}
+            >
+              {isSubscribed ? t('subscribedButton') : t('subscribeButton')}
+            </Button>
+          </div>
+          {error && (
+            <p className="font-sans text-sm leading-5 text-feedback-error-500">
+              {tErrors(error)}
+            </p>
+          )}
         </form>
       </div>
 
@@ -128,7 +166,7 @@ const Footer = () => {
         )}
       >
         <Link href={Routes.home} aria-label={t('logoAria')}>
-          <PGFTextLogo className="h-8 w-auto max-w-80 text-quaternary-100" />
+          <PGFTextLogo className="h-11 w-auto text-neutral-white" />
         </Link>
 
         <nav className="flex flex-col gap-4" aria-label={t('footerNavAria')}>
