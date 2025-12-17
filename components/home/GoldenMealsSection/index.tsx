@@ -49,7 +49,7 @@ const GoldenMealsSection = () => {
           <div className={cn('flex flex-col gap-3', 'text-neutral-white')}>
             <h2
               className={cn(
-                'font-display font-semibold',
+                'font-display',
                 'text-3xl md:text-4xl',
                 'leading-tight md:leading-12',
                 'tracking-tight'

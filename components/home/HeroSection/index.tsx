@@ -1,81 +1,117 @@
-import Image from 'next/image'
-import Link from 'next/link'
+'use client'
+
 import { useTranslations } from 'next-intl'
+import { useEffect, useRef } from 'react'
 
 import { Button } from '@/components/common/Button'
+import { Link } from '@/components/common/Link'
+import { useConciergeContact } from '@/hooks/useConciergeContact'
 import { cn } from '@/utils/cn'
 
 const HeroSection = () => {
   const t = useTranslations('Home.Hero')
+  const tConcierge = useTranslations('Common.ConciergeLink')
+  const { href: conciergeHref, isTabletOrLarger } = useConciergeContact()
+  const videoRef = useRef<HTMLVideoElement | null>(null)
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (video && video instanceof HTMLVideoElement) {
+      const handleCanPlay = () => {
+        video.play().catch((error: unknown) => {
+          console.error('Error playing video:', error)
+        })
+      }
+
+      const handleError = () => {
+        if (video.error) {
+          console.error('Video error code:', video.error.code)
+          console.error('Video error message:', video.error.message)
+        }
+      }
+
+      video.addEventListener('canplay', handleCanPlay)
+      video.addEventListener('error', handleError)
+
+      // Try to load the video
+      video.load()
+
+      return () => {
+        video.removeEventListener('canplay', handleCanPlay)
+        video.removeEventListener('error', handleError)
+      }
+    }
+  }, [])
 
   return (
-    <section
-      className={cn('w-full', 'flex flex-col md:flex-row', 'min-h-[720px]')}
-    >
-      {/* Content Side */}
+    <section className="relative w-full min-h-[720px] flex items-center overflow-hidden">
+      {/* Video Background */}
+      <video
+        ref={videoRef}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ zIndex: 1 }}
+        poster="/images/home/hero-bg.jpg"
+        aria-label={t('imageAlt')}
+        width="100%"
+        height="100%"
+      >
+        <source src="/videos/hero-video.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      {/* Dark Overlay */}
+      <div
+        className="absolute inset-0 bg-neutral-950 opacity-60"
+        style={{ zIndex: 2 }}
+        aria-hidden="true"
+      />
+
+      {/* Content */}
       <div
         className={cn(
-          'w-full md:w-1/2',
-          'bg-neutral-400',
-          'flex flex-col items-center justify-center',
-          'px-5 py-12 md:p-12',
-          'gap-8 md:gap-10',
-          'order-2 md:order-1'
+          'relative z-10',
+          'flex flex-col gap-8',
+          'px-5 md:px-11 py-12',
+          'tablet:px-12',
+          'desktop:px-32',
+          'max-w-2xl'
         )}
       >
-        <div className="flex flex-col items-center gap-2 max-w-lg w-full">
-          <h1
-            className={cn(
-              'font-display font-semibold',
-              'text-4xl md:text-5xl',
-              'leading-tight md:leading-14',
-              'tracking-tight',
-              'text-secondary-950',
-              'text-center'
-            )}
-          >
-            {t('headline')}
-          </h1>
-        </div>
+        <h1
+          className={cn(
+            'font-display',
+            'text-4xl tablet:text-5xl desktop:text-6xl',
+            'leading-tight',
+            'tracking-tight',
+            'text-neutral-white'
+          )}
+        >
+          {t('headline')}
+        </h1>
 
-        <div className="flex flex-col items-center gap-8 w-full">
+        <div className="flex flex-col tablet:flex-row items-start gap-6">
           <Button variant="primary" href="/quiz" className="px-4 py-4">
             {t('ctaButton')}
           </Button>
 
           <Link
-            href="/contact"
-            className={cn(
-              'font-bold text-base leading-4',
-              'text-primary-800 underline',
-              'hover:text-primary-700'
-            )}
+            href={conciergeHref}
+            size="large"
+            className="text-neutral-white hover:text-neutral-200"
+            aria-label={
+              isTabletOrLarger
+                ? tConcierge('emailAriaLabel')
+                : tConcierge('phoneAriaLabel')
+            }
           >
             {t('ctaLink')}
           </Link>
         </div>
-      </div>
-
-      {/* Image Side */}
-      <div
-        className={cn(
-          'w-full md:w-1/2',
-          'relative',
-          'min-h-80 md:min-h-0',
-          'order-1 md:order-2'
-        )}
-      >
-        <Image
-          src="/images/home/hero-bg.jpg"
-          alt={t('imageAlt')}
-          fill
-          className="object-cover"
-          priority
-        />
-        <div
-          className="absolute inset-0 bg-tertiary-800-70 mix-blend-color"
-          aria-hidden="true"
-        />
       </div>
     </section>
   )
