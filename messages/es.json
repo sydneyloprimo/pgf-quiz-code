@@ -50,6 +50,20 @@
       "successImageAlt": "Icono de marca de verificación de éxito"
     }
   },
+  "Footer": {
+    "emailAria": "Ingresa tu dirección de correo electrónico",
+    "emailPlaceholder": "Escribe tu correo aquí",
+    "footerNavAria": "Navegación del pie de página",
+    "linkAbout": "Acerca de Nosotros",
+    "linkContact": "Información de contacto",
+    "linkHome": "Inicio",
+    "linkRecipe": "Nuestra Receta",
+    "logoAria": "Ir a la página de inicio",
+    "newsletterDescription": "Obtén acceso anticipado a actualizaciones clínicas, perspectivas de expertos y lanzamientos exclusivos de productos.",
+    "newsletterTitle": "Únete a nuestra lista de espera y boletín",
+    "subscribeButton": "Suscribirse",
+    "subscribedButton": "¡Suscrito!"
+  },
   "Home": {
     "title": "Hola mundo!"
   },
