@@ -68,7 +68,8 @@ const Footer = () => {
           'bg-secondary-950',
           'px-8 md:px-10 py-16 md:py-20',
           'flex flex-col justify-between gap-12',
-          'min-h-80 lg:min-h-[500px]'
+          'min-h-80 lg:min-h-[500px]',
+          'order-1 lg:order-0'
         )}
       >
         <div className="flex flex-col gap-5 text-neutral-100">
@@ -139,7 +140,7 @@ const Footer = () => {
           'w-full lg:flex-1',
           'relative',
           'min-h-80 lg:min-h-[500px]',
-          'order-last lg:order-0'
+          'order-2 lg:order-0'
         )}
       >
         <Image
@@ -162,7 +163,8 @@ const Footer = () => {
           'bg-secondary-950',
           'px-8 md:px-10 py-16 md:py-20',
           'flex flex-col justify-between gap-12',
-          'min-h-80 lg:min-h-[500px]'
+          'min-h-80 lg:min-h-[500px]',
+          'order-3 lg:order-0'
         )}
       >
         <Link href={Routes.home} aria-label={t('logoAria')}>
