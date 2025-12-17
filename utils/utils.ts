@@ -7,6 +7,8 @@ import {
 } from '@/hooks/useProductSearch'
 import { CartLineEdge } from '@/shopify/generated/graphql'
 
+ 
+
 export const passwordRegExp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])/
 
 export const findProductLine = (edges: CartLineEdge[], productId: string) =>
