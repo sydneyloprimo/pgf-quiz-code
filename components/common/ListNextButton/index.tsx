@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-
 import ChevronIcon from 'public/icons/chevron-left.svg'
 
 export enum ListNextButtonTypes {
