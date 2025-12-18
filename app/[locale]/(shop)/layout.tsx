@@ -17,7 +17,7 @@ export default function RootLayout({
         params={params}
         localeGroup={['MainNav', 'AnnouncementToast', 'Common']}
       >
-        <div className="sticky top-0 z-50">
+        <div className="w-full top-0 z-50">
           <MainNav />
           <AnnouncementToast />
         </div>

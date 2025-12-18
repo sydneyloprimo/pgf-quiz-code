@@ -4,6 +4,18 @@
       "emailAriaLabel": "Enviar un correo electrónico a nuestro concierge",
       "phoneAriaLabel": "Llamar a nuestro concierge"
     },
+    "EmailCustomer": {
+      "errors": {
+        "CUSTOMER_CREATION_FAILED": "Error al crear el cliente. Por favor, inténtalo de nuevo.",
+        "EMAIL_ALREADY_EXISTS": "Este correo electrónico ya está registrado.",
+        "EMAIL_REQUIRED": "Se requiere la dirección de correo electrónico.",
+        "INTERNAL_SERVER_ERROR": "Ocurrió un error inesperado. Por favor, inténtalo de nuevo.",
+        "INVALID_EMAIL": "Por favor, ingresa un correo electrónico válido.",
+        "NETWORK_ERROR": "Error de red. Por favor, verifica tu conexión.",
+        "SERVER_CONFIGURATION_ERROR": "Error de configuración del servidor. Por favor, inténtalo más tarde.",
+        "UNEXPECTED_RESPONSE": "Respuesta inesperada. Por favor, inténtalo de nuevo."
+      }
+    },
     "InputDropdown": {
       "selectOption": "Seleccionar una opción"
     },
@@ -19,7 +31,38 @@
       "shipmentFrequencyPlaceholder": "Seleccionar frecuencia",
       "subscribeButton": "Suscribirse por {price} al día",
       "whatYoullGetTitle": "Lo que obtendrás:"
+    },
+    "WaitlistModal": {
+      "ariaLabel": "Formulario para unirse a la lista de espera",
+      "cancelButton": "Cancelar",
+      "closeButtonLabel": "Cerrar modal de lista de espera",
+      "description": "Sé el primero en saber cuando ampliemos nuestras ofertas. Ingresa tu correo electrónico y te notificaremos tan pronto como haya nuevas opciones disponibles.",
+      "emailLabel": "Correo electrónico:",
+      "emailPlaceholder": "Ingresa tu correo electrónico",
+      "heading": "Únete a Nuestra Lista de Espera",
+      "imageAlt": "Ilustración de perro",
+      "submitButton": "Unirse a la Lista",
+      "submittingButton": "Uniéndose...",
+      "successAriaLabel": "Registro exitoso en la lista de espera",
+      "successButton": "Volver al Inicio",
+      "successDescription": "Te notificaremos tan pronto como lleguemos a tu área.",
+      "successHeading": "Hemos Guardado Tu Lugar",
+      "successImageAlt": "Icono de marca de verificación de éxito"
     }
+  },
+  "Footer": {
+    "emailAria": "Ingresa tu dirección de correo electrónico",
+    "emailPlaceholder": "Escribe tu correo aquí",
+    "footerNavAria": "Navegación del pie de página",
+    "linkAbout": "Acerca de Nosotros",
+    "linkContact": "Información de contacto",
+    "linkHome": "Inicio",
+    "linkRecipe": "Nuestra Receta",
+    "logoAria": "Ir a la página de inicio",
+    "newsletterDescription": "Obtén acceso anticipado a actualizaciones clínicas, perspectivas de expertos y lanzamientos exclusivos de productos.",
+    "newsletterTitle": "Únete a nuestra lista de espera y boletín",
+    "subscribeButton": "Suscribirse",
+    "subscribedButton": "¡Suscrito!"
   },
   "Home": {
     "title": "Hola mundo!"
