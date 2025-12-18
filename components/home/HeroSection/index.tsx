@@ -44,7 +44,7 @@ const HeroSection = () => {
   }, [])
 
   return (
-    <section className="relative w-full md:min-h-[720px] h-96 md:max-h-none flex items-end md:items-center overflow-hidden">
+    <section className="relative w-full md:min-h-180 h-96 md:max-h-none flex items-end md:items-center overflow-hidden">
       {/* Video Background */}
       <video
         ref={videoRef}

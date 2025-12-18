@@ -19,7 +19,7 @@ const GoldenMealsSection = () => {
         className={cn(
           'w-full',
           'relative',
-          'min-h-[650px] md:min-h-[651px]',
+          'min-h-164 md:min-h-164',
           'flex items-start md:items-end justify-end',
           'overflow-hidden'
         )}
