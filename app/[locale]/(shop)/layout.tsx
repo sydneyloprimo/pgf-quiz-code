@@ -19,7 +19,9 @@ export default function RootLayout({
       <LocaleWrapper params={params} localeGroup="Home">
         {children}
       </LocaleWrapper>
-      <Footer />
+      <LocaleWrapper params={params} localeGroup="Footer">
+        <Footer />
+      </LocaleWrapper>
     </>
   )
 }

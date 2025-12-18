@@ -1,8 +1,6 @@
 import { dehydrate } from '@tanstack/react-query'
 import { client } from 'shopify/client'
 
-import { AnnouncementToast } from '@/components/common/AnnouncementToast'
-import { MainNav } from '@/components/common/MainNav'
 import ExploreCategories from '@/components/home/ExploreCategories'
 import HeroBanner from '@/components/home/HeroBanner'
 import LatestProducts from '@/components/home/LatestProducts'
@@ -39,8 +37,6 @@ export default async function Home() {
   return (
     <Hydrate state={dehydratedState}>
       <main className="flex min-h-screen flex-col items-center w-full bg-background">
-        <AnnouncementToast />
-        <MainNav />
         <HeroBanner />
         <ExploreCategories
           categories={edges.map(({ node }) => ({ name: node }))}

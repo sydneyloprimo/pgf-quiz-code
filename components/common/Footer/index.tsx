@@ -1,42 +1,15 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { useTranslations } from 'next-intl'
-import React from 'react'
+import { FooterImage } from './FooterImage'
+import { FooterJoinWaitlist } from './FooterJoinWaitlist'
+import { FooterLinks } from './FooterLinks'
 
-import { instagramUrl, linkedinUrl } from '@/constants'
-import { Routes } from '@/types/enums/routes'
-import InstagramIcon from 'public/icons/instagram.svg'
-import LinkedinIcon from 'public/icons/linkedin.svg'
-import LogoIcon from 'public/icons/logo-white.svg'
+import { cn } from '@/utils/cn'
 
 const Footer = () => {
-  const t = useTranslations('Footer')
-
   return (
-    <footer className="bg-dark-violet w-full pb-[60px] px-4 md:px-[118px] py-9 flex justify-between">
-      <Link href={Routes.home}>
-        <Image
-          src={LogoIcon}
-          className="w-[105px] md:w-[192px]"
-          alt={t('altIcon')}
-        />
-      </Link>
-      <div className="flex">
-        <a className="mr-4 my-auto h-min" href={instagramUrl} target="_blank">
-          <Image
-            src={InstagramIcon}
-            className="w-[12px] md:w-[22px]"
-            alt={t('altInstagram')}
-          />
-        </a>
-        <a className="h-min my-auto" href={linkedinUrl} target="_blank">
-          <Image
-            src={LinkedinIcon}
-            className="w-[12px] md:w-[22px]"
-            alt={t('altLinkedin')}
-          />
-        </a>
-      </div>
+    <footer className={cn('w-full', 'flex flex-col lg:flex-row', 'flex-wrap')}>
+      <FooterJoinWaitlist />
+      <FooterImage />
+      <FooterLinks />
     </footer>
   )
 }
