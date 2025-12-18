@@ -44,7 +44,7 @@ const HeroSection = () => {
   }, [])
 
   return (
-    <section className="relative w-full min-h-[720px] flex items-center overflow-hidden">
+    <section className="relative w-full md:min-h-[720px] h-96 md:max-h-none flex items-end md:items-center overflow-hidden">
       {/* Video Background */}
       <video
         ref={videoRef}
@@ -75,9 +75,9 @@ const HeroSection = () => {
       <div
         className={cn(
           'relative z-10',
-          'flex flex-col gap-8',
-          'px-5 md:px-11 py-12',
-          'tablet:px-12',
+          'flex flex-col gap-2 md:gap-8',
+          'px-5 md:px-11 py-6 md:py-12',
+          'md:px-12',
           'desktop:px-32',
           'max-w-2xl'
         )}
@@ -85,7 +85,7 @@ const HeroSection = () => {
         <h1
           className={cn(
             'font-display',
-            'text-4xl tablet:text-5xl desktop:text-6xl',
+            'text-xl md:text-5xl desktop:text-6xl',
             'leading-tight',
             'tracking-tight',
             'text-neutral-white'
@@ -94,15 +94,19 @@ const HeroSection = () => {
           {t('headline')}
         </h1>
 
-        <div className="flex flex-col tablet:flex-row items-start gap-6">
-          <Button variant="primary" href="/quiz" className="px-4 py-4">
+        <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
+          <Button
+            variant="primary"
+            href="/quiz"
+            className="w-full md:w-auto px-4 py-4"
+          >
             {t('ctaButton')}
           </Button>
 
           <Link
             href={conciergeHref}
             size="large"
-            className="text-neutral-white hover:text-neutral-200"
+            className="font-normal text-base md:text-md text-neutral-white hover:text-neutral-200"
             aria-label={
               isTabletOrLarger
                 ? tConcierge('emailAriaLabel')

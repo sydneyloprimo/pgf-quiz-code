@@ -19,20 +19,26 @@ const GoldenMealsSection = () => {
         className={cn(
           'w-full',
           'relative',
-          'min-h-[500px] md:min-h-[651px]',
-          'flex items-end justify-end',
+          'min-h-[650px] md:min-h-[651px]',
+          'flex items-start md:items-end justify-end',
           'overflow-hidden'
         )}
       >
         {/* Background Image */}
-        <Image
-          src="/images/home/golden-meals-bg.jpg"
-          alt={t('imageAlt')}
-          fill
-          className="object-cover"
-        />
+        <div className="absolute inset-0 translate-y-15 md:translate-y-0">
+          <Image
+            src="/images/home/golden-meals-bg.png"
+            alt={t('imageAlt')}
+            fill
+            className={cn('object-cover scale-140 md:scale-100')}
+          />
+        </div>
         <div
-          className="absolute inset-0 bg-tertiary-800-70 mix-blend-color"
+          className="absolute inset-0 mix-blend-color"
+          style={{
+            background:
+              'linear-gradient(0deg, rgba(68, 52, 36, 0.15) 0%, rgba(68, 52, 36, 0.15) 100%)',
+          }}
           aria-hidden="true"
         />
 
@@ -41,9 +47,9 @@ const GoldenMealsSection = () => {
           className={cn(
             'relative z-10',
             'w-full md:w-auto md:max-w-md',
-            'px-6 md:px-10 py-12',
-            'flex flex-col gap-8 items-start',
-            'm-5 md:m-0'
+            'px-8 md:px-10 py-12',
+            'flex flex-col gap-8 items-start'
+            // 'm-5 mb-24 md:m-0'
           )}
         >
           <div className={cn('flex flex-col gap-3', 'text-neutral-white')}>
