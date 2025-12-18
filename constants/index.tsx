@@ -364,3 +364,55 @@ export const HOW_IT_WORKS_STEPS: HowItWorksStep[] = [
     descriptionKey: 'step3Description',
   },
 ] as const
+
+// Benefits section data
+export interface BenefitData {
+  titleKey: string
+  descriptionKey: string
+  pointerLabelKey?: string
+  pointerPosition?: {
+    top?: string
+    bottom?: string
+    left?: string
+    right?: string
+  }
+  benefitIndex: number
+}
+
+export const BENEFITS_DATA: BenefitData[] = [
+  {
+    titleKey: 'benefit1Title',
+    descriptionKey: 'benefit1Description',
+    pointerLabelKey: 'pointerNutrition',
+    pointerPosition: { top: '0', right: '30%' },
+    benefitIndex: 0,
+  },
+  {
+    titleKey: 'benefit2Title',
+    descriptionKey: 'benefit2Description',
+    pointerLabelKey: 'pointerEnergy',
+    pointerPosition: { bottom: '10%', left: '0' },
+    benefitIndex: 1,
+  },
+  {
+    titleKey: 'benefit3Title',
+    descriptionKey: 'benefit3Description',
+    pointerLabelKey: 'pointerImmunity',
+    pointerPosition: { top: '40%', left: '0' },
+    benefitIndex: 2,
+  },
+  {
+    titleKey: 'benefit4Title',
+    descriptionKey: 'benefit4Description',
+    pointerLabelKey: 'pointerCoat',
+    pointerPosition: { top: '50%', right: '0' },
+    benefitIndex: 3,
+  },
+  {
+    titleKey: 'benefit5Title',
+    descriptionKey: 'benefit5Description',
+    pointerLabelKey: 'pointerDigestion',
+    pointerPosition: { bottom: '5%', right: '25%' },
+    benefitIndex: 4,
+  },
+] as const

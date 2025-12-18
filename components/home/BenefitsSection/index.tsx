@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl'
 import { useCallback, useState } from 'react'
 
 import { BenefitPointerIcon } from '@/components/common/Icon'
+import { BENEFITS_DATA } from '@/constants'
 import { cn } from '@/utils/cn'
 
 interface BenefitItemProps {
@@ -53,10 +54,23 @@ const BenefitItem = ({
 interface ImagePointerProps {
   label: string
   position: { top?: string; bottom?: string; left?: string; right?: string }
+  onClick: () => void
 }
 
-const ImagePointer = ({ label, position }: ImagePointerProps) => (
-  <div className="absolute flex flex-col items-center gap-4" style={position}>
+const ImagePointer = ({ label, position, onClick }: ImagePointerProps) => (
+  <button
+    type="button"
+    onClick={onClick}
+    className={cn(
+      'absolute flex flex-col items-center gap-4',
+      'cursor-pointer transition-opacity',
+      'hover:opacity-80 focus:opacity-80',
+      'focus:outline-none',
+      'rounded-md'
+    )}
+    style={position}
+    aria-label={label}
+  >
     <BenefitPointerIcon className="size-5 text-secondary-500" />
     <span
       className={cn(
@@ -68,7 +82,7 @@ const ImagePointer = ({ label, position }: ImagePointerProps) => (
     >
       {label}
     </span>
-  </div>
+  </button>
 )
 
 const BenefitsSection = () => {
@@ -79,36 +93,20 @@ const BenefitsSection = () => {
     setActiveIndex(index)
   }, [])
 
-  const benefits = [
-    {
-      title: t('benefit1Title'),
-      description: t('benefit1Description'),
-    },
-    {
-      title: t('benefit2Title'),
-      description: t('benefit2Description'),
-    },
-    {
-      title: t('benefit3Title'),
-      description: t('benefit3Description'),
-    },
-    {
-      title: t('benefit4Title'),
-      description: t('benefit4Description'),
-    },
-    {
-      title: t('benefit5Title'),
-      description: t('benefit5Description'),
-    },
-  ]
+  const benefits = [...BENEFITS_DATA]
+    .sort((a, b) => a.benefitIndex - b.benefitIndex)
+    .map((benefit) => ({
+      title: t(benefit.titleKey),
+      description: t(benefit.descriptionKey),
+    }))
 
-  const pointers = [
-    { label: t('pointerNutrition'), position: { top: '0', right: '30%' } },
-    { label: t('pointerImmunity'), position: { top: '40%', left: '0' } },
-    { label: t('pointerCoat'), position: { top: '50%', right: '0' } },
-    { label: t('pointerEnergy'), position: { bottom: '10%', left: '0' } },
-    { label: t('pointerDigestion'), position: { bottom: '5%', right: '25%' } },
-  ]
+  const pointers = BENEFITS_DATA.filter(
+    (benefit) => benefit.pointerLabelKey && benefit.pointerPosition
+  ).map((benefit) => ({
+    label: t(benefit.pointerLabelKey!),
+    position: benefit.pointerPosition!,
+    benefitIndex: benefit.benefitIndex,
+  }))
 
   return (
     <section className={cn('w-full', 'px-5 md:px-11 py-14')}>
@@ -186,6 +184,7 @@ const BenefitsSection = () => {
                 key={index}
                 label={pointer.label}
                 position={pointer.position}
+                onClick={() => handleBenefitClick(pointer.benefitIndex)}
               />
             ))}
           </div>
