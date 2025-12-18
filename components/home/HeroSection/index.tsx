@@ -60,7 +60,8 @@ const HeroSection = () => {
             'text-xl md:text-5xl desktop:text-6xl',
             'leading-tight',
             'tracking-tight',
-            'text-neutral-white'
+            'text-neutral-white',
+            'w-4/5 md:w-full'
           )}
         >
           {t('headline')}
