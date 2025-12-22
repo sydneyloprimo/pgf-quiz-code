@@ -109,7 +109,7 @@ const BenefitsSection = () => {
   }))
 
   return (
-    <section className={cn('w-full', 'px-5 md:px-11 py-14')}>
+    <section className={cn('w-full', 'px-5 md:px-11 py-8')}>
       <div
         className={cn('w-full', 'flex flex-col lg:flex-row', 'items-stretch')}
       >
@@ -119,13 +119,14 @@ const BenefitsSection = () => {
             'w-full lg:w-1/2',
             'bg-neutral-400',
             'px-8 md:px-16 py-16 md:py-20',
-            'flex flex-col gap-12'
+            'flex flex-col gap-12',
+            'order-2 lg:order-1'
           )}
         >
           <div className="flex flex-col gap-4">
             <h2
               className={cn(
-                'font-display font-semibold',
+                'font-display',
                 'text-3xl md:text-4xl',
                 'leading-tight md:leading-12',
                 'text-secondary-950'
@@ -163,7 +164,8 @@ const BenefitsSection = () => {
             'w-full lg:w-1/2',
             'relative',
             'min-h-96 lg:min-h-0',
-            'overflow-hidden'
+            'overflow-hidden',
+            'order-1 lg:order-2'
           )}
         >
           <Image

@@ -2,7 +2,6 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
-import { cn } from '@/utils/cn'
 
 interface StatItemProps {
   percentage: string
@@ -11,23 +10,10 @@ interface StatItemProps {
 
 const StatItem = ({ percentage, description }: StatItemProps) => (
   <div className="flex items-center gap-6">
-    <span
-      className={cn(
-        'font-display font-semibold',
-        'text-4xl md:text-5xl',
-        'leading-tight md:leading-14',
-        'tracking-tight',
-        'text-quaternary-800',
-        'shrink-0'
-      )}
-    >
+    <span className="font-display text-4xl md:text-5xl leading-tight md:leading-14 tracking-tight text-quaternary-800 shrink-0">
       {percentage}
     </span>
-    <p
-      className={cn('font-semibold text-base leading-6', 'text-secondary-950')}
-    >
-      {description}
-    </p>
+    <p className="text-base leading-6 text-secondary-950">{description}</p>
   </div>
 )
 
@@ -42,30 +28,10 @@ const ClinicallyApprovedSection = () => {
   ]
 
   return (
-    <section
-      className={cn(
-        'w-full',
-        'px-5 md:px-11 py-28 md:py-32',
-        'relative overflow-hidden'
-      )}
-    >
-      <div
-        className={cn(
-          'w-full',
-          'flex flex-col lg:flex-row',
-          'items-center',
-          'gap-16 md:gap-36'
-        )}
-      >
+    <section className="w-full px-5 md:px-11 pt-4 pb-0 md:py-32 relative overflow-hidden bg-[url(/images/home/clinically-approved-bg.svg)] bg-no-repeat bg-right bg-size-[auto_100%]">
+      <div className="w-full flex flex-col lg:flex-row items-center">
         {/* Image */}
-        <div
-          className={cn(
-            'w-full lg:w-5/12',
-            'relative',
-            'aspect-square lg:aspect-auto lg:h-[750px]',
-            'shrink-0'
-          )}
-        >
+        <div className="w-full lg:w-5/12 relative aspect-square lg:aspect-auto lg:h-[750px] shrink-0">
           <Image
             src="/images/home/clinically-approved-dog.jpg"
             alt={t('imageAlt')}
@@ -79,22 +45,9 @@ const ClinicallyApprovedSection = () => {
         </div>
 
         {/* Content */}
-        <div
-          className={cn(
-            'w-full lg:flex-1',
-            'flex flex-col gap-14 md:gap-16',
-            'py-0 lg:py-16'
-          )}
-        >
+        <div className="w-full lg:flex-1 flex flex-col gap-14 md:gap-16 py-16 lg:px-35">
           <div className="flex flex-col gap-10">
-            <h2
-              className={cn(
-                'font-display font-semibold',
-                'text-3xl md:text-4xl',
-                'leading-tight md:leading-12',
-                'text-secondary-950'
-              )}
-            >
+            <h2 className="font-display text-3xl md:text-4xl leading-tight md:leading-12 text-secondary-950">
               {t('title')}
             </h2>
 
@@ -109,9 +62,20 @@ const ClinicallyApprovedSection = () => {
             </div>
           </div>
 
-          <Button variant="tertiary" href="/recipe">
+          <Button variant="tertiary" href="/recipe" className="w-full md:w-3/5">
             {t('ctaButton')}
           </Button>
+        </div>
+
+        {/* Decoration - Desktop/Tablet: bottom right */}
+        <div className="block self-end md:absolute bottom-0 md:bottom-8 right-2 md:right-8 lg:bottom-12 lg:right-12">
+          <Image
+            src="/icons/clinically-approved-decoration.svg"
+            alt=""
+            width={250}
+            height={250}
+            aria-hidden="true"
+          />
         </div>
       </div>
     </section>
