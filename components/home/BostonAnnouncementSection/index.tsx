@@ -32,10 +32,6 @@ const BostonAnnouncementSection = () => {
             className="object-cover"
             aria-hidden="true"
           />
-          <div
-            className="absolute inset-0 bg-tertiary-800-70 mix-blend-color"
-            aria-hidden="true"
-          />
 
           {/* Content Card */}
           <div

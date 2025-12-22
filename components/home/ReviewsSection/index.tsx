@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 import {
   ArrowLeftIcon,
@@ -74,7 +74,18 @@ const ReviewsSection = () => {
       review: t('review2Text'),
       name: t('review2Name'),
     },
+    {
+      image: '/images/home/reviews-david.jpg',
+      quote: t('review3Quote'),
+      review: t('review3Text'),
+      name: t('review3Name'),
+    },
   ]
+
+  const visibleReviews = useMemo(() => {
+    const nextIndex = (currentIndex + 1) % reviews.length
+    return [reviews[currentIndex], reviews[nextIndex]]
+  }, [currentIndex, reviews])
 
   const handlePrev = useCallback(() => {
     setCurrentIndex((prev) => (prev === 0 ? reviews.length - 1 : prev - 1))
@@ -88,16 +99,16 @@ const ReviewsSection = () => {
     <section
       className={cn(
         'w-full',
-        'border-t border-b border-neutral-600',
+        'border-t border-neutral-600',
         'px-5 md:px-11',
         'py-20 md:py-36',
         'relative overflow-hidden',
-        'bg-[url(/images/home/reviews-molecules.svg)] bg-no-repeat bg-left bg-size-[auto_100%]'
+        'md:bg-[url(/images/home/reviews-molecules.svg)] md:bg-no-repeat md:bg-left md:bg-size-[auto_100%]'
       )}
     >
       {/* Mirrored background on the right */}
       <div
-        className="absolute top-0 right-0 bottom-0 w-1/2 bg-[url(/images/home/reviews-molecules.svg)] bg-no-repeat bg-left bg-size-[auto_100%] scale-x-[-1] pointer-events-none"
+        className="absolute top-0 right-0 bottom-0 w-1/2 bg-[url(/images/home/reviews-molecules.svg)] bg-no-repeat bg-left bg-size-[auto_100%] scale-x-[-1] pointer-events-none hidden md:block"
         aria-hidden="true"
       />
 
@@ -121,9 +132,9 @@ const ReviewsSection = () => {
           {t('title')}
         </h2>
 
-        {/* Desktop: Show all reviews */}
+        {/* Desktop: Show two reviews at a time */}
         <div className="hidden md:flex gap-8 w-full">
-          {reviews.map((review, index) => (
+          {visibleReviews.map((review, index) => (
             <ReviewCard key={index} {...review} />
           ))}
         </div>
@@ -138,7 +149,11 @@ const ReviewsSection = () => {
           <button
             type="button"
             onClick={handlePrev}
-            className={cn('p-3', 'text-secondary-950 hover:text-secondary-700')}
+            className={cn(
+              'p-3',
+              'cursor-pointer',
+              'text-secondary-950 hover:text-secondary-700'
+            )}
             aria-label={t('prevAria')}
           >
             <ArrowLeftIcon className="size-6" />
@@ -146,7 +161,11 @@ const ReviewsSection = () => {
           <button
             type="button"
             onClick={handleNext}
-            className={cn('p-3', 'text-secondary-950 hover:text-secondary-700')}
+            className={cn(
+              'p-3',
+              'cursor-pointer',
+              'text-secondary-950 hover:text-secondary-700'
+            )}
             aria-label={t('nextAria')}
           >
             <ArrowRightIcon className="size-6" />

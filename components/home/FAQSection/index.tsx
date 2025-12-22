@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { useCallback, useState } from 'react'
 
@@ -31,6 +32,7 @@ const FAQItem = ({ question, answer, isOpen, onClick }: FAQItemProps) => (
         'text-xl md:text-3xl',
         'leading-tight md:leading-10',
         'tracking-tight',
+        'cursor-pointer',
         isOpen ? 'text-secondary-800' : 'text-secondary-900'
       )}
     >
@@ -48,6 +50,20 @@ const FAQItem = ({ question, answer, isOpen, onClick }: FAQItemProps) => (
       </p>
     )}
   </button>
+)
+
+const SectionDivider = () => (
+  <div className="flex items-center justify-center w-full gap-4 md:gap-6">
+    <div className="flex-1 h-px bg-secondary-300" />
+    <Image
+      src="/icons/faq-divider.svg"
+      alt=""
+      width={43}
+      height={47}
+      className="w-8 h-9 md:w-10 md:h-11"
+    />
+    <div className="flex-1 h-px bg-secondary-300" />
+  </div>
 )
 
 const FAQSection = () => {
@@ -81,13 +97,65 @@ const FAQSection = () => {
     <section
       className={cn(
         'w-full',
-        'border-b border-secondary-300',
         'px-5 md:px-24',
         'py-28 md:py-32',
         'relative overflow-hidden'
       )}
     >
+      {/* Background decorative elements */}
+      <div
+        className="absolute inset-0 pointer-events-none hidden md:block"
+        aria-hidden="true"
+      >
+        <Image
+          src="/images/home/faq-right-veggie.svg"
+          alt=""
+          width={60}
+          height={68}
+          className="absolute w-44 h-60"
+          style={{
+            left: '94%',
+            top: '50%',
+            transform: 'translate(-50%, -50%)',
+          }}
+        />
+        <Image
+          src="/images/home/faq-pepper-right.svg"
+          alt=""
+          width={60}
+          height={46}
+          className="absolute w-15 h-11"
+          style={{
+            left: '90%',
+            top: '75%',
+            transform: 'translate(-50%, -50%)',
+          }}
+        />
+        <Image
+          src="/images/home/faq-pepper-left.svg"
+          alt=""
+          width={60}
+          height={68}
+          className="absolute w-15 h-17"
+          style={{
+            left: '10%',
+            top: '35%',
+            transform: 'translate(-50%, -50%)',
+          }}
+        />
+        <Image
+          src="/images/home/faq-left-veggie.svg"
+          alt=""
+          width={100}
+          height={68}
+          className="absolute w-40 h-44"
+          style={{ left: '4%', top: '70%', transform: 'translate(-50%, -50%)' }}
+        />
+      </div>
+
       <div className={cn('flex flex-col gap-12 items-center', 'relative z-10')}>
+        <SectionDivider />
+
         <h2
           className={cn(
             'font-display',
@@ -112,6 +180,8 @@ const FAQSection = () => {
             />
           ))}
         </div>
+
+        <SectionDivider />
       </div>
     </section>
   )
