@@ -6,11 +6,11 @@ import { useTranslations } from 'next-intl'
 import { useCallback, useState } from 'react'
 
 import {
-  CartIcon,
   CloseIcon,
   HamburgerIcon,
   PGFTextLogo,
-  SearchIcon,
+  ShoppingCartIcon,
+  UserIcon,
 } from '@/components/common/Icon'
 import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
@@ -68,13 +68,17 @@ const MainNav = () => {
         'bg-secondary-950 w-full',
         'px-5 md:px-24 py-3',
         'flex items-center justify-between',
-        'shadow-sm'
+        'shadow-sm relative'
       )}
       aria-label={t('ariaLabel')}
     >
       {/* Logo */}
-      <Link href={Routes.home} className="shrink-0" aria-label={t('logoAria')}>
-        <PGFTextLogo className="h-7 w-auto text-primary-800" />
+      <Link
+        href={Routes.home}
+        className="shrink-0 flex items-center"
+        aria-label={t('logoAria')}
+      >
+        <PGFTextLogo className="h-11 w-auto text-neutral-white" />
       </Link>
 
       {/* Desktop Navigation Links */}
@@ -91,19 +95,19 @@ const MainNav = () => {
 
       {/* User Actions */}
       <div className="flex items-center gap-1">
-        <button
-          type="button"
+        <Link
+          href="/profile"
           className="p-3 text-neutral-white hover:text-secondary-400"
-          aria-label={t('searchAria')}
+          aria-label={t('profileAria')}
         >
-          <SearchIcon className="size-5" />
-        </button>
+          <UserIcon className="size-5" />
+        </Link>
         <Link
           href={Routes.cart}
           className="p-3 text-neutral-white hover:text-secondary-400"
           aria-label={t('cartAria')}
         >
-          <CartIcon className="size-5" />
+          <ShoppingCartIcon className="size-5" />
         </Link>
 
         {/* Mobile Menu Toggle */}
