@@ -95,12 +95,7 @@ const FAQSection = () => {
 
   return (
     <section
-      className={cn(
-        'w-full',
-        'px-5 md:px-24',
-        'py-28 md:py-32',
-        'relative overflow-hidden'
-      )}
+      className={cn('w-full', 'px-5 md:px-24', 'relative overflow-hidden')}
     >
       {/* Background decorative elements */}
       <div
