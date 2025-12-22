@@ -54,15 +54,30 @@
     "emailAria": "Ingresa tu dirección de correo electrónico",
     "emailPlaceholder": "Escribe tu correo aquí",
     "footerNavAria": "Navegación del pie de página",
-    "linkAbout": "Acerca de Nosotros",
-    "linkContact": "Información de contacto",
-    "linkHome": "Inicio",
-    "linkRecipe": "Nuestra Receta",
     "logoAria": "Ir a la página de inicio",
     "newsletterDescription": "Obtén acceso anticipado a actualizaciones clínicas, perspectivas de expertos y lanzamientos exclusivos de productos.",
     "newsletterTitle": "Únete a nuestra lista de espera y boletín",
     "subscribeButton": "Suscribirse",
     "subscribedButton": "¡Suscrito!"
+  },
+  "MainNav": {
+    "about": "Acerca de",
+    "ariaLabel": "Navegación principal",
+    "cartAria": "Carrito de compras",
+    "closeMenuAria": "Cerrar menú",
+    "contact": "Contacto",
+    "home": "Inicio",
+    "logoAria": "Ir a la página de inicio",
+    "openMenuAria": "Abrir menú",
+    "ourFormulation": "Nuestra Formulación",
+    "profileAria": "Perfil de usuario",
+    "searchAria": "Buscar"
+  },
+  "Navigation": {
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "home": "Inicio",
+    "ourFormulation": "Nuestra Formulación"
   },
   "Home": {
     "title": "Hola mundo!"

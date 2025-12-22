@@ -1,4 +1,18 @@
 import type { BreedOption } from '@/components/quiz/QuizBreedSelection/BreedDropdown'
+import { Routes } from '@/types/enums/routes'
+
+// Navigation links - centralized for MainNav and Footer
+export interface NavLink {
+  href: Routes
+  labelKey: string
+}
+
+export const NAV_LINKS: NavLink[] = [
+  { href: Routes.home, labelKey: 'home' },
+  { href: Routes.formulation, labelKey: 'ourFormulation' },
+  { href: Routes.about, labelKey: 'about' },
+  { href: Routes.contact, labelKey: 'contact' },
+]
 
 // Tailwind default md breakpoint is 768px
 export const MOBILE_WIDTH = 768
