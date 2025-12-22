@@ -27,7 +27,7 @@ const FAQItem = ({ question, answer, isOpen, onClick }: FAQItemProps) => (
   >
     <h3
       className={cn(
-        'font-display font-semibold',
+        'font-display',
         'text-xl md:text-3xl',
         'leading-tight md:leading-10',
         'tracking-tight',
@@ -90,7 +90,7 @@ const FAQSection = () => {
       <div className={cn('flex flex-col gap-12 items-center', 'relative z-10')}>
         <h2
           className={cn(
-            'font-display font-semibold',
+            'font-display',
             'text-3xl md:text-4xl',
             'leading-tight md:leading-12',
             'tracking-tight',

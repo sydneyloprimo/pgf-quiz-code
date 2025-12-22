@@ -110,7 +110,7 @@ const ReviewsSection = () => {
       >
         <h2
           className={cn(
-            'font-display font-semibold',
+            'font-display',
             'text-3xl md:text-4xl',
             'leading-tight md:leading-12',
             'tracking-tight',
