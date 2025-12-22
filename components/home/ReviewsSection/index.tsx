@@ -91,13 +91,21 @@ const ReviewsSection = () => {
         'border-t border-b border-neutral-600',
         'px-5 md:px-11',
         'py-20 md:py-36',
-        'relative'
+        'relative overflow-hidden',
+        'bg-[url(/images/home/reviews-molecules.svg)] bg-no-repeat bg-left bg-size-[auto_100%]'
       )}
     >
+      {/* Mirrored background on the right */}
+      <div
+        className="absolute top-0 right-0 bottom-0 w-1/2 bg-[url(/images/home/reviews-molecules.svg)] bg-no-repeat bg-left bg-size-[auto_100%] scale-x-[-1] pointer-events-none"
+        aria-hidden="true"
+      />
+
       <div
         className={cn(
           'w-full max-w-5xl mx-auto',
-          'flex flex-col gap-8 items-center'
+          'flex flex-col gap-8 items-center',
+          'relative z-10'
         )}
       >
         <h2
