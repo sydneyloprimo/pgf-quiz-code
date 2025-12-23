@@ -61,7 +61,7 @@ const StepCard = ({
       >
         {title}
       </h3>
-      <p className={cn('font-sans text-lg leading-7', 'text-quaternary-100')}>
+      <p className="font-sans text-lg leading-7 text-quaternary-100">
         {description}
       </p>
     </div>

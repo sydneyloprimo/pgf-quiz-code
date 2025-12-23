@@ -49,7 +49,7 @@ const FeatureGrid = () => {
     <section
       className={cn('w-full', 'px-5 md:px-24', 'pt-28 md:pt-32 pb-14 md:pb-16')}
     >
-      <div className={cn('grid grid-cols-1 md:grid-cols-3', 'w-full')}>
+      <div className="grid grid-cols-1 md:grid-cols-3 w-full">
         {features.map((feature, index) => {
           const isEven = index % 2 === 1
 

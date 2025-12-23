@@ -30,7 +30,7 @@ const FeatureBox = ({ icon, title, description, isEven }: FeatureBoxProps) => (
       >
         {title}
       </h3>
-      <p className={cn('font-sans text-base leading-6', 'text-secondary-900')}>
+      <p className="font-sans text-base leading-6 text-secondary-900">
         {description}
       </p>
     </div>
