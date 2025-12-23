@@ -17,8 +17,7 @@ const BenefitPointerIcon = ({
     className={className}
     {...props}
   >
-    <circle cx="10" cy="10" r="10" fill="currentColor" fillOpacity="0.3" />
-    <circle cx="10" cy="10" r="4" fill="currentColor" />
+    <circle cx="10" cy="10" r="5" fill="currentColor" />
   </svg>
 )
 
