@@ -33,7 +33,7 @@ const FAQItem = ({ question, answer, isOpen, onClick }: FAQItemProps) => (
         'leading-tight md:leading-10',
         'tracking-tight',
         'cursor-pointer',
-        isOpen ? 'text-secondary-800' : 'text-secondary-900'
+        isOpen ? 'text-secondary-800 font-semibold' : 'text-secondary-900'
       )}
     >
       {question}

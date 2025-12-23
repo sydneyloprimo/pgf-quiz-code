@@ -4,11 +4,7 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { useCallback, useMemo, useState } from 'react'
 
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  StarIcon,
-} from '@/components/common/Icon'
+import { ArrowLeftIcon, ArrowRightIcon } from '@/components/common/Icon'
 import { cn } from '@/utils/cn'
 
 interface ReviewCardProps {
@@ -46,13 +42,6 @@ const ReviewCard = ({ image, quote, review, name }: ReviewCardProps) => (
     <div className="flex flex-col gap-2 text-secondary-950">
       <p className="font-sans text-base leading-6">&ldquo;{review}&rdquo;</p>
       <p className="font-bold text-xl leading-tight tracking-tight">{name}</p>
-    </div>
-
-    {/* Stars */}
-    <div className="flex gap-1.5">
-      {[...Array(5)].map((_, index) => (
-        <StarIcon key={index} className="size-6 text-secondary-500" />
-      ))}
     </div>
   </div>
 )
