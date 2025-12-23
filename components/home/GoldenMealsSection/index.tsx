@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
+import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
 
 const GoldenMealsSection = () => {
@@ -65,7 +66,7 @@ const GoldenMealsSection = () => {
             <p className="font-sans text-lg leading-7">{t('description')}</p>
           </div>
 
-          <Button variant="secondary" href="/recipe">
+          <Button variant="secondary" href={Routes.formulation}>
             {t('ctaButton')}
           </Button>
         </div>
