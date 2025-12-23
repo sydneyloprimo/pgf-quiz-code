@@ -339,3 +339,28 @@ export const QUIZ_RESULTS_FOOTER_BENEFITS: QuizResultBenefit[] = [
     descriptionKey: 'benefits.moreMealtimesTogether.description',
   },
 ] as const
+
+// How It Works section steps
+export interface HowItWorksStep {
+  stepNumber: number
+  titleKey: string
+  descriptionKey: string
+}
+
+export const HOW_IT_WORKS_STEPS: HowItWorksStep[] = [
+  {
+    stepNumber: 1,
+    titleKey: 'step1Title',
+    descriptionKey: 'step1Description',
+  },
+  {
+    stepNumber: 2,
+    titleKey: 'step2Title',
+    descriptionKey: 'step2Description',
+  },
+  {
+    stepNumber: 3,
+    titleKey: 'step3Title',
+    descriptionKey: 'step3Description',
+  },
+] as const
