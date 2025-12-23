@@ -1,11 +1,12 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 
 import { Button } from '@/components/common/Button'
 import { Link } from '@/components/common/Link'
 import { useConciergeContact } from '@/hooks/useConciergeContact'
+import { useVideoAutoPlay } from '@/hooks/useVideoAutoPlay'
 import { cn } from '@/utils/cn'
 
 const HeroSection = () => {
@@ -14,34 +15,7 @@ const HeroSection = () => {
   const { href: conciergeHref, isTabletOrLarger } = useConciergeContact()
   const videoRef = useRef<HTMLVideoElement | null>(null)
 
-  useEffect(() => {
-    const video = videoRef.current
-    if (video && video instanceof HTMLVideoElement) {
-      const handleCanPlay = () => {
-        video.play().catch((error: unknown) => {
-          console.error('Error playing video:', error)
-        })
-      }
-
-      const handleError = () => {
-        if (video.error) {
-          console.error('Video error code:', video.error.code)
-          console.error('Video error message:', video.error.message)
-        }
-      }
-
-      video.addEventListener('canplay', handleCanPlay)
-      video.addEventListener('error', handleError)
-
-      // Try to load the video
-      video.load()
-
-      return () => {
-        video.removeEventListener('canplay', handleCanPlay)
-        video.removeEventListener('error', handleError)
-      }
-    }
-  }, [])
+  useVideoAutoPlay(videoRef)
 
   return (
     <section className="relative w-full md:min-h-180 h-96 md:max-h-none flex items-end md:items-center overflow-hidden">
@@ -53,8 +27,7 @@ const HeroSection = () => {
         muted
         playsInline
         preload="auto"
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{ zIndex: 1 }}
+        className="absolute inset-0 w-full h-full object-cover z-1"
         poster="/images/home/hero-bg.jpg"
         aria-label={t('imageAlt')}
         width="100%"
@@ -66,8 +39,7 @@ const HeroSection = () => {
 
       {/* Dark Overlay */}
       <div
-        className="absolute inset-0 bg-neutral-950 opacity-60"
-        style={{ zIndex: 2 }}
+        className="absolute inset-0 bg-neutral-950 opacity-60 z-2"
         aria-hidden="true"
       />
 
@@ -88,7 +60,8 @@ const HeroSection = () => {
             'text-xl md:text-5xl desktop:text-6xl',
             'leading-tight',
             'tracking-tight',
-            'text-neutral-white'
+            'text-neutral-white',
+            'w-4/5 md:w-full'
           )}
         >
           {t('headline')}
