@@ -63,8 +63,8 @@ const ImagePointer = ({ label, position, onClick }: ImagePointerProps) => (
     onClick={onClick}
     className={cn(
       'absolute flex flex-col items-center gap-4',
-      'cursor-pointer transition-opacity',
-      'hover:opacity-80 focus:opacity-80',
+      'cursor-pointer transition-transform',
+      'hover:scale-110 focus:scale-110',
       'focus:outline-none',
       'rounded-md'
     )}

@@ -30,7 +30,7 @@ const GoldenMealsSection = () => {
             src="/images/home/golden-meals-bg.png"
             alt={t('imageAlt')}
             fill
-            className={cn('object-cover scale-140 md:scale-100')}
+            className="object-cover scale-140 md:scale-100"
           />
         </div>
         <div
@@ -49,10 +49,9 @@ const GoldenMealsSection = () => {
             'w-full md:w-auto md:max-w-md',
             'px-8 md:px-10 py-12',
             'flex flex-col gap-8 items-start'
-            // 'm-5 mb-24 md:m-0'
           )}
         >
-          <div className={cn('flex flex-col gap-3', 'text-neutral-white')}>
+          <div className="flex flex-col gap-3 text-neutral-white">
             <h2
               className={cn(
                 'font-display',
