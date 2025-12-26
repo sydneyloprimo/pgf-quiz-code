@@ -13,25 +13,17 @@ const ValuePropCard = ({ title, description }: ValuePropCardProps) => (
     className={cn(
       'bg-neutral-300',
       'border border-quaternary-500',
-      'flex flex-col gap-10',
-      'px-12 py-[60px]',
+      'flex flex-col',
+      'px-12 py-15',
       'flex-1'
     )}
   >
-    <div className="flex flex-col gap-10">
-      <div className="flex h-[52.529px] items-center justify-center w-0">
-        <div className="flex-none" style={{ transform: 'rotate(270deg)' }}>
-          <Image
-            src="/images/formulation/line-icon-rotated.svg"
-            alt=""
-            width={53}
-            height={53}
-            className="h-auto w-auto"
-            aria-hidden="true"
-          />
-        </div>
-      </div>
+    <div className="flex flex-col">
       <div className="flex flex-col gap-4">
+        <div
+          className={cn('h-12', 'border-l border-quaternary-500')}
+          aria-hidden="true"
+        />
         <h3
           className={cn(
             'font-display',
@@ -84,7 +76,7 @@ const StepCard = ({
     className={cn(
       'bg-neutral-400',
       'flex flex-wrap gap-8',
-      'py-20 px-0',
+      'py-0 lg:py-15 px-0',
       'relative',
       'overflow-clip'
     )}
@@ -92,9 +84,10 @@ const StepCard = ({
     <div
       className={cn(
         'bg-neutral-400',
-        'flex flex-col items-center justify-center',
+        'flex flex-col items-center justify-start',
         'w-[204px]',
-        'shrink-0'
+        'shrink-0',
+        'pl-5 lg:pl-0'
       )}
     >
       <div
@@ -115,7 +108,7 @@ const StepCard = ({
         'flex flex-1 flex-col gap-8',
         'items-center justify-center',
         'min-w-[393px]',
-        'pb-12 pl-12 pr-[60px] pt-0',
+        'pb-0 lg:pb-12 pl-5 lg:pl-12 pr-[60px] pt-0',
         'relative'
       )}
     >
@@ -231,8 +224,8 @@ const ClinicalResearchSection = () => {
       className={cn(
         'relative w-full',
         'bg-neutral-400',
-        'px-5 md:px-24',
-        'py-16 md:py-[200px]',
+        'px-5 lg:px-24',
+        'py-16 lg:py-[200px]',
         'flex flex-col gap-12',
         'items-center justify-center'
       )}
@@ -271,7 +264,7 @@ const ClinicalResearchSection = () => {
           <h2
             className={cn(
               'font-display',
-              'text-5xl md:text-6xl',
+              'text-5xl lg:text-6xl',
               'leading-[56px]',
               'tracking-[-0.48px]',
               'text-quaternary-800',
@@ -303,7 +296,7 @@ const ClinicalResearchSection = () => {
         </div>
 
         {/* Value Prop Cards */}
-        <div className="flex flex-col md:flex-row gap-[19px] w-full">
+        <div className="flex flex-col lg:flex-row gap-[19px] w-full">
           {valueProps.map((prop, index) => (
             <ValuePropCard key={index} {...prop} />
           ))}
