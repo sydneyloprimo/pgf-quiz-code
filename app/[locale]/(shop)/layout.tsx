@@ -22,7 +22,10 @@ export default function RootLayout({
           <AnnouncementToast />
         </div>
       </LocaleWrapper>
-      <LocaleWrapper params={params} localeGroup="Home">
+      <LocaleWrapper
+        params={params}
+        localeGroup={['Home', 'Common', 'Formulation']}
+      >
         {children}
       </LocaleWrapper>
       <LocaleWrapper params={params} localeGroup="Footer">
