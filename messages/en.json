@@ -512,5 +512,10 @@
     "message": "Our Promise of Care: Every recipe is formulated to meet pharmaceutical grade standards for quality and digestibility. If your dog doesn't respond as expected, our nutrition team will work with you to make it right.",
     "closeButton": "Close alert"
   },
-  "Formulation": {}
+  "Formulation": {
+    "Introduction": {
+      "column1": "At Purely Golden Foods, we believe great nutrition begins with intention. Every recipe is a thoughtful blend of science and care—crafted by veterinary nutritionists, refined in our own kitchen, and inspired by the dogs we love.",
+      "column2": "We source only the finest ingredients, cook in small batches for freshness, and tailor each plan to match your dog's unique needs. It's nutrition made personal, nourishing, and real—because every dog deserves more than ordinary."
+    }
+  }
 }
