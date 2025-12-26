@@ -512,5 +512,39 @@
     "message": "Our Promise of Care: Every recipe is formulated to meet pharmaceutical grade standards for quality and digestibility. If your dog doesn't respond as expected, our nutrition team will work with you to make it right.",
     "closeButton": "Close alert"
   },
-  "Formulation": {}
+  "Formulation": {
+    "Ingredients": {
+      "title": "Ingredient Library",
+      "description": "Our carefully selected ingredients are chosen for their nutritional benefits and digestibility.",
+      "basil": {
+        "name": "Basil",
+        "description": "Rich in antioxidants and anti-inflammatory compounds that support overall health."
+      },
+      "pumpkin": {
+        "name": "Pumpkin",
+        "description": "High in fiber and beta-carotene, supporting digestive health and immune function."
+      },
+      "turmeric": {
+        "name": "Turmeric",
+        "description": "Contains curcumin, a powerful anti-inflammatory and antioxidant compound."
+      },
+      "avocado": {
+        "name": "Avocado Oil",
+        "description": "Rich in healthy fats and vitamin E for skin and coat health."
+      },
+      "raspberry": {
+        "name": "Raspberries",
+        "description": "Packed with vitamins, minerals, and antioxidants for immune support."
+      },
+      "lamb": {
+        "name": "Lamb",
+        "description": "High-quality protein source rich in essential amino acids and B vitamins."
+      },
+      "soybeans": {
+        "name": "Soy Beans",
+        "description": "Complete plant protein with essential amino acids and isoflavones."
+      },
+      "toggleAria": "Toggle ingredient details"
+    }
+  }
 }
