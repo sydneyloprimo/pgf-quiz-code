@@ -302,5 +302,12 @@
   "PromiseOfCareAlert": {
     "message": "Nuestra Promesa de Cuidado: Cada receta está formulada para cumplir con estándares de grado farmacéutico de calidad y digestibilidad. Si tu perro no responde como se espera, nuestro equipo de nutrición trabajará contigo para solucionarlo.",
     "closeButton": "Cerrar alerta"
+  },
+  "Formulation": {
+    "Precision": {
+      "title": "Precisión en Cada Lote",
+      "description": "Cada receta comienza con un pesaje meticuloso de lotes, asegurando que cada ingrediente rico en nutrientes se mida con precisión absoluta antes de entrar en nuestras cocinas. Durante la preparación, se mantienen registros detallados de temperatura para salvaguardar la integridad de los nutrientes y preservar la actividad enzimática óptima. Desde el abastecimiento hasta el emplatado, cada paso sigue un proceso de preparación rigurosamente controlado—uniendo la artesanía culinaria con la disciplina científica para entregar nutrición en su forma más pura, consistente y elevada.",
+      "imageAlt": "Comida nutritiva recién preparada con cuchara medidora"
+    }
   }
 }
