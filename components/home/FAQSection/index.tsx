@@ -35,7 +35,7 @@ const FAQSection = () => {
       >
         <Image
           src="/images/home/faq-right-veggie.svg"
-          alt=""
+          alt={t('decorativeRightVeggieAlt')}
           width={60}
           height={68}
           className="absolute w-44 h-60"
@@ -47,7 +47,7 @@ const FAQSection = () => {
         />
         <Image
           src="/images/home/faq-pepper-right.svg"
-          alt=""
+          alt={t('decorativeRightPepperAlt')}
           width={60}
           height={46}
           className="absolute w-15 h-11"
@@ -59,7 +59,7 @@ const FAQSection = () => {
         />
         <Image
           src="/images/home/faq-pepper-left.svg"
-          alt=""
+          alt={t('decorativeLeftPepperAlt')}
           width={60}
           height={68}
           className="absolute w-15 h-17"
@@ -71,7 +71,7 @@ const FAQSection = () => {
         />
         <Image
           src="/images/home/faq-left-veggie.svg"
-          alt=""
+          alt={t('decorativeLeftVeggieAlt')}
           width={100}
           height={68}
           className="absolute w-40 h-44"

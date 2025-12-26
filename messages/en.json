@@ -153,6 +153,7 @@
       "title": "Benefits"
     },
     "BostonAnnouncement": {
+      "backgroundImageAlt": "Decorative background image for Boston announcement section",
       "ctaButton": "Join the Waitlist",
       "description1": "We're thrilled to bring wholesome, vet-crafted meals to Boston.",
       "description2": "Make sure to join the waitlist to be the first to know when we expand to your area.",
@@ -174,6 +175,11 @@
       "title": "Explore our store"
     },
     "FAQ": {
+      "decorativeDividerAlt": "Decorative divider icon",
+      "decorativeLeftPepperAlt": "Decorative pepper illustration on the left",
+      "decorativeLeftVeggieAlt": "Decorative vegetable illustration on the left",
+      "decorativeRightPepperAlt": "Decorative pepper illustration on the right",
+      "decorativeRightVeggieAlt": "Decorative vegetable illustration on the right",
       "faq1Answer": "Follow the feeding guide on the package and adjust based on your dog's weight and activity. Ask your vet if unsure.",
       "faq1Question": "How can I determine the right portion size for my dog?",
       "faq2Answer": "Gradually mix the new food with the old over 7-10 days, increasing the new food ratio each day.",

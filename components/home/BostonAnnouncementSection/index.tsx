@@ -18,7 +18,7 @@ const BostonAnnouncementSection = () => {
           {/* Background Image */}
           <Image
             src="/images/home/boston-announcement-bg.jpg"
-            alt=""
+            alt={t('backgroundImageAlt')}
             fill
             className="object-cover"
             aria-hidden="true"
