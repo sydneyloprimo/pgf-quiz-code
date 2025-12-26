@@ -19,7 +19,7 @@ const FormulationHeroSection = () => {
         src="/images/formulation/hero-bg.jpg"
         alt={t('backgroundAlt')}
         fill
-        className="object-cover"
+        className="object-cover object-[center_25%]"
         priority
       />
 
@@ -27,7 +27,7 @@ const FormulationHeroSection = () => {
       <div
         className={cn(
           'absolute inset-0',
-          'bg-gradient-to-r from-neutral-950/80 to-transparent'
+          'bg-[linear-gradient(0deg,rgba(204,204,204,0)_-36.31%,rgba(106,43,0,0.6)_100%)]'
         )}
         aria-hidden="true"
       />
@@ -36,27 +36,39 @@ const FormulationHeroSection = () => {
       <div
         className={cn(
           'relative z-10',
-          'flex flex-col gap-4 md:gap-6',
+          'flex flex-col gap-10',
           'items-center text-center',
           'px-5 md:px-24 desktop:px-32',
           'max-w-2xl mx-auto'
         )}
       >
         <div className="flex flex-col gap-2">
-          <p className="font-sans text-sm md:text-base text-neutral-white/80">
-            {t('subtitle')}
-          </p>
           <h1
             className={cn(
               'font-display',
-              'text-3xl md:text-5xl desktop:text-6xl',
-              'leading-tight',
-              'tracking-tight',
-              'text-neutral-white'
+              'text-[48px]',
+              'leading-[56px]',
+              'tracking-[1.44px]',
+              'text-neutral-100',
+              '[text-shadow:0_4px_4px_rgba(0,0,0,0.25)]',
+              'text-center'
             )}
           >
             {t('title')}
           </h1>
+          <p
+            className={cn(
+              'font-sans',
+              'text-base',
+              'font-normal',
+              'leading-6',
+              'text-neutral-100',
+              '[text-shadow:0_4px_4px_rgba(0,0,0,0.25)]',
+              'text-center'
+            )}
+          >
+            {t('subtitle')}
+          </p>
         </div>
 
         <Button
