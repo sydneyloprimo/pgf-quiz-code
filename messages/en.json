@@ -512,5 +512,12 @@
     "message": "Our Promise of Care: Every recipe is formulated to meet pharmaceutical grade standards for quality and digestibility. If your dog doesn't respond as expected, our nutrition team will work with you to make it right.",
     "closeButton": "Close alert"
   },
-  "Formulation": {}
+  "Formulation": {
+    "DiscoverPlans": {
+      "title": "Discover our Plans",
+      "description": "Take our quick quiz to get a meal plan tailored to your dog's unique needs.",
+      "ctaButton": "Build your dog's Feeding Plan",
+      "backgroundAlt": "Happy dog with personalized meal"
+    }
+  }
 }
