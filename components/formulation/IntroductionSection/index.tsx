@@ -12,7 +12,7 @@ const IntroductionSection = () => {
         'relative w-full',
         'px-5 md:px-24 desktop:px-32',
         'py-16 md:py-24',
-        'bg-neutral-100',
+        'bg-neutral-400',
         'overflow-hidden'
       )}
     >
@@ -42,36 +42,24 @@ const IntroductionSection = () => {
       >
         <p
           className={cn(
-            'font-display font-normal',
-            'text-lg md:text-xl',
-            'leading-relaxed',
-            'text-secondary-900'
+            'font-sans font-normal',
+            'text-sm md:text-lg',
+            'leading-normal',
+            'text-secondary-950'
           )}
         >
           {t('column1')}
         </p>
         <p
           className={cn(
-            'font-display font-normal',
-            'text-lg md:text-xl',
-            'leading-relaxed',
-            'text-secondary-900'
+            'font-sans font-normal',
+            'text-sm md:text-lg',
+            'leading-normal',
+            'text-secondary-950'
           )}
         >
           {t('column2')}
         </p>
-      </div>
-
-      {/* Divider */}
-      <div className="flex items-center justify-center w-full mt-16">
-        <Image
-          src="/images/formulation/divider.svg"
-          alt=""
-          width={199}
-          height={2}
-          className="w-full max-w-md"
-          aria-hidden="true"
-        />
       </div>
     </section>
   )
