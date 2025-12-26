@@ -13,7 +13,7 @@ const PrecisionBatchSection = () => {
       <div
         className={cn(
           'relative z-10',
-          'grid grid-cols-1 md:grid-cols-2',
+          'grid grid-cols-1 lg:grid-cols-2',
           'items-center',
           'w-full max-w-full'
         )}
@@ -22,12 +22,12 @@ const PrecisionBatchSection = () => {
         <div
           className={cn(
             'relative w-full',
-            'h-auto md:h-[850px]',
-            'overflow-hidden md:overflow-visible'
+            'h-auto lg:h-[850px]',
+            'overflow-hidden lg:overflow-visible'
           )}
         >
-          {/* Mobile: natural image sizing */}
-          <div className="relative w-full h-auto md:hidden">
+          {/* Mobile/Tablet: natural image sizing */}
+          <div className="relative w-full h-auto lg:hidden">
             <Image
               src="/images/formulation/precision-batch-image-mobile.png"
               alt={t('imageAlt')}
@@ -37,7 +37,7 @@ const PrecisionBatchSection = () => {
             />
           </div>
           {/* Desktop: fixed height with overflow */}
-          <div className="hidden md:block absolute inset-0 overflow-visible">
+          <div className="hidden lg:block absolute inset-0 overflow-visible">
             <div className="relative h-full w-[200%] overflow-visible pointer-events-none">
               <Image
                 src="/images/formulation/precision-batch-image.png"
@@ -53,13 +53,13 @@ const PrecisionBatchSection = () => {
         <div
           className={cn(
             'relative flex flex-col',
-            'p-5 md:pl-40 md:pt-20 md:pr-[60px] md:pb-[140px]',
+            'p-5 lg:pl-40 lg:pt-20 lg:pr-[60px] lg:pb-[140px]',
             'w-full max-w-full'
           )}
         >
           {/* Decorative pattern - top right */}
           <div
-            className="absolute top-0 right-0 pointer-events-none hidden md:block"
+            className="absolute top-0 right-0 pointer-events-none hidden lg:block"
             aria-hidden="true"
           >
             <Image
@@ -73,16 +73,16 @@ const PrecisionBatchSection = () => {
 
           {/* Vertical line divider - extends from top, stops above body text */}
           <div
-            className="absolute top-0 right-0 w-px h-20 bg-secondary-700 opacity-30 hidden md:block"
+            className="absolute top-0 right-0 w-px h-20 bg-secondary-700 opacity-30 hidden lg:block"
             aria-hidden="true"
           />
 
           {/* Content */}
-          <div className="flex flex-col gap-6 md:gap-8 relative z-10">
+          <div className="flex flex-col gap-6 lg:gap-8 relative z-10">
             {/* Vertical divider before heading */}
             <div
               className={cn(
-                'hidden md:block',
+                'hidden lg:block',
                 'h-[178px]',
                 'border-r border-quaternary-500',
                 'mb-6'
@@ -92,10 +92,10 @@ const PrecisionBatchSection = () => {
             <h2
               className={cn(
                 'font-display',
-                'text-3xl md:text-4xl desktop:text-5xl',
+                'text-3xl lg:text-5xl',
                 'leading-tight',
                 'text-secondary-950',
-                'text-left md:text-right'
+                'text-left lg:text-right'
               )}
             >
               {(() => {
@@ -118,7 +118,7 @@ const PrecisionBatchSection = () => {
                 'text-base',
                 'leading-normal',
                 'text-secondary-950',
-                'text-left md:text-justify'
+                'text-left lg:text-justify'
               )}
             >
               {t('description')}
