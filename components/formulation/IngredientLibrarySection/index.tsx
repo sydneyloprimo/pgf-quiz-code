@@ -140,7 +140,12 @@ const IngredientLibrarySection = () => {
 
   return (
     <section
-      className={cn('w-full', 'px-24', 'pt-24', 'pb-36', 'bg-neutral-100')}
+      className={cn(
+        'w-full',
+        'px-5 py-14',
+        'tablet:px-24 tablet:pt-24 tablet:pb-36',
+        'bg-neutral-100'
+      )}
     >
       <div className="w-full">
         <h2
