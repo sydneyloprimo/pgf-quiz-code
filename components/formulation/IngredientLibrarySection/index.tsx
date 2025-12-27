@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { useCallback, useState } from 'react'
 
-import { ChevronIcon } from '@/components/common/Icon'
+import { MinusIcon, PlusIcon } from '@/components/common/Icon'
 import { cn } from '@/utils/cn'
 
 interface IngredientItemProps {
@@ -23,58 +23,74 @@ const IngredientItem = ({
   isOpen,
   onToggle,
   toggleAriaLabel,
-}: IngredientItemProps) => (
-  <button
-    type="button"
-    onClick={onToggle}
-    className={cn(
-      'w-full',
-      'border-b border-tertiary-200',
-      'py-6',
-      'flex flex-col gap-4',
-      'text-left'
-    )}
-    aria-expanded={isOpen}
-    aria-label={toggleAriaLabel}
-  >
-    <div className="flex items-center justify-between w-full">
-      <div className="flex items-center gap-4">
-        <Image
-          src={iconSrc}
-          alt=""
-          width={48}
-          height={48}
-          className="w-12 h-12"
-          aria-hidden="true"
-        />
-        <h3
-          className={cn(
-            'font-display',
-            'text-lg md:text-xl',
-            'text-secondary-950'
-          )}
-        >
-          {name}
-        </h3>
-      </div>
-      <ChevronIcon
-        direction={isOpen ? 'up' : 'down'}
-        className="w-5 h-5 text-secondary-700"
-      />
-    </div>
-    {isOpen && (
-      <p
+}: IngredientItemProps) => {
+  const handleToggle = useCallback(() => {
+    onToggle()
+  }, [onToggle])
+
+  return (
+    <div
+      className={cn(
+        'w-full',
+        'border-b border-tertiary-200',
+        isOpen && 'bg-neutral-200 border border-quaternary-200'
+      )}
+    >
+      <button
+        type="button"
+        onClick={handleToggle}
         className={cn(
-          'font-sans text-base leading-relaxed',
-          'text-secondary-700',
-          'pl-16'
+          'w-full',
+          'py-6 px-6',
+          'flex items-center justify-between',
+          'text-left'
         )}
+        aria-expanded={isOpen}
+        aria-label={toggleAriaLabel}
       >
-        {description}
-      </p>
-    )}
-  </button>
-)
+        <div className="flex items-center gap-5">
+          <Image
+            src={iconSrc}
+            alt=""
+            width={25}
+            height={28}
+            className="w-[25px] h-7"
+            aria-hidden="true"
+          />
+          <h3
+            className={cn(
+              'font-display',
+              'text-2xl leading-8',
+              'font-bold',
+              'text-quaternary-800'
+            )}
+          >
+            {name}
+          </h3>
+        </div>
+        {isOpen ? (
+          <MinusIcon className="w-6 h-6 text-quaternary-800" />
+        ) : (
+          <PlusIcon className="w-6 h-6 text-quaternary-800" />
+        )}
+      </button>
+      {isOpen && (
+        <div className="px-5 pb-5">
+          <p
+            className={cn(
+              'font-sans',
+              'text-lg leading-7',
+              'font-normal',
+              'text-secondary-950'
+            )}
+          >
+            {description}
+          </p>
+        </div>
+      )}
+    </div>
+  )
+}
 
 const IngredientLibrarySection = () => {
   const t = useTranslations('Formulation.Ingredients')
@@ -86,37 +102,37 @@ const IngredientLibrarySection = () => {
 
   const ingredients = [
     {
-      iconSrc: '/images/formulation/icon-basil.svg',
+      iconSrc: '/icons/basil-icon.svg',
       name: t('basil.name'),
       description: t('basil.description'),
     },
     {
-      iconSrc: '/images/formulation/icon-pumpkin.svg',
+      iconSrc: '/icons/pumpkin-icon.svg',
       name: t('pumpkin.name'),
       description: t('pumpkin.description'),
     },
     {
-      iconSrc: '/images/formulation/icon-turmeric.svg',
+      iconSrc: '/icons/turmeric-icon.svg',
       name: t('turmeric.name'),
       description: t('turmeric.description'),
     },
     {
-      iconSrc: '/images/formulation/icon-avocado.svg',
+      iconSrc: '/icons/pumpkin-icon.svg',
       name: t('avocado.name'),
       description: t('avocado.description'),
     },
     {
-      iconSrc: '/images/formulation/icon-raspberry.svg',
+      iconSrc: '/icons/raspberry-icon.svg',
       name: t('raspberry.name'),
       description: t('raspberry.description'),
     },
     {
-      iconSrc: '/images/formulation/icon-lamb.svg',
+      iconSrc: '/icons/lamb-icon.svg',
       name: t('lamb.name'),
       description: t('lamb.description'),
     },
     {
-      iconSrc: '/images/formulation/icon-soybeans.svg',
+      iconSrc: '/icons/soybeans-icon.svg',
       name: t('soybeans.name'),
       description: t('soybeans.description'),
     },
@@ -124,39 +140,21 @@ const IngredientLibrarySection = () => {
 
   return (
     <section
-      className={cn(
-        'w-full',
-        'px-5 md:px-24 desktop:px-32',
-        'py-16 md:py-24',
-        'bg-neutral-100'
-      )}
+      className={cn('w-full', 'px-24', 'pt-24', 'pb-36', 'bg-neutral-100')}
     >
-      <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="flex flex-col gap-4 mb-12 text-center">
-          <h2
-            className={cn(
-              'font-display',
-              'text-3xl md:text-4xl desktop:text-5xl',
-              'leading-tight',
-              'text-secondary-950'
-            )}
-          >
-            {t('title')}
-          </h2>
-          <p
-            className={cn(
-              'font-sans',
-              'text-base md:text-lg',
-              'leading-relaxed',
-              'text-secondary-700'
-            )}
-          >
-            {t('description')}
-          </p>
-        </div>
+      <div className="w-full">
+        <h2
+          className={cn(
+            'font-display',
+            'text-[2.5rem] leading-12',
+            'font-semibold',
+            'text-quaternary-800',
+            'mb-[22px]'
+          )}
+        >
+          {t('title')}
+        </h2>
 
-        {/* Ingredient List */}
         <div className="flex flex-col">
           {ingredients.map((ingredient, index) => (
             <IngredientItem

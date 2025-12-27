@@ -518,31 +518,31 @@
       "description": "Our carefully selected ingredients are chosen for their nutritional benefits and digestibility.",
       "basil": {
         "name": "Basil",
-        "description": "Rich in antioxidants and anti-inflammatory compounds that support overall health."
+        "description": "Basil is a versatile herb that brings a vibrant flavor to a variety of dishes. Packed with antioxidants, it helps fight free radicals in the body. Moreover, basil possesses anti-inflammatory properties and supports digestive health. Its fragrant leaves elevate the taste of sauces, salads, and even drinks, making it an excellent choice for both cooking and garnishing. We source our basil from local organic farms from Boston to ensure the highest quality."
       },
       "pumpkin": {
         "name": "Pumpkin",
-        "description": "High in fiber and beta-carotene, supporting digestive health and immune function."
+        "description": "Pumpkin is a nutrient-dense ingredient that provides essential vitamins and minerals for your dog's well-being. High in fiber and beta-carotene, it supports digestive health and immune function. The natural fiber content helps maintain healthy digestion and can aid in weight management. Rich in antioxidants, pumpkin also contributes to overall cellular health and helps protect against oxidative stress. We carefully select fresh, organic pumpkins to provide the best nutritional benefits."
       },
       "turmeric": {
         "name": "Turmeric",
-        "description": "Contains curcumin, a powerful anti-inflammatory and antioxidant compound."
+        "description": "Turmeric is a powerful spice known for its remarkable health benefits. It contains curcumin, a potent anti-inflammatory and antioxidant compound that helps reduce inflammation throughout the body. This golden spice supports joint health, promotes healthy digestion, and contributes to overall wellness. Turmeric's natural properties make it an excellent addition to your dog's diet, helping to maintain mobility and support the body's natural healing processes. We use premium-grade turmeric to ensure maximum potency and effectiveness."
       },
       "avocado": {
-        "name": "Avocado Oil",
-        "description": "Rich in healthy fats and vitamin E for skin and coat health."
+        "name": "Avocado",
+        "description": "Avocado is a nutrient-rich superfood that offers numerous health benefits for your dog. Rich in healthy monounsaturated fats and vitamin E, it supports skin and coat health, giving your pet a shiny, healthy appearance. The high fiber content aids in digestion and helps maintain a healthy weight. Avocados also contain essential vitamins and minerals that support overall wellness, including potassium, folate, and various B vitamins. We source only the finest, perfectly ripe avocados to provide optimal nutrition."
       },
       "raspberry": {
         "name": "Raspberries",
-        "description": "Packed with vitamins, minerals, and antioxidants for immune support."
+        "description": "Raspberries are a delicious and nutritious fruit packed with vitamins, minerals, and powerful antioxidants. These vibrant berries support immune function and help protect cells from damage caused by free radicals. Rich in vitamin C, manganese, and dietary fiber, raspberries contribute to overall health and well-being. The natural antioxidants found in raspberries, including ellagic acid and anthocyanins, provide anti-inflammatory benefits and support cardiovascular health. We select only the freshest, organic raspberries to ensure your dog receives the highest quality nutrition."
       },
       "lamb": {
         "name": "Lamb",
-        "description": "High-quality protein source rich in essential amino acids and B vitamins."
+        "description": "Lamb is a high-quality protein source that provides essential amino acids and B vitamins crucial for your dog's health. This lean meat is rich in iron, zinc, and selenium, supporting muscle development and overall vitality. Lamb is particularly beneficial for dogs with food sensitivities, as it's less commonly used in commercial pet foods. The complete amino acid profile supports healthy muscle maintenance, while B vitamins help maintain energy levels and support metabolic function. We source our lamb from trusted, sustainable farms that prioritize animal welfare and quality."
       },
       "soybeans": {
         "name": "Soy Beans",
-        "description": "Complete plant protein with essential amino acids and isoflavones."
+        "description": "Soybeans are a complete plant protein that provides all essential amino acids your dog needs for optimal health. These versatile legumes are rich in isoflavones, which have been shown to support heart health and provide antioxidant benefits. Soybeans are an excellent source of fiber, supporting digestive health and helping to maintain healthy cholesterol levels. They also contain essential minerals like iron, calcium, and magnesium, contributing to strong bones and overall wellness. We use only non-GMO, organic soybeans to ensure the highest quality and nutritional value for your pet."
       },
       "toggleAria": "Toggle ingredient details"
     }
