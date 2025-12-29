@@ -53,7 +53,7 @@ const PrecisionBatchSection = () => {
         <div
           className={cn(
             'relative flex flex-col',
-            'p-5 lg:pl-40 lg:pt-20 lg:pr-[60px] lg:pb-[140px]',
+            'p-5 lg:pl-40 lg:pt-20 lg:pr-16 lg:pb-36',
             'w-full max-w-full'
           )}
         >
@@ -83,7 +83,7 @@ const PrecisionBatchSection = () => {
             <div
               className={cn(
                 'hidden lg:block',
-                'h-[178px]',
+                'h-44',
                 'border-r border-quaternary-500',
                 'mb-6'
               )}
