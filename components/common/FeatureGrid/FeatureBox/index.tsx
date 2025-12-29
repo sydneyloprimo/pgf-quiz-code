@@ -19,9 +19,7 @@ const FeatureBox = ({
 }: FeatureBoxProps) => (
   <div
     className={cn(
-      'flex flex-col items-center justify-center',
-      'px-6 py-5 gap-8',
-      'aspect-square md:aspect-auto md:min-h-80',
+      'flex flex-col items-center justify-center px-6 py-5 gap-8 aspect-square md:aspect-auto md:min-h-80',
       isEven ? 'bg-neutral-400' : 'bg-neutral-300 border border-neutral-500'
     )}
   >

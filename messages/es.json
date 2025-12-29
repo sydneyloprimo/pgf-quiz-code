@@ -65,6 +65,29 @@
     "subscribedButton": "¡Suscrito!"
   },
   "Home": {
+    "BostonAnnouncement": {
+      "backgroundImageAlt": "Imagen decorativa de fondo para la sección de anuncio de Boston",
+      "ctaButton": "Únete a la Lista de Espera",
+      "description1": "Estamos emocionados de traer comidas saludables y elaboradas por veterinarios a Boston.",
+      "description2": "Asegúrate de unirte a la lista de espera para ser el primero en saber cuando nos expandamos a tu área.",
+      "title": "¡Ya estamos en Boston!"
+    },
+    "FAQ": {
+      "decorativeDividerAlt": "Icono decorativo divisor",
+      "decorativeLeftPepperAlt": "Ilustración decorativa de pimiento a la izquierda",
+      "decorativeLeftVeggieAlt": "Ilustración decorativa de vegetal a la izquierda",
+      "decorativeRightPepperAlt": "Ilustración decorativa de pimiento a la derecha",
+      "decorativeRightVeggieAlt": "Ilustración decorativa de vegetal a la derecha",
+      "faq1Answer": "Sigue la guía de alimentación en el paquete y ajusta según el peso y la actividad de tu perro. Consulta a tu veterinario si no estás seguro.",
+      "faq1Question": "¿Cómo puedo determinar el tamaño de porción correcto para mi perro?",
+      "faq2Answer": "Mezcla gradualmente la comida nueva con la antigua durante 7-10 días, aumentando la proporción de comida nueva cada día.",
+      "faq2Question": "¿Cuál es la mejor manera de hacer la transición de mi perro a una comida nueva?",
+      "faq3Answer": "Observa síntomas como picazón, problemas digestivos o infecciones de oído. Consulta a tu veterinario para pruebas de alergia.",
+      "faq3Question": "¿Cómo puedo saber si mi perro es alérgico a ciertos ingredientes?",
+      "faq4Answer": "Intenta calentar la comida, agregar toppers o establecer un horario de alimentación consistente. Si los problemas persisten, consulta a tu veterinario.",
+      "faq4Question": "¿Qué debo hacer si mi perro se niega a comer?",
+      "title": "Preguntas Frecuentes"
+    },
     "title": "Hola mundo!"
   },
   "Quiz": {

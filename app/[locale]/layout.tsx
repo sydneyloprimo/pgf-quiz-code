@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     description:
       'Discover the best in online shopping at RS Blackmarket! We offer a wide range of products from furniture, tech gadgets to home decor. Enjoy great deals, fast shipping, and top-notch customer service. Explore now and experience effortless shopping at your fingertips.',
     images: '/images/temporary-metadata-image.png',
-    title: 'RS Blackmarket',
+    title: 'Purely Golden Foods',
   },
-  title: 'RS Blackmarket',
+  title: 'Purely Golden Foods',
 }
 
 type RootLayoutProps = PropsWithChildren<{
