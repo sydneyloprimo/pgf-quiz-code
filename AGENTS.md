@@ -517,7 +517,7 @@ export enum Routes {
 - **Design System First**: Always prefer design system tokens over custom values
 - **Custom Configuration**: All design tokens are defined in `app/[locale]/globals.css` using the `@theme` directive
 - **Variants Over Classes**: Prioritize Tailwind variants (`md:`, `hover:`, `focus:`, etc.) over extra classes
-- **Responsive Design**: Use mobile-first approach with `mobile:`, `tablet:`, `desktop:` custom variants
+- **Responsive Design**: Use mobile-first approach with standard Tailwind breakpoints (`sm:`, `md:`, `lg:`, `xl:`, `2xl:`). **NEVER use custom breakpoint variants like `mobile:`, `tablet:`, or `desktop:`** - Tailwind v4 uses standard breakpoints only
 - **Avoid Arbitrary Values**: Always prefer Tailwind's default utility classes over arbitrary values (e.g., `h-10` instead of `h-[40px]`, `w-6` instead of `w-[24px]`). Use arbitrary values only when there's no Tailwind equivalent and the value is design-specific
 - **Prefer Tailwind Utilities Over JavaScript**: Always prefer Tailwind utilities and pseudo-classes over JavaScript conditionals for styling. Use Tailwind's built-in pseudo-classes (e.g., `:placeholder-shown`, `:hover`, `:focus`, `:disabled`) instead of JavaScript state checks when possible
 
@@ -525,7 +525,7 @@ export enum Routes {
 
 ```typescript
 // ✅ Good - Using design system tokens and Tailwind variants
-<div className="text-sm tablet:text-xl font-bold hover:bg-primary-700 focus:outline-primary-600">
+<div className="text-sm lg:text-xl font-bold hover:bg-primary-700 focus:outline-primary-600">
   Content
 </div>
 
