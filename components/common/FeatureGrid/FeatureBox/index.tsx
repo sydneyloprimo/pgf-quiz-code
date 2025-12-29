@@ -8,6 +8,7 @@ interface FeatureBoxProps {
   description?: string
   isEven: boolean
   titleClassName?: string
+  orderClassName?: string
 }
 
 const FeatureBox = ({
@@ -16,11 +17,13 @@ const FeatureBox = ({
   description,
   isEven,
   titleClassName,
+  orderClassName,
 }: FeatureBoxProps) => (
   <div
     className={cn(
       'flex flex-col items-center justify-center px-6 py-5 gap-8 aspect-square md:aspect-auto md:min-h-80',
-      isEven ? 'bg-neutral-400' : 'bg-neutral-300 border border-neutral-500'
+      isEven ? 'bg-neutral-400' : 'bg-neutral-300 border border-neutral-500',
+      orderClassName
     )}
   >
     <div className="flex items-center justify-center h-12 text-tertiary-800">

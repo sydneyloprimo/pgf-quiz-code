@@ -10,6 +10,7 @@ export interface FeatureItem {
   description?: string
   type?: 'special'
   titleClassName?: string
+  orderClassName?: string
 }
 
 interface FeatureGridProps {
@@ -50,6 +51,7 @@ const FeatureGrid = ({
               description={feature.description}
               isEven={isEven}
               titleClassName={feature.titleClassName}
+              orderClassName={feature.orderClassName}
             />
           )
         })}

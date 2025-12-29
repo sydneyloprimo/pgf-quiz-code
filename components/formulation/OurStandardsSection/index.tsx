@@ -25,6 +25,7 @@ const OurStandardsSection = () => {
       ),
       title: t('clinicallyBacked'),
       titleClassName,
+      orderClassName: 'order-1 md:order-1',
     },
     {
       icon: (
@@ -41,6 +42,7 @@ const OurStandardsSection = () => {
       ),
       title: t('humanGrade'),
       titleClassName,
+      orderClassName: 'order-2 md:order-2',
     },
     {
       icon: (
@@ -57,6 +59,7 @@ const OurStandardsSection = () => {
       ),
       title: t('noAdditives'),
       titleClassName,
+      orderClassName: 'order-4 md:order-3',
     },
     {
       icon: (
@@ -73,6 +76,7 @@ const OurStandardsSection = () => {
       ),
       title: t('measuredPortions'),
       titleClassName,
+      orderClassName: 'order-3 md:order-4',
     },
   ]
 
