@@ -132,11 +132,63 @@
     "successfulLogout": "You have been logged out successfully"
   },
   "Home": {
+    "Benefits": {
+      "benefit1Description": "Fresh, whole-food ingredients crafted to support steady energy and overall wellness.",
+      "benefit1Title": "Balanced Nutrition",
+      "benefit2Description": "Quality proteins and healthy fats designed to fuel your dog's active lifestyle and maintain steady energy.",
+      "benefit2Title": "Sustained Energy",
+      "benefit3Description": "Antioxidant-rich ingredients and essential vitamins to strengthen natural defenses and support immune health.",
+      "benefit3Title": "Immune Support",
+      "benefit4Description": "Omega fatty acids and essential nutrients that promote a shiny, healthy coat and support overall skin wellness.",
+      "benefit4Title": "Coat Wellness",
+      "benefit5Description": "Fiber and prebiotics combined with digestive enzymes to support optimal gut health and nutrient absorption.",
+      "benefit5Title": "Digestive Health",
+      "description": "Human-grade, pumpkin-based meals for your furry friends. Includes one puree and pre-portioned, tailored ingredients to easily cook up fresh, nutritious meals.",
+      "imageAlt": "Golden retriever enjoying the benefits of our food",
+      "pointerCoat": "COAT",
+      "pointerDigestion": "DIGESTION",
+      "pointerEnergy": "ENERGY",
+      "pointerImmunity": "IMMUNITY",
+      "pointerNutrition": "BALANCED NUTRITION",
+      "title": "Benefits"
+    },
+    "BostonAnnouncement": {
+      "backgroundImageAlt": "Decorative background image for Boston announcement section",
+      "ctaButton": "Join the Waitlist",
+      "description1": "We're thrilled to bring wholesome, vet-crafted meals to Boston.",
+      "description2": "Make sure to join the waitlist to be the first to know when we expand to your area.",
+      "title": "We're now live in Boston!"
+    },
+    "ClinicallyApproved": {
+      "ctaButton": "Learn more about Our Recipe",
+      "imageAlt": "Dog enjoying clinically approved meal",
+      "stat1": "Lorem ipsum dolor sit amet this is a text example or sentence example.",
+      "stat2": "Lorem ipsum dolor sit amet this is a text example or sentence example.",
+      "stat3": "Lorem ipsum dolor sit amet this is a text example or sentence example.",
+      "stat4": "Lorem ipsum dolor sit amet this is a text example or sentence example.",
+      "title": "Clinically approved by veterinary and food specialists."
+    },
     "ExploreCategories": {
       "alt": "Category image",
       "button": "Explore all categories",
       "subtitle": "Good as new",
       "title": "Explore our store"
+    },
+    "FAQ": {
+      "decorativeDividerAlt": "Decorative divider icon",
+      "decorativeLeftPepperAlt": "Decorative pepper illustration on the left",
+      "decorativeLeftVeggieAlt": "Decorative vegetable illustration on the left",
+      "decorativeRightPepperAlt": "Decorative pepper illustration on the right",
+      "decorativeRightVeggieAlt": "Decorative vegetable illustration on the right",
+      "faq1Answer": "Follow the feeding guide on the package and adjust based on your dog's weight and activity. Ask your vet if unsure.",
+      "faq1Question": "How can I determine the right portion size for my dog?",
+      "faq2Answer": "Gradually mix the new food with the old over 7-10 days, increasing the new food ratio each day.",
+      "faq2Question": "What is the best way to transition my dog to a new food?",
+      "faq3Answer": "Watch for symptoms like itching, digestive issues, or ear infections. Consult your vet for allergy testing.",
+      "faq3Question": "How can I tell if my dog is allergic to certain ingredients?",
+      "faq4Answer": "Try warming the food, adding toppers, or establishing a consistent feeding schedule. If issues persist, consult your vet.",
+      "faq4Question": "What should I do if my dog refuses to eat?",
+      "title": "Frequently Asked Questions"
     },
     "Features": {
       "clinicalDescription": "Developed in partnership with university-led research to target gut health and long-term wellness.",
@@ -182,6 +234,20 @@
       "description": "See what's trending in the market. Explore a wide variety of newly released products in our featured catalog.",
       "title": "Our latest products"
     },
+    "Reviews": {
+      "nextAria": "Next review",
+      "prevAria": "Previous review",
+      "review1Name": "David M.",
+      "review1Quote": "More energy and joy at mealtime.",
+      "review1Text": "My older dog was starting to get picky with his food and had lost some of his energy. Since switching to Purely Golden Foods, he's like a puppy again! He gobbles up his meals and has so much more pep in his step. Thank you for giving my furry friend a healthier and happier life!",
+      "review2Name": "Mark L.",
+      "review2Quote": "Healthy, human-grade meals my puppy loves.",
+      "review2Text": "I'm a new puppy parent and was worried about finding a food that was both healthy and appealing to my little guy. He absolutely loves the Purely Golden Foods meals! I love that it's human-grade and made with real ingredients I recognize. Plus, knowing it's good for him gives me such peace of mind.",
+      "review3Name": "Sarah T.",
+      "review3Quote": "Best decision for my dog's health.",
+      "review3Text": "After years of trying different brands, I finally found what works for my sensitive golden. No more digestive issues, and his coat has never looked better! The quality is unmatched, and I can tell he feels great. Worth every penny for the peace of mind and visible results.",
+      "title": "Trusted by Devoted Dog Parents"
+    },
     "ShopProducts": {
       "button": "Shop products",
       "description_one": "Everything you need for your dream home",
@@ -192,6 +258,12 @@
       "returns": "No-hassle returns",
       "returns_alt": "No-hassle returns image",
       "title": "Elegant & Affordable"
+    },
+    "VetNutritionist": {
+      "ctaButton": "Chat with Our Clinical Nutrition Concierge",
+      "description": "Speak with a veterinary nutrition expert for tailored insights into your dog's diet, wellness goals, and daily habits. Together, we'll ensure their meals are balanced, purposeful, and crafted with the care they deserve.",
+      "linkText": "Build your dog's plan",
+      "title": "Talk to a Vet-Nutritionist"
     }
   },
   "MainNav": {
