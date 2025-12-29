@@ -143,7 +143,7 @@ const IngredientLibrarySection = () => {
       className={cn(
         'w-full',
         'px-5 py-14',
-        'tablet:px-24 tablet:pt-24 tablet:pb-36',
+        'md:px-24 md:pt-24 md:pb-36',
         'bg-neutral-100'
       )}
     >
