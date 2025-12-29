@@ -45,10 +45,9 @@ const FormulationHeroSection = () => {
         <div className="flex flex-col gap-2">
           <h1
             className={cn(
+              'heading-h1',
               'font-display',
-              'text-[48px]',
-              'leading-[56px]',
-              'tracking-[1.44px]',
+              'tracking-wide',
               'text-neutral-100',
               '[text-shadow:0_4px_4px_rgba(0,0,0,0.25)]',
               'text-center'
