@@ -24,10 +24,10 @@ const IntroductionSection = () => {
         <Image
           src="/images/formulation/decorative-group.svg"
           alt=""
-          width={200}
-          height={200}
-          className="absolute w-48 h-48 opacity-30"
-          style={{ right: '5%', top: '10%' }}
+          width={584}
+          height={824}
+          className="absolute opacity-30"
+          style={{ right: '-25%', top: '0%' }}
         />
       </div>
 
