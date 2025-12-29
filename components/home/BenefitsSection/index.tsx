@@ -26,7 +26,7 @@ const BenefitItem = ({
   <button
     type="button"
     onClick={onClick}
-    className={cn('w-full text-left', 'flex flex-col gap-2', 'py-2')}
+    className="w-full text-left flex flex-col gap-2 py-2"
     aria-expanded={isActive}
   >
     <span
@@ -38,13 +38,7 @@ const BenefitItem = ({
       {number}. {title}
     </span>
     {isActive && (
-      <p
-        className={cn(
-          'font-sans text-base leading-6',
-          'text-secondary-950',
-          'pl-7'
-        )}
-      >
+      <p className="font-sans text-base leading-6 text-secondary-950 pl-7">
         {description}
       </p>
     )}
@@ -61,25 +55,12 @@ const ImagePointer = ({ label, position, onClick }: ImagePointerProps) => (
   <button
     type="button"
     onClick={onClick}
-    className={cn(
-      'absolute flex flex-col items-center gap-4',
-      'cursor-pointer transition-transform',
-      'hover:scale-110 focus:scale-110',
-      'focus:outline-none',
-      'rounded-md'
-    )}
+    className="absolute flex flex-col items-center gap-4 cursor-pointer transition-transform hover:scale-110 focus:scale-110 focus:outline-none rounded-md"
     style={position}
     aria-label={label}
   >
     <BenefitPointerIcon className="size-5 text-secondary-500" />
-    <span
-      className={cn(
-        'font-bold text-sm leading-tight',
-        'text-neutral-100 text-center',
-        'tracking-widest uppercase',
-        'drop-shadow-md'
-      )}
-    >
+    <span className="font-bold text-sm leading-tight text-neutral-100 text-center tracking-widest uppercase drop-shadow-md">
       {label}
     </span>
   </button>
@@ -109,37 +90,15 @@ const BenefitsSection = () => {
   }))
 
   return (
-    <section className={cn('w-full', 'px-5 md:px-11 py-8')}>
-      <div
-        className={cn('w-full', 'flex flex-col lg:flex-row', 'items-stretch')}
-      >
+    <section className="w-full px-5 md:px-11 py-8">
+      <div className="w-full flex flex-col lg:flex-row items-stretch">
         {/* Left Content - Accordion */}
-        <div
-          className={cn(
-            'w-full lg:w-1/2',
-            'bg-neutral-400',
-            'px-8 md:px-16 py-16 md:py-20',
-            'flex flex-col gap-12',
-            'order-2 lg:order-1'
-          )}
-        >
+        <div className="w-full lg:w-1/2 bg-neutral-400 px-8 md:px-16 py-16 md:py-20 flex flex-col gap-12 order-2 lg:order-1">
           <div className="flex flex-col gap-4">
-            <h2
-              className={cn(
-                'font-display',
-                'text-3xl md:text-4xl',
-                'leading-tight md:leading-12',
-                'text-secondary-950'
-              )}
-            >
+            <h2 className="font-display text-3xl md:text-4xl leading-tight md:leading-12 text-secondary-950">
               {t('title')}
             </h2>
-            <p
-              className={cn(
-                'font-sans text-lg leading-7',
-                'text-secondary-950'
-              )}
-            >
+            <p className="font-sans text-lg leading-7 text-secondary-950">
               {t('description')}
             </p>
           </div>
@@ -159,15 +118,7 @@ const BenefitsSection = () => {
         </div>
 
         {/* Right Content - Image with Pointers */}
-        <div
-          className={cn(
-            'w-full lg:w-1/2',
-            'relative',
-            'min-h-96 lg:min-h-0',
-            'overflow-hidden',
-            'order-1 lg:order-2'
-          )}
-        >
+        <div className="w-full lg:w-1/2 relative min-h-96 lg:min-h-0 overflow-hidden order-1 lg:order-2">
           <Image
             src="/images/home/benefits-dog.jpg"
             alt={t('imageAlt')}

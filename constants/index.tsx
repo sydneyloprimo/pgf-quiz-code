@@ -430,3 +430,57 @@ export const BENEFITS_DATA: BenefitData[] = [
     benefitIndex: 4,
   },
 ] as const
+
+// FAQ section data
+export interface FAQData {
+  questionKey: string
+  answerKey: string
+}
+
+export const FAQS_DATA: FAQData[] = [
+  {
+    questionKey: 'faq1Question',
+    answerKey: 'faq1Answer',
+  },
+  {
+    questionKey: 'faq2Question',
+    answerKey: 'faq2Answer',
+  },
+  {
+    questionKey: 'faq3Question',
+    answerKey: 'faq3Answer',
+  },
+  {
+    questionKey: 'faq4Question',
+    answerKey: 'faq4Answer',
+  },
+] as const
+
+// Reviews section data
+export interface ReviewData {
+  image: string
+  quoteKey: string
+  reviewKey: string
+  nameKey: string
+}
+
+export const REVIEWS_DATA: ReviewData[] = [
+  {
+    image: '/images/home/reviews-david.jpg',
+    quoteKey: 'review1Quote',
+    reviewKey: 'review1Text',
+    nameKey: 'review1Name',
+  },
+  {
+    image: '/images/home/reviews-mark.jpg',
+    quoteKey: 'review2Quote',
+    reviewKey: 'review2Text',
+    nameKey: 'review2Name',
+  },
+  {
+    image: '/images/home/reviews-david.jpg',
+    quoteKey: 'review3Quote',
+    reviewKey: 'review3Text',
+    nameKey: 'review3Name',
+  },
+] as const
