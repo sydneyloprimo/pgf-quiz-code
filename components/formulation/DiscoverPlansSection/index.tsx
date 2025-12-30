@@ -12,7 +12,7 @@ const DiscoverPlansSection = () => {
     <section
       className={cn(
         'w-full',
-        'py-[60px]',
+        'py-16',
         'lg:py-20',
         'px-5',
         'lg:px-24',
@@ -22,11 +22,11 @@ const DiscoverPlansSection = () => {
       <div
         className={cn(
           'flex',
-          'max-w-[1440px]',
+          'max-w-screen-2xl',
           'flex-col',
           'justify-center',
           'items-center',
-          'gap-[60px]',
+          'gap-16',
           'self-stretch',
           'w-full'
         )}
@@ -36,7 +36,7 @@ const DiscoverPlansSection = () => {
             'relative',
             'flex flex-col',
             'items-start justify-end',
-            'h-[321px]',
+            'h-80',
             'lg:h-auto',
             'w-full'
           )}
@@ -83,10 +83,10 @@ const DiscoverPlansSection = () => {
               'gap-4',
               'lg:gap-8',
               'w-full',
-              'lg:w-[617px]',
-              'max-w-[637px]',
+              'lg:w-[600px]',
+              'max-w-2xl',
               'p-5',
-              'lg:p-[60px]'
+              'lg:p-16'
             )}
           >
             <div
@@ -94,7 +94,7 @@ const DiscoverPlansSection = () => {
                 'flex flex-col items-center',
                 'text-neutral-white',
                 'w-full',
-                'lg:w-[392px]'
+                'lg:w-96'
               )}
             >
               <h2
@@ -102,8 +102,8 @@ const DiscoverPlansSection = () => {
                   'font-display',
                   'text-xl',
                   'leading-7',
-                  'lg:text-[48px]',
-                  'lg:leading-[56px]',
+                  'lg:text-5xl',
+                  'lg:leading-[1.167]',
                   'tracking-[-0.48px]',
                   'w-full'
                 )}
