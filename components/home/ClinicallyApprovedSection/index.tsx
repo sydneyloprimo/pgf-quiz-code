@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
+import { Routes } from '@/types/enums/routes'
 
 interface StatItemProps {
   percentage: string
@@ -62,7 +63,11 @@ const ClinicallyApprovedSection = () => {
             </div>
           </div>
 
-          <Button variant="tertiary" href="/recipe" className="w-full md:w-3/5">
+          <Button
+            variant="tertiary"
+            href={Routes.formulation}
+            className="w-full md:w-3/5"
+          >
             {t('ctaButton')}
           </Button>
         </div>
