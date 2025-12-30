@@ -68,9 +68,9 @@ export const IngredientItem = ({
           </h3>
         </div>
         {isOpen ? (
-          <MinusIcon className="w-6 h-6 text-quaternary-800" />
+          <MinusIcon className="w-6 h-6 text-quaternary-800 cursor-pointer" />
         ) : (
-          <PlusIcon className="w-6 h-6 text-quaternary-800" />
+          <PlusIcon className="w-6 h-6 text-quaternary-800 cursor-pointer" />
         )}
       </button>
       {isOpen && (
