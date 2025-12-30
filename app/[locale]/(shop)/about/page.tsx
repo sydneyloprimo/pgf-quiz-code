@@ -1,4 +1,5 @@
 import { CommitmentSection } from '@/components/about/CommitmentSection'
+import { CTASection } from '@/components/about/CTASection'
 import { ExpertsSection } from '@/components/about/ExpertsSection'
 import { GallerySection } from '@/components/about/GallerySection'
 import { HeroSection } from '@/components/about/HeroSection'
@@ -16,6 +17,7 @@ export default function AboutPage() {
       <MissionSection />
       <CommitmentSection />
       <ExpertsSection />
+      <CTASection />
     </main>
   )
 }
