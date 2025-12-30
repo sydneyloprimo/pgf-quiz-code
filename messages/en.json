@@ -609,6 +609,11 @@
       "paragraph1": "At our dedicated dog food company, we are deeply committed to enhancing the lives of animals through exceptional nutrition that is specifically tailored to meet their unique needs. Our passion drives us to actively collaborate with local shelters and rescue organizations, allowing us to create a meaningful and lasting impact within our community.",
       "paragraph2": "By joining forces with these vital organizations, we aim not only to provide nutritious meals that promote health and vitality but also to host engaging and fun adoption events that help pets find their forever homes. Through these initiatives, we believe we can make a significant difference in the lives of these animals, ensuring they receive the love, care, and attention they truly deserve. Together, we can foster a compassionate environment where every pet has the opportunity to thrive and be cherished.",
       "signature": "Irene Ou, Founder & CEO"
+    },
+    "Gallery": {
+      "image1Alt": "Gallery image 1",
+      "image2Alt": "Gallery image 2",
+      "image3Alt": "Gallery image 3"
     }
   }
 }

@@ -363,6 +363,11 @@
       "paragraph1": "En nuestra empresa dedicada a la comida para perros, estamos profundamente comprometidos a mejorar las vidas de los animales a través de una nutrición excepcional que está específicamente diseñada para satisfacer sus necesidades únicas. Nuestra pasión nos impulsa a colaborar activamente con refugios locales y organizaciones de rescate, permitiéndonos crear un impacto significativo y duradero dentro de nuestra comunidad.",
       "paragraph2": "Al unir fuerzas con estas organizaciones vitales, nuestro objetivo no solo es proporcionar comidas nutritivas que promuevan la salud y vitalidad, sino también organizar eventos de adopción atractivos y divertidos que ayuden a las mascotas a encontrar sus hogares para siempre. A través de estas iniciativas, creemos que podemos marcar una diferencia significativa en las vidas de estos animales, asegurando que reciban el amor, cuidado y atención que realmente merecen. Juntos, podemos fomentar un ambiente compasivo donde cada mascota tenga la oportunidad de prosperar y ser apreciada.",
       "signature": "Irene Ou, Fundadora y CEO"
+    },
+    "Gallery": {
+      "image1Alt": "Imagen de galería 1",
+      "image2Alt": "Imagen de galería 2",
+      "image3Alt": "Imagen de galería 3"
     }
   }
 }
