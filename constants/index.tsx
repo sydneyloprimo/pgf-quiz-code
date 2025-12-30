@@ -1,4 +1,18 @@
 import type { BreedOption } from '@/components/quiz/QuizBreedSelection/BreedDropdown'
+import { Routes } from '@/types/enums/routes'
+
+// Navigation links - centralized for MainNav and Footer
+export interface NavLink {
+  href: Routes
+  labelKey: string
+}
+
+export const NAV_LINKS: NavLink[] = [
+  { href: Routes.home, labelKey: 'home' },
+  { href: Routes.formulation, labelKey: 'ourFormulation' },
+  { href: Routes.about, labelKey: 'about' },
+  { href: Routes.contact, labelKey: 'contact' },
+]
 
 // Tailwind default md breakpoint is 768px
 export const MOBILE_WIDTH = 768
@@ -362,5 +376,111 @@ export const HOW_IT_WORKS_STEPS: HowItWorksStep[] = [
     stepNumber: 3,
     titleKey: 'step3Title',
     descriptionKey: 'step3Description',
+  },
+] as const
+
+// Benefits section data
+export interface BenefitData {
+  titleKey: string
+  descriptionKey: string
+  pointerLabelKey?: string
+  pointerPosition?: {
+    top?: string
+    bottom?: string
+    left?: string
+    right?: string
+  }
+  benefitIndex: number
+}
+
+export const BENEFITS_DATA: BenefitData[] = [
+  {
+    titleKey: 'benefit1Title',
+    descriptionKey: 'benefit1Description',
+    pointerLabelKey: 'pointerNutrition',
+    pointerPosition: { top: '0', right: '30%' },
+    benefitIndex: 0,
+  },
+  {
+    titleKey: 'benefit2Title',
+    descriptionKey: 'benefit2Description',
+    pointerLabelKey: 'pointerEnergy',
+    pointerPosition: { bottom: '10%', left: '0' },
+    benefitIndex: 1,
+  },
+  {
+    titleKey: 'benefit3Title',
+    descriptionKey: 'benefit3Description',
+    pointerLabelKey: 'pointerImmunity',
+    pointerPosition: { top: '40%', left: '0' },
+    benefitIndex: 2,
+  },
+  {
+    titleKey: 'benefit4Title',
+    descriptionKey: 'benefit4Description',
+    pointerLabelKey: 'pointerCoat',
+    pointerPosition: { top: '50%', right: '0' },
+    benefitIndex: 3,
+  },
+  {
+    titleKey: 'benefit5Title',
+    descriptionKey: 'benefit5Description',
+    pointerLabelKey: 'pointerDigestion',
+    pointerPosition: { bottom: '5%', right: '25%' },
+    benefitIndex: 4,
+  },
+] as const
+
+// FAQ section data
+export interface FAQData {
+  questionKey: string
+  answerKey: string
+}
+
+export const FAQS_DATA: FAQData[] = [
+  {
+    questionKey: 'faq1Question',
+    answerKey: 'faq1Answer',
+  },
+  {
+    questionKey: 'faq2Question',
+    answerKey: 'faq2Answer',
+  },
+  {
+    questionKey: 'faq3Question',
+    answerKey: 'faq3Answer',
+  },
+  {
+    questionKey: 'faq4Question',
+    answerKey: 'faq4Answer',
+  },
+] as const
+
+// Reviews section data
+export interface ReviewData {
+  image: string
+  quoteKey: string
+  reviewKey: string
+  nameKey: string
+}
+
+export const REVIEWS_DATA: ReviewData[] = [
+  {
+    image: '/images/home/reviews-david.jpg',
+    quoteKey: 'review1Quote',
+    reviewKey: 'review1Text',
+    nameKey: 'review1Name',
+  },
+  {
+    image: '/images/home/reviews-mark.jpg',
+    quoteKey: 'review2Quote',
+    reviewKey: 'review2Text',
+    nameKey: 'review2Name',
+  },
+  {
+    image: '/images/home/reviews-david.jpg',
+    quoteKey: 'review3Quote',
+    reviewKey: 'review3Text',
+    nameKey: 'review3Name',
   },
 ] as const
