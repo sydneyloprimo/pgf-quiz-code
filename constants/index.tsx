@@ -484,3 +484,48 @@ export const REVIEWS_DATA: ReviewData[] = [
     nameKey: 'review3Name',
   },
 ] as const
+
+// Ingredient library section data
+export interface IngredientData {
+  iconSrc: string
+  nameKey: string
+  descriptionKey: string
+}
+
+export const INGREDIENTS_DATA: IngredientData[] = [
+  {
+    iconSrc: '/icons/basil-icon.svg',
+    nameKey: 'basil.name',
+    descriptionKey: 'basil.description',
+  },
+  {
+    iconSrc: '/icons/pumpkin-icon.svg',
+    nameKey: 'pumpkin.name',
+    descriptionKey: 'pumpkin.description',
+  },
+  {
+    iconSrc: '/icons/turmeric-icon.svg',
+    nameKey: 'turmeric.name',
+    descriptionKey: 'turmeric.description',
+  },
+  {
+    iconSrc: '/icons/pumpkin-icon.svg',
+    nameKey: 'avocado.name',
+    descriptionKey: 'avocado.description',
+  },
+  {
+    iconSrc: '/icons/raspberry-icon.svg',
+    nameKey: 'raspberry.name',
+    descriptionKey: 'raspberry.description',
+  },
+  {
+    iconSrc: '/icons/lamb-icon.svg',
+    nameKey: 'lamb.name',
+    descriptionKey: 'lamb.description',
+  },
+  {
+    iconSrc: '/icons/soybeans-icon.svg',
+    nameKey: 'soybeans.name',
+    descriptionKey: 'soybeans.description',
+  },
+] as const
