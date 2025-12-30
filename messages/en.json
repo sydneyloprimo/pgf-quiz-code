@@ -641,6 +641,21 @@
       "expert3Name": "Expert 3",
       "expert3Role": "Expert 3 Role",
       "title": "Our Commitment"
+    },
+    "Experts": {
+      "expert1Description": "Expert 1 description",
+      "expert1ImageAlt": "Expert 1 image",
+      "expert1Name": "Expert 1",
+      "expert1Role": "Expert 1 Role",
+      "expert2Description": "Expert 2 description",
+      "expert2ImageAlt": "Expert 2 image",
+      "expert2Name": "Expert 2",
+      "expert2Role": "Expert 2 Role",
+      "expert3Description": "Expert 3 description",
+      "expert3ImageAlt": "Expert 3 image",
+      "expert3Name": "Expert 3",
+      "expert3Role": "Expert 3 Role",
+      "title": "Our Experts"
     }
   }
 }

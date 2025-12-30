@@ -383,6 +383,21 @@
       "card2": "Cada comida está diseñada para apoyar la salud y felicidad de las mascotas.",
       "card3": "Nos mantenemos a estándares inquebrantables porque las mascotas merecen el mismo nivel de cuidado que nosotros.",
       "title": "Nuestro Compromiso"
+    },
+    "Experts": {
+      "ecvcnParagraph1": "Estamos emocionados por nuestra colaboración activa con ",
+      "ecvcnParagraph2": "ECVCN",
+      "ecvcnParagraph3": ", una asociación que tiene como objetivo mejorar la calidad de la nutrición de las mascotas. Juntos, estamos trabajando en soluciones innovadoras que se centran en la salud y sostenibilidad para las mascotas.",
+      "expert1Description": "La Dra. Willis-Mahn aporta casi dos décadas de experiencia clínica en medicina interna de animales pequeños y nutrición.",
+      "expert1ImageAlt": "Dra. Christine Willis-Mahn",
+      "expert1Name": "Dra. Christine Willis-Mahn DVM, DACVIM",
+      "expert2Description": "El Dr. Samuel Thompson tiene casi 20 años de experiencia en medicina interna de animales pequeños y nutrición.",
+      "expert2ImageAlt": "Dr. Samuel Thompson",
+      "expert2Name": "Dr. Samuel Thompson DVM, DACVIM",
+      "expert3Description": "La Dra. Emily Hartman cuenta con casi tres décadas de experiencia en medicina interna de animales pequeños y nutrición.",
+      "expert3ImageAlt": "Dra. Emily Hartman",
+      "expert3Name": "Dra. Emily Hartman DVM, DACVIM",
+      "title": "Conoce a los Expertos"
     }
   }
 }
