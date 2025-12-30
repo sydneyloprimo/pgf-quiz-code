@@ -322,8 +322,28 @@
       }
     }
   },
+  "Auth": {
+    "email": "Correo electrónico",
+    "emailPlaceholder": "Escribe tu Correo electrónico",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Escribe tu Contraseña"
+  },
   "PromiseOfCareAlert": {
     "message": "Nuestra Promesa de Cuidado: Cada receta está formulada para cumplir con estándares de grado farmacéutico de calidad y digestibilidad. Si tu perro no responde como se espera, nuestro equipo de nutrición trabajará contigo para solucionarlo.",
     "closeButton": "Cerrar alerta"
+  },
+  "SignIn": {
+    "accountQuestion": "¿No tienes una cuenta?",
+    "buttonText": "Iniciar sesión",
+    "closeButtonAriaLabel": "Cerrar página de inicio de sesión",
+    "createAccountLink": "Crear cuenta",
+    "emailRequired": "El correo electrónico es obligatorio",
+    "forgotPasswordLink": "¿Olvidaste tu contraseña?",
+    "formHeading": "Inicia sesión en PGF",
+    "formSubHeading": "Ofrece a tu perro una alimentación refinada y elaborada éticamente.",
+    "heroDescription": "Preparado con artesanía atemporal, guiado por la ciencia, adaptado a sus necesidades.",
+    "heroHeading": "Ofrece a tu perro una alimentación refinada y elaborada éticamente.",
+    "logoAlt": "Logo de Purely Golden Foods",
+    "passwordRequired": "La contraseña es obligatoria"
   }
 }

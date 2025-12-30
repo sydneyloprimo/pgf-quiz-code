@@ -564,8 +564,17 @@
     "searchTerms": "You searched for: {term}"
   },
   "SignIn": {
-    "buttonText": "Sign in",
+    "accountQuestion": "You don't have an account?",
+    "buttonText": "Log In",
+    "closeButtonAriaLabel": "Close login page",
+    "createAccountLink": "Create Account",
     "emailRequired": "Email is required",
+    "forgotPasswordLink": "Forgot your password?",
+    "formHeading": "Log in to PGF",
+    "formSubHeading": "Offer your dog refined, ethically crafted nourishment.",
+    "heroDescription": "Prepared with timeless craftsmanship, guided by science, tailored to their needs.",
+    "heroHeading": "Offer your dog refined, ethically crafted nourishment.",
+    "logoAlt": "Purely Golden Foods logo",
     "passwordRequired": "Password is required",
     "signupRedirectLink": "Sign up",
     "signupRedirectMessage": "Don't have an account?"

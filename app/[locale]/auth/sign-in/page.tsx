@@ -1,16 +1,17 @@
 'use client'
 
-import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { z } from 'zod'
 
-import AuthCard from '@/components/auth/AuthCard'
 import AuthForm from '@/components/auth/AuthForm'
-import Card from '@/components/common/Card'
+import { LoginCloseButton } from '@/components/auth/LoginCloseButton'
+import { LoginDivider } from '@/components/auth/LoginDivider'
+import { LoginFormCard } from '@/components/auth/LoginFormCard'
+import { LoginHero } from '@/components/auth/LoginHero'
 import { useUserAccess } from '@/hooks/useUserAccess'
 import event from '@/scripts/GoogleTagManager/event'
 import { Events, AuthenticationMethods } from '@/types/enums/events'
-import { Routes } from '@/types/enums/routes'
+import { cn } from '@/utils/cn'
 
 export default function SignIn() {
   const t = useTranslations('SignIn')
@@ -39,8 +40,21 @@ export default function SignIn() {
   })
 
   return (
-    <div className="flex flex-col gap-4">
-      <AuthCard>
+    <div
+      className={cn(
+        'bg-quaternary-800',
+        'content-center flex flex-wrap',
+        'gap-8 desktop:gap-[100px]',
+        'isolate items-center justify-center',
+        'px-5 desktop:px-24',
+        'py-10',
+        'relative size-full',
+        'min-h-screen'
+      )}
+    >
+      <LoginCloseButton />
+      <LoginHero />
+      <LoginFormCard>
         <AuthForm
           handleSubmit={handleSubmit}
           isLoading={isLoading}
@@ -49,17 +63,8 @@ export default function SignIn() {
           clearApiError={clearApiError}
           validationSchema={validationSchema}
         />
-      </AuthCard>
-      <Card className="mx-4 md:mx-32">
-        <div className="flex flex-col items-center gap-1">
-          <div>{t('signupRedirectMessage')}</div>
-          <Link className="w-full" href={Routes.signup}>
-            <button className="btn-secondary w-full h-11">
-              {t('signupRedirectLink')}
-            </button>
-          </Link>
-        </div>
-      </Card>
+      </LoginFormCard>
+      <LoginDivider />
     </div>
   )
 }
