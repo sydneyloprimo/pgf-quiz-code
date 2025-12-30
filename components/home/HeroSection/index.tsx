@@ -7,6 +7,7 @@ import { Button } from '@/components/common/Button'
 import { Link } from '@/components/common/Link'
 import { useConciergeContact } from '@/hooks/useConciergeContact'
 import { useVideoAutoPlay } from '@/hooks/useVideoAutoPlay'
+import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
 
 const HeroSection = () => {
@@ -18,7 +19,7 @@ const HeroSection = () => {
   useVideoAutoPlay(videoRef)
 
   return (
-    <section className="relative w-full md:min-h-180 h-96 md:max-h-none flex items-end md:items-center overflow-hidden">
+    <section className="relative w-full md:min-h-180 h-96 md:max-h-none flex items-end overflow-hidden">
       {/* Video Background */}
       <video
         ref={videoRef}
@@ -70,7 +71,7 @@ const HeroSection = () => {
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
           <Button
             variant="primary"
-            href="/quiz"
+            href={Routes.quiz}
             className="w-full md:w-auto px-4 py-4"
           >
             {t('ctaButton')}

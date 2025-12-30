@@ -12,6 +12,7 @@ import {
   ShoppingCartIcon,
   UserIcon,
 } from '@/components/common/Icon'
+import { NAV_LINKS } from '@/constants'
 import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
 
@@ -48,12 +49,10 @@ const MainNav = () => {
     setIsMobileMenuOpen(false)
   }, [])
 
-  const navLinks = [
-    { href: Routes.home, label: t('home') },
-    { href: '/formulation', label: t('ourFormulation') },
-    { href: '/about', label: t('aboutUs') },
-    { href: '/contact', label: t('contact') },
-  ]
+  const navLinks = NAV_LINKS.map((link) => ({
+    href: link.href,
+    label: t(link.labelKey),
+  }))
 
   const isActiveLink = (href: string) => {
     if (href === Routes.home) {
