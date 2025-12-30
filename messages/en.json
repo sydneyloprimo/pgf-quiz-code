@@ -103,6 +103,10 @@
     "emailAria": "Enter your email address",
     "emailPlaceholder": "Type your email here",
     "footerNavAria": "Footer navigation",
+    "linkAbout": "About Us",
+    "linkContact": "Contact information",
+    "linkHome": "Home",
+    "linkRecipe": "Our Recipe",
     "logoAria": "Go to homepage",
     "newsletterDescription": "Get early access to clinical updates, expert insights, and exclusive product drops.",
     "newsletterTitle": "Join our waitlist and newsletter",
@@ -263,7 +267,7 @@
     }
   },
   "MainNav": {
-    "about": "About",
+    "aboutUs": "About Us",
     "ariaLabel": "Main navigation",
     "cartAria": "Shopping cart",
     "closeMenuAria": "Close menu",
