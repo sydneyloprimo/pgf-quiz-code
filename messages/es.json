@@ -368,6 +368,15 @@
       "image1Alt": "Imagen de galería 1",
       "image2Alt": "Imagen de galería 2",
       "image3Alt": "Imagen de galería 3"
+    },
+    "Mission": {
+      "image1Alt": "Imagen de misión 1",
+      "image2Alt": "Imagen de misión 2",
+      "image3Alt": "Imagen de misión 3",
+      "image4Alt": "Imagen de misión 4",
+      "paragraph1": "Nuestra misión es transformar la nutrición de las mascotas a través de estándares de grado farmacéutico e innovación reflexiva. Cada comida está diseñada para apoyar la salud y felicidad de las mascotas mientras honramos el planeta que todos compartimos, convirtiendo la alimentación diaria en un acto de cuidado.",
+      "paragraph2": "Creemos que el verdadero cuidado combina precisión y compasión. Cada receta está guiada por investigación clínica y elaborada con intención sincera, demostrando que la nutrición puede ser inteligente y profundamente sentida, combinando calidad con la calidez del genuino amor por los animales.",
+      "title": "Nuestra Misión"
     }
   }
 }

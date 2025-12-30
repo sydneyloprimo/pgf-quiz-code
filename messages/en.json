@@ -614,6 +614,15 @@
       "image1Alt": "Gallery image 1",
       "image2Alt": "Gallery image 2",
       "image3Alt": "Gallery image 3"
+    },
+    "Mission": {
+      "image1Alt": "Mission image 1",
+      "image2Alt": "Mission image 2",
+      "image3Alt": "Mission image 3",
+      "image4Alt": "Mission image 4",
+      "paragraph1": "Our mission is to transform pet nutrition through pharmaceutical-grade standards and thoughtful innovation. Each meal is designed to support the health and happiness of pets while honoring the planet we all share, turning daily feeding into an act of care.",
+      "paragraph2": "We believe that true care blends precision and compassion. Every recipe is guided by clinical research and crafted with heartfelt intention, proving that nourishment can be intelligent and deeply felt, combining quality with the warmth of genuine love for animals.",
+      "title": "Our Mission"
     }
   }
 }
