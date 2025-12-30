@@ -504,7 +504,7 @@ export const INGREDIENTS_DATA: IngredientData[] = [
     descriptionKey: 'pumpkin.description',
   },
   {
-    iconSrc: '/icons/turmeric-icon.svg',
+    iconSrc: '/icons/basil-icon.svg',
     nameKey: 'turmeric.name',
     descriptionKey: 'turmeric.description',
   },
@@ -514,7 +514,7 @@ export const INGREDIENTS_DATA: IngredientData[] = [
     descriptionKey: 'avocado.description',
   },
   {
-    iconSrc: '/icons/raspberry-icon.svg',
+    iconSrc: '/icons/basil-icon.svg',
     nameKey: 'raspberry.name',
     descriptionKey: 'raspberry.description',
   },
@@ -524,7 +524,7 @@ export const INGREDIENTS_DATA: IngredientData[] = [
     descriptionKey: 'lamb.description',
   },
   {
-    iconSrc: '/icons/soybeans-icon.svg',
+    iconSrc: '/icons/pumpkin-icon.svg',
     nameKey: 'soybeans.name',
     descriptionKey: 'soybeans.description',
   },
