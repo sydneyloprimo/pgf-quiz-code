@@ -656,6 +656,10 @@
       "expert3Name": "Expert 3",
       "expert3Role": "Expert 3 Role",
       "title": "Our Experts"
+    },
+    "CTA": {
+      "button": "Explore more about Our Formulation",
+      "quote": "Clinically crafted, Purposefully formulated"
     }
   }
 }
