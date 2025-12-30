@@ -1,3 +1,4 @@
+import { CommitmentSection } from '@/components/about/CommitmentSection'
 import { GallerySection } from '@/components/about/GallerySection'
 import { HeroSection } from '@/components/about/HeroSection'
 import { LeadershipSection } from '@/components/about/LeadershipSection'
@@ -12,6 +13,7 @@ export default function AboutPage() {
       <LeadershipSection />
       <GallerySection />
       <MissionSection />
+      <CommitmentSection />
     </main>
   )
 }
