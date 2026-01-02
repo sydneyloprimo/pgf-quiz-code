@@ -1,13 +1,15 @@
 'use client'
 
-import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { toast } from 'react-toastify'
 import { useMediaQuery } from 'usehooks-ts'
 import { z } from 'zod'
 
-import AuthCard from '@/components/auth/AuthCard'
 import AuthForm from '@/components/auth/AuthForm'
+import { LoginCloseButton } from '@/components/auth/LoginCloseButton'
+import { LoginDivider } from '@/components/auth/LoginDivider'
+import { SignUpFormCard } from '@/components/auth/SignUpFormCard'
+import { SignUpHero } from '@/components/auth/SignUpHero'
 import Toast, { ToastTypes } from '@/components/common/Toast'
 import { MediaQuery } from '@/constants'
 import { useUserAccess } from '@/hooks/useUserAccess'
@@ -60,24 +62,26 @@ export default function SignUp() {
   })
 
   return (
-    <AuthCard
-      footer={
-        <div className="flex justify-center gap-1">
-          <span>{t('signinRedirectMessage')}</span>
-          <Link className="link-primary" href={Routes.signin}>
-            {t('signinRedirectLink')}
-          </Link>
-        </div>
-      }
-    >
-      <AuthForm
-        handleSubmit={handleSubmit}
-        isLoading={isLoading}
-        buttonText={t('buttonText')}
-        apiError={apiError}
-        validationSchema={validationSchema}
-        clearApiError={clearApiError}
+    <div className="bg-quaternary-800 content-center flex flex-wrap gap-8 lg:gap-10 isolate items-center justify-center px-5 lg:px-24 pt-17 pb-10 lg:py-16 relative size-full min-h-screen overflow-hidden">
+      {/* Background Texture */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-30 bg-[url(/images/login-pattern.svg)] bg-repeat bg-auto"
+        aria-hidden="true"
       />
-    </AuthCard>
+      <LoginCloseButton translationNamespace="SignUp" />
+      <SignUpHero />
+      <SignUpFormCard>
+        <AuthForm
+          handleSubmit={handleSubmit}
+          isLoading={isLoading}
+          buttonText={t('buttonText')}
+          apiError={apiError}
+          clearApiError={clearApiError}
+          validationSchema={validationSchema}
+          redirectLinkHref={Routes.signin}
+        />
+      </SignUpFormCard>
+      <LoginDivider />
+    </div>
   )
 }

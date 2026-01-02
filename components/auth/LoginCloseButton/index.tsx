@@ -4,8 +4,14 @@ import { useTranslations } from 'next-intl'
 
 import { Routes } from '@/types/enums/routes'
 
-const LoginCloseButton = () => {
-  const t = useTranslations('SignIn')
+interface LoginCloseButtonProps {
+  translationNamespace?: string
+}
+
+const LoginCloseButton = ({
+  translationNamespace = 'SignIn',
+}: LoginCloseButtonProps) => {
+  const t = useTranslations(translationNamespace)
 
   return (
     <Link
