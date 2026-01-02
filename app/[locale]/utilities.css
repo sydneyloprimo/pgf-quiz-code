@@ -209,6 +209,10 @@
   background-color: var(--image-overlay);
 }
 
+@utility gradient-hero-overlay {
+  background: var(--gradient-hero-overlay);
+}
+
 /* Semantic Helpers - Grid */
 
 @utility grid-mobile {
