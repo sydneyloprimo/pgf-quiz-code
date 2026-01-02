@@ -18,41 +18,32 @@ const LoginFormCard = ({ children, className }: LoginFormCardProps) => {
       className={cn(
         'bg-tertiary-100',
         'flex flex-1 flex-col',
-        'max-w-[600px] min-w-[335px]',
-        'pb-12 pt-8 desktop:pt-[60px]',
-        'px-5 desktop:px-8',
+        'max-w-xl min-w-[335px]',
+        'pb-6 pt-4 lg:pt-15 lg:pb-12',
+        'px-5 lg:px-8',
         'gap-12',
-        'relative z-[2]',
+        'relative z-2',
         className
       )}
     >
       <div className="flex flex-col gap-8 items-center w-full">
         <div className="flex flex-col gap-5 items-center w-full">
-          <div className="flex justify-center desktop:hidden">
+          <div className="flex justify-center lg:hidden">
             <Link href={Routes.home}>
               <Image
-                src="/icons/logo-black.svg"
+                src="/images/login-logo-full.svg"
                 alt={t('logoAlt')}
-                width={115}
-                height={100}
+                width={156}
+                height={136}
                 priority
               />
             </Link>
           </div>
           <div className="flex flex-col gap-2 items-center text-center w-full">
-            <h2
-              className={cn(
-                'font-display',
-                'text-[32px] leading-[40px] tracking-[-0.32px]',
-                'desktop:text-[40px] desktop:leading-[48px] desktop:tracking-[-0.4px]',
-                'font-semibold',
-                'text-neutral-950',
-                'w-full'
-              )}
-            >
+            <h2 className="heading-h4 lg:heading-h2 tracking-tight text-neutral-950 w-full">
               {t('formHeading')}
             </h2>
-            <p className={cn('text-body-m', 'text-secondary-900', 'w-full')}>
+            <p className="text-body-m text-secondary-900 w-full">
               {t('formSubHeading')}
             </p>
           </div>

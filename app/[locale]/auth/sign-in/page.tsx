@@ -11,7 +11,6 @@ import { LoginHero } from '@/components/auth/LoginHero'
 import { useUserAccess } from '@/hooks/useUserAccess'
 import event from '@/scripts/GoogleTagManager/event'
 import { Events, AuthenticationMethods } from '@/types/enums/events'
-import { cn } from '@/utils/cn'
 
 export default function SignIn() {
   const t = useTranslations('SignIn')
@@ -40,18 +39,12 @@ export default function SignIn() {
   })
 
   return (
-    <div
-      className={cn(
-        'bg-quaternary-800',
-        'content-center flex flex-wrap',
-        'gap-8 desktop:gap-[100px]',
-        'isolate items-center justify-center',
-        'px-5 desktop:px-24',
-        'py-10',
-        'relative size-full',
-        'min-h-screen'
-      )}
-    >
+    <div className="bg-quaternary-800 content-center flex flex-wrap gap-8 lg:gap-10 isolate items-center justify-center px-5 lg:px-24 pt-17 pb-10 lg:py-16 relative size-full min-h-screen overflow-hidden">
+      {/* Background Texture */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-30 bg-[url(/images/login-pattern.svg)] bg-repeat bg-auto"
+        aria-hidden="true"
+      />
       <LoginCloseButton />
       <LoginHero />
       <LoginFormCard>

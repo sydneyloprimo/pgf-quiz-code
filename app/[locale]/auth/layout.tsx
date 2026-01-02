@@ -11,7 +11,7 @@ export default function AuthLayout({
 }>) {
   return (
     <LocaleWrapper params={params} localeGroup={['Auth', 'SignIn', 'SignUp']}>
-      <div className="h-screen w-full flex justify-center">{children}</div>
+      <div className="w-full flex justify-center">{children}</div>
     </LocaleWrapper>
   )
 }

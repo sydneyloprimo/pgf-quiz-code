@@ -15,7 +15,6 @@ import Input from '@/components/common/Input'
 import Spinner from '@/components/common/Spinner'
 import { InputIconPosition } from '@/types/enums/constants'
 import { Routes } from '@/types/enums/routes'
-import { cn } from '@/utils/cn'
 
 interface AuthFormProps {
   handleSubmit: (email: string, password: string) => Promise<void>
@@ -176,7 +175,7 @@ const AuthForm = ({
 
         <Button
           variant="primary"
-          className={cn('w-full mt-4 tracking-[0.4px] h-11')}
+          className="w-full mt-4 tracking-normal h-11"
           type="submit"
           disabled={
             !!errors.email?.message || !!errors.password?.message || isLoading
@@ -185,8 +184,8 @@ const AuthForm = ({
           {isLoading ? <Spinner /> : buttonText}
         </Button>
       </form>
-      <div className="flex flex-col gap-1 items-center w-full mt-3">
-        <p className="text-body-l text-tertiary-900 text-center">
+      <div className="flex flex-col lg:flex-row gap-1 items-center justify-center w-full mt-3">
+        <p className="text-body-l text-tertiary-900">
           {tSignIn('accountQuestion')}
         </p>
         <Link
