@@ -19,7 +19,7 @@ const LoginFormCard = ({ children, className }: LoginFormCardProps) => {
         'bg-tertiary-100',
         'flex flex-1 flex-col',
         'max-w-xl min-w-[335px]',
-        'pb-6 pt-4 lg:pt-15 lg:pb-12',
+        'pb-6 pt-6 lg:pt-15 lg:pb-12',
         'px-5 lg:px-8',
         'gap-12',
         'relative z-2',

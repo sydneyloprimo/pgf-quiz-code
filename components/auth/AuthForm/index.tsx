@@ -10,6 +10,9 @@ import { useState, useCallback } from 'react'
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
 import { z } from 'zod'
 
+import { EmailLabel } from './EmailLabel'
+import { PasswordLabel } from './PasswordLabel'
+
 import { Button } from '@/components/common/Button'
 import Input from '@/components/common/Input'
 import Spinner from '@/components/common/Spinner'
@@ -68,32 +71,6 @@ const AuthForm = ({
   const handleTogglePasswordVisibility = useCallback(() => {
     setIsPasswordVisible((prev) => !prev)
   }, [])
-
-  const EmailLabel = () => (
-    <div className="flex gap-1 items-center">
-      <span className="text-body-m font-bold text-secondary-900">
-        {t('email')}
-      </span>
-      <span className="text-body-m text-feedback-error-500">*</span>
-    </div>
-  )
-
-  const PasswordLabel = () => (
-    <div className="flex gap-2 items-center justify-between w-full">
-      <div className="flex gap-1 items-center">
-        <span className="text-body-m font-bold text-secondary-900">
-          {t('password')}
-        </span>
-        <span className="text-body-m text-feedback-error-500">*</span>
-      </div>
-      <Link
-        href={Routes.home}
-        className="text-body-s text-secondary-900 underline"
-      >
-        {tSignIn('forgotPasswordLink')}
-      </Link>
-    </div>
-  )
 
   return (
     <div className="flex flex-col gap-4 items-start w-full">
