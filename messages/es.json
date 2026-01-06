@@ -54,15 +54,30 @@
     "emailAria": "Ingresa tu dirección de correo electrónico",
     "emailPlaceholder": "Escribe tu correo aquí",
     "footerNavAria": "Navegación del pie de página",
-    "linkAbout": "Acerca de Nosotros",
-    "linkContact": "Información de contacto",
-    "linkHome": "Inicio",
-    "linkRecipe": "Nuestra Receta",
     "logoAria": "Ir a la página de inicio",
     "newsletterDescription": "Obtén acceso anticipado a actualizaciones clínicas, perspectivas de expertos y lanzamientos exclusivos de productos.",
     "newsletterTitle": "Únete a nuestra lista de espera y boletín",
     "subscribeButton": "Suscribirse",
     "subscribedButton": "¡Suscrito!"
+  },
+  "MainNav": {
+    "about": "Acerca de",
+    "ariaLabel": "Navegación principal",
+    "cartAria": "Carrito de compras",
+    "closeMenuAria": "Cerrar menú",
+    "contact": "Contacto",
+    "home": "Inicio",
+    "logoAria": "Ir a la página de inicio",
+    "openMenuAria": "Abrir menú",
+    "ourFormulation": "Nuestra Formulación",
+    "profileAria": "Perfil de usuario",
+    "searchAria": "Buscar"
+  },
+  "Navigation": {
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "home": "Inicio",
+    "ourFormulation": "Nuestra Formulación"
   },
   "Home": {
     "BostonAnnouncement": {
@@ -325,5 +340,19 @@
   "PromiseOfCareAlert": {
     "message": "Nuestra Promesa de Cuidado: Cada receta está formulada para cumplir con estándares de grado farmacéutico de calidad y digestibilidad. Si tu perro no responde como se espera, nuestro equipo de nutrición trabajará contigo para solucionarlo.",
     "closeButton": "Cerrar alerta"
+  },
+  "Formulation": {
+    "Hero": {
+      "title": "Nuestra Formulación",
+      "subtitle": "Nutrición basada en ciencia",
+      "ctaButton": "Habla con un nutricionista veterinario",
+      "backgroundAlt": "Ingredientes de comida para perros recién preparados"
+    },
+    "Standards": {
+      "clinicallyBacked": "Nutrición Respaldada Clínicamente",
+      "humanGrade": "Ingredientes de Grado Humano",
+      "noAdditives": "Sin Aditivos Artificiales",
+      "measuredPortions": "Porciones Cuidadosamente Medidas"
+    }
   }
 }
