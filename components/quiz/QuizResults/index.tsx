@@ -5,6 +5,10 @@ import { useCallback, useMemo, useState } from 'react'
 import { useWatch, UseFormReturn } from 'react-hook-form'
 
 import { OptionSelectProduct } from '@/components/common/OptionSelectProduct'
+import {
+  ProductDetailPanel,
+  ProductDetailPanelData,
+} from '@/components/common/ProductDetailPanel'
 import { PromiseOfCareAlert } from '@/components/common/PromiseOfCareAlert'
 import {
   calculateDailyFoodAndPrice,
@@ -14,6 +18,7 @@ import {
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizResultsFooter } from '@/components/quiz/QuizResultsFooter'
 import { QuizResultsHeader } from '@/components/quiz/QuizResultsHeader'
+import { PRODUCT_DETAIL_IMAGES } from '@/constants'
 import { QUIZ_RESULT_PRODUCTS } from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
@@ -31,6 +36,7 @@ type Recipe = 'turkey' | 'lamb'
 const QuizResults = ({ formMethods }: QuizResultsProps) => {
   const { control } = formMethods
   const t = useTranslations('Quiz.results')
+  const tPanel = useTranslations('Common.ProductDetailPanel')
 
   const formData = useWatch({ control }) as QuizFormData
 
@@ -47,6 +53,9 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
     topper: 'everyWeek',
     fullMeal: 'everyWeek',
   })
+  const [isPanelOpen, setIsPanelOpen] = useState(false)
+  const [panelProductData, setPanelProductData] =
+    useState<ProductDetailPanelData | null>(null)
 
   const recipeOptions = useMemo(
     () => [
@@ -91,18 +100,6 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
     []
   )
 
-  const handleDetailsClick = useCallback(() => {
-    // TODO: Handle details click
-  }, [])
-
-  const handleSubscribeClick = useCallback(() => {
-    // TODO: Handle subscribe click
-  }, [])
-
-  const handleAddToCartClick = useCallback(() => {
-    // TODO: Handle add to cart click
-  }, [])
-
   const dogName = formData.name || ''
 
   const getPricePerDay = useCallback(
@@ -121,6 +118,97 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
     },
     [recipes, formData]
   )
+
+  const getProductDescription = useCallback(
+    (recipeType: Recipe): string => {
+      if (recipeType === 'turkey') {
+        return t('products.turkeyDescription')
+      }
+      return t('products.lambDescription')
+    },
+    [t]
+  )
+
+  const getProductPrice = useCallback(
+    (productMode: ProductMode): string => {
+      if (productMode === 'alaCarte') {
+        return '$19.79 / 2 kg'
+      }
+      const pricePerDay = getPricePerDay(productMode)
+      return `$${pricePerDay.toFixed(2)} / day`
+    },
+    [getPricePerDay]
+  )
+
+  const handleDetailsClick = useCallback(
+    (mode: ProductMode) => {
+      const recipe = recipes[mode]
+
+      const productData: ProductDetailPanelData = {
+        mode,
+        recipe,
+        images: {
+          main: PRODUCT_DETAIL_IMAGES.main,
+          thumbnails: [
+            PRODUCT_DETAIL_IMAGES.main,
+            PRODUCT_DETAIL_IMAGES.thumbnail2,
+            PRODUCT_DETAIL_IMAGES.thumbnail3,
+          ],
+        },
+        price: getProductPrice(mode),
+        description: getProductDescription(recipe),
+        sections: {
+          analyticalConstituents: {
+            title: tPanel('analyticalConstituentsTitle'),
+            content: tPanel('analyticalConstituentsContent'),
+          },
+          nutritionalFacts: {
+            title: tPanel('nutritionalFactsTitle'),
+            content: tPanel('nutritionalFactsContent'),
+          },
+          ingredients: {
+            title: tPanel('ingredientsTitle'),
+            content: tPanel('ingredientsContent'),
+          },
+        },
+      }
+
+      setPanelProductData(productData)
+      setIsPanelOpen(true)
+    },
+    [recipes, getProductPrice, getProductDescription, tPanel]
+  )
+
+  const handlePanelClose = useCallback(() => {
+    setIsPanelOpen(false)
+  }, [])
+
+  const handlePanelRecipeChange = useCallback(
+    (recipe: 'turkey' | 'lamb') => {
+      if (!panelProductData) return
+
+      const updatedData: ProductDetailPanelData = {
+        ...panelProductData,
+        recipe,
+        description: getProductDescription(recipe),
+      }
+
+      setPanelProductData(updatedData)
+      setRecipes((prev) => ({
+        ...prev,
+        [panelProductData.mode]: recipe,
+      }))
+    },
+    [panelProductData, getProductDescription]
+  )
+
+  const handleSubscribeClick = useCallback(() => {
+    // TODO: Handle subscribe click
+  }, [])
+
+  const handleAddToCartClick = useCallback(() => {
+    // TODO: Handle add to cart click
+  }, [])
 
   const getBenefits = useCallback(
     (mode: 'topper' | 'fullMeal') => {
@@ -178,7 +266,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
               }
               benefits={getBenefits(mode)}
               pricePerDay={getPricePerDay(mode)}
-              onDetailsClick={handleDetailsClick}
+              onDetailsClick={() => handleDetailsClick(product.mode)}
               onSubscribeClick={handleSubscribeClick}
             />
           )
@@ -208,11 +296,19 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
           recipeValue={recipes.alaCarte}
           onRecipeSelect={(value) => handleRecipeSelect('alaCarte', value)}
           benefits={getQuizBenefitsAlaCarte(t)}
-          onDetailsClick={handleDetailsClick}
+          onDetailsClick={() => handleDetailsClick('alaCarte')}
           onAddToCartClick={handleAddToCartClick}
         />
       </div>
       <QuizResultsFooter dogName={dogName} />
+
+      <ProductDetailPanel
+        isOpen={isPanelOpen}
+        onClose={handlePanelClose}
+        productData={panelProductData}
+        recipeOptions={recipeOptions}
+        onRecipeChange={handlePanelRecipeChange}
+      />
     </div>
   )
 }

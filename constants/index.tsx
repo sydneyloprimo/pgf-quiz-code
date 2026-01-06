@@ -484,3 +484,10 @@ export const REVIEWS_DATA: ReviewData[] = [
     nameKey: 'review3Name',
   },
 ] as const
+
+// Product detail panel images
+export const PRODUCT_DETAIL_IMAGES = {
+  main: '/images/product-detail-main.png',
+  thumbnail2: '/images/product-detail-thumbnail-2.png',
+  thumbnail3: '/images/product-detail-thumbnail-3.png',
+} as const
