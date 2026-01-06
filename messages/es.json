@@ -340,5 +340,13 @@
   "PromiseOfCareAlert": {
     "message": "Nuestra Promesa de Cuidado: Cada receta está formulada para cumplir con estándares de grado farmacéutico de calidad y digestibilidad. Si tu perro no responde como se espera, nuestro equipo de nutrición trabajará contigo para solucionarlo.",
     "closeButton": "Cerrar alerta"
+  },
+  "Formulation": {
+    "Hero": {
+      "title": "Nuestra Formulación",
+      "subtitle": "Nutrición basada en ciencia",
+      "ctaButton": "Habla con un nutricionista veterinario",
+      "backgroundAlt": "Ingredientes de comida para perros recién preparados"
+    }
   }
 }
