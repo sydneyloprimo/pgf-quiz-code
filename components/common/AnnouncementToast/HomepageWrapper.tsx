@@ -7,7 +7,6 @@ import { AnnouncementToast } from './index'
 import { Locale } from '@/i18n'
 import { Routes } from '@/types/enums/routes'
 
-
 const AnnouncementToastHomepageWrapper = () => {
   const pathname = usePathname()
   const isHomepage =
