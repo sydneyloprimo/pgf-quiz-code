@@ -83,7 +83,7 @@ const OurStandardsSection = () => {
     <FeatureGrid
       features={features}
       columns={2}
-      className="px-5 md:px-24 desktop:px-32 py-8"
+      className="bg-white px-5 md:px-24 desktop:px-32 py-8"
     />
   )
 }

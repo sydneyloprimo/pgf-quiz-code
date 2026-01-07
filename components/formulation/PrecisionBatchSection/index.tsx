@@ -57,20 +57,6 @@ const PrecisionBatchSection = () => {
             'w-full max-w-full'
           )}
         >
-          {/* Decorative pattern - top right */}
-          <div
-            className="absolute top-0 right-0 pointer-events-none hidden lg:block"
-            aria-hidden="true"
-          >
-            <Image
-              src="/images/formulation/precision-decorative.svg"
-              alt=""
-              width={200}
-              height={200}
-              className="w-32 h-32 opacity-20"
-            />
-          </div>
-
           {/* Vertical line divider - extends from top, stops above body text */}
           <div
             className="absolute top-0 right-0 w-px h-20 bg-secondary-700 opacity-30 hidden lg:block"
@@ -124,6 +110,32 @@ const PrecisionBatchSection = () => {
               {t('description')}
             </p>
           </div>
+        </div>
+
+        {/* Decorative pattern - top right */}
+        <div
+          className="absolute top-0 right-0 pointer-events-none hidden lg:flex lg:flex-col"
+          aria-hidden="true"
+        >
+          <Image
+            src="/images/formulation/precision-decorative.svg"
+            alt=""
+            width={255}
+            height={150}
+            className="w-[255px] h-[150px] opacity-20"
+          />
+        </div>
+        <div
+          className="absolute top-0 right-0 pointer-events-none hidden lg:flex lg:flex-col"
+          aria-hidden="true"
+        >
+          <Image
+            src="/images/formulation/precision-decorative-2.svg"
+            alt=""
+            width={318}
+            height={149}
+            className="w-[318px] h-[149px] opacity-20"
+          />
         </div>
       </div>
     </section>
