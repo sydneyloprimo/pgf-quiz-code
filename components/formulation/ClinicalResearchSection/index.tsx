@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
-import { STEP_COUNT, STEP_STATIC_DATA, VALUE_PROP_COUNT } from './constants'
+import { STEP_STATIC_DATA, VALUE_PROP_COUNT } from './constants'
 import { StepCard } from './StepCard'
 import { ValuePropCard } from './ValuePropCard'
 
@@ -16,9 +16,8 @@ const ClinicalResearchSection = () => {
     }
   })
 
-  const steps = Array.from({ length: STEP_COUNT }, (_, i) => {
+  const steps = STEP_STATIC_DATA.map((staticData, i) => {
     const index = i + 1
-    const staticData = STEP_STATIC_DATA[i]
     return {
       number: t(`step${index}Number`),
       title: t(`step${index}Title`),

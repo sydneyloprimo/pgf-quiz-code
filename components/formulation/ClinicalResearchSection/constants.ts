@@ -39,4 +39,3 @@ export const STEP_STATIC_DATA: StepStaticData[] = [
 ]
 
 export const VALUE_PROP_COUNT = 3
-export const STEP_COUNT = 3
