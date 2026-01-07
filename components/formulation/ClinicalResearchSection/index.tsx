@@ -27,6 +27,7 @@ const ClinicalResearchSection = () => {
       imageSrc: staticData.imageSrc,
       imageRotation: staticData.imageRotation,
       imagePosition: staticData.imagePosition,
+      moleculeSrc: staticData.moleculeSrc,
     }
   })
 

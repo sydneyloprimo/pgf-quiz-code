@@ -11,6 +11,7 @@ interface StepCardProps {
     bottom: string
     left: string
   }
+  moleculeSrc: string
 }
 
 const StepCard = ({
@@ -21,12 +22,21 @@ const StepCard = ({
   imageSrc,
   imageRotation,
   imagePosition,
+  moleculeSrc,
 }: StepCardProps) => (
   <div className="bg-neutral-400 flex flex-wrap gap-8 py-0 lg:py-15 px-0 relative overflow-clip">
-    <div className="bg-neutral-400 flex flex-col items-center justify-start w-[204px] shrink-0 pl-5 lg:pl-0">
+    <div className="bg-neutral-400 flex flex-col items-start justify-start w-[204px] shrink-0 pl-5 lg:pl-0">
       <div className="font-display text-[100px] leading-[100px] text-quaternary-800 text-center tracking-[-1px]">
         {number}
       </div>
+      <Image
+        src={moleculeSrc}
+        alt=""
+        width={189}
+        height={189}
+        className="h-auto w-auto mt-5 self-end"
+        aria-hidden="true"
+      />
     </div>
     <div className="flex flex-1 flex-col gap-8 items-center justify-center min-w-[393px] pb-0 lg:pb-12 pl-5 lg:pl-12 pr-[60px] pt-0 relative">
       <div className="flex flex-col gap-4 w-full">
