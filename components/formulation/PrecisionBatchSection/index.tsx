@@ -7,9 +7,7 @@ const PrecisionBatchSection = () => {
   const t = useTranslations('Formulation.Precision')
 
   return (
-    <section
-      className={cn('relative w-full', 'bg-neutral-300', 'overflow-x-hidden')}
-    >
+    <section className="relative w-full bg-neutral-300 overflow-x-hidden">
       <div
         className={cn(
           'relative z-10',
@@ -80,22 +78,11 @@ const PrecisionBatchSection = () => {
                 'text-3xl lg:text-5xl',
                 'leading-tight',
                 'text-secondary-950',
-                'text-left lg:text-right'
+                'text-left lg:text-right',
+                'whitespace-pre-line'
               )}
             >
-              {(() => {
-                const title = t('title')
-                const words = title.split(' ')
-                const firstWord = words[0]
-                const rest = words.slice(1).join(' ')
-                return (
-                  <>
-                    {firstWord}
-                    <br />
-                    {rest}
-                  </>
-                )
-              })()}
+              {t('title')}
             </h2>
             <p
               className={cn(
