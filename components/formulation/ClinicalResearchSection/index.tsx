@@ -34,7 +34,7 @@ const ClinicalResearchSection = () => {
   return (
     <section className="relative w-full bg-neutral-400 px-5 lg:px-24 py-16 lg:py-[200px] flex flex-col gap-12 items-center justify-center">
       {/* Background Image */}
-      <div className="absolute h-[1362px] left-1/2 top-0 -translate-x-1/2 w-[2019.219px] pointer-events-none">
+      <div className="absolute h-screen left-1/2 top-0 -translate-x-1/2 w-full pointer-events-none">
         <Image
           src="/images/formulation/research-bg-new.png"
           alt={t('backgroundAlt')}
@@ -44,10 +44,10 @@ const ClinicalResearchSection = () => {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 flex flex-col gap-[60px] items-start w-full">
+      <div className="relative z-10 flex flex-col gap-16 items-start w-full">
         {/* Header Section */}
         <div className="flex flex-col gap-2.5 w-full">
-          <h2 className="font-display text-5xl lg:text-6xl leading-[56px] tracking-[-0.48px] text-quaternary-800 not-italic">
+          <h2 className="font-display text-5xl lg:text-6xl leading-[56px] tracking-tight text-quaternary-800 not-italic">
             {t('title')}
           </h2>
           <p className="font-sans text-lg leading-7 text-quaternary-800">
@@ -59,7 +59,7 @@ const ClinicalResearchSection = () => {
         </div>
 
         {/* Value Prop Cards */}
-        <div className="flex flex-col lg:flex-row gap-[19px] w-full">
+        <div className="flex flex-col lg:flex-row gap-5 w-full">
           {valueProps.map((prop, index) => (
             <ValuePropCard key={index} {...prop} />
           ))}

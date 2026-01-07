@@ -24,9 +24,9 @@ const StepCard = ({
   imagePosition,
   moleculeSrc,
 }: StepCardProps) => (
-  <div className="bg-neutral-400 flex flex-wrap gap-8 py-0 lg:py-15 px-0 relative overflow-clip">
-    <div className="bg-neutral-400 flex flex-col items-start justify-start w-[204px] shrink-0 pl-5 lg:pl-0">
-      <div className="font-display text-[100px] leading-[100px] text-quaternary-800 text-center tracking-[-1px]">
+  <div className="bg-neutral-400 flex flex-wrap gap-8 py-0 lg:py-16 px-0 relative overflow-clip">
+    <div className="bg-neutral-400 flex flex-col items-start justify-start w-52 shrink-0 pl-5 lg:pl-0">
+      <div className="font-display text-8xl leading-[100px] text-quaternary-800 text-center tracking-tight">
         {number}
       </div>
       <Image
@@ -38,9 +38,9 @@ const StepCard = ({
         aria-hidden="true"
       />
     </div>
-    <div className="flex flex-1 flex-col gap-8 items-center justify-center min-w-[393px] pb-0 lg:pb-12 pl-5 lg:pl-12 pr-[60px] pt-0 relative">
+    <div className="flex flex-1 flex-col gap-8 items-center justify-center min-w-96 pb-0 lg:pb-12 pl-5 lg:pl-12 pr-16 pt-0 relative">
       <div className="flex flex-col gap-4 w-full">
-        <h4 className="font-display text-3xl leading-10 tracking-[-0.32px] text-quaternary-800 whitespace-pre-line">
+        <h4 className="font-display text-3xl leading-10 tracking-tight text-quaternary-800 whitespace-pre-line">
           {title}
         </h4>
         <div className="font-sans text-lg leading-7 text-quaternary-800">
