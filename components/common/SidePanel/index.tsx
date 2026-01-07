@@ -68,6 +68,7 @@ const SidePanel = ({
         aria-modal="true"
         aria-label={ariaLabel}
         className={cn(
+          // SIDE_PANEL_WIDTH constant (500px) - design-specific width
           'fixed left-0 top-0 h-full w-full md:w-[500px]',
           'bg-neutral-100',
           'overflow-y-auto',

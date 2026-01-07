@@ -18,8 +18,14 @@ import {
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizResultsFooter } from '@/components/quiz/QuizResultsFooter'
 import { QuizResultsHeader } from '@/components/quiz/QuizResultsHeader'
-import { PRODUCT_DETAIL_IMAGES } from '@/constants'
-import { QUIZ_RESULT_PRODUCTS } from '@/constants'
+import {
+  PRODUCT_DETAIL_IMAGES,
+  PRODUCT_MODE,
+  QUIZ_RESULT_PRODUCTS,
+  QUIZ_RESULTS_DEFAULTS,
+  RECIPE_TYPE,
+  SHIPMENT_FREQUENCY,
+} from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 
@@ -40,18 +46,19 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
 
   const formData = useWatch({ control }) as QuizFormData
 
-  const [selectedProductMode, setSelectedProductMode] =
-    useState<ProductMode>('fullMeal')
+  const [selectedProductMode, setSelectedProductMode] = useState<ProductMode>(
+    QUIZ_RESULTS_DEFAULTS.productMode
+  )
   const [recipes, setRecipes] = useState<Record<ProductMode, Recipe>>({
-    topper: 'turkey',
-    fullMeal: 'turkey',
-    alaCarte: 'turkey',
+    topper: QUIZ_RESULTS_DEFAULTS.recipe,
+    fullMeal: QUIZ_RESULTS_DEFAULTS.recipe,
+    alaCarte: QUIZ_RESULTS_DEFAULTS.recipe,
   })
   const [shipmentFrequencies, setShipmentFrequencies] = useState<
     Record<'topper' | 'fullMeal', string>
   >({
-    topper: 'everyWeek',
-    fullMeal: 'everyWeek',
+    topper: QUIZ_RESULTS_DEFAULTS.shipmentFrequency,
+    fullMeal: QUIZ_RESULTS_DEFAULTS.shipmentFrequency,
   })
   const [isPanelOpen, setIsPanelOpen] = useState(false)
   const [panelProductData, setPanelProductData] =
@@ -61,11 +68,11 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
     () => [
       {
         label: t('recipes.turkey'),
-        value: 'turkey',
+        value: RECIPE_TYPE.turkey,
       },
       {
         label: t('recipes.lamb'),
-        value: 'lamb',
+        value: RECIPE_TYPE.lamb,
       },
     ],
     [t]
@@ -75,11 +82,11 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
     () => [
       {
         label: t('shipmentFrequencies.everyWeek'),
-        value: 'everyWeek',
+        value: SHIPMENT_FREQUENCY.everyWeek,
       },
       {
         label: t('shipmentFrequencies.everyTwoWeeks'),
-        value: 'everyTwoWeeks',
+        value: SHIPMENT_FREQUENCY.everyTwoWeeks,
       },
     ],
     [t]
@@ -104,11 +111,11 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
 
   const getPricePerDay = useCallback(
     (mode: ProductMode): number => {
-      if (mode === 'alaCarte') {
+      if (mode === PRODUCT_MODE.alaCarte) {
         return 0
       }
       const recipe = recipes[mode]
-      const calculationMode = mode === 'topper' ? 'topper' : 'full'
+      const calculationMode = mode === PRODUCT_MODE.topper ? 'topper' : 'full'
       const { pricePerDay } = calculateDailyFoodAndPrice(
         formData,
         recipe,
@@ -121,7 +128,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
 
   const getProductDescription = useCallback(
     (recipeType: Recipe): string => {
-      if (recipeType === 'turkey') {
+      if (recipeType === RECIPE_TYPE.turkey) {
         return t('products.turkeyDescription')
       }
       return t('products.lambDescription')
@@ -131,13 +138,13 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
 
   const getProductPrice = useCallback(
     (productMode: ProductMode): string => {
-      if (productMode === 'alaCarte') {
-        return '$19.79 / 2 kg'
+      if (productMode === PRODUCT_MODE.alaCarte) {
+        return t('products.alaCartePrice')
       }
       const pricePerDay = getPricePerDay(productMode)
       return `$${pricePerDay.toFixed(2)} / day`
     },
-    [getPricePerDay]
+    [getPricePerDay, t]
   )
 
   const handleDetailsClick = useCallback(
@@ -235,12 +242,12 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
           const isSelected = selectedProductMode === product.mode
           const mode = product.mode as 'topper' | 'fullMeal'
           const title =
-            product.mode === 'fullMeal'
+            product.mode === PRODUCT_MODE.fullMeal
               ? t(product.titleKey, { name: dogName })
               : t(product.titleKey)
           const description = t(product.descriptionKey, { name: dogName })
           const imageAlt =
-            product.mode === 'fullMeal'
+            product.mode === PRODUCT_MODE.fullMeal
               ? t(product.titleKey, { name: dogName })
               : t(product.titleKey)
 
@@ -284,8 +291,8 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
 
       <div className="w-full flex flex-col gap-6">
         <OptionSelectProduct
-          isSelected={selectedProductMode === 'alaCarte'}
-          onSelect={() => handleProductModeSelect('alaCarte')}
+          isSelected={selectedProductMode === PRODUCT_MODE.alaCarte}
+          onSelect={() => handleProductModeSelect(PRODUCT_MODE.alaCarte)}
           title={t('products.alaCarte.title')}
           description={t('products.alaCarte.description')}
           imageSrc="/images/product-full-meal.png"
@@ -294,9 +301,11 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
           isAlaCarte={true}
           recipeOptions={recipeOptions}
           recipeValue={recipes.alaCarte}
-          onRecipeSelect={(value) => handleRecipeSelect('alaCarte', value)}
+          onRecipeSelect={(value) =>
+            handleRecipeSelect(PRODUCT_MODE.alaCarte, value)
+          }
           benefits={getQuizBenefitsAlaCarte(t)}
-          onDetailsClick={() => handleDetailsClick('alaCarte')}
+          onDetailsClick={() => handleDetailsClick(PRODUCT_MODE.alaCarte)}
           onAddToCartClick={handleAddToCartClick}
         />
       </div>

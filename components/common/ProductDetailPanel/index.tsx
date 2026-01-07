@@ -10,7 +10,17 @@ import { ProductDetailPanelSections } from './ProductDetailPanelSections'
 
 import { CloseIcon } from '@/components/common/Icon'
 import { SidePanel } from '@/components/common/SidePanel'
+import {
+  PRODUCT_DETAIL_DEFAULTS,
+  PRODUCT_DETAIL_SECTIONS_CONFIG,
+  PRODUCT_MODE,
+  RECIPE_TYPE,
+} from '@/constants'
 import { cn } from '@/utils/cn'
+
+const isRecipe = (value: string): value is 'turkey' | 'lamb' => {
+  return value === RECIPE_TYPE.turkey || value === RECIPE_TYPE.lamb
+}
 
 interface ProductDetailPanelData {
   mode: 'topper' | 'fullMeal' | 'alaCarte'
@@ -45,7 +55,7 @@ const ProductDetailPanel = ({
 }: ProductDetailPanelProps) => {
   const t = useTranslations('Common.ProductDetailPanel')
   const [selectedRecipe, setSelectedRecipe] = useState<'turkey' | 'lamb'>(
-    productData?.recipe || 'turkey'
+    productData?.recipe || PRODUCT_DETAIL_DEFAULTS.recipe
   )
 
   useEffect(() => {
@@ -53,14 +63,20 @@ const ProductDetailPanel = ({
       setSelectedRecipe(productData.recipe)
     }
   }, [productData])
-  const [quantity, setQuantity] = useState(0)
-  const [selectedImage, setSelectedImage] = useState(0)
+  const [quantity, setQuantity] = useState<number>(
+    PRODUCT_DETAIL_DEFAULTS.quantity
+  )
+  const [selectedImage, setSelectedImage] = useState<number>(
+    PRODUCT_DETAIL_DEFAULTS.selectedImage
+  )
 
   const handleRecipeSelect = useCallback(
     (value: string) => {
-      const recipe = value as 'turkey' | 'lamb'
-      setSelectedRecipe(recipe)
-      onRecipeChange?.(recipe)
+      if (!isRecipe(value)) {
+        return
+      }
+      setSelectedRecipe(value)
+      onRecipeChange?.(value)
     },
     [onRecipeChange]
   )
@@ -81,34 +97,30 @@ const ProductDetailPanel = ({
     // No functionality yet
   }, [])
 
+  const getPanelTitle = useCallback(
+    (mode: 'topper' | 'fullMeal' | 'alaCarte'): string => {
+      if (mode === PRODUCT_MODE.alaCarte) {
+        return t('alaCarteTitle')
+      }
+      if (mode === PRODUCT_MODE.topper) {
+        return t('topperTitle')
+      }
+      return t('fullMealTitle')
+    },
+    [t]
+  )
+
   if (!productData) {
     return null
   }
 
-  const sections = [
-    {
-      id: 'analytical-constituents',
-      title: productData.sections.analyticalConstituents.title,
-      content: productData.sections.analyticalConstituents.content,
-    },
-    {
-      id: 'nutritional-facts',
-      title: productData.sections.nutritionalFacts.title,
-      content: productData.sections.nutritionalFacts.content,
-    },
-    {
-      id: 'ingredients',
-      title: productData.sections.ingredients.title,
-      content: productData.sections.ingredients.content,
-    },
-  ]
+  const sections = PRODUCT_DETAIL_SECTIONS_CONFIG.map((config) => ({
+    id: config.id,
+    title: productData.sections[config.sectionKey].title,
+    content: productData.sections[config.sectionKey].content,
+  }))
 
-  const panelTitle =
-    productData.mode === 'alaCarte'
-      ? t('alaCarteTitle')
-      : productData.mode === 'topper'
-        ? t('topperTitle')
-        : t('fullMealTitle')
+  const panelTitle = getPanelTitle(productData.mode)
 
   return (
     <SidePanel

@@ -33,6 +33,13 @@ const ProductDetailImageGallery = ({
     [onThumbnailClick]
   )
 
+  const handleThumbnailButtonClick = useCallback(
+    (thumbnailIndex: number) => {
+      handleThumbnailClick(thumbnailIndex)
+    },
+    [handleThumbnailClick]
+  )
+
   return (
     <div className="flex flex-col gap-5 items-start w-full">
       <div className="h-96 relative shrink-0 w-full">
@@ -53,7 +60,7 @@ const ProductDetailImageGallery = ({
             <button
               key={index}
               type="button"
-              onClick={() => handleThumbnailClick(thumbnailIndex)}
+              onClick={() => handleThumbnailButtonClick(thumbnailIndex)}
               className={cn(
                 'flex-1 h-24 min-w-0 relative shrink-0',
                 'cursor-pointer',

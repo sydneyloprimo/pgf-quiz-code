@@ -32,6 +32,13 @@ const ProductDetailPanelSections = ({
     })
   }, [])
 
+  const handleSectionButtonClick = useCallback(
+    (sectionId: string) => {
+      handleToggleSection(sectionId)
+    },
+    [handleToggleSection]
+  )
+
   return (
     <div className="flex flex-col gap-6 w-full">
       {sections.map((section) => {
@@ -41,7 +48,7 @@ const ProductDetailPanelSections = ({
           <div key={section.id} className="flex flex-col gap-0 w-full">
             <button
               type="button"
-              onClick={() => handleToggleSection(section.id)}
+              onClick={() => handleSectionButtonClick(section.id)}
               className={cn(
                 'flex gap-2.5 items-start p-0 w-full',
                 'cursor-pointer',
@@ -51,6 +58,7 @@ const ProductDetailPanelSections = ({
               aria-controls={`section-${section.id}`}
             >
               <p
+                id={`section-title-${section.id}`}
                 className={cn(
                   'flex-1 min-w-0',
                   'font-sans font-bold leading-6 text-base',
