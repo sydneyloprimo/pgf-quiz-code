@@ -357,6 +357,39 @@
       "humanGrade": "Ingredientes de Grado Humano",
       "noAdditives": "Sin Aditivos Artificiales",
       "measuredPortions": "Porciones Cuidadosamente Medidas"
+    },
+    "Ingredients": {
+      "title": "Biblioteca de Ingredientes",
+      "description": "Nuestros ingredientes cuidadosamente seleccionados son elegidos por sus beneficios nutricionales y digestibilidad.",
+      "basil": {
+        "name": "Albahaca",
+        "description": "La albahaca es una hierba versátil que aporta un sabor vibrante a una variedad de platos. Llena de antioxidantes, ayuda a combatir los radicales libres en el cuerpo. Además, la albahaca posee propiedades antiinflamatorias y apoya la salud digestiva. Sus hojas fragantes elevan el sabor de salsas, ensaladas e incluso bebidas, convirtiéndola en una excelente opción tanto para cocinar como para decorar. Obtenemos nuestra albahaca de granjas orgánicas locales de Boston para asegurar la más alta calidad."
+      },
+      "pumpkin": {
+        "name": "Calabaza",
+        "description": "La calabaza es un ingrediente rico en nutrientes que proporciona vitaminas y minerales esenciales para el bienestar de tu perro. Alta en fibra y betacaroteno, apoya la salud digestiva y la función inmunológica. El contenido natural de fibra ayuda a mantener una digestión saludable y puede ayudar en el control del peso. Rica en antioxidantes, la calabaza también contribuye a la salud celular general y ayuda a proteger contra el estrés oxidativo. Seleccionamos cuidadosamente calabazas frescas y orgánicas para proporcionar los mejores beneficios nutricionales."
+      },
+      "turmeric": {
+        "name": "Cúrcuma",
+        "description": "La cúrcuma es una especia poderosa conocida por sus notables beneficios para la salud. Contiene curcumina, un compuesto antiinflamatorio y antioxidante potente que ayuda a reducir la inflamación en todo el cuerpo. Esta especia dorada apoya la salud articular, promueve una digestión saludable y contribuye al bienestar general. Las propiedades naturales de la cúrcuma la convierten en una excelente adición a la dieta de tu perro, ayudando a mantener la movilidad y apoyar los procesos naturales de curación del cuerpo. Usamos cúrcuma de grado premium para asegurar la máxima potencia y efectividad."
+      },
+      "avocado": {
+        "name": "Aguacate",
+        "description": "El aguacate es un superalimento rico en nutrientes que ofrece numerosos beneficios para la salud de tu perro. Rico en grasas monoinsaturadas saludables y vitamina E, apoya la salud de la piel y el pelaje, dando a tu mascota una apariencia brillante y saludable. El alto contenido de fibra ayuda en la digestión y ayuda a mantener un peso saludable. Los aguacates también contienen vitaminas y minerales esenciales que apoyan el bienestar general, incluyendo potasio, folato y varias vitaminas B. Obtenemos solo los mejores aguacates perfectamente maduros para proporcionar una nutrición óptima."
+      },
+      "raspberry": {
+        "name": "Frambuesas",
+        "description": "Las frambuesas son una fruta deliciosa y nutritiva llena de vitaminas, minerales y poderosos antioxidantes. Estas bayas vibrantes apoyan la función inmunológica y ayudan a proteger las células del daño causado por los radicales libres. Ricas en vitamina C, manganeso y fibra dietética, las frambuesas contribuyen a la salud y el bienestar general. Los antioxidantes naturales que se encuentran en las frambuesas, incluyendo el ácido elágico y las antocianinas, proporcionan beneficios antiinflamatorios y apoyan la salud cardiovascular. Seleccionamos solo las frambuesas más frescas y orgánicas para asegurar que tu perro reciba la nutrición de más alta calidad."
+      },
+      "lamb": {
+        "name": "Cordero",
+        "description": "El cordero es una fuente de proteína de alta calidad que proporciona aminoácidos esenciales y vitaminas B cruciales para la salud de tu perro. Esta carne magra es rica en hierro, zinc y selenio, apoyando el desarrollo muscular y la vitalidad general. El cordero es particularmente beneficioso para perros con sensibilidades alimentarias, ya que es menos comúnmente usado en alimentos comerciales para mascotas. El perfil completo de aminoácidos apoya el mantenimiento muscular saludable, mientras que las vitaminas B ayudan a mantener los niveles de energía y apoyan la función metabólica. Obtenemos nuestro cordero de granjas sostenibles de confianza que priorizan el bienestar animal y la calidad."
+      },
+      "soybeans": {
+        "name": "Soja",
+        "description": "La soja es una proteína vegetal completa que proporciona todos los aminoácidos esenciales que tu perro necesita para una salud óptima. Estas legumbres versátiles son ricas en isoflavonas, que se ha demostrado que apoyan la salud del corazón y proporcionan beneficios antioxidantes. La soja es una excelente fuente de fibra, apoyando la salud digestiva y ayudando a mantener niveles saludables de colesterol. También contienen minerales esenciales como hierro, calcio y magnesio, contribuyendo a huesos fuertes y bienestar general. Usamos solo soja orgánica no transgénica para asegurar la más alta calidad y valor nutricional para tu mascota."
+      },
+      "toggleAria": "Alternar detalles del ingrediente"
     }
   }
 }
