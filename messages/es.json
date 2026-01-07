@@ -348,6 +348,10 @@
       "ctaButton": "Habla con un nutricionista veterinario",
       "backgroundAlt": "Ingredientes de comida para perros recién preparados"
     },
+    "Introduction": {
+      "column1": "Elaborado con conocimientos del Colegio Europeo de Nutrición Veterinaria Comparada, nuestro enfoque combina ciencia y experiencia culinaria. Cada fórmula se basa en investigaciones profundas sobre la salud canina, enfatizando la digestión y el impacto de los nutrientes. Esta colaboración eleva la nutrición a una estrategia de cuidado lujosa y clínicamente sólida.",
+      "column2": "Nuestras recetas reflejan un compromiso con la calibración precisa de nutrientes, evaluando cada ingrediente por su pureza y biodisponibilidad. Esto asegura proporciones óptimas de aminoácidos, ácidos grasos y antioxidantes, creando comidas que nutren el microbioma y apoyan el bienestar a largo plazo."
+    },
     "Standards": {
       "clinicallyBacked": "Nutrición Respaldada Clínicamente",
       "humanGrade": "Ingredientes de Grado Humano",

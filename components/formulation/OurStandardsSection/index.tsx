@@ -2,12 +2,11 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import { FeatureGrid } from '@/components/common/FeatureGrid'
-import { cn } from '@/utils/cn'
 
 const OurStandardsSection = () => {
   const t = useTranslations('Formulation.Standards')
 
-  const titleClassName = cn('font-normal', 'text-2xl', 'text-quaternary-800')
+  const titleClassName = 'font-normal text-2xl text-quaternary-800'
 
   const features = [
     {
@@ -84,7 +83,7 @@ const OurStandardsSection = () => {
     <FeatureGrid
       features={features}
       columns={2}
-      className={cn('px-5 md:px-24 desktop:px-32', 'py-8')}
+      className="px-5 md:px-24 desktop:px-32 py-8"
     />
   )
 }

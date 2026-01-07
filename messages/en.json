@@ -593,6 +593,10 @@
       "ctaButton": "Talk to a vet nutritionist",
       "backgroundAlt": "Freshly prepared dog food ingredients"
     },
+    "Introduction": {
+      "column1": "Crafted with insights from the European College of Veterinary and Comparative Nutrition, our approach merges science with culinary expertise. Each formula is based on in-depth research into canine health, emphasizing digestion and nutrient impact. This collaboration elevates nutrition to a luxurious, clinically sound care strategy.",
+      "column2": "Our recipes reflect a commitment to precise nutrient calibration, evaluating each ingredient for purity and bioavailability. This ensures optimal ratios of amino acids, fatty acids, and antioxidants, creating meals that nourish the microbiome and support long-term wellness."
+    },
     "Standards": {
       "clinicallyBacked": "Clinically Backed Nutrition",
       "humanGrade": "Human-Grade Ingredients",

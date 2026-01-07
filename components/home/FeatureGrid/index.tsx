@@ -8,7 +8,6 @@ import {
   FeaturePharmIcon,
   FeatureTransparentIcon,
 } from '@/components/common/Icon'
-import { cn } from '@/utils/cn'
 
 const HomeFeatureGrid = () => {
   const t = useTranslations('Home.Features')
@@ -48,7 +47,7 @@ const HomeFeatureGrid = () => {
     <FeatureGrid
       features={features}
       columns={3}
-      className={cn('px-5 md:px-24', 'pt-28 md:pt-32 pb-14 md:pb-16')}
+      className="px-5 md:px-24 pt-28 md:pt-32 pb-14 md:pb-16"
     />
   )
 }
