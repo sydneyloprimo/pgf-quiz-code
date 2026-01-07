@@ -19,7 +19,7 @@ const HeroSection = () => {
   useVideoAutoPlay(videoRef)
 
   return (
-    <section className="relative w-full md:min-h-180 h-96 md:max-h-none flex items-end md:items-center overflow-hidden">
+    <section className="relative w-full md:min-h-180 h-96 md:max-h-none flex items-end overflow-hidden">
       {/* Video Background */}
       <video
         ref={videoRef}
