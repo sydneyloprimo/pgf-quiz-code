@@ -54,15 +54,30 @@
     "emailAria": "Ingresa tu dirección de correo electrónico",
     "emailPlaceholder": "Escribe tu correo aquí",
     "footerNavAria": "Navegación del pie de página",
-    "linkAbout": "Acerca de Nosotros",
-    "linkContact": "Información de contacto",
-    "linkHome": "Inicio",
-    "linkRecipe": "Nuestra Receta",
     "logoAria": "Ir a la página de inicio",
     "newsletterDescription": "Obtén acceso anticipado a actualizaciones clínicas, perspectivas de expertos y lanzamientos exclusivos de productos.",
     "newsletterTitle": "Únete a nuestra lista de espera y boletín",
     "subscribeButton": "Suscribirse",
     "subscribedButton": "¡Suscrito!"
+  },
+  "MainNav": {
+    "about": "Acerca de",
+    "ariaLabel": "Navegación principal",
+    "cartAria": "Carrito de compras",
+    "closeMenuAria": "Cerrar menú",
+    "contact": "Contacto",
+    "home": "Inicio",
+    "logoAria": "Ir a la página de inicio",
+    "openMenuAria": "Abrir menú",
+    "ourFormulation": "Nuestra Formulación",
+    "profileAria": "Perfil de usuario",
+    "searchAria": "Buscar"
+  },
+  "Navigation": {
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "home": "Inicio",
+    "ourFormulation": "Nuestra Formulación"
   },
   "Home": {
     "BostonAnnouncement": {
@@ -327,6 +342,22 @@
     "closeButton": "Cerrar alerta"
   },
   "Formulation": {
+    "Hero": {
+      "title": "Nuestra Formulación",
+      "subtitle": "Nutrición basada en ciencia",
+      "ctaButton": "Habla con un nutricionista veterinario",
+      "backgroundAlt": "Ingredientes de comida para perros recién preparados"
+    },
+    "Introduction": {
+      "column1": "Elaborado con conocimientos del Colegio Europeo de Nutrición Veterinaria Comparada, nuestro enfoque combina ciencia y experiencia culinaria. Cada fórmula se basa en investigaciones profundas sobre la salud canina, enfatizando la digestión y el impacto de los nutrientes. Esta colaboración eleva la nutrición a una estrategia de cuidado lujosa y clínicamente sólida.",
+      "column2": "Nuestras recetas reflejan un compromiso con la calibración precisa de nutrientes, evaluando cada ingrediente por su pureza y biodisponibilidad. Esto asegura proporciones óptimas de aminoácidos, ácidos grasos y antioxidantes, creando comidas que nutren el microbioma y apoyan el bienestar a largo plazo."
+    },
+    "Standards": {
+      "clinicallyBacked": "Nutrición Respaldada Clínicamente",
+      "humanGrade": "Ingredientes de Grado Humano",
+      "noAdditives": "Sin Aditivos Artificiales",
+      "measuredPortions": "Porciones Cuidadosamente Medidas"
+    },
     "Precision": {
       "title": "Precisión en Cada Lote",
       "description": "Cada receta comienza con un pesaje meticuloso de lotes, asegurando que cada ingrediente rico en nutrientes se mida con precisión absoluta antes de entrar en nuestras cocinas. Durante la preparación, se mantienen registros detallados de temperatura para salvaguardar la integridad de los nutrientes y preservar la actividad enzimática óptima. Desde el abastecimiento hasta el emplatado, cada paso sigue un proceso de preparación rigurosamente controlado—uniendo la artesanía culinaria con la disciplina científica para entregar nutrición en su forma más pura, consistente y elevada.",

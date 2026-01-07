@@ -103,10 +103,6 @@
     "emailAria": "Enter your email address",
     "emailPlaceholder": "Type your email here",
     "footerNavAria": "Footer navigation",
-    "linkAbout": "About Us",
-    "linkContact": "Contact information",
-    "linkHome": "Home",
-    "linkRecipe": "Our Recipe",
     "logoAria": "Go to homepage",
     "newsletterDescription": "Get early access to clinical updates, expert insights, and exclusive product drops.",
     "newsletterTitle": "Join our waitlist and newsletter",
@@ -267,7 +263,7 @@
     }
   },
   "MainNav": {
-    "aboutUs": "About Us",
+    "about": "About",
     "ariaLabel": "Main navigation",
     "cartAria": "Shopping cart",
     "closeMenuAria": "Close menu",
@@ -278,6 +274,12 @@
     "ourFormulation": "Our Formulation",
     "profileAria": "User profile",
     "searchAria": "Search"
+  },
+  "Navigation": {
+    "about": "About",
+    "contact": "Contact",
+    "home": "Home",
+    "ourFormulation": "Our Formulation"
   },
   "Orders": {
     "emptyState": {
@@ -585,6 +587,22 @@
     "closeButton": "Close alert"
   },
   "Formulation": {
+    "Hero": {
+      "title": "Our Formulation",
+      "subtitle": "Science-led nutrition",
+      "ctaButton": "Talk to a vet nutritionist",
+      "backgroundAlt": "Freshly prepared dog food ingredients"
+    },
+    "Introduction": {
+      "column1": "Crafted with insights from the European College of Veterinary and Comparative Nutrition, our approach merges science with culinary expertise. Each formula is based on in-depth research into canine health, emphasizing digestion and nutrient impact. This collaboration elevates nutrition to a luxurious, clinically sound care strategy.",
+      "column2": "Our recipes reflect a commitment to precise nutrient calibration, evaluating each ingredient for purity and bioavailability. This ensures optimal ratios of amino acids, fatty acids, and antioxidants, creating meals that nourish the microbiome and support long-term wellness."
+    },
+    "Standards": {
+      "clinicallyBacked": "Clinically Backed Nutrition",
+      "humanGrade": "Human-Grade Ingredients",
+      "noAdditives": "No Artificial Additives",
+      "measuredPortions": "Carefully Measured Portions"
+    },
     "Precision": {
       "title": "Precision in Every Batch",
       "description": "Every recipe begins with meticulous batch weighing, ensuring each nutrient-rich ingredient is measured with absolute precision before it enters our kitchens. Throughout preparation, detailed temperature logs are maintained to safeguard nutrient integrity and preserve optimal enzymatic activity. From sourcing to plating, every step follows a rigorously controlled prep process—uniting culinary craftsmanship with scientific discipline to deliver nutrition at its most pure, consistent, and elevated.",
