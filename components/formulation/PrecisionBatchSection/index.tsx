@@ -13,7 +13,7 @@ const PrecisionBatchSection = () => {
       <div
         className={cn(
           'relative z-10',
-          'grid grid-cols-1 lg:grid-cols-2',
+          'grid grid-cols-1 lg:grid-cols-[1fr_1.5fr]',
           'items-center',
           'w-full max-w-full'
         )}
@@ -53,7 +53,7 @@ const PrecisionBatchSection = () => {
         <div
           className={cn(
             'relative flex flex-col',
-            'p-5 lg:pl-40 lg:pt-20 lg:pr-16 lg:pb-36',
+            'p-5 lg:pl-40 lg:pt-31 lg:pr-50 lg:pb-25',
             'w-full max-w-full'
           )}
         >
@@ -70,8 +70,7 @@ const PrecisionBatchSection = () => {
               className={cn(
                 'hidden lg:block',
                 'h-44',
-                'border-r border-quaternary-500',
-                'mb-6'
+                'border-r border-quaternary-500'
               )}
               aria-hidden="true"
             />
