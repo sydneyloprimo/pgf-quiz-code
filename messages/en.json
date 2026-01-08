@@ -603,6 +603,11 @@
       "noAdditives": "No Artificial Additives",
       "measuredPortions": "Carefully Measured Portions"
     },
+    "Precision": {
+      "title": "Precision\nin Every Batch",
+      "description": "Every recipe begins with meticulous batch weighing, ensuring each nutrient-rich ingredient is measured with absolute precision before it enters our kitchens. Throughout preparation, detailed temperature logs are maintained to safeguard nutrient integrity and preserve optimal enzymatic activity. From sourcing to plating, every step follows a rigorously controlled prep process—uniting culinary craftsmanship with scientific discipline to deliver nutrition at its most pure, consistent, and elevated.",
+      "imageAlt": "Freshly prepared nutritious meal with measuring spoon",
+    },
     "Research": {
       "title": "Clinical Research",
       "description1": "By analyzing feeding rhythm and gut response, we can reduce bloating, stomach sensitivity, and stool irregularities. Better digestion leads to better behavior, comfort, and mood — transforming mealtime into a predictable and enjoyable experience.",
