@@ -718,17 +718,22 @@ import { Link } from '@/components/common/Link'
 - **Intelligent Merging**: `tailwind-merge` automatically resolves conflicts between Tailwind classes (e.g., `p-4 p-6` becomes just `p-6`)
 - Combine Tailwind classes with custom classes when needed
 
+**⚠️ IMPORTANT: When NOT to Use `cn`**
+
+**DO NOT use `cn` for static strings.** If all your classes are static strings with no conditionals, props, or dynamic values, use a regular string instead. Using `cn` with only static strings is unnecessary and adds overhead.
+
+**When NOT to Use `cn`:**
+
+- **Static strings only**: When all classes are static strings with no conditionals, props, or conflicts, use regular strings instead
+- **Multiple static strings in array**: When you have multiple static strings passed as separate arguments to `cn`, combine them into a single string
+- **Single class string**: When you have a single class string with no merging needed
+
 **When to Use `cn`:**
 
 - **Conditional classes**: When you need to conditionally apply classes based on props or state
 - **Merging with props**: When merging classes with a `className` prop from parent components
 - **Resolving conflicts**: When you have potential Tailwind class conflicts that need intelligent resolution
 - **Multiple class sources**: When combining classes from multiple sources (base classes, conditional classes, prop classes)
-
-**When NOT to Use `cn`:**
-
-- **Static strings only**: When all classes are static strings with no conditionals, props, or conflicts, use regular strings instead
-- **Single class string**: When you have a single class string with no merging needed
 
 **String Assignment:**
 
@@ -753,10 +758,25 @@ import { cn } from '@/utils/cn'
 // ✅ Good - Direct string assignment (no braces needed)
 <div className="flex flex-col items-center">
 
+// ✅ Good - Multiple static classes in a single string
+<div className="w-full py-16 lg:py-20 px-5 lg:px-24 flex flex-col items-center justify-center">
+
 // ❌ Bad - Using cn with only static strings (unnecessary)
 <div className={cn('flex flex-col items-center')}>
 // Should be:
 <div className="flex flex-col items-center">
+
+// ❌ Bad - Using cn with multiple static strings in array (unnecessary)
+<div className={cn(
+  'w-full',
+  'py-16',
+  'lg:py-20',
+  'px-5',
+  'lg:px-24',
+  'flex flex-col items-center justify-center'
+)}>
+// Should be:
+<div className="w-full py-16 lg:py-20 px-5 lg:px-24 flex flex-col items-center justify-center">
 
 // ❌ Bad - Unnecessary curly braces around string literal
 <div className={'flex flex-col items-center'}>
