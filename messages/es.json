@@ -390,6 +390,11 @@
         "description": "La soja es una proteína vegetal completa que proporciona todos los aminoácidos esenciales que tu perro necesita para una salud óptima. Estas legumbres versátiles son ricas en isoflavonas, que se ha demostrado que apoyan la salud del corazón y proporcionan beneficios antioxidantes. La soja es una excelente fuente de fibra, apoyando la salud digestiva y ayudando a mantener niveles saludables de colesterol. También contienen minerales esenciales como hierro, calcio y magnesio, contribuyendo a huesos fuertes y bienestar general. Usamos solo soja orgánica no transgénica para asegurar la más alta calidad y valor nutricional para tu mascota."
       },
       "toggleAria": "Alternar detalles del ingrediente"
+    },
+    "Precision": {
+      "title": "Precisión\nen Cada Lote",
+      "description": "Cada receta comienza con un pesaje meticuloso de lotes, asegurando que cada ingrediente rico en nutrientes se mida con precisión absoluta antes de entrar en nuestras cocinas. Durante la preparación, se mantienen registros detallados de temperatura para salvaguardar la integridad de los nutrientes y preservar la actividad enzimática óptima. Desde el abastecimiento hasta el emplatado, cada paso sigue un proceso de preparación rigurosamente controlado—uniendo la artesanía culinaria con la disciplina científica para entregar nutrición en su forma más pura, consistente y elevada.",
+      "imageAlt": "Comida nutritiva recién preparada con cuchara medidora"
     }
   }
 }
