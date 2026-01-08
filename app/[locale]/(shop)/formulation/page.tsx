@@ -1,8 +1,11 @@
 import {
+  ClinicalResearchSection,
   DiscoverPlansSection,
   FormulationHeroSection,
+  IngredientLibrarySection,
   IntroductionSection,
   OurStandardsSection,
+  PrecisionBatchSection,
 } from '@/components/formulation'
 
 export default function FormulationPage() {
@@ -12,6 +15,9 @@ export default function FormulationPage() {
       <IntroductionSection />
       <OurStandardsSection />
       <DiscoverPlansSection />
+      <IngredientLibrarySection />
+      <PrecisionBatchSection />
+      <ClinicalResearchSection />
     </main>
   )
 }
