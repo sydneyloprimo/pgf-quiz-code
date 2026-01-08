@@ -607,6 +607,29 @@
       "title": "Precision\nin Every Batch",
       "description": "Every recipe begins with meticulous batch weighing, ensuring each nutrient-rich ingredient is measured with absolute precision before it enters our kitchens. Throughout preparation, detailed temperature logs are maintained to safeguard nutrient integrity and preserve optimal enzymatic activity. From sourcing to plating, every step follows a rigorously controlled prep process—uniting culinary craftsmanship with scientific discipline to deliver nutrition at its most pure, consistent, and elevated.",
       "imageAlt": "Freshly prepared nutritious meal with measuring spoon"
+    "Research": {
+      "title": "Clinical Research",
+      "description1": "By analyzing feeding rhythm and gut response, we can reduce bloating, stomach sensitivity, and stool irregularities. Better digestion leads to better behavior, comfort, and mood — transforming mealtime into a predictable and enjoyable experience.",
+      "description2": "We selected Cornell University for our clinical research due to its renowned expertise in nutrition and digestive health. The university's cutting-edge facilities and commitment to innovative research ensure that our findings are based on the latest scientific advancements. Additionally, Cornell's collaborative environment fosters interdisciplinary studies, allowing us to explore the intricate connections between diet, digestion, and overall well-being.",
+      "valueProp1Title": "Digestive Tolerance\n& Stool Quality",
+      "valueProp1Description": "Evaluated via stool frequency, and ease of passage to monitor digestive tolerance and efficiency.",
+      "valueProp2Title": "Metabolic\nMarkers",
+      "valueProp2Description": "Tracked using blood glucose, lipid profile, and key metabolic enzymes to quantify systemic nutritional impact.",
+      "valueProp3Title": "Coat & Skin\nVitality",
+      "valueProp3Description": "Measured through coat density, shedding rate, and skin hydration scores to assess barrier function.",
+      "step1Number": "12%",
+      "step1Title": "Increase in Positive Dog Interactions",
+      "step1Description1": "Understanding a dog's behavior is key to building a nutrition plan that truly fits their needs. Studies show a 12% increase in positive interactions when feeding routines align with their temperament and daily habits. Dogs who feel understood and engaged show clearer signs of satisfaction and emotional stability.",
+      "step1Description2": "By observing interaction patterns, we can better predict feeding preferences and stress triggers. This insight helps shape customized plans that support not just physical nourishment, but emotional wellness as well — building stronger bonds between dogs and their humans.",
+      "step2Number": "42%",
+      "step2Title": "Better Nutritional Balance Achieved",
+      "step2Description1": "Clinical data reveals that 42% of dogs reach a healthier nutritional balance when their diets are adapted according to age, breed, weight, and metabolic status. Personalized feeding transforms nutrition from generic to precision-based, helping each dog reach their ideal condition.",
+      "step2Description2": "These improvements are often seen in coat quality, energy levels, digestion, and weight management. By adjusting macronutrients and portion sizes, we can create a plan that supports long-term vitality and overall health — without guesswork.",
+      "step3Number": "22%",
+      "step3Title": "Fewer Digestive Upset Episodes",
+      "step3Description1": "A 22% reduction in digestive issues was observed when portion timing and meal formats were optimized. Factors like consistency, ingredient sourcing, and digestion rate play a major role in how a dog absorbs nutrients and feels after meals.",
+      "step3Description2": "By analyzing feeding rhythm and gut response, we can reduce bloating, stomach sensitivity, and stool irregularities. Better digestion leads to better behavior, comfort, and mood — transforming mealtime into a predictable and enjoyable experience.",
+      "backgroundAlt": "Research and clinical testing background"
     }
   }
 }
