@@ -1,3 +1,4 @@
+export * from './ClinicalResearchSection'
 export * from './FormulationHeroSection'
 export * from './IngredientLibrarySection'
 export * from './IntroductionSection'
