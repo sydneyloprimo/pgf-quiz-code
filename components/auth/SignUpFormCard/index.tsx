@@ -16,13 +16,7 @@ const SignUpFormCard = ({ children, className }: SignUpFormCardProps) => {
   return (
     <div
       className={cn(
-        'bg-tertiary-100',
-        'flex flex-1 flex-col',
-        'max-w-xl min-w-[335px]',
-        'pb-6 pt-6 lg:pt-15 lg:pb-12',
-        'px-5 lg:px-8',
-        'gap-12',
-        'relative z-2',
+        'bg-tertiary-100 flex flex-1 flex-col max-w-xl min-w-[335px] pb-6 pt-6 lg:pt-15 lg:pb-12 px-5 lg:px-8 gap-12 relative z-2',
         className
       )}
     >

@@ -5,7 +5,7 @@ const SignUpHero = () => {
   const t = useTranslations('SignUp')
 
   return (
-    <div className="hidden lg:flex flex-1 flex-col items-center justify-center max-w-xl min-w-[335px] px-9 py-24 gap-12 bg-quaternary-800 relative z-2">
+    <section className="hidden lg:flex flex-1 flex-col items-center justify-center max-w-xl min-w-[335px] px-9 py-24 gap-12 bg-quaternary-800 relative z-2">
       <div className="flex flex-col items-center gap-12 w-full">
         <div className="flex justify-center">
           <Image
@@ -26,7 +26,7 @@ const SignUpHero = () => {
           </p>
         </div>
       </div>
-    </div>
+    </section>
   )
 }
 
