@@ -603,6 +603,12 @@
       "noAdditives": "No Artificial Additives",
       "measuredPortions": "Carefully Measured Portions"
     },
+    "DiscoverPlans": {
+      "title": "Discover our Plans",
+      "description": "Take our quick quiz to get a meal plan tailored to your dog's unique needs.",
+      "ctaButton": "Build your dog's Feeding Plan",
+      "backgroundAlt": "Happy dog with personalized meal"
+    },
     "Ingredients": {
       "title": "Ingredient Library",
       "description": "Our carefully selected ingredients are chosen for their nutritional benefits and digestibility.",
@@ -634,12 +640,12 @@
         "name": "Soy Beans",
         "description": "Soybeans are a complete plant protein that provides all essential amino acids your dog needs for optimal health. These versatile legumes are rich in isoflavones, which have been shown to support heart health and provide antioxidant benefits. Soybeans are an excellent source of fiber, supporting digestive health and helping to maintain healthy cholesterol levels. They also contain essential minerals like iron, calcium, and magnesium, contributing to strong bones and overall wellness. We use only non-GMO, organic soybeans to ensure the highest quality and nutritional value for your pet."
       },
-      "toggleAria": "Toggle ingredient details",
+      "toggleAria": "Toggle ingredient details"
     },
     "Precision": {
       "title": "Precision\nin Every Batch",
       "description": "Every recipe begins with meticulous batch weighing, ensuring each nutrient-rich ingredient is measured with absolute precision before it enters our kitchens. Throughout preparation, detailed temperature logs are maintained to safeguard nutrient integrity and preserve optimal enzymatic activity. From sourcing to plating, every step follows a rigorously controlled prep process—uniting culinary craftsmanship with scientific discipline to deliver nutrition at its most pure, consistent, and elevated.",
-      "imageAlt": "Freshly prepared nutritious meal with measuring spoon",
+      "imageAlt": "Freshly prepared nutritious meal with measuring spoon"
     },
     "Research": {
       "title": "Clinical Research",
