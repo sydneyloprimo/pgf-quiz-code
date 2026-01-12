@@ -61,6 +61,27 @@
       "subscribeButton": "Subscribe for {price} a day",
       "whatYoullGetTitle": "What you'll get:"
     },
+    "ProductDetailPanel": {
+      "addToCartButton": "Add to cart",
+      "alaCarteTitle": "A la carte",
+      "decreaseQuantity": "Decrease quantity",
+      "increaseQuantity": "Increase quantity",
+      "analyticalConstituentsContent": "Analytical constituents content will be displayed here.",
+      "analyticalConstituentsTitle": "Analytical constituents",
+      "certifiedBadgeAlt": "Animal welfare certified badge",
+      "closeButtonAriaLabel": "Close product detail panel",
+      "fullMealTitle": "Full Meal",
+      "ingredientsContent": "Ingredients content will be displayed here.",
+      "ingredientsTitle": "Ingredients",
+      "mainImageAlt": "Product image",
+      "nutritionalFactsContent": "Nutritional facts content will be displayed here.",
+      "nutritionalFactsTitle": "Nutritional Facts",
+      "panelAriaLabel": "Product detail panel for {title}",
+      "priceLabel": "Price",
+      "thumbnailAlt": "Product thumbnail {number}",
+      "thumbnailAriaLabel": "Select thumbnail {number}",
+      "topperTitle": "Topper"
+    },
     "Toast": {
       "Error": {
         "iconAlt": "Error icon",
@@ -517,7 +538,10 @@
           "oneTimeDelivery": "One-time delivery.",
           "saveOverheads": "Save overheads every month — easiest way to feed healthy and save.",
           "flexibleSchedule": "Flexible schedule — pause, skip, or cancel anytime."
-        }
+        },
+        "lambDescription": "Customized health benefits that specifically target concerns like dry skin and lackluster fur, ensuring your pet looks and feels their best.",
+        "turkeyDescription": "Customized health benefits that specifically target concerns like dry skin and lackluster fur, ensuring your pet looks and feels their best.",
+        "alaCartePrice": "$19.79 / 2 kg"
       },
       "footer": {
         "title": "Benefits",

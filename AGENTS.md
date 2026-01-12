@@ -204,6 +204,7 @@ import { Routes } from '@/types/enums/routes'
 2. **Functional Components**: Use function components (not class components)
 3. **PropsWithChildren**: Extend `PropsWithChildren` when components accept children
 4. **Barrel Files**: Use `export * from './Component'` in barrel files (index.tsx) to export both components and types
+5. **Component Separation**: Divide different React components onto different files. Large components should be split into smaller, focused sub-components. Each component should have a single responsibility and be placed in its own file within the component directory.
 
 **Example:**
 
@@ -519,6 +520,7 @@ export enum Routes {
 - **Variants Over Classes**: Prioritize Tailwind variants (`md:`, `hover:`, `focus:`, etc.) over extra classes
 - **Responsive Design**: Use mobile-first approach with standard Tailwind breakpoints (`sm:`, `md:`, `lg:`, `xl:`, `2xl:`). **NEVER use custom breakpoint variants like `mobile:`, `tablet:`, or `desktop:`** - Tailwind v4 uses standard breakpoints only
 - **Avoid Arbitrary Values**: Always prefer Tailwind's default utility classes over arbitrary values (e.g., `h-10` instead of `h-[40px]`, `w-6` instead of `w-[24px]`). Use arbitrary values only when there's no Tailwind equivalent and the value is design-specific
+- **No Pixel Literals**: Never use pixel literals in className attributes. Always use Tailwind's spacing scale instead. For example, use `h-96` (384px) instead of `h-[414px]`, `h-24` (96px) instead of `h-[104px]`. Use the closest Tailwind value when an exact match doesn't exist
 - **Prefer Tailwind Utilities Over JavaScript**: Always prefer Tailwind utilities and pseudo-classes over JavaScript conditionals for styling. Use Tailwind's built-in pseudo-classes (e.g., `:placeholder-shown`, `:hover`, `:focus`, `:disabled`) instead of JavaScript state checks when possible
 
 **Example:**
@@ -1200,6 +1202,7 @@ const handleToggle = useCallback(() => {
 - Use descriptive names in UPPER_SNAKE_CASE
 - Group related constants together
 - **Always define constants for explicit values**: Never use magic numbers or hardcoded values in business logic. Define constants for thresholds, limits, sizes, and other explicit values used in comparisons or calculations
+- **Move data constants to constants file**: All hardcoded data values (image paths, URLs, static content arrays, etc.) should be moved to the `constants/index.tsx` file. Components should import and use these constants instead of defining them inline
 
 **Example:**
 
@@ -1301,8 +1304,11 @@ Before submitting code, ensure:
 - ✅ Tailwind variants used instead of extra classes
 - ✅ **No `!important` usage** - use `cn` from `@/utils/cn` with tailwind-merge to resolve conflicts
 - ✅ **No arbitrary values** - prefer Tailwind default utilities (e.g., `h-10` not `h-[40px]`)
+- ✅ **No pixel literals** - always use Tailwind spacing scale instead of pixel values (e.g., `h-96` not `h-[414px]`)
 - ✅ **Prefer Tailwind utilities over JavaScript** - use pseudo-classes (e.g., `:placeholder-shown`, `:hover`) instead of JS conditionals for styling
 - ✅ **Use icons from icon pack** - always use icons from `public/icons/` instead of downloading from Figma or creating inline SVGs
+- ✅ **Component separation** - divide different React components onto different files
+- ✅ **Constants in constants file** - move all data constants (image paths, URLs, static arrays) to `constants/index.tsx`
 - ✅ Rendering logic optimized (useMemo/useCallback)
 - ✅ No unused variables or imports
 - ✅ Imports use path aliases (no `../`)

@@ -32,6 +32,27 @@
       "subscribeButton": "Suscribirse por {price} al día",
       "whatYoullGetTitle": "Lo que obtendrás:"
     },
+    "ProductDetailPanel": {
+      "addToCartButton": "Agregar al carrito",
+      "alaCarteTitle": "A la carta",
+      "decreaseQuantity": "Disminuir cantidad",
+      "increaseQuantity": "Aumentar cantidad",
+      "analyticalConstituentsContent": "El contenido de constituyentes analíticos se mostrará aquí.",
+      "analyticalConstituentsTitle": "Constituyentes analíticos",
+      "certifiedBadgeAlt": "Insignia certificada de bienestar animal",
+      "closeButtonAriaLabel": "Cerrar panel de detalles del producto",
+      "fullMealTitle": "Comida Completa",
+      "ingredientsContent": "El contenido de ingredientes se mostrará aquí.",
+      "ingredientsTitle": "Ingredientes",
+      "mainImageAlt": "Imagen del producto",
+      "nutritionalFactsContent": "El contenido de datos nutricionales se mostrará aquí.",
+      "nutritionalFactsTitle": "Datos Nutricionales",
+      "panelAriaLabel": "Panel de detalles del producto para {title}",
+      "priceLabel": "Precio",
+      "thumbnailAlt": "Miniatura del producto {number}",
+      "thumbnailAriaLabel": "Seleccionar miniatura {number}",
+      "topperTitle": "Topper"
+    },
     "WaitlistModal": {
       "ariaLabel": "Formulario para unirse a la lista de espera",
       "cancelButton": "Cancelar",
@@ -312,7 +333,10 @@
           "oneTimeDelivery": "Entrega única.",
           "saveOverheads": "Ahorra gastos cada mes — la forma más fácil de alimentar de forma saludable y ahorrar.",
           "flexibleSchedule": "Horario flexible — pausa, omite o cancela en cualquier momento."
-        }
+        },
+        "lambDescription": "Beneficios de salud personalizados que se dirigen específicamente a preocupaciones como piel seca y pelaje sin brillo, asegurando que tu mascota se vea y se sienta mejor.",
+        "turkeyDescription": "Beneficios de salud personalizados que se dirigen específicamente a preocupaciones como piel seca y pelaje sin brillo, asegurando que tu mascota se vea y se sienta mejor.",
+        "alaCartePrice": "$19.79 / 2 kg"
       },
       "footer": {
         "title": "Beneficios",
