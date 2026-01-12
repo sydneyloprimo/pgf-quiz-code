@@ -19,7 +19,7 @@ const LoginHero = () => {
         </div>
         <div className="flex flex-col gap-4 items-center max-w-2xl w-full text-center">
           <h1 className="heading-h1 tracking-tight text-neutral-white w-full">
-            {t('heroHeading')}
+            {t('formSubHeading')}
           </h1>
           <p className="text-body-l text-center text-neutral-white w-full">
             {t('heroDescription')}

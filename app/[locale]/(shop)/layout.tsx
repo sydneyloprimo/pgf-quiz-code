@@ -1,4 +1,4 @@
-import { AnnouncementToast } from '@/components/common/AnnouncementToast'
+import { AnnouncementToastHomepageWrapper } from '@/components/common/AnnouncementToast/HomepageWrapper'
 import Footer from '@/components/common/Footer'
 import LocaleWrapper from '@/components/common/LocaleWrapper'
 import { MainNav } from '@/components/common/MainNav'
@@ -19,10 +19,13 @@ export default function RootLayout({
       >
         <div className="w-full top-0 z-50">
           <MainNav />
-          <AnnouncementToast />
+          <AnnouncementToastHomepageWrapper />
         </div>
       </LocaleWrapper>
-      <LocaleWrapper params={params} localeGroup={['Home', 'Common']}>
+      <LocaleWrapper
+        params={params}
+        localeGroup={['Home', 'Common', 'Formulation']}
+      >
         {children}
       </LocaleWrapper>
       <LocaleWrapper params={params} localeGroup="Footer">
