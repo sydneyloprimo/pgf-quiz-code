@@ -518,7 +518,7 @@ export enum Routes {
 - **Design System First**: Always prefer design system tokens over custom values
 - **Custom Configuration**: All design tokens are defined in `app/[locale]/globals.css` using the `@theme` directive
 - **Variants Over Classes**: Prioritize Tailwind variants (`md:`, `hover:`, `focus:`, etc.) over extra classes
-- **Responsive Design**: Use mobile-first approach with `mobile:`, `tablet:`, `desktop:` custom variants
+- **Responsive Design**: Use mobile-first approach with standard Tailwind breakpoints (`sm:`, `md:`, `lg:`, `xl:`, `2xl:`). **NEVER use custom breakpoint variants like `mobile:`, `tablet:`, or `desktop:`** - Tailwind v4 uses standard breakpoints only
 - **Avoid Arbitrary Values**: Always prefer Tailwind's default utility classes over arbitrary values (e.g., `h-10` instead of `h-[40px]`, `w-6` instead of `w-[24px]`). Use arbitrary values only when there's no Tailwind equivalent and the value is design-specific
 - **No Pixel Literals**: Never use pixel literals in className attributes. Always use Tailwind's spacing scale instead. For example, use `h-96` (384px) instead of `h-[414px]`, `h-24` (96px) instead of `h-[104px]`. Use the closest Tailwind value when an exact match doesn't exist
 - **Prefer Tailwind Utilities Over JavaScript**: Always prefer Tailwind utilities and pseudo-classes over JavaScript conditionals for styling. Use Tailwind's built-in pseudo-classes (e.g., `:placeholder-shown`, `:hover`, `:focus`, `:disabled`) instead of JavaScript state checks when possible
@@ -527,7 +527,7 @@ export enum Routes {
 
 ```typescript
 // ✅ Good - Using design system tokens and Tailwind variants
-<div className="text-sm tablet:text-xl font-bold hover:bg-primary-700 focus:outline-primary-600">
+<div className="text-sm lg:text-xl font-bold hover:bg-primary-700 focus:outline-primary-600">
   Content
 </div>
 
@@ -720,17 +720,22 @@ import { Link } from '@/components/common/Link'
 - **Intelligent Merging**: `tailwind-merge` automatically resolves conflicts between Tailwind classes (e.g., `p-4 p-6` becomes just `p-6`)
 - Combine Tailwind classes with custom classes when needed
 
+**⚠️ IMPORTANT: When NOT to Use `cn`**
+
+**DO NOT use `cn` for static strings.** If all your classes are static strings with no conditionals, props, or dynamic values, use a regular string instead. Using `cn` with only static strings is unnecessary and adds overhead.
+
+**When NOT to Use `cn`:**
+
+- **Static strings only**: When all classes are static strings with no conditionals, props, or conflicts, use regular strings instead
+- **Multiple static strings in array**: When you have multiple static strings passed as separate arguments to `cn`, combine them into a single string
+- **Single class string**: When you have a single class string with no merging needed
+
 **When to Use `cn`:**
 
 - **Conditional classes**: When you need to conditionally apply classes based on props or state
 - **Merging with props**: When merging classes with a `className` prop from parent components
 - **Resolving conflicts**: When you have potential Tailwind class conflicts that need intelligent resolution
 - **Multiple class sources**: When combining classes from multiple sources (base classes, conditional classes, prop classes)
-
-**When NOT to Use `cn`:**
-
-- **Static strings only**: When all classes are static strings with no conditionals, props, or conflicts, use regular strings instead
-- **Single class string**: When you have a single class string with no merging needed
 
 **String Assignment:**
 
@@ -755,10 +760,25 @@ import { cn } from '@/utils/cn'
 // ✅ Good - Direct string assignment (no braces needed)
 <div className="flex flex-col items-center">
 
+// ✅ Good - Multiple static classes in a single string
+<div className="w-full py-16 lg:py-20 px-5 lg:px-24 flex flex-col items-center justify-center">
+
 // ❌ Bad - Using cn with only static strings (unnecessary)
 <div className={cn('flex flex-col items-center')}>
 // Should be:
 <div className="flex flex-col items-center">
+
+// ❌ Bad - Using cn with multiple static strings in array (unnecessary)
+<div className={cn(
+  'w-full',
+  'py-16',
+  'lg:py-20',
+  'px-5',
+  'lg:px-24',
+  'flex flex-col items-center justify-center'
+)}>
+// Should be:
+<div className="w-full py-16 lg:py-20 px-5 lg:px-24 flex flex-col items-center justify-center">
 
 // ❌ Bad - Unnecessary curly braces around string literal
 <div className={'flex flex-col items-center'}>
