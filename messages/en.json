@@ -311,7 +311,47 @@
     "title": "My orders"
   },
   "Profile": {
+    "accountCreated": "Account created on {date}",
     "address": "Address",
+    "OrdersCard": {
+      "description": "View your previous and current orders along with any past payments here.",
+      "details": "Details",
+      "emptyState": "No orders yet",
+      "title": "My Orders"
+    },
+    "OrderDetailsModal": {
+      "ariaLabel": "Order details",
+      "billingAddress": "Billing Address",
+      "closeButton": "Close",
+      "closeButtonLabel": "Close order details modal",
+      "date": "Date",
+      "itemImageAlt": "Product image for {name}",
+      "items": "Items",
+      "orderNumber": "Order #",
+      "orderSummary": "Order Summary",
+      "paymentMethod": "Payment Method",
+      "price": "Price",
+      "quantity": "Qty",
+      "shipping": "Shipping",
+      "shippingAddress": "Shipping Address",
+      "status": "Status",
+      "subtotal": "Subtotal",
+      "tax": "Tax",
+      "title": "Order Details",
+      "total": "Total"
+    },
+    "PetsCard": {
+      "activeSubscription": "Active Subscription",
+      "cancelSubscription": "Cancel Subscription",
+      "description": "View your previous and current orders along with any past payments here.",
+      "editPlan": "Edit Their Plan",
+      "emptyState": "No pets yet",
+      "expiredSubscription": "Expired Subscription",
+      "pendingPayment": "Pending Payment",
+      "renewsOn": "Renews on {date}",
+      "subscribeAgain": "Subscribe Again",
+      "title": "My Pets"
+    },
     "addressPlaceholder": "Address",
     "cancelButtonText": "Cancel",
     "city": "City",
