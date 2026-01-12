@@ -88,13 +88,20 @@ const AuthForm = ({
           <Controller
             name="email"
             control={control}
-            render={({ field, fieldState: { error } }) => (
+            render={({
+              field: { ref, name, value, onChange, onBlur },
+              fieldState: { error },
+            }) => (
               <div className="flex flex-col gap-1 items-start w-full">
                 <EmailLabel />
                 <Input
-                  {...field}
+                  ref={ref}
                   label=""
+                  value={value}
                   className="w-full"
+                  name={name}
+                  onChange={onChange}
+                  onBlur={onBlur}
                   placeholder={t('emailPlaceholder')}
                   autoComplete="on"
                   id="email"
@@ -106,13 +113,20 @@ const AuthForm = ({
           <Controller
             name="password"
             control={control}
-            render={({ field, fieldState: { error } }) => (
+            render={({
+              field: { ref, name, value, onChange, onBlur },
+              fieldState: { error },
+            }) => (
               <div className="flex flex-col gap-1 items-start w-full">
                 <PasswordLabel />
                 <Input
-                  {...field}
+                  ref={ref}
                   label=""
+                  value={value}
                   className="w-full"
+                  name={name}
+                  onChange={onChange}
+                  onBlur={onBlur}
                   placeholder={t('passwordPlaceholder')}
                   autoComplete="on"
                   id="password"
@@ -179,4 +193,4 @@ const AuthForm = ({
   )
 }
 
-export default AuthForm
+export { AuthForm }

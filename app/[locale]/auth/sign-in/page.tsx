@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl'
 import { z } from 'zod'
 
-import AuthForm from '@/components/auth/AuthForm'
+import { AuthForm } from '@/components/auth/AuthForm'
 import { LoginCloseButton } from '@/components/auth/LoginCloseButton'
 import { LoginDivider } from '@/components/auth/LoginDivider'
 import { LoginFormCard } from '@/components/auth/LoginFormCard'
