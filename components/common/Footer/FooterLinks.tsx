@@ -2,18 +2,18 @@ import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 
 import { PGFTextLogo } from '@/components/common/Icon'
+import { NAV_LINKS } from '@/constants'
 import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
 
 const FooterLinks = () => {
-  const t = useTranslations('Footer')
+  const tNav = useTranslations('Navigation')
+  const tFooter = useTranslations('Footer')
 
-  const navLinks = [
-    { href: Routes.home, label: t('linkHome') },
-    { href: '/recipe', label: t('linkRecipe') },
-    { href: '/about', label: t('linkAbout') },
-    { href: '/contact', label: t('linkContact') },
-  ]
+  const navLinks = NAV_LINKS.map((link) => ({
+    href: link.href,
+    label: tNav(link.labelKey),
+  }))
 
   return (
     <div
@@ -26,11 +26,14 @@ const FooterLinks = () => {
         'order-3 lg:order-0'
       )}
     >
-      <Link href={Routes.home} aria-label={t('logoAria')}>
+      <Link href={Routes.home} aria-label={tFooter('logoAria')}>
         <PGFTextLogo className="h-11 w-auto text-neutral-white" />
       </Link>
 
-      <nav className="flex flex-col gap-4" aria-label={t('footerNavAria')}>
+      <nav
+        className="flex flex-col gap-4"
+        aria-label={tFooter('footerNavAria')}
+      >
         {navLinks.map((link) => (
           <Link
             key={link.href}

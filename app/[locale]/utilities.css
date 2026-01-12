@@ -4,6 +4,7 @@
   font-family: var(--font-display);
   font-size: 3rem;
   line-height: 3.75rem;
+  font-weight: 500;
 
   @media (width >= 601px) and (width <= 1135px) {
     font-size: 3rem;
@@ -201,6 +202,10 @@
 
 @utility image-overlay {
   background-color: var(--image-overlay);
+}
+
+@utility gradient-hero-overlay {
+  background: var(--gradient-hero-overlay);
 }
 
 /* Semantic Helpers - Grid */
