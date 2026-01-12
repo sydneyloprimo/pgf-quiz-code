@@ -29,6 +29,10 @@ interface AuthFormProps {
     password: z.ZodString
   }>
   clearApiError: () => void
+  showRedirectLink?: boolean
+  redirectLinkHref?: string
+  redirectLinkText?: string
+  redirectMessage?: string
 }
 
 const AuthForm = ({
@@ -38,9 +42,14 @@ const AuthForm = ({
   apiError,
   validationSchema,
   clearApiError,
+  showRedirectLink = true,
+  redirectLinkHref = Routes.signup,
+  redirectLinkText,
+  redirectMessage,
 }: AuthFormProps) => {
   const t = useTranslations('Auth')
   const tSignIn = useTranslations('SignIn')
+  const tSignUp = useTranslations('SignUp')
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [apiEmail, setApiEmail] = useState<string>('')
 
@@ -147,17 +156,25 @@ const AuthForm = ({
           {isLoading ? <Spinner /> : buttonText}
         </Button>
       </form>
-      <div className="flex flex-col lg:flex-row gap-1 items-center justify-center w-full mt-3">
-        <p className="text-body-l text-tertiary-900">
-          {tSignIn('accountQuestion')}
-        </p>
-        <Link
-          href={Routes.signup}
-          className="text-body-m font-bold text-secondary-900 underline"
-        >
-          {tSignIn('createAccountLink')}
-        </Link>
-      </div>
+      {showRedirectLink && (
+        <div className="flex flex-col lg:flex-row gap-1 items-center justify-center w-full mt-3">
+          <p className="text-body-l text-tertiary-900">
+            {redirectMessage ||
+              (redirectLinkHref === Routes.signin
+                ? tSignUp('signinRedirectMessage')
+                : tSignIn('accountQuestion'))}
+          </p>
+          <Link
+            href={redirectLinkHref}
+            className="text-body-m font-bold text-secondary-900 underline"
+          >
+            {redirectLinkText ||
+              (redirectLinkHref === Routes.signin
+                ? tSignUp('signinRedirectLink')
+                : tSignIn('createAccountLink'))}
+          </Link>
+        </div>
+      )}
     </div>
   )
 }

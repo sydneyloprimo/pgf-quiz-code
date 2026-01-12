@@ -605,12 +605,19 @@
     "signupRedirectMessage": "Don't have an account?"
   },
   "SignUp": {
+    "accountQuestion": "Do you have an account?",
     "buttonText": "Sign up",
+    "closeButtonAriaLabel": "Close sign up page",
     "emailPattern": "Must be a valid email",
     "emailRequired": "Email is required",
+    "formHeading": "Create your Account",
+    "formSubHeading": "Offer your dog refined, ethically crafted nourishment.",
+    "heroDescription": "Prepared with timeless craftsmanship, guided by science, tailored to their needs.",
+    "heroHeading": "Offer your dog refined, ethically crafted nourishment.",
+    "logoAlt": "Purely Golden Foods logo",
     "passwordLength": "Password must be at least 8 characters",
     "passwordPattern": "Password should have at least one number, one uppercase letter and one lowercase letter",
-    "signinRedirectLink": "Sign in",
+    "signinRedirectLink": "Log In",
     "signinRedirectMessage": "Already have an account?",
     "successfulRegistration": "Congratulations! Your account has been successfully created.\nWe have sent a confirmation email to your registered email address."
   },

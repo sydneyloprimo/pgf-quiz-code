@@ -384,6 +384,23 @@
     "logoAlt": "Logo de Purely Golden Foods",
     "passwordRequired": "La contraseña es obligatoria"
   },
+  "SignUp": {
+    "accountQuestion": "¿Ya tienes una cuenta?",
+    "buttonText": "Registrarse",
+    "closeButtonAriaLabel": "Cerrar página de registro",
+    "emailPattern": "Debe ser un correo electrónico válido",
+    "emailRequired": "El correo electrónico es obligatorio",
+    "formHeading": "Crea tu cuenta",
+    "formSubHeading": "Ofrece a tu perro una alimentación refinada y elaborada éticamente.",
+    "heroDescription": "Preparado con artesanía atemporal, guiado por la ciencia, adaptado a sus necesidades.",
+    "heroHeading": "Ofrece a tu perro una alimentación refinada y elaborada éticamente.",
+    "logoAlt": "Logo de Purely Golden Foods",
+    "passwordLength": "La contraseña debe tener al menos 8 caracteres",
+    "passwordPattern": "La contraseña debe tener al menos un número, una letra mayúscula y una letra minúscula",
+    "signinRedirectLink": "Iniciar sesión",
+    "signinRedirectMessage": "¿Ya tienes una cuenta?",
+    "successfulRegistration": "¡Felicidades! Tu cuenta ha sido creada exitosamente.\nHemos enviado un correo de confirmación a tu dirección de correo electrónico registrada."
+  },
   "Formulation": {
     "Hero": {
       "title": "Nuestra Formulación",
