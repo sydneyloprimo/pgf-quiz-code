@@ -311,6 +311,7 @@
     "title": "My orders"
   },
   "Profile": {
+    "accountCreated": "Account created on {date}",
     "address": "Address",
     "addressPlaceholder": "Address",
     "cancelButtonText": "Cancel",
