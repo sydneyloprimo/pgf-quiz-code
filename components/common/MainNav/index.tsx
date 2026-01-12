@@ -95,7 +95,7 @@ const MainNav = () => {
       {/* User Actions */}
       <div className="flex items-center gap-1">
         <Link
-          href="/profile"
+          href={Routes.signin}
           className="p-3 text-neutral-white hover:text-secondary-400"
           aria-label={t('profileAria')}
         >
