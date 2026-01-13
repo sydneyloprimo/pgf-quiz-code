@@ -1,7 +1,10 @@
 'use client'
 
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 import { useCallback, useState } from 'react'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { z } from 'zod'
 
 import { Button } from '@/components/common/Button'
 import { VisibilityIcon, VisibilityOffIcon } from '@/components/common/Icon'
@@ -25,68 +28,69 @@ const ChangePasswordModal = ({
   onSubmit,
 }: ChangePasswordModalProps) => {
   const t = useTranslations('Profile.ChangePasswordModal')
-  const [currentPassword, setCurrentPassword] = useState('')
-  const [newPassword, setNewPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
   const [showCurrentPassword, setShowCurrentPassword] = useState(false)
   const [showNewPassword, setShowNewPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const [errors, setErrors] = useState<{
-    currentPassword?: string
-    newPassword?: string
-    confirmPassword?: string
-  }>({})
 
-  const handleReset = useCallback(() => {
-    setCurrentPassword('')
-    setNewPassword('')
-    setConfirmPassword('')
-    setShowCurrentPassword(false)
-    setShowNewPassword(false)
-    setShowConfirmPassword(false)
-    setErrors({})
-  }, [])
+  const validationSchema = z
+    .object({
+      currentPassword: z
+        .string()
+        .min(1, { message: t('errors.currentPasswordRequired') }),
+      newPassword: z.string().superRefine((val, ctx) => {
+        if (!val || val.length === 0) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: t('errors.newPasswordRequired'),
+          })
+          return
+        }
+        if (val.length < 8) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: t('errors.newPasswordMinLength'),
+          })
+        }
+      }),
+      confirmPassword: z
+        .string()
+        .min(1, { message: t('errors.confirmPasswordRequired') }),
+    })
+    .refine((data) => data.newPassword === data.confirmPassword, {
+      message: t('errors.passwordsDoNotMatch'),
+      path: ['confirmPassword'],
+    })
 
-  const handleSubmit = useCallback(
-    (e: React.FormEvent) => {
-      e.preventDefault()
-      const newErrors: typeof errors = {}
+  type FormData = z.infer<typeof validationSchema>
 
-      if (!currentPassword) {
-        newErrors.currentPassword = t('errors.currentPasswordRequired')
-      }
-
-      if (!newPassword) {
-        newErrors.newPassword = t('errors.newPasswordRequired')
-      } else if (newPassword.length < 8) {
-        newErrors.newPassword = t('errors.newPasswordMinLength')
-      }
-
-      if (!confirmPassword) {
-        newErrors.confirmPassword = t('errors.confirmPasswordRequired')
-      } else if (newPassword !== confirmPassword) {
-        newErrors.confirmPassword = t('errors.passwordsDoNotMatch')
-      }
-
-      if (Object.keys(newErrors).length > 0) {
-        setErrors(newErrors)
-        return
-      }
-
-      onSubmit({
-        currentPassword,
-        newPassword,
-        confirmPassword,
-      })
-      handleReset()
+  const {
+    control,
+    formState: { errors },
+    handleSubmit: rhfHandleSubmit,
+    reset,
+  } = useForm<FormData>({
+    defaultValues: {
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: '',
     },
-    [currentPassword, newPassword, confirmPassword, onSubmit, t, handleReset]
-  )
+    mode: 'all',
+    resolver: zodResolver(validationSchema),
+  })
+
+  const onSubmitForm: SubmitHandler<FormData> = (data) => {
+    onSubmit({
+      currentPassword: data.currentPassword,
+      newPassword: data.newPassword,
+      confirmPassword: data.confirmPassword,
+    })
+    reset()
+  }
 
   const handleClose = useCallback(() => {
-    handleReset()
+    reset()
     onClose()
-  }, [handleReset, onClose])
+  }, [reset, onClose])
 
   const toggleCurrentPassword = useCallback(() => {
     setShowCurrentPassword((prev) => !prev)
@@ -108,82 +112,125 @@ const ChangePasswordModal = ({
       ariaLabel={t('ariaLabel')}
       className="max-w-lg p-8"
     >
-      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+      <form
+        onSubmit={rhfHandleSubmit(onSubmitForm)}
+        className="flex flex-col gap-6"
+      >
         <h2 className="heading-h5 font-sans text-xl text-secondary-950">
           {t('heading')}
         </h2>
         <div className="flex flex-col gap-4">
-          <Input
-            label={t('currentPasswordLabel')}
-            type={showCurrentPassword ? 'text' : 'password'}
-            value={currentPassword}
-            onChange={(e) => setCurrentPassword(e.target.value)}
-            error={errors.currentPassword}
-            icon={
-              <button
-                type="button"
-                onClick={toggleCurrentPassword}
-                aria-label={
-                  showCurrentPassword ? t('hidePassword') : t('showPassword')
+          <Controller
+            name="currentPassword"
+            control={control}
+            render={({
+              field: { ref, name, value, onChange, onBlur },
+              fieldState: { error },
+            }) => (
+              <Input
+                ref={ref}
+                label={t('currentPasswordLabel')}
+                type={showCurrentPassword ? 'text' : 'password'}
+                value={value}
+                name={name}
+                onChange={onChange}
+                onBlur={onBlur}
+                error={error?.message}
+                icon={
+                  <button
+                    type="button"
+                    onClick={toggleCurrentPassword}
+                    aria-label={
+                      showCurrentPassword
+                        ? t('hidePassword')
+                        : t('showPassword')
+                    }
+                    className="flex items-center justify-center"
+                  >
+                    {showCurrentPassword ? (
+                      <VisibilityOffIcon className="size-6 text-secondary-950" />
+                    ) : (
+                      <VisibilityIcon className="size-6 text-secondary-950" />
+                    )}
+                  </button>
                 }
-                className="flex items-center justify-center"
-              >
-                {showCurrentPassword ? (
-                  <VisibilityOffIcon className="size-6 text-secondary-950" />
-                ) : (
-                  <VisibilityIcon className="size-6 text-secondary-950" />
-                )}
-              </button>
-            }
-            iconPosition={InputIconPosition.End}
+                iconPosition={InputIconPosition.End}
+              />
+            )}
           />
-          <Input
-            label={t('newPasswordLabel')}
-            type={showNewPassword ? 'text' : 'password'}
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            error={errors.newPassword}
-            icon={
-              <button
-                type="button"
-                onClick={toggleNewPassword}
-                aria-label={
-                  showNewPassword ? t('hidePassword') : t('showPassword')
+          <Controller
+            name="newPassword"
+            control={control}
+            render={({
+              field: { ref, name, value, onChange, onBlur },
+              fieldState: { error },
+            }) => (
+              <Input
+                ref={ref}
+                label={t('newPasswordLabel')}
+                type={showNewPassword ? 'text' : 'password'}
+                value={value}
+                name={name}
+                onChange={onChange}
+                onBlur={onBlur}
+                error={error?.message}
+                icon={
+                  <button
+                    type="button"
+                    onClick={toggleNewPassword}
+                    aria-label={
+                      showNewPassword ? t('hidePassword') : t('showPassword')
+                    }
+                    className="flex items-center justify-center"
+                  >
+                    {showNewPassword ? (
+                      <VisibilityOffIcon className="size-6 text-secondary-950" />
+                    ) : (
+                      <VisibilityIcon className="size-6 text-secondary-950" />
+                    )}
+                  </button>
                 }
-                className="flex items-center justify-center"
-              >
-                {showNewPassword ? (
-                  <VisibilityOffIcon className="size-6 text-secondary-950" />
-                ) : (
-                  <VisibilityIcon className="size-6 text-secondary-950" />
-                )}
-              </button>
-            }
-            iconPosition={InputIconPosition.End}
+                iconPosition={InputIconPosition.End}
+              />
+            )}
           />
-          <Input
-            label={t('confirmPasswordLabel')}
-            type={showConfirmPassword ? 'text' : 'password'}
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            error={errors.confirmPassword}
-            icon={
-              <button
-                type="button"
-                onClick={toggleConfirmPassword}
-                aria-label={
-                  showConfirmPassword ? t('hidePassword') : t('showPassword')
+          <Controller
+            name="confirmPassword"
+            control={control}
+            render={({
+              field: { ref, name, value, onChange, onBlur },
+              fieldState: { error },
+            }) => (
+              <Input
+                ref={ref}
+                label={t('confirmPasswordLabel')}
+                type={showConfirmPassword ? 'text' : 'password'}
+                value={value}
+                name={name}
+                onChange={onChange}
+                onBlur={onBlur}
+                error={error?.message}
+                icon={
+                  <button
+                    type="button"
+                    onClick={toggleConfirmPassword}
+                    aria-label={
+                      showConfirmPassword
+                        ? t('hidePassword')
+                        : t('showPassword')
+                    }
+                    className="flex items-center justify-center"
+                  >
+                    {showConfirmPassword ? (
+                      <VisibilityOffIcon className="size-6 text-secondary-950" />
+                    ) : (
+                      <VisibilityIcon className="size-6 text-secondary-950" />
+                    )}
+                  </button>
                 }
-                className="flex items-center justify-center"
-              >
-                {showConfirmPassword ? (
-                  <VisibilityOffIcon className="size-6 text-secondary-950" />
-                ) : (
-                  <VisibilityIcon className="size-6 text-secondary-950" />
-                )}
-              </button>
-            }
-            iconPosition={InputIconPosition.End}
+                iconPosition={InputIconPosition.End}
+              />
+            )}
           />
         </div>
         <div className="flex flex-col md:flex-row gap-4 pt-2">
