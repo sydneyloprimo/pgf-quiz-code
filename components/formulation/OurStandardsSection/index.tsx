@@ -80,11 +80,12 @@ const OurStandardsSection = () => {
   ]
 
   return (
-    <FeatureGrid
-      features={features}
-      columns={2}
-      className="bg-white px-5 md:px-24 desktop:px-32 py-8"
-    />
+    <section className="w-full py-28 px-5 md:px-8 desktop:px-24">
+      <h2 className="heading-h2 text-secondary-950 text-center tracking-[-0.4px] mb-8">
+        {t('title')}
+      </h2>
+      <FeatureGrid features={features} columns={2} />
+    </section>
   )
 }
 

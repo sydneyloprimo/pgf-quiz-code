@@ -27,7 +27,7 @@ const FeatureGrid = ({
   const gridColsClass = columns === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'
 
   return (
-    <section className={cn('w-full', className)}>
+    <div className={cn('w-full', className)}>
       <div className={cn('grid grid-cols-1 w-full', gridColsClass)}>
         {features.map((feature, index) => {
           const isEven =
@@ -56,7 +56,7 @@ const FeatureGrid = ({
           )
         })}
       </div>
-    </section>
+    </div>
   )
 }
 
