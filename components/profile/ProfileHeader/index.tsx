@@ -61,7 +61,6 @@ const ProfileHeader = () => {
     },
     [closeChangePasswordModal]
   )
-
   return (
     <div className="bg-quaternary-800 border border-secondary-200 p-5 md:p-10 flex flex-col gap-6">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
