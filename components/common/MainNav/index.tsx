@@ -55,9 +55,9 @@ const MainNav = () => {
 
   const navLinks = [
     { href: Routes.home, label: t('home') },
-    { href: '/formulation', label: t('ourFormulation') },
-    { href: '/about', label: t('aboutUs') },
-    { href: '/contact', label: t('contact') },
+    { href: Routes.formulation, label: t('ourFormulation') },
+    { href: Routes.about, label: t('aboutUs') },
+    { href: Routes.contact, label: t('contact') },
   ]
 
   const isActiveLink = (href: string) => {
