@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useCallback, useState } from 'react'
+import { useCookies } from 'react-cookie'
 
 import {
   CloseIcon,
@@ -12,7 +13,7 @@ import {
   ShoppingCartIcon,
   UserIcon,
 } from '@/components/common/Icon'
-import { NAV_LINKS } from '@/constants'
+import { Cookies } from '@/types/enums/cookies'
 import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
 
@@ -40,6 +41,9 @@ const MainNav = () => {
   const t = useTranslations('MainNav')
   const pathname = usePathname()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [cookies] = useCookies([Cookies.customerAccessToken])
+  const isLoggedIn = !!cookies[Cookies.customerAccessToken]
+  const profileHref = isLoggedIn ? Routes.profile : Routes.signin
 
   const handleToggleMobileMenu = useCallback(() => {
     setIsMobileMenuOpen((prev) => !prev)
@@ -49,10 +53,12 @@ const MainNav = () => {
     setIsMobileMenuOpen(false)
   }, [])
 
-  const navLinks = NAV_LINKS.map((link) => ({
-    href: link.href,
-    label: t(link.labelKey),
-  }))
+  const navLinks = [
+    { href: Routes.home, label: t('home') },
+    { href: Routes.formulation, label: t('ourFormulation') },
+    { href: Routes.about, label: t('aboutUs') },
+    { href: Routes.contact, label: t('contact') },
+  ]
 
   const isActiveLink = (href: string) => {
     if (href === Routes.home) {
@@ -95,7 +101,7 @@ const MainNav = () => {
       {/* User Actions */}
       <div className="flex items-center gap-1">
         <Link
-          href={Routes.signin}
+          href={profileHref}
           className="p-3 text-neutral-white hover:text-secondary-400"
           aria-label={t('profileAria')}
         >
