@@ -364,6 +364,7 @@
   "Auth": {
     "email": "Correo electrónico",
     "emailPlaceholder": "Escribe tu Correo electrónico",
+    "logoAlt": "Logo negro",
     "password": "Contraseña",
     "passwordPlaceholder": "Escribe tu Contraseña"
   },
@@ -456,13 +457,54 @@
       "address": "Dirección",
       "addressPlaceholder": "Dirección",
       "cancelButtonText": "Cancelar",
+      "ChangePasswordModal": {
+        "ariaLabel": "Formulario de cambio de contraseña",
+        "cancelButton": "Cancelar",
+        "closeButtonLabel": "Cerrar modal de cambio de contraseña",
+        "confirmPasswordLabel": "Confirmar Nueva Contraseña",
+        "currentPasswordLabel": "Contraseña Actual",
+        "errors": {
+          "confirmPasswordRequired": "Por favor confirma tu nueva contraseña",
+          "currentPasswordRequired": "Por favor ingresa tu contraseña actual",
+          "newPasswordMinLength": "La contraseña debe tener al menos 8 caracteres",
+          "newPasswordRequired": "Por favor ingresa una nueva contraseña",
+          "passwordsDoNotMatch": "Las contraseñas no coinciden"
+        },
+        "heading": "Cambiar Contraseña",
+        "hidePassword": "Ocultar contraseña",
+        "newPasswordLabel": "Nueva Contraseña",
+        "showPassword": "Mostrar contraseña",
+        "submitButton": "Guardar"
+      },
+      "changePassword": "Cambiar Contraseña",
       "city": "Ciudad",
       "cityPlaceholder": "Ciudad",
       "country": "País",
       "countryPlaceholder": "País",
+      "deleteAccountLink": {
+        "text": "Eliminar Mi Cuenta",
+        "url": "/profile/delete"
+      },
+      "DeleteAccountModal": {
+        "ariaLabel": "Confirmación de eliminación de cuenta",
+        "cancelButton": "Cancelar",
+        "closeButtonLabel": "Cerrar modal de eliminación de cuenta",
+        "confirmButton": "Eliminar Cuenta",
+        "description": "¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer y todos tus datos se eliminarán permanentemente.",
+        "heading": "Eliminar Cuenta"
+      },
       "editSettings": "Editar mi configuración personal",
       "email": "Dirección de correo",
       "emailPlaceholder": "Correo electrónico",
+      "logOut": "Cerrar sesión",
+      "LogoutModal": {
+        "ariaLabel": "Confirmación de cierre de sesión",
+        "cancelButton": "Cancelar",
+        "closeButtonLabel": "Cerrar modal de cierre de sesión",
+        "confirmButton": "Cerrar Sesión",
+        "description": "¿Estás seguro de que deseas cerrar sesión? Necesitarás iniciar sesión nuevamente para acceder a tu cuenta.",
+        "heading": "Cerrar Sesión"
+      },
       "name": "Nombre",
       "namePlaceholder": "Nombre",
       "OrdersCard": {

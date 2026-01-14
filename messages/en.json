@@ -7,6 +7,7 @@
   "Auth": {
     "email": "Email",
     "emailPlaceholder": "Type your email",
+    "logoAlt": "Logo black",
     "password": "Password",
     "passwordPlaceholder": "Type your password"
   },
@@ -313,6 +314,47 @@
   "Profile": {
     "accountCreated": "Account created on {date}",
     "address": "Address",
+    "ChangePasswordModal": {
+      "ariaLabel": "Change password form",
+      "cancelButton": "Cancel",
+      "closeButtonLabel": "Close change password modal",
+      "confirmPasswordLabel": "Confirm New Password",
+      "currentPasswordLabel": "Current Password",
+      "errors": {
+        "confirmPasswordRequired": "Please confirm your new password",
+        "currentPasswordRequired": "Please enter your current password",
+        "newPasswordMinLength": "Password must be at least 8 characters",
+        "newPasswordRequired": "Please enter a new password",
+        "passwordsDoNotMatch": "Passwords do not match"
+      },
+      "heading": "Change Password",
+      "hidePassword": "Hide password",
+      "newPasswordLabel": "New Password",
+      "showPassword": "Show password",
+      "submitButton": "Save"
+    },
+    "changePassword": "Change Password",
+    "deleteAccountLink": {
+      "text": "Delete My Account",
+      "url": "/profile/delete"
+    },
+    "DeleteAccountModal": {
+      "ariaLabel": "Delete account confirmation",
+      "cancelButton": "Cancel",
+      "closeButtonLabel": "Close delete account modal",
+      "confirmButton": "Delete Account",
+      "description": "Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently removed.",
+      "heading": "Delete Account"
+    },
+    "logOut": "Log out",
+    "LogoutModal": {
+      "ariaLabel": "Logout confirmation",
+      "cancelButton": "Cancel",
+      "closeButtonLabel": "Close logout modal",
+      "confirmButton": "Log Out",
+      "description": "Are you sure you want to log out? You will need to sign in again to access your account.",
+      "heading": "Log Out"
+    },
     "OrdersCard": {
       "description": "View your previous and current orders along with any past payments here.",
       "details": "Details",

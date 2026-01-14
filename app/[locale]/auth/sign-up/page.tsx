@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import { useMediaQuery } from 'usehooks-ts'
 import { z } from 'zod'
 
-import AuthForm from '@/components/auth/AuthForm'
+import { AuthForm } from '@/components/auth/AuthForm'
 import { LoginCloseButton } from '@/components/auth/LoginCloseButton'
 import { LoginDivider } from '@/components/auth/LoginDivider'
 import { SignUpFormCard } from '@/components/auth/SignUpFormCard'

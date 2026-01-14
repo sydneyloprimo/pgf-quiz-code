@@ -93,7 +93,6 @@ const AuthForm = ({
                 <EmailLabel />
                 <Input
                   {...field}
-                  label=""
                   className="w-full"
                   placeholder={t('emailPlaceholder')}
                   autoComplete="on"
@@ -111,7 +110,6 @@ const AuthForm = ({
                 <PasswordLabel />
                 <Input
                   {...field}
-                  label=""
                   className="w-full"
                   placeholder={t('passwordPlaceholder')}
                   autoComplete="on"
@@ -179,4 +177,4 @@ const AuthForm = ({
   )
 }
 
-export default AuthForm
+export { AuthForm }
