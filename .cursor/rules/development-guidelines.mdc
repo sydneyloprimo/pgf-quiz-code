@@ -1,3 +1,12 @@
+---
+description: Comprehensive development guidelines and coding standards covering file organization, component patterns, accessibility, TypeScript, styling, i18n, imports, performance, GraphQL, and code quality
+filePatterns:
+  - "**/*.{ts,tsx,js,jsx}"
+  - "**/*.css"
+  - "**/*.graphql"
+alwaysApply: true
+---
+
 # AGENTS.md - Development Guidelines
 
 This document outlines the coding standards, patterns, and best practices for working with this codebase. Follow these guidelines to maintain consistency and code quality.
