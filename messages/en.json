@@ -7,6 +7,7 @@
   "Auth": {
     "email": "Email",
     "emailPlaceholder": "Type your email",
+    "logoAlt": "Logo black",
     "password": "Password",
     "passwordPlaceholder": "Type your password"
   },
@@ -60,6 +61,27 @@
       "shipmentFrequencyPlaceholder": "Select frequency",
       "subscribeButton": "Subscribe for {price} a day",
       "whatYoullGetTitle": "What you'll get:"
+    },
+    "ProductDetailPanel": {
+      "addToCartButton": "Add to cart",
+      "alaCarteTitle": "A la carte",
+      "decreaseQuantity": "Decrease quantity",
+      "increaseQuantity": "Increase quantity",
+      "analyticalConstituentsContent": "Analytical constituents content will be displayed here.",
+      "analyticalConstituentsTitle": "Analytical constituents",
+      "certifiedBadgeAlt": "Animal welfare certified badge",
+      "closeButtonAriaLabel": "Close product detail panel",
+      "fullMealTitle": "Full Meal",
+      "ingredientsContent": "Ingredients content will be displayed here.",
+      "ingredientsTitle": "Ingredients",
+      "mainImageAlt": "Product image",
+      "nutritionalFactsContent": "Nutritional facts content will be displayed here.",
+      "nutritionalFactsTitle": "Nutritional Facts",
+      "panelAriaLabel": "Product detail panel for {title}",
+      "priceLabel": "Price",
+      "thumbnailAlt": "Product thumbnail {number}",
+      "thumbnailAriaLabel": "Select thumbnail {number}",
+      "topperTitle": "Topper"
     },
     "Toast": {
       "Error": {
@@ -294,7 +316,88 @@
     "title": "My orders"
   },
   "Profile": {
+    "accountCreated": "Account created on {date}",
     "address": "Address",
+    "ChangePasswordModal": {
+      "ariaLabel": "Change password form",
+      "cancelButton": "Cancel",
+      "closeButtonLabel": "Close change password modal",
+      "confirmPasswordLabel": "Confirm New Password",
+      "currentPasswordLabel": "Current Password",
+      "errors": {
+        "confirmPasswordRequired": "Please confirm your new password",
+        "currentPasswordRequired": "Please enter your current password",
+        "newPasswordMinLength": "Password must be at least 8 characters",
+        "newPasswordRequired": "Please enter a new password",
+        "passwordsDoNotMatch": "Passwords do not match"
+      },
+      "heading": "Change Password",
+      "hidePassword": "Hide password",
+      "newPasswordLabel": "New Password",
+      "showPassword": "Show password",
+      "submitButton": "Save"
+    },
+    "changePassword": "Change Password",
+    "deleteAccountLink": {
+      "text": "Delete My Account",
+      "url": "/profile/delete"
+    },
+    "DeleteAccountModal": {
+      "ariaLabel": "Delete account confirmation",
+      "cancelButton": "Cancel",
+      "closeButtonLabel": "Close delete account modal",
+      "confirmButton": "Delete Account",
+      "description": "Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently removed.",
+      "heading": "Delete Account"
+    },
+    "logOut": "Log out",
+    "LogoutModal": {
+      "ariaLabel": "Logout confirmation",
+      "cancelButton": "Cancel",
+      "closeButtonLabel": "Close logout modal",
+      "confirmButton": "Log Out",
+      "description": "Are you sure you want to log out? You will need to sign in again to access your account.",
+      "heading": "Log Out"
+    },
+    "OrdersCard": {
+      "description": "View your previous and current orders along with any past payments here.",
+      "details": "Details",
+      "emptyState": "No orders yet",
+      "title": "My Orders"
+    },
+    "OrderDetailsModal": {
+      "ariaLabel": "Order details",
+      "billingAddress": "Billing Address",
+      "closeButton": "Close",
+      "closeButtonLabel": "Close order details modal",
+      "date": "Date",
+      "itemImageAlt": "Product image for {name}",
+      "items": "Items",
+      "orderNumber": "Order #",
+      "orderSummary": "Order Summary",
+      "paymentMethod": "Payment Method",
+      "price": "Price",
+      "quantity": "Qty",
+      "shipping": "Shipping",
+      "shippingAddress": "Shipping Address",
+      "status": "Status",
+      "subtotal": "Subtotal",
+      "tax": "Tax",
+      "title": "Order Details",
+      "total": "Total"
+    },
+    "PetsCard": {
+      "activeSubscription": "Active Subscription",
+      "cancelSubscription": "Cancel Subscription",
+      "description": "View your previous and current orders along with any past payments here.",
+      "editPlan": "Edit Their Plan",
+      "emptyState": "No pets yet",
+      "expiredSubscription": "Expired Subscription",
+      "pendingPayment": "Pending Payment",
+      "renewsOn": "Renews on {date}",
+      "subscribeAgain": "Subscribe Again",
+      "title": "My Pets"
+    },
     "addressPlaceholder": "Address",
     "cancelButtonText": "Cancel",
     "city": "City",
@@ -521,7 +624,10 @@
           "oneTimeDelivery": "One-time delivery.",
           "saveOverheads": "Save overheads every month — easiest way to feed healthy and save.",
           "flexibleSchedule": "Flexible schedule — pause, skip, or cancel anytime."
-        }
+        },
+        "lambDescription": "Customized health benefits that specifically target concerns like dry skin and lackluster fur, ensuring your pet looks and feels their best.",
+        "turkeyDescription": "Customized health benefits that specifically target concerns like dry skin and lackluster fur, ensuring your pet looks and feels their best.",
+        "alaCartePrice": "$19.79 / 2 kg"
       },
       "footer": {
         "title": "Benefits",
@@ -570,19 +676,34 @@
     "searchTerms": "You searched for: {term}"
   },
   "SignIn": {
-    "buttonText": "Sign in",
+    "accountQuestion": "You don't have an account?",
+    "buttonText": "Log In",
+    "closeButtonAriaLabel": "Close login page",
+    "createAccountLink": "Create Account",
     "emailRequired": "Email is required",
+    "forgotPasswordLink": "Forgot your password?",
+    "formHeading": "Log in to PGF",
+    "formSubHeading": "Offer your dog refined, ethically crafted nourishment.",
+    "heroDescription": "Prepared with timeless craftsmanship, guided by science, tailored to their needs.",
+    "logoAlt": "Purely Golden Foods logo",
     "passwordRequired": "Password is required",
     "signupRedirectLink": "Sign up",
     "signupRedirectMessage": "Don't have an account?"
   },
   "SignUp": {
+    "accountQuestion": "Do you have an account?",
     "buttonText": "Sign up",
+    "closeButtonAriaLabel": "Close sign up page",
     "emailPattern": "Must be a valid email",
     "emailRequired": "Email is required",
+    "formHeading": "Create your Account",
+    "formSubHeading": "Offer your dog refined, ethically crafted nourishment.",
+    "heroDescription": "Prepared with timeless craftsmanship, guided by science, tailored to their needs.",
+    "heroHeading": "Offer your dog refined, ethically crafted nourishment.",
+    "logoAlt": "Purely Golden Foods logo",
     "passwordLength": "Password must be at least 8 characters",
     "passwordPattern": "Password should have at least one number, one uppercase letter and one lowercase letter",
-    "signinRedirectLink": "Sign in",
+    "signinRedirectLink": "Log In",
     "signinRedirectMessage": "Already have an account?",
     "successfulRegistration": "Congratulations! Your account has been successfully created.\nWe have sent a confirmation email to your registered email address."
   },
@@ -590,7 +711,92 @@
     "message": "Our Promise of Care: Every recipe is formulated to meet pharmaceutical grade standards for quality and digestibility. If your dog doesn't respond as expected, our nutrition team will work with you to make it right.",
     "closeButton": "Close alert"
   },
-  "Formulation": {},
+  "Formulation": {
+    "Hero": {
+      "title": "Our Formulation",
+      "subtitle": "Science-led nutrition",
+      "ctaButton": "Talk to a vet nutritionist",
+      "backgroundAlt": "Freshly prepared dog food ingredients"
+    },
+    "Introduction": {
+      "column1": "Crafted with insights from the European College of Veterinary and Comparative Nutrition, our approach merges science with culinary expertise. Each formula is based on in-depth research into canine health, emphasizing digestion and nutrient impact. This collaboration elevates nutrition to a luxurious, clinically sound care strategy.",
+      "column2": "Our recipes reflect a commitment to precise nutrient calibration, evaluating each ingredient for purity and bioavailability. This ensures optimal ratios of amino acids, fatty acids, and antioxidants, creating meals that nourish the microbiome and support long-term wellness."
+    },
+    "Standards": {
+      "clinicallyBacked": "Clinically Backed Nutrition",
+      "humanGrade": "Human-Grade Ingredients",
+      "noAdditives": "No Artificial Additives",
+      "measuredPortions": "Carefully Measured Portions"
+    },
+    "DiscoverPlans": {
+      "title": "Discover our Plans",
+      "description": "Take our quick quiz to get a meal plan tailored to your dog's unique needs.",
+      "ctaButton": "Build your dog's Feeding Plan",
+      "backgroundAlt": "Happy dog with personalized meal"
+    },
+    "Ingredients": {
+      "title": "Ingredient Library",
+      "description": "Our carefully selected ingredients are chosen for their nutritional benefits and digestibility.",
+      "basil": {
+        "name": "Basil",
+        "description": "Basil is a versatile herb that brings a vibrant flavor to a variety of dishes. Packed with antioxidants, it helps fight free radicals in the body. Moreover, basil possesses anti-inflammatory properties and supports digestive health. Its fragrant leaves elevate the taste of sauces, salads, and even drinks, making it an excellent choice for both cooking and garnishing. We source our basil from local organic farms from Boston to ensure the highest quality."
+      },
+      "pumpkin": {
+        "name": "Pumpkin",
+        "description": "Pumpkin is a nutrient-dense ingredient that provides essential vitamins and minerals for your dog's well-being. High in fiber and beta-carotene, it supports digestive health and immune function. The natural fiber content helps maintain healthy digestion and can aid in weight management. Rich in antioxidants, pumpkin also contributes to overall cellular health and helps protect against oxidative stress. We carefully select fresh, organic pumpkins to provide the best nutritional benefits."
+      },
+      "turmeric": {
+        "name": "Turmeric",
+        "description": "Turmeric is a powerful spice known for its remarkable health benefits. It contains curcumin, a potent anti-inflammatory and antioxidant compound that helps reduce inflammation throughout the body. This golden spice supports joint health, promotes healthy digestion, and contributes to overall wellness. Turmeric's natural properties make it an excellent addition to your dog's diet, helping to maintain mobility and support the body's natural healing processes. We use premium-grade turmeric to ensure maximum potency and effectiveness."
+      },
+      "avocado": {
+        "name": "Avocado",
+        "description": "Avocado is a nutrient-rich superfood that offers numerous health benefits for your dog. Rich in healthy monounsaturated fats and vitamin E, it supports skin and coat health, giving your pet a shiny, healthy appearance. The high fiber content aids in digestion and helps maintain a healthy weight. Avocados also contain essential vitamins and minerals that support overall wellness, including potassium, folate, and various B vitamins. We source only the finest, perfectly ripe avocados to provide optimal nutrition."
+      },
+      "raspberry": {
+        "name": "Raspberries",
+        "description": "Raspberries are a delicious and nutritious fruit packed with vitamins, minerals, and powerful antioxidants. These vibrant berries support immune function and help protect cells from damage caused by free radicals. Rich in vitamin C, manganese, and dietary fiber, raspberries contribute to overall health and well-being. The natural antioxidants found in raspberries, including ellagic acid and anthocyanins, provide anti-inflammatory benefits and support cardiovascular health. We select only the freshest, organic raspberries to ensure your dog receives the highest quality nutrition."
+      },
+      "lamb": {
+        "name": "Lamb",
+        "description": "Lamb is a high-quality protein source that provides essential amino acids and B vitamins crucial for your dog's health. This lean meat is rich in iron, zinc, and selenium, supporting muscle development and overall vitality. Lamb is particularly beneficial for dogs with food sensitivities, as it's less commonly used in commercial pet foods. The complete amino acid profile supports healthy muscle maintenance, while B vitamins help maintain energy levels and support metabolic function. We source our lamb from trusted, sustainable farms that prioritize animal welfare and quality."
+      },
+      "soybeans": {
+        "name": "Soy Beans",
+        "description": "Soybeans are a complete plant protein that provides all essential amino acids your dog needs for optimal health. These versatile legumes are rich in isoflavones, which have been shown to support heart health and provide antioxidant benefits. Soybeans are an excellent source of fiber, supporting digestive health and helping to maintain healthy cholesterol levels. They also contain essential minerals like iron, calcium, and magnesium, contributing to strong bones and overall wellness. We use only non-GMO, organic soybeans to ensure the highest quality and nutritional value for your pet."
+      },
+      "toggleAria": "Toggle ingredient details"
+    },
+    "Precision": {
+      "title": "Precision\nin Every Batch",
+      "description": "Every recipe begins with meticulous batch weighing, ensuring each nutrient-rich ingredient is measured with absolute precision before it enters our kitchens. Throughout preparation, detailed temperature logs are maintained to safeguard nutrient integrity and preserve optimal enzymatic activity. From sourcing to plating, every step follows a rigorously controlled prep process—uniting culinary craftsmanship with scientific discipline to deliver nutrition at its most pure, consistent, and elevated.",
+      "imageAlt": "Freshly prepared nutritious meal with measuring spoon"
+    },
+    "Research": {
+      "title": "Clinical Research",
+      "description1": "By analyzing feeding rhythm and gut response, we can reduce bloating, stomach sensitivity, and stool irregularities. Better digestion leads to better behavior, comfort, and mood — transforming mealtime into a predictable and enjoyable experience.",
+      "description2": "We selected Cornell University for our clinical research due to its renowned expertise in nutrition and digestive health. The university's cutting-edge facilities and commitment to innovative research ensure that our findings are based on the latest scientific advancements. Additionally, Cornell's collaborative environment fosters interdisciplinary studies, allowing us to explore the intricate connections between diet, digestion, and overall well-being.",
+      "valueProp1Title": "Digestive Tolerance\n& Stool Quality",
+      "valueProp1Description": "Evaluated via stool frequency, and ease of passage to monitor digestive tolerance and efficiency.",
+      "valueProp2Title": "Metabolic\nMarkers",
+      "valueProp2Description": "Tracked using blood glucose, lipid profile, and key metabolic enzymes to quantify systemic nutritional impact.",
+      "valueProp3Title": "Coat & Skin\nVitality",
+      "valueProp3Description": "Measured through coat density, shedding rate, and skin hydration scores to assess barrier function.",
+      "step1Number": "12%",
+      "step1Title": "Increase in Positive Dog Interactions",
+      "step1Description1": "Understanding a dog's behavior is key to building a nutrition plan that truly fits their needs. Studies show a 12% increase in positive interactions when feeding routines align with their temperament and daily habits. Dogs who feel understood and engaged show clearer signs of satisfaction and emotional stability.",
+      "step1Description2": "By observing interaction patterns, we can better predict feeding preferences and stress triggers. This insight helps shape customized plans that support not just physical nourishment, but emotional wellness as well — building stronger bonds between dogs and their humans.",
+      "step2Number": "42%",
+      "step2Title": "Better Nutritional Balance Achieved",
+      "step2Description1": "Clinical data reveals that 42% of dogs reach a healthier nutritional balance when their diets are adapted according to age, breed, weight, and metabolic status. Personalized feeding transforms nutrition from generic to precision-based, helping each dog reach their ideal condition.",
+      "step2Description2": "These improvements are often seen in coat quality, energy levels, digestion, and weight management. By adjusting macronutrients and portion sizes, we can create a plan that supports long-term vitality and overall health — without guesswork.",
+      "step3Number": "22%",
+      "step3Title": "Fewer Digestive Upset Episodes",
+      "step3Description1": "A 22% reduction in digestive issues was observed when portion timing and meal formats were optimized. Factors like consistency, ingredient sourcing, and digestion rate play a major role in how a dog absorbs nutrients and feels after meals.",
+      "step3Description2": "By analyzing feeding rhythm and gut response, we can reduce bloating, stomach sensitivity, and stool irregularities. Better digestion leads to better behavior, comfort, and mood — transforming mealtime into a predictable and enjoyable experience.",
+      "backgroundAlt": "Research and clinical testing background"
+    }
+  },
   "About": {
     "Hero": {
       "title": "About us",

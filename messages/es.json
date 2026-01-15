@@ -32,6 +32,27 @@
       "subscribeButton": "Suscribirse por {price} al día",
       "whatYoullGetTitle": "Lo que obtendrás:"
     },
+    "ProductDetailPanel": {
+      "addToCartButton": "Agregar al carrito",
+      "alaCarteTitle": "A la carta",
+      "decreaseQuantity": "Disminuir cantidad",
+      "increaseQuantity": "Aumentar cantidad",
+      "analyticalConstituentsContent": "El contenido de constituyentes analíticos se mostrará aquí.",
+      "analyticalConstituentsTitle": "Constituyentes analíticos",
+      "certifiedBadgeAlt": "Insignia certificada de bienestar animal",
+      "closeButtonAriaLabel": "Cerrar panel de detalles del producto",
+      "fullMealTitle": "Comida Completa",
+      "ingredientsContent": "El contenido de ingredientes se mostrará aquí.",
+      "ingredientsTitle": "Ingredientes",
+      "mainImageAlt": "Imagen del producto",
+      "nutritionalFactsContent": "El contenido de datos nutricionales se mostrará aquí.",
+      "nutritionalFactsTitle": "Datos Nutricionales",
+      "panelAriaLabel": "Panel de detalles del producto para {title}",
+      "priceLabel": "Precio",
+      "thumbnailAlt": "Miniatura del producto {number}",
+      "thumbnailAriaLabel": "Seleccionar miniatura {number}",
+      "topperTitle": "Topper"
+    },
     "WaitlistModal": {
       "ariaLabel": "Formulario para unirse a la lista de espera",
       "cancelButton": "Cancelar",
@@ -316,7 +337,10 @@
           "oneTimeDelivery": "Entrega única.",
           "saveOverheads": "Ahorra gastos cada mes — la forma más fácil de alimentar de forma saludable y ahorrar.",
           "flexibleSchedule": "Horario flexible — pausa, omite o cancela en cualquier momento."
-        }
+        },
+        "lambDescription": "Beneficios de salud personalizados que se dirigen específicamente a preocupaciones como piel seca y pelaje sin brillo, asegurando que tu mascota se vea y se sienta mejor.",
+        "turkeyDescription": "Beneficios de salud personalizados que se dirigen específicamente a preocupaciones como piel seca y pelaje sin brillo, asegurando que tu mascota se vea y se sienta mejor.",
+        "alaCartePrice": "$19.79 / 2 kg"
       },
       "footer": {
         "title": "Beneficios",
@@ -341,9 +365,204 @@
       }
     }
   },
+  "Auth": {
+    "email": "Correo electrónico",
+    "emailPlaceholder": "Escribe tu Correo electrónico",
+    "logoAlt": "Logo negro",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Escribe tu Contraseña"
+  },
   "PromiseOfCareAlert": {
     "message": "Nuestra Promesa de Cuidado: Cada receta está formulada para cumplir con estándares de grado farmacéutico de calidad y digestibilidad. Si tu perro no responde como se espera, nuestro equipo de nutrición trabajará contigo para solucionarlo.",
     "closeButton": "Cerrar alerta"
+  },
+  "SignIn": {
+    "accountQuestion": "¿No tienes una cuenta?",
+    "buttonText": "Iniciar sesión",
+    "closeButtonAriaLabel": "Cerrar página de inicio de sesión",
+    "createAccountLink": "Crear cuenta",
+    "emailRequired": "El correo electrónico es obligatorio",
+    "forgotPasswordLink": "¿Olvidaste tu contraseña?",
+    "formHeading": "Inicia sesión en PGF",
+    "formSubHeading": "Ofrece a tu perro una alimentación refinada y elaborada éticamente.",
+    "heroDescription": "Preparado con artesanía atemporal, guiado por la ciencia, adaptado a sus necesidades.",
+    "logoAlt": "Logo de Purely Golden Foods",
+    "passwordRequired": "La contraseña es obligatoria"
+  },
+  "SignUp": {
+    "accountQuestion": "¿Ya tienes una cuenta?",
+    "buttonText": "Registrarse",
+    "closeButtonAriaLabel": "Cerrar página de registro",
+    "emailPattern": "Debe ser un correo electrónico válido",
+    "emailRequired": "El correo electrónico es obligatorio",
+    "formHeading": "Crea tu cuenta",
+    "formSubHeading": "Ofrece a tu perro una alimentación refinada y elaborada éticamente.",
+    "heroDescription": "Preparado con artesanía atemporal, guiado por la ciencia, adaptado a sus necesidades.",
+    "heroHeading": "Ofrece a tu perro una alimentación refinada y elaborada éticamente.",
+    "logoAlt": "Logo de Purely Golden Foods",
+    "passwordLength": "La contraseña debe tener al menos 8 caracteres",
+    "passwordPattern": "La contraseña debe tener al menos un número, una letra mayúscula y una letra minúscula",
+    "signinRedirectLink": "Iniciar sesión",
+    "signinRedirectMessage": "¿Ya tienes una cuenta?",
+    "successfulRegistration": "¡Felicidades! Tu cuenta ha sido creada exitosamente.\nHemos enviado un correo de confirmación a tu dirección de correo electrónico registrada."
+  },
+  "Formulation": {
+    "Hero": {
+      "title": "Nuestra Formulación",
+      "subtitle": "Nutrición basada en ciencia",
+      "ctaButton": "Habla con un nutricionista veterinario",
+      "backgroundAlt": "Ingredientes de comida para perros recién preparados"
+    },
+    "Introduction": {
+      "column1": "Elaborado con conocimientos del Colegio Europeo de Nutrición Veterinaria Comparada, nuestro enfoque combina ciencia y experiencia culinaria. Cada fórmula se basa en investigaciones profundas sobre la salud canina, enfatizando la digestión y el impacto de los nutrientes. Esta colaboración eleva la nutrición a una estrategia de cuidado lujosa y clínicamente sólida.",
+      "column2": "Nuestras recetas reflejan un compromiso con la calibración precisa de nutrientes, evaluando cada ingrediente por su pureza y biodisponibilidad. Esto asegura proporciones óptimas de aminoácidos, ácidos grasos y antioxidantes, creando comidas que nutren el microbioma y apoyan el bienestar a largo plazo."
+    },
+    "Standards": {
+      "clinicallyBacked": "Nutrición Respaldada Clínicamente",
+      "humanGrade": "Ingredientes de Grado Humano",
+      "noAdditives": "Sin Aditivos Artificiales",
+      "measuredPortions": "Porciones Cuidadosamente Medidas"
+    },
+    "Ingredients": {
+      "title": "Biblioteca de Ingredientes",
+      "description": "Nuestros ingredientes cuidadosamente seleccionados son elegidos por sus beneficios nutricionales y digestibilidad.",
+      "basil": {
+        "name": "Albahaca",
+        "description": "La albahaca es una hierba versátil que aporta un sabor vibrante a una variedad de platos. Llena de antioxidantes, ayuda a combatir los radicales libres en el cuerpo. Además, la albahaca posee propiedades antiinflamatorias y apoya la salud digestiva. Sus hojas fragantes elevan el sabor de salsas, ensaladas e incluso bebidas, convirtiéndola en una excelente opción tanto para cocinar como para decorar. Obtenemos nuestra albahaca de granjas orgánicas locales de Boston para asegurar la más alta calidad."
+      },
+      "pumpkin": {
+        "name": "Calabaza",
+        "description": "La calabaza es un ingrediente rico en nutrientes que proporciona vitaminas y minerales esenciales para el bienestar de tu perro. Alta en fibra y betacaroteno, apoya la salud digestiva y la función inmunológica. El contenido natural de fibra ayuda a mantener una digestión saludable y puede ayudar en el control del peso. Rica en antioxidantes, la calabaza también contribuye a la salud celular general y ayuda a proteger contra el estrés oxidativo. Seleccionamos cuidadosamente calabazas frescas y orgánicas para proporcionar los mejores beneficios nutricionales."
+      },
+      "turmeric": {
+        "name": "Cúrcuma",
+        "description": "La cúrcuma es una especia poderosa conocida por sus notables beneficios para la salud. Contiene curcumina, un compuesto antiinflamatorio y antioxidante potente que ayuda a reducir la inflamación en todo el cuerpo. Esta especia dorada apoya la salud articular, promueve una digestión saludable y contribuye al bienestar general. Las propiedades naturales de la cúrcuma la convierten en una excelente adición a la dieta de tu perro, ayudando a mantener la movilidad y apoyar los procesos naturales de curación del cuerpo. Usamos cúrcuma de grado premium para asegurar la máxima potencia y efectividad."
+      },
+      "avocado": {
+        "name": "Aguacate",
+        "description": "El aguacate es un superalimento rico en nutrientes que ofrece numerosos beneficios para la salud de tu perro. Rico en grasas monoinsaturadas saludables y vitamina E, apoya la salud de la piel y el pelaje, dando a tu mascota una apariencia brillante y saludable. El alto contenido de fibra ayuda en la digestión y ayuda a mantener un peso saludable. Los aguacates también contienen vitaminas y minerales esenciales que apoyan el bienestar general, incluyendo potasio, folato y varias vitaminas B. Obtenemos solo los mejores aguacates perfectamente maduros para proporcionar una nutrición óptima."
+      },
+      "raspberry": {
+        "name": "Frambuesas",
+        "description": "Las frambuesas son una fruta deliciosa y nutritiva llena de vitaminas, minerales y poderosos antioxidantes. Estas bayas vibrantes apoyan la función inmunológica y ayudan a proteger las células del daño causado por los radicales libres. Ricas en vitamina C, manganeso y fibra dietética, las frambuesas contribuyen a la salud y el bienestar general. Los antioxidantes naturales que se encuentran en las frambuesas, incluyendo el ácido elágico y las antocianinas, proporcionan beneficios antiinflamatorios y apoyan la salud cardiovascular. Seleccionamos solo las frambuesas más frescas y orgánicas para asegurar que tu perro reciba la nutrición de más alta calidad."
+      },
+      "lamb": {
+        "name": "Cordero",
+        "description": "El cordero es una fuente de proteína de alta calidad que proporciona aminoácidos esenciales y vitaminas B cruciales para la salud de tu perro. Esta carne magra es rica en hierro, zinc y selenio, apoyando el desarrollo muscular y la vitalidad general. El cordero es particularmente beneficioso para perros con sensibilidades alimentarias, ya que es menos comúnmente usado en alimentos comerciales para mascotas. El perfil completo de aminoácidos apoya el mantenimiento muscular saludable, mientras que las vitaminas B ayudan a mantener los niveles de energía y apoyan la función metabólica. Obtenemos nuestro cordero de granjas sostenibles de confianza que priorizan el bienestar animal y la calidad."
+      },
+      "soybeans": {
+        "name": "Soja",
+        "description": "La soja es una proteína vegetal completa que proporciona todos los aminoácidos esenciales que tu perro necesita para una salud óptima. Estas legumbres versátiles son ricas en isoflavonas, que se ha demostrado que apoyan la salud del corazón y proporcionan beneficios antioxidantes. La soja es una excelente fuente de fibra, apoyando la salud digestiva y ayudando a mantener niveles saludables de colesterol. También contienen minerales esenciales como hierro, calcio y magnesio, contribuyendo a huesos fuertes y bienestar general. Usamos solo soja orgánica no transgénica para asegurar la más alta calidad y valor nutricional para tu mascota."
+      },
+      "toggleAria": "Alternar detalles del ingrediente"
+    },
+    "Profile": {
+      "accountCreated": "Cuenta creada el {date}",
+      "address": "Dirección",
+      "addressPlaceholder": "Dirección",
+      "cancelButtonText": "Cancelar",
+      "ChangePasswordModal": {
+        "ariaLabel": "Formulario de cambio de contraseña",
+        "cancelButton": "Cancelar",
+        "closeButtonLabel": "Cerrar modal de cambio de contraseña",
+        "confirmPasswordLabel": "Confirmar Nueva Contraseña",
+        "currentPasswordLabel": "Contraseña Actual",
+        "errors": {
+          "confirmPasswordRequired": "Por favor confirma tu nueva contraseña",
+          "currentPasswordRequired": "Por favor ingresa tu contraseña actual",
+          "newPasswordMinLength": "La contraseña debe tener al menos 8 caracteres",
+          "newPasswordRequired": "Por favor ingresa una nueva contraseña",
+          "passwordsDoNotMatch": "Las contraseñas no coinciden"
+        },
+        "heading": "Cambiar Contraseña",
+        "hidePassword": "Ocultar contraseña",
+        "newPasswordLabel": "Nueva Contraseña",
+        "showPassword": "Mostrar contraseña",
+        "submitButton": "Guardar"
+      },
+      "changePassword": "Cambiar Contraseña",
+      "city": "Ciudad",
+      "cityPlaceholder": "Ciudad",
+      "country": "País",
+      "countryPlaceholder": "País",
+      "deleteAccountLink": {
+        "text": "Eliminar Mi Cuenta",
+        "url": "/profile/delete"
+      },
+      "DeleteAccountModal": {
+        "ariaLabel": "Confirmación de eliminación de cuenta",
+        "cancelButton": "Cancelar",
+        "closeButtonLabel": "Cerrar modal de eliminación de cuenta",
+        "confirmButton": "Eliminar Cuenta",
+        "description": "¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer y todos tus datos se eliminarán permanentemente.",
+        "heading": "Eliminar Cuenta"
+      },
+      "editSettings": "Editar mi configuración personal",
+      "email": "Dirección de correo",
+      "emailPlaceholder": "Correo electrónico",
+      "logOut": "Cerrar sesión",
+      "LogoutModal": {
+        "ariaLabel": "Confirmación de cierre de sesión",
+        "cancelButton": "Cancelar",
+        "closeButtonLabel": "Cerrar modal de cierre de sesión",
+        "confirmButton": "Cerrar Sesión",
+        "description": "¿Estás seguro de que deseas cerrar sesión? Necesitarás iniciar sesión nuevamente para acceder a tu cuenta.",
+        "heading": "Cerrar Sesión"
+      },
+      "name": "Nombre",
+      "namePlaceholder": "Nombre",
+      "OrdersCard": {
+        "description": "Ve tus pedidos anteriores y actuales junto con cualquier pago pasado aquí.",
+        "details": "Detalles",
+        "emptyState": "Aún no hay pedidos",
+        "title": "Mis Pedidos"
+      },
+      "OrderDetailsModal": {
+        "ariaLabel": "Detalles del pedido",
+        "billingAddress": "Dirección de Facturación",
+        "closeButton": "Cerrar",
+        "closeButtonLabel": "Cerrar modal de detalles del pedido",
+        "date": "Fecha",
+        "itemImageAlt": "Imagen del producto para {name}",
+        "items": "Artículos",
+        "orderNumber": "Pedido #",
+        "orderSummary": "Resumen del Pedido",
+        "paymentMethod": "Método de Pago",
+        "price": "Precio",
+        "quantity": "Cantidad",
+        "shipping": "Envío",
+        "shippingAddress": "Dirección de Envío",
+        "status": "Estado",
+        "subtotal": "Subtotal",
+        "tax": "Impuesto",
+        "title": "Detalles del Pedido",
+        "total": "Total"
+      },
+      "PetsCard": {
+        "activeSubscription": "Suscripción Activa",
+        "cancelSubscription": "Cancelar Suscripción",
+        "description": "Ve tus pedidos anteriores y actuales junto con cualquier pago pasado aquí.",
+        "editPlan": "Editar Su Plan",
+        "emptyState": "Aún no hay mascotas",
+        "expiredSubscription": "Suscripción Expirada",
+        "pendingPayment": "Pago Pendiente",
+        "renewsOn": "Se renueva el {date}",
+        "subscribeAgain": "Suscribirse Nuevamente",
+        "title": "Mis Mascotas"
+      },
+      "phone": "Teléfono",
+      "phonePlaceholder": "Número de teléfono",
+      "submitButtonText": "Guardar",
+      "subtitle": "Datos Personales",
+      "title": "Configuración de Cuenta",
+      "zip": "Código Postal",
+      "zipPlaceholder": "Código Postal"
+    },
+    "Precision": {
+      "title": "Precisión\nen Cada Lote",
+      "description": "Cada receta comienza con un pesaje meticuloso de lotes, asegurando que cada ingrediente rico en nutrientes se mida con precisión absoluta antes de entrar en nuestras cocinas. Durante la preparación, se mantienen registros detallados de temperatura para salvaguardar la integridad de los nutrientes y preservar la actividad enzimática óptima. Desde el abastecimiento hasta el emplatado, cada paso sigue un proceso de preparación rigurosamente controlado—uniendo la artesanía culinaria con la disciplina científica para entregar nutrición en su forma más pura, consistente y elevada.",
+      "imageAlt": "Comida nutritiva recién preparada con cuchara medidora"
+    }
   },
   "About": {
     "Hero": {

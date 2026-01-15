@@ -51,7 +51,7 @@ const HeaderDropdownMenu = ({
 
   const handleLogout = () => {
     try {
-      removeCookie(Cookies.customerAccessToken, { path: '/' })
+      removeCookie(Cookies.customerAccessToken, { path: '/', secure: true })
       createLogoutToast(true)
     } catch (error) {
       createLogoutToast(false)
