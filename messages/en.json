@@ -796,5 +796,11 @@
       "step3Description2": "By analyzing feeding rhythm and gut response, we can reduce bloating, stomach sensitivity, and stool irregularities. Better digestion leads to better behavior, comfort, and mood — transforming mealtime into a predictable and enjoyable experience.",
       "backgroundAlt": "Research and clinical testing background"
     }
+  },
+  "About": {
+    "Hero": {
+      "title": "About us",
+      "subtitle": "Discover who we are and what drives us."
+    }
   }
 }
