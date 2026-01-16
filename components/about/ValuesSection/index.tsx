@@ -9,7 +9,6 @@ import {
   PawPrintIcon,
 } from '@/components/common/Icon'
 import { VALUE_ITEMS, type ValueIconType } from '@/constants'
-import { cn } from '@/utils/cn'
 
 const getValueIcon = (iconType: ValueIconType): ReactElement => {
   const iconProps = { className: 'size-11' }
@@ -33,14 +32,7 @@ const ValuesSection = () => {
   }))
 
   return (
-    <section
-      className={cn(
-        'w-full',
-        'px-5 md:px-24 py-9 md:py-9',
-        'bg-quaternary-800',
-        'relative overflow-hidden'
-      )}
-    >
+    <section className="w-full px-5 md:px-24 py-9 md:py-9 bg-quaternary-800 relative overflow-hidden">
       {/* Background Texture */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <Image
@@ -51,17 +43,10 @@ const ValuesSection = () => {
           aria-hidden="true"
         />
       </div>
-      <div
-        className={cn(
-          'flex flex-col md:flex-row',
-          'gap-0 md:gap-0',
-          'w-full',
-          'relative z-10'
-        )}
-      >
-        {values.map((value, index) => (
+      <div className="flex flex-col md:flex-row gap-0 md:gap-0 w-full relative z-10">
+        {values.map((value) => (
           <ValueCard
-            key={index}
+            key={value.title}
             icon={value.icon}
             title={value.title}
             description={value.description}
