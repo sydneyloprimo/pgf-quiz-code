@@ -14,10 +14,10 @@ export default function FormulationPage() {
       <FormulationHeroSection />
       <IntroductionSection />
       <OurStandardsSection />
-      <DiscoverPlansSection />
-      <IngredientLibrarySection />
       <PrecisionBatchSection />
       <ClinicalResearchSection />
+      <IngredientLibrarySection />
+      <DiscoverPlansSection />
     </main>
   )
 }
