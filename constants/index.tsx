@@ -485,6 +485,33 @@ export const REVIEWS_DATA: ReviewData[] = [
   },
 ] as const
 
+// About page - Values section
+export type ValueIconType = 'featurePharm' | 'graduationCap' | 'pawPrint'
+
+export interface ValueItem {
+  iconType: ValueIconType
+  titleKey: string
+  descriptionKey: string
+}
+
+export const VALUE_ITEMS: ValueItem[] = [
+  {
+    iconType: 'featurePharm',
+    titleKey: 'card1Title',
+    descriptionKey: 'card1Description',
+  },
+  {
+    iconType: 'graduationCap',
+    titleKey: 'card2Title',
+    descriptionKey: 'card2Description',
+  },
+  {
+    iconType: 'pawPrint',
+    titleKey: 'card3Title',
+    descriptionKey: 'card3Description',
+  },
+] as const
+
 // Product detail panel images
 export const PRODUCT_DETAIL_IMAGES = {
   main: '/images/product-detail-main.png',

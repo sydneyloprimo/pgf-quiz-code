@@ -802,6 +802,14 @@
     "Hero": {
       "title": "About us",
       "subtitle": "Discover who we are and what drives us."
+    },
+    "Values": {
+      "card1Title": "Pharmaceutical-grade standards",
+      "card1Description": "We believe that true care blends precision and compassion. Every recipe is guided by clinical research and crafted with heartfelt intention, proving that nourishment can be intelligent and deeply felt, combining quality with the warmth of genuine love for animals.",
+      "card2Title": "University-validated research",
+      "card2Description": "Our mission is to transform pet nutrition through pharmaceutical-grade standards and thoughtful innovation. Each meal is designed to support the health and happiness of pets while honoring the planet we all share, turning daily feeding into an act of care.",
+      "card3Title": "Small-breed-specific formulation",
+      "card3Description": "Integrity and empathy guide everything we do, from our founder's devotion to her own dogs to every partnership we form. We hold ourselves to uncompromising standards because pets deserve the same level of care and intention we give ourselves."
     }
   }
 }

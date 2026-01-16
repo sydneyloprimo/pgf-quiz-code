@@ -569,6 +569,14 @@
     "Hero": {
       "title": "Acerca de nosotros",
       "subtitle": "Descubre quiénes somos y qué nos impulsa."
+    },
+    "Values": {
+      "card1Title": "Estándares de grado farmacéutico",
+      "card1Description": "Creemos que el verdadero cuidado combina precisión y compasión. Cada receta está guiada por investigación clínica y elaborada con intención sincera, demostrando que la nutrición puede ser inteligente y profundamente sentida, combinando calidad con la calidez del genuino amor por los animales.",
+      "card2Title": "Investigación validada por universidades",
+      "card2Description": "Nuestra misión es transformar la nutrición de las mascotas a través de estándares de grado farmacéutico e innovación reflexiva. Cada comida está diseñada para apoyar la salud y felicidad de las mascotas mientras honramos el planeta que todos compartimos, convirtiendo la alimentación diaria en un acto de cuidado.",
+      "card3Title": "Formulación específica para razas pequeñas",
+      "card3Description": "La integridad y la empatía guían todo lo que hacemos, desde la devoción de nuestra fundadora hacia sus propios perros hasta cada asociación que formamos. Nos mantenemos a estándares inquebrantables porque las mascotas merecen el mismo nivel de cuidado e intención que nos damos a nosotros mismos."
     }
   }
 }
