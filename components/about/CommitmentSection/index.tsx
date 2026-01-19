@@ -35,29 +35,30 @@ const CommitmentSection = () => {
       className={cn(
         'w-full',
         'bg-tertiary-50',
-        'px-5 md:px-24 py-10 md:py-40',
+        'px-5 lg:px-24 py-10 lg:py-40',
         'flex flex-col',
-        'gap-20',
-        'items-center'
+        'lg:gap-20',
+        'items-center lg:items-center'
       )}
     >
       <h2
         className={cn(
           'font-display font-normal',
-          'text-3xl md:text-4xl',
+          'text-3xl lg:text-4xl',
           'leading-12',
           'tracking-tight',
           'text-secondary-950',
-          'text-center'
+          'text-center',
+          'w-full'
         )}
       >
         {t('title')}
       </h2>
       <div
         className={cn(
-          'flex flex-col md:flex-row',
+          'flex flex-col lg:flex-row',
           'gap-0',
-          'items-center',
+          'items-start lg:items-center',
           'w-full'
         )}
       >
