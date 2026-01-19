@@ -643,19 +643,22 @@
       "title": "Our Commitment"
     },
     "Experts": {
-      "expert1Description": "Expert 1 description",
-      "expert1ImageAlt": "Expert 1 image",
-      "expert1Name": "Expert 1",
+      "ecvcnParagraph1": "We're excited about our active collaboration with ",
+      "ecvcnParagraph2": "ECVCN",
+      "ecvcnParagraph3": ", a partnership aimed at improving the quality of pet nutrition. Together, we're working on innovative solutions that focus on health and sustainability for pets.",
+      "expert1Description": "Dr. Willis-Mahn brings nearly two decades of clinical experience in small animal internal medicine and nutrition.",
+      "expert1ImageAlt": "Dr. Christine Willis-Mahn",
+      "expert1Name": "Dr. Christine Willis-Mahn DVM, DACVIM",
       "expert1Role": "Expert 1 Role",
-      "expert2Description": "Expert 2 description",
-      "expert2ImageAlt": "Expert 2 image",
-      "expert2Name": "Expert 2",
+      "expert2Description": "Dr. Samuel Thompson has nearly 20 years of experience in small animal internal medicine and nutrition.",
+      "expert2ImageAlt": "Dr. Samuel Thompson",
+      "expert2Name": "Dr. Samuel Thompson DVM, DACVIM",
       "expert2Role": "Expert 2 Role",
-      "expert3Description": "Expert 3 description",
-      "expert3ImageAlt": "Expert 3 image",
-      "expert3Name": "Expert 3",
+      "expert3Description": "Dr. Emily Hartman has nearly three decades of experience in small animal internal medicine and nutrition.",
+      "expert3ImageAlt": "Dr. Emily Hartman",
+      "expert3Name": "Dr. Emily Hartman DVM, DACVIM",
       "expert3Role": "Expert 3 Role",
-      "title": "Our Experts"
+      "title": "Meet the Experts"
     }
   }
 }
