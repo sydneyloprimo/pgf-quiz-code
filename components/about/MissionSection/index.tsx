@@ -36,7 +36,7 @@ const MissionSection = () => {
         <p
           className={cn(
             'text-body-m text-secondary-950',
-            'w-full lg:w-[21.5rem]',
+            'w-full lg:w-86',
             'order-2 lg:hidden'
           )}
         >
@@ -50,15 +50,15 @@ const MissionSection = () => {
             'hidden lg:flex lg:flex-row',
             'gap-44',
             'items-start',
-            'order-none'
+            'order-0'
           )}
         >
           {/* Image 1 - Desktop only, left side */}
           <div
             className={cn(
               'relative',
-              'w-[27.5rem]',
-              'h-[36rem]',
+              'w-110',
+              'h-144',
               'shrink-0',
               'overflow-hidden'
             )}
@@ -76,9 +76,7 @@ const MissionSection = () => {
             />
           </div>
           {/* Title and Paragraphs Container - Desktop only, right side */}
-          <div
-            className={cn('flex flex-col', 'gap-7', 'w-[21.5rem]', 'shrink-0')}
-          >
+          <div className={cn('flex flex-col', 'gap-7', 'w-86', 'shrink-0')}>
             <h2
               className={cn(
                 'font-display font-normal',
@@ -106,7 +104,7 @@ const MissionSection = () => {
           className={cn(
             'relative',
             'w-full',
-            'h-[36rem]',
+            'h-144',
             'shrink-0',
             'overflow-hidden',
             'order-3 lg:hidden'
@@ -148,7 +146,7 @@ const MissionSection = () => {
             'gap-0',
             'items-start',
             'justify-between',
-            'order-none'
+            'order-0'
           )}
         >
           {/* Subsection Title and Text - Desktop only, left side */}
@@ -171,7 +169,7 @@ const MissionSection = () => {
             >
               {t('subsectionTitle')}
             </h3>
-            <p className="text-body-m text-secondary-950 w-[21.5rem]">
+            <p className="text-body-m text-secondary-950 w-86">
               {t('subsectionText')}
             </p>
           </div>
@@ -179,8 +177,8 @@ const MissionSection = () => {
           <div
             className={cn(
               'relative',
-              'w-[32rem]',
-              'h-[40rem]',
+              'w-lg',
+              'h-160',
               'shrink-0',
               'overflow-hidden'
             )}
@@ -200,7 +198,7 @@ const MissionSection = () => {
           className={cn(
             'text-body-m text-secondary-950',
             'bg-neutral-300',
-            'w-full lg:w-[21.5rem]',
+            'w-full lg:w-86',
             'order-5 lg:hidden'
           )}
         >
@@ -212,7 +210,7 @@ const MissionSection = () => {
           className={cn(
             'relative',
             'w-full',
-            'h-[40rem]',
+            'h-160',
             'shrink-0',
             'overflow-hidden',
             'order-6 lg:hidden'
