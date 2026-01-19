@@ -7162,6 +7162,7 @@ export type GetCustomerQuery = {
     acceptsMarketing: boolean
     email?: string | null
     phone?: string | null
+    createdAt: any
     defaultAddress?: {
       __typename?: 'MailingAddress'
       address1?: string | null
@@ -8059,6 +8060,7 @@ export const GetCustomerDocument = /*#__PURE__*/ `
     acceptsMarketing
     email
     phone
+    createdAt
     defaultAddress {
       address1
       city
