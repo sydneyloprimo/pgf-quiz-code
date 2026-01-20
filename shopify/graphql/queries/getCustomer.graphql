@@ -5,6 +5,7 @@ query getCustomer($customerAccessToken: String!) {
     acceptsMarketing
     email
     phone
+    createdAt
     defaultAddress {
       address1
       city
