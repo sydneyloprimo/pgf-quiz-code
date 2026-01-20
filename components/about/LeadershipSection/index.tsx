@@ -10,18 +10,7 @@ const LeadershipSection = () => {
   const restOfText = paragraph1.substring(1)
 
   return (
-    <section
-      className={cn(
-        'w-full',
-        'h-[100vw] md:h-[40vw]',
-        'pt-14',
-        'px-5 md:px-24',
-        'flex flex-col md:flex-row',
-        'gap-0',
-        'items-stretch',
-        'justify-start'
-      )}
-    >
+    <section className="w-full h-[100vw] md:h-[40vw] pt-14 px-5 md:px-24 flex flex-col md:flex-row gap-0 items-stretch justify-start">
       <div
         className={cn(
           'w-full md:w-2/5',
@@ -98,7 +87,7 @@ const LeadershipSection = () => {
         >
           <Image
             src="/icons/leadership-signature.svg"
-            alt=""
+            alt={t('signature')}
             fill
             className="object-contain"
           />
