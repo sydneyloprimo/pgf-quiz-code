@@ -485,6 +485,27 @@ export const REVIEWS_DATA: ReviewData[] = [
   },
 ] as const
 
+// About page - Gallery section
+export interface GalleryImage {
+  src: string
+  altKey: string
+}
+
+export const GALLERY_IMAGES: GalleryImage[] = [
+  {
+    src: '/images/about/gallery/image1.jpg',
+    altKey: 'image1Alt',
+  },
+  {
+    src: '/images/about/gallery/image2.jpg',
+    altKey: 'image2Alt',
+  },
+  {
+    src: '/images/about/gallery/image3.jpg',
+    altKey: 'image3Alt',
+  },
+] as const
+
 // About page - Values section
 export type ValueIconType = 'featurePharm' | 'graduationCap' | 'pawPrint'
 

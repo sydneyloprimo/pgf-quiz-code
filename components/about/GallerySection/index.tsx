@@ -1,0 +1,62 @@
+import Image from 'next/image'
+import { useTranslations } from 'next-intl'
+
+import { GALLERY_IMAGES } from '@/constants'
+
+const GallerySection = () => {
+  const t = useTranslations('About.Gallery')
+
+  const images = GALLERY_IMAGES.map((item) => ({
+    src: item.src,
+    alt: t(item.altKey),
+  }))
+
+  return (
+    <section className="w-full px-5 lg:px-24 py-0 my-14 flex justify-center">
+      {/* Mobile/Tablet: Horizontal scrollable carousel with peek */}
+      <div className="flex lg:hidden overflow-x-auto snap-x snap-mandatory gap-6 w-full -mx-5 pl-5 pr-0">
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className="relative w-[80vw] h-134 shrink-0 snap-start overflow-hidden"
+          >
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              className="object-cover"
+              sizes="80vw"
+            />
+            <div
+              className="absolute inset-0 bg-secondary-950 opacity-40 mix-blend-color"
+              aria-hidden="true"
+            />
+          </div>
+        ))}
+        {/* Spacer to show peek of last image */}
+        <div className="shrink-0 w-5" aria-hidden="true" />
+      </div>
+
+      {/* Desktop: 3 images in a row */}
+      <div className="hidden lg:flex flex-row gap-10 w-full">
+        {images.map((image, index) => (
+          <div key={index} className="relative flex-1 h-134 overflow-hidden">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              className="object-cover"
+              sizes="388px"
+            />
+            <div
+              className="absolute inset-0 bg-secondary-950 opacity-40 mix-blend-color"
+              aria-hidden="true"
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+export { GallerySection }

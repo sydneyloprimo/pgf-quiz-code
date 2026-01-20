@@ -15,7 +15,7 @@ const LeadershipSection = () => {
           sizes="(max-width: 1024px) 100vw, 40vw"
         />
         <div
-          className="absolute inset-0 bg-secondary-950 opacity-41 mix-blend-color"
+          className="absolute inset-0 bg-secondary-950 opacity-40 mix-blend-color"
           aria-hidden="true"
         />
       </div>
@@ -34,7 +34,7 @@ const LeadershipSection = () => {
           </p>
         </div>
         <div
-          className="absolute right-0 bottom-0 w-40 h-28 rotate-[110deg]"
+          className="absolute right-0 bottom-0 w-40 h-28 rotate-110"
           aria-hidden="true"
         >
           <Image
