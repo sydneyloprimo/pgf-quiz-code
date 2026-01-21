@@ -30,19 +30,22 @@ const CommitmentSection = () => {
   }))
 
   return (
-    <section className="w-full bg-tertiary-50 px-5 md:px-24 py-10 md:py-40 flex flex-col gap-20 items-center">
-      <h2 className="font-display font-normal text-3xl md:text-4xl leading-12 tracking-tight text-secondary-950 text-center">
+    <section className="w-full bg-tertiary-50 px-5 lg:px-24 py-10 lg:py-40 flex flex-col lg:gap-20 items-center lg:items-center">
+      <h2 className="font-display font-normal text-3xl lg:text-4xl leading-12 tracking-tight text-secondary-950 text-center w-full">
         {t('title')}
       </h2>
-      <div className="flex flex-col md:flex-row gap-0 items-center w-full">
-        {commitments.map((commitment, index) => (
-          <CommitmentCard
-            key={index}
-            icon={commitment.icon}
-            text={commitment.text}
-            hasBorder={index < commitments.length - 1}
-          />
-        ))}
+      <div className="flex flex-col lg:flex-row gap-0 items-start lg:items-center w-full">
+        {commitments.map((commitment, index) => {
+          const commitmentItem = COMMITMENT_ITEMS[index]
+          return (
+            <CommitmentCard
+              key={commitmentItem.iconType}
+              icon={commitment.icon}
+              text={commitment.text}
+              hasBorder={index < commitments.length - 1}
+            />
+          )
+        })}
       </div>
     </section>
   )

@@ -1,10 +1,10 @@
 /* Typography - Headings */
 
 @utility heading-h1 {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 3rem;
   line-height: 3.75rem;
-  font-weight: 700;
+  font-weight: 500;
 
   @media (width >= 601px) and (width <= 1135px) {
     font-size: 3rem;
@@ -18,10 +18,9 @@
 }
 
 @utility heading-h2 {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 2.5rem;
   line-height: 3rem;
-  font-weight: 700;
 
   @media (width >= 601px) and (width <= 1135px) {
     font-size: 2.5rem;
@@ -35,10 +34,9 @@
 }
 
 @utility heading-h3 {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 2.25rem;
   line-height: 3rem;
-  font-weight: 700;
 
   @media (width >= 601px) and (width <= 1135px) {
     font-size: 2.25rem;
@@ -52,10 +50,9 @@
 }
 
 @utility heading-h4 {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 2rem;
   line-height: 2.5rem;
-  font-weight: 700;
 
   @media (width >= 601px) and (width <= 1135px) {
     font-size: 2rem;
@@ -69,10 +66,9 @@
 }
 
 @utility heading-h5 {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 1.5rem;
   line-height: 2rem;
-  font-weight: 700;
 
   @media (width >= 601px) and (width <= 1135px) {
     font-size: 1.5rem;
@@ -86,10 +82,9 @@
 }
 
 @utility heading-h6 {
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 1.25rem;
   line-height: 1.75rem;
-  font-weight: 700;
 }
 
 /* Typography - Body Text */
@@ -207,6 +202,10 @@
 
 @utility image-overlay {
   background-color: var(--image-overlay);
+}
+
+@utility gradient-hero-overlay {
+  background: var(--gradient-hero-overlay);
 }
 
 /* Semantic Helpers - Grid */
