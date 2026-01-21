@@ -633,13 +633,10 @@
       "card3Title": "Small-breed-specific formulation",
       "expert1Description": "Expert 1 description",
       "expert1Name": "Expert 1",
-      "expert1Role": "Expert 1 Role",
       "expert2Description": "Expert 2 description",
       "expert2Name": "Expert 2",
-      "expert2Role": "Expert 2 Role",
       "expert3Description": "Expert 3 description",
       "expert3Name": "Expert 3",
-      "expert3Role": "Expert 3 Role",
       "title": "Our Commitment"
     },
     "Experts": {
@@ -649,15 +646,12 @@
       "expert1Description": "Dr. Willis-Mahn brings nearly two decades of clinical experience in small animal internal medicine and nutrition.",
       "expert1ImageAlt": "Dr. Christine Willis-Mahn",
       "expert1Name": "Dr. Christine Willis-Mahn DVM, DACVIM",
-      "expert1Role": "Expert 1 Role",
       "expert2Description": "Dr. Samuel Thompson has nearly 20 years of experience in small animal internal medicine and nutrition.",
       "expert2ImageAlt": "Dr. Samuel Thompson",
       "expert2Name": "Dr. Samuel Thompson DVM, DACVIM",
-      "expert2Role": "Expert 2 Role",
       "expert3Description": "Dr. Emily Hartman has nearly three decades of experience in small animal internal medicine and nutrition.",
       "expert3ImageAlt": "Dr. Emily Hartman",
       "expert3Name": "Dr. Emily Hartman DVM, DACVIM",
-      "expert3Role": "Expert 3 Role",
       "title": "Meet the Experts"
     }
   }
