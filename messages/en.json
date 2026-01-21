@@ -838,6 +838,21 @@
       "card2": "Each meal is designed to support the health and happiness of pets.",
       "card3": "We hold ourselves to uncompromising standards because pets deserve the same level of care as we.",
       "title": "Our Commitment"
+    },
+    "Experts": {
+      "ecvcnParagraph1": "We're excited about our active collaboration with ",
+      "ecvcnParagraph2": "ECVCN",
+      "ecvcnParagraph3": ", a partnership aimed at improving the quality of pet nutrition. Together, we're working on innovative solutions that focus on health and sustainability for pets.",
+      "expert1Description": "Dr. Willis-Mahn brings nearly two decades of clinical experience in small animal internal medicine and nutrition.",
+      "expert1ImageAlt": "Dr. Christine Willis-Mahn",
+      "expert1Name": "Dr. Christine Willis-Mahn DVM, DACVIM",
+      "expert2Description": "Dr. Samuel Thompson has nearly 20 years of experience in small animal internal medicine and nutrition.",
+      "expert2ImageAlt": "Dr. Samuel Thompson",
+      "expert2Name": "Dr. Samuel Thompson DVM, DACVIM",
+      "expert3Description": "Dr. Emily Hartman has nearly three decades of experience in small animal internal medicine and nutrition.",
+      "expert3ImageAlt": "Dr. Emily Hartman",
+      "expert3Name": "Dr. Emily Hartman DVM, DACVIM",
+      "title": "Meet the Experts"
     }
   }
 }

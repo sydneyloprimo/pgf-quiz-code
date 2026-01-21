@@ -1,4 +1,5 @@
 import { CommitmentSection } from '@/components/about/CommitmentSection'
+import { ExpertsSection } from '@/components/about/ExpertsSection'
 import { GallerySection } from '@/components/about/GallerySection'
 import { HeroSection } from '@/components/about/HeroSection'
 import { LeadershipSection } from '@/components/about/LeadershipSection'
@@ -14,6 +15,7 @@ export default function AboutPage() {
       <GallerySection />
       <MissionSection />
       <CommitmentSection />
+      <ExpertsSection />
     </main>
   )
 }

@@ -529,6 +529,39 @@ export const COMMITMENT_ITEMS: CommitmentItem[] = [
   },
 ] as const
 
+// About page - Experts section
+export interface ExpertItem {
+  id: string
+  imageSrc: string
+  imageAltKey: string
+  nameKey: string
+  descriptionKey: string
+}
+
+export const EXPERT_ITEMS: ExpertItem[] = [
+  {
+    id: 'expert-1',
+    imageSrc: '/images/about/expert-1.jpg',
+    imageAltKey: 'expert1ImageAlt',
+    nameKey: 'expert1Name',
+    descriptionKey: 'expert1Description',
+  },
+  {
+    id: 'expert-2',
+    imageSrc: '/images/about/expert-2.jpg',
+    imageAltKey: 'expert2ImageAlt',
+    nameKey: 'expert2Name',
+    descriptionKey: 'expert2Description',
+  },
+  {
+    id: 'expert-3',
+    imageSrc: '/images/about/expert-3.jpg',
+    imageAltKey: 'expert3ImageAlt',
+    nameKey: 'expert3Name',
+    descriptionKey: 'expert3Description',
+  },
+] as const
+
 // About page - Values section
 export type ValueIconType = 'featurePharm' | 'graduationCap' | 'pawPrint'
 
