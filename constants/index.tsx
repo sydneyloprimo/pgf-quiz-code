@@ -506,6 +506,29 @@ export const GALLERY_IMAGES: GalleryImage[] = [
   },
 ] as const
 
+// About page - Commitment section
+export type CommitmentIconType = 'featurePharm' | 'graduationCap' | 'pawPrint'
+
+export interface CommitmentItem {
+  iconType: CommitmentIconType
+  textKey: string
+}
+
+export const COMMITMENT_ITEMS: CommitmentItem[] = [
+  {
+    iconType: 'featurePharm',
+    textKey: 'card1',
+  },
+  {
+    iconType: 'graduationCap',
+    textKey: 'card2',
+  },
+  {
+    iconType: 'pawPrint',
+    textKey: 'card3',
+  },
+] as const
+
 // About page - Values section
 export type ValueIconType = 'featurePharm' | 'graduationCap' | 'pawPrint'
 
