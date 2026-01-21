@@ -1,125 +1,63 @@
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
-import { cn } from '@/utils/cn'
+import {
+  MissionFirstRow,
+  MissionImage,
+  MissionParagraph,
+  MissionSecondRow,
+  MissionSubsectionTitle,
+  MissionTitle,
+} from './MissionSectionComponents'
 
 const MissionSection = () => {
   const t = useTranslations('About.Mission')
 
   return (
-    <section
-      className={cn(
-        'w-full',
-        'px-5 md:px-24 py-10 md:py-20',
-        'flex flex-col',
-        'gap-48'
-      )}
-    >
-      {/* First Row: Image (left) + 180px gap + Heading + Paragraphs (right) */}
-      <div
-        className={cn(
-          'w-full',
-          'flex flex-col md:flex-row',
-          'gap-10 md:gap-44',
-          'items-start'
-        )}
-      >
-        <div
-          className={cn(
-            'relative',
-            'w-full md:w-[27.5rem]',
-            'h-[36rem]',
-            'shrink-0',
-            'overflow-hidden'
-          )}
-        >
-          <Image
-            src="/images/about/mission-1.jpg"
-            alt={t('image1Alt')}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 440px"
-          />
-          <div
-            className="absolute inset-0 bg-secondary-950 opacity-41 mix-blend-color"
-            aria-hidden="true"
-          />
-        </div>
-        <div
-          className={cn(
-            'flex flex-col',
-            'gap-7',
-            'w-full md:w-[21.5rem]',
-            'shrink-0'
-          )}
-        >
-          <h2
-            className={cn(
-              'font-display font-normal',
-              'heading-h1',
-              'leading-14',
-              'tracking-[-0.03rem]',
-              'text-secondary-950'
-            )}
-          >
-            {t('title')}
-          </h2>
-          <div className="flex flex-col gap-2.5">
-            <p className="text-body-m text-secondary-950">{t('paragraph1')}</p>
-            <p className="text-body-m text-secondary-950">{t('paragraph2')}</p>
-          </div>
-        </div>
-      </div>
+    <section className="w-full px-5 lg:px-24 py-10 lg:py-20 flex flex-col gap-20 lg:gap-48">
+      <div className="w-full flex flex-col lg:contents gap-10">
+        <MissionTitle className="w-full order-1 lg:hidden">
+          {t('title')}
+        </MissionTitle>
 
-      {/* Second Row: Heading + Paragraph (left) + spacing + Image (right) */}
-      <div
-        className={cn(
-          'w-full',
-          'flex flex-col md:flex-row',
-          'gap-10 md:gap-0',
-          'items-start',
-          'justify-between'
-        )}
-      >
-        <div
-          className={cn(
-            'bg-neutral-300',
-            'flex flex-col',
-            'gap-7',
-            'w-full md:w-auto',
-            'shrink-0'
-          )}
-        >
-          <h3
-            className={cn(
-              'font-display italic',
-              'heading-h5',
-              'text-secondary-950'
-            )}
-          >
-            {t('subsectionTitle')}
-          </h3>
-          <p className="text-body-m text-secondary-950 w-full md:w-[21.5rem]">
-            {t('subsectionText')}
-          </p>
-        </div>
-        <div
-          className={cn(
-            'relative',
-            'w-full md:w-[32rem]',
-            'h-[40rem]',
-            'shrink-0',
-            'overflow-hidden'
-          )}
-        >
-          <Image
-            src="/images/about/mission-2.jpg"
-            alt={t('image2Alt')}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 514px"
-          />
-        </div>
+        <MissionParagraph className="w-full lg:w-86 order-2 lg:hidden">
+          {t('paragraph1')}
+        </MissionParagraph>
+
+        <MissionFirstRow
+          title={t('title')}
+          paragraph1={t('paragraph1')}
+          paragraph2={t('paragraph2')}
+          image1Alt={t('image1Alt')}
+        />
+
+        <MissionImage
+          src="/images/about/mission-1.jpg"
+          alt={t('image1Alt')}
+          className="w-full h-144 shrink-0 order-3 lg:hidden"
+          sizes="100vw"
+        />
+
+        <MissionSubsectionTitle className="bg-neutral-300 w-full order-4 lg:hidden">
+          {t('subsectionTitle')}
+        </MissionSubsectionTitle>
+
+        <MissionSecondRow
+          subsectionTitle={t('subsectionTitle')}
+          subsectionText={t('subsectionText')}
+          image2Alt={t('image2Alt')}
+        />
+
+        <MissionParagraph className="bg-neutral-300 w-full lg:w-86 order-5 lg:hidden">
+          {t('subsectionText')}
+        </MissionParagraph>
+
+        <MissionImage
+          src="/images/about/mission-2.jpg"
+          alt={t('image2Alt')}
+          className="w-full h-160 shrink-0 order-6 lg:hidden"
+          sizes="100vw"
+          showOverlay={false}
+        />
       </div>
     </section>
   )

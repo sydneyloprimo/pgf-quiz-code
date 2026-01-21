@@ -531,6 +531,7 @@ export const COMMITMENT_ITEMS: CommitmentItem[] = [
 
 // About page - Experts section
 export interface ExpertItem {
+  id: string
   imageSrc: string
   imageAltKey: string
   nameKey: string
@@ -539,18 +540,21 @@ export interface ExpertItem {
 
 export const EXPERT_ITEMS: ExpertItem[] = [
   {
+    id: 'expert-1',
     imageSrc: '/images/about/expert-1.jpg',
     imageAltKey: 'expert1ImageAlt',
     nameKey: 'expert1Name',
     descriptionKey: 'expert1Description',
   },
   {
+    id: 'expert-2',
     imageSrc: '/images/about/expert-2.jpg',
     imageAltKey: 'expert2ImageAlt',
     nameKey: 'expert2Name',
     descriptionKey: 'expert2Description',
   },
   {
+    id: 'expert-3',
     imageSrc: '/images/about/expert-3.jpg',
     imageAltKey: 'expert3ImageAlt',
     nameKey: 'expert3Name',
@@ -582,5 +586,121 @@ export const VALUE_ITEMS: ValueItem[] = [
     iconType: 'pawPrint',
     titleKey: 'card3Title',
     descriptionKey: 'card3Description',
+  },
+] as const
+
+// Product detail panel images
+export const PRODUCT_DETAIL_IMAGES = {
+  main: '/images/product-detail-main.png',
+  thumbnail2: '/images/product-detail-thumbnail-2.png',
+  thumbnail3: '/images/product-detail-thumbnail-3.png',
+} as const
+
+// Side panel width (design-specific)
+export const SIDE_PANEL_WIDTH = 500
+
+// Product detail panel section IDs
+export const PRODUCT_DETAIL_SECTION_IDS = {
+  analyticalConstituents: 'analytical-constituents',
+  nutritionalFacts: 'nutritional-facts',
+  ingredients: 'ingredients',
+} as const
+
+// Product modes
+export const PRODUCT_MODE = {
+  topper: 'topper',
+  fullMeal: 'fullMeal',
+  alaCarte: 'alaCarte',
+} as const
+
+// Recipe types
+export const RECIPE_TYPE = {
+  turkey: 'turkey',
+  lamb: 'lamb',
+} as const
+
+// Shipment frequencies
+export const SHIPMENT_FREQUENCY = {
+  everyWeek: 'everyWeek',
+  everyTwoWeeks: 'everyTwoWeeks',
+} as const
+
+// Product detail panel default values
+export const PRODUCT_DETAIL_DEFAULTS = {
+  recipe: RECIPE_TYPE.turkey,
+  quantity: 0,
+  selectedImage: 0,
+} as const
+
+// Quiz results default values
+export const QUIZ_RESULTS_DEFAULTS = {
+  productMode: PRODUCT_MODE.fullMeal,
+  recipe: RECIPE_TYPE.turkey,
+  shipmentFrequency: SHIPMENT_FREQUENCY.everyWeek,
+} as const
+
+// Product detail panel section structure
+export interface ProductDetailSectionConfig {
+  id: string
+  sectionKey: 'analyticalConstituents' | 'nutritionalFacts' | 'ingredients'
+}
+
+export const PRODUCT_DETAIL_SECTIONS_CONFIG: ProductDetailSectionConfig[] = [
+  {
+    id: PRODUCT_DETAIL_SECTION_IDS.analyticalConstituents,
+    sectionKey: 'analyticalConstituents',
+  },
+  {
+    id: PRODUCT_DETAIL_SECTION_IDS.nutritionalFacts,
+    sectionKey: 'nutritionalFacts',
+  },
+  {
+    id: PRODUCT_DETAIL_SECTION_IDS.ingredients,
+    sectionKey: 'ingredients',
+  },
+] as const
+
+// Ingredient library section data
+export interface IngredientData {
+  iconSrc: string
+  nameKey: string
+  descriptionKey: string
+}
+
+export const INGREDIENTS_DATA: IngredientData[] = [
+  {
+    iconSrc: '/icons/basil-icon.svg',
+    nameKey: 'basil.name',
+    descriptionKey: 'basil.description',
+  },
+  {
+    iconSrc: '/icons/pumpkin-icon.svg',
+    nameKey: 'pumpkin.name',
+    descriptionKey: 'pumpkin.description',
+  },
+  {
+    iconSrc: '/icons/basil-icon.svg',
+    nameKey: 'turmeric.name',
+    descriptionKey: 'turmeric.description',
+  },
+  {
+    iconSrc: '/icons/pumpkin-icon.svg',
+    nameKey: 'avocado.name',
+    descriptionKey: 'avocado.description',
+  },
+  {
+    iconSrc: '/icons/basil-icon.svg',
+    nameKey: 'raspberry.name',
+    descriptionKey: 'raspberry.description',
+  },
+  {
+    iconSrc: '/icons/lamb-icon.svg',
+    nameKey: 'lamb.name',
+    descriptionKey: 'lamb.description',
+  },
+  {
+    iconSrc: '/icons/pumpkin-icon.svg',
+    nameKey: 'soybeans.name',
+    descriptionKey: 'soybeans.description',
   },
 ] as const

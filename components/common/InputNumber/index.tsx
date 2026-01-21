@@ -19,36 +19,22 @@ const inputNumberVariants = cva('flex gap-4 items-center', {
 })
 
 const buttonVariants = cva(
-  'flex items-center justify-center border cursor-pointer',
+  'flex items-center justify-center border border-solid cursor-pointer shrink-0 p-3',
   {
     variants: {
-      variant: {
-        primary:
-          'bg-primary-800 border-primary-800 text-neutral-white hover:bg-primary-600 hover:border-primary-600 active:bg-primary-900 active:border-primary-900 focus:bg-primary-600 focus:border-primary-600 disabled:bg-neutral-100 disabled:border-neutral-100 disabled:text-neutral-500 disabled:cursor-not-allowed',
-        secondary:
-          'bg-tertiary-800 border-tertiary-800 text-neutral-white hover:bg-tertiary-900 hover:border-tertiary-900 active:bg-tertiary-900 active:border-tertiary-900 focus:bg-tertiary-900 focus:border-tertiary-900 disabled:bg-neutral-100 disabled:border-neutral-100 disabled:text-neutral-500 disabled:cursor-not-allowed',
-        tertiary:
-          'bg-neutral-white border-secondary-900 text-secondary-900 hover:bg-secondary-900 hover:text-neutral-white active:bg-secondary-950 active:text-neutral-white focus:bg-primary-200 focus:border-primary-200 focus:text-primary-800 disabled:bg-neutral-100 disabled:border-neutral-100 disabled:text-neutral-500 disabled:cursor-not-allowed',
-        ghost:
-          'bg-transparent border-secondary-900 text-secondary-900 hover:bg-secondary-100 hover:border-secondary-900 active:bg-secondary-900 active:text-neutral-white focus:bg-primary-200 focus:border-primary-200 focus:text-primary-800 disabled:bg-neutral-100 disabled:border-neutral-100 disabled:text-neutral-500 disabled:cursor-not-allowed',
-        ghostWhite:
-          'bg-transparent border-transparent text-neutral-white hover:border-secondary-600 hover:text-secondary-600 active:bg-secondary-900 active:border-secondary-900 focus:border-secondary-600 focus:text-secondary-600 disabled:bg-neutral-100 disabled:border-neutral-100 disabled:text-neutral-500 disabled:cursor-not-allowed',
-      },
-      size: {
-        large: 'p-3 gap-2',
-        medium: 'p-3 gap-2',
-        small: 'p-2 gap-1',
+      state: {
+        default:
+          'bg-neutral-white border-secondary-900 hover:bg-secondary-100 active:bg-secondary-100 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2',
+        disabled: 'bg-neutral-100 border-neutral-100 cursor-not-allowed',
       },
     },
     defaultVariants: {
-      variant: 'tertiary',
-      size: 'large',
+      state: 'default',
     },
   }
 )
 
 export type InputNumberVariantProps = VariantProps<typeof inputNumberVariants>
-export type InputNumberButtonVariantProps = VariantProps<typeof buttonVariants>
 
 interface InputNumberProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'>,
@@ -57,9 +43,9 @@ interface InputNumberProps
   onIncrement?: () => void
   decrementIcon?: ReactNode
   incrementIcon?: ReactNode
-  buttonVariant?: InputNumberButtonVariantProps['variant']
-  buttonSize?: InputNumberButtonVariantProps['size']
   className?: string
+  decrementAriaLabel?: string
+  incrementAriaLabel?: string
 }
 
 const InputNumber = ({
@@ -71,21 +57,21 @@ const InputNumber = ({
   className,
   state,
   disabled,
-  buttonVariant,
-  buttonSize,
   min,
   max,
+  decrementAriaLabel = 'Decrease quantity',
+  incrementAriaLabel = 'Increase quantity',
   ...props
 }: InputNumberProps) => {
   const isDisabled = disabled || state === 'disabled'
+  const buttonState = isDisabled ? 'disabled' : 'default'
   const textColor = isDisabled ? 'text-neutral-600' : 'text-neutral-900'
-
-  const iconSize =
-    buttonSize === 'small'
-      ? 'size-4'
-      : buttonSize === 'medium'
-        ? 'size-5'
-        : 'size-6'
+  const decrementIconColor = isDisabled
+    ? 'text-neutral-200'
+    : 'text-secondary-900'
+  const incrementIconColor = isDisabled
+    ? 'text-neutral-200'
+    : 'text-primary-600'
 
   return (
     <div
@@ -96,31 +82,38 @@ const InputNumber = ({
     >
       <button
         type="button"
-        className={buttonVariants({
-          variant: buttonVariant,
-          size: buttonSize,
-        })}
+        className={buttonVariants({ state: buttonState })}
         onClick={onDecrement}
         disabled={isDisabled}
+        aria-label={decrementAriaLabel}
       >
         {decrementIcon || (
-          <DecrementIcon className={iconSize} aria-hidden="true" />
+          <DecrementIcon
+            className={cn('size-5', decrementIconColor)}
+            aria-hidden="true"
+          />
         )}
       </button>
-      <p className={cn('font-semibold leading-6 text-base', textColor)}>
+      <p
+        className={cn(
+          'font-sans font-bold leading-6 text-base shrink-0',
+          textColor
+        )}
+      >
         {value || 0}
       </p>
       <button
         type="button"
-        className={buttonVariants({
-          variant: buttonVariant,
-          size: buttonSize,
-        })}
+        className={buttonVariants({ state: buttonState })}
         onClick={onIncrement}
         disabled={isDisabled}
+        aria-label={incrementAriaLabel}
       >
         {incrementIcon || (
-          <IncrementIcon className={iconSize} aria-hidden="true" />
+          <IncrementIcon
+            className={cn('size-5', incrementIconColor)}
+            aria-hidden="true"
+          />
         )}
       </button>
       <input
