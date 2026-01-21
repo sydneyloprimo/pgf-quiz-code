@@ -15,39 +15,19 @@ const CommitmentCard = ({
 }: CommitmentCardProps) => (
   <div
     className={cn(
-      'flex flex-col lg:flex-row',
-      'flex-1 gap-10',
-      'items-center lg:items-center',
-      'px-5 lg:px-14',
-      'py-16 lg:py-5',
-      'min-w-0',
-      'w-full',
-      'relative',
+      'flex flex-col lg:flex-row flex-1 gap-10 items-center lg:items-center px-5 lg:px-14 py-16 lg:py-5 min-w-0 w-full relative',
       hasBorder && 'lg:border-r border-r-0 lg:border-r-quaternary-200'
     )}
   >
     <div className="flex gap-10 items-center lg:w-auto">
       <div className="flex-shrink-0 text-quaternary-800">{icon}</div>
-      <p
-        className={cn(
-          'font-sans font-normal',
-          'text-base',
-          'leading-6',
-          'text-quaternary-800',
-          'flex-1'
-        )}
-      >
+      <p className="font-sans font-normal text-base leading-6 text-quaternary-800 flex-1">
         {text}
       </p>
     </div>
     {hasBorder && (
       <div
-        className={cn(
-          'absolute bottom-0 left-1/2 -translate-x-1/2',
-          'w-[200px] h-px',
-          'bg-quaternary-200',
-          'lg:hidden'
-        )}
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[200px] h-px bg-quaternary-200 lg:hidden"
         aria-hidden="true"
       />
     )}
