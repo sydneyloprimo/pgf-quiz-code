@@ -821,6 +821,17 @@
       "image1Alt": "Gallery image 1",
       "image2Alt": "Gallery image 2",
       "image3Alt": "Gallery image 3"
+    },
+    "Mission": {
+      "image1Alt": "Mission image 1",
+      "image2Alt": "Mission image 2",
+      "image3Alt": "Mission image 3",
+      "image4Alt": "Mission image 4",
+      "paragraph1": "At Purely Golden Foods, our incredible journey began with a simple yet profound goal: to bring wholesome, pumpkin-powered nutrition to every beloved furry friend, ensuring they thrive and enjoy a vibrant, healthy life.",
+      "paragraph2": "We embarked on an amazing adventure driven by a heartfelt mission: to deliver nutritious, pumpkin-infused meals to every cherished pet, helping them flourish and live a lively, healthy life.",
+      "subsectionText": "Integrity and empathy guide everything we do, from our founder's devotion to her own dogs to every partnership we form. We hold ourselves to uncompromising standards because pets deserve the same level of care and intention we give ourselves.  Our commitment extends beyond just providing services; we strive to create a community where pet owners feel supported and understood. By fostering relationships built on trust and compassion, we ensure that every pet receives the love and attention they truly deserve.",
+      "subsectionTitle": "Science Behind our Selection",
+      "title": "The Art of our \n Ingredients"
     }
   }
 }

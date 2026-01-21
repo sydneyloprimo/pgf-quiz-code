@@ -39,7 +39,7 @@ const LeadershipSection = () => {
         >
           <Image
             src="/icons/leadership-signature.svg"
-            alt=""
+            alt={t('signature')}
             fill
             className="object-contain"
           />
