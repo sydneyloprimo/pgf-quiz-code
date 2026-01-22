@@ -1,7 +1,12 @@
 'use client'
 
+import { useQueryClient } from '@tanstack/react-query'
 import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
+import { client } from 'shopify/client'
+import { useCartLinesAddMutation } from 'shopify/generated/graphql'
+import { useMediaQuery } from 'usehooks-ts'
 
 import { ProductDetailFooter } from './ProductDetailFooter'
 import { ProductDetailImageGallery } from './ProductDetailImageGallery'
@@ -10,21 +15,32 @@ import { ProductDetailPanelSections } from './ProductDetailPanelSections'
 
 import { CloseIcon } from '@/components/common/Icon'
 import { SidePanel } from '@/components/common/SidePanel'
+import Toast, { ToastTypes } from '@/components/common/Toast'
+import { calculateDailyFoodAndPrice } from '@/components/quiz/helpers'
+import { QuizFormData } from '@/components/quiz/QuizLayout'
 import {
+  MediaQuery,
   PRODUCT_DETAIL_DEFAULTS,
   PRODUCT_DETAIL_SECTIONS_CONFIG,
   PRODUCT_MODE,
   RECIPE_TYPE,
 } from '@/constants'
+import useCartCookie from '@/hooks/useCartCookie'
+import { useProductConfigs } from '@/hooks/useProductConfigs'
+import { calculateWeeklyPacks, generateCartPayload } from '@/utils/cartHelpers'
 import { cn } from '@/utils/cn'
 
-const isRecipe = (value: string): value is 'turkey' | 'lamb' => {
-  return value === RECIPE_TYPE.turkey || value === RECIPE_TYPE.lamb
+const isRecipe = (value: string): value is 'turkey' | 'lamb' | 'pancreatic' => {
+  return (
+    value === RECIPE_TYPE.turkey ||
+    value === RECIPE_TYPE.lamb ||
+    value === 'pancreatic'
+  )
 }
 
 interface ProductDetailPanelData {
   mode: 'topper' | 'fullMeal' | 'alaCarte'
-  recipe: 'turkey' | 'lamb'
+  recipe: 'turkey' | 'lamb' | 'pancreatic'
   images: {
     main: string
     thumbnails: string[]
@@ -43,7 +59,11 @@ interface ProductDetailPanelProps {
   onClose: () => void
   productData: ProductDetailPanelData | null
   recipeOptions: Array<{ label: string; value: string }>
-  onRecipeChange?: (recipe: 'turkey' | 'lamb') => void
+  onRecipeChange?: (recipe: 'turkey' | 'lamb' | 'pancreatic') => void
+  onAddToCartClick?: () => void
+  formData?: QuizFormData
+  shipmentFrequency?: string
+  dogName?: string
 }
 
 const ProductDetailPanel = ({
@@ -52,11 +72,21 @@ const ProductDetailPanel = ({
   productData,
   recipeOptions,
   onRecipeChange,
+  onAddToCartClick,
+  formData,
+  shipmentFrequency,
+  dogName = '',
 }: ProductDetailPanelProps) => {
   const t = useTranslations('Common.ProductDetailPanel')
-  const [selectedRecipe, setSelectedRecipe] = useState<'turkey' | 'lamb'>(
-    productData?.recipe || PRODUCT_DETAIL_DEFAULTS.recipe
-  )
+  const tDetail = useTranslations('Detail')
+  const tToast = useTranslations('Common.Toast')
+  const isMobile = useMediaQuery(MediaQuery.mobile)
+  const { cartId } = useCartCookie()
+  const queryClient = useQueryClient()
+  const { configs: productConfigs } = useProductConfigs()
+  const [selectedRecipe, setSelectedRecipe] = useState<
+    'turkey' | 'lamb' | 'pancreatic'
+  >(productData?.recipe || PRODUCT_DETAIL_DEFAULTS.recipe)
 
   useEffect(() => {
     if (productData) {
@@ -69,6 +99,99 @@ const ProductDetailPanel = ({
   const [selectedImage, setSelectedImage] = useState<number>(
     PRODUCT_DETAIL_DEFAULTS.selectedImage
   )
+
+  const { mutate: addLine, isPending: isAddLineLoading } =
+    useCartLinesAddMutation(client, {
+      onError: () => {
+        toast(
+          <Toast
+            type={ToastTypes.error}
+            description={tDetail('errorMessage')}
+            iconAlt={tToast('Error.iconAlt')}
+            title={tToast('Error.title')}
+          />,
+          {
+            className: 'border-error border rounded-lg',
+            position: isMobile ? 'top-center' : 'bottom-center',
+          }
+        )
+      },
+      onSuccess: (data) => {
+        // Debug: Log mutation response
+        if (process.env.NODE_ENV === 'development') {
+          console.log('CartLinesAdd Mutation Response (ProductDetailPanel):', {
+            data,
+            cartIdUsed: cartId,
+            cartIdFromResponse: data?.cartLinesAdd?.cart?.id,
+            cartIdsMatch: cartId === data?.cartLinesAdd?.cart?.id,
+            userErrors: data?.cartLinesAdd?.userErrors,
+            cart: data?.cartLinesAdd?.cart,
+            fullResponse: data,
+          })
+        }
+
+        if (
+          data?.cartLinesAdd?.userErrors &&
+          data?.cartLinesAdd?.userErrors.length > 0
+        ) {
+          return toast(
+            <Toast
+              type={ToastTypes.error}
+              description={data.cartLinesAdd?.userErrors[0].message}
+              iconAlt={tToast('Error.iconAlt')}
+              title={tToast('Error.title')}
+            />,
+            {
+              className: 'border-error border rounded-lg w-max',
+              position: isMobile ? 'top-center' : 'bottom-center',
+            }
+          )
+        }
+
+        // Check if cart was actually updated
+        if (!data?.cartLinesAdd?.cart?.id) {
+          if (process.env.NODE_ENV === 'development') {
+            console.error('Cart mutation succeeded but no cart ID returned')
+          }
+          return toast(
+            <Toast
+              type={ToastTypes.error}
+              description={tDetail('errorMessage')}
+              iconAlt="Error icon"
+              title="Error"
+            />,
+            {
+              className: 'border-error border rounded-lg w-max',
+              position: isMobile ? 'top-center' : 'bottom-center',
+            }
+          )
+        }
+
+        // Use the cart ID from the mutation response if available
+        const updatedCartId = data?.cartLinesAdd?.cart?.id || cartId
+
+        // Invalidate and refetch cart queries with a small delay to ensure mutation is processed
+        window.setTimeout(() => {
+          queryClient.invalidateQueries({
+            queryKey: ['getCart'],
+          })
+        }, 100)
+
+        toast(
+          <Toast
+            type={ToastTypes.success}
+            description={tDetail('successMessage', { title: '' })}
+            iconAlt={tToast('Success.iconAlt')}
+            title={tToast('Success.title')}
+          />,
+          {
+            className: 'border-restored border rounded-lg w-max',
+            position: isMobile ? 'top-center' : 'bottom-center',
+          }
+        )
+        onAddToCartClick?.()
+      },
+    })
 
   const handleRecipeSelect = useCallback(
     (value: string) => {
@@ -94,8 +217,111 @@ const ProductDetailPanel = ({
   }, [])
 
   const handleAddToCart = useCallback(() => {
-    // No functionality yet
-  }, [])
+    if (!productData) {
+      return
+    }
+
+    if (productData.mode === 'alaCarte') {
+      if (quantity <= 0) {
+        return
+      }
+
+      const productConfig =
+        productConfigs?.[selectedRecipe as 'turkey' | 'lamb' | 'pancreatic'] ||
+        null
+
+      const payload = generateCartPayload({
+        recipeSlug: selectedRecipe as 'turkey' | 'lamb' | 'pancreatic',
+        calculatedWeeklyPacks: quantity,
+        frequency: 'ONETIME',
+        portion: 'FULL_MEAL',
+        dogName,
+        productConfig,
+      })
+
+      toast.dismiss()
+
+      // Debug: Log payload being sent
+      if (process.env.NODE_ENV === 'development') {
+        console.log('Adding to cart (A la Carte from Panel) - Payload:', {
+          cartId,
+          payload,
+          recipeSlug: selectedRecipe,
+          calculatedWeeklyPacks: quantity,
+          frequency: 'ONETIME',
+          portion: 'FULL_MEAL',
+          dogName,
+        })
+      }
+
+      addLine({
+        cartId,
+        lines: [payload],
+      })
+      return
+    }
+
+    if (!formData) {
+      return
+    }
+
+    const mode = productData.mode === 'topper' ? 'topper' : 'full'
+    const calculationRecipe =
+      selectedRecipe === 'pancreatic' ? 'turkey' : selectedRecipe
+    const { dailyFoodGrams } = calculateDailyFoodAndPrice(
+      formData,
+      calculationRecipe,
+      mode
+    )
+    const calculatedWeeklyPacks = calculateWeeklyPacks(dailyFoodGrams)
+
+    const frequency =
+      shipmentFrequency === 'everyTwoWeeks' ? 'BIWEEKLY' : 'WEEKLY'
+    const portion = productData.mode === 'topper' ? 'TOPPER' : 'FULL_MEAL'
+
+    const productConfig =
+      productConfigs?.[selectedRecipe as 'turkey' | 'lamb' | 'pancreatic'] ||
+      null
+
+    const payload = generateCartPayload({
+      recipeSlug: selectedRecipe as 'turkey' | 'lamb' | 'pancreatic',
+      calculatedWeeklyPacks,
+      frequency,
+      portion,
+      dogName,
+      productConfig,
+    })
+
+    toast.dismiss()
+
+    // Debug: Log payload being sent
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Adding to cart (Subscription from Panel) - Payload:', {
+        cartId,
+        payload,
+        recipeSlug: selectedRecipe,
+        calculatedWeeklyPacks,
+        frequency,
+        portion,
+        dogName,
+      })
+    }
+
+    addLine({
+      cartId,
+      lines: [payload],
+    })
+  }, [
+    productData,
+    quantity,
+    selectedRecipe,
+    dogName,
+    formData,
+    shipmentFrequency,
+    cartId,
+    productConfigs,
+    addLine,
+  ])
 
   const getPanelTitle = useCallback(
     (mode: 'topper' | 'fullMeal' | 'alaCarte'): string => {
@@ -128,8 +354,8 @@ const ProductDetailPanel = ({
       onClose={onClose}
       ariaLabel={t('panelAriaLabel', { title: panelTitle })}
     >
-      <div className="flex flex-col min-h-full">
-        <div className="flex flex-col gap-6 px-5 pt-6 flex-1">
+      <div className="flex flex-col h-full">
+        <div className="flex flex-col gap-6 px-5 pt-6 flex-1 overflow-y-auto">
           <div className="flex items-center justify-between p-1">
             <p className="font-display leading-6 text-xl text-neutral-950">
               {panelTitle}
@@ -173,12 +399,14 @@ const ProductDetailPanel = ({
           </div>
         </div>
 
-        <ProductDetailFooter
-          quantity={quantity}
-          onQuantityDecrement={handleQuantityDecrement}
-          onQuantityIncrement={handleQuantityIncrement}
-          onAddToCart={handleAddToCart}
-        />
+        {productData.mode === 'alaCarte' && (
+          <ProductDetailFooter
+            quantity={quantity}
+            onQuantityDecrement={handleQuantityDecrement}
+            onQuantityIncrement={handleQuantityIncrement}
+            onAddToCart={handleAddToCart}
+          />
+        )}
       </div>
     </SidePanel>
   )

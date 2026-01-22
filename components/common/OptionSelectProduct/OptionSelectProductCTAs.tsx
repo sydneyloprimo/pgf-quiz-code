@@ -11,6 +11,8 @@ interface OptionSelectProductCTAsProps {
   onSubscribeClick?: () => void
   onAddToCartClick?: () => void
   isAlaCarte?: boolean
+  subscribeButtonDisabled?: boolean
+  subscribeButtonText?: string
 }
 
 const OptionSelectProductCTAs = ({
@@ -19,6 +21,8 @@ const OptionSelectProductCTAs = ({
   onSubscribeClick,
   onAddToCartClick,
   isAlaCarte = false,
+  subscribeButtonDisabled = false,
+  subscribeButtonText,
 }: OptionSelectProductCTAsProps) => {
   const t = useTranslations('Common.OptionSelectProduct')
 
@@ -68,10 +72,12 @@ const OptionSelectProductCTAs = ({
           variant="primary"
           onClick={handleSubscribeClick}
           className="w-full md:flex-1"
+          disabled={subscribeButtonDisabled}
         >
-          {t('subscribeButton', {
-            price: `$${pricePerDay?.toFixed(2) || '0.00'}`,
-          })}
+          {subscribeButtonText ||
+            t('subscribeButton', {
+              price: `$${pricePerDay?.toFixed(2) || '0.00'}`,
+            })}
         </Button>
       )}
     </div>

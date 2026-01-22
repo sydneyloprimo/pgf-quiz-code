@@ -325,9 +325,10 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
           sellingPlanName.includes('bi') || sellingPlanName.includes('2')
 
         // Get the selling plan ID for the new recipe with the same frequency
-        updatePayload.sellingPlanId = isBiWeekly
-          ? newConfig.sellingPlanIds.biweekly
-          : newConfig.sellingPlanIds.weekly
+        updatePayload.sellingPlanId =
+          (isBiWeekly
+            ? newConfig.sellingPlanIds.biweekly
+            : newConfig.sellingPlanIds.weekly) || undefined
       }
 
       if (process.env.NODE_ENV === 'development') {

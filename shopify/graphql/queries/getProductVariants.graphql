@@ -1,0 +1,60 @@
+query getProductVariants($query: String!) {
+  products(first: 10, query: $query) {
+    edges {
+      node {
+        id
+        title
+        handle
+        tags
+        variants(first: 10) {
+          edges {
+            node {
+              id
+              title
+              price {
+                amount
+                currencyCode
+              }
+              image {
+                url: url(transform: { maxWidth: 600, crop: CENTER })
+                altText
+                width
+                height
+              }
+              sellingPlanAllocations(first: 10) {
+                edges {
+                  node {
+                    sellingPlan {
+                      id
+                      name
+                      options {
+                        name
+                        value
+                      }
+                    }
+                    priceAdjustments {
+                      perDeliveryPrice {
+                        amount
+                        currencyCode
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        images(first: 5) {
+          edges {
+            node {
+              url: url(transform: { maxWidth: 600, crop: CENTER })
+              altText
+              width
+              height
+            }
+          }
+        }
+      }
+    }
+  }
+}

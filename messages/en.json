@@ -85,6 +85,10 @@
       "subscriptionDisplayTopper": " | Topper",
       "title": "Your Shopping Cart"
     },
+    "FloatingCartButton": {
+      "openCartAriaLabel": "Open shopping cart",
+      "itemCountAriaLabel": "{count} items in cart"
+    },
     "ProductDetailPanel": {
       "addToCartButton": "Add to cart",
       "alaCarteTitle": "A la carte",
@@ -617,7 +621,8 @@
       "purchaseAlaCarteHeading": "Purchase à la carte",
       "recipes": {
         "turkey": "Turkey",
-        "lamb": "Lamb"
+        "lamb": "Lamb",
+        "pancreatic": "Pancreatic"
       },
       "shipmentFrequencies": {
         "everyWeek": "Every Week",
@@ -653,6 +658,9 @@
         "turkeyDescription": "Customized health benefits that specifically target concerns like dry skin and lackluster fur, ensuring your pet looks and feels their best.",
         "alaCartePrice": "$19.79 / 2 kg"
       },
+      "subscribeButtonAlreadyInCart": "Already in cart",
+      "subscribeButtonSwitchToFullMeal": "Switch to Full Meal Plan for {price} a day",
+      "subscribeButtonSwitchToTopper": "Switch to Topper Plan for {price} a day",
       "footer": {
         "title": "Benefits",
         "benefits": {

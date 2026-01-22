@@ -7400,6 +7400,90 @@ export type GetProductTypesQuery = {
   }
 }
 
+export type GetProductVariantsQueryVariables = Exact<{
+  query: Scalars['String']['input']
+}>
+
+export type GetProductVariantsQuery = {
+  __typename?: 'QueryRoot'
+  products: {
+    __typename?: 'ProductConnection'
+    edges: Array<{
+      __typename?: 'ProductEdge'
+      node: {
+        __typename?: 'Product'
+        id: string
+        title: string
+        handle: string
+        tags: Array<string>
+        variants: {
+          __typename?: 'ProductVariantConnection'
+          edges: Array<{
+            __typename?: 'ProductVariantEdge'
+            node: {
+              __typename?: 'ProductVariant'
+              id: string
+              title: string
+              price: {
+                __typename?: 'MoneyV2'
+                amount: any
+                currencyCode: CurrencyCode
+              }
+              image?: {
+                __typename?: 'Image'
+                altText?: string | null
+                width?: number | null
+                height?: number | null
+                url: any
+              } | null
+              sellingPlanAllocations: {
+                __typename?: 'SellingPlanAllocationConnection'
+                edges: Array<{
+                  __typename?: 'SellingPlanAllocationEdge'
+                  node: {
+                    __typename?: 'SellingPlanAllocation'
+                    sellingPlan: {
+                      __typename?: 'SellingPlan'
+                      id: string
+                      name: string
+                      options: Array<{
+                        __typename?: 'SellingPlanOption'
+                        name?: string | null
+                        value?: string | null
+                      }>
+                    }
+                    priceAdjustments: Array<{
+                      __typename?: 'SellingPlanAllocationPriceAdjustment'
+                      perDeliveryPrice: {
+                        __typename?: 'MoneyV2'
+                        amount: any
+                        currencyCode: CurrencyCode
+                      }
+                    }>
+                  }
+                }>
+              }
+            }
+          }>
+        }
+        images: {
+          __typename?: 'ImageConnection'
+          edges: Array<{
+            __typename?: 'ImageEdge'
+            node: {
+              __typename?: 'Image'
+              altText?: string | null
+              width?: number | null
+              height?: number | null
+              url: any
+            }
+          }>
+        }
+      }
+    }>
+  }
+}
+
 export type GetVariantSellingPlansQueryVariables = Exact<{
   variantIds: Array<Scalars['ID']['input']> | Scalars['ID']['input']
 }>
@@ -8822,6 +8906,155 @@ useGetProductTypesQuery.fetcher = (
   fetcher<GetProductTypesQuery, GetProductTypesQueryVariables>(
     client,
     GetProductTypesDocument,
+    variables,
+    headers
+  )
+
+export const GetProductVariantsDocument = /*#__PURE__*/ `
+    query getProductVariants($query: String!) {
+  products(first: 10, query: $query) {
+    edges {
+      node {
+        id
+        title
+        handle
+        tags
+        variants(first: 10) {
+          edges {
+            node {
+              id
+              title
+              price {
+                amount
+                currencyCode
+              }
+              image {
+                url: url(transform: {maxWidth: 600, crop: CENTER})
+                altText
+                width
+                height
+              }
+              sellingPlanAllocations(first: 10) {
+                edges {
+                  node {
+                    sellingPlan {
+                      id
+                      name
+                      options {
+                        name
+                        value
+                      }
+                    }
+                    priceAdjustments {
+                      perDeliveryPrice {
+                        amount
+                        currencyCode
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        images(first: 5) {
+          edges {
+            node {
+              url: url(transform: {maxWidth: 600, crop: CENTER})
+              altText
+              width
+              height
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `
+
+export const useGetProductVariantsQuery = <
+  TData = GetProductVariantsQuery,
+  TError = unknown,
+>(
+  client: GraphQLClient,
+  variables: GetProductVariantsQueryVariables,
+  options?: Omit<
+    UseQueryOptions<GetProductVariantsQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseQueryOptions<
+      GetProductVariantsQuery,
+      TError,
+      TData
+    >['queryKey']
+  },
+  headers?: RequestInit['headers']
+) => {
+  return useQuery<GetProductVariantsQuery, TError, TData>({
+    queryKey: ['getProductVariants', variables],
+    queryFn: fetcher<GetProductVariantsQuery, GetProductVariantsQueryVariables>(
+      client,
+      GetProductVariantsDocument,
+      variables,
+      headers
+    ),
+    ...options,
+  })
+}
+
+useGetProductVariantsQuery.getKey = (
+  variables: GetProductVariantsQueryVariables
+) => ['getProductVariants', variables]
+
+export const useInfiniteGetProductVariantsQuery = <
+  TData = InfiniteData<GetProductVariantsQuery>,
+  TError = unknown,
+>(
+  client: GraphQLClient,
+  variables: GetProductVariantsQueryVariables,
+  options: Omit<
+    UseInfiniteQueryOptions<GetProductVariantsQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseInfiniteQueryOptions<
+      GetProductVariantsQuery,
+      TError,
+      TData
+    >['queryKey']
+  },
+  headers?: RequestInit['headers']
+) => {
+  return useInfiniteQuery<GetProductVariantsQuery, TError, TData>(
+    (() => {
+      const { queryKey: optionsQueryKey, ...restOptions } = options
+      return {
+        queryKey: optionsQueryKey ?? ['getProductVariants.infinite', variables],
+        queryFn: (metaData) =>
+          fetcher<GetProductVariantsQuery, GetProductVariantsQueryVariables>(
+            client,
+            GetProductVariantsDocument,
+            { ...variables, ...(metaData.pageParam ?? {}) },
+            headers
+          )(),
+        ...restOptions,
+      }
+    })()
+  )
+}
+
+useInfiniteGetProductVariantsQuery.getKey = (
+  variables: GetProductVariantsQueryVariables
+) => ['getProductVariants.infinite', variables]
+
+useGetProductVariantsQuery.fetcher = (
+  client: GraphQLClient,
+  variables: GetProductVariantsQueryVariables,
+  headers?: RequestInit['headers']
+) =>
+  fetcher<GetProductVariantsQuery, GetProductVariantsQueryVariables>(
+    client,
+    GetProductVariantsDocument,
     variables,
     headers
   )
