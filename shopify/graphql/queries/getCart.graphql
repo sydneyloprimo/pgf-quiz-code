@@ -5,6 +5,10 @@ query getCart($id: ID!, $first: Int = 100) {
       edges {
         node {
           id
+          attributes {
+            key
+            value
+          }
           merchandise {
             ... on ProductVariant {
               id
@@ -24,10 +28,20 @@ query getCart($id: ID!, $first: Int = 100) {
                 amount
                 currencyCode
               }
-              quantityAvailable
             }
           }
           quantity
+          sellingPlanAllocation {
+            sellingPlan {
+              name
+            }
+          }
+          cost {
+            totalAmount {
+              amount
+              currencyCode
+            }
+          }
         }
       }
     }

@@ -1,0 +1,54 @@
+query getVariantSellingPlans($variantIds: [ID!]!) {
+  nodes(ids: $variantIds) {
+    ... on ProductVariant {
+      id
+      title
+      price {
+        amount
+        currencyCode
+      }
+      image {
+        url: url(transform: { maxWidth: 600, crop: CENTER })
+        altText
+        width
+        height
+      }
+      sellingPlanAllocations(first: 10) {
+        edges {
+          node {
+            sellingPlan {
+              id
+              name
+              options {
+                name
+                value
+              }
+            }
+            priceAdjustments {
+              perDeliveryPrice {
+                amount
+                currencyCode
+              }
+            }
+          }
+        }
+      }
+      product {
+        id
+        title
+        handle
+        tags
+        images(first: 5) {
+          edges {
+            node {
+              url: url(transform: { maxWidth: 600, crop: CENTER })
+              altText
+              width
+              height
+            }
+          }
+        }
+      }
+    }
+  }
+}

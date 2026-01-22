@@ -596,6 +596,45 @@ export const PRODUCT_DETAIL_IMAGES = {
   thumbnail3: '/images/product-detail-thumbnail-3.png',
 } as const
 
+// Pack size constant (8oz in grams)
+export const PACK_SIZE_GRAMS = 226.796 // 8 * 28.3495
+
+// Product configuration for cart operations
+export interface ProductConfig {
+  variantId: string
+  sellingPlanIds: {
+    weekly: string
+    biweekly: string
+  }
+}
+
+export const PRODUCT_CONFIGS: Record<
+  'turkey' | 'lamb' | 'pancreatic',
+  ProductConfig
+> = {
+  turkey: {
+    variantId: 'gid://shopify/ProductVariant/47241921626333',
+    sellingPlanIds: {
+      weekly: 'gid://shopify/SellingPlan/6280184029',
+      biweekly: 'gid://shopify/SellingPlan/6280216797',
+    },
+  },
+  lamb: {
+    variantId: 'gid://shopify/ProductVariant/47241925918941',
+    sellingPlanIds: {
+      weekly: 'gid://shopify/SellingPlan/6280052957',
+      biweekly: 'gid://shopify/SellingPlan/6280085725',
+    },
+  },
+  pancreatic: {
+    variantId: 'gid://shopify/ProductVariant/47241926344925',
+    sellingPlanIds: {
+      weekly: 'gid://shopify/SellingPlan/6280151261',
+      biweekly: 'gid://shopify/SellingPlan/6280118493',
+    },
+  },
+} as const
+
 // Side panel width (design-specific)
 export const SIDE_PANEL_WIDTH = 500
 
