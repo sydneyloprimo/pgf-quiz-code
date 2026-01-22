@@ -4,12 +4,14 @@ import { useTranslations } from 'next-intl'
 import PlusIcon from 'public/icons/plus.svg'
 import SubtractIcon from 'public/icons/subtract.svg'
 import TrashIcon from 'public/icons/trash.svg'
-import { toast } from 'react-toastify'
 import { useMediaQuery } from 'usehooks-ts'
 
-import Toast, { ToastTypes } from '@/components/common/Toast'
 import { MediaQuery } from '@/constants'
-import { ProductVariant } from '@/shopify/generated/graphql'
+import {
+  ProductVariant,
+  Attribute,
+  SellingPlanAllocation,
+} from '@/shopify/generated/graphql'
 import { cn } from '@/utils/cn'
 import { formatCurrency } from '@/utils/helpers'
 
@@ -21,6 +23,8 @@ interface CartProductCardProps {
   onIncreaseClick: () => void
   disabled: boolean
   quantity: number
+  attributes?: Attribute[]
+  sellingPlanAllocation?: SellingPlanAllocation | null
 }
 
 const CartProductCard = ({
@@ -31,28 +35,24 @@ const CartProductCard = ({
   onDeleteClick,
   disabled,
   quantity,
+  attributes = [],
+  sellingPlanAllocation,
 }: CartProductCardProps) => {
   const t = useTranslations('Cart')
   const isMobile = useMediaQuery(MediaQuery.mobile)
 
-  const onIncreaseHandler = () => {
-    if (
-      !!productVariant.quantityAvailable &&
-      (disabled || quantity == productVariant.quantityAvailable)
-    ) {
-      toast(
-        <Toast
-          type={ToastTypes.error}
-          description={t('maxStock')}
-          iconAlt="Error icon"
-          title="Error"
-        />,
-        {
-          className: 'md:max-w-lg border-error border rounded-lg',
-          position: isMobile ? 'top-center' : 'bottom-center',
-        }
-      )
+  const dogNameAttribute = attributes.find(
+    (attr) => attr.key === 'Dog Name'
+  )?.value
 
+  const frequencyLabel = sellingPlanAllocation?.sellingPlan?.name
+    ? sellingPlanAllocation.sellingPlan.name
+    : t('oneTimePurchase')
+
+  const onIncreaseHandler = () => {
+    // Note: quantityAvailable is not available in cart queries due to API permissions
+    // We'll allow increases without stock checking from the cart
+    if (disabled) {
       return
     }
 
@@ -80,6 +80,11 @@ const CartProductCard = ({
       <div className="p-[20px] md:p-8 flex justify-between flex-1">
         <div className="flex flex-col justify-between">
           <div>
+            {dogNameAttribute && (
+              <p className="text-primary-600 text-sm text-start font-bold md:text-base mb-1">
+                {dogNameAttribute}
+              </p>
+            )}
             <h2 className="text-black text-sm text-start font-bold md:text-xl">
               {productVariant.product.title}
             </h2>
@@ -88,6 +93,9 @@ const CartProductCard = ({
                 {productVariant.title}
               </p>
             )}
+            <p className="text-neutral-600 text-xs text-start md:text-sm mt-1">
+              {frequencyLabel}
+            </p>
           </div>
           <button
             className="text-start w-max text-primary-600 text-sm font-bold md:text-base disabled:text-neutral-700 hover:underline active:underline active:text-primary-600 focus:outline-dashed focus:outline-2 focus:outline-primary-600 focus:rounded-lg focus:px-1.5"
