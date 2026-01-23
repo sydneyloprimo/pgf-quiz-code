@@ -853,6 +853,10 @@
       "expert3ImageAlt": "Dr. Emily Hartman",
       "expert3Name": "Dr. Emily Hartman DVM, DACVIM",
       "title": "Meet the Experts"
+    },
+    "CTA": {
+      "button": "Explore more about Our Formulation",
+      "quote": "Clinically crafted, Purposefully formulated"
     }
   }
 }

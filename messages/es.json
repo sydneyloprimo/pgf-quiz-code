@@ -620,6 +620,10 @@
       "expert3ImageAlt": "Dra. Emily Hartman",
       "expert3Name": "Dra. Emily Hartman DVM, DACVIM",
       "title": "Conoce a los Expertos"
+    },
+    "CTA": {
+      "button": "Explora más sobre Nuestra Formulación",
+      "quote": "Clínicamente elaborado, Intencionalmente formulado"
     }
   }
 }
