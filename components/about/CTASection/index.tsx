@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
+import { Routes } from '@/types/enums/routes'
 
 const CTASection = () => {
   const t = useTranslations('About.CTA')
@@ -28,7 +29,7 @@ const CTASection = () => {
         </div>
         <Button
           variant="tertiary"
-          href="/formulation"
+          href={Routes.formulation}
           className="max-w-md px-4 py-4"
         >
           {t('button')}
