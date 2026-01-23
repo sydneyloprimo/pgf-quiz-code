@@ -156,7 +156,7 @@ export const calculateDailyFoodAndPrice = (
   const product = PRODUCTS[recipe]
   const modeMultiplier = MODE_MULTIPLIERS[mode]
 
-  const dailyFoodGrams = dailyCalories / (product.kcalPerGram * modeMultiplier)
+  const dailyFoodGrams = (dailyCalories / product.kcalPerGram) * modeMultiplier
 
   return { dailyFoodGrams }
 }

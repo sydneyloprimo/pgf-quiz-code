@@ -192,14 +192,9 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
       )
       const calculatedWeeklyPacks = calculateWeeklyPacks(dailyFoodGrams)
 
-      // Adjust quantity for topper (50% of full meal)
-      let quantity = calculatedWeeklyPacks
-      if (calculationMode === 'topper') {
-        quantity = Math.ceil(calculatedWeeklyPacks * 0.5)
-      }
-
       // Calculate weekly total: perDeliveryPrice × quantity
-      const weeklyTotal = sellingPlanPrice.perDeliveryPrice * quantity
+      const weeklyTotal =
+        sellingPlanPrice.perDeliveryPrice * calculatedWeeklyPacks
 
       // Calculate daily price: weeklyTotal / 7
       const pricePerDay = weeklyTotal / 7
