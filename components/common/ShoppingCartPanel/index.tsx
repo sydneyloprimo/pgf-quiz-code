@@ -8,6 +8,7 @@ import {
   useGetCartQuery,
   useCartLinesUpdateMutation,
   useCartLinesRemoveMutation,
+  useCartLinesAddMutation,
   type CartLineEdge,
 } from 'shopify/generated/graphql'
 
@@ -22,6 +23,7 @@ import {
   isProductVariant,
   isSellingPlanAllocation,
 } from '@/types/guards/products'
+import { generateCartPayload } from '@/utils/cartHelpers'
 import { cn } from '@/utils/cn'
 import { findProductLine } from '@/utils/utils'
 
@@ -52,6 +54,7 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
   )
 
   const [hasMounted, setHasMounted] = useState(false)
+  const [updatingLineId, setUpdatingLineId] = useState<string | null>(null)
 
   // Refetch cart when panel opens or cartId changes
   useEffect(() => {
@@ -64,6 +67,13 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
       getCartRefetch()
     }
   }, [isOpen, cartId, getCartRefetch, queryClient])
+
+  // Clear updating state when panel closes
+  useEffect(() => {
+    if (!isOpen) {
+      setUpdatingLineId(null)
+    }
+  }, [isOpen])
 
   // Debug: Log cart data
   useEffect(() => {
@@ -113,7 +123,34 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
   const { mutate: removeLine, isPending: isRemoveLoading } =
     useCartLinesRemoveMutation(client, {
       onSuccess: () => {
+        // Clear updating state after old line is successfully removed
+        if (updatingLineId) {
+          setUpdatingLineId(null)
+        }
         getCartRefetch()
+      },
+      onError: () => {
+        // Clear updating state on error
+        setUpdatingLineId(null)
+      },
+    })
+
+  const { mutate: addLine, isPending: isAddLineLoading } =
+    useCartLinesAddMutation(client, {
+      onSuccess: (data) => {
+        // Check if the add was successful
+        if (data?.cartLinesAdd?.cart?.id && updatingLineId) {
+          // Remove the old line after the new one is successfully added
+          removeLine({
+            cartId,
+            lineIds: [updatingLineId],
+          })
+        }
+        getCartRefetch()
+      },
+      onError: () => {
+        // Clear updating state on error
+        setUpdatingLineId(null)
       },
     })
 
@@ -129,7 +166,8 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
 
   // Use totalQuantity as the primary check, but also check validEdges as fallback
   const isEmpty = (cart?.totalQuantity ?? 0) === 0 || validEdges.length === 0
-  const isDisabled = isGetCartLoading || isRemoveLoading || isUpdateLoading
+  const isDisabled =
+    isGetCartLoading || isRemoveLoading || isUpdateLoading || isAddLineLoading
 
   const handleCheckoutClick = useCallback(() => {
     if (!cart?.checkoutUrl) {
@@ -292,60 +330,110 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
         ? line.node.sellingPlanAllocation
         : null
       const attributes = line.node.attributes || []
+      const quantity = line.node.quantity
 
-      // Get the new recipe's variant ID
-      const newConfig = PRODUCT_CONFIGS[recipe]
-      const newMerchandiseId = newConfig.variantId
+      // Check if this is a subscription
+      const isSubscription = !!sellingPlanAllocation
 
-      // Preserve attributes when changing merchandise
-      const preservedAttributes = attributes
-        .filter((attr) => attr.value != null)
-        .map((attr) => ({
-          key: attr.key,
-          value: attr.value as string,
-        }))
+      if (isSubscription) {
+        // For subscriptions, we need to remove and re-add the line
+        // because Shopify doesn't support changing merchandiseId for subscription lines
 
-      // If it's a subscription, preserve the selling plan ID for the new recipe
-      const updatePayload: {
-        id: string
-        merchandiseId: string
-        sellingPlanId?: string
-        attributes?: Array<{ key: string; value: string }>
-      } = {
-        id: line.node.id,
-        merchandiseId: newMerchandiseId,
-        attributes: preservedAttributes,
-      }
+        // Extract attributes
+        const portionAttribute = attributes.find(
+          (attr) => attr.key === 'Portion'
+        )
+        const dogNameAttribute = attributes.find(
+          (attr) => attr.key === 'Dog Name'
+        )
 
-      if (sellingPlanAllocation?.sellingPlan?.id) {
-        // Determine current frequency from selling plan name
+        const portion =
+          (portionAttribute?.value as 'FULL_MEAL' | 'TOPPER') || 'FULL_MEAL'
+        const dogName = dogNameAttribute?.value as string | undefined
+
+        // Determine frequency from selling plan name
         const sellingPlanName =
           sellingPlanAllocation.sellingPlan.name?.toLowerCase() || ''
         const isBiWeekly =
           sellingPlanName.includes('bi') || sellingPlanName.includes('2')
+        const frequency = isBiWeekly ? 'BIWEEKLY' : 'WEEKLY'
 
-        // Get the selling plan ID for the new recipe with the same frequency
-        updatePayload.sellingPlanId =
-          (isBiWeekly
-            ? newConfig.sellingPlanIds.biweekly
-            : newConfig.sellingPlanIds.weekly) || undefined
-      }
+        // Calculate weekly packs from quantity
+        // For biweekly, quantity is doubled, so we divide by 2
+        const calculatedWeeklyPacks = isBiWeekly
+          ? Math.ceil(quantity / 2)
+          : quantity
 
-      if (process.env.NODE_ENV === 'development') {
-        console.log('Updating cart line with recipe change:', {
-          cartLineId,
-          recipe,
-          newMerchandiseId,
-          updatePayload,
+        // Generate new payload with the new recipe
+        const newPayload = generateCartPayload({
+          recipeSlug: recipe,
+          calculatedWeeklyPacks,
+          frequency,
+          portion,
+          dogName,
+          productConfig: PRODUCT_CONFIGS[recipe],
+        })
+
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Changing subscription recipe - adding new line first:', {
+            cartLineId,
+            recipe,
+            quantity,
+            calculatedWeeklyPacks,
+            frequency,
+            portion,
+            dogName,
+            newPayload,
+          })
+        }
+
+        // Mark this line as updating to show loading state
+        setUpdatingLineId(cartLineId)
+
+        // Add the new line first (old line will be removed after success)
+        addLine({
+          cartId,
+          lines: [newPayload],
+        })
+      } else {
+        // For non-subscriptions, we can update in place
+        const newConfig = PRODUCT_CONFIGS[recipe]
+        const newMerchandiseId = newConfig.variantId
+
+        // Preserve attributes when changing merchandise
+        const preservedAttributes = attributes
+          .filter((attr) => attr.value != null)
+          .map((attr) => ({
+            key: attr.key,
+            value: attr.value as string,
+          }))
+
+        const updatePayload: {
+          id: string
+          merchandiseId: string
+          attributes?: Array<{ key: string; value: string }>
+        } = {
+          id: line.node.id,
+          merchandiseId: newMerchandiseId,
+          attributes: preservedAttributes,
+        }
+
+        if (process.env.NODE_ENV === 'development') {
+          console.log('Updating cart line with recipe change:', {
+            cartLineId,
+            recipe,
+            newMerchandiseId,
+            updatePayload,
+          })
+        }
+
+        updateLine({
+          cartId,
+          lines: [updatePayload],
         })
       }
-
-      updateLine({
-        cartId,
-        lines: [updatePayload],
-      })
     },
-    [cartId, edges, updateLine]
+    [cartId, edges, updateLine, removeLine, addLine]
   )
 
   if (!hasMounted) {
@@ -409,6 +497,8 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
                       return null
                     }
 
+                    const isUpdating = updatingLineId === id
+
                     return (
                       <ShoppingCartItem
                         key={id}
@@ -431,7 +521,7 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
                         onRecipeChange={(recipe) =>
                           handleRecipeChange(id, recipe)
                         }
-                        disabled={isDisabled}
+                        disabled={isDisabled || isUpdating}
                       />
                     )
                   }
