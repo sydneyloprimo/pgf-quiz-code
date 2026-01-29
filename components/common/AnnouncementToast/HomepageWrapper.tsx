@@ -4,15 +4,11 @@ import { usePathname } from 'next/navigation'
 
 import { AnnouncementToast } from './index'
 
-import { Locale } from '@/i18n'
 import { Routes } from '@/types/enums/routes'
 
 const AnnouncementToastHomepageWrapper = () => {
   const pathname = usePathname()
-  const isHomepage =
-    pathname === Routes.home ||
-    pathname === `/${Locale.EN}` ||
-    pathname === `/${Locale.ES}`
+  const isHomepage = pathname === Routes.home
 
   if (!isHomepage) {
     return null

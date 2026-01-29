@@ -47,14 +47,8 @@ export const clearFormData = () => {
   }
 }
 
-export const formatAgeText = (
-  age: string,
-  locale: string,
-  t: (key: string) => string
-): string => {
-  return locale === 'es'
-    ? `${t('agePrefix')} ${age} ${t('ageSuffix')}`
-    : `${age}-year-old`
+export const formatAgeText = (age: string): string => {
+  return `${age}-year-old`
 }
 
 export const getQuizBenefits = (

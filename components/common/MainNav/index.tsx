@@ -62,7 +62,7 @@ const MainNav = () => {
 
   const isActiveLink = (href: string) => {
     if (href === Routes.home) {
-      return pathname === '/' || pathname === '/en' || pathname === '/es'
+      return pathname === '/'
     }
     return pathname.includes(href)
   }

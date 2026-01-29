@@ -21,13 +21,10 @@ const LocaleWrapper = async ({
   const { locale } = await params
   let messages: Messages
   try {
-    if (locale === Locale.EN) {
-      messages = (await import('@/messages/en.json')).default
-    } else if (locale === Locale.ES) {
-      messages = (await import('@/messages/es.json')).default
-    } else {
+    if (locale !== Locale.EN) {
       throw new Error(`Unsupported locale: ${locale}`)
     }
+    messages = (await import('@/messages/en.json')).default
 
     if (Array.isArray(localeGroup)) {
       const filteredMessages: Messages = localeGroup.reduce((result, group) => {
