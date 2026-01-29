@@ -93,6 +93,13 @@ const ProductDetailPanel = ({
       setSelectedRecipe(productData.recipe)
     }
   }, [productData])
+
+  useEffect(() => {
+    if (productData?.images) {
+      setSelectedImage(PRODUCT_DETAIL_DEFAULTS.selectedImage)
+    }
+  }, [productData?.images])
+
   const [quantity, setQuantity] = useState<number>(
     PRODUCT_DETAIL_DEFAULTS.quantity
   )

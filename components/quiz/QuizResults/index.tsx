@@ -142,7 +142,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
   const dogName = formData.name || ''
 
   const getPricePerDay = useCallback(
-    (mode: ProductMode): number => {
+    (mode: ProductMode, recipeOverride?: Recipe): number => {
       if (mode === PRODUCT_MODE.alaCarte) {
         return 0
       }
@@ -152,14 +152,13 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
         return 0
       }
 
-      const recipe = recipes[mode]
+      const recipe = recipeOverride ?? recipes[mode]
       const calculationMode = mode === PRODUCT_MODE.topper ? 'topper' : 'full'
-      // Use turkey as fallback for pancreatic since calculation is the same
+      // Use turkey for daily food calculation when pancreatic (same formula)
       const calculationRecipe = recipe === 'pancreatic' ? 'turkey' : recipe
 
-      // Get product config for this recipe
-      const productConfig =
-        productConfigs?.[calculationRecipe] || productConfigs?.turkey
+      // Get product config for this recipe (pancreatic has its own config)
+      const productConfig = productConfigs?.[recipe] || productConfigs?.turkey
 
       if (!productConfig) {
         // Fallback: return 0 if config not loaded (prices will show as $0.00)
@@ -218,11 +217,11 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
   )
 
   const getProductPrice = useCallback(
-    (productMode: ProductMode): string => {
+    (productMode: ProductMode, recipeOverride?: Recipe): string => {
       if (productMode === PRODUCT_MODE.alaCarte) {
         return t('products.alaCartePrice')
       }
-      const pricePerDay = getPricePerDay(productMode)
+      const pricePerDay = getPricePerDay(productMode, recipeOverride)
       return `$${pricePerDay.toFixed(2)} / day`
     },
     [getPricePerDay, t]
@@ -231,9 +230,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
   const handleDetailsClick = useCallback(
     (mode: ProductMode) => {
       const recipe = recipes[mode]
-      const calculationRecipe = recipe === 'pancreatic' ? 'turkey' : recipe
-      const productConfig =
-        productConfigs?.[calculationRecipe] || productConfigs?.turkey
+      const productConfig = productConfigs?.[recipe] || productConfigs?.turkey
 
       // Use Shopify images if available, fallback to hardcoded
       const shopifyImages = productConfig?.images || []
@@ -286,9 +283,24 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
     (recipe: 'turkey' | 'lamb' | 'pancreatic') => {
       if (!panelProductData) return
 
+      const productConfig = productConfigs?.[recipe] || productConfigs?.turkey
+
+      const shopifyImages = productConfig?.images || []
+      const mainImage = shopifyImages[0]?.url || PRODUCT_DETAIL_IMAGES.main
+      const thumbnails =
+        shopifyImages.length > 0
+          ? shopifyImages.map((img) => img.url)
+          : [
+              PRODUCT_DETAIL_IMAGES.main,
+              PRODUCT_DETAIL_IMAGES.thumbnail2,
+              PRODUCT_DETAIL_IMAGES.thumbnail3,
+            ]
+
       const updatedData: ProductDetailPanelData = {
         ...panelProductData,
         recipe,
+        images: { main: mainImage, thumbnails },
+        price: getProductPrice(panelProductData.mode, recipe as Recipe),
         description:
           recipe === 'pancreatic'
             ? t('products.turkeyDescription')
@@ -301,7 +313,13 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
         [panelProductData.mode]: recipe as Recipe,
       }))
     },
-    [panelProductData, getProductDescription, t]
+    [
+      panelProductData,
+      productConfigs,
+      getProductPrice,
+      getProductDescription,
+      t,
+    ]
   )
   const queryClient = useQueryClient()
 
