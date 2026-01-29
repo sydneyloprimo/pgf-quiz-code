@@ -219,12 +219,20 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
   const getProductPrice = useCallback(
     (productMode: ProductMode, recipeOverride?: Recipe): string => {
       if (productMode === PRODUCT_MODE.alaCarte) {
-        return t('products.alaCartePrice')
+        const recipe = recipeOverride ?? recipes.alaCarte
+        const config = productConfigs?.[recipe] || productConfigs?.turkey
+        const unitPrice = config?.unitPrice
+        if (unitPrice?.amount != null) {
+          return unitPrice.currencyCode === 'USD'
+            ? `$${unitPrice.amount.toFixed(2)}`
+            : `${unitPrice.currencyCode} ${unitPrice.amount.toFixed(2)}`
+        }
+        return '-'
       }
       const pricePerDay = getPricePerDay(productMode, recipeOverride)
       return `$${pricePerDay.toFixed(2)} / day`
     },
-    [getPricePerDay, t]
+    [getPricePerDay, productConfigs, recipes.alaCarte]
   )
 
   const handleDetailsClick = useCallback(

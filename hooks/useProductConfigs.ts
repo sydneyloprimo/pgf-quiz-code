@@ -9,6 +9,7 @@ import { PRODUCT_CONFIGS } from '@/constants'
 
 export interface ProductConfig {
   variantId: string
+  unitPrice: { amount: number; currencyCode: string } | null
   sellingPlanIds: {
     weekly: string | null
     biweekly: string | null
@@ -211,8 +212,21 @@ export const useProductConfigs = () => {
         }
       })
 
+      const price = variant.price
+      const unitPrice =
+        price?.amount != null && price.currencyCode
+          ? {
+              amount:
+                typeof price.amount === 'string'
+                  ? parseFloat(price.amount)
+                  : Number(price.amount),
+              currencyCode: price.currencyCode,
+            }
+          : null
+
       const configResult: ProductConfig = {
         variantId: variant.id,
+        unitPrice,
         sellingPlanIds: {
           weekly,
           biweekly,
