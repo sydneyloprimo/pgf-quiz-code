@@ -55,6 +55,9 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
 
   const [hasMounted, setHasMounted] = useState(false)
   const [updatingLineId, setUpdatingLineId] = useState<string | null>(null)
+  // Track if we're doing a recipe swap (add new + remove old)
+  // This prevents refetching cart between add and remove operations
+  const [isRecipeSwapInProgress, setIsRecipeSwapInProgress] = useState(false)
 
   // Refetch cart when panel opens or cartId changes
   useEffect(() => {
@@ -72,6 +75,7 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
   useEffect(() => {
     if (!isOpen) {
       setUpdatingLineId(null)
+      setIsRecipeSwapInProgress(false)
     }
   }, [isOpen])
 
@@ -127,30 +131,38 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
         if (updatingLineId) {
           setUpdatingLineId(null)
         }
+        // Clear recipe swap state
+        setIsRecipeSwapInProgress(false)
+        // Refetch cart - this is the only refetch for recipe swaps
         getCartRefetch()
       },
       onError: () => {
-        // Clear updating state on error
+        // Clear all updating states on error
         setUpdatingLineId(null)
+        setIsRecipeSwapInProgress(false)
       },
     })
 
   const { mutate: addLine, isPending: isAddLineLoading } =
     useCartLinesAddMutation(client, {
       onSuccess: (data) => {
-        // Check if the add was successful
+        // Check if the add was successful and this is a recipe swap
         if (data?.cartLinesAdd?.cart?.id && updatingLineId) {
           // Remove the old line after the new one is successfully added
+          // Don't refetch here - wait until remove completes
           removeLine({
             cartId,
             lineIds: [updatingLineId],
           })
+        } else {
+          // Regular add (not a recipe swap) - refetch cart
+          getCartRefetch()
         }
-        getCartRefetch()
       },
       onError: () => {
-        // Clear updating state on error
+        // Clear all updating states on error
         setUpdatingLineId(null)
+        setIsRecipeSwapInProgress(false)
       },
     })
 
@@ -167,7 +179,11 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
   // Use totalQuantity as the primary check, but also check validEdges as fallback
   const isEmpty = (cart?.totalQuantity ?? 0) === 0 || validEdges.length === 0
   const isDisabled =
-    isGetCartLoading || isRemoveLoading || isUpdateLoading || isAddLineLoading
+    isGetCartLoading ||
+    isRemoveLoading ||
+    isUpdateLoading ||
+    isAddLineLoading ||
+    isRecipeSwapInProgress
 
   const handleCheckoutClick = useCallback(() => {
     if (!cart?.checkoutUrl) {
@@ -389,6 +405,8 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
 
         // Mark this line as updating to show loading state
         setUpdatingLineId(cartLineId)
+        // Mark that we're doing a recipe swap to prevent intermediate refetches
+        setIsRecipeSwapInProgress(true)
 
         // Add the new line first (old line will be removed after success)
         addLine({

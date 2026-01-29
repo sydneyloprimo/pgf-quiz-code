@@ -75,6 +75,7 @@
       "frequencyBiWeekly": "Bi-weekly",
       "frequencyWeekly": "Weekly",
       "increaseQuantity": "Increase quantity",
+      "loadingAriaLabel": "Updating cart item",
       "panelAriaLabel": "Shopping cart panel",
       "productDescriptionPlaceholder": "Description goes here lorem ipsum dolor sit amet",
       "productImageAlt": "Image for {title}",

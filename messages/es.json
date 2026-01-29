@@ -66,6 +66,7 @@
       "frequencyBiWeekly": "Cada dos semanas",
       "frequencyWeekly": "Semanal",
       "increaseQuantity": "Aumentar cantidad",
+      "loadingAriaLabel": "Actualizando artículo del carrito",
       "panelAriaLabel": "Panel del carrito de compras",
       "productDescriptionPlaceholder": "La descripción va aquí lorem ipsum dolor sit amet",
       "productImageAlt": "Imagen de {title}",
