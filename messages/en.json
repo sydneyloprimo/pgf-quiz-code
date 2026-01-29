@@ -825,9 +825,26 @@
       ]
     }
   },
+  "BlogPost": {
+    "backToBlog": "Back to Blog",
+    "buildPlanButton": "Build Your Dog's Plan",
+    "clinicalTakeaway": "Clinical Takeaway",
+    "disclaimer": "Educational only. Not medical advice. Consult your veterinarian for individual guidance.",
+    "readMore": "Read more",
+    "references": "References",
+    "referencesDescription": "Includes peer-reviewed sources when available; some topics rely on established clinical practice",
+    "reviewedBy": "Reviewed {date}",
+    "showReferences": "Show references",
+    "talkToNutritionists": "Talk to Our Vet Nutritionists",
+    "writtenBy": "Written by"
+  },
+  "BlogPostCTA": {
+    "description": "Take our quiz where we get to know your dog to recommend the perfect meal plan according to their unique profile.",
+    "title": "Ready to Optimize Your Dog's Nutrition?"
+  },
   "PromiseOfCareAlert": {
-    "message": "Our Promise of Care: Every recipe is formulated to meet pharmaceutical grade standards for quality and digestibility. If your dog doesn't respond as expected, our nutrition team will work with you to make it right.",
-    "closeButton": "Close alert"
+    "closeButton": "Close alert",
+    "message": "Our Promise of Care: Every recipe is formulated to meet pharmaceutical grade standards for quality and digestibility. If your dog doesn't respond as expected, our nutrition team will work with you to make it right."
   },
   "Formulation": {
     "Hero": {
