@@ -5,16 +5,19 @@ This directory contains migration scripts for setting up Contentful content mode
 ## Prerequisites
 
 1. Install Contentful CLI:
+
 ```bash
 npm install -g contentful-cli
 ```
 
 2. Authenticate with Contentful:
+
 ```bash
 contentful login
 ```
 
 3. Set up environment variables in `.env.local`:
+
 ```
 CONTENTFUL_SPACE_ID=your_space_id
 CONTENTFUL_ACCESS_TOKEN=your_access_token
@@ -34,11 +37,13 @@ Replace `YOUR_SPACE_ID` with your actual Contentful space ID.
 ## Content Models
 
 ### Author
+
 - **name** (Symbol, required): Author's full name
 - **title** (Symbol, required): Author's professional title
 - **profilePicture** (Asset): Author's profile photo
 
 ### BlogPost
+
 - **title** (Symbol, required): Blog post title
 - **subtitle** (Symbol): Blog post subtitle
 - **slug** (Symbol, required, unique): URL-friendly identifier
