@@ -29,7 +29,7 @@ CONTENTFUL_PREVIEW_ACCESS_TOKEN=your_preview_token
 To create the Author and BlogPost content types, run:
 
 ```bash
-contentful space migration --space-id YOUR_SPACE_ID scripts/contentful/migration.js
+contentful space migration --space-id YOUR_SPACE_ID scripts/contentful/migration.cjs
 ```
 
 Replace `YOUR_SPACE_ID` with your actual Contentful space ID.

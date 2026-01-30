@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 module.exports = function (migration) {
   // Create Author content type
   const author = migration
