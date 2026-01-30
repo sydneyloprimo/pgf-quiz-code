@@ -157,8 +157,8 @@ const ProductDetailPanel = ({
             <Toast
               type={ToastTypes.error}
               description={tDetail('errorMessage')}
-              iconAlt="Error icon"
-              title="Error"
+              iconAlt={tToast('Error.iconAlt')}
+              title={tToast('Error.title')}
             />,
             {
               className: 'border-error border rounded-lg w-max',
