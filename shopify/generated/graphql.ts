@@ -7109,6 +7109,7 @@ export type GetCartQuery = {
       __typename?: 'CartLineConnection'
       edges: Array<{
         __typename?: 'CartLineEdge'
+        cursor: string
         node: {
           __typename?: 'CartLine'
           id: string
@@ -8076,6 +8077,7 @@ export const GetCartDocument = /*#__PURE__*/ `
     id
     lines(first: $first) {
       edges {
+        cursor
         node {
           id
           attributes {
