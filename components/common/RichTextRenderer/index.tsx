@@ -36,7 +36,7 @@ const RichTextRenderer = ({
           <p
             className={
               isBlog
-                ? 'font-sans text-lg leading-normal text-black mb-6'
+                ? 'font-sans text-lg leading-none text-black mb-6'
                 : 'font-sans text-base leading-6 text-secondary-900 text-center mb-6'
             }
           >
@@ -48,7 +48,7 @@ const RichTextRenderer = ({
         <h1
           className={
             isBlog
-              ? 'font-display text-3xl font-bold mb-6 text-black'
+              ? 'font-display text-2xl font-normal leading-none mb-6 text-black'
               : 'font-display text-3xl font-bold mb-4'
           }
         >
@@ -59,7 +59,7 @@ const RichTextRenderer = ({
         <h2
           className={
             isBlog
-              ? 'font-display text-2xl font-bold mb-4 text-black'
+              ? 'font-display text-2xl font-normal leading-none mb-4 text-black'
               : 'font-display text-2xl font-bold mb-3'
           }
         >
@@ -70,7 +70,7 @@ const RichTextRenderer = ({
         <h3
           className={
             isBlog
-              ? 'font-display text-xl font-bold mb-3 text-black'
+              ? 'font-display text-2xl font-normal leading-none mb-3 text-black'
               : 'font-display text-xl font-bold mb-2'
           }
         >
@@ -111,7 +111,7 @@ const RichTextRenderer = ({
         <li
           className={
             isBlog
-              ? 'font-sans text-lg text-black [&>p]:mb-0'
+              ? 'font-sans text-lg leading-none text-black [&>p]:mb-0'
               : 'mb-2 [&>p]:mb-0'
           }
         >

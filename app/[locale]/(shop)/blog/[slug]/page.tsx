@@ -73,7 +73,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </p>
       </section>
 
-      <hr className="border-t border-neutral-400" />
+      <hr className="border-t border-neutral-700" />
 
       {content && (
         <section className="w-full px-5 lg:px-24 py-8">
@@ -87,7 +87,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </section>
       )}
 
-      <hr className="border-t border-neutral-400" />
+      <hr className="border-t border-neutral-700" />
 
       <section className="w-full space-y-2 px-5 lg:px-24 py-8">
         <div className="mx-auto max-w-6xl">
