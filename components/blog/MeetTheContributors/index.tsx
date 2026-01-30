@@ -29,6 +29,9 @@ const MeetTheContributors = ({ authors }: MeetTheContributorsProps) => {
               <p className="font-sans text-body-m leading-normal text-neutral-700">
                 {author.fields.title}
               </p>
+              <p className="font-sans text-body-s leading-normal text-neutral-700">
+                {t('contributorRole')}
+              </p>
             </div>
           ))}
         </div>

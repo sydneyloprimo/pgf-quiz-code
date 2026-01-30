@@ -66,6 +66,11 @@ const FeaturedBlogPost = ({ post, imageSrc }: FeaturedBlogPostProps) => {
             <span className="mb-3 inline-block w-fit bg-neutral-950 px-3 py-1 font-sans text-body-s text-neutral-white">
               {t('featured')}
             </span>
+            {categoryNames.length > 0 && (
+              <p className="mb-2 font-sans text-body-s text-neutral-white">
+                {categoryNames.join(' | ')}
+              </p>
+            )}
             <Link
               href={postHref}
               className="font-display text-2xl leading-tight text-neutral-white no-underline hover:opacity-90 lg:text-3xl"
@@ -73,18 +78,6 @@ const FeaturedBlogPost = ({ post, imageSrc }: FeaturedBlogPostProps) => {
             >
               {title}
             </Link>
-            {categoryNames.length > 0 && (
-              <div className="mt-2 flex flex-wrap gap-2">
-                {categoryNames.map((name) => (
-                  <span
-                    key={name}
-                    className="border border-neutral-white px-2 py-0.5 font-sans text-body-s text-neutral-white"
-                  >
-                    {name}
-                  </span>
-                ))}
-              </div>
-            )}
             {(authorName || authorTitle) && (
               <p className="mt-2 font-sans text-body-s text-neutral-white">
                 {[authorName, authorTitle].filter(Boolean).join(', ')}

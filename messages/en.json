@@ -827,12 +827,13 @@
   },
   "BlogIndex": {
     "heroHeadline": "Clinical Notes from the Kitchen Lab",
-    "heroSubheadline": "Unpacking canine nutrition—the physiology, the science and the standards most labels don't explore."
+    "heroSubheadline": "Unpacking canine nutrition—the physiology, the science and the standards most labels don't explain."
   },
   "BlogList": {
     "nextPage": "Next Page",
     "nextPageAria": "Go to next page",
     "paginationAria": "Blog list pagination",
+    "postAuthorAndDate": "{author} | {date}",
     "postByAuthor": "By {author}",
     "postDate": "{date}",
     "previousPage": "Previous Page",
@@ -858,6 +859,8 @@
   "BrowseByTopic": {
     "all": "All",
     "filterByCategoryAria": "Filter blog posts by category {name}",
+    "searchPlaceholder": "Select (about 100+)",
+    "searchAria": "Search or filter blog posts",
     "selectAllAria": "Show all blog posts",
     "title": "Browse by Topic"
   },
@@ -866,6 +869,7 @@
     "readPostAria": "Read featured post: {title}"
   },
   "MeetTheContributors": {
+    "contributorRole": "Contributor and Clinical Advisor",
     "title": "Meet the Contributors"
   },
   "PromiseOfCareAlert": {

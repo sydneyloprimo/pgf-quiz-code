@@ -43,9 +43,10 @@ const BlogListCard = ({ post }: BlogListCardProps) => {
         </p>
       )}
       <p className="font-sans text-body-s leading-normal text-neutral-700">
-        {t('postByAuthor', { author: authorName || '—' })}
-        {' · '}
-        {t('postDate', { date })}
+        {t('postAuthorAndDate', {
+          author: authorName || '—',
+          date,
+        })}
       </p>
     </article>
   )
