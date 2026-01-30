@@ -50,9 +50,28 @@ Replace `YOUR_SPACE_ID` with your actual Contentful space ID.
 - **author** (Link to Author): Reference to Author entry
 - **content** (RichText): Main blog post content
 
-## Creating Content
+## Seeding Test Data
 
-After running the migration:
+After running the migration, you can populate Contentful with test data:
+
+```bash
+# Make sure you have CONTENTFUL_MANAGEMENT_TOKEN set
+# (This is different from CONTENTFUL_ACCESS_TOKEN - get it from Contentful Settings > API keys)
+export CONTENTFUL_MANAGEMENT_TOKEN=your_management_token
+
+# Run the seed script
+node scripts/contentful/seed.cjs
+```
+
+This will create:
+
+- 3 veterinarian authors with profile pictures
+- 5 blog posts about healthy fresh food for dogs
+- All content will be published and immediately available
+
+## Creating Content Manually
+
+Alternatively, you can create content manually:
 
 1. Go to your Contentful space
 2. Create Author entries first

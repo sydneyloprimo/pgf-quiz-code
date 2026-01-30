@@ -3367,6 +3367,17 @@ constant-case@^3.0.4:
     tslib "^2.0.3"
     upper-case "^2.0.2"
 
+contentful-management@^11.68.1:
+  version "11.68.1"
+  resolved "https://registry.yarnpkg.com/contentful-management/-/contentful-management-11.68.1.tgz#a7916f3ce8604a68fca1aa7b388a6a6933efecf9"
+  integrity sha512-ZXfOC+bn+dpdh4R6+KavoVgGsxM7Zx00IuV6EaKtYDl+DdfY4JoKQ4mrCS+d9B7mllN5yXTqUw1C6/oLRuIbkA==
+  dependencies:
+    "@contentful/rich-text-types" "^16.6.1"
+    axios "^1.12.2"
+    contentful-sdk-core "^9.4.2"
+    fast-copy "^3.0.0"
+    globals "^15.15.0"
+
 contentful-resolve-response@^1.9.4:
   version "1.9.5"
   resolved "https://registry.yarnpkg.com/contentful-resolve-response/-/contentful-resolve-response-1.9.5.tgz#eabe7499d042da3ea6c18fce373a52cada2f84a7"
@@ -4293,7 +4304,7 @@ extract-files@^9.0.0:
   resolved "https://registry.yarnpkg.com/extract-files/-/extract-files-9.0.0.tgz#8a7744f2437f81f5ed3250ed9f1550de902fe54a"
   integrity sha512-CvdFfHkC95B4bBBk36hcEmvdR2awOdhhVUYH6S/zrVj3477zven/fJMYg7121h4T1xHZC+tetUpubpAhxwI7hQ==
 
-fast-copy@^3.0.2:
+fast-copy@^3.0.0, fast-copy@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/fast-copy/-/fast-copy-3.0.2.tgz#59c68f59ccbcac82050ba992e0d5c389097c9d35"
   integrity sha512-dl0O9Vhju8IrcLndv2eU4ldt1ftXMqqfgN4H1cpmGV7P6jeB9FwpN9a2c8DPGE1Ys88rNUJVYDHq73CGAGOPfQ==
@@ -4654,6 +4665,11 @@ globals@^14.0.0:
   version "14.0.0"
   resolved "https://registry.yarnpkg.com/globals/-/globals-14.0.0.tgz#898d7413c29babcf6bafe56fcadded858ada724e"
   integrity sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==
+
+globals@^15.15.0:
+  version "15.15.0"
+  resolved "https://registry.yarnpkg.com/globals/-/globals-15.15.0.tgz#7c4761299d41c32b075715a4ce1ede7897ff72a8"
+  integrity sha512-7ACyT3wmyp3I61S4fG682L0VA2RGD9otkqGJIwNUMF1SWUombIIk+af1unuDYgMm082aHYwD+mzJvv9Iu8dsgg==
 
 globalthis@^1.0.3:
   version "1.0.3"
