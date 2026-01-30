@@ -26,17 +26,24 @@ const RichTextRenderer = ({
 
   const options: Options = {
     renderNode: {
-      [BLOCKS.PARAGRAPH]: (_node, children) => (
-        <p
-          className={
-            isBlog
-              ? 'font-sans text-lg leading-normal text-black mb-6'
-              : 'font-sans text-base leading-6 text-secondary-900 text-center mb-6'
-          }
-        >
-          {children}
-        </p>
-      ),
+      [BLOCKS.PARAGRAPH]: (node, children) => {
+        const isInsideListItem =
+          node &&
+          'content' in node &&
+          Array.isArray(node.content) &&
+          node.content[0]?.nodeType !== 'list-item'
+        return (
+          <p
+            className={
+              isBlog
+                ? 'font-sans text-lg leading-normal text-black mb-6'
+                : 'font-sans text-base leading-6 text-secondary-900 text-center mb-6'
+            }
+          >
+            {children}
+          </p>
+        )
+      },
       [BLOCKS.HEADING_1]: (_node, children) => (
         <h1
           className={
@@ -82,7 +89,7 @@ const RichTextRenderer = ({
         <ul
           className={
             isBlog
-              ? 'list-disc list-inside mb-6 space-y-2'
+              ? 'list-disc list-outside ml-6 mb-6 space-y-2'
               : 'list-disc list-inside mb-4'
           }
         >
@@ -93,7 +100,7 @@ const RichTextRenderer = ({
         <ol
           className={
             isBlog
-              ? 'list-decimal list-inside mb-6 space-y-2'
+              ? 'list-decimal list-outside ml-6 mb-6 space-y-2'
               : 'list-decimal list-inside mb-4'
           }
         >
@@ -101,7 +108,13 @@ const RichTextRenderer = ({
         </ol>
       ),
       [BLOCKS.LIST_ITEM]: (_node, children) => (
-        <li className={isBlog ? 'font-sans text-lg text-black' : 'mb-2'}>
+        <li
+          className={
+            isBlog
+              ? 'font-sans text-lg text-black [&>p]:mb-0'
+              : 'mb-2 [&>p]:mb-0'
+          }
+        >
           {children}
         </li>
       ),

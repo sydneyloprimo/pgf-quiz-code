@@ -1,4 +1,19 @@
 module.exports = function (migration) {
+  // Create Category content type
+  const category = migration
+    .createContentType('category')
+    .name('Category')
+    .displayField('name')
+
+  category.createField('name').type('Symbol').required(true).name('Name')
+
+  category
+    .createField('slug')
+    .type('Symbol')
+    .required(true)
+    .name('Slug')
+    .validations([{ unique: true }])
+
   // Create Author content type
   const author = migration
     .createContentType('author')
@@ -40,4 +55,14 @@ module.exports = function (migration) {
     .validations([{ linkContentType: ['author'] }])
 
   blogPost.createField('content').type('RichText').name('Content')
+
+  blogPost
+    .createField('categories')
+    .type('Array')
+    .items({
+      type: 'Link',
+      linkType: 'Entry',
+      validations: [{ linkContentType: ['category'] }],
+    })
+    .name('Categories')
 }

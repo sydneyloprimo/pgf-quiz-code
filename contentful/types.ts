@@ -5,6 +5,14 @@ import type {
   EntrySkeletonType,
 } from 'contentful'
 
+export interface CategorySkeleton extends EntrySkeletonType {
+  contentTypeId: 'category'
+  fields: {
+    name: EntryFieldTypes.Symbol
+    slug: EntryFieldTypes.Symbol
+  }
+}
+
 export interface AuthorSkeleton extends EntrySkeletonType {
   contentTypeId: 'author'
   fields: {
@@ -22,9 +30,13 @@ export interface BlogPostSkeleton extends EntrySkeletonType {
     slug: EntryFieldTypes.Symbol
     author: EntryFieldTypes.EntryLink<AuthorSkeleton>
     content: EntryFieldTypes.RichText
+    categories?: EntryFieldTypes.Array<
+      EntryFieldTypes.EntryLink<CategorySkeleton>
+    >
   }
 }
 
+export type CategoryEntry = Entry<CategorySkeleton, undefined, string>
 export type AuthorEntry = Entry<AuthorSkeleton, undefined, string>
 export type BlogPostEntry = Entry<BlogPostSkeleton, undefined, string>
 

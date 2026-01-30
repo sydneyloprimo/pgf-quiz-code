@@ -26,7 +26,7 @@ CONTENTFUL_PREVIEW_ACCESS_TOKEN=your_preview_token
 
 ## Running the Migration
 
-To create the Author and BlogPost content types, run:
+To create the Category, Author, and BlogPost content types, run:
 
 ```bash
 contentful space migration --space-id YOUR_SPACE_ID scripts/contentful/migration.cjs
@@ -35,6 +35,11 @@ contentful space migration --space-id YOUR_SPACE_ID scripts/contentful/migration
 Replace `YOUR_SPACE_ID` with your actual Contentful space ID.
 
 ## Content Models
+
+### Category
+
+- **name** (Symbol, required): Category name
+- **slug** (Symbol, required, unique): URL-friendly identifier
 
 ### Author
 
@@ -49,6 +54,7 @@ Replace `YOUR_SPACE_ID` with your actual Contentful space ID.
 - **slug** (Symbol, required, unique): URL-friendly identifier
 - **author** (Link to Author): Reference to Author entry
 - **content** (RichText): Main blog post content
+- **categories** (Array of Links to Category): Blog post categories/tags
 
 ## Seeding Test Data
 
@@ -65,8 +71,9 @@ node scripts/contentful/seed.cjs
 
 This will create:
 
+- 6 categories (Nutrition, Digestive Health, Small Breed, Fresh Food, Clinical Guide, Diet Transition)
 - 3 veterinarian authors with profile pictures
-- 5 blog posts about healthy fresh food for dogs
+- 5 blog posts about healthy fresh food for dogs, each with relevant categories
 - All content will be published and immediately available
 
 ## Creating Content Manually

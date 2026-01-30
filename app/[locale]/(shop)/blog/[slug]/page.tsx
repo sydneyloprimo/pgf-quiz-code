@@ -60,49 +60,53 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const isAuthorResolved = author && 'fields' in author
 
   return (
-    <div className="bg-neutral-300 min-h-screen">
-      <div className="mx-auto max-w-6xl px-5 lg:px-24 py-16 lg:py-20">
-        <article className="space-y-8">
-          <BlogPostHeader title={title} subtitle={subtitle} />
+    <article className="bg-neutral-300 min-h-screen w-full">
+      <BlogPostHeader title={title} subtitle={subtitle} />
 
-          {isAuthorResolved && (
-            <AuthorCard author={author} reviewDate={reviewDate} />
-          )}
+      {isAuthorResolved && (
+        <AuthorCard author={author} reviewDate={reviewDate} />
+      )}
 
-          <p className="font-sans text-sm italic leading-normal text-black">
-            {t('disclaimer')}
-          </p>
+      <section className="w-full px-5 lg:px-24 py-8">
+        <p className="mx-auto max-w-6xl font-sans text-sm italic leading-normal text-black">
+          {t('disclaimer')}
+        </p>
+      </section>
 
-          <hr className="border-t border-neutral-400" />
+      <hr className="border-t border-neutral-400" />
 
-          {content && (
+      {content && (
+        <section className="w-full px-5 lg:px-24 py-8">
+          <div className="mx-auto max-w-6xl">
             <RichTextRenderer
               content={content}
               variant="blog"
               className="prose max-w-none"
             />
-          )}
+          </div>
+        </section>
+      )}
 
-          <hr className="border-t border-neutral-400 mt-16" />
+      <hr className="border-t border-neutral-400" />
 
-          <section className="space-y-2">
-            <h2 className="font-display text-base leading-normal text-black">
-              {t('references')}
-            </h2>
-            <p className="font-sans text-sm leading-normal text-black">
-              {t('referencesDescription')}
-            </p>
-            <button
-              type="button"
-              className="font-sans text-sm underline text-black"
-            >
-              {t('showReferences')}
-            </button>
-          </section>
+      <section className="w-full space-y-2 px-5 lg:px-24 py-8">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="font-display text-base leading-normal text-black">
+            {t('references')}
+          </h2>
+          <p className="font-sans text-sm leading-normal text-black">
+            {t('referencesDescription')}
+          </p>
+          <button
+            type="button"
+            className="font-sans text-sm underline text-black"
+          >
+            {t('showReferences')}
+          </button>
+        </div>
+      </section>
 
-          <BlogPostCTA />
-        </article>
-      </div>
-    </div>
+      <BlogPostCTA />
+    </article>
   )
 }

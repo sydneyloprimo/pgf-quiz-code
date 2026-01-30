@@ -1,17 +1,29 @@
 /* eslint-disable no-console */
+require('dotenv').config({ path: '.env.local' })
 const contentful = require('contentful-management')
 
 // Configure these values
 const SPACE_ID = process.env.CONTENTFUL_SPACE_ID
 const MANAGEMENT_TOKEN =
-  process.env.CONTENTFUL_MANAGEMENT_TOKEN ||
-  process.env.CONTENTFUL_ACCESS_TOKEN
+  process.env.CONTENTFUL_MANAGEMENT_TOKEN || process.env.CONTENTFUL_ACCESS_TOKEN
 
 if (!SPACE_ID || !MANAGEMENT_TOKEN) {
   console.error('Error: Missing required environment variables')
-  console.error('Please set CONTENTFUL_SPACE_ID and CONTENTFUL_MANAGEMENT_TOKEN')
+  console.error(
+    'Please set CONTENTFUL_SPACE_ID and CONTENTFUL_MANAGEMENT_TOKEN'
+  )
   process.exit(1)
 }
+
+// Category data
+const categories = [
+  { name: 'Nutrition', slug: 'nutrition' },
+  { name: 'Digestive Health', slug: 'digestive-health' },
+  { name: 'Small Breed', slug: 'small-breed' },
+  { name: 'Fresh Food', slug: 'fresh-food' },
+  { name: 'Clinical Guide', slug: 'clinical-guide' },
+  { name: 'Diet Transition', slug: 'diet-transition' },
+]
 
 // Author data
 const authors = [
@@ -32,13 +44,14 @@ const authors = [
   },
 ]
 
-// Blog post data
+// Blog post data with category slugs
 const blogPosts = [
   {
     title: 'Stool Consistency in Small Breed Dogs: Normal and Not',
     subtitle:
       'Observable markers of digestive health, when variation warrants attention, and how meal composition affects GI transit time.',
     slug: 'stool-consistency-small-breed-dogs',
+    categoryIds: ['digestive-health', 'small-breed', 'clinical-guide'],
     content: {
       nodeType: 'document',
       data: {},
@@ -143,6 +156,195 @@ const blogPosts = [
             },
           ],
         },
+        {
+          nodeType: 'heading-3',
+          data: {},
+          content: [
+            {
+              nodeType: 'text',
+              value: 'Factors Influencing Stool Quality',
+              marks: [],
+              data: {},
+            },
+          ],
+        },
+        {
+          nodeType: 'paragraph',
+          data: {},
+          content: [
+            {
+              nodeType: 'text',
+              value:
+                'Multiple dietary and physiological factors converge to determine stool characteristics. Understanding these variables helps distinguish normal variation from clinically significant changes.',
+              marks: [],
+              data: {},
+            },
+          ],
+        },
+        {
+          nodeType: 'ordered-list',
+          data: {},
+          content: [
+            {
+              nodeType: 'list-item',
+              data: {},
+              content: [
+                {
+                  nodeType: 'paragraph',
+                  data: {},
+                  content: [
+                    {
+                      nodeType: 'text',
+                      value:
+                        'Fiber content: Both soluble and insoluble fiber affect stool bulk and water retention. Small breeds may show more pronounced responses to fiber modifications.',
+                      marks: [],
+                      data: {},
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              nodeType: 'list-item',
+              data: {},
+              content: [
+                {
+                  nodeType: 'paragraph',
+                  data: {},
+                  content: [
+                    {
+                      nodeType: 'text',
+                      value:
+                        'Protein digestibility: Higher-quality protein sources typically result in smaller, more formed stools with less odor.',
+                      marks: [],
+                      data: {},
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              nodeType: 'list-item',
+              data: {},
+              content: [
+                {
+                  nodeType: 'paragraph',
+                  data: {},
+                  content: [
+                    {
+                      nodeType: 'text',
+                      value:
+                        'Fat percentage: Excessive dietary fat can lead to soft or greasy stools, while inadequate fat may result in dry, crumbly output.',
+                      marks: [],
+                      data: {},
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              nodeType: 'list-item',
+              data: {},
+              content: [
+                {
+                  nodeType: 'paragraph',
+                  data: {},
+                  content: [
+                    {
+                      nodeType: 'text',
+                      value:
+                        'Hydration status: Dehydration manifests in harder, drier stools, independent of dietary composition.',
+                      marks: [],
+                      data: {},
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          nodeType: 'paragraph',
+          data: {},
+          content: [
+            {
+              nodeType: 'text',
+              value:
+                'The interplay between these factors becomes particularly evident when transitioning between diets. Fresh food diets, with their higher moisture content and bioavailable nutrients, often produce smaller stool volume—a positive indicator of improved digestibility.',
+              marks: [],
+              data: {},
+            },
+          ],
+        },
+        {
+          nodeType: 'blockquote',
+          data: {},
+          content: [
+            {
+              nodeType: 'paragraph',
+              data: {},
+              content: [
+                {
+                  nodeType: 'text',
+                  value: 'Clinical Note: The Bristol Stool Scale Adapted',
+                  marks: [{ type: 'bold' }],
+                  data: {},
+                },
+              ],
+            },
+            {
+              nodeType: 'paragraph',
+              data: {},
+              content: [
+                {
+                  nodeType: 'text',
+                  value:
+                    'While originally developed for humans, a similar 7-point scale applies to canine stool consistency: Types 3-4 (formed, slightly soft but maintains shape) represent ideal consistency for most dogs.',
+                  marks: [],
+                  data: {},
+                },
+              ],
+            },
+          ],
+        },
+        {
+          nodeType: 'heading-3',
+          data: {},
+          content: [
+            {
+              nodeType: 'text',
+              value: 'When to Seek Veterinary Guidance',
+              marks: [],
+              data: {},
+            },
+          ],
+        },
+        {
+          nodeType: 'paragraph',
+          data: {},
+          content: [
+            {
+              nodeType: 'text',
+              value:
+                'Not all variations in stool quality require intervention, but certain patterns warrant professional evaluation. Persistent changes lasting more than 48 hours, presence of blood or mucus, concurrent symptoms like vomiting or lethargy, or acute onset of watery diarrhea all merit veterinary consultation.',
+              marks: [],
+              data: {},
+            },
+          ],
+        },
+        {
+          nodeType: 'paragraph',
+          data: {},
+          content: [
+            {
+              nodeType: 'text',
+              value:
+                'For small breed dogs specifically, rapid deterioration can occur due to their limited glycogen reserves and higher surface area to body weight ratio. What appears as a minor digestive upset in larger breeds may progress more quickly in dogs under 25 pounds.',
+              marks: [],
+              data: {},
+            },
+          ],
+        },
       ],
     },
   },
@@ -151,6 +353,7 @@ const blogPosts = [
     subtitle:
       'Understanding how fresh, whole-food ingredients support digestive health and overall wellness in small breed dogs.',
     slug: 'benefits-fresh-food-small-dogs',
+    categoryIds: ['fresh-food', 'nutrition', 'small-breed'],
     content: {
       nodeType: 'document',
       data: {},
@@ -232,6 +435,7 @@ const blogPosts = [
     subtitle:
       'Examining the nutritional profile and digestive benefits of pumpkin in canine diets.',
     slug: 'pumpkin-digestive-aid-dogs',
+    categoryIds: ['digestive-health', 'nutrition'],
     content: {
       nodeType: 'document',
       data: {},
@@ -313,6 +517,7 @@ const blogPosts = [
     subtitle:
       'Understanding protein bioavailability, amino acid profiles, and their impact on small breed health.',
     slug: 'protein-quality-canine-nutrition',
+    categoryIds: ['nutrition', 'small-breed', 'clinical-guide'],
     content: {
       nodeType: 'document',
       data: {},
@@ -394,6 +599,7 @@ const blogPosts = [
     subtitle:
       'Evidence-based strategies for successfully switching small breed dogs to fresh food diets.',
     slug: 'transitioning-fresh-food-dogs',
+    categoryIds: ['fresh-food', 'diet-transition', 'clinical-guide'],
     content: {
       nodeType: 'document',
       data: {},
@@ -580,6 +786,24 @@ async function uploadImage(space, environment, imageUrl, fileName) {
   }
 }
 
+async function createCategory(environment, categoryData) {
+  console.log(`Creating category: ${categoryData.name}`)
+
+  const category = await environment.createEntry('category', {
+    fields: {
+      name: {
+        'en-US': categoryData.name,
+      },
+      slug: {
+        'en-US': categoryData.slug,
+      },
+    },
+  })
+
+  console.log(`Publishing category: ${categoryData.name}`)
+  return await category.publish()
+}
+
 async function createAuthor(environment, authorData, profilePictureAsset) {
   console.log(`\nCreating author: ${authorData.name}`)
 
@@ -607,8 +831,17 @@ async function createAuthor(environment, authorData, profilePictureAsset) {
   return await author.publish()
 }
 
-async function createBlogPost(environment, postData, authorEntry) {
+async function createBlogPost(environment, postData, authorEntry, categoryMap) {
   console.log(`\nCreating blog post: ${postData.title}`)
+
+  const categoryLinks =
+    postData.categoryIds?.map((slug) => ({
+      sys: {
+        type: 'Link',
+        linkType: 'Entry',
+        id: categoryMap[slug].sys.id,
+      },
+    })) || []
 
   const blogPost = await environment.createEntry('blogPost', {
     fields: {
@@ -633,6 +866,9 @@ async function createBlogPost(environment, postData, authorEntry) {
       content: {
         'en-US': postData.content,
       },
+      categories: {
+        'en-US': categoryLinks,
+      },
     },
   })
 
@@ -655,13 +891,29 @@ async function seed() {
     console.log('Getting environment...')
     const environment = await space.getEnvironment('master')
 
+    // Create categories
+    console.log('\n=== Creating Categories ===')
+    const categoryMap = {}
+
+    for (let i = 0; i < categories.length; i++) {
+      const categoryData = categories[i]
+      console.log(
+        `[${i + 1}/${categories.length}] Creating ${categoryData.name}`
+      )
+      const category = await createCategory(environment, categoryData)
+      categoryMap[categoryData.slug] = category
+      console.log(`✓ Category created: ${categoryData.name}`)
+    }
+
     // Create authors with profile pictures
-    console.log('\n=== Creating Authors ===')
+    console.log('\n\n=== Creating Authors ===')
     const createdAuthors = []
 
     for (let i = 0; i < authors.length; i++) {
       const authorData = authors[i]
-      console.log(`\n[${i + 1}/${authors.length}] Processing ${authorData.name}`)
+      console.log(
+        `\n[${i + 1}/${authors.length}] Processing ${authorData.name}`
+      )
 
       const profilePicture = await uploadImage(
         space,
@@ -686,13 +938,13 @@ async function seed() {
       console.log(
         `\n[${i + 1}/${blogPosts.length}] Creating post by ${randomAuthor.fields.name['en-US']}`
       )
-      await createBlogPost(environment, postData, randomAuthor)
+      await createBlogPost(environment, postData, randomAuthor, categoryMap)
       console.log(`✓ Blog post created: ${postData.title}`)
     }
 
     console.log('\n\n✅ Seed process completed successfully!')
     console.log(
-      `\n📝 Created ${createdAuthors.length} authors and ${blogPosts.length} blog posts`
+      `\n📝 Created ${categories.length} categories, ${createdAuthors.length} authors, and ${blogPosts.length} blog posts`
     )
     console.log('\nYou can now view the blog posts at:')
     blogPosts.forEach((post) => {
