@@ -39,7 +39,7 @@ const BlogList = ({
   return (
     <section className="w-full px-5 py-8 lg:px-24">
       <div className="mx-auto max-w-6xl">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-8 gap-x-20 md:grid-cols-2">
           {posts.map((post) => (
             <BlogListCard key={post.sys.id} post={post} />
           ))}

@@ -33,16 +33,16 @@ const BlogListCard = ({ post }: BlogListCardProps) => {
     <article className="flex flex-col gap-2">
       <Link
         href={postHref}
-        className="heading-h5 text-secondary-950 no-underline hover:underline"
+        className="font-display text-2xl font-normal leading-normal text-quaternary-800 underline decoration-solid underline-offset-auto hover:opacity-90"
       >
         {title}
       </Link>
       {subtitle && (
-        <p className="font-sans text-body-m leading-normal text-neutral-950">
+        <p className="font-sans text-sm font-normal leading-5 text-neutral-black">
           {subtitle}
         </p>
       )}
-      <p className="font-sans text-body-s leading-normal text-neutral-700">
+      <p className="font-sans text-sm font-normal leading-5 text-neutral-black">
         {t('postAuthorAndDate', {
           author: authorName || '—',
           date,

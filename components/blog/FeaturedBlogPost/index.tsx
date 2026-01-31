@@ -5,7 +5,6 @@ import { Link } from '@/components/common/Link'
 import { BlogPostEntry } from '@/contentful/types'
 import { CategoryEntry } from '@/contentful/types'
 import { Routes } from '@/types/enums/routes'
-import { cn } from '@/utils/cn'
 
 function isResolvedCategory(cat: unknown): cat is CategoryEntry {
   return (
@@ -57,32 +56,32 @@ const FeaturedBlogPost = ({ post, imageSrc }: FeaturedBlogPostProps) => {
             priority
           />
           <div
-            className={cn(
-              'absolute inset-0 gradient-hero-overlay',
-              'flex flex-col justify-end p-6 lg:p-10'
-            )}
+            className="absolute inset-0 bg-gradient-to-b from-neutral-950/85 via-neutral-950/50 to-neutral-950/60"
+            aria-hidden
           />
-          <div className="absolute inset-0 flex flex-col justify-end p-6 lg:p-10">
-            <span className="mb-3 inline-block w-fit bg-neutral-950 px-3 py-1 font-sans text-body-s text-neutral-white">
+          <div className="absolute inset-0 flex flex-col justify-between p-6 lg:p-10">
+            <h2 className="font-display text-2xl leading-tight text-neutral-white lg:text-3xl">
               {t('featured')}
-            </span>
-            {categoryNames.length > 0 && (
-              <p className="mb-2 font-sans text-body-s text-neutral-white">
-                {categoryNames.join(' | ')}
-              </p>
-            )}
-            <Link
-              href={postHref}
-              className="font-display text-2xl leading-tight text-neutral-white no-underline hover:opacity-90 lg:text-3xl"
-              aria-label={t('readPostAria', { title })}
-            >
-              {title}
-            </Link>
-            {(authorName || authorTitle) && (
-              <p className="mt-2 font-sans text-body-s text-neutral-white">
-                {[authorName, authorTitle].filter(Boolean).join(', ')}
-              </p>
-            )}
+            </h2>
+            <div className="flex flex-col">
+              {categoryNames.length > 0 && (
+                <p className="mb-2 font-sans text-body-s text-neutral-white">
+                  {categoryNames.join(' | ')}
+                </p>
+              )}
+              <Link
+                href={postHref}
+                className="font-display text-2xl leading-tight text-neutral-white no-underline hover:opacity-90 lg:text-3xl"
+                aria-label={t('readPostAria', { title })}
+              >
+                {title}
+              </Link>
+              {(authorName || authorTitle) && (
+                <p className="mt-2 font-sans text-body-s text-neutral-white">
+                  {[authorName, authorTitle].filter(Boolean).join(', ')}
+                </p>
+              )}
+            </div>
           </div>
         </div>
       </div>
