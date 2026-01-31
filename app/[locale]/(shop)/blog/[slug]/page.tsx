@@ -106,7 +106,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </div>
       </section>
 
-      <BlogPostCTA />
+      <BlogPostCTA variant="post" />
     </article>
   )
 }
