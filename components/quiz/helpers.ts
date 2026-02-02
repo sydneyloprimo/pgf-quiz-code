@@ -125,7 +125,7 @@ export const calculateDailyFoodAndPrice = (
   formData: QuizFormData,
   recipe: 'turkey' | 'lamb',
   mode: 'topper' | 'full'
-): { dailyFoodGrams: number; pricePerDay: number } => {
+): { dailyFoodGrams: number } => {
   const weightLbs = Number(formData.weight) || 0
   const weightKg = weightLbs / 2.20462
 
@@ -157,7 +157,6 @@ export const calculateDailyFoodAndPrice = (
   const modeMultiplier = MODE_MULTIPLIERS[mode]
 
   const dailyFoodGrams = dailyCalories / (product.kcalPerGram * modeMultiplier)
-  const pricePerDay = dailyFoodGrams * product.pricePerGram
 
-  return { dailyFoodGrams, pricePerDay }
+  return { dailyFoodGrams }
 }

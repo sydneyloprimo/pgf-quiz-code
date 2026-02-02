@@ -603,8 +603,8 @@ export const PACK_SIZE_GRAMS = 226.796 // 8 * 28.3495
 export interface ProductConfig {
   variantId: string
   sellingPlanIds: {
-    weekly: string
-    biweekly: string
+    weekly: string | null
+    biweekly: string | null
   }
 }
 

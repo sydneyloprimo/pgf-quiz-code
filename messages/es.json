@@ -76,6 +76,10 @@
       "subscriptionDisplayTopper": " | Topper",
       "title": "Tu Carrito de Compras"
     },
+    "FloatingCartButton": {
+      "openCartAriaLabel": "Abrir carrito de compras",
+      "itemCountAriaLabel": "{count} artículos en el carrito"
+    },
     "WaitlistModal": {
       "ariaLabel": "Formulario para unirse a la lista de espera",
       "cancelButton": "Cancelar",
@@ -330,7 +334,8 @@
       "purchaseAlaCarteHeading": "Compra a la carta",
       "recipes": {
         "turkey": "Pavo",
-        "lamb": "Cordero"
+        "lamb": "Cordero",
+        "pancreatic": "Pancreático"
       },
       "shipmentFrequencies": {
         "everyWeek": "Cada Semana",
@@ -366,6 +371,9 @@
         "turkeyDescription": "Beneficios de salud personalizados que se dirigen específicamente a preocupaciones como piel seca y pelaje sin brillo, asegurando que tu mascota se vea y se sienta mejor.",
         "alaCartePrice": "$19.79 / 2 kg"
       },
+      "subscribeButtonAlreadyInCart": "Ya en el carrito",
+      "subscribeButtonSwitchToFullMeal": "Cambiar a Plan de Comida Completa por {price} al día",
+      "subscribeButtonSwitchToTopper": "Cambiar a Plan Complemento por {price} al día",
       "footer": {
         "title": "Beneficios",
         "benefits": {
