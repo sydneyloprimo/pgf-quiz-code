@@ -242,7 +242,7 @@ export const useProductConfigs = () => {
     })
 
     return result
-  }, [variantsData, isLoadingVariants])
+  }, [variantsData])
 
   const isLoading = isLoadingVariants
 

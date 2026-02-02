@@ -394,8 +394,8 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
             <Toast
               type={ToastTypes.error}
               description={data.cartLinesAdd?.userErrors[0].message}
-              iconAlt="Error icon"
-              title="Error"
+              iconAlt={tToast('Error.iconAlt')}
+              title={tToast('Error.title')}
             />,
             {
               className: 'border-error border rounded-lg w-max',
@@ -411,8 +411,8 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
             <Toast
               type={ToastTypes.error}
               description={tDetail('errorMessage')}
-              iconAlt="Error icon"
-              title="Error"
+              iconAlt={tToast('Error.iconAlt')}
+              title={tToast('Error.title')}
             />,
             {
               className: 'border-error border rounded-lg w-max',
@@ -428,8 +428,8 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
             <Toast
               type={ToastTypes.error}
               description={tDetail('errorMessage')}
-              iconAlt="Error icon"
-              title="Error"
+              iconAlt={tToast('Error.iconAlt')}
+              title={tToast('Error.title')}
             />,
             {
               className: 'border-error border rounded-lg w-max',
@@ -547,8 +547,6 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
       cartId,
       addLine,
       removeLine,
-      calculateDailyFoodAndPrice,
-      calculateWeeklyPacks,
       isAddingToCart,
       isAddLineLoading,
       cartData,

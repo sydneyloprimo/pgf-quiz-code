@@ -53,7 +53,7 @@ const FloatingCartButton = ({
         'bg-primary-800 border border-primary-800',
         'flex items-center justify-center',
         'p-3',
-        'shadow-[0px_32px_64px_0px_rgba(79,94,113,0.07),0px_16px_32px_0px_rgba(79,94,113,0.08),0px_8px_16px_0px_rgba(79,94,113,0.09),0px_4px_8px_0px_rgba(79,94,113,0.1),0px_2px_4px_0px_rgba(79,94,113,0.11),0px_0px_2px_0px_rgba(79,94,113,0.12)]',
+        'elevation-floating',
         'hover:bg-primary-700',
         'focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2',
         'transition-colors',
