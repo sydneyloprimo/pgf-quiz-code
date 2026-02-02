@@ -18,13 +18,17 @@ import {
 } from '@/constants'
 import { cn } from '@/utils/cn'
 
-const isRecipe = (value: string): value is 'turkey' | 'lamb' => {
-  return value === RECIPE_TYPE.turkey || value === RECIPE_TYPE.lamb
+const isRecipe = (value: string): value is 'turkey' | 'lamb' | 'pancreatic' => {
+  return (
+    value === RECIPE_TYPE.turkey ||
+    value === RECIPE_TYPE.lamb ||
+    value === 'pancreatic'
+  )
 }
 
 interface ProductDetailPanelData {
   mode: 'topper' | 'fullMeal' | 'alaCarte'
-  recipe: 'turkey' | 'lamb'
+  recipe: 'turkey' | 'lamb' | 'pancreatic'
   images: {
     main: string
     thumbnails: string[]
@@ -43,7 +47,7 @@ interface ProductDetailPanelProps {
   onClose: () => void
   productData: ProductDetailPanelData | null
   recipeOptions: Array<{ label: string; value: string }>
-  onRecipeChange?: (recipe: 'turkey' | 'lamb') => void
+  onRecipeChange?: (recipe: 'turkey' | 'lamb' | 'pancreatic') => void
 }
 
 const ProductDetailPanel = ({
@@ -54,9 +58,9 @@ const ProductDetailPanel = ({
   onRecipeChange,
 }: ProductDetailPanelProps) => {
   const t = useTranslations('Common.ProductDetailPanel')
-  const [selectedRecipe, setSelectedRecipe] = useState<'turkey' | 'lamb'>(
-    productData?.recipe || PRODUCT_DETAIL_DEFAULTS.recipe
-  )
+  const [selectedRecipe, setSelectedRecipe] = useState<
+    'turkey' | 'lamb' | 'pancreatic'
+  >(productData?.recipe || PRODUCT_DETAIL_DEFAULTS.recipe)
 
   useEffect(() => {
     if (productData) {

@@ -1,13 +1,25 @@
-import { useTranslations } from 'next-intl'
+import type { Document } from '@contentful/rich-text-types'
 
 import { PageHero } from '@/components/common/PageHero'
 import { RichTextRenderer } from '@/components/common/RichTextRenderer'
-import type { RichTextDocument } from '@/components/common/RichTextRenderer'
+import { getRichTextCopy } from '@/contentful/copy'
+import enMessages from '@/messages/en.json'
 
-export default function PrivacyPolicyPage() {
-  const t = useTranslations('PrivacyPolicy')
+type PrivacyPolicyPageProps = {
+  params: Promise<{ locale: string }>
+}
 
-  const content = t.raw('content') as RichTextDocument
+export default async function PrivacyPolicyPage({
+  params,
+}: PrivacyPolicyPageProps) {
+  const { locale } = await params
+  const contentfulContent = await getRichTextCopy(
+    'PrivacyPolicy.content',
+    locale
+  )
+  const privacyPolicy = (enMessages as Record<string, unknown>)
+    .PrivacyPolicy as { content?: Document } | undefined
+  const content = (contentfulContent ?? privacyPolicy?.content) as Document
 
   return (
     <main className="flex flex-col items-center w-full bg-neutral-300">

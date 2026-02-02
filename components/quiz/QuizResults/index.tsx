@@ -37,7 +37,7 @@ interface QuizResultsProps {
 }
 
 type ProductMode = 'topper' | 'fullMeal' | 'alaCarte'
-type Recipe = 'turkey' | 'lamb'
+type Recipe = 'turkey' | 'lamb' | 'pancreatic'
 
 const QuizResults = ({ formMethods }: QuizResultsProps) => {
   const { control } = formMethods
@@ -116,9 +116,10 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
       }
       const recipe = recipes[mode]
       const calculationMode = mode === PRODUCT_MODE.topper ? 'topper' : 'full'
+      const calculationRecipe = recipe === 'pancreatic' ? 'turkey' : recipe
       const { pricePerDay } = calculateDailyFoodAndPrice(
         formData,
-        recipe,
+        calculationRecipe,
         calculationMode
       )
       return pricePerDay
@@ -130,6 +131,9 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
     (recipeType: Recipe): string => {
       if (recipeType === RECIPE_TYPE.turkey) {
         return t('products.turkeyDescription')
+      }
+      if (recipeType === 'pancreatic') {
+        return t('products.pancreaticDescription')
       }
       return t('products.lambDescription')
     },
@@ -191,7 +195,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
   }, [])
 
   const handlePanelRecipeChange = useCallback(
-    (recipe: 'turkey' | 'lamb') => {
+    (recipe: 'turkey' | 'lamb' | 'pancreatic') => {
       if (!panelProductData) return
 
       const updatedData: ProductDetailPanelData = {
