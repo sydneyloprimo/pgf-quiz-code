@@ -188,6 +188,10 @@
   box-shadow: 0 10px 15px -3px var(--elevation-primary);
 }
 
+@utility elevation-floating {
+  box-shadow: var(--elevation-floating);
+}
+
 /* Semantic Helpers - Focus Shadows */
 
 @utility shadow-focus-primary {
