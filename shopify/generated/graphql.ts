@@ -7484,6 +7484,55 @@ export type GetProductVariantsQuery = {
   }
 }
 
+export type GetVariantPricesQueryVariables = Exact<{
+  variantIds: Array<Scalars['ID']['input']> | Scalars['ID']['input']
+}>
+
+export type GetVariantPricesQuery = {
+  __typename?: 'QueryRoot'
+  nodes: Array<
+    | { __typename?: 'AppliedGiftCard' }
+    | { __typename?: 'Article' }
+    | { __typename?: 'Blog' }
+    | { __typename?: 'Cart' }
+    | { __typename?: 'CartLine' }
+    | { __typename?: 'Checkout' }
+    | { __typename?: 'CheckoutLineItem' }
+    | { __typename?: 'Collection' }
+    | { __typename?: 'Comment' }
+    | { __typename?: 'ExternalVideo' }
+    | { __typename?: 'GenericFile' }
+    | { __typename?: 'Location' }
+    | { __typename?: 'MailingAddress' }
+    | { __typename?: 'MediaImage' }
+    | { __typename?: 'Menu' }
+    | { __typename?: 'MenuItem' }
+    | { __typename?: 'Metafield' }
+    | { __typename?: 'Metaobject' }
+    | { __typename?: 'Model3d' }
+    | { __typename?: 'Order' }
+    | { __typename?: 'Page' }
+    | { __typename?: 'Payment' }
+    | { __typename?: 'Product' }
+    | { __typename?: 'ProductOption' }
+    | {
+        __typename?: 'ProductVariant'
+        id: string
+        price: {
+          __typename?: 'MoneyV2'
+          amount: any
+          currencyCode: CurrencyCode
+        }
+        product: { __typename?: 'Product'; title: string }
+      }
+    | { __typename?: 'Shop' }
+    | { __typename?: 'ShopPolicy' }
+    | { __typename?: 'UrlRedirect' }
+    | { __typename?: 'Video' }
+    | null
+  >
+}
+
 export type GetVariantSellingPlansQueryVariables = Exact<{
   variantIds: Array<Scalars['ID']['input']> | Scalars['ID']['input']
 }>
@@ -9055,6 +9104,105 @@ useGetProductVariantsQuery.fetcher = (
   fetcher<GetProductVariantsQuery, GetProductVariantsQueryVariables>(
     client,
     GetProductVariantsDocument,
+    variables,
+    headers
+  )
+
+export const GetVariantPricesDocument = /*#__PURE__*/ `
+    query getVariantPrices($variantIds: [ID!]!) {
+  nodes(ids: $variantIds) {
+    ... on ProductVariant {
+      id
+      price {
+        amount
+        currencyCode
+      }
+      product {
+        title
+      }
+    }
+  }
+}
+    `
+
+export const useGetVariantPricesQuery = <
+  TData = GetVariantPricesQuery,
+  TError = unknown,
+>(
+  client: GraphQLClient,
+  variables: GetVariantPricesQueryVariables,
+  options?: Omit<
+    UseQueryOptions<GetVariantPricesQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseQueryOptions<GetVariantPricesQuery, TError, TData>['queryKey']
+  },
+  headers?: RequestInit['headers']
+) => {
+  return useQuery<GetVariantPricesQuery, TError, TData>({
+    queryKey: ['getVariantPrices', variables],
+    queryFn: fetcher<GetVariantPricesQuery, GetVariantPricesQueryVariables>(
+      client,
+      GetVariantPricesDocument,
+      variables,
+      headers
+    ),
+    ...options,
+  })
+}
+
+useGetVariantPricesQuery.getKey = (
+  variables: GetVariantPricesQueryVariables
+) => ['getVariantPrices', variables]
+
+export const useInfiniteGetVariantPricesQuery = <
+  TData = InfiniteData<GetVariantPricesQuery>,
+  TError = unknown,
+>(
+  client: GraphQLClient,
+  variables: GetVariantPricesQueryVariables,
+  options: Omit<
+    UseInfiniteQueryOptions<GetVariantPricesQuery, TError, TData>,
+    'queryKey'
+  > & {
+    queryKey?: UseInfiniteQueryOptions<
+      GetVariantPricesQuery,
+      TError,
+      TData
+    >['queryKey']
+  },
+  headers?: RequestInit['headers']
+) => {
+  return useInfiniteQuery<GetVariantPricesQuery, TError, TData>(
+    (() => {
+      const { queryKey: optionsQueryKey, ...restOptions } = options
+      return {
+        queryKey: optionsQueryKey ?? ['getVariantPrices.infinite', variables],
+        queryFn: (metaData) =>
+          fetcher<GetVariantPricesQuery, GetVariantPricesQueryVariables>(
+            client,
+            GetVariantPricesDocument,
+            { ...variables, ...(metaData.pageParam ?? {}) },
+            headers
+          )(),
+        ...restOptions,
+      }
+    })()
+  )
+}
+
+useInfiniteGetVariantPricesQuery.getKey = (
+  variables: GetVariantPricesQueryVariables
+) => ['getVariantPrices.infinite', variables]
+
+useGetVariantPricesQuery.fetcher = (
+  client: GraphQLClient,
+  variables: GetVariantPricesQueryVariables,
+  headers?: RequestInit['headers']
+) =>
+  fetcher<GetVariantPricesQuery, GetVariantPricesQueryVariables>(
+    client,
+    GetVariantPricesDocument,
     variables,
     headers
   )
