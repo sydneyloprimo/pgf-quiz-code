@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { useLocale, useTranslations } from 'next-intl'
+import { useTranslations } from 'next-intl'
 
 import { formatAgeText } from '@/components/quiz/helpers'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
@@ -19,7 +19,6 @@ interface QuizResultsHeaderProps {
 const QuizResultsHeader = ({ formData }: QuizResultsHeaderProps) => {
   const t = useTranslations('Quiz.resultsHeader')
   const tDiet = useTranslations('Quiz.diet')
-  const locale = useLocale()
 
   const name = formData.name || ''
   const age = formData.age || ''
@@ -46,7 +45,7 @@ const QuizResultsHeader = ({ formData }: QuizResultsHeaderProps) => {
       (option) => option.value === treatFrequency
     )?.label || tDiet('options.several')
 
-  const ageText = formatAgeText(age, locale, t)
+  const ageText = formatAgeText(age)
 
   return (
     <div
