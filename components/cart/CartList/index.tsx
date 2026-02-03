@@ -12,6 +12,7 @@ import {
   useCartLinesUpdateMutation,
   useCartLinesRemoveMutation,
   CartLineEdge,
+  SellingPlanAllocation,
 } from 'shopify/generated/graphql'
 
 import { Button } from '@/components/common/Button'
@@ -62,7 +63,23 @@ const Cart = ({ className }: CartProps) => {
   const { cart } = data || {}
   const { edges } = cart?.lines || {}
 
-  const isEmpty = !edges?.length
+  // Filter out lines with quantity 0 (Shopify sometimes returns these)
+  const validEdges = edges?.filter(({ node }) => node.quantity > 0) || []
+
+  // Debug: Log cart data
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Cart data:', {
+      cart,
+      edges,
+      validEdges,
+      validEdgesCount: validEdges.length,
+      totalQuantity: cart?.totalQuantity,
+      cartId,
+    })
+  }
+
+  // Use totalQuantity as the primary check, but also check validEdges as fallback
+  const isEmpty = (cart?.totalQuantity ?? 0) === 0 || validEdges.length === 0
   const isDisabled = isGetCartLoading || isRemoveLoading || isUpdateLoading
 
   const handleCheckoutClick = () => {
@@ -134,15 +151,27 @@ const Cart = ({ className }: CartProps) => {
               )}
             >
               <ul>
-                {edges?.map(
+                {validEdges.map(
                   (
-                    { node: { id, merchandise: productVariant, quantity } },
+                    {
+                      node: {
+                        id,
+                        merchandise: productVariant,
+                        quantity,
+                        attributes,
+                        sellingPlanAllocation,
+                      },
+                    },
                     index
                   ) => (
                     <CartProductCard
                       key={`${productVariant.id}-${productVariant.title}`}
                       productVariant={productVariant as ProductVariant}
                       quantity={quantity}
+                      attributes={attributes}
+                      sellingPlanAllocation={
+                        sellingPlanAllocation as SellingPlanAllocation | null
+                      }
                       onDeleteClick={() => onDeleteClick(id)}
                       onDecreaseClick={() => onDecreaseClick(id)}
                       onIncreaseClick={() => onIncreaseClick(id)}

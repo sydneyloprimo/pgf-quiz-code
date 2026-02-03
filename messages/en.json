@@ -62,6 +62,34 @@
       "subscribeButton": "Subscribe for {price} a day",
       "whatYoullGetTitle": "What you'll get:"
     },
+    "ShoppingCartPanel": {
+      "badgeFullMeal": "Full Meal",
+      "badgeSingleMeal": "Single Meal",
+      "badgeTopper": "Topper",
+      "checkoutButton": "Checkout Now",
+      "closeButton": "Close",
+      "closeButtonAriaLabel": "Close shopping cart panel",
+      "decreaseQuantity": "Decrease quantity",
+      "deleteButtonAriaLabel": "Delete {title} from cart",
+      "emptyState": "Your cart is empty",
+      "frequencyBiWeekly": "Bi-weekly",
+      "frequencyWeekly": "Weekly",
+      "increaseQuantity": "Increase quantity",
+      "loadingAriaLabel": "Updating cart item",
+      "panelAriaLabel": "Shopping cart panel",
+      "productDescriptionPlaceholder": "Description goes here lorem ipsum dolor sit amet",
+      "productImageAlt": "Image for {title}",
+      "recipeLamb": "Lamb",
+      "recipePancreatic": "Pancreatic",
+      "recipeTurkey": "Turkey",
+      "subscriptionDisplayFullMeal": " | Full Meal",
+      "subscriptionDisplayTopper": " | Topper",
+      "title": "Your Shopping Cart"
+    },
+    "FloatingCartButton": {
+      "openCartAriaLabel": "Open shopping cart",
+      "itemCountAriaLabel": "{count} items in cart"
+    },
     "ProductDetailPanel": {
       "addToCartButton": "Add to cart",
       "alaCarteTitle": "A la carte",
@@ -295,6 +323,7 @@
     "closeMenuAria": "Close menu",
     "contact": "Contact",
     "home": "Home",
+    "itemCountAriaLabel": "{count} items in cart",
     "logoAria": "Go to homepage",
     "openMenuAria": "Open menu",
     "ourFormulation": "Our Formulation",
@@ -652,7 +681,8 @@
       "purchaseAlaCarteHeading": "Purchase à la carte",
       "recipes": {
         "turkey": "Turkey",
-        "lamb": "Lamb"
+        "lamb": "Lamb",
+        "pancreatic": "Pancreatic"
       },
       "shipmentFrequencies": {
         "everyWeek": "Every Week",
@@ -685,9 +715,11 @@
           "flexibleSchedule": "Flexible schedule — pause, skip, or cancel anytime."
         },
         "lambDescription": "Customized health benefits that specifically target concerns like dry skin and lackluster fur, ensuring your pet looks and feels their best.",
-        "turkeyDescription": "Customized health benefits that specifically target concerns like dry skin and lackluster fur, ensuring your pet looks and feels their best.",
-        "alaCartePrice": "$19.79 / 2 kg"
+        "turkeyDescription": "Customized health benefits that specifically target concerns like dry skin and lackluster fur, ensuring your pet looks and feels their best."
       },
+      "subscribeButtonAlreadyInCart": "Already in cart",
+      "subscribeButtonSwitchToFullMeal": "Switch to Full Meal Plan for {price} a day",
+      "subscribeButtonSwitchToTopper": "Switch to Topper Plan for {price} a day",
       "footer": {
         "title": "Benefits",
         "benefits": {

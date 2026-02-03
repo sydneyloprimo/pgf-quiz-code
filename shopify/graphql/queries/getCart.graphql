@@ -3,6 +3,7 @@ query getCart($id: ID!, $first: Int = 100) {
     id
     lines(first: $first) {
       edges {
+        cursor
         node {
           id
           attributes {
