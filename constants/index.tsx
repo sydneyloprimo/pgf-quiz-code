@@ -11,7 +11,7 @@ export const NAV_LINKS: NavLink[] = [
   { href: Routes.home, labelKey: 'home' },
   { href: Routes.formulation, labelKey: 'ourFormulation' },
   { href: Routes.about, labelKey: 'about' },
-  { href: Routes.contact, labelKey: 'contact' },
+  { href: Routes.recipes, labelKey: 'ourRecipes' },
 ]
 
 // Tailwind default md breakpoint is 768px
@@ -656,6 +656,7 @@ export const PRODUCT_MODE = {
 export const RECIPE_TYPE = {
   turkey: 'turkey',
   lamb: 'lamb',
+  seafood: 'seafood',
 } as const
 
 // Shipment frequencies
@@ -742,4 +743,13 @@ export const INGREDIENTS_DATA: IngredientData[] = [
     nameKey: 'soybeans.name',
     descriptionKey: 'soybeans.description',
   },
+] as const
+
+// Recipe page constants
+export type RecipeTabType = 'turkey' | 'lamb' | 'seafood'
+
+export const RECIPE_TABS: RecipeTabType[] = [
+  'turkey',
+  'lamb',
+  'seafood',
 ] as const
