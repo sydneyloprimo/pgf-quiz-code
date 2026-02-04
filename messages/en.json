@@ -62,34 +62,6 @@
       "subscribeButton": "Subscribe for {price} a day",
       "whatYoullGetTitle": "What you'll get:"
     },
-    "ShoppingCartPanel": {
-      "badgeFullMeal": "Full Meal",
-      "badgeSingleMeal": "Single Meal",
-      "badgeTopper": "Topper",
-      "checkoutButton": "Checkout Now",
-      "closeButton": "Close",
-      "closeButtonAriaLabel": "Close shopping cart panel",
-      "decreaseQuantity": "Decrease quantity",
-      "deleteButtonAriaLabel": "Delete {title} from cart",
-      "emptyState": "Your cart is empty",
-      "frequencyBiWeekly": "Bi-weekly",
-      "frequencyWeekly": "Weekly",
-      "increaseQuantity": "Increase quantity",
-      "loadingAriaLabel": "Updating cart item",
-      "panelAriaLabel": "Shopping cart panel",
-      "productDescriptionPlaceholder": "Description goes here lorem ipsum dolor sit amet",
-      "productImageAlt": "Image for {title}",
-      "recipeLamb": "Lamb",
-      "recipePancreatic": "Pancreatic",
-      "recipeTurkey": "Turkey",
-      "subscriptionDisplayFullMeal": " | Full Meal",
-      "subscriptionDisplayTopper": " | Topper",
-      "title": "Your Shopping Cart"
-    },
-    "FloatingCartButton": {
-      "openCartAriaLabel": "Open shopping cart",
-      "itemCountAriaLabel": "{count} items in cart"
-    },
     "ProductDetailPanel": {
       "addToCartButton": "Add to cart",
       "alaCarteTitle": "A la carte",
@@ -323,27 +295,17 @@
     "closeMenuAria": "Close menu",
     "contact": "Contact",
     "home": "Home",
-    "itemCountAriaLabel": "{count} items in cart",
     "logoAria": "Go to homepage",
     "openMenuAria": "Open menu",
     "ourFormulation": "Our Formulation",
-    "ourRecipes": "Our Recipes",
     "profileAria": "User profile",
     "searchAria": "Search"
   },
   "Navigation": {
     "about": "About",
+    "contact": "Contact",
     "home": "Home",
-    "ourFormulation": "Our Formulation",
-    "ourRecipes": "Our Recipes"
-  },
-  "Recipes": {
-    "Hero": {
-      "backgroundAlt": "Decorative background for recipes page",
-      "clinicallyApprovedAlt": "Clinically approved certification badge",
-      "logoAlt": "Purely Golden Foods decorative logo",
-      "title": "Recipe Science"
-    }
+    "ourFormulation": "Our Formulation"
   },
   "Orders": {
     "emptyState": {
@@ -690,8 +652,7 @@
       "purchaseAlaCarteHeading": "Purchase à la carte",
       "recipes": {
         "turkey": "Turkey",
-        "lamb": "Lamb",
-        "pancreatic": "Pancreatic"
+        "lamb": "Lamb"
       },
       "shipmentFrequencies": {
         "everyWeek": "Every Week",
@@ -724,11 +685,9 @@
           "flexibleSchedule": "Flexible schedule — pause, skip, or cancel anytime."
         },
         "lambDescription": "Customized health benefits that specifically target concerns like dry skin and lackluster fur, ensuring your pet looks and feels their best.",
-        "turkeyDescription": "Customized health benefits that specifically target concerns like dry skin and lackluster fur, ensuring your pet looks and feels their best."
+        "turkeyDescription": "Customized health benefits that specifically target concerns like dry skin and lackluster fur, ensuring your pet looks and feels their best.",
+        "alaCartePrice": "$19.79 / 2 kg"
       },
-      "subscribeButtonAlreadyInCart": "Already in cart",
-      "subscribeButtonSwitchToFullMeal": "Switch to Full Meal Plan for {price} a day",
-      "subscribeButtonSwitchToTopper": "Switch to Topper Plan for {price} a day",
       "footer": {
         "title": "Benefits",
         "benefits": {
@@ -866,9 +825,26 @@
       ]
     }
   },
+  "BlogPost": {
+    "backToBlog": "Back to Blog",
+    "buildPlanButton": "Build Your Dog's Plan",
+    "clinicalTakeaway": "Clinical Takeaway",
+    "disclaimer": "Educational only. Not medical advice. Consult your veterinarian for individual guidance.",
+    "readMore": "Read more",
+    "references": "References",
+    "referencesDescription": "Includes peer-reviewed sources when available; some topics rely on established clinical practice",
+    "reviewedBy": "Reviewed {date}",
+    "showReferences": "Show references",
+    "talkToNutritionists": "Talk to Our Vet Nutritionists",
+    "writtenBy": "Written by"
+  },
+  "BlogPostCTA": {
+    "description": "Take our quiz where we get to know your dog to recommend the perfect meal plan according to their unique profile.",
+    "title": "Ready to Optimize Your Dog's Nutrition?"
+  },
   "PromiseOfCareAlert": {
-    "message": "Our Promise of Care: Every recipe is formulated to meet pharmaceutical grade standards for quality and digestibility. If your dog doesn't respond as expected, our nutrition team will work with you to make it right.",
-    "closeButton": "Close alert"
+    "closeButton": "Close alert",
+    "message": "Our Promise of Care: Every recipe is formulated to meet pharmaceutical grade standards for quality and digestibility. If your dog doesn't respond as expected, our nutrition team will work with you to make it right."
   },
   "Formulation": {
     "Hero": {
