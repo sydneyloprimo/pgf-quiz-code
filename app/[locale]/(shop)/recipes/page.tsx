@@ -1,6 +1,7 @@
 'use client'
 
 import {
+  ReadyToBuildYourPlanSection,
   RecipeInfoSection,
   RecipeTabsSection,
   RecipesHeroSection,
@@ -14,6 +15,7 @@ export default function RecipesPage() {
         <RecipesHeroSection />
         <RecipeTabsSection />
         <RecipeInfoSection />
+        <ReadyToBuildYourPlanSection />
       </main>
     </RecipesProvider>
   )
