@@ -327,14 +327,23 @@
     "logoAria": "Go to homepage",
     "openMenuAria": "Open menu",
     "ourFormulation": "Our Formulation",
+    "ourRecipes": "Our Recipes",
     "profileAria": "User profile",
     "searchAria": "Search"
   },
   "Navigation": {
     "about": "About",
-    "contact": "Contact",
     "home": "Home",
-    "ourFormulation": "Our Formulation"
+    "ourFormulation": "Our Formulation",
+    "ourRecipes": "Our Recipes"
+  },
+  "Recipes": {
+    "Hero": {
+      "backgroundAlt": "Decorative background for recipes page",
+      "clinicallyApprovedAlt": "Clinically approved certification badge",
+      "logoAlt": "Purely Golden Foods decorative logo",
+      "title": "Recipe Science"
+    }
   },
   "Orders": {
     "emptyState": {
