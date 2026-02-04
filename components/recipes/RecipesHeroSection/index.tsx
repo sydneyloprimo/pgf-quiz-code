@@ -10,7 +10,7 @@ const RecipesHeroSection = () => {
       <div className="absolute top-8 right-8 opacity-10 hidden md:block">
         <Image
           src="/images/logo-decorative.svg"
-          alt=""
+          alt={t('logoAlt')}
           width={200}
           height={200}
           aria-hidden="true"
@@ -21,10 +21,9 @@ const RecipesHeroSection = () => {
       <div className="flex justify-center mb-6">
         <Image
           src="/icons/clinically-approved-decoration.svg"
-          alt=""
+          alt={t('clinicallyApprovedAlt')}
           width={160}
           height={55}
-          aria-hidden="true"
         />
       </div>
 

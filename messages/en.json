@@ -340,6 +340,7 @@
   "Recipes": {
     "Hero": {
       "backgroundAlt": "Decorative background for recipes page",
+      "clinicallyApprovedAlt": "Clinically approved certification badge",
       "logoAlt": "Purely Golden Foods decorative logo",
       "title": "Recipe Science"
     }
