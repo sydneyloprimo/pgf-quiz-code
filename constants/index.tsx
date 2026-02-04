@@ -753,3 +753,5 @@ export const RECIPE_TABS: RecipeTabType[] = [
   'lamb',
   'seafood',
 ] as const
+
+export const BENEFITS_COUNT = 3
