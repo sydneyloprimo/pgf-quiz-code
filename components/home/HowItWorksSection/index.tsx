@@ -1,6 +1,6 @@
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { StepCard } from '@/components/home/HowItWorksSection/StepCard'
 import { HOW_IT_WORKS_STEPS } from '@/constants'
 import { cn } from '@/utils/cn'
@@ -26,7 +26,7 @@ const HowItWorksSection = () => {
     >
       {/* Background Texture */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
-        <Image
+        <ContentfulImage
           src="/images/home/how-it-works-texture.png"
           alt=""
           fill

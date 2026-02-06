@@ -1,6 +1,6 @@
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { formatAgeText } from '@/components/quiz/helpers'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import {
@@ -56,7 +56,7 @@ const QuizResultsHeader = ({ formData }: QuizResultsHeaderProps) => {
       )}
     >
       <div className="relative shrink-0">
-        <Image
+        <ContentfulImage
           src="/images/quiz-results-illustration.svg"
           alt={t('imageAlt')}
           width={QUIZ_RESULTS_ILLUSTRATION_WIDTH}

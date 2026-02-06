@@ -1,6 +1,6 @@
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { GALLERY_IMAGES } from '@/constants'
 
 const GallerySection = () => {
@@ -20,7 +20,7 @@ const GallerySection = () => {
             key={index}
             className="relative w-[80vw] h-134 shrink-0 snap-start overflow-hidden"
           >
-            <Image
+            <ContentfulImage
               src={image.src}
               alt={image.alt}
               fill
@@ -41,7 +41,7 @@ const GallerySection = () => {
       <div className="hidden lg:flex flex-row gap-10 w-full">
         {images.map((image, index) => (
           <div key={index} className="relative flex-1 h-134 overflow-hidden">
-            <Image
+            <ContentfulImage
               src={image.src}
               alt={image.alt}
               fill

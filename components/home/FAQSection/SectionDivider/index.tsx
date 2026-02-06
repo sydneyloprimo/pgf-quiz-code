@@ -1,5 +1,6 @@
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 
 const SectionDivider = () => {
   const t = useTranslations('Home.FAQ')
@@ -7,7 +8,7 @@ const SectionDivider = () => {
   return (
     <div className="flex items-center justify-center w-full gap-4 md:gap-6">
       <div className="flex-1 h-px bg-secondary-300" />
-      <Image
+      <ContentfulImage
         src="/icons/faq-divider.svg"
         alt={t('decorativeDividerAlt')}
         width={43}

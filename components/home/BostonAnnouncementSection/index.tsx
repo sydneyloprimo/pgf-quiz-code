@@ -1,9 +1,9 @@
 'use client'
 
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { WaitlistModal } from '@/components/common/WaitlistModal'
 import { useModal } from '@/hooks/useModal'
 
@@ -16,7 +16,7 @@ const BostonAnnouncementSection = () => {
       <section className="w-full px-5 md:px-24 py-20">
         <div className="w-full relative min-h-[500px] md:min-h-[663px] flex items-center justify-center px-5 py-12">
           {/* Background Image */}
-          <Image
+          <ContentfulImage
             src="/images/home/boston-announcement-bg.jpg"
             alt={t('backgroundImageAlt')}
             fill

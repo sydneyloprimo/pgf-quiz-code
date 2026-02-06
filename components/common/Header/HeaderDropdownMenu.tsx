@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import React, { Dispatch, SetStateAction } from 'react'
@@ -6,6 +5,7 @@ import { useCookies } from 'react-cookie'
 import { toast } from 'react-toastify'
 import { useMediaQuery } from 'usehooks-ts'
 
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import {
   DropdownItem,
   DropdownMenu,
@@ -77,12 +77,22 @@ const HeaderDropdownMenu = ({
         <span className="hidden md:inline">{t('myAccount')}</span>
         <div className="hidden md:block">
           {isOpen ? (
-            <Image src="/icons/chevron-up.svg" alt="" width={14} height={8} />
+            <ContentfulImage
+              src="/icons/chevron-up.svg"
+              alt=""
+              width={14}
+              height={8}
+            />
           ) : (
-            <Image src="/icons/chevron-down.svg" alt="" width={14} height={8} />
+            <ContentfulImage
+              src="/icons/chevron-down.svg"
+              alt=""
+              width={14}
+              height={8}
+            />
           )}
         </div>
-        <Image
+        <ContentfulImage
           className="md:hidden"
           alt={t('hamburgerIcon')}
           src="/icons/hamburger.svg"

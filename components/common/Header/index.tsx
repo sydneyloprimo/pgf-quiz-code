@@ -1,12 +1,12 @@
 'use client'
 import debounce from 'lodash/debounce'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import React, { useCallback, useState } from 'react'
 
 import HeaderDropdownMenu from './HeaderDropdownMenu'
 
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import Input from '@/components/common/Input'
 import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
@@ -53,7 +53,7 @@ const Header = () => {
       >
         <div>
           <Link href={Routes.home} data-qa="home-logo">
-            <Image
+            <ContentfulImage
               className="hidden md:block"
               src={images.logoWhite}
               alt={t('logoDesktop')}
@@ -61,7 +61,7 @@ const Header = () => {
               height={34}
               priority
             />
-            <Image
+            <ContentfulImage
               src={images.logoWhite}
               className="md:hidden"
               alt={t('logoMobile')}
@@ -86,7 +86,7 @@ const Header = () => {
             className="btn-primary mx-2 !text-sm h-8 md:h-10 !rounded-sm md:!rounded-md flex gap-2 cursor-default"
           >
             <span className="hidden md:inline">{t('shoppingCart')}</span>
-            <Image
+            <ContentfulImage
               src={images.cartIcon}
               alt={t('cartIcon')}
               width={16}

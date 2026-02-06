@@ -76,6 +76,30 @@ This will create:
 - 5 blog posts about healthy fresh food for dogs, each with relevant categories
 - All content will be published and immediately available
 
+## Image sync and delete
+
+These scripts sync images from `public/images` and `public/icons` to Contentful and optionally delete them.
+
+**Required env (in `.env.local`):** `CONTENTFUL_SPACE_ID`, `CONTENTFUL_MANAGEMENT_TOKEN`.
+
+### Sync images to Contentful
+
+Uploads all images under `public/images/**` and `public/icons/**` to Contentful, grouped by tags (e.g. `page:Home`, `page:About`, `Icons`). Asset title is set to the canonical public path (e.g. `/images/home/hero-bg.jpg`) for app lookup.
+
+```bash
+yarn contentful:sync-images
+```
+
+Editors can filter assets in Contentful by tag (e.g. `page:Home`) to see all images for a page together.
+
+### Delete image assets only
+
+Removes only image assets that were synced by the sync script (assets with our page/Icons tags). Does not delete entries or other assets.
+
+```bash
+yarn contentful:delete-images
+```
+
 ## Creating Content Manually
 
 Alternatively, you can create content manually:

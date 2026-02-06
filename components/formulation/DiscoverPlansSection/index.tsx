@@ -1,7 +1,7 @@
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { Routes } from '@/types/enums/routes'
 
 const DiscoverPlansSection = () => {
@@ -16,7 +16,7 @@ const DiscoverPlansSection = () => {
             className="absolute inset-0 pointer-events-none"
             aria-hidden="true"
           >
-            <Image
+            <ContentfulImage
               src="/images/formulation/discover-plans-bg-new.jpg"
               alt={t('backgroundAlt')}
               fill

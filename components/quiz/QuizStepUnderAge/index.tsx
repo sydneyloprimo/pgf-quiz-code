@@ -1,9 +1,9 @@
 'use client'
 
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { ArrowLeftIcon } from '@/components/common/Icon'
 import { WaitlistModal } from '@/components/common/WaitlistModal'
 import {
@@ -39,7 +39,7 @@ const QuizStepUnderAge = ({
       >
         <div className="flex flex-col gap-3 items-center w-full">
           <div className="relative shrink-0 h-36 w-48">
-            <Image
+            <ContentfulImage
               src="/images/quiz-dog-illustration.png"
               alt={t('imageAlt')}
               width={QUIZ_DOG_ILLUSTRATION_SOURCE_WIDTH}

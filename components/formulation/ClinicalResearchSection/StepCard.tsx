@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 
 interface StepCardProps {
   number: string
@@ -29,7 +29,7 @@ const StepCard = ({
       <div className="font-display text-8xl leading-[100px] text-quaternary-800 text-center tracking-tight">
         {number}
       </div>
-      <Image
+      <ContentfulImage
         src={moleculeSrc}
         alt=""
         width={189}
@@ -59,7 +59,7 @@ const StepCard = ({
           className="flex-none"
           style={{ transform: `rotate(${imageRotation}deg)` }}
         >
-          <Image
+          <ContentfulImage
             src={imageSrc}
             alt=""
             width={136}

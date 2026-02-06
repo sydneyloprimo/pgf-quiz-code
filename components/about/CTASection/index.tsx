@@ -1,7 +1,7 @@
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { Routes } from '@/types/enums/routes'
 
 const CTASection = () => {
@@ -12,7 +12,7 @@ const CTASection = () => {
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div className="absolute inset-0 bg-quaternary-800" />
         <div className="absolute inset-0 mix-blend-overlay opacity-50 overflow-hidden">
-          <Image
+          <ContentfulImage
             src="/images/about/cta-bg.jpg"
             alt=""
             fill

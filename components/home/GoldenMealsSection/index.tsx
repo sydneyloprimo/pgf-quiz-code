@@ -1,7 +1,7 @@
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
 
@@ -27,7 +27,7 @@ const GoldenMealsSection = () => {
       >
         {/* Background Image */}
         <div className="absolute inset-0 translate-y-15 md:translate-y-0">
-          <Image
+          <ContentfulImage
             src="/images/home/golden-meals-bg.png"
             alt={t('imageAlt')}
             fill

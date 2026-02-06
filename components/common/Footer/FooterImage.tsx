@@ -1,5 +1,4 @@
-import Image from 'next/image'
-
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { cn } from '@/utils/cn'
 
 const FooterImage = () => {
@@ -12,7 +11,7 @@ const FooterImage = () => {
         'order-2 lg:order-0'
       )}
     >
-      <Image
+      <ContentfulImage
         src="/images/home/footer-dog.jpg"
         alt=""
         fill

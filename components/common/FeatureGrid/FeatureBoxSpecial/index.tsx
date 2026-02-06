@@ -1,5 +1,4 @@
-import Image from 'next/image'
-
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { cn } from '@/utils/cn'
 
 interface FeatureBoxSpecialProps {
@@ -16,7 +15,7 @@ const FeatureBoxSpecial = ({ isEven }: FeatureBoxSpecialProps) => (
     )}
   >
     <div className="relative w-72 h-72">
-      <Image
+      <ContentfulImage
         src="/images/home/dog-standing.png"
         alt=""
         fill

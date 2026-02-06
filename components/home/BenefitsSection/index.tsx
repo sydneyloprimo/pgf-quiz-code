@@ -1,9 +1,9 @@
 'use client'
 
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { useCallback, useState } from 'react'
 
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { BenefitPointerIcon } from '@/components/common/Icon'
 import { BENEFITS_DATA } from '@/constants'
 import { cn } from '@/utils/cn'
@@ -119,7 +119,7 @@ const BenefitsSection = () => {
 
         {/* Right Content - Image with Pointers */}
         <div className="w-full lg:w-1/2 relative min-h-96 lg:min-h-0 overflow-hidden order-1 lg:order-2">
-          <Image
+          <ContentfulImage
             src="/images/home/benefits-dog.jpg"
             alt={t('imageAlt')}
             fill

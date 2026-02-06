@@ -1,5 +1,6 @@
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 
 const LoginHero = () => {
   const t = useTranslations('SignIn')
@@ -8,7 +9,7 @@ const LoginHero = () => {
     <div className="hidden lg:flex flex-1 flex-col items-center justify-center max-w-xl min-w-[335px] px-9 py-24 gap-12 bg-quaternary-800 relative z-2">
       <div className="flex flex-col items-center gap-12 w-full">
         <div className="flex justify-center">
-          <Image
+          <ContentfulImage
             src="/images/login-logo-full.svg"
             alt={t('logoAlt')}
             width={156}

@@ -1,9 +1,10 @@
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import { STEP_STATIC_DATA, VALUE_PROP_COUNT } from './constants'
 import { StepCard } from './StepCard'
 import { ValuePropCard } from './ValuePropCard'
+
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 
 const ClinicalResearchSection = () => {
   const t = useTranslations('Formulation.Research')
@@ -34,7 +35,7 @@ const ClinicalResearchSection = () => {
     <section className="relative w-full bg-neutral-400 px-5 lg:px-24 py-16 lg:py-[200px] flex flex-col gap-12 items-center justify-center">
       {/* Background Image */}
       <div className="absolute h-screen left-1/2 top-0 -translate-x-1/2 w-full pointer-events-none">
-        <Image
+        <ContentfulImage
           src="/images/formulation/research-bg-new.png"
           alt={t('backgroundAlt')}
           fill

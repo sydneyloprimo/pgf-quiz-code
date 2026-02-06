@@ -1,6 +1,6 @@
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { EXPERT_ITEMS } from '@/constants'
 import type { ExpertsSectionContent } from '@/contentful/experts'
 import { cn } from '@/utils/cn'
@@ -55,7 +55,7 @@ const ExpertsSection = ({ content }: ExpertsSectionProps) => {
               >
                 {expert.imageSrc ? (
                   <div className="relative w-full h-96 md:h-140 z-20">
-                    <Image
+                    <ContentfulImage
                       src={expert.imageSrc}
                       alt={expert.imageAlt}
                       fill

@@ -1,5 +1,6 @@
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 
 const LeadershipSection = () => {
   const t = useTranslations('About.Leadership')
@@ -7,7 +8,7 @@ const LeadershipSection = () => {
   return (
     <section className="w-full pt-14 px-5 lg:px-24 flex flex-col lg:flex-row gap-0 items-stretch justify-start">
       <div className="w-full lg:w-2/5 shrink-0 relative overflow-hidden aspect-square lg:aspect-auto lg:h-[765px]">
-        <Image
+        <ContentfulImage
           src="/images/about/leadership.jpg"
           alt={t('imageAlt')}
           fill
@@ -37,7 +38,7 @@ const LeadershipSection = () => {
           className="absolute right-0 bottom-0 w-40 h-28 rotate-110"
           aria-hidden="true"
         >
-          <Image
+          <ContentfulImage
             src="/icons/leadership-signature.svg"
             alt={t('signature')}
             fill

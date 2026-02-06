@@ -1,7 +1,7 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { Routes } from '@/types/enums/routes'
 
 interface LoginCloseButtonProps {
@@ -20,7 +20,7 @@ const LoginCloseButton = ({
       aria-label={t('closeButtonAriaLabel')}
     >
       <div className="relative size-6">
-        <Image
+        <ContentfulImage
           src="/icons/cross.svg"
           alt=""
           width={24}
