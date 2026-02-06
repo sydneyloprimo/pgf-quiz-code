@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+ 
 require('dotenv').config({ path: '.env.local' })
 const contentful = require('contentful-management')
 

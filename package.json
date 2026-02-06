@@ -12,7 +12,8 @@
     "generate": "graphql-codegen --config codegen.yml",
     "prettier": "prettier --write .",
     "prepare": "husky install",
-    "contentful:sync": "npx tsx scripts/syncEnJsonToContentful.ts"
+    "contentful:sync": "npx tsx scripts/syncEnJsonToContentful.ts",
+    "contentful:clean": "npx tsx scripts/cleanContentful.ts"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^16.1.6",
