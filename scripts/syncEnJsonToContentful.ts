@@ -91,6 +91,12 @@ interface EnvironmentLike {
       publish(): Promise<unknown>
     }>
   }>
+  getEntry(entryId: string): Promise<{
+    fields: Record<string, Record<string, unknown>>
+    update(): Promise<{
+      publish(): Promise<unknown>
+    }>
+  }>
   createEntry(
     contentTypeId: string,
     data: { fields: Record<string, Record<string, unknown>> }
@@ -343,7 +349,21 @@ async function createSectionFromObject(
     })
 
     if (existing.items.length > 0) {
-      console.log(`Section entry exists: ${path.join('.')}`)
+      const entry = await environment.getEntry(entryId)
+      entry.fields.key = { [CONTENTFUL_LOCALE]: key }
+      entry.fields.name = { [CONTENTFUL_LOCALE]: name }
+      entry.fields.content = { [CONTENTFUL_LOCALE]: content }
+      entry.fields.sections = {
+        [CONTENTFUL_LOCALE]: sectionLinks.map((link) => ({ sys: link.sys })),
+      }
+      if (isRootSection) {
+        entry.fields.sectionTag = {
+          [CONTENTFUL_LOCALE]: SECTION_TAG_ROOT,
+        }
+      }
+      const updated = await entry.update()
+      await updated.publish()
+      console.log(`Updated section: ${path.join('.')} (${name})`)
       return entryId
     }
 

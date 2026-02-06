@@ -43,15 +43,17 @@ interface SectionEntry {
 
 /**
  * Builds a nested object from a Section entry and its resolved child entries.
+ * Uses contentfulLocale when reading fields so we match the API response
+ * (Delivery API may return fields keyed by locale e.g. "en-US").
  */
 function sectionToNestedObject(
   entry: SectionEntry,
   entryMap: Map<string, SectionEntry>,
-  locale: string
+  contentfulLocale: string
 ): Record<string, unknown> {
-  const key = getLocalizedField(entry.fields.key, locale)
-  const content = getLocalizedField(entry.fields.content, locale)
-  const sections = getLocalizedField(entry.fields.sections, locale)
+  const key = getLocalizedField(entry.fields.key, contentfulLocale)
+  const content = getLocalizedField(entry.fields.content, contentfulLocale)
+  const sections = getLocalizedField(entry.fields.sections, contentfulLocale)
 
   const result: Record<string, unknown> = {}
 
@@ -76,9 +78,16 @@ function sectionToNestedObject(
       if (!id) continue
       const childEntry = entryMap.get(id)
       if (!childEntry) continue
-      const childKey = getLocalizedField(childEntry.fields.key, locale)
+      const childKey = getLocalizedField(
+        childEntry.fields.key,
+        contentfulLocale
+      )
       if (typeof childKey !== 'string') continue
-      result[childKey] = sectionToNestedObject(childEntry, entryMap, locale)
+      result[childKey] = sectionToNestedObject(
+        childEntry,
+        entryMap,
+        contentfulLocale
+      )
     }
   }
 
@@ -136,25 +145,36 @@ export async function getContentfulCopyMap(
   const contentfulLocale = CONTENTFUL_LOCALE_MAP[locale] ?? locale
 
   try {
-    const response = await contentfulClient.getEntries({
-      content_type: SECTION_CONTENT_TYPE_ID,
-      locale: contentfulLocale,
-      include: 10,
-      limit: 1000,
-    })
-
     const entryMap = new Map<string, SectionEntry>()
     const linkedIds = new Set<string>()
+    const LIMIT = 100
+    let skip = 0
+    let total: number
 
-    const allEntries = [
-      ...response.items,
-      ...(response.includes?.Entry ?? []),
-    ] as unknown as SectionEntry[]
-    for (const entry of allEntries) {
-      entryMap.set(entry.sys.id, entry)
-    }
+    do {
+      const response = await contentfulClient.getEntries({
+        content_type: SECTION_CONTENT_TYPE_ID,
+        locale: contentfulLocale,
+        include: 10,
+        limit: LIMIT,
+        skip,
+      })
+      total = response.total ?? 0
+      const allEntries = [
+        ...response.items,
+        ...(response.includes?.Entry ?? []),
+      ] as unknown as SectionEntry[]
+      for (const entry of allEntries) {
+        entryMap.set(entry.sys.id, entry)
+      }
+      skip += LIMIT
+    } while (skip < total)
+
     for (const entry of entryMap.values()) {
-      const sections = getLocalizedField(entry.fields.sections, locale)
+      const sections = getLocalizedField(
+        entry.fields.sections,
+        contentfulLocale
+      )
       if (sections && Array.isArray(sections)) {
         for (const ref of sections) {
           const id =
@@ -172,9 +192,13 @@ export async function getContentfulCopyMap(
     for (const rootId of rootIds) {
       const rootEntry = entryMap.get(rootId)
       if (!rootEntry) continue
-      const rootKey = getLocalizedField(rootEntry.fields.key, locale)
+      const rootKey = getLocalizedField(rootEntry.fields.key, contentfulLocale)
       if (typeof rootKey !== 'string') continue
-      nested[rootKey] = sectionToNestedObject(rootEntry, entryMap, locale)
+      nested[rootKey] = sectionToNestedObject(
+        rootEntry,
+        entryMap,
+        contentfulLocale
+      )
     }
 
     return flattenObject(nested)
