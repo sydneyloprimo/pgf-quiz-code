@@ -61,7 +61,6 @@ const MainNav = () => {
       label: t('ourFormulation'),
     },
     { key: 'about', href: Routes.about, label: t('aboutUs') },
-    { key: 'contact', href: Routes.contact, label: t('contact') },
   ]
 
   const isActiveLink = (href: string) => {
@@ -111,13 +110,9 @@ const MainNav = () => {
         >
           <UserIcon className="size-5" />
         </Link>
-        <Link
-          href={Routes.cart}
-          className="p-3 text-neutral-white hover:text-secondary-400"
-          aria-label={t('cartAria')}
-        >
+        <span className="p-3 text-neutral-white cursor-default" aria-hidden>
           <ShoppingCartIcon className="size-5" />
-        </Link>
+        </span>
 
         {/* Mobile Menu Toggle */}
         <button

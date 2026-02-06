@@ -11,20 +11,6 @@
     "password": "Password",
     "passwordPlaceholder": "Type your password"
   },
-  "Cart": {
-    "checkoutButton": "Go to checkout",
-    "decreaseQuantity": "Decrease quantity",
-    "deleteButton": "Remove item",
-    "emptyState": {
-      "description": "Looks like you have not added anything to your cart.",
-      "exploreButton": "Go explore products",
-      "title": "Your cart is empty"
-    },
-    "increaseQuantity": "Increase quantity",
-    "maxStock": "There's no more stock available",
-    "title": "My shopping cart",
-    "total": "Total"
-  },
   "Common": {
     "ConciergeLink": {
       "emailAriaLabel": "Send an email to our concierge",
@@ -83,6 +69,9 @@
       "thumbnailAriaLabel": "Select thumbnail {number}",
       "topperTitle": "Topper"
     },
+    "ShoppingCartPanel": {
+      "oneTimePurchase": "One-time purchase"
+    },
     "Toast": {
       "Error": {
         "iconAlt": "Error icon",
@@ -111,24 +100,10 @@
       "successImageAlt": "Success checkmark icon"
     }
   },
-  "Detail": {
-    "addToCart": "Add to cart",
-    "availability": "({count} available)",
-    "errorMessage": "There was an error, try again later.",
-    "outOfStock": "Out of stock",
-    "productDescription": "Product description",
-    "quantity": "Quantity",
-    "successMessage": "{title} was added to your cart.",
-    "variant": "Variant"
-  },
   "Footer": {
     "emailAria": "Enter your email address",
     "emailPlaceholder": "Type your email here",
     "footerNavAria": "Footer navigation",
-    "linkAbout": "About Us",
-    "linkContact": "Contact information",
-    "linkHome": "Home",
-    "linkRecipe": "Our Recipe",
     "logoAria": "Go to homepage",
     "newsletterDescription": "Get early access to clinical updates, expert insights, and exclusive product drops.",
     "newsletterTitle": "Join our waitlist and newsletter",
@@ -145,7 +120,6 @@
     "logoMobile": "logo mobile",
     "logout": "Log out",
     "myAccount": "My Account",
-    "myOrders": "My Orders",
     "myProfile": "My Profile",
     "searchPlaceholder": "Search for products",
     "shoppingCart": "Shopping cart",
@@ -293,27 +267,16 @@
     "ariaLabel": "Main navigation",
     "cartAria": "Shopping cart",
     "closeMenuAria": "Close menu",
-    "contact": "Contact",
     "home": "Home",
     "logoAria": "Go to homepage",
     "openMenuAria": "Open menu",
     "ourFormulation": "Our Formulation",
-    "profileAria": "User profile",
-    "searchAria": "Search"
+    "profileAria": "User profile"
   },
   "Navigation": {
     "about": "About",
-    "contact": "Contact",
     "home": "Home",
     "ourFormulation": "Our Formulation"
-  },
-  "Orders": {
-    "emptyState": {
-      "description": "Looks like you have not ordered anything yet.",
-      "exploreButton": "Go explore products",
-      "title": "Your orders are empty"
-    },
-    "title": "My orders"
   },
   "Profile": {
     "accountCreated": "Account created on {date}",
@@ -711,29 +674,6 @@
         }
       }
     }
-  },
-  "Search": {
-    "FilterPanel": {
-      "buttonAlt": "Select filter",
-      "category": "Category",
-      "clearFilters": "Clear Filters",
-      "condition": "Condition",
-      "filters": "Filters",
-      "max": "Max",
-      "min": "Min",
-      "new": "New",
-      "price": "Price",
-      "refurbished": "Refurbished",
-      "seeResults": "See results",
-      "title": "Your filters will appear here.",
-      "typeMax": "Type maximum",
-      "typeMin": "Type minimum",
-      "used": "Used"
-    },
-    "noResults": "No results found for search term {term}",
-    "noResultsGeneric": "No results found",
-    "search": "Search",
-    "searchTerms": "You searched for: {term}"
   },
   "SignIn": {
     "accountQuestion": "You don't have an account?",

@@ -11,7 +11,6 @@ export const NAV_LINKS: NavLink[] = [
   { href: Routes.home, labelKey: 'home' },
   { href: Routes.formulation, labelKey: 'ourFormulation' },
   { href: Routes.about, labelKey: 'about' },
-  { href: Routes.contact, labelKey: 'contact' },
 ]
 
 // Blog index
