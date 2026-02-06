@@ -66,6 +66,16 @@ function keyPathToEntryId(path: string[]): string {
   )
 }
 
+/** Keys we skip syncing to Contentful (a11y: aria, alt, etc.). */
+function isA11yKey(key: string): boolean {
+  const lower = key.toLowerCase()
+  return (
+    lower.includes('aria') || lower.includes('alt') || lower.includes('a11y')
+  )
+}
+
+const SECTION_TAG_ROOT = 'root'
+
 interface EnvironmentLike {
   getContentTypes(): Promise<{
     items: Array<{ sys: { id: string; publishedAt?: string | null } }>
@@ -113,10 +123,45 @@ async function ensureSectionContentType(
   environment: EnvironmentLike
 ): Promise<void> {
   const existing = await environment.getContentTypes()
-  const exists = existing.items.some(
+  const sectionCt = existing.items.find(
     (ct) => ct.sys.id === SECTION_CONTENT_TYPE_ID
   )
-  if (exists) return
+  if (sectionCt) {
+    const env = environment as unknown as {
+      getContentType(id: string): Promise<{
+        fields: Array<{ id: string }>
+        update(): Promise<unknown>
+        publish(): Promise<unknown>
+      }>
+    }
+    if (typeof env.getContentType === 'function') {
+      const ct = await env.getContentType(SECTION_CONTENT_TYPE_ID)
+      const hasTag = ct.fields.some((f) => f.id === 'sectionTag')
+      if (!hasTag) {
+        ;(
+          ct.fields as Array<{
+            id: string
+            name: string
+            type: string
+            required: boolean
+            localized?: boolean
+          }>
+        ).push({
+          id: 'sectionTag',
+          name: 'Section Tag',
+          type: 'Symbol',
+          required: false,
+          localized: false,
+        })
+        await ct.update()
+        await ct.publish()
+        console.log(
+          `Added sectionTag field to content type: ${SECTION_CONTENT_TYPE_ID}`
+        )
+      }
+    }
+    return
+  }
 
   const ct = await environment.createContentTypeWithId(
     SECTION_CONTENT_TYPE_ID,
@@ -136,6 +181,12 @@ async function ensureSectionContentType(
             linkType: 'Entry',
             validations: [{ linkContentType: [SECTION_CONTENT_TYPE_ID] }],
           },
+          required: false,
+        },
+        {
+          id: 'sectionTag',
+          name: 'Section Tag',
+          type: 'Symbol',
           required: false,
         },
       ],
@@ -225,6 +276,7 @@ async function createSectionFromObject(
 
   for (const [k, value] of Object.entries(obj)) {
     if (value === null || value === undefined) continue
+    if (isA11yKey(k)) continue
     if (typeof value === 'string') {
       content[k] = value
       continue
@@ -270,6 +322,7 @@ async function createSectionFromObject(
 
   const entryId = keyPathToEntryId(path)
   const name = keyToName(key)
+  const isRootSection = path.length === 1
   const fields: Record<string, Record<string, unknown>> = {
     key: { [CONTENTFUL_LOCALE]: key },
     name: { [CONTENTFUL_LOCALE]: name },
@@ -277,6 +330,9 @@ async function createSectionFromObject(
     sections: {
       [CONTENTFUL_LOCALE]: sectionLinks.map((link) => ({ sys: link.sys })),
     },
+    ...(isRootSection && {
+      sectionTag: { [CONTENTFUL_LOCALE]: SECTION_TAG_ROOT },
+    }),
   }
 
   try {
