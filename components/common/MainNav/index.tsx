@@ -54,10 +54,14 @@ const MainNav = () => {
   }, [])
 
   const navLinks = [
-    { href: Routes.home, label: t('home') },
-    { href: Routes.formulation, label: t('ourFormulation') },
-    { href: Routes.about, label: t('aboutUs') },
-    { href: Routes.contact, label: t('contact') },
+    { key: 'home', href: Routes.home, label: t('home') },
+    {
+      key: 'ourFormulation',
+      href: Routes.formulation,
+      label: t('ourFormulation'),
+    },
+    { key: 'about', href: Routes.about, label: t('aboutUs') },
+    { key: 'contact', href: Routes.contact, label: t('contact') },
   ]
 
   const isActiveLink = (href: string) => {
@@ -90,7 +94,7 @@ const MainNav = () => {
       <div className="hidden lg:flex items-center justify-center flex-1 gap-8">
         {navLinks.map((link) => (
           <NavLink
-            key={link.href}
+            key={link.key}
             href={link.href}
             label={link.label}
             isActive={isActiveLink(link.href)}
@@ -145,7 +149,7 @@ const MainNav = () => {
         >
           {navLinks.map((link) => (
             <Link
-              key={link.href}
+              key={link.key}
               href={link.href}
               onClick={handleCloseMobileMenu}
               className={cn(

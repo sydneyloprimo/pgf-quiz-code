@@ -14,7 +14,7 @@ interface BrowseByTopicProps {
 }
 
 const BrowseByTopic = ({ categories, currentSlug }: BrowseByTopicProps) => {
-  const t = useTranslations('BrowseByTopic')
+  const t = useTranslations('BlogIndex.BrowseByTopic')
 
   const buildHref = useCallback((slug: string | null) => {
     const base = Routes.blog

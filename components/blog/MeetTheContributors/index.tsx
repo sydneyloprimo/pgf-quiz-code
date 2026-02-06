@@ -7,7 +7,7 @@ interface MeetTheContributorsProps {
 }
 
 const MeetTheContributors = ({ authors }: MeetTheContributorsProps) => {
-  const t = useTranslations('MeetTheContributors')
+  const t = useTranslations('BlogIndex.MeetTheContributors')
 
   if (authors.length === 0) return null
 

@@ -12,6 +12,7 @@ const FooterLinks = () => {
 
   const navLinks = NAV_LINKS.map((link) => ({
     href: link.href,
+    labelKey: link.labelKey,
     label: tNav(link.labelKey),
   }))
 
@@ -36,7 +37,7 @@ const FooterLinks = () => {
       >
         {navLinks.map((link) => (
           <Link
-            key={link.href}
+            key={link.labelKey}
             href={link.href}
             className={cn(
               'font-bold text-base leading-4',
