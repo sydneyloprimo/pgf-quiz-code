@@ -23,7 +23,7 @@ const LatestProducts = ({ products }: LatestProductsProps) => {
         </span>
         <Button
           variant="primary"
-          href={Routes.products}
+          href={Routes.home}
           className="w-max p-3 outline-dark-violet md:mt-4"
         >
           {t('button')}

@@ -32,7 +32,7 @@ const HeroBanner = () => {
         </h1>
         <Button
           variant="primary"
-          href={Routes.products}
+          href={Routes.home}
           className="w-max p-3 outline-dark-violet mt-4 z-banner"
           data-qa="hero-banner-button"
         >

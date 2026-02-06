@@ -2,17 +2,14 @@
 import debounce from 'lodash/debounce'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter, useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import React, { useCallback, useState } from 'react'
 
 import HeaderDropdownMenu from './HeaderDropdownMenu'
 
 import Input from '@/components/common/Input'
-import { FilterParams } from '@/hooks/useProductSearch'
 import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
-import { buildQueryUrl } from '@/utils/utils'
 
 const images = {
   cartIcon: '/icons/cart.svg',
@@ -22,23 +19,16 @@ const images = {
 }
 
 const DEBOUNCE_WAIT_TIME = 800
-const MINIMUM_SEARCH_LENGTH = 3
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const searchParams = useSearchParams()
-  const [searchTerm, setSearchTerm] = useState(
-    searchParams.get(FilterParams.productTitle) ?? ''
-  )
-  const { push } = useRouter()
+  const [searchTerm, setSearchTerm] = useState('')
   const t = useTranslations('Header')
 
   const debouncedSearch = useCallback(
     debounce(
-      (value: string) => {
-        if (value.length >= MINIMUM_SEARCH_LENGTH || value.length === 0) {
-          push(buildQueryUrl(Routes.products, { productTitle: value }))
-        }
+      () => {
+        // Search / products route removed; no-op
       },
       DEBOUNCE_WAIT_TIME,
       { trailing: true }
@@ -49,7 +39,7 @@ const Header = () => {
   const onDebounceSearch = useCallback(
     ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
       setSearchTerm(value)
-      debouncedSearch(value)
+      debouncedSearch()
     },
     [setSearchTerm, debouncedSearch]
   )
@@ -91,10 +81,9 @@ const Header = () => {
         />
 
         <div className="flex md:flex-row-reverse">
-          <Link
-            data-qa="header-shopping-cart-link"
-            href={Routes.cart}
-            className="btn-primary mx-2 !text-sm h-8 md:h-10 !rounded-sm md:!rounded-md flex gap-2"
+          <span
+            data-qa="header-shopping-cart"
+            className="btn-primary mx-2 !text-sm h-8 md:h-10 !rounded-sm md:!rounded-md flex gap-2 cursor-default"
           >
             <span className="hidden md:inline">{t('shoppingCart')}</span>
             <Image
@@ -103,7 +92,7 @@ const Header = () => {
               width={16}
               height={14}
             />
-          </Link>
+          </span>
           <HeaderDropdownMenu isOpen={isOpen} onMenuChange={setIsOpen} />
         </div>
       </header>

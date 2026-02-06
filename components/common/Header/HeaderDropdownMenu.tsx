@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import React, { Dispatch, SetStateAction } from 'react'
@@ -104,12 +103,6 @@ const HeaderDropdownMenu = ({
           <button onClick={handleProfileClick} data-qa="dropdown-option">
             {t('myProfile')}
           </button>
-        </DropdownItem>
-        <DropdownItem
-          asChild
-          className="text-sm last-of-type:rounded-b-sm md:last-of-type:rounded-b-md"
-        >
-          <Link href={Routes.orders}>{t('myOrders')}</Link>
         </DropdownItem>
         {isLoggedIn && (
           <>
