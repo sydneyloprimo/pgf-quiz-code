@@ -340,6 +340,7 @@
   "Recipes": {
     "Hero": {
       "backgroundAlt": "Decorative background for recipes page",
+      "clinicallyApprovedAlt": "Clinically approved certification badge",
       "logoAlt": "Purely Golden Foods decorative logo",
       "title": "Recipe Science"
     },
@@ -383,6 +384,7 @@
     "NutritionPanel": {
       "aminoAcidProfile": "Amino Acid Profile",
       "aminoContent": "Complete amino acid profile including essential amino acids for muscle maintenance and overall health.",
+      "collapseAriaLabel": "Collapse {section}",
       "efasContent": "Balanced omega-3 and omega-6 fatty acids for skin, coat, and cognitive health.",
       "essentialFattyAcids": "Essential Fatty Acids EFAs",
       "expandAriaLabel": "Expand {section}",

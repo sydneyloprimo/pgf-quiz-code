@@ -2,12 +2,14 @@
 
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import readyToBuildPlanImage from 'public/images/recipes/ready-to-build-plan.png'
 
 import { Button } from '@/components/common/Button'
 import { Link } from '@/components/common/Link'
 import { useConciergeContact } from '@/hooks/useConciergeContact'
 import { QuizStep } from '@/types/enums/constants'
 import { getQuizStepPath } from '@/utils/quizRoutes'
+
 
 const ReadyToBuildYourPlanSection = () => {
   const t = useTranslations('Recipes.CTA')
@@ -22,7 +24,7 @@ const ReadyToBuildYourPlanSection = () => {
           {/* Left Column - Image */}
           <div className="relative aspect-square max-w-md mx-auto lg:mx-0 w-full">
             <Image
-              src="/images/recipes/ready-to-build-plan.png"
+              src={readyToBuildPlanImage}
               alt={t('ctaImageAlt')}
               fill
               className="object-cover"
@@ -56,7 +58,9 @@ const ReadyToBuildYourPlanSection = () => {
                   : tConcierge('phoneAriaLabel')
               }
             >
-              {t('callNowLink')}
+              {isTabletOrLarger
+                ? tConcierge('emailAriaLabel')
+                : tConcierge('phoneAriaLabel')}
             </Link>
           </div>
         </div>

@@ -10,7 +10,7 @@ const RecipesHeroSection = () => {
       <div className="absolute top-8 right-8 opacity-10 hidden md:block w-48 h-48">
         <Image
           src="/images/logo-decorative.svg"
-          alt=""
+          alt={t('logoAlt')}
           fill
           className="object-contain"
           aria-hidden="true"
@@ -21,10 +21,9 @@ const RecipesHeroSection = () => {
       <div className="flex justify-center mb-6 relative w-40 h-14">
         <Image
           src="/icons/clinically-approved-decoration.svg"
-          alt=""
-          fill
-          className="object-contain"
-          aria-hidden="true"
+          alt={t('clinicallyApprovedAlt')}
+          width={160}
+          height={55}
         />
       </div>
 

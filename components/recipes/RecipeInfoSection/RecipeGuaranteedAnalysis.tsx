@@ -1,3 +1,5 @@
+'use client'
+
 import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 
@@ -23,16 +25,10 @@ const RecipeGuaranteedAnalysis = () => {
       <div className="overflow-x-auto">
         <table className="w-full border-collapse bg-quaternary-50 border border-tertiary-800">
           <thead>
-            <tr className="bg-quaternary-200">
-              <th className="py-3 px-4 text-left font-sans text-sm font-semibold text-tertiary-800">
-                {t('nutrientLabel')}
-              </th>
-              <th className="py-3 px-4 text-center font-sans text-sm font-semibold text-tertiary-800">
-                {t('minLabel')}
-              </th>
-              <th className="py-3 px-4 text-center font-sans text-sm font-semibold text-tertiary-800">
-                {t('maxLabel')}
-              </th>
+            <tr className="bg-quaternary-200 py-3 px-4 font-sans text-sm font-semibold text-tertiary-800">
+              <th className="text-left">{t('nutrientLabel')}</th>
+              <th className="text-center">{t('minLabel')}</th>
+              <th className="text-center">{t('maxLabel')}</th>
             </tr>
           </thead>
           <tbody>
@@ -42,6 +38,7 @@ const RecipeGuaranteedAnalysis = () => {
                 <tr
                   key={nutrient.id}
                   className={cn(
+                    'py-3 px-4 font-sans text-sm text-tertiary-800',
                     index % 2 === 0 ? 'bg-white' : 'bg-neutral-100',
                     {
                       'border-b border-tertiary-800': isLastRow,
@@ -49,15 +46,9 @@ const RecipeGuaranteedAnalysis = () => {
                     }
                   )}
                 >
-                  <td className="py-3 px-4 font-sans text-sm text-tertiary-800">
-                    {t(nutrient.nutrientKey)}
-                  </td>
-                  <td className="py-3 px-4 text-center font-sans text-sm text-tertiary-800">
-                    {nutrient.minValue}
-                  </td>
-                  <td className="py-3 px-4 text-center font-sans text-sm text-tertiary-800">
-                    {nutrient.maxValue}
-                  </td>
+                  <td className="text-left">{t(nutrient.nutrientKey)}</td>
+                  <td className="text-center">{nutrient.minValue}</td>
+                  <td className="text-center">{nutrient.maxValue}</td>
                 </tr>
               )
             })}

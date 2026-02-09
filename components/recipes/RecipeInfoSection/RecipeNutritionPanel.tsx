@@ -38,9 +38,12 @@ const RecipeNutritionPanel = () => {
                 className="w-full flex items-center justify-between py-2 text-left cursor-pointer"
                 aria-expanded={isOpen}
                 aria-controls={`panel-${item.id}`}
-                aria-label={t('expandAriaLabel', {
-                  section: t(item.titleKey),
-                })}
+                aria-label={t(
+                  isOpen ? 'collapseAriaLabel' : 'expandAriaLabel',
+                  {
+                    section: t(item.titleKey),
+                  }
+                )}
               >
                 <span className="font-sans text-base font-bold leading-normal text-tertiary-800">
                   {t(item.titleKey)}
