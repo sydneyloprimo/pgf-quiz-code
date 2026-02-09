@@ -7,23 +7,23 @@ const RecipesHeroSection = () => {
   return (
     <section className="relative w-full py-12 px-5 md:px-24 bg-neutral-100 flex flex-col items-center justify-center overflow-hidden">
       {/* Decorative Logo */}
-      <div className="absolute top-8 right-8 opacity-10 hidden md:block">
+      <div className="absolute top-8 right-8 opacity-10 hidden md:block w-48 h-48">
         <Image
           src="/images/logo-decorative.svg"
           alt=""
-          width={200}
-          height={200}
+          fill
+          className="object-contain"
           aria-hidden="true"
         />
       </div>
 
       {/* Clinically Approved Decoration */}
-      <div className="flex justify-center mb-6">
+      <div className="flex justify-center mb-6 relative w-40 h-14">
         <Image
           src="/icons/clinically-approved-decoration.svg"
           alt=""
-          width={160}
-          height={55}
+          fill
+          className="object-contain"
           aria-hidden="true"
         />
       </div>

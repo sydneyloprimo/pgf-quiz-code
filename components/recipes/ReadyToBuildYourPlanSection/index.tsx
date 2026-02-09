@@ -16,7 +16,7 @@ const ReadyToBuildYourPlanSection = () => {
   const { href: conciergeHref, isTabletOrLarger } = useConciergeContact()
 
   return (
-    <section className="w-full bg-[#F3F0ED] px-5 md:px-24 py-12 md:py-20">
+    <section className="w-full bg-neutral-300 px-5 md:px-24 py-12 md:py-20">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left Column - Image */}
@@ -31,7 +31,7 @@ const ReadyToBuildYourPlanSection = () => {
 
           {/* Right Column - Content */}
           <div className="flex flex-col gap-6">
-            <h2 className="font-display text-[36px] font-normal leading-normal text-[#5E573D]">
+            <h2 className="font-display text-4xl font-normal leading-normal text-quaternary-800">
               {t('title')}
             </h2>
             <p className="font-sans text-base font-normal leading-normal text-black">
@@ -40,7 +40,7 @@ const ReadyToBuildYourPlanSection = () => {
             <Button variant="primary" href={quizPath} className="w-fit">
               {t('buildPlanButton')}
             </Button>
-            <h3 className="font-display text-[24px] font-normal leading-normal text-[#5E573D]">
+            <h3 className="font-display text-2xl font-normal leading-normal text-quaternary-800">
               {t('personalizedHeadline')}
             </h3>
             <p className="font-sans text-base font-normal leading-normal text-black">
