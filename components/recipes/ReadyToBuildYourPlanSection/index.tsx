@@ -10,7 +10,6 @@ import { useConciergeContact } from '@/hooks/useConciergeContact'
 import { QuizStep } from '@/types/enums/constants'
 import { getQuizStepPath } from '@/utils/quizRoutes'
 
-
 const ReadyToBuildYourPlanSection = () => {
   const t = useTranslations('Recipes.CTA')
   const tConcierge = useTranslations('Common.ConciergeLink')
