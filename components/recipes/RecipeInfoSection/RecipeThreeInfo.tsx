@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 
 import { useRecipes } from '@/components/recipes/RecipesContext'
-import { BENEFITS_COUNT } from '@/constants'
+import { BENEFIT_KEYS } from '@/constants'
 
 const RecipeThreeInfo = () => {
   const t = useTranslations('Recipes.Detail')
@@ -26,9 +26,9 @@ const RecipeThreeInfo = () => {
 
   const benefits = useMemo(
     () =>
-      Array.from({ length: BENEFITS_COUNT }, (_, i) => ({
+      BENEFIT_KEYS.map((key, i) => ({
         id: `benefit-${i + 1}`,
-        text: t(`benefits.benefit${i + 1}`),
+        text: t(key),
       })),
     [t]
   )
