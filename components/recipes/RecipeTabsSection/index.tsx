@@ -28,6 +28,7 @@ const RecipeTabsSection = () => {
         >
           {RECIPE_TABS.map((recipe) => {
             const isActive = activeRecipe === recipe
+            const handleClick = () => handleTabClick(recipe)
             return (
               <button
                 key={recipe}
@@ -35,7 +36,7 @@ const RecipeTabsSection = () => {
                 role="tab"
                 aria-selected={isActive}
                 aria-controls={`recipe-panel-${recipe}`}
-                onClick={() => handleTabClick(recipe)}
+                onClick={handleClick}
                 className={cn(
                   'py-4 px-2',
                   'font-display',
