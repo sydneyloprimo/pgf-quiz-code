@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 import { useRecipes } from '@/components/recipes/RecipesContext'
 import { BENEFIT_KEYS } from '@/constants'
 
-const RecipeThreeInfo = () => {
+const RecipeDetails = () => {
   const t = useTranslations('Recipes.Detail')
   const { activeRecipe } = useRecipes()
 
@@ -94,4 +94,4 @@ const RecipeThreeInfo = () => {
   )
 }
 
-export { RecipeThreeInfo }
+export { RecipeDetails }
