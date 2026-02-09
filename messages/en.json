@@ -343,6 +343,34 @@
       "clinicallyApprovedAlt": "Clinically approved certification badge",
       "logoAlt": "Purely Golden Foods decorative logo",
       "title": "Recipe Science"
+    },
+    "Tabs": {
+      "lamb": "Lamb",
+      "recipeTabs": "Recipe tabs",
+      "seafood": "Seafood",
+      "turkey": "Turkey"
+    },
+    "Detail": {
+      "benefits": {
+        "benefit1": "Oatmeal is great for dogs with wheat sensitivities or allergies, and will help your pup feel full all day long.",
+        "benefit2": "Made with restaurant-grade, extra-lean beef, and good for fat-restricted diets.",
+        "benefit3": "Organic white quinoa is a gluten-free pseudo-grain and healthy carbohydrate. Helps support metabolism, blood sugar levels and brain function."
+      },
+      "benefitsTitle": "Benefits",
+      "ingredientsTitle": "Ingredients",
+      "lambDescription": "Our Lamb Recipe features premium New Zealand lamb as the primary protein source, paired with easily digestible carbohydrates and essential nutrients for dogs with sensitivities or those who prefer a novel protein.",
+      "lambImageAlt": "Lamb recipe food bowl",
+      "lambIngredientsList": "Premium New Zealand lamb, easily digestible carbohydrates, essential nutrients, and carefully selected supplements.",
+      "lambTitle": "Lamb Recipe",
+      "seafoodDescription": "Our Seafood Recipe combines wild-caught salmon and whitefish to deliver exceptional omega-3 fatty acids, supporting cognitive function, joint health, and a lustrous coat.",
+      "seafoodImageAlt": "Seafood recipe food bowl",
+      "seafoodIngredientsList": "Wild-caught salmon, whitefish, omega-3 rich ingredients, and carefully selected supplements.",
+      "seafoodTitle": "Seafood Recipe",
+      "subtitle": "A complete and balanced formula",
+      "turkeyDescription": "Our Turkey Recipe is crafted with premium, human-grade turkey as the first ingredient, combined with nutrient-dense vegetables and carefully selected supplements to provide complete and balanced nutrition for adult dogs.",
+      "turkeyImageAlt": "Turkey recipe food bowl",
+      "turkeyIngredientsList": "Lean ground turkey, 100% whole grain oats, spinach, wild blueberries, blackberries, beef liver, goji berries, omega-3 fish oil (anchovy), supplement blend.",
+      "turkeyTitle": "Turkey Recipe"
     }
   },
   "Orders": {

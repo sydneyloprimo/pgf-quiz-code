@@ -753,3 +753,12 @@ export const RECIPE_TABS: RecipeTabType[] = [
   'lamb',
   'seafood',
 ] as const
+
+// Benefit translation keys used on the recipe page
+export const BENEFIT_KEYS = [
+  'benefits.benefit1',
+  'benefits.benefit2',
+  'benefits.benefit3',
+] as const
+
+export const BENEFITS_COUNT = BENEFIT_KEYS.length
