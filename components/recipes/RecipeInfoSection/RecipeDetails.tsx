@@ -3,9 +3,9 @@ import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 
 import { useRecipes } from '@/components/recipes/RecipesContext'
-import { BENEFITS_COUNT } from '@/constants'
+import { BENEFIT_KEYS } from '@/constants'
 
-const RecipeThreeInfo = () => {
+const RecipeDetails = () => {
   const t = useTranslations('Recipes.Detail')
   const { activeRecipe } = useRecipes()
 
@@ -14,11 +14,21 @@ const RecipeThreeInfo = () => {
     return t(descriptionKey)
   }, [activeRecipe, t])
 
+  const recipeImageAlt = useMemo(() => {
+    const imageAltKey = `${activeRecipe}ImageAlt` as const
+    return t(imageAltKey)
+  }, [activeRecipe, t])
+
+  const recipeIngredientsList = useMemo(() => {
+    const ingredientsKey = `${activeRecipe}IngredientsList` as const
+    return t(ingredientsKey)
+  }, [activeRecipe, t])
+
   const benefits = useMemo(
     () =>
-      Array.from({ length: BENEFITS_COUNT }, (_, i) => ({
+      BENEFIT_KEYS.map((key, i) => ({
         id: `benefit-${i + 1}`,
-        text: t(`benefits.benefit${i + 1}`),
+        text: t(key),
       })),
     [t]
   )
@@ -30,7 +40,7 @@ const RecipeThreeInfo = () => {
         <div className="relative w-full max-w-md aspect-square">
           <Image
             src={`/images/recipes/recipe-bowl-${activeRecipe}.png`}
-            alt={t('imageAlt')}
+            alt={recipeImageAlt}
             fill
             className="object-contain"
           />
@@ -76,7 +86,7 @@ const RecipeThreeInfo = () => {
             {t('ingredientsTitle')}
           </h3>
           <p className="font-sans text-sm text-neutral-800 leading-relaxed">
-            {t('ingredientsList')}
+            {recipeIngredientsList}
           </p>
         </div>
       </div>
@@ -84,4 +94,4 @@ const RecipeThreeInfo = () => {
   )
 }
 
-export { RecipeThreeInfo }
+export { RecipeDetails }

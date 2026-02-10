@@ -754,7 +754,14 @@ export const RECIPE_TABS: RecipeTabType[] = [
   'seafood',
 ] as const
 
-export const BENEFITS_COUNT = 3
+// Benefit translation keys used on the recipe page
+export const BENEFIT_KEYS = [
+  'benefits.benefit1',
+  'benefits.benefit2',
+  'benefits.benefit3',
+] as const
+
+export const BENEFITS_COUNT = BENEFIT_KEYS.length
 
 export interface FormulationCard {
   id: string
