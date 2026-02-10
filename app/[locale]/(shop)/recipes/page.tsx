@@ -1,6 +1,7 @@
 'use client'
 
 import {
+  ReadyToBuildYourPlanSection,
   RecipeInfoSection,
   RecipeTabsSection,
   RecipesHeroSection,
@@ -10,10 +11,11 @@ import {
 export default function RecipesPage() {
   return (
     <RecipesProvider>
-      <main className="flex flex-col items-center w-full bg-[#F3F0ED]">
+      <main className="flex flex-col items-center w-full bg-neutral-300">
         <RecipesHeroSection />
         <RecipeTabsSection />
         <RecipeInfoSection />
+        <ReadyToBuildYourPlanSection />
       </main>
     </RecipesProvider>
   )

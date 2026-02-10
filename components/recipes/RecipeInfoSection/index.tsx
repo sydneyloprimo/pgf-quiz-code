@@ -1,7 +1,12 @@
 'use client'
 
+import { RecipeAAFCOStatement } from './RecipeAAFCOStatement'
 import { RecipeDetails } from './RecipeDetails'
+import { RecipeFormulationLogic } from './RecipeFormulationLogic'
+import { RecipeGuaranteedAnalysis } from './RecipeGuaranteedAnalysis'
 import { RecipeHeading } from './RecipeHeading'
+import { RecipeNutritionPanel } from './RecipeNutritionPanel'
+import { RecipeServingStorage } from './RecipeServingStorage'
 
 const RecipeInfoSection = () => {
   return (
@@ -9,6 +14,11 @@ const RecipeInfoSection = () => {
       <div className="max-w-6xl mx-auto bg-white border-2 border-black px-4 py-12 lg:px-20">
         <RecipeHeading />
         <RecipeDetails />
+        <RecipeGuaranteedAnalysis />
+        <RecipeNutritionPanel />
+        <RecipeFormulationLogic />
+        <RecipeAAFCOStatement />
+        <RecipeServingStorage />
       </div>
     </section>
   )
@@ -17,3 +27,8 @@ const RecipeInfoSection = () => {
 export { RecipeInfoSection }
 export * from './RecipeDetails'
 export * from './RecipeHeading'
+export * from './RecipeGuaranteedAnalysis'
+export * from './RecipeNutritionPanel'
+export * from './RecipeFormulationLogic'
+export * from './RecipeAAFCOStatement'
+export * from './RecipeServingStorage'

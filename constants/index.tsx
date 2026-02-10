@@ -762,3 +762,137 @@ export const BENEFIT_KEYS = [
 ] as const
 
 export const BENEFITS_COUNT = BENEFIT_KEYS.length
+
+export interface FormulationCard {
+  id: string
+  titleKey: string
+  descriptionKey: string
+}
+
+export const FORMULATION_CARDS: FormulationCard[] = [
+  {
+    id: 'protein',
+    titleKey: 'highBiologicalValue.title',
+    descriptionKey: 'highBiologicalValue.description',
+  },
+  {
+    id: 'fat',
+    titleKey: 'optimizedFatProfile.title',
+    descriptionKey: 'optimizedFatProfile.description',
+  },
+  {
+    id: 'carbs',
+    titleKey: 'controlledCarbohydrates.title',
+    descriptionKey: 'controlledCarbohydrates.description',
+  },
+  {
+    id: 'micronutrients',
+    titleKey: 'bioavailableMicronutrients.title',
+    descriptionKey: 'bioavailableMicronutrients.description',
+  },
+  {
+    id: 'functional',
+    titleKey: 'functionalIngredients.title',
+    descriptionKey: 'functionalIngredients.description',
+  },
+] as const
+
+export interface NutrientRow {
+  id: string
+  nutrientKey: string
+  minValue: string
+  maxValue: string
+}
+
+export const NUTRIENT_DATA: Record<RecipeTabType, NutrientRow[]> = {
+  turkey: [
+    {
+      id: 'protein',
+      nutrientKey: 'crudeProtein',
+      minValue: '46%',
+      maxValue: '—',
+    },
+    {
+      id: 'fat',
+      nutrientKey: 'crudeFat',
+      minValue: '15%',
+      maxValue: '—',
+    },
+    {
+      id: 'carbs',
+      nutrientKey: 'crudeCarbs',
+      minValue: '—',
+      maxValue: '4%',
+    },
+    {
+      id: 'fiber',
+      nutrientKey: 'crudeFiber',
+      minValue: '15%',
+      maxValue: '—',
+    },
+  ],
+  lamb: [
+    {
+      id: 'protein',
+      nutrientKey: 'crudeProtein',
+      minValue: '44%',
+      maxValue: '—',
+    },
+    {
+      id: 'fat',
+      nutrientKey: 'crudeFat',
+      minValue: '14%',
+      maxValue: '—',
+    },
+    {
+      id: 'carbs',
+      nutrientKey: 'crudeCarbs',
+      minValue: '—',
+      maxValue: '5%',
+    },
+    {
+      id: 'fiber',
+      nutrientKey: 'crudeFiber',
+      minValue: '14%',
+      maxValue: '—',
+    },
+  ],
+  seafood: [
+    {
+      id: 'protein',
+      nutrientKey: 'crudeProtein',
+      minValue: '48%',
+      maxValue: '—',
+    },
+    {
+      id: 'fat',
+      nutrientKey: 'crudeFat',
+      minValue: '12%',
+      maxValue: '—',
+    },
+    {
+      id: 'carbs',
+      nutrientKey: 'crudeCarbs',
+      minValue: '—',
+      maxValue: '3%',
+    },
+    {
+      id: 'fiber',
+      nutrientKey: 'crudeFiber',
+      minValue: '12%',
+      maxValue: '—',
+    },
+  ],
+} as const
+
+export interface AccordionItem {
+  id: string
+  titleKey: string
+}
+
+export const NUTRITION_PANEL_ACCORDION_ITEMS: AccordionItem[] = [
+  { id: 'micronutrients', titleKey: 'micronutrients' },
+  { id: 'vitamins', titleKey: 'vitaminsAndMinerals' },
+  { id: 'efas', titleKey: 'essentialFattyAcids' },
+  { id: 'amino', titleKey: 'aminoAcidProfile' },
+] as const
