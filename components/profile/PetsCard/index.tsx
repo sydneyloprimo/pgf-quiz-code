@@ -6,7 +6,9 @@ import { useCallback, useId, useState } from 'react'
 import { Button } from '@/components/common/Button'
 import { ChevronIcon } from '@/components/common/Icon'
 import { Link } from '@/components/common/Link'
+import { CancelSubscriptionModal } from '@/components/profile/CancelSubscriptionModal'
 import { ProfileCard } from '@/components/profile/ProfileCard'
+import { useModal } from '@/hooks/useModal'
 import { cn } from '@/utils/cn'
 
 interface Pet {
@@ -55,20 +57,32 @@ const getActionButtonText = (
 const PetsCard = ({ pets = [], onCancelSubscription }: PetsCardProps) => {
   const t = useTranslations('Profile.PetsCard')
   const [isOpen, setIsOpen] = useState(true)
+  const [selectedPet, setSelectedPet] = useState<Pet | null>(null)
   const contentId = useId()
+  const {
+    isOpen: isCancelModalOpen,
+    openModal: openCancelModal,
+    closeModal: closeCancelModal,
+  } = useModal()
 
   const handleToggle = useCallback(() => {
     setIsOpen((prev) => !prev)
   }, [])
 
   const handleCancelClick = useCallback(
-    (subscriptionId: string) => {
-      if (onCancelSubscription) {
-        onCancelSubscription(subscriptionId)
-      }
+    (pet: Pet) => {
+      setSelectedPet(pet)
+      openCancelModal()
     },
-    [onCancelSubscription]
+    [openCancelModal]
   )
+
+  const handleConfirmCancel = useCallback(() => {
+    if (selectedPet && onCancelSubscription) {
+      onCancelSubscription(selectedPet.id)
+      setSelectedPet(null)
+    }
+  }, [selectedPet, onCancelSubscription])
 
   return (
     <ProfileCard className="w-full bg-neutral-white border border-quaternary-800 p-6 flex flex-col gap-8">
@@ -128,7 +142,7 @@ const PetsCard = ({ pets = [], onCancelSubscription }: PetsCardProps) => {
                       href="#"
                       onClick={(e) => {
                         e.preventDefault()
-                        handleCancelClick(pet.id)
+                        handleCancelClick(pet)
                       }}
                       className="text-sm font-bold text-neutral-black cursor-pointer"
                       aria-label={t('cancelSubscription')}
@@ -145,6 +159,14 @@ const PetsCard = ({ pets = [], onCancelSubscription }: PetsCardProps) => {
             ))
           )}
         </div>
+      )}
+      {selectedPet && (
+        <CancelSubscriptionModal
+          isOpen={isCancelModalOpen}
+          onClose={closeCancelModal}
+          onConfirm={handleConfirmCancel}
+          petName={selectedPet.name}
+        />
       )}
     </ProfileCard>
   )

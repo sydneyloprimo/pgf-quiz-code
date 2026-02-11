@@ -355,6 +355,14 @@
       "title": "Order Details",
       "total": "Total"
     },
+    "CancelSubscriptionModal": {
+      "ariaLabel": "Cancel subscription for {petName}",
+      "cancelButton": "Keep Subscription",
+      "closeButtonLabel": "Close cancel subscription modal",
+      "confirmButton": "Cancel Subscription",
+      "description": "Are you sure you want to cancel {petName}'s subscription? This action cannot be undone.",
+      "heading": "Cancel {petName}'s Subscription?"
+    },
     "PetsCard": {
       "activeSubscription": "Active Subscription",
       "cancelSubscription": "Cancel Subscription",
