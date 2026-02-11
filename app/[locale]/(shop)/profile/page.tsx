@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 
 import { Button } from '@/components/common/Button'
@@ -12,6 +12,7 @@ import { OrdersCard } from '@/components/profile/OrdersCard'
 import { PetsCard } from '@/components/profile/PetsCard'
 import { ProfileHeader } from '@/components/profile/ProfileHeader'
 import { useModal } from '@/hooks/useModal'
+import { useProfileSubscriptions } from '@/hooks/useProfileSubscriptions'
 import { client } from '@/shopify/client'
 import { useGetOrdersQuery } from '@/shopify/generated/graphql'
 import { Cookies } from '@/types/enums/cookies'
@@ -21,19 +22,26 @@ export default function ProfilePage() {
   const t = useTranslations('Profile')
   const router = useRouter()
   const [cookies] = useCookies([Cookies.customerAccessToken])
+  const [isMounted, setIsMounted] = useState(false)
   const {
     isOpen: isDeleteAccountModalOpen,
     openModal: openDeleteAccountModal,
     closeModal: closeDeleteAccountModal,
   } = useModal()
 
-  const customerAccessToken = cookies[Cookies.customerAccessToken]
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  const customerAccessToken = isMounted
+    ? cookies[Cookies.customerAccessToken]
+    : null
 
   useEffect(() => {
-    if (!customerAccessToken) {
+    if (isMounted && !customerAccessToken) {
       router.push(Routes.signin)
     }
-  }, [customerAccessToken, router])
+  }, [isMounted, customerAccessToken, router])
 
   const { data, isLoading, isError } = useGetOrdersQuery(
     client,
@@ -46,34 +54,43 @@ export default function ProfilePage() {
     }
   )
 
+  const {
+    pets,
+    isLoading: isLoadingPets,
+    cancelSubscription,
+  } = useProfileSubscriptions()
+
   const handleDeleteAccount = useCallback(() => {
     // TODO: Implement delete account logic
     closeDeleteAccountModal()
   }, [closeDeleteAccountModal])
 
-  // TODO: Fetch actual pets data
-  const pets = [
-    {
-      name: 'Tommy',
-      subscriptionStatus: 'active' as const,
-      deliveryFrequency: 'Delivers Weekly',
-      renewalDate: 'October 7 2025',
+  const handleCancelSubscription = useCallback(
+    async (subscriptionId: string) => {
+      const success = await cancelSubscription(subscriptionId)
+      if (!success) {
+        // TODO: Show error toast
+        console.error('Failed to cancel subscription')
+      }
     },
-    {
-      name: 'Leia',
-      subscriptionStatus: 'expired' as const,
-      deliveryFrequency: 'Delivers Monthly',
-      paymentStatus: 'Pending Payment',
-    },
-  ]
+    [cancelSubscription]
+  )
 
   const orders = data?.customer?.orders?.edges || []
+
+  if (!isMounted) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <Spinner />
+      </div>
+    )
+  }
 
   if (!customerAccessToken) {
     return null
   }
 
-  if (isLoading) {
+  if (isLoading || isLoadingPets) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <Spinner />
@@ -86,7 +103,10 @@ export default function ProfilePage() {
       <ProfileHeader />
       <div className="flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-8 flex-1">
         <div className="flex-1">
-          <PetsCard pets={pets} />
+          <PetsCard
+            pets={pets}
+            onCancelSubscription={handleCancelSubscription}
+          />
         </div>
         <div className="flex-1">
           <OrdersCard orders={orders} />

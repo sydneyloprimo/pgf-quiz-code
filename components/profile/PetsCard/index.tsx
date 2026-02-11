@@ -5,10 +5,12 @@ import { useCallback, useId, useState } from 'react'
 
 import { Button } from '@/components/common/Button'
 import { ChevronIcon } from '@/components/common/Icon'
+import { Link } from '@/components/common/Link'
 import { ProfileCard } from '@/components/profile/ProfileCard'
 import { cn } from '@/utils/cn'
 
 interface Pet {
+  id: string
   name: string
   subscriptionStatus: 'active' | 'expired'
   deliveryFrequency: string
@@ -18,6 +20,7 @@ interface Pet {
 
 interface PetsCardProps {
   pets?: Pet[]
+  onCancelSubscription?: (subscriptionId: string) => void
 }
 
 const getSubscriptionBadgeClasses = (
@@ -49,7 +52,7 @@ const getActionButtonText = (
   return t('subscribeAgain')
 }
 
-const PetsCard = ({ pets = [] }: PetsCardProps) => {
+const PetsCard = ({ pets = [], onCancelSubscription }: PetsCardProps) => {
   const t = useTranslations('Profile.PetsCard')
   const [isOpen, setIsOpen] = useState(true)
   const contentId = useId()
@@ -58,9 +61,14 @@ const PetsCard = ({ pets = [] }: PetsCardProps) => {
     setIsOpen((prev) => !prev)
   }, [])
 
-  const handleCancelSubscription = useCallback((petName: string) => {
-    // TODO: Implement cancel subscription logic
-  }, [])
+  const handleCancelClick = useCallback(
+    (subscriptionId: string) => {
+      if (onCancelSubscription) {
+        onCancelSubscription(subscriptionId)
+      }
+    },
+    [onCancelSubscription]
+  )
 
   return (
     <ProfileCard className="w-full bg-neutral-white border border-quaternary-800 p-6 flex flex-col gap-8">
@@ -88,7 +96,7 @@ const PetsCard = ({ pets = [] }: PetsCardProps) => {
           ) : (
             pets.map((pet) => (
               <div
-                key={pet.name}
+                key={pet.id}
                 className="bg-neutral-200 p-6 flex flex-col md:flex-row gap-3 md:items-center"
               >
                 <div className="flex flex-col gap-3 flex-1">
@@ -116,19 +124,22 @@ const PetsCard = ({ pets = [] }: PetsCardProps) => {
                     {getActionButtonText(pet.subscriptionStatus, t)}
                   </Button>
                   {pet.subscriptionStatus === 'active' ? (
-                    <button
-                      type="button"
-                      onClick={() => handleCancelSubscription(pet.name)}
-                      className="text-sm font-bold text-neutral-black"
+                    <Link
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault()
+                        handleCancelClick(pet.id)
+                      }}
+                      className="text-sm font-bold text-neutral-black cursor-pointer"
                       aria-label={t('cancelSubscription')}
                     >
                       {t('cancelSubscription')}
-                    </button>
-                  ) : (
+                    </Link>
+                  ) : pet.paymentStatus ? (
                     <p className="text-sm font-bold text-neutral-black">
-                      {t('pendingPayment')}
+                      {pet.paymentStatus}
                     </p>
-                  )}
+                  ) : null}
                 </div>
               </div>
             ))
