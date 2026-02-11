@@ -8,22 +8,25 @@ import { ChevronIcon } from '@/components/common/Icon'
 import { OrderDetailsModal } from '@/components/profile/OrderDetailsModal'
 import { ProfileCard } from '@/components/profile/ProfileCard'
 import { useModal } from '@/hooks/useModal'
+import {
+  GetOrdersQuery,
+  OrderFulfillmentStatus,
+} from '@/shopify/generated/graphql'
 import { cn } from '@/utils/cn'
 
-interface Order {
-  id: string
-  orderNumber: string
-  hasIndicator?: boolean
-}
+type OrderEdge = NonNullable<
+  GetOrdersQuery['customer']
+>['orders']['edges'][number]
+type OrderNode = OrderEdge['node']
 
 interface OrdersCardProps {
-  orders?: Order[]
+  orders?: OrderEdge[]
 }
 
 const OrdersCard = ({ orders = [] }: OrdersCardProps) => {
   const t = useTranslations('Profile.OrdersCard')
   const [isOpen, setIsOpen] = useState(true)
-  const [selectedOrderId, setSelectedOrderId] = useState<string | null>(null)
+  const [selectedOrder, setSelectedOrder] = useState<OrderNode | null>(null)
   const contentId = useId()
   const { isOpen: isModalOpen, openModal, closeModal } = useModal()
 
@@ -32,12 +35,22 @@ const OrdersCard = ({ orders = [] }: OrdersCardProps) => {
   }, [])
 
   const handleDetailsClick = useCallback(
-    (orderId: string) => {
-      setSelectedOrderId(orderId)
+    (order: OrderNode) => {
+      setSelectedOrder(order)
       openModal()
     },
     [openModal]
   )
+
+  const getHasIndicator = (
+    fulfillmentStatus: OrderFulfillmentStatus | null | undefined
+  ): boolean => {
+    return (
+      fulfillmentStatus === OrderFulfillmentStatus.Unfulfilled ||
+      fulfillmentStatus === OrderFulfillmentStatus.PartiallyFulfilled ||
+      fulfillmentStatus === OrderFulfillmentStatus.InProgress
+    )
+  }
 
   return (
     <ProfileCard className="w-full bg-neutral-white border border-quaternary-800 p-6 flex flex-col gap-8">
@@ -63,39 +76,45 @@ const OrdersCard = ({ orders = [] }: OrdersCardProps) => {
           {orders.length === 0 ? (
             <p className="text-body-m text-secondary-950">{t('emptyState')}</p>
           ) : (
-            orders.map((order, index) => (
-              <div
-                key={order.id}
-                className={cn(
-                  'flex gap-3 items-center justify-between p-3',
-                  index < orders.length - 1 && 'border-b border-neutral-500'
-                )}
-              >
-                <div className="flex gap-3 items-center flex-1">
-                  {order.hasIndicator && (
-                    <div className="size-2 rounded-full bg-primary-600 shrink-0" />
+            orders.map((orderEdge, index) => {
+              const order = orderEdge.node
+              const hasIndicator = getHasIndicator(order.fulfillmentStatus)
+              const orderDisplayName = `Order ${order.name || `#${order.orderNumber}`}`
+
+              return (
+                <div
+                  key={order.id}
+                  className={cn(
+                    'flex gap-3 items-center justify-between p-3',
+                    index < orders.length - 1 && 'border-b border-neutral-500'
                   )}
-                  <p className="text-base font-semibold text-secondary-950">
-                    {order.orderNumber}
-                  </p>
-                </div>
-                <Button
-                  variant="tertiary"
-                  size="small"
-                  onClick={() => handleDetailsClick(order.id)}
                 >
-                  {t('details')}
-                </Button>
-              </div>
-            ))
+                  <div className="flex gap-3 items-center flex-1">
+                    {hasIndicator && (
+                      <div className="size-2 rounded-full bg-primary-600 shrink-0" />
+                    )}
+                    <p className="text-base font-semibold text-secondary-950">
+                      {orderDisplayName}
+                    </p>
+                  </div>
+                  <Button
+                    variant="tertiary"
+                    size="small"
+                    onClick={() => handleDetailsClick(order)}
+                  >
+                    {t('details')}
+                  </Button>
+                </div>
+              )
+            })
           )}
         </div>
       )}
-      {selectedOrderId && (
+      {selectedOrder && (
         <OrderDetailsModal
           isOpen={isModalOpen}
           onClose={closeModal}
-          orderId={selectedOrderId}
+          order={selectedOrder}
         />
       )}
     </ProfileCard>

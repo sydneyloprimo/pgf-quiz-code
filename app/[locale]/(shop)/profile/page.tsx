@@ -1,29 +1,57 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
+import { useCookies } from 'react-cookie'
 
 import { Button } from '@/components/common/Button'
+import Spinner from '@/components/common/Spinner'
 import { DeleteAccountModal } from '@/components/profile/DeleteAccountModal'
 import { OrdersCard } from '@/components/profile/OrdersCard'
 import { PetsCard } from '@/components/profile/PetsCard'
 import { ProfileHeader } from '@/components/profile/ProfileHeader'
 import { useModal } from '@/hooks/useModal'
+import { client } from '@/shopify/client'
+import { useGetOrdersQuery } from '@/shopify/generated/graphql'
+import { Cookies } from '@/types/enums/cookies'
+import { Routes } from '@/types/enums/routes'
 
 export default function ProfilePage() {
   const t = useTranslations('Profile')
+  const router = useRouter()
+  const [cookies] = useCookies([Cookies.customerAccessToken])
   const {
     isOpen: isDeleteAccountModalOpen,
     openModal: openDeleteAccountModal,
     closeModal: closeDeleteAccountModal,
   } = useModal()
 
+  const customerAccessToken = cookies[Cookies.customerAccessToken]
+
+  useEffect(() => {
+    if (!customerAccessToken) {
+      router.push(Routes.signin)
+    }
+  }, [customerAccessToken, router])
+
+  const { data, isLoading, isError } = useGetOrdersQuery(
+    client,
+    {
+      customerAccessToken: customerAccessToken || '',
+      first: 20,
+    },
+    {
+      enabled: !!customerAccessToken,
+    }
+  )
+
   const handleDeleteAccount = useCallback(() => {
     // TODO: Implement delete account logic
     closeDeleteAccountModal()
   }, [closeDeleteAccountModal])
 
-  // TODO: Fetch actual pets and orders data
+  // TODO: Fetch actual pets data
   const pets = [
     {
       name: 'Tommy',
@@ -39,13 +67,19 @@ export default function ProfilePage() {
     },
   ]
 
-  const orders = [
-    { id: '1', orderNumber: 'Order #123-456', hasIndicator: true },
-    { id: '2', orderNumber: 'Order #123-456', hasIndicator: true },
-    { id: '3', orderNumber: 'Order #123-456', hasIndicator: false },
-    { id: '4', orderNumber: 'Order #123-456', hasIndicator: false },
-    { id: '5', orderNumber: 'Order #123-456', hasIndicator: false },
-  ]
+  const orders = data?.customer?.orders?.edges || []
+
+  if (!customerAccessToken) {
+    return null
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <Spinner />
+      </div>
+    )
+  }
 
   return (
     <div className="flex min-h-screen flex-col gap-6 md:gap-12 px-5 md:px-11 py-6 md:py-12">
