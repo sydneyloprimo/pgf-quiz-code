@@ -5,7 +5,8 @@ import { useTranslations } from 'next-intl'
 import { Button } from '@/components/common/Button'
 import { Link } from '@/components/common/Link'
 import { useConciergeContact } from '@/hooks/useConciergeContact'
-import { Routes } from '@/types/enums/routes'
+import { QuizStep } from '@/types/enums/constants'
+import { getQuizStepPath } from '@/utils/quizRoutes'
 
 const BlogPostCTA = () => {
   const tCTA = useTranslations('BlogPostCTA')
@@ -25,9 +26,7 @@ const BlogPostCTA = () => {
           <Button
             variant="primary"
             className="px-5 py-3"
-            onClick={() => {
-              window.location.href = Routes.quiz
-            }}
+            href={getQuizStepPath(QuizStep.Welcome)}
           >
             {tBlog('buildPlanButton')}
           </Button>

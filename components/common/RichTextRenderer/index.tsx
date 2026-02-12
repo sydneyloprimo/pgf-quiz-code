@@ -138,7 +138,7 @@ const RichTextRenderer = ({
       [MARKS.ITALIC]: (text) => <em>{text}</em>,
       [MARKS.UNDERLINE]: (text) => <u>{text}</u>,
       [MARKS.CODE]: (text) => (
-        <code className="bg-neutral-200 px-1 rounded">{text}</code>
+        <code className="bg-neutral-200 px-1 rounded-sm">{text}</code>
       ),
     },
   }

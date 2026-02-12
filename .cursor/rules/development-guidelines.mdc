@@ -160,6 +160,7 @@ bd create "Add login form" -p 1 -t feature --blocked-by bd-abc123
 - [Import Organization](#import-organization)
 - [Performance Optimization](#performance-optimization)
 - [GraphQL Patterns](#graphql-patterns)
+- [External API / CMS Configuration](#external-api--cms-configuration)
 - [Code Quality Standards](#code-quality-standards)
 
 ---
@@ -1079,6 +1080,63 @@ const { data, isFetching } = useGetAllProductsQuery(client, variables)
 
 ---
 
+## External API / CMS Configuration
+
+### Config File for Integrations
+
+**When integrating external APIs or CMS platforms (Contentful, etc.), use a dedicated config file** to centralize content types, field names, query defaults, and client options. This makes values easier to read, maintain, and change.
+
+- **Location**: Place config in the integration's directory (e.g., `contentful/config.ts`)
+- **Centralize**: Content type IDs, field names, query parameters (include depth, order, select), and client options (host, etc.)
+- **Never hardcode** these values in queries or client setup—always import from config
+
+**Example - Contentful config:**
+
+```typescript
+// contentful/config.ts
+export const CONTENTFUL_CONTENT_TYPES = {
+  blogPost: 'blogPost',
+  category: 'category',
+  author: 'author',
+} as const
+
+export const CONTENTFUL_FIELDS = {
+  slug: 'slug',
+} as const
+
+export const CONTENTFUL_QUERY_DEFAULTS = {
+  includeDepth: 2,
+  blogPostOrder: ['-sys.createdAt'] as const,
+  slugSelect: ['fields.slug'] as const,
+} as const
+
+export const CONTENTFUL_CLIENT_DEFAULTS = {
+  host: 'cdn.contentful.com' as const,
+} as const
+```
+
+**Example - Using config in queries:**
+
+```typescript
+// ✅ Good - Using config values
+const response = await contentfulClient.getEntries({
+  content_type: CONTENTFUL_CONTENT_TYPES.blogPost,
+  [`fields.${CONTENTFUL_FIELDS.slug}`]: slug,
+  include: CONTENTFUL_QUERY_DEFAULTS.includeDepth,
+})
+
+// ❌ Bad - Hardcoded values
+const response = await contentfulClient.getEntries({
+  content_type: 'blogPost',
+  'fields.slug': slug,
+  include: 2,
+})
+```
+
+**Reference**: See `contentful/config.ts` for the full pattern.
+
+---
+
 ## Code Quality Standards
 
 ### Avoid Nested Ternary Operators
@@ -1318,6 +1376,7 @@ Before submitting code, ensure:
 - ✅ **Use icons from icon pack** - always use icons from `public/icons/` instead of downloading from Figma or creating inline SVGs
 - ✅ **Component separation** - divide different React components onto different files
 - ✅ **Constants in constants file** - move all data constants (image paths, URLs, static arrays) to `constants/index.tsx`
+- ✅ **External API config** - use dedicated config files for CMS/external APIs (content types, fields, query defaults)
 - ✅ Rendering logic optimized (useMemo/useCallback)
 - ✅ No unused variables or imports
 - ✅ Imports use path aliases (no `../`)
