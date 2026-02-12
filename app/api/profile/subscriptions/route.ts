@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+import { RECHARGE_API_URL } from '@/constants'
 import { client } from '@/shopify/client'
 import { GetCustomerDocument } from '@/shopify/generated/graphql'
-
-const RECHARGE_API_URL = 'https://api.rechargeapps.com'
 
 interface RechargeSubscription {
   id: number
@@ -19,8 +18,9 @@ interface RechargeSubscription {
 
 interface RechargeCustomer {
   id: number
-  shopify_customer_id: string
-  email: string
+  shopify_customer_id?: string
+  external_id?: string
+  email?: string
 }
 
 interface RechargeSubscriptionsResponse {
@@ -36,10 +36,29 @@ const extractShopifyCustomerId = (gid: string): string | null => {
   return match ? match[1] : null
 }
 
+const normalizeToNumericId = (id: string): string => {
+  const gidMatch = id.match(/gid:\/\/shopify\/Customer\/(\d+)/)
+  return gidMatch ? gidMatch[1] : id.replace(/\D/g, '') || id
+}
+
+const shopifyIdsMatch = (
+  rechargeId: string,
+  shopifyCustomerId: string,
+  shopifyCustomerGid: string
+): boolean => {
+  const normalized = normalizeToNumericId(rechargeId)
+  return (
+    rechargeId === shopifyCustomerId ||
+    rechargeId === shopifyCustomerGid ||
+    normalized === shopifyCustomerId
+  )
+}
+
 const getShopifyCustomer = async (
   customerAccessToken: string
 ): Promise<{
-  id: string | null
+  shopifyCustomerId: string | null
+  shopifyCustomerGid: string | null
   email: string | null
 }> => {
   try {
@@ -47,25 +66,26 @@ const getShopifyCustomer = async (
       customerAccessToken,
     })
 
-    if (!data?.customer) {
-      return { id: null, email: null }
+    if (!data?.customer?.id) {
+      return { shopifyCustomerId: null, shopifyCustomerGid: null, email: null }
     }
 
-    const shopifyCustomerId = data.customer.id
-      ? extractShopifyCustomerId(data.customer.id)
-      : null
+    const gid = data.customer.id
+    const shopifyCustomerId = extractShopifyCustomerId(gid)
 
     return {
-      id: shopifyCustomerId,
+      shopifyCustomerId,
+      shopifyCustomerGid: shopifyCustomerId ? gid : null,
       email: data.customer.email || null,
     }
-  } catch (error) {
-    return { id: null, email: null }
+  } catch {
+    return { shopifyCustomerId: null, shopifyCustomerGid: null, email: null }
   }
 }
 
-const getRechargeCustomer = async (
-  shopifyCustomerId: string | null,
+const getRechargeCustomerForShopifyCustomer = async (
+  shopifyCustomerId: string,
+  shopifyCustomerGid: string,
   email: string | null
 ): Promise<RechargeCustomer | null> => {
   const rechargeToken = process.env.RECHARGE_ACCESS_TOKEN
@@ -74,55 +94,95 @@ const getRechargeCustomer = async (
     return null
   }
 
-  // Try by shopify_customer_id first
-  if (shopifyCustomerId) {
-    try {
-      const url = `${RECHARGE_API_URL}/customers?shopify_customer_id=${shopifyCustomerId}`
-
-      const response = await fetch(url, {
-        headers: {
-          'X-Recharge-Access-Token': rechargeToken,
-          'X-Recharge-Version': '2021-11',
-        },
-      })
-
-      if (response.ok) {
-        const data: RechargeCustomersResponse = await response.json()
-
-        if (data.customers && data.customers.length > 0) {
-          return data.customers[0]
-        }
-      }
-    } catch (error) {
-      // Silently fail and try email lookup
-    }
+  const idsMatch = (rechargeId: string | undefined): boolean => {
+    if (!rechargeId) return false
+    return shopifyIdsMatch(
+      String(rechargeId),
+      shopifyCustomerId,
+      shopifyCustomerGid
+    )
   }
 
-  // Fallback to email lookup
-  if (email) {
-    try {
-      const url = `${RECHARGE_API_URL}/customers?email=${encodeURIComponent(email)}`
+  const tryLookupById = async (
+    idParam: string
+  ): Promise<RechargeCustomer | null> => {
+    const url = `${RECHARGE_API_URL}/customers?shopify_customer_id=${encodeURIComponent(idParam)}`
 
-      const response = await fetch(url, {
-        headers: {
-          'X-Recharge-Access-Token': rechargeToken,
-          'X-Recharge-Version': '2021-11',
-        },
-      })
+    const response = await fetch(url, {
+      headers: {
+        'X-Recharge-Access-Token': rechargeToken,
+        'X-Recharge-Version': '2021-11',
+      },
+    })
 
-      if (response.ok) {
-        const data: RechargeCustomersResponse = await response.json()
-
-        if (data.customers && data.customers.length > 0) {
-          return data.customers[0]
-        }
-      }
-    } catch (error) {
-      // Silently fail
+    if (!response.ok) {
+      return null
     }
+
+    const data: RechargeCustomersResponse = await response.json()
+
+    if (!data.customers || data.customers.length === 0) {
+      return null
+    }
+
+    const match = data.customers.find(
+      (c) => idsMatch(c.shopify_customer_id) || idsMatch(c.external_id)
+    )
+    return match ?? null
   }
 
-  return null
+  const tryLookupByEmail = async (): Promise<RechargeCustomer | null> => {
+    if (!email) return null
+
+    const url = `${RECHARGE_API_URL}/customers?email=${encodeURIComponent(email)}`
+
+    const response = await fetch(url, {
+      headers: {
+        'X-Recharge-Access-Token': rechargeToken,
+        'X-Recharge-Version': '2021-11',
+      },
+    })
+
+    if (!response.ok) {
+      return null
+    }
+
+    const data: RechargeCustomersResponse = await response.json()
+
+    if (!data.customers || data.customers.length === 0) {
+      return null
+    }
+
+    const byId = data.customers.find(
+      (c) => idsMatch(c.shopify_customer_id) || idsMatch(c.external_id)
+    )
+    if (byId) return byId
+
+    if (
+      data.customers.length === 1 &&
+      data.customers[0].email?.toLowerCase() === email.toLowerCase()
+    ) {
+      return data.customers[0]
+    }
+
+    return null
+  }
+
+  try {
+    if (shopifyCustomerId) {
+      const byNumeric = await tryLookupById(shopifyCustomerId)
+      if (byNumeric) return byNumeric
+    }
+
+    if (shopifyCustomerGid) {
+      const byGid = await tryLookupById(shopifyCustomerGid)
+      if (byGid) return byGid
+    }
+
+    return await tryLookupByEmail()
+  } catch {
+    return null
+  }
 }
 
 const getRechargeSubscriptions = async (
@@ -151,9 +211,15 @@ const getRechargeSubscriptions = async (
     const data: RechargeSubscriptionsResponse = await response.json()
 
     return data.subscriptions || []
-  } catch (error) {
+  } catch {
     return []
   }
+}
+
+const getDeliveryFrequencyForDays = (frequency: number): string => {
+  if (frequency === 7) return 'Delivers Weekly'
+  if (frequency === 14) return 'Delivers Bi-Weekly'
+  return `Delivers Every ${frequency} Days`
 }
 
 const formatDeliveryFrequency = (frequency: number, unit: string): string => {
@@ -163,11 +229,7 @@ const formatDeliveryFrequency = (frequency: number, unit: string): string => {
       : `Delivers Every ${frequency} Weeks`
   }
   if (unit === 'day') {
-    return frequency === 7
-      ? 'Delivers Weekly'
-      : frequency === 14
-        ? 'Delivers Bi-Weekly'
-        : `Delivers Every ${frequency} Days`
+    return getDeliveryFrequencyForDays(frequency)
   }
   return `Delivers Every ${frequency} ${unit}s`
 }
@@ -247,14 +309,18 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'UNAUTHORIZED' }, { status: 401 })
     }
 
-    const { id: shopifyCustomerId, email } =
+    const { shopifyCustomerId, shopifyCustomerGid, email } =
       await getShopifyCustomer(customerAccessToken)
 
-    if (!shopifyCustomerId && !email) {
+    if (!email) {
       return NextResponse.json({ pets: [] })
     }
 
-    const rechargeCustomer = await getRechargeCustomer(shopifyCustomerId, email)
+    const rechargeCustomer = await getRechargeCustomerForShopifyCustomer(
+      shopifyCustomerId ?? '',
+      shopifyCustomerGid ?? '',
+      email
+    )
 
     if (!rechargeCustomer) {
       return NextResponse.json({ pets: [] })
@@ -264,7 +330,12 @@ export async function GET(request: NextRequest) {
 
     const pets = subscriptions.map(mapSubscriptionToPet)
 
-    return NextResponse.json({ pets })
+    const response = NextResponse.json({ pets })
+    response.headers.set(
+      'Cache-Control',
+      'private, no-store, no-cache, must-revalidate'
+    )
+    return response
   } catch (error) {
     return NextResponse.json(
       { error: 'INTERNAL_SERVER_ERROR' },

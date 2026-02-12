@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+import { RECHARGE_API_URL } from '@/constants'
 import { client } from '@/shopify/client'
 import { GetCustomerDocument } from '@/shopify/generated/graphql'
-
-const RECHARGE_API_URL = 'https://api.rechargeapps.com'
 
 interface RechargeSubscription {
   id: number

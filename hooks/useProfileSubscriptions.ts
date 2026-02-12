@@ -63,6 +63,7 @@ export const useProfileSubscriptions = (): UseProfileSubscriptionsReturn => {
 
       try {
         const response = await fetch('/api/profile/subscriptions', {
+          cache: 'no-store',
           headers: {
             Authorization: `Bearer ${customerAccessToken}`,
           },
