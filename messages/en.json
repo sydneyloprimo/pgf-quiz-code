@@ -363,6 +363,16 @@
       "description": "Are you sure you want to cancel {petName}'s subscription? This action cannot be undone.",
       "heading": "Cancel {petName}'s Subscription?"
     },
+    "ReactivateSubscriptionModal": {
+      "ariaLabel": "Reactivate subscription for {petName}",
+      "cancelButton": "Cancel",
+      "closeButtonLabel": "Close reactivate subscription modal",
+      "confirmButton": "Subscribe Again",
+      "description": "Reactivate {petName}'s subscription? You will receive deliveries again according to your plan.",
+      "errorMessage": "We couldn't reactivate the subscription. Please try again or contact support.",
+      "heading": "Reactivate {petName}'s Subscription?",
+      "loading": "Reactivating…"
+    },
     "PetsCard": {
       "activeSubscription": "Active Subscription",
       "cancelSubscription": "Cancel Subscription",

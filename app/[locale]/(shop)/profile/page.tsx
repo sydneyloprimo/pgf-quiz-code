@@ -58,6 +58,7 @@ export default function ProfilePage() {
     pets,
     isLoading: isLoadingPets,
     cancelSubscription,
+    reactivateSubscription,
   } = useProfileSubscriptions()
 
   const handleDeleteAccount = useCallback(() => {
@@ -74,6 +75,11 @@ export default function ProfilePage() {
       }
     },
     [cancelSubscription]
+  )
+
+  const handleReactivateSubscription = useCallback(
+    (subscriptionId: string) => reactivateSubscription(subscriptionId),
+    [reactivateSubscription]
   )
 
   const orders = data?.customer?.orders?.edges || []
@@ -106,6 +112,7 @@ export default function ProfilePage() {
           <PetsCard
             pets={pets}
             onCancelSubscription={handleCancelSubscription}
+            onReactivateSubscription={handleReactivateSubscription}
           />
         </div>
         <div className="flex-1">

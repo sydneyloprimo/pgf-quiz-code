@@ -18,7 +18,11 @@ interface UseProfileSubscriptionsReturn {
   isError: boolean
   refetch: () => Promise<void>
   cancelSubscription: (subscriptionId: string) => Promise<boolean>
+  reactivateSubscription: (
+    subscriptionId: string
+  ) => Promise<{ success: boolean; error?: string }>
   isCancelling: boolean
+  isReactivating: boolean
 }
 
 export const useProfileSubscriptions = (): UseProfileSubscriptionsReturn => {
@@ -27,6 +31,7 @@ export const useProfileSubscriptions = (): UseProfileSubscriptionsReturn => {
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState(false)
   const [isCancelling, setIsCancelling] = useState(false)
+  const [isReactivating, setIsReactivating] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
@@ -114,12 +119,56 @@ export const useProfileSubscriptions = (): UseProfileSubscriptionsReturn => {
     [customerAccessToken, fetchSubscriptions]
   )
 
+  const reactivateSubscription = useCallback(
+    async (
+      subscriptionId: string
+    ): Promise<{ success: boolean; error?: string }> => {
+      if (!customerAccessToken) {
+        return { success: false, error: 'Not authenticated' }
+      }
+
+      setIsReactivating(true)
+
+      try {
+        const response = await fetch('/api/profile/subscriptions/reactivate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${customerAccessToken}`,
+          },
+          body: JSON.stringify({ subscriptionId }),
+        })
+
+        const errorData = await response.json().catch(() => ({}))
+        const message =
+          errorData.details ?? errorData.error ?? 'Failed to reactivate'
+
+        if (!response.ok) {
+          return { success: false, error: message }
+        }
+
+        await fetchSubscriptions()
+        return { success: true }
+      } catch (error) {
+        const message =
+          error instanceof Error ? error.message : 'Failed to reactivate'
+        console.error('Error reactivating subscription:', error)
+        return { success: false, error: message }
+      } finally {
+        setIsReactivating(false)
+      }
+    },
+    [customerAccessToken, fetchSubscriptions]
+  )
+
   return {
     pets,
     isLoading,
     isError,
     refetch: fetchSubscriptions,
     cancelSubscription,
+    reactivateSubscription,
     isCancelling,
+    isReactivating,
   }
 }
