@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { useCallback } from 'react'
 
 import { MinusIcon, PlusIcon } from '@/components/common/Icon'
@@ -48,14 +47,6 @@ export const IngredientItem = ({
         aria-label={toggleAriaLabel}
       >
         <div className="flex items-center gap-5">
-          <Image
-            src={iconSrc}
-            alt=""
-            width={25}
-            height={28}
-            className="w-6 h-7"
-            aria-hidden="true"
-          />
           <h3
             className={cn(
               'font-display',
@@ -78,7 +69,7 @@ export const IngredientItem = ({
           <p
             className={cn(
               'font-sans',
-              'text-lg leading-7',
+              'text-lg leading-normal',
               'font-normal',
               'text-secondary-950'
             )}

@@ -25,13 +25,12 @@ const PrecisionBatchSection = () => {
           )}
         >
           {/* Mobile/Tablet: natural image sizing */}
-          <div className="relative w-full h-auto lg:hidden">
+          <div className="relative w-full aspect-[3/4] lg:hidden">
             <Image
               src="/images/formulation/precision-batch-image-mobile.png"
               alt={t('imageAlt')}
-              width={848}
-              height={1071}
-              className="w-full object-contain"
+              fill
+              className="object-cover"
             />
           </div>
           {/* Desktop: fixed height with overflow */}
@@ -51,7 +50,7 @@ const PrecisionBatchSection = () => {
         <div
           className={cn(
             'relative flex flex-col',
-            'p-5 lg:pl-40 lg:pt-31 lg:pr-50 lg:pb-25',
+            'px-5 py-16 lg:pl-40 lg:pt-31 lg:pr-50 lg:pb-25',
             'w-full max-w-full'
           )}
         >

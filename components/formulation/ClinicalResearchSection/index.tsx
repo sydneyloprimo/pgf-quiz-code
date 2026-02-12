@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import { STEP_STATIC_DATA, VALUE_PROP_COUNT } from './constants'
@@ -31,28 +30,18 @@ const ClinicalResearchSection = () => {
   })
 
   return (
-    <section className="relative w-full bg-neutral-400 px-5 lg:px-24 py-16 lg:py-[200px] flex flex-col gap-12 items-center justify-center">
-      {/* Background Image */}
-      <div className="absolute h-screen left-1/2 top-0 -translate-x-1/2 w-full pointer-events-none">
-        <Image
-          src="/images/formulation/research-bg-new.png"
-          alt={t('backgroundAlt')}
-          fill
-          className="object-cover object-center opacity-10"
-        />
-      </div>
-
+    <section className="relative w-full bg-neutral-400 px-5 lg:px-24 py-16 lg:py-[200px] flex flex-col gap-12 items-center justify-center overflow-hidden bg-[url(/images/home/clinically-approved-bg.svg)] bg-no-repeat bg-[position:right_top] bg-[length:auto_25%] md:bg-[length:auto_35%] lg:bg-[length:auto_45%]">
       {/* Main Content */}
       <div className="relative z-10 flex flex-col gap-16 items-start w-full">
         {/* Header Section */}
-        <div className="flex flex-col gap-2.5 w-full">
-          <h2 className="font-display text-5xl lg:text-6xl leading-[56px] tracking-tight text-quaternary-800 not-italic">
+        <div className="flex flex-col gap-6 w-full">
+          <h2 className="heading-h2 tracking-tight text-quaternary-800 not-italic">
             {t('title')}
           </h2>
-          <p className="font-sans text-lg leading-7 text-quaternary-800">
+          <p className="font-sans text-lg leading-normal text-quaternary-800">
             {t('description1')}
           </p>
-          <p className="font-sans text-lg leading-7 text-quaternary-800">
+          <p className="font-sans text-lg leading-normal text-quaternary-800">
             {t('description2')}
           </p>
         </div>
@@ -70,6 +59,14 @@ const ClinicalResearchSection = () => {
         {steps.map((step, index) => (
           <StepCard key={index} {...step} />
         ))}
+      </div>
+
+      {/* Disclaimer */}
+      <div className="relative z-10 w-full px-5 lg:px-0">
+        <p className="font-sans text-lg leading-7 text-quaternary-800 italic text-left">
+          Preclinical data are used to inform formulation development and do not
+          constitute therapeutic or disease-related claims.
+        </p>
       </div>
     </section>
   )

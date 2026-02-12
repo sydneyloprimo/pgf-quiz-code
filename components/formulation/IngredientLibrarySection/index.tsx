@@ -5,7 +5,9 @@ import { useCallback, useMemo, useState } from 'react'
 
 import { IngredientItem } from './IngredientItem'
 
+import { Link } from '@/components/common/Link'
 import { INGREDIENTS_DATA } from '@/constants'
+import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
 
 const IngredientLibrarySection = () => {
@@ -38,15 +40,22 @@ const IngredientLibrarySection = () => {
       <div className="w-full">
         <h2
           className={cn(
-            'font-display',
-            'text-[2.5rem] leading-12',
-            'font-semibold',
+            'heading-h2',
+            'tracking-tight',
             'text-quaternary-800',
+            'not-italic',
             'mb-6'
           )}
         >
           {t('title')}
         </h2>
+        <p className="font-sans text-lg leading-normal text-quaternary-800 py-2 mb-8">
+          Not all ingredients are in each recipe. View our{' '}
+          <Link href={Routes.recipes} variant="secondary" size="small">
+            recipe science
+          </Link>{' '}
+          page to see a breakdown of each formulation.
+        </p>
 
         <div className="flex flex-col">
           {ingredients.map((ingredient, index) => (
