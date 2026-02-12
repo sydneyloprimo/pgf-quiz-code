@@ -1,13 +1,11 @@
 'use client'
 
-import Image from 'next/image'
 import { useCallback } from 'react'
 
 import { MinusIcon, PlusIcon } from '@/components/common/Icon'
 import { cn } from '@/utils/cn'
 
 interface IngredientItemProps {
-  iconSrc: string
   name: string
   description: string
   isOpen: boolean
@@ -16,7 +14,6 @@ interface IngredientItemProps {
 }
 
 export const IngredientItem = ({
-  iconSrc,
   name,
   description,
   isOpen,
@@ -47,25 +44,17 @@ export const IngredientItem = ({
         aria-expanded={isOpen}
         aria-label={toggleAriaLabel}
       >
-        <div className="flex items-center gap-5">
-          <Image
-            src={iconSrc}
-            alt=""
-            width={25}
-            height={28}
-            className="w-6 h-7"
-            aria-hidden="true"
-          />
-          <h3
+        <div className={cn('flex items-center', 'gap-0')}>
+          <h4
             className={cn(
               'font-display',
-              'text-2xl leading-8',
-              'font-bold',
+              'text-xl leading-8',
+              'font-normal',
               'text-quaternary-800'
             )}
           >
             {name}
-          </h3>
+          </h4>
         </div>
         {isOpen ? (
           <MinusIcon className="w-6 h-6 text-quaternary-800 cursor-pointer" />
@@ -78,7 +67,7 @@ export const IngredientItem = ({
           <p
             className={cn(
               'font-sans',
-              'text-lg leading-7',
+              'text-base leading-7',
               'font-normal',
               'text-secondary-950'
             )}

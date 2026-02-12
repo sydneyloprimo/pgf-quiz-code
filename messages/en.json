@@ -996,36 +996,102 @@
     },
     "Ingredients": {
       "title": "Ingredient Library",
-      "description": "Our carefully selected ingredients are chosen for their nutritional benefits and digestibility.",
-      "basil": {
-        "name": "Basil",
-        "description": "Basil is a versatile herb that brings a vibrant flavor to a variety of dishes. Packed with antioxidants, it helps fight free radicals in the body. Moreover, basil possesses anti-inflammatory properties and supports digestive health. Its fragrant leaves elevate the taste of sauces, salads, and even drinks, making it an excellent choice for both cooking and garnishing. We source our basil from local organic farms from Boston to ensure the highest quality."
-      },
-      "pumpkin": {
-        "name": "Pumpkin",
-        "description": "Pumpkin is a nutrient-dense ingredient that provides essential vitamins and minerals for your dog's well-being. High in fiber and beta-carotene, it supports digestive health and immune function. The natural fiber content helps maintain healthy digestion and can aid in weight management. Rich in antioxidants, pumpkin also contributes to overall cellular health and helps protect against oxidative stress. We carefully select fresh, organic pumpkins to provide the best nutritional benefits."
-      },
-      "turmeric": {
-        "name": "Turmeric",
-        "description": "Turmeric is a powerful spice known for its remarkable health benefits. It contains curcumin, a potent anti-inflammatory and antioxidant compound that helps reduce inflammation throughout the body. This golden spice supports joint health, promotes healthy digestion, and contributes to overall wellness. Turmeric's natural properties make it an excellent addition to your dog's diet, helping to maintain mobility and support the body's natural healing processes. We use premium-grade turmeric to ensure maximum potency and effectiveness."
-      },
-      "avocado": {
-        "name": "Avocado",
-        "description": "Avocado is a nutrient-rich superfood that offers numerous health benefits for your dog. Rich in healthy monounsaturated fats and vitamin E, it supports skin and coat health, giving your pet a shiny, healthy appearance. The high fiber content aids in digestion and helps maintain a healthy weight. Avocados also contain essential vitamins and minerals that support overall wellness, including potassium, folate, and various B vitamins. We source only the finest, perfectly ripe avocados to provide optimal nutrition."
-      },
-      "raspberry": {
-        "name": "Raspberries",
-        "description": "Raspberries are a delicious and nutritious fruit packed with vitamins, minerals, and powerful antioxidants. These vibrant berries support immune function and help protect cells from damage caused by free radicals. Rich in vitamin C, manganese, and dietary fiber, raspberries contribute to overall health and well-being. The natural antioxidants found in raspberries, including ellagic acid and anthocyanins, provide anti-inflammatory benefits and support cardiovascular health. We select only the freshest, organic raspberries to ensure your dog receives the highest quality nutrition."
-      },
-      "lamb": {
-        "name": "Lamb",
-        "description": "Lamb is a high-quality protein source that provides essential amino acids and B vitamins crucial for your dog's health. This lean meat is rich in iron, zinc, and selenium, supporting muscle development and overall vitality. Lamb is particularly beneficial for dogs with food sensitivities, as it's less commonly used in commercial pet foods. The complete amino acid profile supports healthy muscle maintenance, while B vitamins help maintain energy levels and support metabolic function. We source our lamb from trusted, sustainable farms that prioritize animal welfare and quality."
-      },
-      "soybeans": {
-        "name": "Soy Beans",
-        "description": "Soybeans are a complete plant protein that provides all essential amino acids your dog needs for optimal health. These versatile legumes are rich in isoflavones, which have been shown to support heart health and provide antioxidant benefits. Soybeans are an excellent source of fiber, supporting digestive health and helping to maintain healthy cholesterol levels. They also contain essential minerals like iron, calcium, and magnesium, contributing to strong bones and overall wellness. We use only non-GMO, organic soybeans to ensure the highest quality and nutritional value for your pet."
-      },
-      "toggleAria": "Toggle ingredient details"
+      "categoriesTitle": "Categories",
+      "toggleAria": "Toggle ingredient details",
+      "categories": {
+        "proteinsOrgans": {
+          "title": "Proteins & Organs",
+          "items": {
+            "turkey": {
+              "name": "Turkey",
+              "description": "A lean, highly digestible protein serving as a primary amino acid source. Favorable fat profile, suited for adult maintenance and controlled fat intake."
+            },
+            "lamb": {
+              "name": "Lamb",
+              "description": "A nutrient-dense red meat contributing essential amino acids, iron, and zinc. Supports protein diversity and palatability while maintaining controlled macronutrient ratios."
+            },
+            "cod": {
+              "name": "Cod",
+              "description": "A low-fat, highly digestible fish protein. Selected for formulations requiring precise lipid control and fat tolerance."
+            },
+            "beefLiver": {
+              "name": "Beef liver",
+              "description": "A concentrated source of fat-soluble vitamins and trace minerals. Included in measured amounts to support micronutrient adequacy without exceeding safe upper limits."
+            },
+            "chickenLiver": {
+              "name": "Chicken liver",
+              "description": "A functional organ providing bioavailable vitamins and minerals. Used selectively for micronutrient balance and formulation completeness."
+            },
+            "egg": {
+              "name": "Egg",
+              "description": "A highly bioavailable protein containing all essential amino acids. Supports protein quality and digestibility within mixed-ingredient formulations."
+            }
+          }
+        },
+        "carbohydratesFiber": {
+          "title": "Carbohydrates & Fiber",
+          "items": {
+            "pumpkin": {
+              "name": "Pumpkin",
+              "description": "A soluble fiber source supporting stool consistency and digestive tolerance. Contributes fermentable fiber without altering macronutrient balance."
+            },
+            "sweetPotato": {
+              "name": "Sweet potato",
+              "description": "A complex carbohydrate providing dietary fiber and sustained energy. Supports caloric structure and texture while maintaining digestibility."
+            },
+            "brownRice": {
+              "name": "Brown rice",
+              "description": "A digestible carbohydrate used in select formulations. Contributes structured energy and supports dietary tolerance in balanced proportions."
+            },
+            "butternutSquash": {
+              "name": "Butternut squash",
+              "description": "A carbohydrate and fiber source contributing natural beta-carotene. Included for functional diversity rather than caloric density."
+            }
+          }
+        },
+        "vegetablesProduce": {
+          "title": "Vegetables & Produce",
+          "items": {
+            "spinach": {
+              "name": "Spinach",
+              "description": "A low-inclusion leafy green providing trace micronutrients. Used for nutrient diversity, not as a primary fiber or calorie source."
+            },
+            "blueberries": {
+              "name": "Blueberries",
+              "description": "A natural source of polyphenols, included in small quantities. Added for compositional diversity, not therapeutic effect."
+            },
+            "cucumber": {
+              "name": "Cucumber",
+              "description": "A low-calorie, high-moisture vegetable supporting hydration and texture without materially altering macronutrient balance."
+            },
+            "parsley": {
+              "name": "Parsley",
+              "description": "Included in small amounts for micronutrient diversity and aromatic balance."
+            },
+            "dill": {
+              "name": "Dill",
+              "description": "A culinary herb at low inclusion, contributing aroma and palatability without impacting nutritional targets."
+            }
+          }
+        },
+        "fatsFunctionalAdditions": {
+          "title": "Fats & Functional Additions",
+          "items": {
+            "omega3FishOil": {
+              "name": "Omega-3 fish oil",
+              "description": "A purified source of long-chain omega-3 fatty acids. Added in measured amounts to support fatty acid balance and formulation consistency."
+            },
+            "canolaOil": {
+              "name": "Canola oil",
+              "description": "A neutral fat source used to calibrate total dietary fat levels. Supports precise lipid balance where lower overall fat is required."
+            },
+            "flaxseedChiaSeed": {
+              "name": "Flaxseed and chia seed",
+              "description": "Plant-based sources of fiber and alpha-linolenic acid (ALA). Used in small amounts to contribute to fiber diversity and fatty acid balance."
+            }
+          }
+        }
+      }
     },
     "Precision": {
       "title": "Precision\nin Every Batch",
