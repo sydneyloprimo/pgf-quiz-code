@@ -41,9 +41,9 @@ const ClinicalResearchSection = () => {
           <p className="font-sans text-lg leading-normal text-quaternary-800">
             {t('description1')}
           </p>
-          <p className="font-sans text-lg leading-normal text-quaternary-800">
+          {/* <p className="font-sans text-lg leading-7 text-quaternary-800">
             {t('description2')}
-          </p>
+          </p>" */}
         </div>
 
         {/* Value Prop Cards */}
@@ -64,8 +64,7 @@ const ClinicalResearchSection = () => {
       {/* Disclaimer */}
       <div className="relative z-10 w-full px-5 lg:px-0">
         <p className="font-sans text-lg leading-7 text-quaternary-800 italic text-left">
-          Preclinical data are used to inform formulation development and do not
-          constitute therapeutic or disease-related claims.
+          {t('disclaimer')}
         </p>
       </div>
     </section>

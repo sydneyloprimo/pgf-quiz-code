@@ -50,11 +50,15 @@ const IngredientLibrarySection = () => {
           {t('title')}
         </h2>
         <p className="font-sans text-lg leading-normal text-quaternary-800 py-2 mb-8">
-          Not all ingredients are in each recipe. View our{' '}
-          <Link href={Routes.recipes} variant="secondary" size="small">
-            recipe science
-          </Link>{' '}
-          page to see a breakdown of each formulation.
+          Each recipe uses a specific selection of these ingredients. To learn
+          more, view our detailed{' '}
+          <Link
+            href={Routes.recipes}
+            className="font-sans text-lg leading-normal font-normal text-quaternary-800 underline"
+          >
+            recipe breakdowns
+          </Link>
+          .
         </p>
 
         <div className="flex flex-col">
