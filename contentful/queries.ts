@@ -1,4 +1,9 @@
 import { contentfulClient } from './client'
+import {
+  CONTENTFUL_CONTENT_TYPES,
+  CONTENTFUL_FIELDS,
+  CONTENTFUL_QUERY_DEFAULTS,
+} from './config'
 import { BlogPostEntry, BlogPostSkeleton } from './types'
 
 export async function getBlogPostBySlug(
@@ -6,9 +11,9 @@ export async function getBlogPostBySlug(
 ): Promise<BlogPostEntry | null> {
   try {
     const response = await contentfulClient.getEntries<BlogPostSkeleton>({
-      content_type: 'blogPost',
-      'fields.slug': slug,
-      include: 2,
+      content_type: CONTENTFUL_CONTENT_TYPES.blogPost,
+      [`fields.${CONTENTFUL_FIELDS.slug}`]: slug,
+      include: CONTENTFUL_QUERY_DEFAULTS.includeDepth,
       limit: 1,
     })
 
@@ -22,9 +27,9 @@ export async function getBlogPostBySlug(
 export async function getAllBlogPosts(): Promise<BlogPostEntry[]> {
   try {
     const response = await contentfulClient.getEntries<BlogPostSkeleton>({
-      content_type: 'blogPost',
-      include: 2,
-      order: ['-sys.createdAt'],
+      content_type: CONTENTFUL_CONTENT_TYPES.blogPost,
+      include: CONTENTFUL_QUERY_DEFAULTS.includeDepth,
+      order: [...CONTENTFUL_QUERY_DEFAULTS.blogPostOrder],
     })
 
     return response.items
@@ -37,8 +42,8 @@ export async function getAllBlogPosts(): Promise<BlogPostEntry[]> {
 export async function getAllBlogSlugs(): Promise<string[]> {
   try {
     const response = await contentfulClient.getEntries<BlogPostSkeleton>({
-      content_type: 'blogPost',
-      select: ['fields.slug'],
+      content_type: CONTENTFUL_CONTENT_TYPES.blogPost,
+      select: [...CONTENTFUL_QUERY_DEFAULTS.slugSelect],
     })
 
     return response.items
