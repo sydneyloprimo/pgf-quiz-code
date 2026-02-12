@@ -37,10 +37,22 @@ const ReactivateSubscriptionModal = ({
       if (resolved) {
         onClose()
       } else {
-        setErrorMessage(
-          (result && typeof result === 'object' && result.error) ||
-            t('errorMessage')
-        )
+        const err = result && typeof result === 'object' ? result.error : null
+        const knownCodes = new Set([
+          'UNAUTHORIZED',
+          'REACTIVATION_FAILED',
+          'SUBSCRIPTION_ID_REQUIRED',
+          'CUSTOMER_NOT_FOUND',
+          'RECHARGE_CUSTOMER_NOT_FOUND',
+          'SUBSCRIPTION_NOT_FOUND',
+          'FORBIDDEN',
+          'INTERNAL_SERVER_ERROR',
+        ])
+        const msg =
+          err && typeof err === 'string' && knownCodes.has(err)
+            ? t(`errors.${err}`)
+            : t('errorMessage')
+        setErrorMessage(msg)
       }
     } catch {
       setErrorMessage(t('errorMessage'))

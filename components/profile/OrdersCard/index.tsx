@@ -3,16 +3,15 @@
 import { useTranslations } from 'next-intl'
 import { useCallback, useId, useState } from 'react'
 
-import { Button } from '@/components/common/Button'
 import { ChevronIcon } from '@/components/common/Icon'
 import { OrderDetailsModal } from '@/components/profile/OrderDetailsModal'
+import { OrderRow } from '@/components/profile/OrdersCard/OrderRow'
 import { ProfileCard } from '@/components/profile/ProfileCard'
 import { useModal } from '@/hooks/useModal'
 import {
   GetOrdersQuery,
   OrderFulfillmentStatus,
 } from '@/shopify/generated/graphql'
-import { cn } from '@/utils/cn'
 
 type OrderEdge = NonNullable<
   GetOrdersQuery['customer']
@@ -76,35 +75,22 @@ const OrdersCard = ({ orders = [] }: OrdersCardProps) => {
           {orders.length === 0 ? (
             <p className="text-body-m text-secondary-950">{t('emptyState')}</p>
           ) : (
-            orders.map((orderEdge, index) => {
+            orders.map((orderEdge) => {
               const order = orderEdge.node
               const hasIndicator = getHasIndicator(order.fulfillmentStatus)
-              const orderDisplayName = `Order ${order.name || `#${order.orderNumber}`}`
+              const orderDisplayName = t('orderDisplayName', {
+                name: order.name || `#${order.orderNumber}`,
+              })
 
               return (
-                <div
+                <OrderRow
                   key={order.id}
-                  className={cn(
-                    'flex gap-3 items-center justify-between p-3',
-                    index < orders.length - 1 && 'border-b border-neutral-500'
-                  )}
-                >
-                  <div className="flex gap-3 items-center flex-1">
-                    {hasIndicator && (
-                      <div className="size-2 rounded-full bg-primary-600 shrink-0" />
-                    )}
-                    <p className="text-base font-semibold text-secondary-950">
-                      {orderDisplayName}
-                    </p>
-                  </div>
-                  <Button
-                    variant="tertiary"
-                    size="small"
-                    onClick={() => handleDetailsClick(order)}
-                  >
-                    {t('details')}
-                  </Button>
-                </div>
+                  order={order}
+                  onDetailsClick={handleDetailsClick}
+                  hasIndicator={hasIndicator}
+                  orderDisplayName={orderDisplayName}
+                  t={t}
+                />
               )
             })
           )}

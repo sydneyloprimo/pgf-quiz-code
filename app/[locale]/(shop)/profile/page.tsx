@@ -67,13 +67,7 @@ export default function ProfilePage() {
   }, [closeDeleteAccountModal])
 
   const handleCancelSubscription = useCallback(
-    async (subscriptionId: string) => {
-      const success = await cancelSubscription(subscriptionId)
-      if (!success) {
-        // TODO: Show error toast
-        console.error('Failed to cancel subscription')
-      }
-    },
+    (subscriptionId: string) => cancelSubscription(subscriptionId),
     [cancelSubscription]
   )
 

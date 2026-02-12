@@ -326,6 +326,7 @@
       "description": "View your previous and current orders along with any past payments here.",
       "details": "Details",
       "emptyState": "No orders yet",
+      "orderDisplayName": "Order {name}",
       "title": "My Orders"
     },
     "OrderDetailsModal": {
@@ -336,6 +337,7 @@
       "date": "Date",
       "itemImageAlt": "Product image for {name}",
       "items": "Items",
+      "orderDisplayName": "Order {name}",
       "orderNumber": "Order #",
       "orderSummary": "Order Summary",
       "paymentCompleted": "Payment completed",
@@ -361,7 +363,19 @@
       "closeButtonLabel": "Close cancel subscription modal",
       "confirmButton": "Cancel Subscription",
       "description": "Are you sure you want to cancel {petName}'s subscription? This action cannot be undone.",
-      "heading": "Cancel {petName}'s Subscription?"
+      "errorMessage": "We couldn't cancel the subscription. Please try again or contact support.",
+      "errors": {
+        "CANCELLATION_FAILED": "We couldn't cancel the subscription. Please try again or contact support.",
+        "CUSTOMER_NOT_FOUND": "Account not found. Please sign in again.",
+        "FORBIDDEN": "You don't have permission to cancel this subscription.",
+        "INTERNAL_SERVER_ERROR": "Something went wrong. Please try again later.",
+        "RECHARGE_CUSTOMER_NOT_FOUND": "Subscription account not found. Please try again.",
+        "SUBSCRIPTION_ID_REQUIRED": "Invalid request. Please try again.",
+        "SUBSCRIPTION_NOT_FOUND": "Subscription not found. It may have already been cancelled.",
+        "UNAUTHORIZED": "Please sign in to continue."
+      },
+      "heading": "Cancel {petName}'s Subscription?",
+      "loading": "Cancelling…"
     },
     "ReactivateSubscriptionModal": {
       "ariaLabel": "Reactivate subscription for {petName}",
@@ -370,6 +384,16 @@
       "confirmButton": "Subscribe Again",
       "description": "Reactivate {petName}'s subscription? You will receive deliveries again according to your plan.",
       "errorMessage": "We couldn't reactivate the subscription. Please try again or contact support.",
+      "errors": {
+        "CUSTOMER_NOT_FOUND": "Account not found. Please sign in again.",
+        "FORBIDDEN": "You don't have permission to reactivate this subscription.",
+        "INTERNAL_SERVER_ERROR": "Something went wrong. Please try again later.",
+        "REACTIVATION_FAILED": "We couldn't reactivate the subscription. Please try again or contact support.",
+        "RECHARGE_CUSTOMER_NOT_FOUND": "Subscription account not found. Please try again.",
+        "SUBSCRIPTION_ID_REQUIRED": "Invalid request. Please try again.",
+        "SUBSCRIPTION_NOT_FOUND": "Subscription not found. Please try again.",
+        "UNAUTHORIZED": "Please sign in to continue."
+      },
       "heading": "Reactivate {petName}'s Subscription?",
       "loading": "Reactivating…"
     },

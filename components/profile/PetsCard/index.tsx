@@ -3,14 +3,12 @@
 import { useTranslations } from 'next-intl'
 import { useCallback, useId, useState } from 'react'
 
-import { Button } from '@/components/common/Button'
 import { ChevronIcon } from '@/components/common/Icon'
-import { Link } from '@/components/common/Link'
 import { CancelSubscriptionModal } from '@/components/profile/CancelSubscriptionModal'
+import { SubscriptionPetRow } from '@/components/profile/PetsCard/SubscriptionPetRow'
 import { ProfileCard } from '@/components/profile/ProfileCard'
 import { ReactivateSubscriptionModal } from '@/components/profile/ReactivateSubscriptionModal'
 import { useModal } from '@/hooks/useModal'
-import { cn } from '@/utils/cn'
 
 interface Pet {
   id: string
@@ -23,39 +21,12 @@ interface Pet {
 
 interface PetsCardProps {
   pets?: Pet[]
-  onCancelSubscription?: (subscriptionId: string) => void
+  onCancelSubscription?: (
+    subscriptionId: string
+  ) => Promise<{ success: boolean; error?: string }>
   onReactivateSubscription?: (
     subscriptionId: string
   ) => Promise<{ success: boolean; error?: string }>
-}
-
-const getSubscriptionBadgeClasses = (
-  subscriptionStatus: 'active' | 'expired'
-) => {
-  if (subscriptionStatus === 'active') {
-    return 'bg-secondary-500 text-secondary-950'
-  }
-  return 'bg-neutral-white border border-neutral-900 text-neutral-900'
-}
-
-const getSubscriptionBadgeText = (
-  subscriptionStatus: 'active' | 'expired',
-  t: ReturnType<typeof useTranslations<'Profile.PetsCard'>>
-) => {
-  if (subscriptionStatus === 'active') {
-    return t('activeSubscription')
-  }
-  return t('expiredSubscription')
-}
-
-const getActionButtonText = (
-  subscriptionStatus: 'active' | 'expired',
-  t: ReturnType<typeof useTranslations<'Profile.PetsCard'>>
-) => {
-  if (subscriptionStatus === 'active') {
-    return t('editPlan')
-  }
-  return t('subscribeAgain')
 }
 
 const PetsCard = ({
@@ -92,12 +63,17 @@ const PetsCard = ({
     [openCancelModal]
   )
 
-  const handleConfirmCancel = useCallback(() => {
+  const handleConfirmCancel = useCallback(async () => {
     if (selectedPet && onCancelSubscription) {
-      onCancelSubscription(selectedPet.id)
-      setSelectedPet(null)
+      return await onCancelSubscription(selectedPet.id)
     }
+    return { success: false }
   }, [selectedPet, onCancelSubscription])
+
+  const handleCloseCancelModal = useCallback(() => {
+    closeCancelModal()
+    setSelectedPet(null)
+  }, [closeCancelModal])
 
   const handleReactivateClick = useCallback(
     (pet: Pet) => {
@@ -113,6 +89,11 @@ const PetsCard = ({
     }
     return { success: false }
   }, [selectedPetForReactivate, onReactivateSubscription])
+
+  const handleCloseReactivateModal = useCallback(() => {
+    closeReactivateModal()
+    setSelectedPetForReactivate(null)
+  }, [closeReactivateModal])
 
   return (
     <ProfileCard className="w-full bg-neutral-white border border-quaternary-800 p-6 flex flex-col gap-8">
@@ -139,61 +120,13 @@ const PetsCard = ({
             <p className="text-body-m text-secondary-950">{t('emptyState')}</p>
           ) : (
             pets.map((pet) => (
-              <div
+              <SubscriptionPetRow
                 key={pet.id}
-                className="bg-neutral-200 p-6 flex flex-col md:flex-row gap-3 md:items-center"
-              >
-                <div className="flex flex-col gap-3 flex-1">
-                  <div className="flex gap-3 items-center">
-                    <h3 className="heading-h5 text-secondary-950">
-                      {pet.name}
-                    </h3>
-                    <span
-                      className={cn(
-                        'px-3 py-1 rounded-2xxl text-xs font-bold',
-                        getSubscriptionBadgeClasses(pet.subscriptionStatus)
-                      )}
-                    >
-                      {getSubscriptionBadgeText(pet.subscriptionStatus, t)}
-                    </span>
-                  </div>
-                  <p className="text-sm text-neutral-black">
-                    {pet.deliveryFrequency}
-                    {pet.renewalDate &&
-                      ` - ${t('renewsOn', { date: pet.renewalDate })}`}
-                  </p>
-                </div>
-                <div className="flex flex-col gap-3 md:items-center">
-                  <Button
-                    variant="tertiary"
-                    size="large"
-                    onClick={
-                      pet.subscriptionStatus === 'expired'
-                        ? () => handleReactivateClick(pet)
-                        : undefined
-                    }
-                  >
-                    {getActionButtonText(pet.subscriptionStatus, t)}
-                  </Button>
-                  {pet.subscriptionStatus === 'active' ? (
-                    <Link
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault()
-                        handleCancelClick(pet)
-                      }}
-                      className="text-sm font-bold text-neutral-black cursor-pointer"
-                      aria-label={t('cancelSubscription')}
-                    >
-                      {t('cancelSubscription')}
-                    </Link>
-                  ) : pet.paymentStatus ? (
-                    <p className="text-sm font-bold text-neutral-black">
-                      {pet.paymentStatus}
-                    </p>
-                  ) : null}
-                </div>
-              </div>
+                pet={pet}
+                onCancelClick={handleCancelClick}
+                onReactivateClick={handleReactivateClick}
+                t={t}
+              />
             ))
           )}
         </div>
@@ -201,7 +134,7 @@ const PetsCard = ({
       {selectedPet && (
         <CancelSubscriptionModal
           isOpen={isCancelModalOpen}
-          onClose={closeCancelModal}
+          onClose={handleCloseCancelModal}
           onConfirm={handleConfirmCancel}
           petName={selectedPet.name}
         />
@@ -209,10 +142,7 @@ const PetsCard = ({
       {selectedPetForReactivate && (
         <ReactivateSubscriptionModal
           isOpen={isReactivateModalOpen}
-          onClose={() => {
-            closeReactivateModal()
-            setSelectedPetForReactivate(null)
-          }}
+          onClose={handleCloseReactivateModal}
           onConfirm={handleConfirmReactivate}
           petName={selectedPetForReactivate.name}
         />

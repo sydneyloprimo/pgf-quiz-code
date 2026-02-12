@@ -17,7 +17,9 @@ interface UseProfileSubscriptionsReturn {
   isLoading: boolean
   isError: boolean
   refetch: () => Promise<void>
-  cancelSubscription: (subscriptionId: string) => Promise<boolean>
+  cancelSubscription: (
+    subscriptionId: string
+  ) => Promise<{ success: boolean; error?: string }>
   reactivateSubscription: (
     subscriptionId: string
   ) => Promise<{ success: boolean; error?: string }>
@@ -42,41 +44,49 @@ export const useProfileSubscriptions = (): UseProfileSubscriptionsReturn => {
     ? cookies[Cookies.customerAccessToken]
     : null
 
-  const fetchSubscriptions = useCallback(async () => {
-    if (!isMounted) {
-      return
-    }
-
-    if (!customerAccessToken) {
-      setPets([])
-      setIsLoading(false)
-      return
-    }
-
-    setIsLoading(true)
-    setIsError(false)
-
-    try {
-      const response = await fetch('/api/profile/subscriptions', {
-        headers: {
-          Authorization: `Bearer ${customerAccessToken}`,
-        },
-      })
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch subscriptions')
+  const fetchSubscriptions = useCallback(
+    async (background = false) => {
+      if (!isMounted) {
+        return
       }
 
-      const data = await response.json()
-      setPets(data.pets || [])
-    } catch (error) {
-      console.error('Error fetching subscriptions:', error)
-      setIsError(true)
-      setPets([])
-    } finally {
-      setIsLoading(false)
-    }
-  }, [isMounted, customerAccessToken])
+      if (!customerAccessToken) {
+        setPets([])
+        setIsLoading(false)
+        return
+      }
+
+      if (!background) {
+        setIsLoading(true)
+        setIsError(false)
+      }
+
+      try {
+        const response = await fetch('/api/profile/subscriptions', {
+          headers: {
+            Authorization: `Bearer ${customerAccessToken}`,
+          },
+        })
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch subscriptions')
+        }
+
+        const data = await response.json()
+        setPets(data.pets || [])
+      } catch {
+        if (!background) {
+          setIsError(true)
+        }
+        setPets([])
+      } finally {
+        if (!background) {
+          setIsLoading(false)
+        }
+      }
+    },
+    [isMounted, customerAccessToken]
+  )
 
   useEffect(() => {
     if (isMounted) {
@@ -85,9 +95,11 @@ export const useProfileSubscriptions = (): UseProfileSubscriptionsReturn => {
   }, [isMounted, fetchSubscriptions])
 
   const cancelSubscription = useCallback(
-    async (subscriptionId: string): Promise<boolean> => {
+    async (
+      subscriptionId: string
+    ): Promise<{ success: boolean; error?: string }> => {
       if (!customerAccessToken) {
-        return false
+        return { success: false, error: 'UNAUTHORIZED' }
       }
 
       setIsCancelling(true)
@@ -102,16 +114,30 @@ export const useProfileSubscriptions = (): UseProfileSubscriptionsReturn => {
           body: JSON.stringify({ subscriptionId }),
         })
 
+        const errorData = await response.json().catch(() => ({}))
+        const knownCodes = new Set([
+          'UNAUTHORIZED',
+          'CANCELLATION_FAILED',
+          'SUBSCRIPTION_ID_REQUIRED',
+          'CUSTOMER_NOT_FOUND',
+          'RECHARGE_CUSTOMER_NOT_FOUND',
+          'SUBSCRIPTION_NOT_FOUND',
+          'FORBIDDEN',
+          'INTERNAL_SERVER_ERROR',
+        ])
+        const code = errorData.error
+        const message = knownCodes.has(code)
+          ? code
+          : (errorData.details ?? code ?? 'CANCELLATION_FAILED')
+
         if (!response.ok) {
-          const errorData = await response.json()
-          throw new Error(errorData.error || 'Failed to cancel subscription')
+          return { success: false, error: message }
         }
 
-        await fetchSubscriptions()
-        return true
-      } catch (error) {
-        console.error('Error cancelling subscription:', error)
-        return false
+        await fetchSubscriptions(true)
+        return { success: true }
+      } catch {
+        return { success: false, error: 'INTERNAL_SERVER_ERROR' }
       } finally {
         setIsCancelling(false)
       }
@@ -124,7 +150,7 @@ export const useProfileSubscriptions = (): UseProfileSubscriptionsReturn => {
       subscriptionId: string
     ): Promise<{ success: boolean; error?: string }> => {
       if (!customerAccessToken) {
-        return { success: false, error: 'Not authenticated' }
+        return { success: false, error: 'UNAUTHORIZED' }
       }
 
       setIsReactivating(true)
@@ -140,20 +166,29 @@ export const useProfileSubscriptions = (): UseProfileSubscriptionsReturn => {
         })
 
         const errorData = await response.json().catch(() => ({}))
-        const message =
-          errorData.details ?? errorData.error ?? 'Failed to reactivate'
+        const knownCodes = new Set([
+          'UNAUTHORIZED',
+          'REACTIVATION_FAILED',
+          'SUBSCRIPTION_ID_REQUIRED',
+          'CUSTOMER_NOT_FOUND',
+          'RECHARGE_CUSTOMER_NOT_FOUND',
+          'SUBSCRIPTION_NOT_FOUND',
+          'FORBIDDEN',
+          'INTERNAL_SERVER_ERROR',
+        ])
+        const code = errorData.error
+        const message = knownCodes.has(code)
+          ? code
+          : (errorData.details ?? code ?? 'REACTIVATION_FAILED')
 
         if (!response.ok) {
           return { success: false, error: message }
         }
 
-        await fetchSubscriptions()
+        await fetchSubscriptions(true)
         return { success: true }
-      } catch (error) {
-        const message =
-          error instanceof Error ? error.message : 'Failed to reactivate'
-        console.error('Error reactivating subscription:', error)
-        return { success: false, error: message }
+      } catch {
+        return { success: false, error: 'INTERNAL_SERVER_ERROR' }
       } finally {
         setIsReactivating(false)
       }

@@ -1,7 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 
 import { Button } from '@/components/common/Button'
 import { Modal } from '@/components/common/Modal'
@@ -9,7 +9,7 @@ import { Modal } from '@/components/common/Modal'
 interface CancelSubscriptionModalProps {
   isOpen: boolean
   onClose: () => void
-  onConfirm: () => void
+  onConfirm: () => void | Promise<{ success: boolean; error?: string }>
   petName: string
 }
 
@@ -20,16 +20,56 @@ const CancelSubscriptionModal = ({
   petName,
 }: CancelSubscriptionModalProps) => {
   const t = useTranslations('Profile.CancelSubscriptionModal')
+  const [isLoading, setIsLoading] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
-  const handleConfirm = useCallback(() => {
-    onConfirm()
+  const handleConfirm = useCallback(async () => {
+    setErrorMessage(null)
+    setIsLoading(true)
+
+    try {
+      const result = await Promise.resolve(onConfirm())
+      const resolved =
+        result && typeof result === 'object' && 'success' in result
+          ? result.success
+          : true
+
+      if (resolved) {
+        onClose()
+      } else {
+        const err = result && typeof result === 'object' ? result.error : null
+        const knownCodes = new Set([
+          'UNAUTHORIZED',
+          'CANCELLATION_FAILED',
+          'SUBSCRIPTION_ID_REQUIRED',
+          'CUSTOMER_NOT_FOUND',
+          'RECHARGE_CUSTOMER_NOT_FOUND',
+          'SUBSCRIPTION_NOT_FOUND',
+          'FORBIDDEN',
+          'INTERNAL_SERVER_ERROR',
+        ])
+        const msg =
+          err && typeof err === 'string' && knownCodes.has(err)
+            ? t(`errors.${err}`)
+            : t('errorMessage')
+        setErrorMessage(msg)
+      }
+    } catch {
+      setErrorMessage(t('errorMessage'))
+    } finally {
+      setIsLoading(false)
+    }
+  }, [onConfirm, onClose, t])
+
+  const handleClose = useCallback(() => {
+    setErrorMessage(null)
     onClose()
-  }, [onConfirm, onClose])
+  }, [onClose])
 
   return (
     <Modal
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={handleClose}
       closeButtonLabel={t('closeButtonLabel')}
       ariaLabel={t('ariaLabel', { petName })}
       className="max-w-lg p-8"
@@ -41,10 +81,16 @@ const CancelSubscriptionModal = ({
         <p className="text-body-m text-secondary-950">
           {t('description', { petName })}
         </p>
+        {errorMessage && (
+          <p className="text-body-m text-feedback-error-500" role="alert">
+            {errorMessage}
+          </p>
+        )}
         <div className="flex flex-col md:flex-row gap-4 pt-2">
           <Button
             variant="tertiary"
-            onClick={onClose}
+            onClick={handleClose}
+            disabled={isLoading}
             className="w-full md:w-auto md:flex-1"
           >
             {t('cancelButton')}
@@ -52,9 +98,10 @@ const CancelSubscriptionModal = ({
           <Button
             variant="primary"
             onClick={handleConfirm}
+            disabled={isLoading}
             className="w-full md:w-auto md:flex-1 bg-feedback-error-500 hover:bg-feedback-error-600 active:bg-feedback-error-700 focus:bg-feedback-error-600"
           >
-            {t('confirmButton')}
+            {isLoading ? t('loading') : t('confirmButton')}
           </Button>
         </div>
       </div>

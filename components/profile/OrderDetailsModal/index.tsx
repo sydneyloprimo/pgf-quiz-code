@@ -54,7 +54,9 @@ const OrderDetailsModal = ({
     }
   }
 
-  const orderDisplayName = `Order ${order.name || `#${order.orderNumber}`}`
+  const orderDisplayName = t('orderDisplayName', {
+    name: order.name || `#${order.orderNumber}`,
+  })
   const lineItems = order.lineItems?.edges || []
   const shippingAddress = order.shippingAddress
 
