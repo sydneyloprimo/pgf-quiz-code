@@ -11,7 +11,7 @@ export const NAV_LINKS: NavLink[] = [
   { href: Routes.home, labelKey: 'home' },
   { href: Routes.formulation, labelKey: 'ourFormulation' },
   { href: Routes.about, labelKey: 'about' },
-  { href: Routes.contact, labelKey: 'contact' },
+  { href: Routes.recipes, labelKey: 'ourRecipes' },
 ]
 
 // Blog index
@@ -607,8 +607,8 @@ export const PACK_SIZE_GRAMS = 226.796 // 8 * 28.3495
 export interface ProductConfig {
   variantId: string
   sellingPlanIds: {
-    weekly: string
-    biweekly: string
+    weekly: string | null
+    biweekly: string | null
   }
 }
 
@@ -660,6 +660,7 @@ export const PRODUCT_MODE = {
 export const RECIPE_TYPE = {
   turkey: 'turkey',
   lamb: 'lamb',
+  seafood: 'seafood',
 } as const
 
 // Shipment frequencies
@@ -746,4 +747,156 @@ export const INGREDIENTS_DATA: IngredientData[] = [
     nameKey: 'soybeans.name',
     descriptionKey: 'soybeans.description',
   },
+] as const
+
+// Recipe page constants
+export type RecipeTabType = 'turkey' | 'lamb' | 'seafood'
+
+export const RECIPE_TABS: RecipeTabType[] = [
+  'turkey',
+  'lamb',
+  'seafood',
+] as const
+
+// Benefit translation keys used on the recipe page
+export const BENEFIT_KEYS = [
+  'benefits.benefit1',
+  'benefits.benefit2',
+  'benefits.benefit3',
+] as const
+
+export const BENEFITS_COUNT = BENEFIT_KEYS.length
+
+export interface FormulationCard {
+  id: string
+  titleKey: string
+  descriptionKey: string
+}
+
+export const FORMULATION_CARDS: FormulationCard[] = [
+  {
+    id: 'protein',
+    titleKey: 'highBiologicalValue.title',
+    descriptionKey: 'highBiologicalValue.description',
+  },
+  {
+    id: 'fat',
+    titleKey: 'optimizedFatProfile.title',
+    descriptionKey: 'optimizedFatProfile.description',
+  },
+  {
+    id: 'carbs',
+    titleKey: 'controlledCarbohydrates.title',
+    descriptionKey: 'controlledCarbohydrates.description',
+  },
+  {
+    id: 'micronutrients',
+    titleKey: 'bioavailableMicronutrients.title',
+    descriptionKey: 'bioavailableMicronutrients.description',
+  },
+  {
+    id: 'functional',
+    titleKey: 'functionalIngredients.title',
+    descriptionKey: 'functionalIngredients.description',
+  },
+] as const
+
+export interface NutrientRow {
+  id: string
+  nutrientKey: string
+  minValue: string
+  maxValue: string
+}
+
+export const NUTRIENT_DATA: Record<RecipeTabType, NutrientRow[]> = {
+  turkey: [
+    {
+      id: 'protein',
+      nutrientKey: 'crudeProtein',
+      minValue: '46%',
+      maxValue: '—',
+    },
+    {
+      id: 'fat',
+      nutrientKey: 'crudeFat',
+      minValue: '15%',
+      maxValue: '—',
+    },
+    {
+      id: 'carbs',
+      nutrientKey: 'crudeCarbs',
+      minValue: '—',
+      maxValue: '4%',
+    },
+    {
+      id: 'fiber',
+      nutrientKey: 'crudeFiber',
+      minValue: '15%',
+      maxValue: '—',
+    },
+  ],
+  lamb: [
+    {
+      id: 'protein',
+      nutrientKey: 'crudeProtein',
+      minValue: '44%',
+      maxValue: '—',
+    },
+    {
+      id: 'fat',
+      nutrientKey: 'crudeFat',
+      minValue: '14%',
+      maxValue: '—',
+    },
+    {
+      id: 'carbs',
+      nutrientKey: 'crudeCarbs',
+      minValue: '—',
+      maxValue: '5%',
+    },
+    {
+      id: 'fiber',
+      nutrientKey: 'crudeFiber',
+      minValue: '14%',
+      maxValue: '—',
+    },
+  ],
+  seafood: [
+    {
+      id: 'protein',
+      nutrientKey: 'crudeProtein',
+      minValue: '48%',
+      maxValue: '—',
+    },
+    {
+      id: 'fat',
+      nutrientKey: 'crudeFat',
+      minValue: '12%',
+      maxValue: '—',
+    },
+    {
+      id: 'carbs',
+      nutrientKey: 'crudeCarbs',
+      minValue: '—',
+      maxValue: '3%',
+    },
+    {
+      id: 'fiber',
+      nutrientKey: 'crudeFiber',
+      minValue: '12%',
+      maxValue: '—',
+    },
+  ],
+} as const
+
+export interface AccordionItem {
+  id: string
+  titleKey: string
+}
+
+export const NUTRITION_PANEL_ACCORDION_ITEMS: AccordionItem[] = [
+  { id: 'micronutrients', titleKey: 'micronutrients' },
+  { id: 'vitamins', titleKey: 'vitaminsAndMinerals' },
+  { id: 'efas', titleKey: 'essentialFattyAcids' },
+  { id: 'amino', titleKey: 'aminoAcidProfile' },
 ] as const

@@ -24,7 +24,7 @@ const AuthorCard = ({ author, reviewDate }: AuthorCardProps) => {
           <div className="relative size-28 flex-shrink-0 rounded-full">
             <Image
               src={`https:${profileUrl}`}
-              alt={author.fields.name}
+              alt={t('authorImageAlt', { name: author.fields.name })}
               fill
               className="rounded-full object-cover"
             />
