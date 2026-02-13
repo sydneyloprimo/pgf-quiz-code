@@ -63,6 +63,7 @@ const MainNav = () => {
   const totalQuantity = data?.cart?.totalQuantity ?? 0
   const hasItems = totalQuantity > 0
   const quizResultsPath = getQuizStepPath(QuizStep.Results)
+  const isHome = pathname === '/'
 
   const handleToggleMobileMenu = useCallback(() => {
     setIsMobileMenuOpen((prev) => !prev)
@@ -89,10 +90,13 @@ const MainNav = () => {
   return (
     <nav
       className={cn(
-        'bg-secondary-950 w-full',
+        'w-full',
+        isHome
+          ? 'fixed top-0 left-0 right-0 z-50 bg-transparent hover:bg-secondary-950 transition-colors duration-300'
+          : 'relative bg-secondary-950',
         'px-5 md:px-24 py-3',
         'flex items-center justify-between',
-        'shadow-sm relative'
+        isHome ? 'shadow-none' : 'shadow-sm'
       )}
       aria-label={t('ariaLabel')}
     >
