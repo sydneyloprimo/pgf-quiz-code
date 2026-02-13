@@ -5,6 +5,8 @@ import { usePathname } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useCallback, useState } from 'react'
 import { useCookies } from 'react-cookie'
+import { client } from 'shopify/client'
+import { useGetCartQuery } from 'shopify/generated/graphql'
 
 import {
   CloseIcon,
@@ -13,9 +15,12 @@ import {
   ShoppingCartIcon,
   UserIcon,
 } from '@/components/common/Icon'
+import useCartCookie from '@/hooks/useCartCookie'
+import { QuizStep } from '@/types/enums/constants'
 import { Cookies } from '@/types/enums/cookies'
 import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
+import { getQuizStepPath } from '@/utils/quizRoutes'
 
 interface NavLinkProps {
   href: string
@@ -44,6 +49,20 @@ const MainNav = () => {
   const [cookies] = useCookies([Cookies.customerAccessToken])
   const isLoggedIn = !!cookies[Cookies.customerAccessToken]
   const profileHref = isLoggedIn ? Routes.profile : Routes.signin
+  const { cartId } = useCartCookie()
+
+  const { data } = useGetCartQuery(
+    client,
+    { id: cartId },
+    {
+      enabled: !!cartId,
+      refetchOnWindowFocus: false,
+    }
+  )
+
+  const totalQuantity = data?.cart?.totalQuantity ?? 0
+  const hasItems = totalQuantity > 0
+  const quizResultsPath = getQuizStepPath(QuizStep.Results)
 
   const handleToggleMobileMenu = useCallback(() => {
     setIsMobileMenuOpen((prev) => !prev)
@@ -61,6 +80,7 @@ const MainNav = () => {
       label: t('ourFormulation'),
     },
     { key: 'about', href: Routes.about, label: t('aboutUs') },
+    { key: 'recipes', href: Routes.recipes, label: t('ourRecipes') },
   ]
 
   const isActiveLink = (href: string) => {
@@ -110,9 +130,30 @@ const MainNav = () => {
         >
           <UserIcon className="size-5" />
         </Link>
-        <span className="p-3 text-neutral-white cursor-default" aria-hidden>
+        <Link
+          href={quizResultsPath}
+          className="p-3 text-neutral-white hover:text-secondary-400 relative"
+          aria-label={t('cartAria')}
+        >
           <ShoppingCartIcon className="size-5" />
-        </span>
+          {hasItems && (
+            <span
+              className={cn(
+                'absolute top-0 left-0',
+                'bg-feedback-error-500',
+                'text-neutral-white',
+                'text-[10px] font-bold',
+                'rounded-full',
+                'min-w-[16px] h-4',
+                'flex items-center justify-center',
+                'px-1'
+              )}
+              aria-label={t('itemCountAriaLabel', { count: totalQuantity })}
+            >
+              {totalQuantity > 99 ? '99+' : totalQuantity}
+            </span>
+          )}
+        </Link>
 
         {/* Mobile Menu Toggle */}
         <button

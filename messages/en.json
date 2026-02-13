@@ -271,12 +271,135 @@
     "logoAria": "Go to homepage",
     "openMenuAria": "Open menu",
     "ourFormulation": "Our Formulation",
-    "profileAria": "User profile"
+    "ourRecipes": "Our Recipes",
+    "profileAria": "User profile",
+    "searchAria": "Search"
   },
   "Navigation": {
     "about": "About",
     "home": "Home",
-    "ourFormulation": "Our Formulation"
+    "ourFormulation": "Our Formulation",
+    "ourRecipes": "Our Recipes"
+  },
+  "Recipes": {
+    "Hero": {
+      "backgroundAlt": "Decorative background for recipes page",
+      "clinicallyApprovedAlt": "Clinically approved certification badge",
+      "logoAlt": "Purely Golden Foods decorative logo",
+      "title": "Recipe Science"
+    },
+    "Tabs": {
+      "lamb": "Lamb",
+      "recipeTabs": "Recipe tabs",
+      "seafood": "Seafood",
+      "turkey": "Turkey"
+    },
+    "Detail": {
+      "benefits": {
+        "benefit1": "Oatmeal is great for dogs with wheat sensitivities or allergies, and will help your pup feel full all day long.",
+        "benefit2": "Made with restaurant-grade, extra-lean beef, and good for fat-restricted diets.",
+        "benefit3": "Organic white quinoa is a gluten-free pseudo-grain and healthy carbohydrate. Helps support metabolism, blood sugar levels and brain function."
+      },
+      "benefitsTitle": "Benefits",
+      "ingredientsTitle": "Ingredients",
+      "lambDescription": "Our Lamb Recipe features premium New Zealand lamb as the primary protein source, paired with easily digestible carbohydrates and essential nutrients for dogs with sensitivities or those who prefer a novel protein.",
+      "lambImageAlt": "Lamb recipe food bowl",
+      "lambIngredientsList": "Premium New Zealand lamb, easily digestible carbohydrates, essential nutrients, and carefully selected supplements.",
+      "lambTitle": "Lamb Recipe",
+      "seafoodDescription": "Our Seafood Recipe combines wild-caught salmon and whitefish to deliver exceptional omega-3 fatty acids, supporting cognitive function, joint health, and a lustrous coat.",
+      "seafoodImageAlt": "Seafood recipe food bowl",
+      "seafoodIngredientsList": "Wild-caught salmon, whitefish, omega-3 rich ingredients, and carefully selected supplements.",
+      "seafoodTitle": "Seafood Recipe",
+      "subtitle": "A complete and balanced formula",
+      "turkeyDescription": "Our Turkey Recipe is crafted with premium, human-grade turkey as the first ingredient, combined with nutrient-dense vegetables and carefully selected supplements to provide complete and balanced nutrition for adult dogs.",
+      "turkeyImageAlt": "Turkey recipe food bowl",
+      "turkeyIngredientsList": "Lean ground turkey, 100% whole grain oats, spinach, wild blueberries, blackberries, beef liver, goji berries, omega-3 fish oil (anchovy), supplement blend.",
+      "turkeyTitle": "Turkey Recipe"
+    },
+    "GuaranteedAnalysis": {
+      "calories": "Calories",
+      "caloriesValue": "1,200 kcal/kg",
+      "crudeCarbs": "Crude Carbohydrates",
+      "crudeFat": "Crude Fat",
+      "crudeFiber": "Crude Fiber",
+      "crudeProtein": "Crude Protein",
+      "maxLabel": "Max %",
+      "minLabel": "Min %",
+      "moisture": "Moisture",
+      "nutrientLabel": "Nutrient",
+      "title": "Guaranteed Analysis"
+    },
+    "NutritionPanel": {
+      "aminoAcidProfile": "Amino Acid Profile",
+      "aminoContent": "Complete amino acid profile including essential amino acids for muscle maintenance and overall health.",
+      "collapseAriaLabel": "Collapse {section}",
+      "efasContent": "Balanced omega-3 and omega-6 fatty acids for skin, coat, and cognitive health.",
+      "essentialFattyAcids": "Essential Fatty Acids EFAs",
+      "expandAriaLabel": "Expand {section}",
+      "micronutrients": "Micronutrients",
+      "micronutrientsContent": "Essential micronutrients including vitamins and minerals for optimal health.",
+      "title": "Detailed Nutrition Panel",
+      "vitaminsAndMinerals": "Micronutrients | Vitamins and Minerals",
+      "vitaminsContent": "Comprehensive vitamin and mineral blend to support immune function and vitality."
+    },
+    "FormulationLogic": {
+      "bioavailableMicronutrients": {
+        "description": "Chelated minerals and bioactive vitamin forms ensure maximum absorption and utilization by your dog's body.",
+        "title": "Bioavailable Micronutrients"
+      },
+      "controlledCarbohydrates": {
+        "description": "Low-glycemic vegetables and fiber-rich ingredients support stable energy levels and healthy digestion.",
+        "title": "Controlled Carbohydrate Sources"
+      },
+      "functionalIngredients": {
+        "description": "Targeted additions like probiotics, joint-supporting compounds, and antioxidants address specific health needs.",
+        "title": "Functional Ingredients"
+      },
+      "highBiologicalValue": {
+        "description": "We select proteins with complete amino acid profiles that closely match your dog's biological needs for optimal muscle maintenance and cellular repair.",
+        "title": "High Biological Value Protein"
+      },
+      "optimizedFatProfile": {
+        "description": "Carefully balanced omega-3 and omega-6 fatty acids support skin health, coat shine, and anti-inflammatory responses.",
+        "title": "Optimized Fat Profile"
+      },
+      "title": "Formulation Logic"
+    },
+    "AAFCOStatement": {
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "subtitle": "Complete and Balanced Formula",
+      "title": "AAFCO Statement"
+    },
+    "ServingStorage": {
+      "feedingGuide": {
+        "description": "Feed according to your dog's weight and activity level. Adjust portions as needed to maintain ideal body condition.",
+        "title": "Feeding Guide"
+      },
+      "storageDelivered": {
+        "description": "Meals arrive fresh and should be refrigerated immediately upon delivery.",
+        "title": "Delivered"
+      },
+      "storageFrozen": {
+        "description": "For extended storage, freeze unopened portions for up to 6 months.",
+        "title": "Frozen"
+      },
+      "storageOpened": {
+        "description": "Once opened, consume within 5-7 days. Keep refrigerated at 40°F or below.",
+        "title": "Opened"
+      },
+      "storageTitle": "Storage Instructions",
+      "title": "Serving and Storage Guidelines"
+    },
+    "CTA": {
+      "buildPlanButton": "Build Your Dog's Plan",
+      "callNowLink": "Call Now",
+      "conciergeDescription": "Our nutrition concierge can help create a custom feeding plan tailored to your dog's unique needs.",
+      "conciergeLink": "Speak with Our Concierge",
+      "ctaImageAlt": "Happy dog enjoying our recipes",
+      "personalizedDescription": "Talk to our concierge team today for consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "personalizedHeadline": "Want a more personalized approach?",
+      "title": "Ready to Build Your Dog's Plan?"
+    }
   },
   "Profile": {
     "accountCreated": "Account created on {date}",
@@ -777,10 +900,6 @@
       "previousPage": "Previous Page",
       "previousPageAria": "Go to previous page"
     },
-    "BlogPostCTA": {
-      "description": "Take our quiz where we get to know your dog to recommend the perfect meal plan according to their unique profile.",
-      "title": "Ready to Optimize Your Dog's Nutrition?"
-    },
     "BrowseByTopic": {
       "all": "All",
       "filterByCategoryAria": "Filter blog posts by category {name}",
@@ -798,7 +917,8 @@
     "heroHeadline": "Clinical Notes from the Kitchen Lab",
     "heroSubheadline": "Unpacking canine nutrition—the physiology, the science and the\nstandards most labels don't explain."
   },
-  "BlogPostPage": {
+  "BlogPost": {
+    "authorImageAlt": "Profile picture of {name}",
     "backToBlog": "Back to Blog",
     "buildPlanButton": "Build Your Dog's Plan",
     "clinicalTakeaway": "Clinical Takeaway",
@@ -809,7 +929,12 @@
     "reviewedBy": "Reviewed {date}",
     "showReferences": "Show references",
     "talkToNutritionists": "Talk to Our Vet Nutritionists",
+    "titleNotFound": "Blog Post Not Found",
     "writtenBy": "Written by"
+  },
+  "BlogPostCTA": {
+    "description": "Take our quiz where we get to know your dog to recommend the perfect meal plan according to their unique profile.",
+    "title": "Ready to Optimize Your Dog's Nutrition?"
   },
   "PromiseOfCareAlert": {
     "closeButton": "Close alert",

@@ -4,7 +4,7 @@ import { PropsWithChildren } from 'react'
 interface ClinicalTakeawayProps extends PropsWithChildren {}
 
 const ClinicalTakeaway = ({ children }: ClinicalTakeawayProps) => {
-  const t = useTranslations('BlogPostPage')
+  const t = useTranslations('BlogPost')
 
   return (
     <section className="my-8">

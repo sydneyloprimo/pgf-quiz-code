@@ -37,13 +37,9 @@ export const generateCartPayload = ({
 
   let quantity = calculatedWeeklyPacks
 
-  if (frequency === 'WEEKLY' || frequency === 'BIWEEKLY') {
-    if (portion === 'TOPPER') {
-      quantity = Math.ceil(calculatedWeeklyPacks * 0.5)
-    }
-    if (frequency === 'BIWEEKLY') {
-      quantity = quantity * 2
-    }
+  // Double quantity for biweekly subscriptions
+  if (frequency === 'BIWEEKLY') {
+    quantity = quantity * 2
   }
 
   // Ensure quantity is at least 1

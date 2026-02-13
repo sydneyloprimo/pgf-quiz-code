@@ -5,12 +5,18 @@ import {
   Filters,
   ProductURLParameters,
 } from '@/hooks/useProductSearch'
-import { CartLineEdge } from '@/shopify/generated/graphql'
+import { GetCartQuery } from '@/shopify/generated/graphql'
 
 export const passwordRegExp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])/
 
-export const findProductLine = (edges: CartLineEdge[], productId: string) =>
-  edges.find(({ node: { id } }) => id === productId)
+type CartLineEdgeFromQuery = NonNullable<
+  NonNullable<GetCartQuery['cart']>['lines']
+>['edges'][number]
+
+export const findProductLine = <T extends { node: { id: string } }>(
+  edges: T[] | undefined,
+  productId: string
+): T | undefined => edges?.find(({ node: { id } }) => id === productId)
 
 export const buildQueryString = (params: ProductURLParameters) =>
   Object.keys(params)

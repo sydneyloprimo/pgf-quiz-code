@@ -54,6 +54,7 @@ const ShoppingCartItem = ({
   cost,
 }: ShoppingCartItemProps) => {
   const t = useTranslations('Common.ShoppingCartPanel')
+  const tCart = useTranslations('Cart')
 
   const dogNameAttribute = attributes.find(
     (attr) => attr.key === 'Dog Name'
@@ -67,7 +68,7 @@ const ShoppingCartItem = ({
     sellingPlanName: string | null | undefined
   ): string => {
     if (!sellingPlanName) {
-      return t('oneTimePurchase')
+      return tCart('oneTimePurchase')
     }
 
     const nameLower = sellingPlanName.toLowerCase()
