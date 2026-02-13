@@ -702,7 +702,6 @@ export const PRODUCT_DETAIL_SECTIONS_CONFIG: ProductDetailSectionConfig[] = [
 
 // Ingredient library section data
 export interface IngredientData {
-  iconSrc?: string
   nameKey: string
   descriptionKey: string
 }

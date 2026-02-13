@@ -34,7 +34,6 @@ const IngredientLibrarySection = () => {
       INGREDIENT_CATEGORIES.map((category) => ({
         title: t(category.titleKey),
         items: category.items.map((ingredient) => ({
-          iconSrc: ingredient.iconSrc,
           name: t(ingredient.nameKey),
           description: t(ingredient.descriptionKey),
         })),
