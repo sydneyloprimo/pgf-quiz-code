@@ -983,10 +983,14 @@
     },
     "Standards": {
       "title": "Our Standards",
-      "clinicallyBacked": "Clinically Backed Nutrition",
-      "humanGrade": "Human-Grade Ingredients",
-      "noAdditives": "No Artificial Additives",
-      "measuredPortions": "Carefully Measured Portions"
+      "box1Title": "Validated at the finished-food level",
+      "box1Description": "We verify nutrient content through testing each finished batch of food, ensuring every bowl meets the nutritional targets set out in our formulation model.",
+      "box2Title": "Batch-level nutrient testing",
+      "box2Description": "Every production run is tested for nutrient density, confirming consistency from formulation to bowl.",
+      "box3Title": "Oversight led by board-certified nutritionists",
+      "box3Description": "Our recipes are developed and reviewed by board-certified veterinary nutritionists, applying clinical reasoning to every decision.",
+      "box4Title": "Pharmaceutical-grade preparation and handling",
+      "box4Description": "From sourcing to cooking, we apply strict quality controls that include pathogen screening, temperature management, and full traceability."
     },
     "DiscoverPlans": {
       "title": "Discover our Plans",
