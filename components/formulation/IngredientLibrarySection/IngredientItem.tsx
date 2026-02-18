@@ -35,23 +35,17 @@ export const IngredientItem = ({
       <button
         type="button"
         onClick={handleToggle}
-        className={cn(
-          'w-full',
-          'py-6 px-6',
-          'flex items-center justify-between',
-          'text-left'
-        )}
+        className={
+          'w-full py-6 px-6 flex items-center justify-between text-left'
+        }
         aria-expanded={isOpen}
         aria-label={toggleAriaLabel}
       >
-        <div className={cn('flex items-center', 'gap-0')}>
+        <div className={'flex items-center'}>
           <h4
-            className={cn(
-              'font-display',
-              'text-xl leading-8',
-              'font-normal',
-              'text-quaternary-800'
-            )}
+            className={
+              'font-display text-xl leading-8 font-normal text-quaternary-800'
+            }
           >
             {name}
           </h4>
@@ -65,12 +59,9 @@ export const IngredientItem = ({
       {isOpen && (
         <div className="px-5 pb-5">
           <p
-            className={cn(
-              'font-sans',
-              'text-base leading-7',
-              'font-normal',
-              'text-secondary-950'
-            )}
+            className={
+              'font-sans text-base leading-7 font-normal text-secondary-950'
+            }
           >
             {description}
           </p>
