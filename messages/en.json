@@ -996,7 +996,6 @@
     },
     "Ingredients": {
       "title": "Ingredient Library",
-      "categoriesTitle": "Categories",
       "toggleAria": "Toggle ingredient details",
       "categories": {
         "proteinsOrgans": {
