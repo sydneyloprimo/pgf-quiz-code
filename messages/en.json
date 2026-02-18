@@ -1009,7 +1009,7 @@
     },
     "Ingredients": {
       "title": "Ingredient Library",
-      "description": "Our carefully selected ingredients are chosen for their nutritional benefits and digestibility.",
+      "description": "Each recipe uses a specific selection of these ingredients. To learn more, view our detailed <recipeBreakdowns>recipe breakdowns</recipeBreakdowns>.",
       "basil": {
         "name": "Basil",
         "description": "Basil is a versatile herb that brings a vibrant flavor to a variety of dishes. Packed with antioxidants, it helps fight free radicals in the body. Moreover, basil possesses anti-inflammatory properties and supports digestive health. Its fragrant leaves elevate the taste of sauces, salads, and even drinks, making it an excellent choice for both cooking and garnishing. We source our basil from local organic farms from Boston to ensure the highest quality."

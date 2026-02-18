@@ -50,15 +50,16 @@ const IngredientLibrarySection = () => {
           {t('title')}
         </h2>
         <p className="font-sans text-lg leading-normal text-quaternary-800 py-2 mb-8">
-          Each recipe uses a specific selection of these ingredients. To learn
-          more, view our detailed{' '}
-          <Link
-            href={Routes.recipes}
-            className="font-sans text-lg leading-normal font-normal text-quaternary-800 underline"
-          >
-            recipe breakdowns
-          </Link>
-          .
+          {t.rich('description', {
+            recipeBreakdowns: (chunks) => (
+              <Link
+                href={Routes.recipes}
+                className="font-sans text-lg leading-normal font-normal text-quaternary-800 underline"
+              >
+                {chunks}
+              </Link>
+            ),
+          })}
         </p>
 
         <div className="flex flex-col">
