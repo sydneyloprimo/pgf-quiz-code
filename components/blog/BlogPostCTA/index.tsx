@@ -6,15 +6,22 @@ import { Button } from '@/components/common/Button'
 import { Link } from '@/components/common/Link'
 import { useConciergeContact } from '@/hooks/useConciergeContact'
 import { QuizStep } from '@/types/enums/constants'
+import { cn } from '@/utils/cn'
 import { getQuizStepPath } from '@/utils/quizRoutes'
 
-const BlogPostCTA = () => {
+interface BlogPostCTAProps {
+  /** Use creamy page background (e.g. on blog post page). Default: white. */
+  variant?: 'index' | 'post'
+}
+
+const BlogPostCTA = ({ variant = 'index' }: BlogPostCTAProps) => {
   const tCTA = useTranslations('BlogPostCTA')
   const tBlog = useTranslations('BlogPost')
   const { href } = useConciergeContact()
+  const bgClass = variant === 'post' ? 'bg-neutral-300' : 'bg-neutral-white'
 
   return (
-    <section className="w-full bg-neutral-white px-5 py-16 lg:px-24 lg:py-20">
+    <section className={cn('w-full px-5 py-16 lg:px-24 lg:py-20', bgClass)}>
       <div className="mx-auto flex max-w-6xl flex-col items-center text-center">
         <h2 className="font-display text-4xl leading-normal text-quaternary-800 mb-6">
           {tCTA('title')}

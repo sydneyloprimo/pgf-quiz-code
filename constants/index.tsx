@@ -14,6 +14,10 @@ export const NAV_LINKS: NavLink[] = [
   { href: Routes.recipes, labelKey: 'ourRecipes' },
 ]
 
+// Blog index
+export const BLOG_FEATURED_IMAGE_PATH = '/images/blog-featured.jpg'
+export const BLOG_INDEX_POSTS_PER_PAGE = 4
+
 // Tailwind default md breakpoint is 768px
 export const MOBILE_WIDTH = 768
 

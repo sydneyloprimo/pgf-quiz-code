@@ -947,6 +947,20 @@
       ]
     }
   },
+  "BlogIndex": {
+    "heroHeadline": "Clinical Notes from the Kitchen Lab",
+    "heroSubheadline": "Unpacking canine nutrition—the physiology, the science and the\nstandards most labels don't explain."
+  },
+  "BlogList": {
+    "nextPage": "Next Page",
+    "nextPageAria": "Go to next page",
+    "paginationAria": "Blog list pagination",
+    "postAuthorAndDate": "{author} | {date}",
+    "postByAuthor": "By {author}",
+    "postDate": "{date}",
+    "previousPage": "Previous Page",
+    "previousPageAria": "Go to previous page"
+  },
   "BlogPost": {
     "authorImageAlt": "Profile picture of {name}",
     "backToBlog": "Back to Blog",
@@ -965,6 +979,20 @@
   "BlogPostCTA": {
     "description": "Take our quiz where we get to know your dog to recommend the perfect meal plan according to their unique profile.",
     "title": "Ready to Optimize Your Dog's Nutrition?"
+  },
+  "BrowseByTopic": {
+    "all": "All",
+    "filterByCategoryAria": "Filter blog posts by category {name}",
+    "selectAllAria": "Show all blog posts",
+    "title": "Browse by Topic"
+  },
+  "FeaturedBlogPost": {
+    "featured": "Featured",
+    "readPostAria": "Read featured post: {title}"
+  },
+  "MeetTheContributors": {
+    "contributorRole": "Contributor and Clinical Advisor",
+    "title": "Meet the Contributors"
   },
   "PromiseOfCareAlert": {
     "closeButton": "Close alert",
