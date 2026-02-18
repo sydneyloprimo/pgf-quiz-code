@@ -34,6 +34,7 @@ const AnnouncementToast = () => {
       <div
         className={cn(
           'bg-feedback-success-100 w-full',
+          'fixed left-0 right-0 z-40 top-[4.25rem]',
           'px-5 md:px-8 py-4',
           'flex items-center gap-4'
         )}

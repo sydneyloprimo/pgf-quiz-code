@@ -90,9 +90,9 @@ const MainNav = () => {
   return (
     <nav
       className={cn(
-        'w-full',
+        'w-full group overflow-hidden',
         isHome
-          ? 'fixed top-0 left-0 right-0 z-50 bg-transparent hover:bg-secondary-950 transition-colors duration-300'
+          ? 'fixed top-0 left-0 right-0 z-50 bg-transparent'
           : 'relative bg-secondary-950',
         'px-5 md:px-24 py-3',
         'flex items-center justify-between',
@@ -100,6 +100,18 @@ const MainNav = () => {
       )}
       aria-label={t('ariaLabel')}
     >
+      {isHome && (
+        <div
+          className={cn(
+            'absolute inset-0 -z-10',
+            'bg-secondary-950',
+            'transform -translate-y-full',
+            'group-hover:translate-y-0',
+            'transition-transform duration-300'
+          )}
+          aria-hidden="true"
+        />
+      )}
       {/* Logo */}
       <Link
         href={Routes.home}
