@@ -36,7 +36,7 @@ const HowItWorksSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col gap-12">
+      <div className="relative z-10 flex flex-col gap-4 md:gap-12">
         <h2
           className={cn(
             'font-display',
