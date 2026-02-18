@@ -36,6 +36,7 @@ export default function RootLayout({
           'Formulation',
           'Home',
           'MeetTheContributors',
+          'Recipes',
         ]}
       >
         {children}
