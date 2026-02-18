@@ -40,7 +40,7 @@ const HeroSection = () => {
 
       {/* Dark Overlay */}
       <div
-        className="absolute inset-0 bg-neutral-950 opacity-60 z-2"
+        className="absolute inset-0 bg-neutral-950 opacity-30 z-2"
         aria-hidden="true"
       />
 
