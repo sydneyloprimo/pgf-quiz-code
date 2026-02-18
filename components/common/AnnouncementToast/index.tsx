@@ -35,17 +35,17 @@ const AnnouncementToast = () => {
         className={cn(
           'bg-feedback-success-100 w-full',
           'fixed left-0 right-0 z-40 top-[4.25rem]',
-          'px-5 md:px-8 py-4',
-          'flex items-center gap-4'
+          'px-4 md:px-8 py-2 md:py-4',
+          'flex items-center gap-2 md:gap-4'
         )}
         role="alert"
       >
         <AnnouncementIcon
-          className="size-6 text-feedback-success-900 shrink-0"
+          className="size-5 md:size-6 text-feedback-success-900 shrink-0"
           aria-hidden="true"
         />
 
-        <p className="flex-1 font-semibold text-base leading-6 text-feedback-success-900">
+        <p className="flex-1 font-semibold text-sm md:text-base leading-5 md:leading-6 text-feedback-success-900">
           {t('message')}
         </p>
 
@@ -53,7 +53,7 @@ const AnnouncementToast = () => {
           type="button"
           onClick={handleCtaClick}
           className={cn(
-            'font-bold text-base leading-4',
+            'font-bold text-sm md:text-base leading-3 md:leading-4',
             'text-feedback-success-500 underline',
             'hover:text-feedback-success-900',
             'shrink-0'
