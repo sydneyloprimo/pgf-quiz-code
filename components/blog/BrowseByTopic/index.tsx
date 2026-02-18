@@ -16,7 +16,7 @@ interface BrowseByTopicProps {
 const BrowseByTopic = ({ categories, currentSlug }: BrowseByTopicProps) => {
   const t = useTranslations('BrowseByTopic')
 
-  const buildHref = useCallback((slug: string | null) => {
+  const buildHref = useCallback((slug?: string | null) => {
     const base = Routes.blog
     if (!slug) return base
     return `${base}?category=${encodeURIComponent(slug)}`
@@ -34,7 +34,7 @@ const BrowseByTopic = ({ categories, currentSlug }: BrowseByTopicProps) => {
           aria-label={t('title')}
         >
           <Link
-            href={buildHref(null)}
+            href={buildHref()}
             className={cn(
               'rounded-none border px-4 py-2 font-sans text-body-s focus:rounded-none',
               currentSlug === null
