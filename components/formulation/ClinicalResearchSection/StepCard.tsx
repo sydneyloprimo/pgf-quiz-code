@@ -1,7 +1,6 @@
 import Image from 'next/image'
 
 interface StepCardProps {
-  number: string
   title: string
   description1: string
   description2: string
@@ -11,18 +10,15 @@ interface StepCardProps {
     bottom: string
     left: string
   }
-  moleculeSrc: string
 }
 
 const StepCard = ({
-  number,
   title,
   description1,
   description2,
   imageSrc,
   imageRotation,
   imagePosition,
-  moleculeSrc,
 }: StepCardProps) => (
   <div className="bg-neutral-400 flex justify-center py-0 lg:pt-16 pl-5 lg:pl-0 pr-5 lg:pr-12 relative overflow-clip">
     <div className="flex flex-1 flex-col gap-8 items-center justify-center max-w-4xl pb-0 lg:pb-12 pt-0 relative">

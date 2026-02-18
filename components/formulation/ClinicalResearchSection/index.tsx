@@ -18,14 +18,12 @@ const ClinicalResearchSection = () => {
   const steps = STEP_STATIC_DATA.map((staticData, i) => {
     const index = i + 1
     return {
-      number: t(`step${index}Number`),
       title: t(`step${index}Title`),
       description1: t(`step${index}Description1`),
       description2: t(`step${index}Description2`),
       imageSrc: staticData.imageSrc,
       imageRotation: staticData.imageRotation,
       imagePosition: staticData.imagePosition,
-      moleculeSrc: staticData.moleculeSrc,
     }
   })
 
