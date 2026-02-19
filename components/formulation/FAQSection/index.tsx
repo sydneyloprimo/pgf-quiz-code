@@ -21,7 +21,7 @@ const FAQSection = () => {
       className={cn(
         'w-full',
         'px-5 py-14',
-        'lg:px-24 py-16 lg:py-[200px]',
+        'lg:px-24 lg:py-[200px]',
         'md:px-24 md:pt-24 md:pb-36',
         'bg-neutral-300'
       )}

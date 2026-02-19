@@ -1,6 +1,5 @@
 'use client'
 
-import { useCallback } from 'react'
 
 import { MinusIcon, PlusIcon } from '@/components/common/Icon'
 
@@ -19,20 +18,16 @@ export const FAQItem = ({
   onToggle,
   toggleAriaLabel,
 }: FAQItemProps) => {
-  const handleToggle = useCallback(() => {
-    onToggle()
-  }, [onToggle])
-
   return (
     <div className={'w-full border-b-2 border-tertiary-400'}>
       <button
         type="button"
-        onClick={handleToggle}
+        onClick={onToggle}
         className={'w-full py-6 flex items-center justify-between text-left'}
         aria-expanded={isOpen}
         aria-label={toggleAriaLabel}
       >
-        <div className={'flex items-center gap-0'}>
+        <div className={'flex items-center'}>
           <h4
             className={
               'font-sans text-xl leading-8 font-semibold text-quaternary-800'
