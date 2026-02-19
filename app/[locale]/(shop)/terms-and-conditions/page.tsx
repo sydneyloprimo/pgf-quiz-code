@@ -1,13 +1,26 @@
-import { useTranslations } from 'next-intl'
+import type { Document } from '@contentful/rich-text-types'
 
 import { PageHero } from '@/components/common/PageHero'
 import { RichTextRenderer } from '@/components/common/RichTextRenderer'
-import type { RichTextDocument } from '@/components/common/RichTextRenderer'
+import { getRichTextCopy } from '@/contentful/copy'
+import enMessages from '@/messages/en.json'
 
-export default function TermsAndConditionsPage() {
-  const t = useTranslations('TermsAndConditions')
+type TermsAndConditionsPageProps = {
+  params: Promise<{ locale: string }>
+}
 
-  const content = t.raw('content') as RichTextDocument
+export default async function TermsAndConditionsPage({
+  params,
+}: TermsAndConditionsPageProps) {
+  const { locale } = await params
+  const contentfulContent = await getRichTextCopy(
+    'TermsAndConditions.content',
+    locale
+  )
+  const terms = (enMessages as Record<string, unknown>).TermsAndConditions as
+    | { content?: Document }
+    | undefined
+  const content = (contentfulContent ?? terms?.content) as Document
 
   return (
     <main className="flex flex-col items-center w-full bg-neutral-300">

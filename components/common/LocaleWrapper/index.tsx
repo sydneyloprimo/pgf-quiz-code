@@ -1,11 +1,12 @@
 import { notFound } from 'next/navigation'
 import { NextIntlClientProvider } from 'next-intl'
+import { getMessages } from 'next-intl/server'
 import { PropsWithChildren } from 'react'
 
 import { Locale } from '@/i18n'
 
 interface Messages {
-  [key: string]: any
+  [key: string]: unknown
 }
 
 type LocaleWrapperProps = PropsWithChildren<{
@@ -24,7 +25,10 @@ const LocaleWrapper = async ({
     if (locale !== Locale.EN) {
       throw new Error(`Unsupported locale: ${locale}`)
     }
-    messages = (await import('@/messages/en.json')).default
+    // Use getMessages() so client gets the same merged messages as getRequestConfig
+    // (en.json + Contentful overlay). Importing en.json directly skipped Contentful.
+    const merged = await getMessages()
+    messages = (merged ?? {}) as Messages
 
     if (Array.isArray(localeGroup)) {
       const filteredMessages: Messages = localeGroup.reduce((result, group) => {

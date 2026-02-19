@@ -15,8 +15,8 @@ interface BlogPostCTAProps {
 }
 
 const BlogPostCTA = ({ variant = 'index' }: BlogPostCTAProps) => {
-  const tCTA = useTranslations('BlogPostCTA')
-  const tBlog = useTranslations('BlogPost')
+  const tCTA = useTranslations('BlogIndex.BlogPostCTA')
+  const tBlog = useTranslations('BlogPostPage')
   const { href } = useConciergeContact()
   const bgClass = variant === 'post' ? 'bg-neutral-300' : 'bg-neutral-white'
 

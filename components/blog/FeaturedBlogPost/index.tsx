@@ -21,7 +21,7 @@ interface FeaturedBlogPostProps {
 }
 
 const FeaturedBlogPost = ({ post, imageSrc }: FeaturedBlogPostProps) => {
-  const t = useTranslations('FeaturedBlogPost')
+  const t = useTranslations('BlogIndex.FeaturedBlogPost')
   const { title, slug, author, categories } = post.fields
   const authorResolved =
     author && typeof author === 'object' && 'fields' in author

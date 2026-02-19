@@ -2,7 +2,6 @@ export enum Routes {
   home = '/',
   about = '/about',
   blog = '/blog',
-  contact = '/contact',
   formulation = '/formulation',
   privacyPolicy = '/privacy-policy',
   profile = '/profile',

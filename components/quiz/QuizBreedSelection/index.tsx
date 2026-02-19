@@ -1,12 +1,14 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
+import { useMemo } from 'react'
 import { Controller, useWatch, UseFormReturn } from 'react-hook-form'
 
 import { BreedDropdown } from '@/components/quiz/QuizBreedSelection/BreedDropdown'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
 import { BREEDS } from '@/constants'
+import { useQuizBreedOptions } from '@/hooks/useQuizBreedOptions'
 import { QuizStep } from '@/types/enums/constants'
 import { InputDropdownState } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
@@ -24,9 +26,22 @@ const QuizBreedSelection = ({
   canGoBack,
   formMethods,
 }: QuizBreedSelectionProps) => {
+  const locale = useLocale()
   const t = useTranslations('Quiz.breedSelection')
   const tQuiz = useTranslations('Quiz')
   const { control, watch } = formMethods
+  const contentfulBreeds = useQuizBreedOptions(locale)
+  const breeds = useMemo(
+    () =>
+      contentfulBreeds && contentfulBreeds.length > 0
+        ? contentfulBreeds
+        : BREEDS.map((b) => ({
+            value: b.value,
+            labelKey: b.labelKey,
+            categoryKey: b.categoryKey,
+          })),
+    [contentfulBreeds]
+  )
 
   const dogName =
     useWatch({
@@ -78,7 +93,7 @@ const QuizBreedSelection = ({
                 <BreedDropdown
                   value={value}
                   onSelect={onChange}
-                  breeds={BREEDS}
+                  breeds={breeds}
                   placeholder={t('placeholder')}
                   className="w-full"
                   state={

@@ -209,7 +209,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
         return t('products.turkeyDescription')
       }
       if (recipeType === 'pancreatic') {
-        return t('products.turkeyDescription')
+        return t('products.pancreaticDescription')
       }
       return t('products.lambDescription')
     },
