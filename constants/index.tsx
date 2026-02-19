@@ -703,55 +703,46 @@ export const PRODUCT_DETAIL_SECTIONS_CONFIG: ProductDetailSectionConfig[] = [
 // Formulation section data
 
 export interface FAQItem {
-  question: string
-  answer: string
+  questionKey: string
+  answerKey: string
 }
 
 export const FAQ_ITEMS: FAQItem[] = [
   {
-    question: 'What does "clinical validation" mean for PGF?',
-    answer:
-      'Controlled preclinical research conducted at Cornell University under standardized conditions. Our eight-week feeding evaluation assessed palatability, digestive tolerance, and physiological markers in adult dogs—generating objective data to inform formulation decisions. This is observational research, not an establishment therapeutic efficacy.',
+    questionKey: 'formulationFaq1Question',
+    answerKey: 'formulationFaq1Answer',
   },
   {
-    question: 'Which biomarkers are measured, and why?',
-    answer:
-      'CRP and IL-6 as indicators of inflammatory balance. Daily fecal scoring for digestive tolerance. Microbiome sequencing for microbial diversity. These markers reflect measurable physiological responses to diet.',
+    questionKey: 'formulationFaq2Question',
+    answerKey: 'formulationFaq2Answer',
   },
   {
-    question: 'How is stool quality assessed?',
-    answer:
-      'Using the Purina Fecal Scoring System, a standardized 1–7 scale used in veterinary research. A score of 2 indicates ideal consistency. Daily scoring allows us to track digestive tolerance and variability over time.',
+    questionKey: 'formulationFaq3Question',
+    answerKey: 'formulationFaq3Answer',
   },
   {
-    question: 'What does microbiome diversity indicate?',
-    answer:
-      'A diverse gut microbiome is associated with more efficient digestion, nutrient synthesis, and balanced immune signaling. Our formulations include fermentable fibers and polyphenols to promote microbial diversity and short-chain fatty acid production. We do not claim to treat or prevent disease.',
+    questionKey: 'formulationFaq4Question',
+    answerKey: 'formulationFaq4Answer',
   },
   {
-    question: 'Why measure inflammation in healthy dogs?',
-    answer:
-      'Low-grade systemic inflammation is common and often diet-influenced. Monitoring CRP and IL-6 allows us to observe whether formulation correlates with shifts in inflammatory balance. ',
+    questionKey: 'formulationFaq5Question',
+    answerKey: 'formulationFaq5Answer',
   },
   {
-    question: 'How does PGF differ from prescription diets?',
-    answer:
-      'Prescription diets manage diagnosed conditions and require veterinary authorization. PGF is formulated for adult maintenance in healthy dogs; we optimize for digestibility, gut stability, and nutrient adequacy, not to treat a specific disease.',
+    questionKey: 'formulationFaq6Question',
+    answerKey: 'formulationFaq6Answer',
   },
   {
-    question: 'How is batch-level consistency ensured?',
-    answer:
-      'Fresh ingredients vary. Every production batch is tested after preparation against AAFCO vitamin and mineral standards, confirming that finished meals meet nutrient targets regardless of seasonal or sourcing variation.',
+    questionKey: 'formulationFaq7Question',
+    answerKey: 'formulationFaq7Answer',
   },
   {
-    question: 'Who oversees formulation development?',
-    answer:
-      'Board-certified veterinary nutritionists (ECVCN-credentialed). Research protocols are conducted under IACUC approval at Cornell, ensuring compliance with animal welfare and research governance standards.',
+    questionKey: 'formulationFaq8Question',
+    answerKey: 'formulationFaq8Answer',
   },
   {
-    question: 'Will research findings be published?',
-    answer:
-      'Yes. We intend to share findings through appropriate channels as analysis is completed. Academic collaborators do not commercially endorse products, and we are committed to transparent reporting regardless of outcome.',
+    questionKey: 'formulationFaq9Question',
+    answerKey: 'formulationFaq9Answer',
   },
 ]
 

@@ -42,9 +42,9 @@ const FAQSection = () => {
         <div className="flex flex-col">
           {FAQ_ITEMS.map((faq, index) => (
             <FAQItem
-              key={faq.question}
-              question={faq.question}
-              answer={faq.answer}
+              key={faq.questionKey}
+              question={t(faq.questionKey)}
+              answer={t(faq.answerKey)}
               isOpen={openIndex === index}
               onToggle={() => handleToggle(index)}
               toggleAriaLabel="Toggle FAQ answer"
