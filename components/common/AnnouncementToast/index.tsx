@@ -45,9 +45,10 @@ const AnnouncementToast = () => {
           aria-hidden="true"
         />
 
-        <p className="flex-1 font-semibold text-sm md:text-base leading-5 md:leading-6 text-feedback-success-900">
-          {t('message')}
-        </p>
+        <div className="flex-1 font-semibold text-sm md:text-base leading-5 md:leading-6 text-feedback-success-900">
+          <p className="md:hidden">{t('messageMobile')}</p>
+          <p className="hidden md:block">{t('message')}</p>
+        </div>
 
         <button
           type="button"
