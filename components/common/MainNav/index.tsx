@@ -77,6 +77,7 @@ const MainNav = () => {
     { href: Routes.formulation, label: t('ourFormulation') },
     { href: Routes.about, label: t('aboutUs') },
     { href: Routes.recipes, label: t('ourRecipes') },
+    { href: Routes.blog, label: t('blog') },
   ]
 
   const isActiveLink = (href: string) => {
