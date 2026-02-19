@@ -39,9 +39,6 @@ const ClinicalResearchSection = () => {
           <p className="font-sans text-lg leading-normal text-quaternary-800">
             {t('description1')}
           </p>
-          {/* <p className="font-sans text-lg leading-7 text-quaternary-800">
-            {t('description2')}
-          </p>" */}
         </div>
 
         {/* Value Prop Cards */}
