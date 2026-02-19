@@ -35,6 +35,8 @@ interface OptionSelectProductProps {
   onDetailsClick?: () => void
   onSubscribeClick?: () => void
   onAddToCartClick?: () => void
+  subscribeButtonDisabled?: boolean
+  subscribeButtonText?: string
   className?: string
 }
 
@@ -58,6 +60,8 @@ const OptionSelectProduct = ({
   onDetailsClick,
   onSubscribeClick,
   onAddToCartClick,
+  subscribeButtonDisabled,
+  subscribeButtonText,
   className,
 }: OptionSelectProductProps) => {
   const t = useTranslations('Common.OptionSelectProduct')
@@ -152,6 +156,8 @@ const OptionSelectProduct = ({
               onSubscribeClick={onSubscribeClick}
               onAddToCartClick={onAddToCartClick}
               isAlaCarte={isAlaCarte}
+              subscribeButtonDisabled={subscribeButtonDisabled}
+              subscribeButtonText={subscribeButtonText}
             />
           </div>
         )}

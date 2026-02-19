@@ -10,9 +10,14 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: 'cdn.shopify.com',
-        pathname: '/**/**',
         protocol: 'https',
+        hostname: 'cdn.shopify.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.ctfassets.net',
+        pathname: '/**',
       },
       {
         hostname: 'images.ctfassets.net',

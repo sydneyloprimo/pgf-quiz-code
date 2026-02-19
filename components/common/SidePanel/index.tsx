@@ -9,6 +9,7 @@ interface SidePanelProps extends PropsWithChildren {
   onClose: () => void
   className?: string
   ariaLabel: string
+  position?: 'left' | 'right'
 }
 
 const SidePanel = ({
@@ -17,6 +18,7 @@ const SidePanel = ({
   children,
   className,
   ariaLabel,
+  position = 'left',
 }: SidePanelProps) => {
   const panelId = useId()
 
@@ -68,10 +70,10 @@ const SidePanel = ({
         aria-modal="true"
         aria-label={ariaLabel}
         className={cn(
-          // SIDE_PANEL_WIDTH constant (500px) - design-specific width
-          'fixed left-0 top-0 h-full w-full md:w-[500px]',
+          'fixed top-0 h-full w-full md:w-[500px]',
+          position === 'left' ? 'left-0' : 'right-0',
           'bg-neutral-100',
-          'overflow-y-auto',
+          'flex flex-col',
           'transition-transform duration-300 ease-in-out',
           'transform translate-x-0',
           className

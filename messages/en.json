@@ -11,6 +11,10 @@
     "password": "Password",
     "passwordPlaceholder": "Type your password"
   },
+  "Detail": {
+    "errorMessage": "Something went wrong. Please try again.",
+    "successMessage": "Added to cart successfully."
+  },
   "Common": {
     "ConciergeLink": {
       "emailAriaLabel": "Send an email to our concierge",
@@ -268,15 +272,139 @@
     "cartAria": "Shopping cart",
     "closeMenuAria": "Close menu",
     "home": "Home",
+    "itemCountAriaLabel": "{count} items in cart",
     "logoAria": "Go to homepage",
     "openMenuAria": "Open menu",
     "ourFormulation": "Our Formulation",
-    "profileAria": "User profile"
+    "ourRecipes": "Our Recipes",
+    "profileAria": "User profile",
+    "searchAria": "Search"
   },
   "Navigation": {
     "about": "About",
     "home": "Home",
-    "ourFormulation": "Our Formulation"
+    "ourFormulation": "Our Formulation",
+    "ourRecipes": "Our Recipes"
+  },
+  "Recipes": {
+    "Hero": {
+      "backgroundAlt": "Decorative background for recipes page",
+      "clinicallyApprovedAlt": "Clinically approved certification badge",
+      "logoAlt": "Purely Golden Foods decorative logo",
+      "title": "Recipe Science"
+    },
+    "Tabs": {
+      "lamb": "Lamb",
+      "recipeTabs": "Recipe tabs",
+      "seafood": "Seafood",
+      "turkey": "Turkey"
+    },
+    "Detail": {
+      "benefits": {
+        "benefit1": "Oatmeal is great for dogs with wheat sensitivities or allergies, and will help your pup feel full all day long.",
+        "benefit2": "Made with restaurant-grade, extra-lean beef, and good for fat-restricted diets.",
+        "benefit3": "Organic white quinoa is a gluten-free pseudo-grain and healthy carbohydrate. Helps support metabolism, blood sugar levels and brain function."
+      },
+      "benefitsTitle": "Benefits",
+      "ingredientsTitle": "Ingredients",
+      "lambDescription": "Our Lamb Recipe features premium New Zealand lamb as the primary protein source, paired with easily digestible carbohydrates and essential nutrients for dogs with sensitivities or those who prefer a novel protein.",
+      "lambImageAlt": "Lamb recipe food bowl",
+      "lambIngredientsList": "Premium New Zealand lamb, easily digestible carbohydrates, essential nutrients, and carefully selected supplements.",
+      "lambTitle": "Lamb Recipe",
+      "seafoodDescription": "Our Seafood Recipe combines wild-caught salmon and whitefish to deliver exceptional omega-3 fatty acids, supporting cognitive function, joint health, and a lustrous coat.",
+      "seafoodImageAlt": "Seafood recipe food bowl",
+      "seafoodIngredientsList": "Wild-caught salmon, whitefish, omega-3 rich ingredients, and carefully selected supplements.",
+      "seafoodTitle": "Seafood Recipe",
+      "subtitle": "A complete and balanced formula",
+      "turkeyDescription": "Our Turkey Recipe is crafted with premium, human-grade turkey as the first ingredient, combined with nutrient-dense vegetables and carefully selected supplements to provide complete and balanced nutrition for adult dogs.",
+      "turkeyImageAlt": "Turkey recipe food bowl",
+      "turkeyIngredientsList": "Lean ground turkey, 100% whole grain oats, spinach, wild blueberries, blackberries, beef liver, goji berries, omega-3 fish oil (anchovy), supplement blend.",
+      "turkeyTitle": "Turkey Recipe"
+    },
+    "GuaranteedAnalysis": {
+      "calories": "Calories",
+      "caloriesValue": "1,200 kcal/kg",
+      "crudeCarbs": "Crude Carbohydrates",
+      "crudeFat": "Crude Fat",
+      "crudeFiber": "Crude Fiber",
+      "crudeProtein": "Crude Protein",
+      "maxLabel": "Max %",
+      "minLabel": "Min %",
+      "moisture": "Moisture",
+      "nutrientLabel": "Nutrient",
+      "title": "Guaranteed Analysis"
+    },
+    "NutritionPanel": {
+      "aminoAcidProfile": "Amino Acid Profile",
+      "aminoContent": "Complete amino acid profile including essential amino acids for muscle maintenance and overall health.",
+      "collapseAriaLabel": "Collapse {section}",
+      "efasContent": "Balanced omega-3 and omega-6 fatty acids for skin, coat, and cognitive health.",
+      "essentialFattyAcids": "Essential Fatty Acids EFAs",
+      "expandAriaLabel": "Expand {section}",
+      "micronutrients": "Micronutrients",
+      "micronutrientsContent": "Essential micronutrients including vitamins and minerals for optimal health.",
+      "title": "Detailed Nutrition Panel",
+      "vitaminsAndMinerals": "Micronutrients | Vitamins and Minerals",
+      "vitaminsContent": "Comprehensive vitamin and mineral blend to support immune function and vitality."
+    },
+    "FormulationLogic": {
+      "bioavailableMicronutrients": {
+        "description": "Chelated minerals and bioactive vitamin forms ensure maximum absorption and utilization by your dog's body.",
+        "title": "Bioavailable Micronutrients"
+      },
+      "controlledCarbohydrates": {
+        "description": "Low-glycemic vegetables and fiber-rich ingredients support stable energy levels and healthy digestion.",
+        "title": "Controlled Carbohydrate Sources"
+      },
+      "functionalIngredients": {
+        "description": "Targeted additions like probiotics, joint-supporting compounds, and antioxidants address specific health needs.",
+        "title": "Functional Ingredients"
+      },
+      "highBiologicalValue": {
+        "description": "We select proteins with complete amino acid profiles that closely match your dog's biological needs for optimal muscle maintenance and cellular repair.",
+        "title": "High Biological Value Protein"
+      },
+      "optimizedFatProfile": {
+        "description": "Carefully balanced omega-3 and omega-6 fatty acids support skin health, coat shine, and anti-inflammatory responses.",
+        "title": "Optimized Fat Profile"
+      },
+      "title": "Formulation Logic"
+    },
+    "AAFCOStatement": {
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "subtitle": "Complete and Balanced Formula",
+      "title": "AAFCO Statement"
+    },
+    "ServingStorage": {
+      "feedingGuide": {
+        "description": "Feed according to your dog's weight and activity level. Adjust portions as needed to maintain ideal body condition.",
+        "title": "Feeding Guide"
+      },
+      "storageDelivered": {
+        "description": "Meals arrive fresh and should be refrigerated immediately upon delivery.",
+        "title": "Delivered"
+      },
+      "storageFrozen": {
+        "description": "For extended storage, freeze unopened portions for up to 6 months.",
+        "title": "Frozen"
+      },
+      "storageOpened": {
+        "description": "Once opened, consume within 5-7 days. Keep refrigerated at 40°F or below.",
+        "title": "Opened"
+      },
+      "storageTitle": "Storage Instructions",
+      "title": "Serving and Storage Guidelines"
+    },
+    "CTA": {
+      "buildPlanButton": "Build Your Dog's Plan",
+      "callNowLink": "Call Now",
+      "conciergeDescription": "Our nutrition concierge can help create a custom feeding plan tailored to your dog's unique needs.",
+      "conciergeLink": "Speak with Our Concierge",
+      "ctaImageAlt": "Happy dog enjoying our recipes",
+      "personalizedDescription": "Talk to our concierge team today for consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "personalizedHeadline": "Want a more personalized approach?",
+      "title": "Ready to Build Your Dog's Plan?"
+    }
   },
   "Profile": {
     "accountCreated": "Account created on {date}",
@@ -798,7 +926,11 @@
     "heroHeadline": "Clinical Notes from the Kitchen Lab",
     "heroSubheadline": "Unpacking canine nutrition—the physiology, the science and the\nstandards most labels don't explain."
   },
+  "BlogPost": {
+    "titleNotFound": "Blog Post Not Found"
+  },
   "BlogPostPage": {
+    "authorImageAlt": "Profile picture of {name}",
     "backToBlog": "Back to Blog",
     "buildPlanButton": "Build Your Dog's Plan",
     "clinicalTakeaway": "Clinical Takeaway",
@@ -809,6 +941,7 @@
     "reviewedBy": "Reviewed {date}",
     "showReferences": "Show references",
     "talkToNutritionists": "Talk to Our Vet Nutritionists",
+    "titleNotFound": "Blog Post Not Found",
     "writtenBy": "Written by"
   },
   "PromiseOfCareAlert": {
@@ -828,10 +961,14 @@
     },
     "Standards": {
       "title": "Our Standards",
-      "clinicallyBacked": "Clinically Backed Nutrition",
-      "humanGrade": "Human-Grade Ingredients",
-      "noAdditives": "No Artificial Additives",
-      "measuredPortions": "Carefully Measured Portions"
+      "box1Title": "Validated at the finished-food level",
+      "box1Description": "We verify nutrient content through testing each finished batch of food, ensuring every bowl meets the nutritional targets set out in our formulation model.",
+      "box2Title": "Batch-level nutrient testing",
+      "box2Description": "Every production run is tested for nutrient density, confirming consistency from formulation to bowl.",
+      "box3Title": "Oversight led by board-certified nutritionists",
+      "box3Description": "Our recipes are developed and reviewed by board-certified veterinary nutritionists, applying clinical reasoning to every decision.",
+      "box4Title": "Pharmaceutical-grade preparation and handling",
+      "box4Description": "From sourcing to cooking, we apply strict quality controls that include pathogen screening, temperature management, and full traceability."
     },
     "DiscoverPlans": {
       "title": "Discover our Plans",
@@ -841,36 +978,101 @@
     },
     "Ingredients": {
       "title": "Ingredient Library",
-      "description": "Our carefully selected ingredients are chosen for their nutritional benefits and digestibility.",
-      "basil": {
-        "name": "Basil",
-        "description": "Basil is a versatile herb that brings a vibrant flavor to a variety of dishes. Packed with antioxidants, it helps fight free radicals in the body. Moreover, basil possesses anti-inflammatory properties and supports digestive health. Its fragrant leaves elevate the taste of sauces, salads, and even drinks, making it an excellent choice for both cooking and garnishing. We source our basil from local organic farms from Boston to ensure the highest quality."
-      },
-      "pumpkin": {
-        "name": "Pumpkin",
-        "description": "Pumpkin is a nutrient-dense ingredient that provides essential vitamins and minerals for your dog's well-being. High in fiber and beta-carotene, it supports digestive health and immune function. The natural fiber content helps maintain healthy digestion and can aid in weight management. Rich in antioxidants, pumpkin also contributes to overall cellular health and helps protect against oxidative stress. We carefully select fresh, organic pumpkins to provide the best nutritional benefits."
-      },
-      "turmeric": {
-        "name": "Turmeric",
-        "description": "Turmeric is a powerful spice known for its remarkable health benefits. It contains curcumin, a potent anti-inflammatory and antioxidant compound that helps reduce inflammation throughout the body. This golden spice supports joint health, promotes healthy digestion, and contributes to overall wellness. Turmeric's natural properties make it an excellent addition to your dog's diet, helping to maintain mobility and support the body's natural healing processes. We use premium-grade turmeric to ensure maximum potency and effectiveness."
-      },
-      "avocado": {
-        "name": "Avocado",
-        "description": "Avocado is a nutrient-rich superfood that offers numerous health benefits for your dog. Rich in healthy monounsaturated fats and vitamin E, it supports skin and coat health, giving your pet a shiny, healthy appearance. The high fiber content aids in digestion and helps maintain a healthy weight. Avocados also contain essential vitamins and minerals that support overall wellness, including potassium, folate, and various B vitamins. We source only the finest, perfectly ripe avocados to provide optimal nutrition."
-      },
-      "raspberry": {
-        "name": "Raspberries",
-        "description": "Raspberries are a delicious and nutritious fruit packed with vitamins, minerals, and powerful antioxidants. These vibrant berries support immune function and help protect cells from damage caused by free radicals. Rich in vitamin C, manganese, and dietary fiber, raspberries contribute to overall health and well-being. The natural antioxidants found in raspberries, including ellagic acid and anthocyanins, provide anti-inflammatory benefits and support cardiovascular health. We select only the freshest, organic raspberries to ensure your dog receives the highest quality nutrition."
-      },
-      "lamb": {
-        "name": "Lamb",
-        "description": "Lamb is a high-quality protein source that provides essential amino acids and B vitamins crucial for your dog's health. This lean meat is rich in iron, zinc, and selenium, supporting muscle development and overall vitality. Lamb is particularly beneficial for dogs with food sensitivities, as it's less commonly used in commercial pet foods. The complete amino acid profile supports healthy muscle maintenance, while B vitamins help maintain energy levels and support metabolic function. We source our lamb from trusted, sustainable farms that prioritize animal welfare and quality."
-      },
-      "soybeans": {
-        "name": "Soy Beans",
-        "description": "Soybeans are a complete plant protein that provides all essential amino acids your dog needs for optimal health. These versatile legumes are rich in isoflavones, which have been shown to support heart health and provide antioxidant benefits. Soybeans are an excellent source of fiber, supporting digestive health and helping to maintain healthy cholesterol levels. They also contain essential minerals like iron, calcium, and magnesium, contributing to strong bones and overall wellness. We use only non-GMO, organic soybeans to ensure the highest quality and nutritional value for your pet."
-      },
-      "toggleAria": "Toggle ingredient details"
+      "toggleAria": "Toggle ingredient details",
+      "categories": {
+        "proteinsOrgans": {
+          "title": "Proteins & Organs",
+          "items": {
+            "turkey": {
+              "name": "Turkey",
+              "description": "A lean, highly digestible protein serving as a primary amino acid source. Favorable fat profile, suited for adult maintenance and controlled fat intake."
+            },
+            "lamb": {
+              "name": "Lamb",
+              "description": "A nutrient-dense red meat contributing essential amino acids, iron, and zinc. Supports protein diversity and palatability while maintaining controlled macronutrient ratios."
+            },
+            "cod": {
+              "name": "Cod",
+              "description": "A low-fat, highly digestible fish protein. Selected for formulations requiring precise lipid control and fat tolerance."
+            },
+            "beefLiver": {
+              "name": "Beef liver",
+              "description": "A concentrated source of fat-soluble vitamins and trace minerals. Included in measured amounts to support micronutrient adequacy without exceeding safe upper limits."
+            },
+            "chickenLiver": {
+              "name": "Chicken liver",
+              "description": "A functional organ providing bioavailable vitamins and minerals. Used selectively for micronutrient balance and formulation completeness."
+            },
+            "egg": {
+              "name": "Egg",
+              "description": "A highly bioavailable protein containing all essential amino acids. Supports protein quality and digestibility within mixed-ingredient formulations."
+            }
+          }
+        },
+        "carbohydratesFiber": {
+          "title": "Carbohydrates & Fiber",
+          "items": {
+            "pumpkin": {
+              "name": "Pumpkin",
+              "description": "A soluble fiber source supporting stool consistency and digestive tolerance. Contributes fermentable fiber without altering macronutrient balance."
+            },
+            "sweetPotato": {
+              "name": "Sweet potato",
+              "description": "A complex carbohydrate providing dietary fiber and sustained energy. Supports caloric structure and texture while maintaining digestibility."
+            },
+            "brownRice": {
+              "name": "Brown rice",
+              "description": "A digestible carbohydrate used in select formulations. Contributes structured energy and supports dietary tolerance in balanced proportions."
+            },
+            "butternutSquash": {
+              "name": "Butternut squash",
+              "description": "A carbohydrate and fiber source contributing natural beta-carotene. Included for functional diversity rather than caloric density."
+            }
+          }
+        },
+        "vegetablesProduce": {
+          "title": "Vegetables & Produce",
+          "items": {
+            "spinach": {
+              "name": "Spinach",
+              "description": "A low-inclusion leafy green providing trace micronutrients. Used for nutrient diversity, not as a primary fiber or calorie source."
+            },
+            "blueberries": {
+              "name": "Blueberries",
+              "description": "A natural source of polyphenols, included in small quantities. Added for compositional diversity, not therapeutic effect."
+            },
+            "cucumber": {
+              "name": "Cucumber",
+              "description": "A low-calorie, high-moisture vegetable supporting hydration and texture without materially altering macronutrient balance."
+            },
+            "parsley": {
+              "name": "Parsley",
+              "description": "Included in small amounts for micronutrient diversity and aromatic balance."
+            },
+            "dill": {
+              "name": "Dill",
+              "description": "A culinary herb at low inclusion, contributing aroma and palatability without impacting nutritional targets."
+            }
+          }
+        },
+        "fatsFunctionalAdditions": {
+          "title": "Fats & Functional Additions",
+          "items": {
+            "omega3FishOil": {
+              "name": "Omega-3 fish oil",
+              "description": "A purified source of long-chain omega-3 fatty acids. Added in measured amounts to support fatty acid balance and formulation consistency."
+            },
+            "canolaOil": {
+              "name": "Canola oil",
+              "description": "A neutral fat source used to calibrate total dietary fat levels. Supports precise lipid balance where lower overall fat is required."
+            },
+            "flaxseedChiaSeed": {
+              "name": "Flaxseed and chia seed",
+              "description": "Plant-based sources of fiber and alpha-linolenic acid (ALA). Used in small amounts to contribute to fiber diversity and fatty acid balance."
+            }
+          }
+        }
+      }
     },
     "Precision": {
       "title": "Precision\nin Every Batch",

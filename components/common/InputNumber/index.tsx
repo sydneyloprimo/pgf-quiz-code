@@ -24,7 +24,7 @@ const buttonVariants = cva(
     variants: {
       state: {
         default:
-          'bg-neutral-white border-secondary-900 hover:bg-secondary-100 active:bg-secondary-100 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-offset-2',
+          'bg-neutral-white border-secondary-900 hover:bg-secondary-100 active:bg-secondary-100 focus:outline-none',
         disabled: 'bg-neutral-100 border-neutral-100 cursor-not-allowed',
       },
     },

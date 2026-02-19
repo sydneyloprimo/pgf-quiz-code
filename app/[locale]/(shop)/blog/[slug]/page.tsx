@@ -19,10 +19,11 @@ export async function generateMetadata({
 }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params
   const blogPost = await getBlogPostBySlug(slug)
+  const t = await getTranslations('BlogPost')
 
   if (!blogPost) {
     return {
-      title: 'Blog Post Not Found',
+      title: t('titleNotFound'),
     }
   }
 

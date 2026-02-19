@@ -6,6 +6,7 @@ export enum Routes {
   privacyPolicy = '/privacy-policy',
   profile = '/profile',
   quiz = '/quiz',
+  recipes = '/recipes',
   signin = '/auth/sign-in',
   signup = '/auth/sign-up',
   termsAndConditions = '/terms-and-conditions',
