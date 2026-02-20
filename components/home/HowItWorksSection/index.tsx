@@ -25,7 +25,7 @@ const HowItWorksSection = () => {
       )}
     >
       {/* Background Texture */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none">
+      <div className="absolute inset-0 opacity-80 pointer-events-none">
         <Image
           src="/images/home/how-it-works-texture.png"
           alt=""
