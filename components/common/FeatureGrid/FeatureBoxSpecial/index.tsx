@@ -17,7 +17,7 @@ const FeatureBoxSpecial = ({ isEven }: FeatureBoxSpecialProps) => (
   >
     <div className="relative w-72 h-72">
       <Image
-        src="/images/home/dog-standing.svg"
+        src="/images/home/dog-standing.png"
         alt=""
         fill
         className="object-contain opacity-90"
