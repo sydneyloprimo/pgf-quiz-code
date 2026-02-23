@@ -32,7 +32,6 @@ const BostonAnnouncementSection = () => {
               </h2>
               <div className="font-sans text-base leading-6 text-secondary-900">
                 <p className="mb-2">{t('description1')}</p>
-                <p>{t('description2')}</p>
               </div>
             </div>
 

@@ -129,16 +129,16 @@
   },
   "Home": {
     "Benefits": {
-      "benefit1Description": "Fresh, whole-food ingredients crafted to support steady energy and overall wellness.",
-      "benefit1Title": "Balanced Nutrition",
-      "benefit2Description": "Quality proteins and healthy fats designed to fuel your dog's active lifestyle and maintain steady energy.",
-      "benefit2Title": "Sustained Energy",
-      "benefit3Description": "Antioxidant-rich ingredients and essential vitamins to strengthen natural defenses and support immune health.",
-      "benefit3Title": "Immune Support",
-      "benefit4Description": "Omega fatty acids and essential nutrients that promote a shiny, healthy coat and support overall skin wellness.",
-      "benefit4Title": "Coat Wellness",
-      "benefit5Description": "Fiber and prebiotics combined with digestive enzymes to support optimal gut health and nutrient absorption.",
-      "benefit5Title": "Digestive Health",
+      "benefit1Description": "Soluble fibers and digestible proteins selected to promote nutrient absorption and gastrointestinal tolerance.",
+      "benefit1Title": "Digestive Stability",
+      "benefit2Description": "Fiber composition selected to deliver firm, predictable stools—an observable marker of digestive function.",
+      "benefit2Title": "Stool Quality",
+      "benefit3Description": "Fermentable fibers and polyphenols selected to encourage microbial balance and short-chain fatty acid production.",
+      "benefit3Title": "Microbiome Diversity",
+      "benefit4Description": "Macronutrient ratios selected to enable slow, steady glucose release and prevent energy fluctuation.",
+      "benefit4Title": "Sustained Energy",
+      "benefit5Description": "Targeted fatty acid profiles selected to maintain barrier integrity, dermal health, and coat quality.",
+      "benefit5Title": "Skin and Coat Condition",
       "description": "Human-grade, pumpkin-based meals for your furry friends. Includes one puree and pre-portioned, tailored ingredients to easily cook up fresh, nutritious meals.",
       "imageAlt": "Golden retriever enjoying the benefits of our food",
       "pointerCoat": "COAT",
@@ -146,23 +146,31 @@
       "pointerEnergy": "ENERGY",
       "pointerImmunity": "IMMUNITY",
       "pointerNutrition": "BALANCED NUTRITION",
-      "title": "Benefits"
+      "title": "What balanced nutrition delivers"
     },
     "BostonAnnouncement": {
       "backgroundImageAlt": "Decorative background image for Boston announcement section",
-      "ctaButton": "Join the Waitlist",
-      "description1": "We're thrilled to bring wholesome, vet-crafted meals to Boston.",
-      "description2": "Make sure to join the waitlist to be the first to know when we expand to your area.",
-      "title": "We're now live in Boston!"
+      "ctaButton": "Request enrollment",
+      "description1": "Clinical-grade nutrition, launching first in Boston. We’re enrolling a limited number of dogs into our founding cohort to ensure careful oversight and quality control.",
+      "title": "Founding Cohort: Now Enrolling in Boston"
     },
     "ClinicallyApproved": {
-      "ctaButton": "Learn more about Our Recipe",
+      "ctaButton": "Explore our formulation",
       "imageAlt": "Dog enjoying clinically approved meal",
-      "stat1": "Lorem ipsum dolor sit amet this is a text example or sentence example.",
-      "stat2": "Lorem ipsum dolor sit amet this is a text example or sentence example.",
-      "stat3": "Lorem ipsum dolor sit amet this is a text example or sentence example.",
-      "stat4": "Lorem ipsum dolor sit amet this is a text example or sentence example.",
-      "title": "Clinically approved by veterinary and food specialists."
+      "title": "Clinically evaluated in Cornell University-led research",
+      "description": "Our formulation underwent an eight-week preclinical feeding evaluation at Cornell University to understand how our formulation interacts with digestion, metabolism, and physiological markers in adult dogs.",
+      "item1Title": "Digestive tolerance and stool quality",
+      "item1Description": "Daily fecal scoring conducted using the Purina 1–7 scale. Consistency and gastrointestinal tolerance tracked across the full eight-week period.",
+      "item2Title": "Palatability and consumption",
+      "item2Description": "Food acceptance measured twice daily. Monitored both immediate intake and total consumption to assess real-world feeding behavior.",
+      "item3Title": "Body weight and condition",
+      "item3Description": "Weekly assessments of body weight, body condition (AAHA 9-point scale), and muscle condition (WSAVA) completed. All evaluations conducted by veterinary staff blinded to diet group.",
+      "item4Title": "Clinical pathology and biomarkers",
+      "item4Description": "Bloodwork performed at study start and conclusion. Complete blood count, chemistry panel, CRP, fructosamine, and serum IL-6 were measured.",
+      "item5Title": "Skin, coat, and oral health",
+      "item5Description": "Skin, coat, oral health, and aural cytology evaluated at multiple timepoints. Standardized veterinary scoring systems used for objectivity.",
+      "item6Title": "Research oversight and compliance",
+      "item6Description": "Conducted under an approved IACUC protocol at Cornell's AAALAC-accredited Preclinical Services Core. Full compliance with animal welfare and research standards."
     },
     "ExploreCategories": {
       "alt": "Category image",
@@ -176,39 +184,44 @@
       "decorativeLeftVeggieAlt": "Decorative vegetable illustration on the left",
       "decorativeRightPepperAlt": "Decorative pepper illustration on the right",
       "decorativeRightVeggieAlt": "Decorative vegetable illustration on the right",
-      "faq1Answer": "Follow the feeding guide on the package and adjust based on your dog's weight and activity. Ask your vet if unsure.",
-      "faq1Question": "How can I determine the right portion size for my dog?",
-      "faq2Answer": "Gradually mix the new food with the old over 7-10 days, increasing the new food ratio each day.",
-      "faq2Question": "What is the best way to transition my dog to a new food?",
-      "faq3Answer": "Watch for symptoms like itching, digestive issues, or ear infections. Consult your vet for allergy testing.",
-      "faq3Question": "How can I tell if my dog is allergic to certain ingredients?",
-      "faq4Answer": "Try warming the food, adding toppers, or establishing a consistent feeding schedule. If issues persist, consult your vet.",
-      "faq4Question": "What should I do if my dog refuses to eat?",
+      "faq1Question": "How is PGF different from other fresh dog foods?",
+      "faq1Answer": "PGF is a clinical nutrition platform, not a lifestyle brand. Formulations are developed with board-certified veterinary nutritionists, validated through controlled research at Cornell, and verified at the batch level. We measure physiological outcomes, not just ingredient quality.",
+      "faq2Question": "Is PGF nutritionally complete?",
+      "faq2Answer": "Yes. Every recipe meets or exceeds AAFCO adult maintenance standards, meaning it’s suitable for long-term feeding. But we go further: each production batch is tested against vitamin and mineral targets to confirm nutritional adequacy in the finished food.",
+      "faq3Question": "Which dogs is PGF formulated for?",
+      "faq3Answer": "PGF is currently formulated specifically for small-breed dogs under 20 lbs. Small breeds have faster digestive transit, higher stool variability, and greater nutrient sensitivity. Our recipes are calibrated for this physiology, not scaled down from larger-breed formulations.",
+      "faq4Question": "Is a veterinary prescription required for PGF?",
+      "faq4Answer": "No. PGF is formulated for adult maintenance, not therapeutic use. We recommend discussing any dietary change with your veterinarian, and our nutrition team is available for consultation.",
+      "faq5Question": "What changes do owners typically observe first?",
+      "faq5Answer": "Improved stool consistency, energy stability, coat condition, and digestive tolerance.",
+      "faq6Question": "How flexible is the feeding schedule?",
+      "faq6Answer": "Fully. Adjust delivery cadence, pause, or modify your protocol at any time. No lock-ins.",
       "title": "Frequently Asked Questions"
     },
     "Features": {
-      "clinicalDescription": "Developed in partnership with university-led research to target gut health and long-term wellness.",
-      "clinicalTitle": "Clinically Validated Recipes",
-      "communityDescription": "Access expert workshops, wellness guides, and research updates to become your dog's healthiest ally.",
-      "communityTitle": "Community & Education",
-      "environmentDescription": "We craft every meal with a low-impact philosophy: responsibly sourced ingredients, reduced waste, and packaging designed to protect both your dog's health and the planet's future.",
-      "environmentTitle": "Environmental Commitment",
-      "pharmDescription": "We apply pharmaceutical quality control to every meal, from measured ingredients to batch testing.",
-      "pharmTitle": "Pharmaceutical-Grade Standards",
-      "transparentDescription": "Our kitchen is always visible, and our food is always fresh — made on-site and delivered same day.",
-      "transparentTitle": "Transparent Preparation"
+      "feature1Title": "Verified Nutrient Content in Every Meal",
+      "feature1Description": "We validate every recipe at the finished-food level, using laboratory testing to confirm vitamin and mineral targets are repeatedly met—not just assumed.",
+      "feature2Title": "Batch-level testing against AAFCO standards",
+      "feature2Description": "Every batch we produce is tested against AAFCO vitamin and mineral requirements, ensuring a consistent nutritional profile despite natural variation in sourcing, seasonality, and raw material composition.",
+      "feature3Title": "End-to-End veterinary nutritionist oversight",
+      "feature3Description": "Our formulation development and review are led by a board-certified veterinary nutritionist (ECVCN), ensuring that each decision is guided by established clinical nutrition principles.",
+      "feature4Title": "Designed for small-breed physiology",
+      "feature4Description": "Small breeds don’t just eat less, they metabolize differently—our recipes are engineered for their faster digestive transit, higher stool variability, and greater nutrient sensitivity.",
+      "feature5Title": "Responsible sourcing and packaging",
+      "feature5Description": "We responsibly source our ingredients and select our packaging to balance food safety, nutritional protection, and environmental impact without compromising formulation integrity."
     },
     "GoldenMeals": {
-      "ctaButton": "Learn more about Our Recipe",
-      "description": "Lorem ipsum dolor sit amet. This is an example of a text box.",
+      "ctaButton": "Learn about our recipes",
+      "description": "A protein rationale that accounts for different tolerances, sensitivities, and requirements.",
       "imageAlt": "Golden meals background with fresh ingredients",
-      "title": "Golden Meals"
+      "title": "Nutrition that recognizes physiological nuance"
     },
     "Hero": {
       "ctaButton": "Build your Dog's Plan",
       "ctaLink": "Speak directly to our Concierge",
-      "headline": "Vet-Formulated, Kitchen-Fresh Meals for Dogs.",
-      "imageAlt": "Fresh dog food preparation"
+      "headline": "Clinical-grade nutrition for small-breed digestive health",
+      "imageAlt": "Fresh dog food preparation",
+      "subheadline": "Balanced meals formulated for your dog’s physiology. Limited enrollment now open for our founding cohort."
     },
     "HeroBanner": {
       "alt": "Banner image",
@@ -217,12 +230,12 @@
       "title": "Top brands affordable prices"
     },
     "HowItWorks": {
-      "step1Description": "Every great meal begins with understanding. We take the time to learn about your dog's personality, preferences, and needs — because true nourishment starts with knowing who we're feeding.",
-      "step1Title": "We meet your dog",
-      "step2Description": "With this insight, we design a personalized meal plan, curated from the finest ingredients. Each recipe is tailored to complement your dog's lifestyle, ensuring balance, flavor, and genuine well-being.",
-      "step2Title": "Craft a unique plan for him",
-      "step3Description": "Finally, we prepare and deliver each meal with care and precision. Fresh, wholesome, and beautifully crafted — ready to delight your dog and bring peace of mind to you.",
-      "step3Title": "Deliver his perfect meal",
+      "step1Title": "We assess your dog's needs",
+      "step1Description": "We start with your dog's physiology, not preferences. Small-breed dogs metabolize differently, meaning our formulation decisions must begin there. We consider size, age, activity level, and digestive sensitivity.",
+      "step2Title": "We build a calibrated plan",
+      "step2Description": "We translate your dog’s needs into a feeding plan grounded in clinical nutrition standards. We map nutrient ratios and portions to support balanced nutrition, digestive stability, and sustained energy.",
+      "step3Title": "Your dog receives precision nutrition in every meal",
+      "step3Description": "Every meal is prepared under strict protocols. We use measured inputs, controlled cooking, and batch-level nutrient verification to ensure that what we formulated is exactly what gets delivered each time.",
       "title": "How it Works"
     },
     "LatestProducts": {
@@ -242,7 +255,7 @@
       "review3Name": "Sarah T.",
       "review3Quote": "Best decision for my dog's health.",
       "review3Text": "After years of trying different brands, I finally found what works for my sensitive golden. No more digestive issues, and his coat has never looked better! The quality is unmatched, and I can tell he feels great. Worth every penny for the peace of mind and visible results.",
-      "title": "Trusted by Devoted Dog Parents"
+      "title": "What dog owners observe"
     },
     "ShopProducts": {
       "button": "Shop products",
@@ -256,10 +269,10 @@
       "title": "Elegant & Affordable"
     },
     "VetNutritionist": {
-      "ctaButton": "Chat with Our Clinical Nutrition Concierge",
-      "description": "Speak with a veterinary nutrition expert for tailored insights into your dog's diet, wellness goals, and daily habits. Together, we'll ensure their meals are balanced, purposeful, and crafted with the care they deserve.",
+      "ctaButton": "Consult a nutritionist",
+      "description": "Consult directly with a credentialed animal nutritionist for guidance on your dog's dietary requirements, physiological needs, and feeding protocol.",
       "linkText": "Build your dog's plan",
-      "title": "Talk to a Vet-Nutritionist"
+      "title": "Speak with a nutritionist"
     }
   },
   "MainNav": {
