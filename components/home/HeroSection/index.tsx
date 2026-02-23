@@ -68,10 +68,6 @@ const HeroSection = () => {
           {t('headline')}
         </h1>
 
-        <p className="text-sm md:text-lg text-neutral-white opacity-90 w-4/5 md:w-full">
-          {t('subheadline')}
-        </p>
-
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
           <Button
             variant="primary"

@@ -2,11 +2,11 @@ import { useTranslations } from 'next-intl'
 
 import { FeatureGrid } from '@/components/common/FeatureGrid'
 import {
-  SustainabilityIcon,
-  ScienceProof2Icon,
-  ScienceProofIcon,
-  ResearchDocumentIcon,
-  SmallDogIcon,
+  FeatureClinicIcon,
+  FeatureCommunityIcon,
+  FeatureEnvironmentIcon,
+  FeaturePharmIcon,
+  FeatureTransparentIcon,
 } from '@/components/common/Icon'
 
 const HomeFeatureGrid = () => {
@@ -14,32 +14,32 @@ const HomeFeatureGrid = () => {
 
   const features = [
     {
-      icon: <ScienceProofIcon className="size-16 text-secondary-950" />,
-      title: t('feature1Title'),
-      description: t('feature1Description'),
+      icon: <FeatureClinicIcon className="size-16" />,
+      title: t('clinicalTitle'),
+      description: t('clinicalDescription'),
     },
     {
-      icon: <ResearchDocumentIcon className="size-16 text-secondary-950" />,
-      title: t('feature2Title'),
-      description: t('feature2Description'),
+      icon: <FeaturePharmIcon className="size-16" />,
+      title: t('pharmTitle'),
+      description: t('pharmDescription'),
     },
     {
-      icon: <ScienceProof2Icon className="size-16 text-secondary-950" />,
-      title: t('feature3Title'),
-      description: t('feature3Description'),
+      icon: <FeatureTransparentIcon className="size-16" />,
+      title: t('transparentTitle'),
+      description: t('transparentDescription'),
     },
     {
-      icon: <SmallDogIcon className="size-16 text-secondary-950" />,
-      title: t('feature4Title'),
-      description: t('feature4Description'),
+      icon: <FeatureCommunityIcon className="size-16" />,
+      title: t('communityTitle'),
+      description: t('communityDescription'),
     },
     {
       type: 'special' as const,
     },
     {
-      icon: <SustainabilityIcon className="size-16 text-secondary-950" />,
-      title: t('feature5Title'),
-      description: t('feature5Description'),
+      icon: <FeatureEnvironmentIcon className="size-16" />,
+      title: t('environmentTitle'),
+      description: t('environmentDescription'),
     },
   ]
 
