@@ -33,15 +33,17 @@ const BostonAnnouncementContent = ({
         <h2
           className={cn(
             'font-display heading-h2 leading-tight tracking-tight',
-            isMobile ? 'text-secondary-950' : 'text-4xl leading-12 text-white'
+            isMobile ? 'text-secondary-950' : 'text-white'
           )}
         >
           {title}
         </h2>
         <div
           className={cn(
-            'font-sans text-base leading-6',
-            isMobile ? 'text-body-m text-secondary-950' : 'text-white'
+            'font-sans',
+            isMobile
+              ? 'text-body-m text-secondary-950'
+              : 'text-body-m text-white'
           )}
         >
           <p className="mb-2">{description1}</p>

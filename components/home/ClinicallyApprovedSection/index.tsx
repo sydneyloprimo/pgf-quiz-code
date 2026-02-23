@@ -51,10 +51,10 @@ const ClinicallyApprovedSection = () => {
         <div className="w-full lg:flex-1 flex flex-col gap-14 md:gap-16 py-16 lg:px-35">
           <div className="flex flex-col gap-10">
             <div className="flex flex-col gap-4">
-              <h2 className="font-display heading-h2 md:text-4xl leading-tight md:leading-12 text-secondary-950">
+              <h2 className="font-display heading-h2 text-secondary-950">
                 {t('title')}
               </h2>
-              <p className="font-sans text-body-m leading-7 text-secondary-950">
+              <p className="font-sans text-body-m text-secondary-950">
                 {t('description')}
               </p>
             </div>
@@ -79,7 +79,7 @@ const ClinicallyApprovedSection = () => {
                 <ChevronIcon
                   direction="down"
                   className="disclaimer-chevron size-5 shrink-0 text-secondary-950 transition-transform"
-                  aria-hidden
+                  aria-hidden="true"
                 />
                 <span>{t('disclaimerLabel')}</span>
               </summary>

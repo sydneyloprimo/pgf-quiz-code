@@ -31,6 +31,7 @@ const AnnouncementToast = () => {
 
   return (
     <>
+      {/* top-[4.25rem] aligns below MainNav (py-3 + logo); update if nav height changes */}
       <div
         className={cn(
           'bg-feedback-success-100 w-full',

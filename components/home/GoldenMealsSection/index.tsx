@@ -31,7 +31,7 @@ const GoldenMealsSection = () => {
             src="/images/home/golden-meals-bg.jpg"
             alt={t('imageAlt')}
             fill
-            className="object-cover md:object-center "
+            className="object-cover md:object-center"
           />
         </div>
         <div

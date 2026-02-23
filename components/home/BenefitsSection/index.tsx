@@ -39,7 +39,7 @@ const BenefitItem = ({
     </span>
     <p
       className={cn(
-        'font-sans text-base leading-6 text-secondary-950 pl-7',
+        'block font-sans text-base leading-6 text-secondary-950 pl-7',
         isActive ? 'lg:block' : 'lg:hidden'
       )}
     >
