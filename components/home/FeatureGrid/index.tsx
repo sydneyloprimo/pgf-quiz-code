@@ -15,31 +15,31 @@ const HomeFeatureGrid = () => {
   const features = [
     {
       icon: <FeatureClinicIcon className="size-16" />,
-      title: t('clinicalTitle'),
-      description: t('clinicalDescription'),
+      title: t('feature1Title'),
+      description: t('feature1Description'),
     },
     {
       icon: <FeaturePharmIcon className="size-16" />,
-      title: t('pharmTitle'),
-      description: t('pharmDescription'),
+      title: t('feature2Title'),
+      description: t('feature2Description'),
     },
     {
       icon: <FeatureTransparentIcon className="size-16" />,
-      title: t('transparentTitle'),
-      description: t('transparentDescription'),
+      title: t('feature3Title'),
+      description: t('feature3Description'),
     },
     {
       icon: <FeatureCommunityIcon className="size-16" />,
-      title: t('communityTitle'),
-      description: t('communityDescription'),
+      title: t('feature4Title'),
+      description: t('feature4Description'),
     },
     {
       type: 'special' as const,
     },
     {
       icon: <FeatureEnvironmentIcon className="size-16" />,
-      title: t('environmentTitle'),
-      description: t('environmentDescription'),
+      title: t('feature5Title'),
+      description: t('feature5Description'),
     },
   ]
 
