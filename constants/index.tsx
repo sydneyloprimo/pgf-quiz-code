@@ -457,6 +457,14 @@ export const FAQS_DATA: FAQData[] = [
     questionKey: 'faq4Question',
     answerKey: 'faq4Answer',
   },
+  {
+    questionKey: 'faq5Question',
+    answerKey: 'faq5Answer',
+  },
+  {
+    questionKey: 'faq6Question',
+    answerKey: 'faq6Answer',
+  },
 ] as const
 
 // Reviews section data

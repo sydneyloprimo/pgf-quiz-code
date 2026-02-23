@@ -7,15 +7,15 @@ import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
 
 interface StatItemProps {
-  percentage: string
+  title: string
   description: string
 }
 
-const StatItem = ({ percentage, description }: StatItemProps) => (
-  <div className="flex items-center gap-6">
-    <span className="font-display text-4xl md:text-5xl leading-tight md:leading-14 tracking-tight text-quaternary-800 shrink-0">
-      {percentage}
-    </span>
+const StatItem = ({ title, description }: StatItemProps) => (
+  <div className="flex flex-col gap-2 md:gap-3">
+    <h3 className="font-display text-xl md:text-2xl leading-tight md:leading-10 tracking-tight text-quaternary-800">
+      {title}
+    </h3>
     <p className="text-base leading-6 text-secondary-950">{description}</p>
   </div>
 )
@@ -24,10 +24,12 @@ const ClinicallyApprovedSection = () => {
   const t = useTranslations('Home.ClinicallyApproved')
 
   const stats = [
-    { percentage: '86%', description: t('stat1') },
-    { percentage: '45%', description: t('stat2') },
-    { percentage: '75%', description: t('stat3') },
-    { percentage: '25%', description: t('stat4') },
+    { title: t('item1Title'), description: t('item1Description') },
+    { title: t('item2Title'), description: t('item2Description') },
+    { title: t('item3Title'), description: t('item3Description') },
+    { title: t('item4Title'), description: t('item4Description') },
+    { title: t('item5Title'), description: t('item5Description') },
+    { title: t('item6Title'), description: t('item6Description') },
   ]
 
   return (
@@ -50,20 +52,17 @@ const ClinicallyApprovedSection = () => {
         {/* Content */}
         <div className="w-full lg:flex-1 flex flex-col gap-14 md:gap-16 py-16 lg:px-35">
           <div className="flex flex-col gap-10">
-            <div className="flex flex-col gap-4">
-              <h2 className="font-display heading-h2 text-secondary-950">
-                {t('title')}
-              </h2>
-              <p className="font-sans text-body-m text-secondary-950">
-                {t('description')}
-              </p>
-            </div>
-
+            <h2 className="font-display text-3xl md:text-4xl leading-tight md:leading-12 text-secondary-950">
+              {t('title')}
+            </h2>
+            <p className="font-sans text-lg leading-7 text-secondary-950">
+              {t('description')}
+            </p>
             <div className="flex flex-col gap-6">
               {stats.map((stat, index) => (
                 <StatItem
                   key={index}
-                  percentage={stat.percentage}
+                  title={stat.title}
                   description={stat.description}
                 />
               ))}
