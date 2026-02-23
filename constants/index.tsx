@@ -11,8 +11,11 @@ export const NAV_LINKS: NavLink[] = [
   { href: Routes.home, labelKey: 'home' },
   { href: Routes.formulation, labelKey: 'ourFormulation' },
   { href: Routes.about, labelKey: 'about' },
-  { href: Routes.recipes, labelKey: 'ourRecipes' },
 ]
+
+// Blog index
+export const BLOG_FEATURED_IMAGE_PATH = '/images/blog-featured.jpg'
+export const BLOG_INDEX_POSTS_PER_PAGE = 4
 
 // Tailwind default md breakpoint is 768px
 export const MOBILE_WIDTH = 768
@@ -702,46 +705,120 @@ export const PRODUCT_DETAIL_SECTIONS_CONFIG: ProductDetailSectionConfig[] = [
 
 // Ingredient library section data
 export interface IngredientData {
-  iconSrc: string
   nameKey: string
   descriptionKey: string
 }
 
-export const INGREDIENTS_DATA: IngredientData[] = [
+export interface IngredientCategory {
+  titleKey: string
+  items: IngredientData[]
+}
+
+export const INGREDIENT_CATEGORIES: IngredientCategory[] = [
   {
-    iconSrc: '/icons/basil-icon.svg',
-    nameKey: 'basil.name',
-    descriptionKey: 'basil.description',
+    titleKey: 'categories.proteinsOrgans.title',
+    items: [
+      {
+        nameKey: 'categories.proteinsOrgans.items.turkey.name',
+        descriptionKey: 'categories.proteinsOrgans.items.turkey.description',
+      },
+      {
+        nameKey: 'categories.proteinsOrgans.items.lamb.name',
+        descriptionKey: 'categories.proteinsOrgans.items.lamb.description',
+      },
+      {
+        nameKey: 'categories.proteinsOrgans.items.cod.name',
+        descriptionKey: 'categories.proteinsOrgans.items.cod.description',
+      },
+      {
+        nameKey: 'categories.proteinsOrgans.items.beefLiver.name',
+        descriptionKey: 'categories.proteinsOrgans.items.beefLiver.description',
+      },
+      {
+        nameKey: 'categories.proteinsOrgans.items.chickenLiver.name',
+        descriptionKey:
+          'categories.proteinsOrgans.items.chickenLiver.description',
+      },
+      {
+        nameKey: 'categories.proteinsOrgans.items.egg.name',
+        descriptionKey: 'categories.proteinsOrgans.items.egg.description',
+      },
+    ],
   },
   {
-    iconSrc: '/icons/pumpkin-icon.svg',
-    nameKey: 'pumpkin.name',
-    descriptionKey: 'pumpkin.description',
+    titleKey: 'categories.carbohydratesFiber.title',
+    items: [
+      {
+        nameKey: 'categories.carbohydratesFiber.items.pumpkin.name',
+        descriptionKey:
+          'categories.carbohydratesFiber.items.pumpkin.description',
+      },
+      {
+        nameKey: 'categories.carbohydratesFiber.items.sweetPotato.name',
+        descriptionKey:
+          'categories.carbohydratesFiber.items.sweetPotato.description',
+      },
+      {
+        nameKey: 'categories.carbohydratesFiber.items.brownRice.name',
+        descriptionKey:
+          'categories.carbohydratesFiber.items.brownRice.description',
+      },
+      {
+        nameKey: 'categories.carbohydratesFiber.items.butternutSquash.name',
+        descriptionKey:
+          'categories.carbohydratesFiber.items.butternutSquash.description',
+      },
+    ],
   },
   {
-    iconSrc: '/icons/basil-icon.svg',
-    nameKey: 'turmeric.name',
-    descriptionKey: 'turmeric.description',
+    titleKey: 'categories.vegetablesProduce.title',
+    items: [
+      {
+        nameKey: 'categories.vegetablesProduce.items.spinach.name',
+        descriptionKey:
+          'categories.vegetablesProduce.items.spinach.description',
+      },
+      {
+        nameKey: 'categories.vegetablesProduce.items.blueberries.name',
+        descriptionKey:
+          'categories.vegetablesProduce.items.blueberries.description',
+      },
+      {
+        nameKey: 'categories.vegetablesProduce.items.cucumber.name',
+        descriptionKey:
+          'categories.vegetablesProduce.items.cucumber.description',
+      },
+      {
+        nameKey: 'categories.vegetablesProduce.items.parsley.name',
+        descriptionKey:
+          'categories.vegetablesProduce.items.parsley.description',
+      },
+      {
+        nameKey: 'categories.vegetablesProduce.items.dill.name',
+        descriptionKey: 'categories.vegetablesProduce.items.dill.description',
+      },
+    ],
   },
   {
-    iconSrc: '/icons/pumpkin-icon.svg',
-    nameKey: 'avocado.name',
-    descriptionKey: 'avocado.description',
-  },
-  {
-    iconSrc: '/icons/basil-icon.svg',
-    nameKey: 'raspberry.name',
-    descriptionKey: 'raspberry.description',
-  },
-  {
-    iconSrc: '/icons/lamb-icon.svg',
-    nameKey: 'lamb.name',
-    descriptionKey: 'lamb.description',
-  },
-  {
-    iconSrc: '/icons/pumpkin-icon.svg',
-    nameKey: 'soybeans.name',
-    descriptionKey: 'soybeans.description',
+    titleKey: 'categories.fatsFunctionalAdditions.title',
+    items: [
+      {
+        nameKey: 'categories.fatsFunctionalAdditions.items.omega3FishOil.name',
+        descriptionKey:
+          'categories.fatsFunctionalAdditions.items.omega3FishOil.description',
+      },
+      {
+        nameKey: 'categories.fatsFunctionalAdditions.items.canolaOil.name',
+        descriptionKey:
+          'categories.fatsFunctionalAdditions.items.canolaOil.description',
+      },
+      {
+        nameKey:
+          'categories.fatsFunctionalAdditions.items.flaxseedChiaSeed.name',
+        descriptionKey:
+          'categories.fatsFunctionalAdditions.items.flaxseedChiaSeed.description',
+      },
+    ],
   },
 ] as const
 

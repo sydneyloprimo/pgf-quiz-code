@@ -1,12 +1,9 @@
 export enum Routes {
   home = '/',
   about = '/about',
-  cart = '/cart',
+  blog = '/blog',
   contact = '/contact',
-  detail = '/detail/',
   formulation = '/formulation',
-  orders = '/orders',
-  products = '/products',
   privacyPolicy = '/privacy-policy',
   profile = '/profile',
   quiz = '/quiz',

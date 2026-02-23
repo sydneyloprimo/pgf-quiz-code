@@ -24,7 +24,20 @@ export default function RootLayout({
       </LocaleWrapper>
       <LocaleWrapper
         params={params}
-        localeGroup={['Home', 'Common', 'Formulation', 'About', 'Recipes']}
+        localeGroup={[
+          'About',
+          'BlogIndex',
+          'BlogList',
+          'BlogPost',
+          'BlogPostCTA',
+          'BrowseByTopic',
+          'Common',
+          'FeaturedBlogPost',
+          'Formulation',
+          'Home',
+          'MeetTheContributors',
+          'Recipes',
+        ]}
       >
         {children}
       </LocaleWrapper>

@@ -11,20 +11,6 @@
     "password": "Password",
     "passwordPlaceholder": "Type your password"
   },
-  "Cart": {
-    "checkoutButton": "Go to checkout",
-    "decreaseQuantity": "Decrease quantity",
-    "deleteButton": "Remove item",
-    "emptyState": {
-      "description": "Looks like you have not added anything to your cart.",
-      "exploreButton": "Go explore products",
-      "title": "Your cart is empty"
-    },
-    "increaseQuantity": "Increase quantity",
-    "maxStock": "There's no more stock available",
-    "title": "My shopping cart",
-    "total": "Total"
-  },
   "Common": {
     "ConciergeLink": {
       "emailAriaLabel": "Send an email to our concierge",
@@ -62,34 +48,6 @@
       "subscribeButton": "Subscribe for {price} a day",
       "whatYoullGetTitle": "What you'll get:"
     },
-    "ShoppingCartPanel": {
-      "badgeFullMeal": "Full Meal",
-      "badgeSingleMeal": "Single Meal",
-      "badgeTopper": "Topper",
-      "checkoutButton": "Checkout Now",
-      "closeButton": "Close",
-      "closeButtonAriaLabel": "Close shopping cart panel",
-      "decreaseQuantity": "Decrease quantity",
-      "deleteButtonAriaLabel": "Delete {title} from cart",
-      "emptyState": "Your cart is empty",
-      "frequencyBiWeekly": "Bi-weekly",
-      "frequencyWeekly": "Weekly",
-      "increaseQuantity": "Increase quantity",
-      "loadingAriaLabel": "Updating cart item",
-      "panelAriaLabel": "Shopping cart panel",
-      "productDescriptionPlaceholder": "Description goes here lorem ipsum dolor sit amet",
-      "productImageAlt": "Image for {title}",
-      "recipeLamb": "Lamb",
-      "recipePancreatic": "Pancreatic",
-      "recipeTurkey": "Turkey",
-      "subscriptionDisplayFullMeal": " | Full Meal",
-      "subscriptionDisplayTopper": " | Topper",
-      "title": "Your Shopping Cart"
-    },
-    "FloatingCartButton": {
-      "openCartAriaLabel": "Open shopping cart",
-      "itemCountAriaLabel": "{count} items in cart"
-    },
     "ProductDetailPanel": {
       "addToCartButton": "Add to cart",
       "alaCarteTitle": "A la carte",
@@ -110,6 +68,9 @@
       "thumbnailAlt": "Product thumbnail {number}",
       "thumbnailAriaLabel": "Select thumbnail {number}",
       "topperTitle": "Topper"
+    },
+    "ShoppingCartPanel": {
+      "oneTimePurchase": "One-time purchase"
     },
     "Toast": {
       "Error": {
@@ -139,24 +100,10 @@
       "successImageAlt": "Success checkmark icon"
     }
   },
-  "Detail": {
-    "addToCart": "Add to cart",
-    "availability": "({count} available)",
-    "errorMessage": "There was an error, try again later.",
-    "outOfStock": "Out of stock",
-    "productDescription": "Product description",
-    "quantity": "Quantity",
-    "successMessage": "{title} was added to your cart.",
-    "variant": "Variant"
-  },
   "Footer": {
     "emailAria": "Enter your email address",
     "emailPlaceholder": "Type your email here",
     "footerNavAria": "Footer navigation",
-    "linkAbout": "About Us",
-    "linkContact": "Contact information",
-    "linkHome": "Home",
-    "linkRecipe": "Our Recipe",
     "logoAria": "Go to homepage",
     "newsletterDescription": "Get early access to clinical updates, expert insights, and exclusive product drops.",
     "newsletterTitle": "Join our waitlist and newsletter",
@@ -173,7 +120,6 @@
     "logoMobile": "logo mobile",
     "logout": "Log out",
     "myAccount": "My Account",
-    "myOrders": "My Orders",
     "myProfile": "My Profile",
     "searchPlaceholder": "Search for products",
     "shoppingCart": "Shopping cart",
@@ -319,17 +265,14 @@
   "MainNav": {
     "aboutUs": "About Us",
     "ariaLabel": "Main navigation",
+    "blog": "Blog",
     "cartAria": "Shopping cart",
     "closeMenuAria": "Close menu",
-    "contact": "Contact",
     "home": "Home",
-    "itemCountAriaLabel": "{count} items in cart",
     "logoAria": "Go to homepage",
     "openMenuAria": "Open menu",
     "ourFormulation": "Our Formulation",
-    "ourRecipes": "Our Recipes",
-    "profileAria": "User profile",
-    "searchAria": "Search"
+    "profileAria": "User profile"
   },
   "Navigation": {
     "about": "About",
@@ -456,14 +399,6 @@
       "personalizedHeadline": "Want a more personalized approach?",
       "title": "Ready to Build Your Dog's Plan?"
     }
-  },
-  "Orders": {
-    "emptyState": {
-      "description": "Looks like you have not ordered anything yet.",
-      "exploreButton": "Go explore products",
-      "title": "Your orders are empty"
-    },
-    "title": "My orders"
   },
   "Profile": {
     "accountCreated": "Account created on {date}",
@@ -802,8 +737,7 @@
       "purchaseAlaCarteHeading": "Purchase à la carte",
       "recipes": {
         "turkey": "Turkey",
-        "lamb": "Lamb",
-        "pancreatic": "Pancreatic"
+        "lamb": "Lamb"
       },
       "shipmentFrequencies": {
         "everyWeek": "Every Week",
@@ -836,11 +770,9 @@
           "flexibleSchedule": "Flexible schedule — pause, skip, or cancel anytime."
         },
         "lambDescription": "Customized health benefits that specifically target concerns like dry skin and lackluster fur, ensuring your pet looks and feels their best.",
-        "turkeyDescription": "Customized health benefits that specifically target concerns like dry skin and lackluster fur, ensuring your pet looks and feels their best."
+        "turkeyDescription": "Customized health benefits that specifically target concerns like dry skin and lackluster fur, ensuring your pet looks and feels their best.",
+        "alaCartePrice": "$19.79 / 2 kg"
       },
-      "subscribeButtonAlreadyInCart": "Already in cart",
-      "subscribeButtonSwitchToFullMeal": "Switch to Full Meal Plan for {price} a day",
-      "subscribeButtonSwitchToTopper": "Switch to Topper Plan for {price} a day",
       "footer": {
         "title": "Benefits",
         "benefits": {
@@ -863,29 +795,6 @@
         }
       }
     }
-  },
-  "Search": {
-    "FilterPanel": {
-      "buttonAlt": "Select filter",
-      "category": "Category",
-      "clearFilters": "Clear Filters",
-      "condition": "Condition",
-      "filters": "Filters",
-      "max": "Max",
-      "min": "Min",
-      "new": "New",
-      "price": "Price",
-      "refurbished": "Refurbished",
-      "seeResults": "See results",
-      "title": "Your filters will appear here.",
-      "typeMax": "Type maximum",
-      "typeMin": "Type minimum",
-      "used": "Used"
-    },
-    "noResults": "No results found for search term {term}",
-    "noResultsGeneric": "No results found",
-    "search": "Search",
-    "searchTerms": "You searched for: {term}"
   },
   "SignIn": {
     "accountQuestion": "You don't have an account?",
@@ -978,9 +887,56 @@
       ]
     }
   },
+  "BlogIndex": {
+    "heroHeadline": "Clinical Notes from the Kitchen Lab",
+    "heroSubheadline": "Unpacking canine nutrition—the physiology, the science and the\nstandards most labels don't explain."
+  },
+  "BlogList": {
+    "nextPage": "Next Page",
+    "nextPageAria": "Go to next page",
+    "paginationAria": "Blog list pagination",
+    "postAuthorAndDate": "{author} | {date}",
+    "postByAuthor": "By {author}",
+    "postDate": "{date}",
+    "previousPage": "Previous Page",
+    "previousPageAria": "Go to previous page"
+  },
+  "BlogPost": {
+    "authorImageAlt": "Profile picture of {name}",
+    "backToBlog": "Back to Blog",
+    "buildPlanButton": "Build Your Dog's Plan",
+    "clinicalTakeaway": "Clinical Takeaway",
+    "disclaimer": "Educational only. Not medical advice. Consult your veterinarian for individual guidance.",
+    "readMore": "Read more",
+    "references": "References",
+    "referencesDescription": "Includes peer-reviewed sources when available; some topics rely on established clinical practice",
+    "reviewedBy": "Reviewed {date}",
+    "showReferences": "Show references",
+    "talkToNutritionists": "Talk to Our Vet Nutritionists",
+    "titleNotFound": "Blog Post Not Found",
+    "writtenBy": "Written by"
+  },
+  "BlogPostCTA": {
+    "description": "Take our quiz where we get to know your dog to recommend the perfect meal plan according to their unique profile.",
+    "title": "Ready to Optimize Your Dog's Nutrition?"
+  },
+  "BrowseByTopic": {
+    "all": "All",
+    "filterByCategoryAria": "Filter blog posts by category {name}",
+    "selectAllAria": "Show all blog posts",
+    "title": "Browse by Topic"
+  },
+  "FeaturedBlogPost": {
+    "featured": "Featured",
+    "readPostAria": "Read featured post: {title}"
+  },
+  "MeetTheContributors": {
+    "contributorRole": "Contributor and Clinical Advisor",
+    "title": "Meet the Contributors"
+  },
   "PromiseOfCareAlert": {
-    "message": "Our Promise of Care: Every recipe is formulated to meet pharmaceutical grade standards for quality and digestibility. If your dog doesn't respond as expected, our nutrition team will work with you to make it right.",
-    "closeButton": "Close alert"
+    "closeButton": "Close alert",
+    "message": "Our Promise of Care: Every recipe is formulated to meet pharmaceutical grade standards for quality and digestibility. If your dog doesn't respond as expected, our nutrition team will work with you to make it right."
   },
   "Formulation": {
     "Hero": {
@@ -996,10 +952,14 @@
     "Standards": {
       "title": "Our Standards",
       "subtitle": "These standards govern every step of our formulation, production, and verification.",
-      "clinicallyBacked": "Clinically Backed Nutrition",
-      "humanGrade": "Human-Grade Ingredients",
-      "noAdditives": "No Artificial Additives",
-      "measuredPortions": "Carefully Measured Portions"
+      "box1Title": "Validated at the finished-food level",
+      "box1Description": "We verify nutrient content through testing each finished batch of food, ensuring every bowl meets the nutritional targets set out in our formulation model.",
+      "box2Title": "Batch-level nutrient testing",
+      "box2Description": "Every production run is tested for nutrient density, confirming consistency from formulation to bowl.",
+      "box3Title": "Oversight led by board-certified nutritionists",
+      "box3Description": "Our recipes are developed and reviewed by board-certified veterinary nutritionists, applying clinical reasoning to every decision.",
+      "box4Title": "Pharmaceutical-grade preparation and handling",
+      "box4Description": "From sourcing to cooking, we apply strict quality controls that include pathogen screening, temperature management, and full traceability."
     },
     "DiscoverPlans": {
       "title": "Learn from the experts",
@@ -1010,35 +970,101 @@
     "Ingredients": {
       "title": "Ingredient Library",
       "description": "Each recipe uses a specific selection of these ingredients. To learn more, view our detailed <recipeBreakdowns>recipe breakdowns</recipeBreakdowns>.",
-      "basil": {
-        "name": "Basil",
-        "description": "Basil is a versatile herb that brings a vibrant flavor to a variety of dishes. Packed with antioxidants, it helps fight free radicals in the body. Moreover, basil possesses anti-inflammatory properties and supports digestive health. Its fragrant leaves elevate the taste of sauces, salads, and even drinks, making it an excellent choice for both cooking and garnishing. We source our basil from local organic farms from Boston to ensure the highest quality."
-      },
-      "pumpkin": {
-        "name": "Pumpkin",
-        "description": "Pumpkin is a nutrient-dense ingredient that provides essential vitamins and minerals for your dog's well-being. High in fiber and beta-carotene, it supports digestive health and immune function. The natural fiber content helps maintain healthy digestion and can aid in weight management. Rich in antioxidants, pumpkin also contributes to overall cellular health and helps protect against oxidative stress. We carefully select fresh, organic pumpkins to provide the best nutritional benefits."
-      },
-      "turmeric": {
-        "name": "Turmeric",
-        "description": "Turmeric is a powerful spice known for its remarkable health benefits. It contains curcumin, a potent anti-inflammatory and antioxidant compound that helps reduce inflammation throughout the body. This golden spice supports joint health, promotes healthy digestion, and contributes to overall wellness. Turmeric's natural properties make it an excellent addition to your dog's diet, helping to maintain mobility and support the body's natural healing processes. We use premium-grade turmeric to ensure maximum potency and effectiveness."
-      },
-      "avocado": {
-        "name": "Avocado",
-        "description": "Avocado is a nutrient-rich superfood that offers numerous health benefits for your dog. Rich in healthy monounsaturated fats and vitamin E, it supports skin and coat health, giving your pet a shiny, healthy appearance. The high fiber content aids in digestion and helps maintain a healthy weight. Avocados also contain essential vitamins and minerals that support overall wellness, including potassium, folate, and various B vitamins. We source only the finest, perfectly ripe avocados to provide optimal nutrition."
-      },
-      "raspberry": {
-        "name": "Raspberries",
-        "description": "Raspberries are a delicious and nutritious fruit packed with vitamins, minerals, and powerful antioxidants. These vibrant berries support immune function and help protect cells from damage caused by free radicals. Rich in vitamin C, manganese, and dietary fiber, raspberries contribute to overall health and well-being. The natural antioxidants found in raspberries, including ellagic acid and anthocyanins, provide anti-inflammatory benefits and support cardiovascular health. We select only the freshest, organic raspberries to ensure your dog receives the highest quality nutrition."
-      },
-      "lamb": {
-        "name": "Lamb",
-        "description": "Lamb is a high-quality protein source that provides essential amino acids and B vitamins crucial for your dog's health. This lean meat is rich in iron, zinc, and selenium, supporting muscle development and overall vitality. Lamb is particularly beneficial for dogs with food sensitivities, as it's less commonly used in commercial pet foods. The complete amino acid profile supports healthy muscle maintenance, while B vitamins help maintain energy levels and support metabolic function. We source our lamb from trusted, sustainable farms that prioritize animal welfare and quality."
-      },
-      "soybeans": {
-        "name": "Soy Beans",
-        "description": "Soybeans are a complete plant protein that provides all essential amino acids your dog needs for optimal health. These versatile legumes are rich in isoflavones, which have been shown to support heart health and provide antioxidant benefits. Soybeans are an excellent source of fiber, supporting digestive health and helping to maintain healthy cholesterol levels. They also contain essential minerals like iron, calcium, and magnesium, contributing to strong bones and overall wellness. We use only non-GMO, organic soybeans to ensure the highest quality and nutritional value for your pet."
-      },
-      "toggleAria": "Toggle ingredient details"
+      "toggleAria": "Toggle ingredient details",
+      "categories": {
+        "proteinsOrgans": {
+          "title": "Proteins & Organs",
+          "items": {
+            "turkey": {
+              "name": "Turkey",
+              "description": "A lean, highly digestible protein serving as a primary amino acid source. Favorable fat profile, suited for adult maintenance and controlled fat intake."
+            },
+            "lamb": {
+              "name": "Lamb",
+              "description": "A nutrient-dense red meat contributing essential amino acids, iron, and zinc. Supports protein diversity and palatability while maintaining controlled macronutrient ratios."
+            },
+            "cod": {
+              "name": "Cod",
+              "description": "A low-fat, highly digestible fish protein. Selected for formulations requiring precise lipid control and fat tolerance."
+            },
+            "beefLiver": {
+              "name": "Beef liver",
+              "description": "A concentrated source of fat-soluble vitamins and trace minerals. Included in measured amounts to support micronutrient adequacy without exceeding safe upper limits."
+            },
+            "chickenLiver": {
+              "name": "Chicken liver",
+              "description": "A functional organ providing bioavailable vitamins and minerals. Used selectively for micronutrient balance and formulation completeness."
+            },
+            "egg": {
+              "name": "Egg",
+              "description": "A highly bioavailable protein containing all essential amino acids. Supports protein quality and digestibility within mixed-ingredient formulations."
+            }
+          }
+        },
+        "carbohydratesFiber": {
+          "title": "Carbohydrates & Fiber",
+          "items": {
+            "pumpkin": {
+              "name": "Pumpkin",
+              "description": "A soluble fiber source supporting stool consistency and digestive tolerance. Contributes fermentable fiber without altering macronutrient balance."
+            },
+            "sweetPotato": {
+              "name": "Sweet potato",
+              "description": "A complex carbohydrate providing dietary fiber and sustained energy. Supports caloric structure and texture while maintaining digestibility."
+            },
+            "brownRice": {
+              "name": "Brown rice",
+              "description": "A digestible carbohydrate used in select formulations. Contributes structured energy and supports dietary tolerance in balanced proportions."
+            },
+            "butternutSquash": {
+              "name": "Butternut squash",
+              "description": "A carbohydrate and fiber source contributing natural beta-carotene. Included for functional diversity rather than caloric density."
+            }
+          }
+        },
+        "vegetablesProduce": {
+          "title": "Vegetables & Produce",
+          "items": {
+            "spinach": {
+              "name": "Spinach",
+              "description": "A low-inclusion leafy green providing trace micronutrients. Used for nutrient diversity, not as a primary fiber or calorie source."
+            },
+            "blueberries": {
+              "name": "Blueberries",
+              "description": "A natural source of polyphenols, included in small quantities. Added for compositional diversity, not therapeutic effect."
+            },
+            "cucumber": {
+              "name": "Cucumber",
+              "description": "A low-calorie, high-moisture vegetable supporting hydration and texture without materially altering macronutrient balance."
+            },
+            "parsley": {
+              "name": "Parsley",
+              "description": "Included in small amounts for micronutrient diversity and aromatic balance."
+            },
+            "dill": {
+              "name": "Dill",
+              "description": "A culinary herb at low inclusion, contributing aroma and palatability without impacting nutritional targets."
+            }
+          }
+        },
+        "fatsFunctionalAdditions": {
+          "title": "Fats & Functional Additions",
+          "items": {
+            "omega3FishOil": {
+              "name": "Omega-3 fish oil",
+              "description": "A purified source of long-chain omega-3 fatty acids. Added in measured amounts to support fatty acid balance and formulation consistency."
+            },
+            "canolaOil": {
+              "name": "Canola oil",
+              "description": "A neutral fat source used to calibrate total dietary fat levels. Supports precise lipid balance where lower overall fat is required."
+            },
+            "flaxseedChiaSeed": {
+              "name": "Flaxseed and chia seed",
+              "description": "Plant-based sources of fiber and alpha-linolenic acid (ALA). Used in small amounts to contribute to fiber diversity and fatty acid balance."
+            }
+          }
+        }
+      }
     },
     "Precision": {
       "title": "Precision in Every Batch",
