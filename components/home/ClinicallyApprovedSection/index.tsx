@@ -2,7 +2,9 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
+import { ChevronIcon } from '@/components/common/Icon'
 import { Routes } from '@/types/enums/routes'
+import { cn } from '@/utils/cn'
 
 interface StatItemProps {
   percentage: string
@@ -67,11 +69,23 @@ const ClinicallyApprovedSection = () => {
               ))}
             </div>
 
-            <details className="text-secondary-950">
-              <summary className="cursor-pointer text-sm font-semibold underline underline-offset-4">
-                {t('disclaimerLabel')}
+            <details
+              className={cn(
+                'text-secondary-950 border-b border-neutral-600',
+                '[&[open]_.disclaimer-chevron]:rotate-180'
+              )}
+            >
+              <summary className="cursor-pointer list-none py-3 flex items-center gap-2 font-sans text-base font-medium text-secondary-950 outline-none [&::-webkit-details-marker]:hidden">
+                <ChevronIcon
+                  direction="down"
+                  className="disclaimer-chevron size-5 shrink-0 text-secondary-950 transition-transform"
+                  aria-hidden
+                />
+                <span>{t('disclaimerLabel')}</span>
               </summary>
-              <p className="mt-3 text-sm leading-6">{t('disclaimerText')}</p>
+              <p className="pb-3 pl-7 text-sm leading-6 text-secondary-950">
+                {t('disclaimerText')}
+              </p>
             </details>
           </div>
 
