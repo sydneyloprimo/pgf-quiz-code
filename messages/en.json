@@ -2,7 +2,8 @@
   "AnnouncementToast": {
     "ctaLink": "Join our waitlist",
     "dismissAria": "Dismiss announcement",
-    "message": "Boston, we're here—founding members get 20% off + free consultation"
+    "message": "Boston, we're here—founding members get 20% off + free consultation",
+    "messageMobile": "We're live in Boston!"
   },
   "Auth": {
     "email": "Email",
@@ -150,19 +151,22 @@
     },
     "BostonAnnouncement": {
       "backgroundImageAlt": "Decorative background image for Boston announcement section",
-      "ctaButton": "Join the Waitlist",
-      "description1": "We're thrilled to bring wholesome, vet-crafted meals to Boston.",
-      "description2": "Make sure to join the waitlist to be the first to know when we expand to your area.",
-      "title": "We're now live in Boston!"
+      "ctaButton": "Request enrollment",
+      "description1": "Clinical-grade nutrition, launching first in Boston.",
+      "description2": "We’re enrolling a limited number of dogs into our founding cohort to ensure careful oversight and quality control.",
+      "title": "Founding Cohort: Now Enrolling in Boston"
     },
     "ClinicallyApproved": {
       "ctaButton": "Learn more about Our Recipe",
+      "disclaimerLabel": "Research disclaimer",
+      "disclaimerText": "IACUC (Institutional Animal Care and Use Committee) is the oversight body responsible for reviewing and approving research protocols involving animals. AAALAC (Association for Assessment and Accreditation of Laboratory Animal Care) is an independent organization that accredits institutions meeting the highest standards of animal care and welfare in research settings.",
       "imageAlt": "Dog enjoying clinically approved meal",
       "stat1": "Lorem ipsum dolor sit amet this is a text example or sentence example.",
       "stat2": "Lorem ipsum dolor sit amet this is a text example or sentence example.",
       "stat3": "Lorem ipsum dolor sit amet this is a text example or sentence example.",
       "stat4": "Lorem ipsum dolor sit amet this is a text example or sentence example.",
-      "title": "Clinically approved by veterinary and food specialists."
+      "title": "Clinically approved by veterinary and food specialists.",
+      "description": "Our formulation underwent an eight-week preclinical feeding evaluation at Cornell University to understand how our formulation interacts with digestion, metabolism, and physiological markers in adult dogs."
     },
     "ExploreCategories": {
       "alt": "Category image",

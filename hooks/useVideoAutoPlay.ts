@@ -15,6 +15,7 @@ export const useVideoAutoPlay = (
     const video = videoRef.current
     if (video && video instanceof HTMLVideoElement) {
       const handleCanPlay = () => {
+        video.playbackRate = 0.85
         video.play().catch((error: unknown) => {
           console.error('Error playing video:', error)
         })

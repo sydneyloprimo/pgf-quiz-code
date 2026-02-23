@@ -25,7 +25,7 @@ const HowItWorksSection = () => {
       )}
     >
       {/* Background Texture */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none">
+      <div className="absolute inset-0 opacity-80 pointer-events-none">
         <Image
           src="/images/home/how-it-works-texture.png"
           alt=""
@@ -36,7 +36,7 @@ const HowItWorksSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col gap-12">
+      <div className="relative z-10 flex flex-col gap-4 md:gap-12">
         <h2
           className={cn(
             'font-display',

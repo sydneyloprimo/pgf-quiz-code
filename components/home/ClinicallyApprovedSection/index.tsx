@@ -2,7 +2,9 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
+import { ChevronIcon } from '@/components/common/Icon'
 import { Routes } from '@/types/enums/routes'
+import { cn } from '@/utils/cn'
 
 interface StatItemProps {
   percentage: string
@@ -32,7 +34,7 @@ const ClinicallyApprovedSection = () => {
     <section className="w-full px-5 md:px-11 pt-4 pb-0 md:py-32 relative overflow-hidden bg-[url(/images/home/clinically-approved-bg.svg)] bg-no-repeat bg-right bg-size-[auto_100%]">
       <div className="w-full flex flex-col lg:flex-row items-center">
         {/* Image */}
-        <div className="w-full lg:w-5/12 relative aspect-square lg:aspect-auto lg:h-[750px] shrink-0">
+        <div className="w-full lg:w-5/12 relative aspect-[3/4] md:aspect-square lg:aspect-auto lg:h-[750px] shrink-0">
           <Image
             src="/images/home/clinically-approved-dog.jpg"
             alt={t('imageAlt')}
@@ -48,9 +50,14 @@ const ClinicallyApprovedSection = () => {
         {/* Content */}
         <div className="w-full lg:flex-1 flex flex-col gap-14 md:gap-16 py-16 lg:px-35">
           <div className="flex flex-col gap-10">
-            <h2 className="font-display text-3xl md:text-4xl leading-tight md:leading-12 text-secondary-950">
-              {t('title')}
-            </h2>
+            <div className="flex flex-col gap-4">
+              <h2 className="font-display heading-h2 text-secondary-950">
+                {t('title')}
+              </h2>
+              <p className="font-sans text-body-m text-secondary-950">
+                {t('description')}
+              </p>
+            </div>
 
             <div className="flex flex-col gap-6">
               {stats.map((stat, index) => (
@@ -61,6 +68,25 @@ const ClinicallyApprovedSection = () => {
                 />
               ))}
             </div>
+
+            <details
+              className={cn(
+                'text-secondary-950 border-b border-neutral-600',
+                '[&[open]_.disclaimer-chevron]:rotate-180'
+              )}
+            >
+              <summary className="cursor-pointer list-none py-3 flex items-center gap-2 font-sans text-base font-medium text-secondary-950 outline-none [&::-webkit-details-marker]:hidden">
+                <ChevronIcon
+                  direction="down"
+                  className="disclaimer-chevron size-5 shrink-0 text-secondary-950 transition-transform"
+                  aria-hidden="true"
+                />
+                <span>{t('disclaimerLabel')}</span>
+              </summary>
+              <p className="pb-3 pl-7 text-sm leading-6 text-secondary-950">
+                {t('disclaimerText')}
+              </p>
+            </details>
           </div>
 
           <Button
