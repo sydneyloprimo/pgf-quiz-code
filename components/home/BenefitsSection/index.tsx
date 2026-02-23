@@ -121,7 +121,7 @@ const BenefitsSection = () => {
         </div>
 
         {/* Right Content - Image with Pointers */}
-        <div className="w-full lg:w-1/2 relative aspect-[3/4] lg:aspect-auto overflow-hidden order-2 lg:order-2">
+        <div className="w-full lg:w-1/2 relative aspect-[3/4] lg:aspect-[4/3] lg:min-h-[360px] overflow-hidden order-2 lg:order-2">
           <Image
             src="/images/home/benefit-dog.jpg"
             alt={t('imageAlt')}

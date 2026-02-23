@@ -34,7 +34,7 @@ const ClinicallyApprovedSection = () => {
         {/* Image */}
         <div className="w-full lg:w-5/12 relative aspect-[3/4] md:aspect-square lg:aspect-auto lg:h-[750px] shrink-0">
           <Image
-            src="/images/home/clinically-approved-dog1.jpg"
+            src="/images/home/clinically-approved-dog.jpg"
             alt={t('imageAlt')}
             fill
             className="object-cover"

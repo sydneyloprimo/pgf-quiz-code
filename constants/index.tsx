@@ -487,7 +487,7 @@ export const REVIEWS_DATA: ReviewData[] = [
 
 // Boston announcement section data
 export const BOSTON_ANNOUNCEMENT_BACKGROUND_IMAGE =
-  '/images/home/boston-announcement-bg1.jpg'
+  '/images/home/boston-announcement-bg.jpg'
 
 // About page - Gallery section
 export interface GalleryImage {
