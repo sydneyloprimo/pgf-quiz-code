@@ -98,9 +98,6 @@ const BenefitsSection = () => {
             <h2 className="font-display text-3xl md:text-4xl leading-tight md:leading-12 text-secondary-950">
               {t('title')}
             </h2>
-            <p className="font-sans text-lg leading-7 text-secondary-950">
-              {t('description')}
-            </p>
           </div>
 
           <div className="flex flex-col gap-4">
