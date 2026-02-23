@@ -10,7 +10,7 @@ const DiscoverPlansSection = () => {
   return (
     <section className="w-full py-16 lg:py-20 px-5 lg:px-24 flex flex-col items-center justify-center">
       <div className="flex max-w-screen-2xl flex-col justify-center items-center gap-16 self-stretch w-full">
-        <div className="relative flex flex-col items-start justify-end h-80 lg:h-auto w-full">
+        <div className="relative flex flex-col items-start justify-end lg:justify-around h-80 lg:h-[500px] w-full">
           {/* Background Image */}
           <div
             className="absolute inset-0 pointer-events-none"

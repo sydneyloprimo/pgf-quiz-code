@@ -5,7 +5,9 @@ import { useCallback, useMemo, useState } from 'react'
 
 import { IngredientItem } from './IngredientItem'
 
+import { Link } from '@/components/common/Link'
 import { INGREDIENT_CATEGORIES } from '@/constants'
+import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
 
 const IngredientLibrarySection = () => {
@@ -53,15 +55,27 @@ const IngredientLibrarySection = () => {
       <div className="w-full">
         <h2
           className={cn(
-            'font-display',
-            'text-[2.5rem] leading-12',
-            'font-semibold',
+            'heading-h2',
+            'tracking-tight',
             'text-quaternary-800',
+            'not-italic',
             'mb-6'
           )}
         >
           {t('title')}
         </h2>
+        <p className="font-sans text-lg leading-normal text-quaternary-800 py-2 mb-8">
+          {t.rich('description', {
+            recipeBreakdowns: (chunks) => (
+              <Link
+                href={Routes.recipes}
+                className="font-sans text-lg leading-normal font-normal text-quaternary-800 underline"
+              >
+                {chunks}
+              </Link>
+            ),
+          })}
+        </p>
 
         <div className="flex flex-col gap-16">
           {categories.map((category, categoryIndex) => (

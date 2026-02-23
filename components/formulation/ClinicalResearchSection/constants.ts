@@ -5,7 +5,6 @@ export interface StepStaticData {
     bottom: string
     left: string
   }
-  moleculeSrc: string
 }
 
 export const STEP_STATIC_DATA: StepStaticData[] = [
@@ -16,7 +15,6 @@ export const STEP_STATIC_DATA: StepStaticData[] = [
       bottom: '0',
       left: '-165.2px',
     },
-    moleculeSrc: '/images/formulation/molecule1.svg',
   },
   {
     imageSrc: '/images/formulation/step-decorative-2.svg',
@@ -25,7 +23,6 @@ export const STEP_STATIC_DATA: StepStaticData[] = [
       bottom: '-52.36px',
       left: '-151.68px',
     },
-    moleculeSrc: '/images/formulation/molecule2.svg',
   },
   {
     imageSrc: '/images/formulation/step-decorative-3.svg',
@@ -34,7 +31,6 @@ export const STEP_STATIC_DATA: StepStaticData[] = [
       bottom: '-34.27px',
       left: '-174.68px',
     },
-    moleculeSrc: '/images/formulation/molecule3.svg',
   },
 ]
 

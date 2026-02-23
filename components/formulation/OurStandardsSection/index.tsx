@@ -88,6 +88,9 @@ const OurStandardsSection = () => {
       <h2 className="heading-h2 text-secondary-950 text-center tracking-[-0.4px] mb-8">
         {t('title')}
       </h2>
+      <p className="font-sans text-lg text-quaternary-800 text-center mb-12">
+        {t('subtitle')}
+      </p>
       <FeatureGrid features={features} columns={2} />
     </section>
   )
