@@ -703,6 +703,52 @@ export const PRODUCT_DETAIL_SECTIONS_CONFIG: ProductDetailSectionConfig[] = [
   },
 ] as const
 
+// Formulation section data
+
+export interface FAQItem {
+  questionKey: string
+  answerKey: string
+}
+
+export const FAQ_ITEMS: FAQItem[] = [
+  {
+    questionKey: 'formulationFaq1Question',
+    answerKey: 'formulationFaq1Answer',
+  },
+  {
+    questionKey: 'formulationFaq2Question',
+    answerKey: 'formulationFaq2Answer',
+  },
+  {
+    questionKey: 'formulationFaq3Question',
+    answerKey: 'formulationFaq3Answer',
+  },
+  {
+    questionKey: 'formulationFaq4Question',
+    answerKey: 'formulationFaq4Answer',
+  },
+  {
+    questionKey: 'formulationFaq5Question',
+    answerKey: 'formulationFaq5Answer',
+  },
+  {
+    questionKey: 'formulationFaq6Question',
+    answerKey: 'formulationFaq6Answer',
+  },
+  {
+    questionKey: 'formulationFaq7Question',
+    answerKey: 'formulationFaq7Answer',
+  },
+  {
+    questionKey: 'formulationFaq8Question',
+    answerKey: 'formulationFaq8Answer',
+  },
+  {
+    questionKey: 'formulationFaq9Question',
+    answerKey: 'formulationFaq9Answer',
+  },
+]
+
 // Ingredient library section data
 export interface IngredientData {
   nameKey: string
