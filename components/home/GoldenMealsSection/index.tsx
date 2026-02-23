@@ -26,12 +26,12 @@ const GoldenMealsSection = () => {
         )}
       >
         {/* Background Image */}
-        <div className="absolute inset-0 translate-y-15 md:translate-y-0">
+        <div className="absolute inset-0">
           <Image
-            src="/images/home/golden-meals-bg.png"
+            src="/images/home/golden-meals-bg.jpg"
             alt={t('imageAlt')}
             fill
-            className="object-cover scale-140 md:scale-100"
+            className="object-cover md:object-center "
           />
         </div>
         <div
