@@ -192,27 +192,27 @@
       "faq3Answer": "PGF is currently formulated specifically for small-breed dogs under 20 lbs. Small breeds have faster digestive transit, higher stool variability, and greater nutrient sensitivity. Our recipes are calibrated for this physiology, not scaled down from larger-breed formulations.",
       "faq4Question": "Is a veterinary prescription required for PGF?",
       "faq4Answer": "No. PGF is formulated for adult maintenance, not therapeutic use. We recommend discussing any dietary change with your veterinarian, and our nutrition team is available for consultation.",
-      "faq5Question": "What changes do owners typically observe first? ",
+      "faq5Question": "What changes do owners typically observe first?",
       "faq5Answer": "Improved stool consistency, energy stability, coat condition, and digestive tolerance.",
       "faq6Question": "How flexible is the feeding schedule?",
       "faq6Answer": "Fully. Adjust delivery cadence, pause, or modify your protocol at any time. No lock-ins.",
       "title": "Frequently Asked Questions"
     },
     "Features": {
-      "feature1Title": "Verified Nutrient Content in Every Meal (TL)",
+      "feature1Title": "Verified Nutrient Content in Every Meal",
       "feature1Description": "We validate every recipe at the finished-food level, using laboratory testing to confirm vitamin and mineral targets are repeatedly met—not just assumed.",
-      "feature2Title": "Batch-level testing against AAFCO standards (TM)",
+      "feature2Title": "Batch-level testing against AAFCO standards",
       "feature2Description": "Every batch we produce is tested against AAFCO vitamin and mineral requirements, ensuring a consistent nutritional profile despite natural variation in sourcing, seasonality, and raw material composition.",
-      "feature3Title": "End-to-End Veterinary nutritionist oversight (TR)",
+      "feature3Title": "End-to-End veterinary nutritionist oversight",
       "feature3Description": "Our formulation development and review are led by a board-certified veterinary nutritionist (ECVCN), ensuring that each decision is guided by established clinical nutrition principles.",
-      "feature4Title": "Designed for small-breed physiology (BL)",
+      "feature4Title": "Designed for small-breed physiology",
       "feature4Description": "Small breeds don’t just eat less, they metabolize differently—our recipes are engineered for their faster digestive transit, higher stool variability, and greater nutrient sensitivity.",
-      "feature5Title": "Responsible sourcing and packaging (BR)",
+      "feature5Title": "Responsible sourcing and packaging",
       "feature5Description": "We responsibly source our ingredients and select our packaging to balance food safety, nutritional protection, and environmental impact without compromising formulation integrity."
     },
     "GoldenMeals": {
       "ctaButton": "Learn about our recipes",
-      "description": " A protein rationale that accounts for different tolerances, sensitivities, and requirements.",
+      "description": "A protein rationale that accounts for different tolerances, sensitivities, and requirements.",
       "imageAlt": "Golden meals background with fresh ingredients",
       "title": "Nutrition that recognizes physiological nuance"
     },
@@ -221,7 +221,7 @@
       "ctaLink": "Speak directly to our Concierge",
       "headline": "Clinical-grade nutrition for small-breed digestive health",
       "imageAlt": "Fresh dog food preparation",
-      "subheadline": " Balanced meals formulated for your dog’s physiology. Limited enrollment now open for our founding cohort."
+      "subheadline": "Balanced meals formulated for your dog’s physiology. Limited enrollment now open for our founding cohort."
     },
     "HeroBanner": {
       "alt": "Banner image",
