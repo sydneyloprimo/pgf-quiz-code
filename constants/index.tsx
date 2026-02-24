@@ -20,6 +20,10 @@ export const BLOG_INDEX_POSTS_PER_PAGE = 4
 // Tailwind default md breakpoint is 768px
 export const MOBILE_WIDTH = 768
 
+// Formulation page section spacing: base 64px top/bottom (py-16), lg 96px top (pt-24) and 144px bottom (pb-36)
+export const FORMULATION_SECTION_PADDING_Y = 'py-16 lg:pt-24 lg:pb-36'
+export const FORMULATION_SECTION_PADDING_X = 'px-5 lg:px-24'
+
 // Concierge contact information
 export const CONCIERGE_EMAIL = 'concierge@purelygoldenfoods.com'
 export const CONCIERGE_PHONE = '+1 111 111 1111'

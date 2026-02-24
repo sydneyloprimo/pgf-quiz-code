@@ -2,6 +2,11 @@ import { useTranslations } from 'next-intl'
 
 import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { FeatureGrid } from '@/components/common/FeatureGrid'
+import {
+  FORMULATION_SECTION_PADDING_X,
+  FORMULATION_SECTION_PADDING_Y,
+} from '@/constants'
+import { cn } from '@/utils/cn'
 
 const OurStandardsSection = () => {
   const t = useTranslations('Formulation.Standards')
@@ -84,7 +89,13 @@ const OurStandardsSection = () => {
   ]
 
   return (
-    <section className="w-full py-28 px-5 md:px-8 desktop:px-24">
+    <section
+      className={cn(
+        'w-full',
+        FORMULATION_SECTION_PADDING_X,
+        FORMULATION_SECTION_PADDING_Y
+      )}
+    >
       <h2 className="heading-h2 text-secondary-950 text-center tracking-[-0.4px] mb-8">
         {t('title')}
       </h2>

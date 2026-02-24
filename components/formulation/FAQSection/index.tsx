@@ -5,7 +5,11 @@ import { useCallback, useState } from 'react'
 
 import { FAQItem } from './FAQItem'
 
-import { FAQ_ITEMS } from '@/constants'
+import {
+  FAQ_ITEMS,
+  FORMULATION_SECTION_PADDING_X,
+  FORMULATION_SECTION_PADDING_Y,
+} from '@/constants'
 import { cn } from '@/utils/cn'
 
 const FAQSection = () => {
@@ -20,9 +24,8 @@ const FAQSection = () => {
     <section
       className={cn(
         'w-full',
-        'px-5 py-14',
-        'lg:px-24 lg:py-[200px]',
-        'md:px-24 md:pt-24 md:pb-36',
+        FORMULATION_SECTION_PADDING_X,
+        FORMULATION_SECTION_PADDING_Y,
         'bg-neutral-300'
       )}
     >

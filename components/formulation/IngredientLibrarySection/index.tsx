@@ -6,7 +6,11 @@ import { useCallback, useMemo, useState } from 'react'
 import { IngredientItem } from './IngredientItem'
 
 import { Link } from '@/components/common/Link'
-import { INGREDIENT_CATEGORIES } from '@/constants'
+import {
+  FORMULATION_SECTION_PADDING_X,
+  FORMULATION_SECTION_PADDING_Y,
+  INGREDIENT_CATEGORIES,
+} from '@/constants'
 import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
 
@@ -47,8 +51,8 @@ const IngredientLibrarySection = () => {
     <section
       className={cn(
         'w-full',
-        'px-5 py-14',
-        'md:px-24 md:pt-24 md:pb-36',
+        FORMULATION_SECTION_PADDING_X,
+        FORMULATION_SECTION_PADDING_Y,
         'bg-neutral-100'
       )}
     >

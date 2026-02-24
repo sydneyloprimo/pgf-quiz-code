@@ -20,8 +20,8 @@ const StepCard = ({
   imageRotation,
   imagePosition,
 }: StepCardProps) => (
-  <div className="bg-neutral-400 flex justify-center py-0 lg:pt-16 pl-5 lg:pl-0 pr-5 lg:pr-12 relative overflow-clip">
-    <div className="flex flex-1 flex-col gap-8 items-center justify-center max-w-4xl pb-0 lg:pb-12 pt-0 relative">
+  <div className="bg-neutral-400 flex justify-center py-0 pl-5 lg:pl-0 pr-5 relative overflow-clip">
+    <div className="flex flex-1 flex-col gap-8 items-center justify-center w-full pb-0 pt-0 relative">
       <div className="flex flex-col gap-4 w-full">
         <h4 className="font-display text-3xl leading-10 tracking-tight text-quaternary-800 whitespace-pre-line">
           {title}
