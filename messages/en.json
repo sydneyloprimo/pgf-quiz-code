@@ -921,10 +921,6 @@
       "previousPage": "Previous Page",
       "previousPageAria": "Go to previous page"
     },
-    "BlogPostCTA": {
-      "description": "Take our quiz where we get to know your dog to recommend the perfect meal plan according to their unique profile.",
-      "title": "Ready to Optimize Your Dog's Nutrition?"
-    },
     "BrowseByTopic": {
       "all": "All",
       "filterByCategoryAria": "Filter blog posts by category {name}",

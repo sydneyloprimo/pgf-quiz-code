@@ -1,8 +1,8 @@
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import type { ReactElement } from 'react'
 
 import { ValueCard } from '@/components/about/ValuesSection/ValueCard'
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import {
   FeaturePharmIcon,
   GraduationCapIcon,
@@ -35,7 +35,7 @@ const ValuesSection = () => {
     <section className="w-full px-5 md:px-24 py-9 md:py-9 bg-quaternary-800 relative overflow-hidden">
       {/* Background Texture */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
-        <Image
+        <ContentfulImage
           src="/images/about/values-background-texture.png"
           alt=""
           fill

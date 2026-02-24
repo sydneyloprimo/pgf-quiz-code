@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 
 interface StepCardProps {
   title: string
@@ -42,7 +42,7 @@ const StepCard = ({
           className="flex-none"
           style={{ transform: `rotate(${imageRotation}deg)` }}
         >
-          <Image
+          <ContentfulImage
             src={imageSrc}
             alt=""
             width={136}

@@ -1,6 +1,6 @@
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { cn } from '@/utils/cn'
 
 const PrecisionBatchSection = () => {
@@ -26,7 +26,7 @@ const PrecisionBatchSection = () => {
         >
           {/* Mobile/Tablet: natural image sizing */}
           <div className="relative w-full aspect-[3/4] lg:hidden">
-            <Image
+            <ContentfulImage
               src="/images/formulation/precision-batch-image-mobile.png"
               alt={t('imageAlt')}
               fill
@@ -36,7 +36,7 @@ const PrecisionBatchSection = () => {
           {/* Desktop: fixed height with overflow */}
           <div className="hidden lg:block absolute inset-0 overflow-visible">
             <div className="relative h-full w-[200%] overflow-visible pointer-events-none">
-              <Image
+              <ContentfulImage
                 src="/images/formulation/precision-batch-image.png"
                 alt={t('imageAlt')}
                 fill
@@ -102,7 +102,7 @@ const PrecisionBatchSection = () => {
           className="absolute top-0 right-0 pointer-events-none hidden lg:flex lg:flex-col"
           aria-hidden="true"
         >
-          <Image
+          <ContentfulImage
             src="/images/formulation/precision-decorative.svg"
             alt=""
             width={255}
@@ -114,7 +114,7 @@ const PrecisionBatchSection = () => {
           className="absolute top-0 right-0 pointer-events-none hidden lg:flex lg:flex-col"
           aria-hidden="true"
         >
-          <Image
+          <ContentfulImage
             src="/images/formulation/precision-decorative-2.svg"
             alt=""
             width={318}

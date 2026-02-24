@@ -1,9 +1,9 @@
 'use client'
 
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { Link } from '@/components/common/Link'
 import { useConciergeContact } from '@/hooks/useConciergeContact'
 import { Routes } from '@/types/enums/routes'
@@ -16,7 +16,7 @@ const VetNutritionistCTA = () => {
     <section className="w-full bg-quaternary-800 relative overflow-hidden px-5 md:px-24 py-36 md:py-40">
       {/* Background Texture */}
       <div className="absolute inset-0 mix-blend-overlay opacity-70 pointer-events-none">
-        <Image
+        <ContentfulImage
           src="/images/home/vet-nutritionist-texture.png"
           alt=""
           fill

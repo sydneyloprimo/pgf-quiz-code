@@ -7,6 +7,7 @@ import { CookiesProvider } from 'react-cookie'
 
 import ToastProvider from './ToasterProvider'
 
+import { ContentfulImageProvider } from '@/components/common/ContentfulImage'
 import { InputDropdownProvider } from '@/components/common/InputDropdown/InputDropdownContext'
 import { Locale } from '@/i18n'
 
@@ -22,9 +23,11 @@ function Providers({ children }: ProviderProps) {
   return (
     <QueryClientProvider client={client}>
       <CookiesProvider>
-        <InputDropdownProvider>
-          <ToastProvider>{children}</ToastProvider>
-        </InputDropdownProvider>
+        <ContentfulImageProvider>
+          <InputDropdownProvider>
+            <ToastProvider>{children}</ToastProvider>
+          </InputDropdownProvider>
+        </ContentfulImageProvider>
       </CookiesProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

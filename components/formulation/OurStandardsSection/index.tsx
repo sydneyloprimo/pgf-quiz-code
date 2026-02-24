@@ -1,6 +1,6 @@
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { FeatureGrid } from '@/components/common/FeatureGrid'
 
 const OurStandardsSection = () => {
@@ -12,7 +12,7 @@ const OurStandardsSection = () => {
     {
       icon: (
         <div className="h-12 w-auto">
-          <Image
+          <ContentfulImage
             src="/images/formulation/icon-cauliflower.svg"
             alt=""
             width={40}
@@ -30,7 +30,7 @@ const OurStandardsSection = () => {
     {
       icon: (
         <div className="h-12 w-auto">
-          <Image
+          <ContentfulImage
             src="/images/formulation/icon-carrot.svg"
             alt=""
             width={43}
@@ -48,7 +48,7 @@ const OurStandardsSection = () => {
     {
       icon: (
         <div className="h-12 w-auto">
-          <Image
+          <ContentfulImage
             src="/images/formulation/icon-leaf.svg"
             alt=""
             width={49}
@@ -66,7 +66,7 @@ const OurStandardsSection = () => {
     {
       icon: (
         <div className="h-12 w-auto">
-          <Image
+          <ContentfulImage
             src="/images/formulation/icon-garlic2.svg"
             alt=""
             width={38}

@@ -1,6 +1,6 @@
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { cn } from '@/utils/cn'
 
 const IntroductionSection = () => {
@@ -21,7 +21,7 @@ const IntroductionSection = () => {
         className="absolute inset-0 pointer-events-none hidden md:block"
         aria-hidden="true"
       >
-        <Image
+        <ContentfulImage
           src="/images/formulation/decorative-group.svg"
           alt=""
           width={584}

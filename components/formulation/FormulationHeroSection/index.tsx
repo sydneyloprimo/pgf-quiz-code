@@ -1,9 +1,9 @@
 'use client'
 
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { useConciergeContact } from '@/hooks/useConciergeContact'
 
 const FormulationHeroSection = () => {
@@ -14,7 +14,7 @@ const FormulationHeroSection = () => {
   return (
     <section className="relative w-full h-96 md:h-120 flex items-center">
       {/* Background Image */}
-      <Image
+      <ContentfulImage
         src="/images/formulation/hero-bg.jpg"
         alt={t('backgroundAlt')}
         fill

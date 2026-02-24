@@ -1,7 +1,8 @@
 'use client'
 
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 
 interface OptionSelectProductHeaderProps {
   title: string
@@ -30,7 +31,7 @@ const OptionSelectProductHeader = ({
 
       <div className="flex flex-col md:flex-row items-stretch gap-4 mb-6">
         <div className="relative size-32 shrink-0 mx-auto md:mx-0">
-          <Image
+          <ContentfulImage
             src={imageSrc}
             alt={imageAlt}
             fill
@@ -38,7 +39,7 @@ const OptionSelectProductHeader = ({
             sizes="128px"
           />
           <div className="absolute bottom-0 right-0">
-            <Image
+            <ContentfulImage
               src="/images/animal-welfare-certified.png"
               alt={t('animalWelfareCertified')}
               width={60}

@@ -27,6 +27,8 @@ export default function RootLayout({
         localeGroup={[
           'About',
           'BlogIndex',
+          'BlogPost',
+          'BlogPostCTA',
           'BlogPostPage',
           'Common',
           'Formulation',

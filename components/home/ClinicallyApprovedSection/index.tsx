@@ -1,7 +1,7 @@
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { ChevronIcon } from '@/components/common/Icon'
 import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
@@ -37,7 +37,7 @@ const ClinicallyApprovedSection = () => {
       <div className="w-full flex flex-col lg:flex-row items-center">
         {/* Image */}
         <div className="w-full lg:w-5/12 relative aspect-[3/4] md:aspect-square lg:aspect-auto lg:h-[750px] shrink-0">
-          <Image
+          <ContentfulImage
             src="/images/home/clinically-approved-dog.jpg"
             alt={t('imageAlt')}
             fill
@@ -99,7 +99,7 @@ const ClinicallyApprovedSection = () => {
 
         {/* Decoration - Desktop/Tablet: bottom right */}
         <div className="block self-end md:absolute bottom-0 md:bottom-8 right-2 md:right-8 lg:bottom-12 lg:right-12">
-          <Image
+          <ContentfulImage
             src="/icons/clinically-approved-decoration.svg"
             alt=""
             width={250}

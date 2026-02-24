@@ -1,8 +1,8 @@
 'use client'
 
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { WaitlistModal } from '@/components/common/WaitlistModal'
 import { BostonAnnouncementContent } from '@/components/home/BostonAnnouncementSection/BostonAnnouncementContent'
 import { BOSTON_ANNOUNCEMENT_BACKGROUND_IMAGE } from '@/constants'
@@ -18,7 +18,7 @@ const BostonAnnouncementSection = () => {
         {/* Mobile layout - image on top, content below */}
         <div className="md:hidden w-full flex flex-col gap-0">
           <div className="w-full aspect-[3/4] relative">
-            <Image
+            <ContentfulImage
               src={BOSTON_ANNOUNCEMENT_BACKGROUND_IMAGE}
               alt={t('backgroundImageAlt')}
               fill
@@ -39,7 +39,7 @@ const BostonAnnouncementSection = () => {
 
         {/* Desktop layout - image with content overlay */}
         <div className="hidden md:block w-full relative min-h-[663px]">
-          <Image
+          <ContentfulImage
             src={BOSTON_ANNOUNCEMENT_BACKGROUND_IMAGE}
             alt={t('backgroundImageAlt')}
             fill

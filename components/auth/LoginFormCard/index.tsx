@@ -1,8 +1,8 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 import { PropsWithChildren } from 'react'
 
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
 
@@ -30,7 +30,7 @@ const LoginFormCard = ({ children, className }: LoginFormCardProps) => {
         <div className="flex flex-col gap-5 items-center w-full">
           <div className="flex justify-center lg:hidden">
             <Link href={Routes.home}>
-              <Image
+              <ContentfulImage
                 src="/images/login-logo-full.svg"
                 alt={t('logoAlt')}
                 width={156}

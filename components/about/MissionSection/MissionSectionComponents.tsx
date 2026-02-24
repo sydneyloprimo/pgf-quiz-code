@@ -1,6 +1,6 @@
-import Image from 'next/image'
 import { PropsWithChildren } from 'react'
 
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { cn } from '@/utils/cn'
 
 interface MissionImageProps {
@@ -19,7 +19,13 @@ const MissionImage = ({
   showOverlay = true,
 }: MissionImageProps) => (
   <div className={cn('relative', 'overflow-hidden', className)}>
-    <Image src={src} alt={alt} fill className="object-cover" sizes={sizes} />
+    <ContentfulImage
+      src={src}
+      alt={alt}
+      fill
+      className="object-cover"
+      sizes={sizes}
+    />
     {showOverlay && (
       <div
         className="absolute inset-0 bg-secondary-950 opacity-41 mix-blend-color"

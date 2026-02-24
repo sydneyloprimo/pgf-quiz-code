@@ -1,8 +1,8 @@
 'use client'
 
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { Link } from '@/components/common/Link'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
 import {
@@ -34,7 +34,7 @@ const QuizStep1 = ({ goToStep, goBack, canGoBack }: QuizStep1Props) => {
     >
       <div className="flex flex-col gap-4 items-center w-full pb-[60px]">
         <div className="relative shrink-0">
-          <Image
+          <ContentfulImage
             src="/images/quiz-dog-illustration.png"
             alt={t('imageAlt')}
             width={QUIZ_DOG_ILLUSTRATION_WIDTH}

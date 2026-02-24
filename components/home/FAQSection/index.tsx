@@ -1,12 +1,12 @@
 'use client'
 
-import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { useCallback, useMemo, useState } from 'react'
 
 import { FAQItem } from './FAQItem'
 import { SectionDivider } from './SectionDivider'
 
+import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { FAQS_DATA } from '@/constants'
 
 const FAQSection = () => {
@@ -33,7 +33,7 @@ const FAQSection = () => {
         className="absolute inset-0 pointer-events-none hidden md:block"
         aria-hidden="true"
       >
-        <Image
+        <ContentfulImage
           src="/images/home/faq-right-veggie.svg"
           alt={t('decorativeRightVeggieAlt')}
           width={60}
@@ -45,7 +45,7 @@ const FAQSection = () => {
             transform: 'translate(-50%, -50%)',
           }}
         />
-        <Image
+        <ContentfulImage
           src="/images/home/faq-pepper-right.svg"
           alt={t('decorativeRightPepperAlt')}
           width={60}
@@ -57,7 +57,7 @@ const FAQSection = () => {
             transform: 'translate(-50%, -50%)',
           }}
         />
-        <Image
+        <ContentfulImage
           src="/images/home/faq-pepper-left.svg"
           alt={t('decorativeLeftPepperAlt')}
           width={60}
@@ -69,7 +69,7 @@ const FAQSection = () => {
             transform: 'translate(-50%, -50%)',
           }}
         />
-        <Image
+        <ContentfulImage
           src="/images/home/faq-left-veggie.svg"
           alt={t('decorativeLeftVeggieAlt')}
           width={100}
