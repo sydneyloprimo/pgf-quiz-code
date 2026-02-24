@@ -53,7 +53,7 @@ const ExpertsSection = ({ content }: ExpertsSectionProps) => {
                 className="flex flex-col gap-6 items-center justify-center max-w-full md:max-w-72 w-full isolate"
               >
                 {expert.imageSrc ? (
-                  <div className="relative w-full h-72 md:h-96 z-20">
+                  <div className="relative w-full aspect-[3/4] md:aspect-auto md:h-96 z-20 overflow-hidden">
                     <ContentfulImage
                       src={expert.imageSrc}
                       alt={expert.imageAlt}

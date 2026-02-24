@@ -15,7 +15,7 @@ const ExpertCard = ({
 }: ExpertCardProps) => {
   return (
     <div className="flex flex-col gap-6 items-center w-full isolate">
-      <div className="relative w-full h-72 md:h-80 overflow-hidden z-10">
+      <div className="relative w-full aspect-[3/4] md:aspect-auto md:h-80 overflow-hidden z-10">
         <ContentfulImage
           src={imageSrc}
           alt={imageAlt}

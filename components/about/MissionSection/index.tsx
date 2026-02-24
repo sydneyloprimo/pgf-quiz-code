@@ -33,8 +33,8 @@ const MissionSection = () => {
         <MissionImage
           src="/images/about/mission-1.jpg"
           alt={t('image1Alt')}
-          className="w-full h-144 shrink-0 order-3 lg:hidden"
-          sizes="100vw"
+          className="w-full max-w-2xl mx-auto aspect-[4/5] shrink-0 order-3 lg:hidden"
+          sizes="(max-width: 768px) 100vw, 672px"
         />
 
         <MissionSubsectionTitle className="bg-neutral-300 w-full order-4 lg:hidden">
@@ -54,8 +54,8 @@ const MissionSection = () => {
         <MissionImage
           src="/images/about/mission-2.jpg"
           alt={t('image2Alt')}
-          className="w-full h-160 shrink-0 order-6 lg:hidden"
-          sizes="100vw"
+          className="w-full max-w-2xl mx-auto aspect-[4/5] shrink-0 order-6 lg:hidden"
+          sizes="(max-width: 768px) 100vw, 672px"
           showOverlay={false}
         />
       </div>

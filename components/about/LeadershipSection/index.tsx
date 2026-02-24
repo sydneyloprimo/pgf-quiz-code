@@ -7,7 +7,7 @@ const LeadershipSection = () => {
 
   return (
     <section className="w-full pt-14 px-5 lg:px-24 flex flex-col lg:flex-row gap-0 items-stretch justify-start">
-      <div className="w-full lg:w-2/5 shrink-0 relative overflow-hidden aspect-square lg:aspect-auto lg:h-[765px]">
+      <div className="w-full lg:w-2/5 shrink-0 relative overflow-hidden aspect-[3/4] lg:aspect-auto lg:h-[765px]">
         <ContentfulImage
           src="/images/about/leadership.jpg"
           alt={t('imageAlt')}

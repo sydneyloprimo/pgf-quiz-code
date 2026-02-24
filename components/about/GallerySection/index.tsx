@@ -18,13 +18,13 @@ const GallerySection = () => {
         {images.map((image, index) => (
           <div
             key={index}
-            className="relative w-[80vw] h-134 shrink-0 snap-start overflow-hidden"
+            className="relative w-[80vw] aspect-[3/4] shrink-0 snap-start overflow-hidden"
           >
             <ContentfulImage
               src={image.src}
               alt={image.alt}
               fill
-              className="object-cover"
+              className="object-cover object-center"
               sizes="80vw"
             />
             <div
@@ -45,7 +45,7 @@ const GallerySection = () => {
               src={image.src}
               alt={image.alt}
               fill
-              className="object-cover"
+              className="object-cover object-center"
               sizes="388px"
             />
             <div
