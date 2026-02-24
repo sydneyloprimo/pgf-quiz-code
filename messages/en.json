@@ -2,7 +2,8 @@
   "AnnouncementToast": {
     "ctaLink": "Join our waitlist",
     "dismissAria": "Dismiss announcement",
-    "message": "Boston, we're here—founding members get 20% off + free consultation"
+    "message": "Boston, we're here—founding members get 20% off + free consultation",
+    "messageMobile": "We're live in Boston!"
   },
   "Auth": {
     "email": "Email",
@@ -287,6 +288,7 @@
   "MainNav": {
     "aboutUs": "About Us",
     "ariaLabel": "Main navigation",
+    "blog": "Blog",
     "cartAria": "Shopping cart",
     "closeMenuAria": "Close menu",
     "home": "Home",
