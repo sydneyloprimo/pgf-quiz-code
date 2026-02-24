@@ -457,6 +457,14 @@ export const FAQS_DATA: FAQData[] = [
     questionKey: 'faq4Question',
     answerKey: 'faq4Answer',
   },
+  {
+    questionKey: 'faq5Question',
+    answerKey: 'faq5Answer',
+  },
+  {
+    questionKey: 'faq6Question',
+    answerKey: 'faq6Answer',
+  },
 ] as const
 
 // Reviews section data
@@ -487,6 +495,10 @@ export const REVIEWS_DATA: ReviewData[] = [
     nameKey: 'review3Name',
   },
 ] as const
+
+// Boston announcement section data
+export const BOSTON_ANNOUNCEMENT_BACKGROUND_IMAGE =
+  '/images/home/boston-announcement-bg.jpg'
 
 // About page - Gallery section
 export interface GalleryImage {
@@ -702,6 +714,52 @@ export const PRODUCT_DETAIL_SECTIONS_CONFIG: ProductDetailSectionConfig[] = [
     sectionKey: 'ingredients',
   },
 ] as const
+
+// Formulation section data
+
+export interface FAQItem {
+  questionKey: string
+  answerKey: string
+}
+
+export const FAQ_ITEMS: FAQItem[] = [
+  {
+    questionKey: 'formulationFaq1Question',
+    answerKey: 'formulationFaq1Answer',
+  },
+  {
+    questionKey: 'formulationFaq2Question',
+    answerKey: 'formulationFaq2Answer',
+  },
+  {
+    questionKey: 'formulationFaq3Question',
+    answerKey: 'formulationFaq3Answer',
+  },
+  {
+    questionKey: 'formulationFaq4Question',
+    answerKey: 'formulationFaq4Answer',
+  },
+  {
+    questionKey: 'formulationFaq5Question',
+    answerKey: 'formulationFaq5Answer',
+  },
+  {
+    questionKey: 'formulationFaq6Question',
+    answerKey: 'formulationFaq6Answer',
+  },
+  {
+    questionKey: 'formulationFaq7Question',
+    answerKey: 'formulationFaq7Answer',
+  },
+  {
+    questionKey: 'formulationFaq8Question',
+    answerKey: 'formulationFaq8Answer',
+  },
+  {
+    questionKey: 'formulationFaq9Question',
+    answerKey: 'formulationFaq9Answer',
+  },
+]
 
 // Ingredient library section data
 export interface IngredientData {

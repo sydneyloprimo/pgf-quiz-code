@@ -137,11 +137,13 @@
   --image-overlay: #44342469;
 
   /* Gradients */
-  --gradient-hero-overlay: linear-gradient(
-    0deg,
-    rgba(204, 204, 204, 0) -36.31%,
-    rgba(106, 43, 0, 0.6) 100%
-  );
+  --gradient-hero-overlay:
+    linear-gradient(
+      0deg,
+      rgba(204, 204, 204, 0) -36.31%,
+      rgba(106, 43, 0, 0.6) 100%
+    ),
+    rgba(68, 52, 36, 0.41);
 
   /* Breakpoints - Mobile */
   --breakpoint-mobile-min: 375px;

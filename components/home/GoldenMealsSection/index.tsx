@@ -20,18 +20,18 @@ const GoldenMealsSection = () => {
         className={cn(
           'w-full',
           'relative',
-          'min-h-164 md:min-h-164',
+          'aspect-[3/4] md:aspect-auto md:min-h-164',
           'flex items-start md:items-end justify-end',
           'overflow-hidden'
         )}
       >
         {/* Background Image */}
-        <div className="absolute inset-0 translate-y-15 md:translate-y-0">
+        <div className="absolute inset-0">
           <Image
-            src="/images/home/golden-meals-bg.png"
+            src="/images/home/golden-meals-bg.jpg"
             alt={t('imageAlt')}
             fill
-            className="object-cover scale-140 md:scale-100"
+            className="object-cover md:object-center"
           />
         </div>
         <div
