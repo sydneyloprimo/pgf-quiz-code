@@ -69,7 +69,7 @@ const IngredientLibrarySection = () => {
             recipeBreakdowns: (chunks) => (
               <Link
                 href={Routes.recipes}
-                className="font-sans text-lg leading-normal font-normal text-quaternary-800 underline"
+                className="text-lg leading-normal font-normal text-quaternary-800 underline"
               >
                 {chunks}
               </Link>
@@ -80,7 +80,7 @@ const IngredientLibrarySection = () => {
         <div className="flex flex-col gap-16">
           {categories.map((category, categoryIndex) => (
             <div className="flex flex-col" key={category.title}>
-              <h3 className="font-display text-2xl leading-8 font-semibold text-quaternary-800 mb-4 italic">
+              <h3 className="font-display text-2xl leading-8 text-quaternary-800 mb-4">
                 {category.title}
               </h3>
               <div className="flex flex-col">
