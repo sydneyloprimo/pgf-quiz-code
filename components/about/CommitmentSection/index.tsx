@@ -1,32 +1,15 @@
 import { useTranslations } from 'next-intl'
-import type { ReactElement } from 'react'
 
 import { CommitmentCard } from '@/components/about/CommitmentSection/CommitmentCard'
-import {
-  FeaturePharmIcon,
-  GraduationCapIcon,
-  PawPrintIcon,
-} from '@/components/common/Icon'
-import { COMMITMENT_ITEMS, type CommitmentIconType } from '@/constants'
-
-const getCommitmentIcon = (iconType: CommitmentIconType): ReactElement => {
-  const iconProps = { className: 'size-11' }
-  switch (iconType) {
-    case 'featurePharm':
-      return <FeaturePharmIcon {...iconProps} />
-    case 'graduationCap':
-      return <GraduationCapIcon {...iconProps} />
-    case 'pawPrint':
-      return <PawPrintIcon {...iconProps} />
-  }
-}
+import { COMMITMENT_ITEMS } from '@/constants'
 
 const CommitmentSection = () => {
   const t = useTranslations('About.Commitment')
 
   const commitments = COMMITMENT_ITEMS.map((item) => ({
-    icon: getCommitmentIcon(item.iconType),
-    text: t(item.textKey),
+    text: t.rich(item.textKey, {
+      bold: (chunks) => <strong className="font-semibold">{chunks}</strong>,
+    }),
   }))
 
   return (
@@ -34,13 +17,12 @@ const CommitmentSection = () => {
       <h2 className="font-display font-normal text-3xl lg:text-4xl leading-12 tracking-tight text-secondary-950 text-center w-full">
         {t('title')}
       </h2>
-      <div className="flex flex-col lg:flex-row gap-0 items-start lg:items-center w-full">
+      <div className="flex flex-col lg:flex-row gap-0 items-start lg:items-center w-full max-w-6xl mx-auto">
         {commitments.map((commitment, index) => {
           const commitmentItem = COMMITMENT_ITEMS[index]
           return (
             <CommitmentCard
-              key={commitmentItem.iconType}
-              icon={commitment.icon}
+              key={commitmentItem.textKey}
               text={commitment.text}
               hasBorder={index < commitments.length - 1}
             />
