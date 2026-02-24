@@ -18,7 +18,7 @@ const BlogList = ({
   totalPages,
   categorySlug,
 }: BlogListProps) => {
-  const t = useTranslations('BlogList')
+  const t = useTranslations('BlogIndex.BlogList')
 
   const buildPageHref = (page: number) => {
     const parts: string[] = []

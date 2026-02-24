@@ -1,6 +1,5 @@
 'use client'
 
-
 import { MinusIcon, PlusIcon } from '@/components/common/Icon'
 
 interface FAQItemProps {

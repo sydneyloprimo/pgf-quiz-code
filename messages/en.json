@@ -11,6 +11,10 @@
     "password": "Password",
     "passwordPlaceholder": "Type your password"
   },
+  "Detail": {
+    "errorMessage": "Something went wrong. Please try again.",
+    "successMessage": "Added to cart successfully."
+  },
   "Common": {
     "ConciergeLink": {
       "emailAriaLabel": "Send an email to our concierge",
@@ -281,14 +285,16 @@
   "MainNav": {
     "aboutUs": "About Us",
     "ariaLabel": "Main navigation",
-    "blog": "Blog",
     "cartAria": "Shopping cart",
     "closeMenuAria": "Close menu",
     "home": "Home",
+    "itemCountAriaLabel": "{count} items in cart",
     "logoAria": "Go to homepage",
     "openMenuAria": "Open menu",
     "ourFormulation": "Our Formulation",
-    "profileAria": "User profile"
+    "ourRecipes": "Our Recipes",
+    "profileAria": "User profile",
+    "searchAria": "Search"
   },
   "Navigation": {
     "about": "About",
@@ -786,6 +792,7 @@
           "flexibleSchedule": "Flexible schedule — pause, skip, or cancel anytime."
         },
         "lambDescription": "Customized health benefits that specifically target concerns like dry skin and lackluster fur, ensuring your pet looks and feels their best.",
+        "pancreaticDescription": "Customized health benefits that specifically target concerns like dry skin and lackluster fur, ensuring your pet looks and feels their best.",
         "turkeyDescription": "Customized health benefits that specifically target concerns like dry skin and lackluster fur, ensuring your pet looks and feels their best.",
         "alaCartePrice": "$19.79 / 2 kg"
       },
@@ -904,20 +911,41 @@
     }
   },
   "BlogIndex": {
+    "BlogList": {
+      "nextPage": "Next Page",
+      "nextPageAria": "Go to next page",
+      "paginationAria": "Blog list pagination",
+      "postAuthorAndDate": "{author} | {date}",
+      "postByAuthor": "By {author}",
+      "postDate": "{date}",
+      "previousPage": "Previous Page",
+      "previousPageAria": "Go to previous page"
+    },
+    "BlogPostCTA": {
+      "description": "Take our quiz where we get to know your dog to recommend the perfect meal plan according to their unique profile.",
+      "title": "Ready to Optimize Your Dog's Nutrition?"
+    },
+    "BrowseByTopic": {
+      "all": "All",
+      "filterByCategoryAria": "Filter blog posts by category {name}",
+      "selectAllAria": "Show all blog posts",
+      "title": "Browse by Topic"
+    },
+    "FeaturedBlogPost": {
+      "featured": "Featured",
+      "readPostAria": "Read featured post: {title}"
+    },
+    "MeetTheContributors": {
+      "contributorRole": "Contributor and Clinical Advisor",
+      "title": "Meet the Contributors"
+    },
     "heroHeadline": "Clinical Notes from the Kitchen Lab",
     "heroSubheadline": "Unpacking canine nutrition—the physiology, the science and the\nstandards most labels don't explain."
   },
-  "BlogList": {
-    "nextPage": "Next Page",
-    "nextPageAria": "Go to next page",
-    "paginationAria": "Blog list pagination",
-    "postAuthorAndDate": "{author} | {date}",
-    "postByAuthor": "By {author}",
-    "postDate": "{date}",
-    "previousPage": "Previous Page",
-    "previousPageAria": "Go to previous page"
-  },
   "BlogPost": {
+    "titleNotFound": "Blog Post Not Found"
+  },
+  "BlogPostPage": {
     "authorImageAlt": "Profile picture of {name}",
     "backToBlog": "Back to Blog",
     "buildPlanButton": "Build Your Dog's Plan",
@@ -931,24 +959,6 @@
     "talkToNutritionists": "Talk to Our Vet Nutritionists",
     "titleNotFound": "Blog Post Not Found",
     "writtenBy": "Written by"
-  },
-  "BlogPostCTA": {
-    "description": "Take our quiz where we get to know your dog to recommend the perfect meal plan according to their unique profile.",
-    "title": "Ready to Optimize Your Dog's Nutrition?"
-  },
-  "BrowseByTopic": {
-    "all": "All",
-    "filterByCategoryAria": "Filter blog posts by category {name}",
-    "selectAllAria": "Show all blog posts",
-    "title": "Browse by Topic"
-  },
-  "FeaturedBlogPost": {
-    "featured": "Featured",
-    "readPostAria": "Read featured post: {title}"
-  },
-  "MeetTheContributors": {
-    "contributorRole": "Contributor and Clinical Advisor",
-    "title": "Meet the Contributors"
   },
   "PromiseOfCareAlert": {
     "closeButton": "Close alert",

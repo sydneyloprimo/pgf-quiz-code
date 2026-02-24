@@ -15,7 +15,7 @@ const BLOG_LIST_DATE_OPTIONS: Intl.DateTimeFormatOptions = {
 }
 
 const BlogListCard = ({ post }: BlogListCardProps) => {
-  const t = useTranslations('BlogList')
+  const t = useTranslations('BlogIndex.BlogList')
   const { title, subtitle, slug, author } = post.fields
   const date = new Date(post.sys.updatedAt).toLocaleDateString(
     'en-US',

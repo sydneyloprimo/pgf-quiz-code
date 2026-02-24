@@ -10,7 +10,7 @@ interface AuthorCardProps {
 }
 
 const AuthorCard = ({ author, reviewDate }: AuthorCardProps) => {
-  const t = useTranslations('BlogPost')
+  const t = useTranslations('BlogPostPage')
   const profilePicture = author.fields.profilePicture
   const profileUrl =
     profilePicture && 'fields' in profilePicture

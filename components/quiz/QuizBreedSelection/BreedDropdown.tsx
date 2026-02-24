@@ -32,10 +32,12 @@ export type BreedDropdownVariantProps = VariantProps<
   typeof inputDropdownVariants
 >
 
-interface BreedOption {
-  labelKey: string
+export interface BreedOption {
   value: string
-  categoryKey: string
+  labelKey?: string
+  categoryKey?: string
+  label?: string
+  category?: string
 }
 
 interface BreedDropdownProps extends BreedDropdownVariantProps {
@@ -95,10 +97,26 @@ const BreedDropdown = ({
     }
   }
 
-  // Group breeds by category
+  const getLabel = useCallback(
+    (breed: BreedOption) => {
+      if (breed.label) return breed.label
+      if (breed.labelKey) return t(breed.labelKey)
+      return ''
+    },
+    [t]
+  )
+  const getCategory = useCallback(
+    (breed: BreedOption) => {
+      if (breed.category) return breed.category
+      if (breed.categoryKey) return t(breed.categoryKey)
+      return ''
+    },
+    [t]
+  )
+
   const breedsByCategory = breeds.reduce(
     (acc, breed) => {
-      const categoryLabel = t(breed.categoryKey)
+      const categoryLabel = getCategory(breed)
       if (!acc[categoryLabel]) {
         acc[categoryLabel] = []
       }
@@ -134,7 +152,7 @@ const BreedDropdown = ({
             textClassName
           )}
         >
-          {selectedBreed ? t(selectedBreed.labelKey) : placeholder}
+          {selectedBreed ? getLabel(selectedBreed) : placeholder}
         </p>
         {icon && <div className="relative shrink-0 size-6">{icon}</div>}
         <div className="relative shrink-0 size-6">
@@ -170,7 +188,7 @@ const BreedDropdown = ({
                 >
                   <div className="flex-1 min-w-0 text-left">
                     <p className="font-body leading-6 whitespace-pre-wrap">
-                      {t(breed.labelKey)}
+                      {getLabel(breed)}
                     </p>
                   </div>
                   {breed.value === value && (
@@ -189,4 +207,3 @@ const BreedDropdown = ({
 }
 
 export { BreedDropdown }
-export type { BreedOption }
