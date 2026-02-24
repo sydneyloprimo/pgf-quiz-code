@@ -200,14 +200,14 @@
     font-family: 'Miller Banner';
     font-weight: 400;
     font-style: normal;
-    src: url('/fonts/MillerBanner-Regular.ttf') format('truetype');
+    src: url('/fonts/MillerBanner-Regular.otf') format('opentype');
   }
 
   @font-face {
     font-family: 'Miller Banner';
     font-weight: 700;
     font-style: normal;
-    src: url('/fonts/MillerBanner-Bold.ttf') format('truetype');
+    src: url('/fonts/MillerBanner-Regular.otf') format('opentype');
   }
 }
 

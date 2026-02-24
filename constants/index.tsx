@@ -13,6 +13,9 @@ export const NAV_LINKS: NavLink[] = [
   { href: Routes.about, labelKey: 'about' },
 ]
 
+// 404 Not Found page
+export const NOT_FOUND_DOG_BOWL_IMAGE = '/images/404-dog-bowl.svg'
+
 // Blog index
 export const BLOG_FEATURED_IMAGE_PATH = '/images/blog-featured.jpg'
 export const BLOG_INDEX_POSTS_PER_PAGE = 4
