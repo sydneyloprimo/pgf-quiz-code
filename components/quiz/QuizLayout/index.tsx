@@ -9,6 +9,7 @@ import { z } from 'zod'
 
 import { getStoredFormData, saveFormData } from '@/components/quiz/helpers'
 import { QuizHeader } from '@/components/quiz/QuizHeader'
+import { FEATURE_FLAG_WAITLIST } from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 import {
@@ -41,6 +42,11 @@ const createQuizFormSchema = (t: (key: string) => string) =>
     treatFrequency: z.string().optional(),
     mealtimeBehavior: z.string().optional(),
     activityLevel: z.string().optional(),
+    zipCode: z.string().optional(),
+    subscriptionType: z.string().optional(),
+    firstName: z.string().optional(),
+    lastName: z.string().optional(),
+    email: z.union([z.string().email(), z.literal('')]).optional(),
   })
 
 export type QuizFormData = z.infer<ReturnType<typeof createQuizFormSchema>>
@@ -78,6 +84,11 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
       treatFrequency: storedFormData?.treatFrequency,
       mealtimeBehavior: storedFormData?.mealtimeBehavior,
       activityLevel: storedFormData?.activityLevel,
+      zipCode: storedFormData?.zipCode,
+      subscriptionType: storedFormData?.subscriptionType,
+      firstName: storedFormData?.firstName,
+      lastName: storedFormData?.lastName,
+      email: storedFormData?.email,
     }),
     [storedFormData]
   )
@@ -106,6 +117,11 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
         treatFrequency: stored.treatFrequency,
         mealtimeBehavior: stored.mealtimeBehavior,
         activityLevel: stored.activityLevel,
+        zipCode: stored.zipCode,
+        subscriptionType: stored.subscriptionType,
+        firstName: stored.firstName,
+        lastName: stored.lastName,
+        email: stored.email,
       })
     }
   }, [formMethods])
@@ -144,9 +160,29 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
       return
     }
 
-    // Results page should go back to Step7
+    // Results page: go back to SubscriptionType (flag ON) or HowActive (flag OFF)
     if (currentStep === QuizStep.Results) {
-      goToStep(QuizStep.Step7)
+      fetch(
+        `/api/feature-flags?key=${encodeURIComponent(FEATURE_FLAG_WAITLIST)}`
+      )
+        .then((res) => (res.ok ? res.json() : { enabled: false }))
+        .then((json) =>
+          json.enabled
+            ? goToStep(QuizStep.SubscriptionType)
+            : goToStep(QuizStep.Step7)
+        )
+      return
+    }
+
+    // ResultsBeta should go back to SubscriptionType
+    if (currentStep === QuizStep.ResultsBeta) {
+      goToStep(QuizStep.SubscriptionType)
+      return
+    }
+
+    // ConfirmationBeta should go back to ResultsBeta
+    if (currentStep === QuizStep.ConfirmationBeta) {
+      goToStep(QuizStep.ResultsBeta)
       return
     }
 
@@ -177,9 +213,21 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
     <div className="flex flex-col h-screen bg-neutral-300 w-full overflow-y-auto">
       <QuizHeader
         visitedSteps={visitedSteps}
-        showProgressBar={currentStep !== QuizStep.Results}
-        centerLogo={currentStep === QuizStep.Results}
-        showBackButton={currentStep === QuizStep.Results}
+        showProgressBar={
+          currentStep !== QuizStep.Results &&
+          currentStep !== QuizStep.ResultsBeta &&
+          currentStep !== QuizStep.ConfirmationBeta
+        }
+        centerLogo={
+          currentStep === QuizStep.Results ||
+          currentStep === QuizStep.ResultsBeta ||
+          currentStep === QuizStep.ConfirmationBeta
+        }
+        showBackButton={
+          currentStep === QuizStep.Results ||
+          currentStep === QuizStep.ResultsBeta ||
+          currentStep === QuizStep.ConfirmationBeta
+        }
         onBack={goBack}
       />
 

@@ -25,6 +25,8 @@
         "CUSTOMER_CREATION_FAILED": "Failed to create customer. Please try again.",
         "EMAIL_ALREADY_EXISTS": "This email is already registered.",
         "EMAIL_REQUIRED": "Email address is required.",
+        "FIRST_NAME_REQUIRED": "First name is required.",
+        "LAST_NAME_REQUIRED": "Last name is required.",
         "INTERNAL_SERVER_ERROR": "An unexpected error occurred. Please try again.",
         "INVALID_EMAIL": "Please enter a valid email address.",
         "NETWORK_ERROR": "Network error. Please check your connection.",
@@ -643,15 +645,27 @@
       "weightMustBePositive": "Weight must be a positive number"
     },
     "step1": {
-      "heading": "Let's build the everyday moments that shape your dog's wellbeing",
-      "description": "Tell us a bit about your dog's age, size, and habits so we can recommend the right meals — fresh, balanced, and made just for them.",
-      "button": "Build your dog's plan",
+      "heading": "Build your dog's feeding protocol.",
+      "description": "We'll use age, size, and physiological factors to calibrate a feeding protocol grounded in clinical standards.",
+      "button": "Build your dog's protocol",
       "imageAlt": "Dog illustration",
-      "link": "Speak directly to our Concierge"
+      "link": "Consult our Nutrition Concierge"
+    },
+    "location": {
+      "heading": "Confirm your location.",
+      "description": "We're currently enrolling a limited number of dogs into our founding cohort in the Boston area.",
+      "zipLabel": "ZIP code",
+      "zipPlaceholder": "Enter ZIP code",
+      "invalidZipMessage": "You're ahead of us! We're expanding thoughtfully, region by region. Would you like to be notified when enrollment opens in your area?",
+      "notifyMeButton": "Yes, notify me",
+      "checkBackButton": "I'll check back later",
+      "changeZipButton": "Change ZIP code",
+      "emailLabel": "Email",
+      "emailPlaceholder": "Enter email address"
     },
     "step2": {
-      "heading": "Let's get to know your dog.",
-      "description": "We'll use this information to tailor a science-backed plan that fits your dog's exact needs.",
+      "heading": "Let's start with the fundamentals.",
+      "description": "This information allows us to determine nutrient ratios, portion size, and caloric needs based on your dog's physiology.",
       "namePrefix": "My dog's name is",
       "nameSuffix": "a",
       "gender": {
@@ -662,75 +676,75 @@
       "agePrefix": "who is",
       "ageSuffix": "years old and weighs",
       "weightPrefix": "",
-      "weightSuffix": "lbs"
+      "weightSuffix": "lbs."
     },
     "neuteredStatus": {
-      "heading": "Is {name} neutered or intact?",
-      "description": "This helps us fine-tune {name}'s portion size and calorie needs — hormones can slightly affect metabolism.",
+      "heading": "Is {name} neutered/spayed or intact?",
+      "description": "Hormonal status affects metabolic rate and caloric requirements, which we account for in your dog's feeding protocol.",
       "options": {
         "neutered": "Neutered",
         "intact": "Intact"
       }
     },
     "bodyShape": {
-      "heading": "How would you describe your dog's body shape?",
-      "description": "This helps us fine-tune portion size and calorie balance to keep them in their healthiest shape.",
+      "heading": "How would you describe your dog's body condition?",
+      "description": "This assessment informs caloric needs and portion guidance.",
       "options": {
         "lightLean": {
-          "title": "Light and Lean",
-          "description": "You can see or easily feel their ribs and a clear waist.",
-          "imageAlt": "Light and lean dog body shape illustration"
+          "title": "Underweight",
+          "description": "Ribs and spine visible or easily felt; minimal fat cover; clear waist and abdominal tuck.",
+          "imageAlt": "Underweight dog body condition illustration"
         },
         "idealBalanced": {
-          "title": "Ideal & Balanced",
-          "description": "You can feel ribs under a gentle layer, and there's a natural waist when viewed from above.",
-          "imageAlt": "Ideal and balanced dog body shape illustration"
+          "title": "Ideal",
+          "description": "Ribs palpable under light fat cover; visible waist from above; healthy abdominal tuck.",
+          "imageAlt": "Ideal dog body condition illustration"
         },
         "slightlyFilled": {
-          "title": "Slightly Filled Out",
-          "description": "Their waistline is softening, and ribs are harder to feel with light pressure.",
-          "imageAlt": "Slightly filled out dog body shape illustration"
+          "title": "Overweight",
+          "description": "Ribs difficult to feel; waist less defined; abdominal tuck reduced.",
+          "imageAlt": "Overweight dog body condition illustration"
         },
         "fullRound": {
-          "title": "Full or Round",
-          "description": "No visible waist; their belly feels soft and hangs lower.",
-          "imageAlt": "Full or round dog body shape illustration"
+          "title": "Obese",
+          "description": "No palpable ribs; no visible waist; abdomen distended or pendulous.",
+          "imageAlt": "Obese dog body condition illustration"
         }
       }
     },
     "title": "Purely Golden Foods",
     "plus25Lbs": {
-      "heading": "Our current meal plans are tailored for small dogs under 25 lbs.",
-      "description": "We're expanding to larger breeds soon — join the waitlist to be the first to know when new sizes launch.",
-      "changeWeightsButton": "Change Weighs",
-      "joinWaitlistButton": "Join the Waitlist",
+      "heading": "Our formulations are currently engineered for small breeds under 20 lbs.",
+      "description": "Protocols for larger breeds are in development. Would you like to be notified when they become available?",
+      "changeWeightsButton": "Change weight",
+      "joinWaitlistButton": "Yes, notify me",
       "imageAlt": "Dog illustration"
     },
     "underAge": {
-      "heading": "We're still perfecting our meals for puppies.",
-      "description": "Our current formulas are designed for adult dogs. We're developing a specialized line for growing pups — join the waitlist and be the first to know when it's ready.",
-      "changeAgeButton": "Change Age",
-      "joinWaitlistButton": "Join the Waitlist",
+      "heading": "Our current formulations are engineered for adult maintenance.",
+      "description": "A growth-stage protocol for puppies is in development. Would you like to be notified when it becomes available?",
+      "changeAgeButton": "Change age",
+      "joinWaitlistButton": "Yes, notify me",
       "imageAlt": "Dog illustration"
     },
     "howActive": {
       "heading": "How active is {name} day-to-day?",
-      "description": "We'll use this to match his calorie intake and portion size to his daily energy level.",
+      "description": "Activity level determines energy needs and informs calorie allocation.",
       "placeholder": "Select activity level",
       "options": {
-        "couchPotato": "Couch Potato",
-        "routineWalker": "Routine Walker",
-        "activelyAthletic": "Actively Athletic"
+        "couchPotato": "Low activity",
+        "routineWalker": "Moderate activity",
+        "activelyAthletic": "High activity"
       }
     },
     "breedSelection": {
-      "heading": "Select {name}'s breed (or the closest match)",
-      "description": "Different breeds have different needs — this helps us fine-tune portion size and nutritional balance.",
+      "heading": "Select {name}'s breed (or closest match).",
+      "description": "Breed influences metabolic rate, digestive sensitivity, and nutrient requirements. This helps us refine your dog's feeding protocol.",
       "placeholder": "Choose a breed",
       "categories": {
-        "toyAndCompanion": "Toy and Companion",
-        "smallAndStylish": "Small and stylish",
-        "sportingAndAdventurous": "Sporting & Adventurous"
+        "toyAndCompanion": "Toy",
+        "smallAndStylish": "Small",
+        "sportingAndAdventurous": "Medium"
       },
       "options": {
         "shihTzu": "Shih Tzu",
@@ -760,36 +774,58 @@
       }
     },
     "diet": {
-      "heading": "{name}'s Diet",
-      "description": "Every dog has their own habits — this helps us personalize {name}'s plan for balanced nutrition and portion size.",
-      "mainFoodLabel": "{name} mainly eats",
+      "heading": "{name}'s current diet intake",
+      "description": "Understanding current intake helps establish a nutritional baseline and inform transition planning.",
+      "mainFoodLabel": "{name} primarily eats…",
       "mainFoodPlaceholder": "Select food type",
-      "treatFrequencyLabel": "and gets",
+      "treatFrequencyLabel": "{name} receives…",
       "treatFrequencyPlaceholder": "Select frequency",
-      "treatFrequencySuffix": "treats or table scraps daily.",
-      "mealtimeBehaviorLabel": "At mealtimes, {name}",
+      "treatFrequencySuffix": "Please include training treats and table scraps.",
+      "mealtimeBehaviorLabel": "At mealtimes, {name}…",
       "mealtimeBehaviorPlaceholder": "Select behavior",
       "options": {
-        "dryFood": "dry food",
-        "wetFood": "wet food",
-        "rawFood": "raw food",
-        "dehydratedFood": "dehydrated food",
-        "freshFood": "fresh food",
-        "homemadeFood": "homemade food",
-        "mixedCombination": "mixed (combination)",
-        "no": "no",
-        "oneToTwoSmall": "1-2 small",
-        "several": "several",
-        "lotsSpoiledRotten": "lots (spoiled rotten)",
-        "veryPicky": "very picky",
-        "canBePicky": "can be picky",
-        "goodEater": "good eater",
-        "willEatAnything": "will eat anything"
+        "dryFood": "Kibble (dry food)",
+        "wetFood": "Wet food (canned)",
+        "rawFood": "Raw diet",
+        "dehydratedFood": "Dehydrated or freeze-dried food",
+        "freshFood": "Fresh or refrigerated food",
+        "homemadeFood": "Home-prepared meals",
+        "mixedCombination": "Mixed feeding (multiple formats)",
+        "no": "No treats or table scraps",
+        "oneToTwoSmall": "1–2 treats daily",
+        "several": "Occasional treats (a few per week)",
+        "lotsSpoiledRotten": "Frequent treats or table scraps (3+ per day)",
+        "veryPicky": "Is selective or frequently leaves food behind",
+        "canBePicky": "Grazes throughout the day",
+        "goodEater": "Eats consistently but slowly",
+        "willEatAnything": "Eats immediately and finishes everything"
       }
     },
+    "subscriptionType": {
+      "heading": "Select your desired feeding format",
+      "description": "Let us know how you want Purely Golden Foods to augment your dog's nutrition.",
+      "options": {
+        "completeProtocol": "Complete Protocol (100% Daily Nutritional Needs)",
+        "topperProtocol": "Topper Protocol (50% Daily Nutritional Needs)",
+        "singleMeals": "Single Meals"
+      }
+    },
+    "resultsBeta": {
+      "heading": "{name}'s Recommended Feeding Protocol",
+      "description": "Based on the information you provided, we've identified a feeding protocol calibrated to {name}'s physiology and daily nutritional requirements. To complete your request for enrollment in our founding cohort, please share your contact information.",
+      "firstNameLabel": "First name",
+      "lastNameLabel": "Last name",
+      "emailLabel": "Email",
+      "submitButton": "Submit"
+    },
+    "confirmationBeta": {
+      "heading": "Thank you for your interest in our founding cohort.",
+      "description": "We've received your information and will review it as part of our enrollment process. If selected, we'll be in touch with next steps.",
+      "backToHome": "Return to home"
+    },
     "loading": {
-      "heading": "Creating the perfect meal plan for {name}…",
-      "description": "We're analyzing his details to balance nutrition, flavor, and portion — the way care and science should meet."
+      "heading": "Determining {name}'s feeding protocol…",
+      "description": "Calculating nutrient ratios, portion guidance, and daily energy requirements."
     },
     "resultsHeader": {
       "headingPrefix": "Your Recommended Plan for {name}",

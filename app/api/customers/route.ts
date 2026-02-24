@@ -4,6 +4,10 @@ const SHOPIFY_ADMIN_API_URL = `https://${process.env.NEXT_PUBLIC_SHOPIFY_STORE_D
 
 interface CustomerCreateRequest {
   email: string
+  firstName?: string
+  lastName?: string
+  note?: string
+  tags?: string[]
 }
 
 interface ShopifyCustomerResponse {
@@ -17,7 +21,7 @@ interface ShopifyCustomerResponse {
 export async function POST(request: NextRequest) {
   try {
     const body: CustomerCreateRequest = await request.json()
-    const { email } = body
+    const { email, firstName, lastName, note, tags } = body
 
     if (!email) {
       return NextResponse.json({ error: 'EMAIL_REQUIRED' }, { status: 400 })
@@ -37,6 +41,25 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    const customerPayload: Record<string, unknown> = {
+      email,
+      accepts_marketing: true,
+      verified_email: true,
+    }
+
+    if (firstName) {
+      customerPayload.first_name = firstName
+    }
+    if (lastName) {
+      customerPayload.last_name = lastName
+    }
+    if (note) {
+      customerPayload.note = note
+    }
+    if (tags && tags.length > 0) {
+      customerPayload.tags = tags.join(', ')
+    }
+
     const response = await fetch(SHOPIFY_ADMIN_API_URL, {
       method: 'POST',
       headers: {
@@ -44,11 +67,7 @@ export async function POST(request: NextRequest) {
         'X-Shopify-Access-Token': adminToken,
       },
       body: JSON.stringify({
-        customer: {
-          email,
-          accepts_marketing: true,
-          verified_email: true,
-        },
+        customer: customerPayload,
       }),
     })
 

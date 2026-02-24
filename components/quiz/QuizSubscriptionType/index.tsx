@@ -4,40 +4,54 @@ import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useState } from 'react'
 import { Controller, useWatch, UseFormReturn } from 'react-hook-form'
 
-import { InputDropdown } from '@/components/common/InputDropdown'
+import { OptionSelect } from '@/components/common/OptionSelect'
 import { FoodAnimation } from '@/components/quiz/FoodAnimation'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
 import {
-  ACTIVITY_LEVEL_OPTIONS,
   FEATURE_FLAG_WAITLIST,
   QUIZ_LOADING_DURATION_MS,
+  SUBSCRIPTION_TYPE_OPTIONS,
 } from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
-import { InputDropdownState } from '@/types/enums/constants'
 import { getTranslatedOptions } from '@/utils/helpers'
 
-interface QuizHowActiveProps {
+interface QuizSubscriptionTypeProps {
   goToStep: (step: QuizStep) => void
   goBack: () => void
   canGoBack: boolean
   formMethods: UseFormReturn<QuizFormData>
 }
 
-const QuizHowActive = ({
+const QuizSubscriptionType = ({
   goToStep,
   goBack,
   canGoBack,
   formMethods,
-}: QuizHowActiveProps) => {
-  const t = useTranslations('Quiz.howActive')
+}: QuizSubscriptionTypeProps) => {
+  const t = useTranslations('Quiz.subscriptionType')
   const tQuiz = useTranslations('Quiz')
   const tLoading = useTranslations('Quiz.loading')
   const { control } = formMethods
   const [isLoading, setIsLoading] = useState(false)
 
+  // Redirect to Results when flag is OFF (subscription step only for flag ON)
+  useEffect(() => {
+    let cancelled = false
+    fetch(`/api/feature-flags?key=${encodeURIComponent(FEATURE_FLAG_WAITLIST)}`)
+      .then((res) => (res.ok ? res.json() : { enabled: false }))
+      .then((json) => {
+        if (!cancelled && !json.enabled) {
+          goToStep(QuizStep.Results)
+        }
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [goToStep])
+
   const dogName = useWatch({ control, name: 'name' }) || ''
-  const activityLevel = useWatch({ control, name: 'activityLevel' })
+  const subscriptionType = useWatch({ control, name: 'subscriptionType' })
 
   const handleNext = useCallback(() => {
     setIsLoading(true)
@@ -59,7 +73,7 @@ const QuizHowActive = ({
       const waitlistFlipEnabled = await flagPromise
       if (!cancelled) {
         const nextStep = waitlistFlipEnabled
-          ? QuizStep.SubscriptionType
+          ? QuizStep.ResultsBeta
           : QuizStep.Results
         goToStep(nextStep)
       }
@@ -71,12 +85,7 @@ const QuizHowActive = ({
     }
   }, [isLoading, goToStep])
 
-  const isFormValid = Boolean(activityLevel)
-
-  const translatedActivityLevelOptions = getTranslatedOptions(
-    ACTIVITY_LEVEL_OPTIONS,
-    t
-  )
+  const translatedOptions = getTranslatedOptions(SUBSCRIPTION_TYPE_OPTIONS, t)
 
   if (isLoading) {
     return (
@@ -101,34 +110,26 @@ const QuizHowActive = ({
       <div className="flex flex-col gap-12 items-center w-full md:max-w-2xl md:mx-auto pb-16">
         <div className="flex flex-col gap-6 items-center text-center w-full text-secondary-950">
           <h2 className="font-display text-4xl leading-12 tracking-tight w-full">
-            {t('heading', { name: dogName })}
+            {t('heading')}
           </h2>
           <p className="font-body text-xl leading-8 w-full">
             {t('description')}
           </p>
         </div>
 
-        <div className="flex flex-col gap-8 items-center w-full">
-          <div className="w-full">
-            <Controller
-              name="activityLevel"
-              control={control}
-              render={({ field: { value, onChange } }) => (
-                <InputDropdown
-                  value={value}
-                  onSelect={onChange}
-                  options={translatedActivityLevelOptions}
-                  placeholder={t('placeholder')}
-                  className="w-full"
-                  state={
-                    value
-                      ? InputDropdownState.Filled
-                      : InputDropdownState.Default
-                  }
-                />
-              )}
-            />
-          </div>
+        <div className="flex flex-col gap-4 items-center w-full">
+          <Controller
+            name="subscriptionType"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <OptionSelect
+                options={translatedOptions}
+                value={value || ''}
+                onSelect={onChange}
+                className="w-full"
+              />
+            )}
+          />
         </div>
       </div>
       <QuizNavigationFooter
@@ -136,10 +137,10 @@ const QuizHowActive = ({
         canGoBack={canGoBack}
         onContinue={handleNext}
         continueButtonText={tQuiz('continueButton')}
-        continueDisabled={!isFormValid}
+        continueDisabled={!subscriptionType}
       />
     </div>
   )
 }
 
-export { QuizHowActive }
+export { QuizSubscriptionType }

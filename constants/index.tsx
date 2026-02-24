@@ -48,6 +48,66 @@ export const QUIZ_RESULTS_ILLUSTRATION_HEIGHT = 103
 export const PUPPY_MAX_AGE_YEARS = 1
 export const MAX_DOG_WEIGHT_LBS = 25
 
+// Boston-area ZIP codes for quiz location step (founding cohort enrollment)
+export const BOSTON_AREA_ZIP_CODES: ReadonlySet<string> = new Set([
+  '02108',
+  '02109',
+  '02110',
+  '02111',
+  '02112',
+  '02113',
+  '02114',
+  '02115',
+  '02116',
+  '02117',
+  '02118',
+  '02119',
+  '02120',
+  '02121',
+  '02122',
+  '02123',
+  '02124',
+  '02125',
+  '02126',
+  '02127',
+  '02128',
+  '02129',
+  '02130',
+  '02131',
+  '02132',
+  '02133',
+  '02134',
+  '02135',
+  '02136',
+  '02163',
+  '02196',
+  '02199',
+  '02201',
+  '02203',
+  '02204',
+  '02205',
+  '02206',
+  '02210',
+  '02211',
+  '02212',
+  '02215',
+  '02217',
+  '02222',
+  '02241',
+  '02266',
+  '02283',
+  '02284',
+  '02293',
+  '02295',
+  '02297',
+  '02298',
+])
+
+export const MIN_ZIP_CODE_LENGTH = 5
+export const QUIZ_LOADING_DURATION_MS = 5000
+export const FEATURE_FLAG_WAITLIST = 'waitlistFlip'
+export const QUIZ_ENROLLMENT_TAGS = ['quiz-enrollment', 'beta-cohort'] as const
+
 // Quiz calculation constants
 export const RER_BASE = 70
 
@@ -304,6 +364,26 @@ export const MEALTIME_BEHAVIOR_OPTIONS: DietOption[] = [
   { labelKey: 'options.canBePicky', value: 'can-be-picky' },
   { labelKey: 'options.goodEater', value: 'good-eater' },
   { labelKey: 'options.willEatAnything', value: 'will-eat-anything' },
+]
+
+export interface SubscriptionTypeOption {
+  labelKey: string
+  value: string
+}
+
+export const SUBSCRIPTION_TYPE_OPTIONS: SubscriptionTypeOption[] = [
+  {
+    labelKey: 'options.completeProtocol',
+    value: 'complete-protocol',
+  },
+  {
+    labelKey: 'options.topperProtocol',
+    value: 'topper-protocol',
+  },
+  {
+    labelKey: 'options.singleMeals',
+    value: 'single-meals',
+  },
 ]
 
 // Quiz results product options

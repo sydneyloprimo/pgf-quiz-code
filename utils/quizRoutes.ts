@@ -3,6 +3,7 @@ import { Routes } from '@/types/enums/routes'
 
 const STEP_TO_PATH: Partial<Record<QuizStep, string>> = {
   [QuizStep.Welcome]: 'welcome',
+  [QuizStep.Location]: 'location',
   [QuizStep.PetInfo]: 'pet-info',
   [QuizStep.Plus25Lbs]: 'plus-25-lbs',
   [QuizStep.UnderAge]: 'under-age',
@@ -11,8 +12,11 @@ const STEP_TO_PATH: Partial<Record<QuizStep, string>> = {
   [QuizStep.Step5]: 'body-shape',
   [QuizStep.Step6]: 'step6',
   [QuizStep.Step7]: 'step7',
-  // Step8 (loading) is not a route - shown inline during Step7 → Results transition
+  [QuizStep.SubscriptionType]: 'subscription-type',
+  // Step8 (loading) is not a route - shown inline during SubscriptionType → Results transition
   [QuizStep.Results]: 'results',
+  [QuizStep.ResultsBeta]: 'results-beta',
+  [QuizStep.ConfirmationBeta]: 'confirmation-beta',
 }
 
 const PATH_TO_STEP: Record<string, QuizStep> = Object.entries(
@@ -56,12 +60,14 @@ export const isValidQuizStepPath = (path: string): boolean => {
 
 export const STEP_ORDER: QuizStep[] = [
   QuizStep.Welcome,
+  QuizStep.Location,
   QuizStep.PetInfo,
   QuizStep.NeuteredStatus,
   QuizStep.BreedSelection,
   QuizStep.Step5,
   QuizStep.Step6,
   QuizStep.Step7,
+  QuizStep.SubscriptionType,
   // Step8 (loading) is not in the order - shown inline, not a separate step
 ]
 

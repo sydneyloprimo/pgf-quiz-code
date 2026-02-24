@@ -6,6 +6,8 @@ import { UseFormReturn } from 'react-hook-form'
 import {
   QuizStep1,
   QuizStep2,
+  QuizConfirmationBeta,
+  QuizLocation,
   QuizNeuteredStatus,
   QuizBreedSelection,
   QuizBodyShape,
@@ -13,7 +15,9 @@ import {
   QuizHowActive,
   QuizPlus25Lbs,
   QuizResults,
+  QuizResultsBeta,
   QuizStepUnderAge,
+  QuizSubscriptionType,
 } from '@/components/quiz'
 import QuizLayout, { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizStep } from '@/types/enums/constants'
@@ -34,6 +38,15 @@ export default function QuizStepPage() {
               goToStep={goToStep}
               goBack={goBack}
               canGoBack={canGoBack}
+            />
+          )
+        case QuizStep.Location:
+          return (
+            <QuizLocation
+              goToStep={goToStep}
+              goBack={goBack}
+              canGoBack={canGoBack}
+              formMethods={formMethods}
             />
           )
         case QuizStep.PetInfo:
@@ -90,6 +103,15 @@ export default function QuizStepPage() {
               formMethods={formMethods}
             />
           )
+        case QuizStep.SubscriptionType:
+          return (
+            <QuizSubscriptionType
+              goToStep={goToStep}
+              goBack={goBack}
+              canGoBack={canGoBack}
+              formMethods={formMethods}
+            />
+          )
         case QuizStep.Results:
           return (
             <QuizResults
@@ -97,6 +119,23 @@ export default function QuizStepPage() {
               goBack={goBack}
               canGoBack={canGoBack}
               formMethods={formMethods}
+            />
+          )
+        case QuizStep.ResultsBeta:
+          return (
+            <QuizResultsBeta
+              goToStep={goToStep}
+              goBack={goBack}
+              canGoBack={canGoBack}
+              formMethods={formMethods}
+            />
+          )
+        case QuizStep.ConfirmationBeta:
+          return (
+            <QuizConfirmationBeta
+              goToStep={goToStep}
+              goBack={goBack}
+              canGoBack={canGoBack}
             />
           )
         case QuizStep.Plus25Lbs:

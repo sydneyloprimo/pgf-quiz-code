@@ -25,7 +25,7 @@ const QuizStep1 = ({ goToStep, goBack, canGoBack }: QuizStep1Props) => {
   const { href: conciergeHref, isTabletOrLarger } = useConciergeContact()
 
   const handleNext = () => {
-    goToStep(QuizStep.PetInfo)
+    goToStep(QuizStep.Location)
   }
 
   return (

@@ -7,6 +7,7 @@ export const CONTENTFUL_CONTENT_TYPES = {
   blogPost: 'blogPost',
   category: 'category',
   author: 'author',
+  featureFlag: 'featureFlag',
 } as const
 
 export const CONTENTFUL_FIELDS = {
