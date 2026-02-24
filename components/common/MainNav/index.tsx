@@ -92,6 +92,7 @@ const MainNav = () => {
       label: t('ourFormulation'),
     },
     { key: 'about', href: Routes.about, label: t('aboutUs') },
+    { key: 'blog', href: Routes.blog, label: t('blog') },
     { key: 'ourRecipes', href: Routes.recipes, label: t('ourRecipes') },
   ]
 
