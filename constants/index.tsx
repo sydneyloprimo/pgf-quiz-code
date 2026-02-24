@@ -179,28 +179,28 @@ export interface BodyShapeOption {
 export const BODY_SHAPE_OPTIONS: BodyShapeOption[] = [
   {
     value: 'light-lean',
-    image: '/images/body-shape-light-lean.png',
+    image: '/images/body-shape-light-lean.svg',
     titleKey: 'options.lightLean.title',
     descriptionKey: 'options.lightLean.description',
     imageAltKey: 'options.lightLean.imageAlt',
   },
   {
     value: 'ideal-balanced',
-    image: '/images/body-shape-ideal-balanced.png',
+    image: '/images/body-shape-ideal-balanced.svg',
     titleKey: 'options.idealBalanced.title',
     descriptionKey: 'options.idealBalanced.description',
     imageAltKey: 'options.idealBalanced.imageAlt',
   },
   {
     value: 'slightly-filled',
-    image: '/images/body-shape-slightly-filled.png',
+    image: '/images/body-shape-slightly-filled.svg',
     titleKey: 'options.slightlyFilled.title',
     descriptionKey: 'options.slightlyFilled.description',
     imageAltKey: 'options.slightlyFilled.imageAlt',
   },
   {
     value: 'full-round',
-    image: '/images/body-shape-full-round.png',
+    image: '/images/body-shape-full-round.svg',
     titleKey: 'options.fullRound.title',
     descriptionKey: 'options.fullRound.description',
     imageAltKey: 'options.fullRound.imageAlt',

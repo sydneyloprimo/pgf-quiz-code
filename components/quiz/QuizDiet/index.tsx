@@ -11,8 +11,7 @@ import {
   MEALTIME_BEHAVIOR_OPTIONS,
   TREAT_FREQUENCY_OPTIONS,
 } from '@/constants'
-import { QuizStep } from '@/types/enums/constants'
-import { InputDropdownState } from '@/types/enums/constants'
+import { InputDropdownState, QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 import { getTranslatedOptions } from '@/utils/helpers'
 
@@ -125,7 +124,7 @@ const QuizDiet = ({
 
           <div className="flex flex-wrap gap-5 items-center justify-center w-full">
             <p className="font-display heading-h5 text-secondary-950">
-              {t('treatFrequencyLabel')}
+              {t('treatFrequencyLabel', { name: dogName })}
             </p>
             <div className="w-44">
               <Controller

@@ -9,7 +9,6 @@ import { FoodAnimation } from '@/components/quiz/FoodAnimation'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
 import {
-  FEATURE_FLAG_WAITLIST,
   QUIZ_LOADING_DURATION_MS,
   SUBSCRIPTION_TYPE_OPTIONS,
 } from '@/constants'
@@ -32,23 +31,17 @@ const QuizSubscriptionType = ({
   const t = useTranslations('Quiz.subscriptionType')
   const tQuiz = useTranslations('Quiz')
   const tLoading = useTranslations('Quiz.loading')
+  const tFlags = useTranslations('FeatureFlags')
   const { control } = formMethods
   const [isLoading, setIsLoading] = useState(false)
 
   // Redirect to Results when flag is OFF (subscription step only for flag ON)
   useEffect(() => {
-    let cancelled = false
-    fetch(`/api/feature-flags?key=${encodeURIComponent(FEATURE_FLAG_WAITLIST)}`)
-      .then((res) => (res.ok ? res.json() : { enabled: false }))
-      .then((json) => {
-        if (!cancelled && !json.enabled) {
-          goToStep(QuizStep.Results)
-        }
-      })
-    return () => {
-      cancelled = true
+    const waitlistFlipEnabled = Boolean(tFlags('waitlistFlip'))
+    if (!waitlistFlipEnabled) {
+      goToStep(QuizStep.Results)
     }
-  }, [goToStep])
+  }, [goToStep, tFlags])
 
   const dogName = useWatch({ control, name: 'name' }) || ''
   const subscriptionType = useWatch({ control, name: 'subscriptionType' })
@@ -61,16 +54,8 @@ const QuizSubscriptionType = ({
     if (!isLoading) return
 
     let cancelled = false
-
-    const flagPromise = fetch(
-      `/api/feature-flags?key=${encodeURIComponent(FEATURE_FLAG_WAITLIST)}`
-    )
-      .then((res) => (res.ok ? res.json() : { enabled: false }))
-      .then((json) => Boolean(json.enabled))
-      .catch(() => false)
-
-    const timer = window.setTimeout(async () => {
-      const waitlistFlipEnabled = await flagPromise
+    const waitlistFlipEnabled = Boolean(tFlags('waitlistFlip'))
+    const timer = window.setTimeout(() => {
       if (!cancelled) {
         const nextStep = waitlistFlipEnabled
           ? QuizStep.ResultsBeta
@@ -83,7 +68,7 @@ const QuizSubscriptionType = ({
       cancelled = true
       window.clearTimeout(timer)
     }
-  }, [isLoading, goToStep])
+  }, [isLoading, goToStep, tFlags])
 
   const translatedOptions = getTranslatedOptions(SUBSCRIPTION_TYPE_OPTIONS, t)
 

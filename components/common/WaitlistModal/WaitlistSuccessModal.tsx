@@ -34,7 +34,7 @@ const WaitlistSuccessModal = ({
         </div>
         <div className="relative shrink-0 w-auto mx-auto">
           <EnvelopeIcon
-            className="w-full h-auto"
+            className="h-24 w-auto text-secondary-950"
             aria-label={t('successImageAlt')}
           />
         </div>

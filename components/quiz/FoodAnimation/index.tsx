@@ -6,13 +6,10 @@ import { cn } from '@/utils/cn'
 
 // Animation frame images
 const FRAME_IMAGES = [
-  '/images/quiz-loading/frame-default.svg',
+  '/images/quiz-loading/frame-1.svg',
   '/images/quiz-loading/frame-2.svg',
   '/images/quiz-loading/frame-3.svg',
   '/images/quiz-loading/frame-4.svg',
-  '/images/quiz-loading/frame-5.svg',
-  '/images/quiz-loading/frame-6.svg',
-  '/images/quiz-loading/frame-7.svg',
 ]
 
 const ANIMATION_DELAY_MS = 400
