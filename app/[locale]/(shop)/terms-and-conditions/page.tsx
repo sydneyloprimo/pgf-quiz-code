@@ -1,9 +1,9 @@
 import type { Document } from '@contentful/rich-text-types'
+import { getMessages } from 'next-intl/server'
 
 import { PageHero } from '@/components/common/PageHero'
 import { RichTextRenderer } from '@/components/common/RichTextRenderer'
 import { getRichTextCopy } from '@/contentful/copy'
-import enMessages from '@/messages/en.json'
 
 type TermsAndConditionsPageProps = {
   params: Promise<{ locale: string }>
@@ -17,7 +17,8 @@ export default async function TermsAndConditionsPage({
     'TermsAndConditions.content',
     locale
   )
-  const terms = (enMessages as Record<string, unknown>).TermsAndConditions as
+  const messages = await getMessages()
+  const terms = (messages as Record<string, unknown>).TermsAndConditions as
     | { content?: Document }
     | undefined
   const content = (contentfulContent ?? terms?.content) as Document

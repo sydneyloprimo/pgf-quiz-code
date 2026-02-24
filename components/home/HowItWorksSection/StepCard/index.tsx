@@ -18,8 +18,8 @@ const StepCard = ({
   <div
     className={cn(
       'relative',
-      'flex flex-col md:flex-row items-start md:items-center',
-      'w-full py-11',
+      'flex flex-col md:flex-row items-start',
+      'w-full py-4',
       'border-b border-quaternary-500'
     )}
   >
@@ -35,7 +35,7 @@ const StepCard = ({
       />
     )}
     {/* Step Number */}
-    <div className="w-32 shrink-0 flex items-center justify-center">
+    <div className="w-32 shrink-0 flex items-start justify-center">
       <span
         className={cn(
           'font-display',
@@ -49,7 +49,7 @@ const StepCard = ({
     </div>
 
     {/* Content */}
-    <div className="flex-1 flex flex-col gap-4 pl-0 md:pl-8 pr-0 md:pr-16 pt-4 md:pt-0">
+    <div className="flex-1 flex flex-col gap-4 pl-0 md:pl-8 pr-0 md:pr-16 pt-4 md:pt-4">
       <h3
         className={cn(
           'font-display',

@@ -98,11 +98,19 @@ const BreedDropdown = ({
   }
 
   const getLabel = useCallback(
-    (breed: BreedOption) => breed.label ?? t(breed.labelKey ?? ''),
+    (breed: BreedOption) => {
+      if (breed.label) return breed.label
+      if (breed.labelKey) return t(breed.labelKey)
+      return ''
+    },
     [t]
   )
   const getCategory = useCallback(
-    (breed: BreedOption) => breed.category ?? t(breed.categoryKey ?? ''),
+    (breed: BreedOption) => {
+      if (breed.category) return breed.category
+      if (breed.categoryKey) return t(breed.categoryKey)
+      return ''
+    },
     [t]
   )
 

@@ -2,9 +2,10 @@
 
 import { useTranslations } from 'next-intl'
 
-import { Button } from '@/components/common/Button'
 import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { WaitlistModal } from '@/components/common/WaitlistModal'
+import { BostonAnnouncementContent } from '@/components/home/BostonAnnouncementSection/BostonAnnouncementContent'
+import { BOSTON_ANNOUNCEMENT_BACKGROUND_IMAGE } from '@/constants'
 import { useModal } from '@/hooks/useModal'
 
 const BostonAnnouncementSection = () => {
@@ -14,32 +15,46 @@ const BostonAnnouncementSection = () => {
   return (
     <>
       <section className="w-full px-5 md:px-24 py-20">
-        <div className="w-full relative min-h-[500px] md:min-h-[663px] flex items-center justify-center px-5 py-12">
-          {/* Background Image */}
+        {/* Mobile layout - image on top, content below */}
+        <div className="md:hidden w-full flex flex-col gap-0">
+          <div className="w-full aspect-[3/4] relative">
+            <ContentfulImage
+              src={BOSTON_ANNOUNCEMENT_BACKGROUND_IMAGE}
+              alt={t('backgroundImageAlt')}
+              fill
+              className="object-cover"
+              aria-hidden="true"
+            />
+          </div>
+
+          <BostonAnnouncementContent
+            title={t('title')}
+            description1={t('description1')}
+            description2={t('description2')}
+            ctaLabel={t('ctaButton')}
+            onCtaClick={openModal}
+            variant="mobile"
+          />
+        </div>
+
+        {/* Desktop layout - image with content overlay */}
+        <div className="hidden md:block w-full relative min-h-[663px]">
           <ContentfulImage
-            src="/images/home/boston-announcement-bg.jpg"
+            src={BOSTON_ANNOUNCEMENT_BACKGROUND_IMAGE}
             alt={t('backgroundImageAlt')}
             fill
             className="object-cover"
             aria-hidden="true"
           />
 
-          {/* Content Card */}
-          <div className="relative z-10 w-full max-w-xl bg-neutral-300 px-10 md:px-20 py-14 md:py-16 flex flex-col gap-8 items-center text-center">
-            <div className="flex flex-col gap-4">
-              <h2 className="font-display text-3xl md:text-4xl leading-tight md:leading-12 tracking-tight text-secondary-950">
-                {t('title')}
-              </h2>
-              <div className="font-sans text-base leading-6 text-secondary-900">
-                <p className="mb-2">{t('description1')}</p>
-                <p>{t('description2')}</p>
-              </div>
-            </div>
-
-            <Button variant="secondary" onClick={openModal}>
-              {t('ctaButton')}
-            </Button>
-          </div>
+          <BostonAnnouncementContent
+            title={t('title')}
+            description1={t('description1')}
+            description2={t('description2')}
+            ctaLabel={t('ctaButton')}
+            onCtaClick={openModal}
+            variant="desktop"
+          />
         </div>
       </section>
 

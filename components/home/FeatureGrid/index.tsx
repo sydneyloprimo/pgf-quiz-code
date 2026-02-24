@@ -2,11 +2,11 @@ import { useTranslations } from 'next-intl'
 
 import { FeatureGrid } from '@/components/common/FeatureGrid'
 import {
-  FeatureClinicIcon,
-  FeatureCommunityIcon,
-  FeatureEnvironmentIcon,
-  FeaturePharmIcon,
-  FeatureTransparentIcon,
+  SustainabilityIcon,
+  ScienceProof2Icon,
+  ScienceProofIcon,
+  ResearchDocumentIcon,
+  SmallDogIcon,
 } from '@/components/common/Icon'
 
 const HomeFeatureGrid = () => {
@@ -14,32 +14,32 @@ const HomeFeatureGrid = () => {
 
   const features = [
     {
-      icon: <FeatureClinicIcon className="size-16" />,
-      title: t('clinicalTitle'),
-      description: t('clinicalDescription'),
+      icon: <ScienceProofIcon className="size-16 text-secondary-950" />,
+      title: t('feature1Title'),
+      description: t('feature1Description'),
     },
     {
-      icon: <FeaturePharmIcon className="size-16" />,
-      title: t('pharmTitle'),
-      description: t('pharmDescription'),
+      icon: <ResearchDocumentIcon className="size-16 text-secondary-950" />,
+      title: t('feature2Title'),
+      description: t('feature2Description'),
     },
     {
-      icon: <FeatureTransparentIcon className="size-16" />,
-      title: t('transparentTitle'),
-      description: t('transparentDescription'),
+      icon: <ScienceProof2Icon className="size-16 text-secondary-950" />,
+      title: t('feature3Title'),
+      description: t('feature3Description'),
     },
     {
-      icon: <FeatureCommunityIcon className="size-16" />,
-      title: t('communityTitle'),
-      description: t('communityDescription'),
+      icon: <SmallDogIcon className="size-16 text-secondary-950" />,
+      title: t('feature4Title'),
+      description: t('feature4Description'),
     },
     {
       type: 'special' as const,
     },
     {
-      icon: <FeatureEnvironmentIcon className="size-16" />,
-      title: t('environmentTitle'),
-      description: t('environmentDescription'),
+      icon: <SustainabilityIcon className="size-16 text-secondary-950" />,
+      title: t('feature5Title'),
+      description: t('feature5Description'),
     },
   ]
 

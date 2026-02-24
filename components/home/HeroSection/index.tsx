@@ -40,7 +40,7 @@ const HeroSection = () => {
 
       {/* Dark Overlay */}
       <div
-        className="absolute inset-0 bg-neutral-950 opacity-60 z-2"
+        className="absolute inset-0 bg-neutral-950 opacity-30 z-2"
         aria-hidden="true"
       />
 
@@ -67,6 +67,10 @@ const HeroSection = () => {
         >
           {t('headline')}
         </h1>
+
+        <p className="text-sm md:text-lg text-neutral-white opacity-90 w-4/5 md:w-full">
+          {t('subheadline')}
+        </p>
 
         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
           <Button

@@ -312,7 +312,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 - **Buttons**: `Button` with variants (`variant="primary"`, `variant="secondary"`, `variant="tertiary"`, `variant="outline"`) from `@/components/common/Button`
 - **Links**: `Link` from `@/components/common/Link`
 - **Forms**: `Input` from `@/components/common/Input`, `Select` from `@/components/common/Select`
-- **Layout**: `Card` from `@/components/common/Card`, `Header` from `@/components/common/Header`, `Footer` from `@/components/common/Footer`
+- **Layout**: `Card` from `@/components/common/Card`, `Footer` from `@/components/common/Footer`
 - **Navigation**: `DropdownMenu` components from `@/components/common/DropdownMenu`
 - **Feedback**: `Toast` from `@/components/common/Toast`, `Spinner` from `@/components/common/Spinner`
 - **Content**: `Carousel` from `@/components/common/Carousel`, `ProductCard` from `@/components/common/ProductCard`, `CategoryCard` from `@/components/common/CategoryCard`
@@ -1009,7 +1009,7 @@ import { Routes } from '@/types/enums/routes'
 import { useProductSearch } from '@/hooks/useProductSearch'
 
 // Sibling
-import HeaderDropdownMenu from './HeaderDropdownMenu'
+import RecipeDetails from './RecipeDetails'
 ```
 
 ### Import Rules

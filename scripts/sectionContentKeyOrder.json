@@ -1,0 +1,600 @@
+{
+  "About.CTA": [
+    "quote",
+    "button"
+  ],
+  "About.Commitment": [
+    "title"
+  ],
+  "About.Experts": [
+    "title",
+    "ecvcnParagraph1",
+    "ecvcnParagraph2",
+    "ecvcnParagraph3"
+  ],
+  "About.Hero": [
+    "title",
+    "subtitle"
+  ],
+  "About.Leadership": [
+    "imageAlt",
+    "paragraph1",
+    "paragraph2",
+    "signature"
+  ],
+  "About.Mission": [
+    "title",
+    "paragraph1",
+    "paragraph2",
+    "image1Alt",
+    "subsectionTitle",
+    "subsectionText",
+    "image2Alt"
+  ],
+  "Auth": [
+    "logoAlt",
+    "email",
+    "password",
+    "emailPlaceholder",
+    "passwordPlaceholder"
+  ],
+  "SignIn": [
+    "logoAlt",
+    "formHeading",
+    "formSubHeading",
+    "heroDescription"
+  ],
+  "SignUp": [
+    "logoAlt",
+    "formHeading",
+    "formSubHeading",
+    "heroHeading",
+    "heroDescription"
+  ],
+  "BlogPost": [
+    "authorImageAlt",
+    "reviewedBy",
+    "clinicalTakeaway"
+  ],
+  "BlogIndex.BlogList": [
+    "paginationAria",
+    "previousPageAria",
+    "previousPage",
+    "nextPageAria",
+    "nextPage",
+    "postAuthorAndDate"
+  ],
+  "BlogIndex.BrowseByTopic": [
+    "title",
+    "selectAllAria",
+    "all",
+    "filterByCategoryAria"
+  ],
+  "BlogIndex.FeaturedBlogPost": [
+    "featured",
+    "readPostAria"
+  ],
+  "BlogIndex.MeetTheContributors": [
+    "title",
+    "contributorRole"
+  ],
+  "AnnouncementToast": [
+    "message",
+    "ctaLink",
+    "dismissAria"
+  ],
+  "Home.ExploreCategories": [
+    "alt",
+    "subtitle",
+    "title",
+    "button"
+  ],
+  "Footer": [
+    "newsletterTitle",
+    "newsletterDescription",
+    "emailPlaceholder",
+    "emailAria",
+    "subscribedButton",
+    "subscribeButton"
+  ],
+  "Header": [
+    "successfulLogout",
+    "failedLogout",
+    "successIconAlt",
+    "errorIconAlt",
+    "successTitle",
+    "errorTitle",
+    "myAccount",
+    "hamburgerIcon",
+    "myProfile",
+    "logout",
+    "logoDesktop",
+    "logoMobile",
+    "searchPlaceholder",
+    "shoppingCart",
+    "cartIcon"
+  ],
+  "Common.InputDropdown": [
+    "selectOption"
+  ],
+  "Common.List": [
+    "nextButton",
+    "previousButton"
+  ],
+  "MainNav": [
+    "home",
+    "ourFormulation",
+    "aboutUs",
+    "ourRecipes",
+    "blog",
+    "ariaLabel",
+    "logoAria",
+    "profileAria",
+    "cartAria",
+    "itemCountAriaLabel",
+    "closeMenuAria",
+    "openMenuAria"
+  ],
+  "Common.OptionSelectProduct": [
+    "whatYoullGetTitle",
+    "detailsButton",
+    "addToCartButton",
+    "subscribeButton",
+    "recipeLabel",
+    "recipePlaceholder",
+    "shipmentFrequencyLabel",
+    "shipmentFrequencyPlaceholder",
+    "mostPopular",
+    "animalWelfareCertified",
+    "selectOption"
+  ],
+  "Common.ProductDetailPanel": [
+    "decreaseQuantity",
+    "increaseQuantity",
+    "addToCartButton",
+    "mainImageAlt",
+    "thumbnailAriaLabel",
+    "thumbnailAlt",
+    "priceLabel",
+    "Error",
+    "Success",
+    "alaCarteTitle",
+    "topperTitle",
+    "fullMealTitle",
+    "panelAriaLabel",
+    "closeButtonAriaLabel"
+  ],
+  "PromiseOfCareAlert": [
+    "message",
+    "closeButton"
+  ],
+  "Common.ShoppingCartPanel": [
+    "checkoutButton",
+    "closeButton",
+    "oneTimePurchase",
+    "frequencyBiWeekly",
+    "frequencyWeekly",
+    "subscriptionDisplayTopper",
+    "subscriptionDisplayFullMeal",
+    "recipeTurkey",
+    "recipeLamb",
+    "recipePancreatic",
+    "badgeTopper",
+    "badgeFullMeal",
+    "badgeSingleMeal",
+    "productImageAlt",
+    "productDescriptionPlaceholder",
+    "decreaseQuantity",
+    "increaseQuantity",
+    "deleteButtonAriaLabel",
+    "panelAriaLabel",
+    "title",
+    "closeButtonAriaLabel",
+    "emptyState"
+  ],
+  "Common.WaitlistModal": [
+    "closeButtonLabel",
+    "successAriaLabel",
+    "successHeading",
+    "successDescription",
+    "successImageAlt",
+    "successButton",
+    "ariaLabel",
+    "heading",
+    "description",
+    "emailLabel",
+    "cancelButton",
+    "submittingButton",
+    "submitButton"
+  ],
+  "Formulation.Research": [
+    "title",
+    "description1",
+    "description2",
+    "expandableDisclaimerTrigger",
+    "expandableDisclaimer",
+    "footerDisclaimer"
+  ],
+  "Formulation.DiscoverPlans": [
+    "backgroundAlt",
+    "title",
+    "description",
+    "ctaButton"
+  ],
+  "Formulation.Hero": [
+    "backgroundAlt",
+    "title",
+    "subtitle",
+    "ctaButton"
+  ],
+  "Formulation.Ingredients": [
+    "title",
+    "descriptionBefore",
+    "linkText",
+    "descriptionAfter",
+    "toggleAria"
+  ],
+  "Formulation.Introduction": [
+    "column1",
+    "column2"
+  ],
+  "Formulation.Standards": [
+    "box1Title",
+    "box1Description",
+    "box2Title",
+    "box2Description",
+    "box3Title",
+    "box3Description",
+    "box4Title",
+    "box4Description",
+    "title",
+    "subhead"
+  ],
+  "Formulation.Precision": [
+    "imageAlt",
+    "title",
+    "description"
+  ],
+  "Home.Benefits": [
+    "title",
+    "description",
+    "imageAlt",
+    "benefit1Title",
+    "benefit1Description",
+    "pointerNutrition",
+    "benefit2Title",
+    "benefit2Description",
+    "pointerEnergy",
+    "benefit3Title",
+    "benefit3Description",
+    "pointerImmunity",
+    "benefit4Title",
+    "benefit4Description",
+    "pointerCoat",
+    "benefit5Title",
+    "benefit5Description",
+    "pointerDigestion"
+  ],
+  "Home.BostonAnnouncement": [
+    "backgroundImageAlt",
+    "title",
+    "description1",
+    "description2",
+    "ctaButton"
+  ],
+  "Home.ClinicallyApproved": [
+    "stat1",
+    "stat2",
+    "stat3",
+    "stat4",
+    "imageAlt",
+    "title",
+    "ctaButton"
+  ],
+  "Home.FAQ": [
+    "decorativeDividerAlt",
+    "decorativeRightVeggieAlt",
+    "decorativeRightPepperAlt",
+    "decorativeLeftPepperAlt",
+    "decorativeLeftVeggieAlt",
+    "title",
+    "faq1Question",
+    "faq1Answer",
+    "faq2Question",
+    "faq2Answer",
+    "faq3Question",
+    "faq3Answer",
+    "faq4Question",
+    "faq4Answer"
+  ],
+  "Home.Features": [
+    "clinicalTitle",
+    "clinicalDescription",
+    "pharmTitle",
+    "pharmDescription",
+    "transparentTitle",
+    "transparentDescription",
+    "communityTitle",
+    "communityDescription",
+    "environmentTitle",
+    "environmentDescription"
+  ],
+  "Home.GoldenMeals": [
+    "imageAlt",
+    "title",
+    "description",
+    "ctaButton"
+  ],
+  "Home.HeroBanner": [
+    "subtitle",
+    "title",
+    "button",
+    "alt"
+  ],
+  "Home.Hero": [
+    "imageAlt",
+    "headline",
+    "ctaButton",
+    "ctaLink"
+  ],
+  "Home.HowItWorks": [
+    "title",
+    "step1Title",
+    "step1Description",
+    "step2Title",
+    "step2Description",
+    "step3Title",
+    "step3Description"
+  ],
+  "Home.LatestProducts": [
+    "title",
+    "description",
+    "button"
+  ],
+  "Home.Reviews": [
+    "title",
+    "prevAria",
+    "nextAria",
+    "review1Quote",
+    "review1Text",
+    "review1Name",
+    "review2Quote",
+    "review2Text",
+    "review2Name",
+    "review3Quote",
+    "review3Text",
+    "review3Name"
+  ],
+  "Home.ShopProducts": [
+    "image_alt",
+    "title",
+    "description_one",
+    "description_two",
+    "returns_alt",
+    "returns",
+    "quality_alt",
+    "quality",
+    "button"
+  ],
+  "Home.VetNutritionist": [
+    "title",
+    "description",
+    "linkText",
+    "ctaButton"
+  ],
+  "Profile.ChangePasswordModal": [
+    "errors",
+    "closeButtonLabel",
+    "ariaLabel",
+    "heading",
+    "currentPasswordLabel",
+    "hidePassword",
+    "showPassword",
+    "newPasswordLabel",
+    "confirmPasswordLabel",
+    "cancelButton",
+    "submitButton"
+  ],
+  "Profile.DeleteAccountModal": [
+    "closeButtonLabel",
+    "ariaLabel",
+    "heading",
+    "description",
+    "cancelButton",
+    "confirmButton"
+  ],
+  "Profile.LogoutModal": [
+    "closeButtonLabel",
+    "ariaLabel",
+    "heading",
+    "description",
+    "cancelButton",
+    "confirmButton"
+  ],
+  "Profile.OrderDetailsModal": [
+    "closeButtonLabel",
+    "ariaLabel",
+    "orderSummary",
+    "orderNumber",
+    "date",
+    "status",
+    "items",
+    "itemImageAlt",
+    "quantity",
+    "shippingAddress",
+    "billingAddress",
+    "paymentMethod",
+    "subtotal",
+    "shipping",
+    "tax",
+    "total"
+  ],
+  "Profile.OrdersCard": [
+    "title",
+    "description",
+    "emptyState",
+    "details"
+  ],
+  "Profile.PetsCard": [
+    "activeSubscription",
+    "expiredSubscription",
+    "editPlan",
+    "subscribeAgain",
+    "title",
+    "description",
+    "emptyState",
+    "renewsOn",
+    "cancelSubscription",
+    "pendingPayment"
+  ],
+  "Profile": [
+    "accountCreated",
+    "changePassword",
+    "logOut"
+  ],
+  "Common.FloatingCartButton": [
+    "openCartAriaLabel",
+    "itemCountAriaLabel"
+  ],
+  "Quiz.bodyShape": [
+    "heading",
+    "description"
+  ],
+  "Quiz.breedSelection": [
+    "heading",
+    "description",
+    "placeholder"
+  ],
+  "Quiz.diet": [
+    "heading",
+    "description",
+    "mainFoodLabel",
+    "mainFoodPlaceholder",
+    "treatFrequencyLabel",
+    "treatFrequencyPlaceholder",
+    "treatFrequencySuffix",
+    "mealtimeBehaviorLabel",
+    "mealtimeBehaviorPlaceholder"
+  ],
+  "Quiz": [
+    "backButton",
+    "title",
+    "closeButton",
+    "validation"
+  ],
+  "Quiz.howActive": [
+    "heading",
+    "description",
+    "placeholder"
+  ],
+  "Quiz.neuteredStatus": [
+    "options",
+    "heading",
+    "description"
+  ],
+  "Quiz.plus25Lbs": [
+    "imageAlt",
+    "heading",
+    "description",
+    "changeWeightsButton",
+    "joinWaitlistButton"
+  ],
+  "Quiz.results": [
+    "recipes",
+    "shipmentFrequencies",
+    "products",
+    "Error",
+    "Success",
+    "subscribeButtonAlreadyInCart",
+    "subscribeButtonSwitchToFullMeal",
+    "subscribeButtonSwitchToTopper",
+    "tryRecipeBeforeMembership",
+    "purchaseAlaCarteHeading"
+  ],
+  "Quiz.results.footer": [
+    "title",
+    "moreBuddies"
+  ],
+  "Quiz.resultsHeader": [
+    "options",
+    "imageAlt",
+    "headingPrefix",
+    "descriptionPrefix",
+    "descriptionIs",
+    "defaultBreed",
+    "descriptionWho",
+    "descriptionAnd",
+    "descriptionSuffix"
+  ],
+  "Quiz.step1": [
+    "imageAlt",
+    "heading",
+    "description",
+    "button",
+    "link"
+  ],
+  "Quiz.step2": [
+    "gender",
+    "heading",
+    "description",
+    "namePrefix",
+    "nameSuffix",
+    "genderSuffix",
+    "agePrefix",
+    "ageSuffix",
+    "weightPrefix",
+    "weightSuffix"
+  ],
+  "Quiz.underAge": [
+    "imageAlt",
+    "heading",
+    "description",
+    "changeAgeButton",
+    "joinWaitlistButton"
+  ],
+  "Recipes.CTA": [
+    "ctaImageAlt",
+    "title",
+    "conciergeDescription",
+    "buildPlanButton",
+    "personalizedHeadline",
+    "personalizedDescription"
+  ],
+  "Recipes.AAFCOStatement": [
+    "title",
+    "subtitle",
+    "content"
+  ],
+  "Recipes.Detail": [
+    "subtitle",
+    "benefitsTitle",
+    "ingredientsTitle"
+  ],
+  "Recipes.FormulationLogic": [
+    "title"
+  ],
+  "Recipes.GuaranteedAnalysis": [
+    "title",
+    "nutrientLabel",
+    "minLabel",
+    "maxLabel"
+  ],
+  "Recipes.NutritionPanel": [
+    "title"
+  ],
+  "Recipes.ServingStorage": [
+    "title",
+    "feedingGuide",
+    "storageTitle",
+    "storageDelivered",
+    "storageOpened",
+    "storageFrozen"
+  ],
+  "Recipes.Tabs": [
+    "recipeTabs"
+  ],
+  "Recipes.Hero": [
+    "clinicallyApprovedAlt",
+    "title"
+  ]
+}
