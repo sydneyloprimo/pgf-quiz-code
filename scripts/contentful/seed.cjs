@@ -14,6 +14,8 @@ if (!SPACE_ID || !MANAGEMENT_TOKEN) {
   process.exit(1)
 }
 
+const ENVIRONMENT_ID = process.argv.includes('--master') ? 'master' : 'staging'
+
 // Category data
 const categories = [
   { name: 'Nutrition', slug: 'nutrition' },
@@ -887,8 +889,8 @@ async function seed() {
     console.log('Getting space...')
     const space = await client.getSpace(SPACE_ID)
 
-    console.log('Getting environment...')
-    const environment = await space.getEnvironment('master')
+    console.log(`Getting environment [${ENVIRONMENT_ID}]...`)
+    const environment = await space.getEnvironment(ENVIRONMENT_ID)
 
     // Create categories
     console.log('\n=== Creating Categories ===')

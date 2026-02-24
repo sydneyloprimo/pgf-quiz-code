@@ -2,6 +2,10 @@
 
 This directory contains migration scripts for setting up Contentful content models.
 
+## Environment (staging vs master)
+
+Sync scripts (`contentful:sync`, `contentful:sync-images`, `contentful:clean`, `contentful:delete-images`) default to the **staging** Contentful environment. Use the `--master` flag to target production (master). New scripts `contentful:sync:master` and `contentful:sync-images:master` run sync against master.
+
 ## Prerequisites
 
 1. Install Contentful CLI:
@@ -65,8 +69,11 @@ After running the migration, you can populate Contentful with test data:
 # (This is different from CONTENTFUL_ACCESS_TOKEN - get it from Contentful Settings > API keys)
 export CONTENTFUL_MANAGEMENT_TOKEN=your_management_token
 
-# Run the seed script
+# Run the seed script (default: staging environment)
 node scripts/contentful/seed.cjs
+
+# For production (master) environment
+node scripts/contentful/seed.cjs --master
 ```
 
 This will create:
@@ -82,12 +89,18 @@ These scripts sync images from `public/images` and `public/icons` to Contentful 
 
 **Required env (in `.env.local`):** `CONTENTFUL_SPACE_ID`, `CONTENTFUL_MANAGEMENT_TOKEN`.
 
+**Environment:** All sync scripts default to the `staging` Contentful environment. Use the `--master` flag to target production (master) when needed.
+
 ### Sync images to Contentful
 
 Uploads all images under `public/images/**` and `public/icons/**` to Contentful, grouped by tags (e.g. `page:Home`, `page:About`, `Icons`). Asset title is set to the canonical public path (e.g. `/images/home/hero-bg.jpg`) for app lookup.
 
 ```bash
+# Default: staging environment
 yarn contentful:sync-images
+
+# Production (master)
+yarn contentful:sync-images:master
 ```
 
 Editors can filter assets in Contentful by tag (e.g. `page:Home`) to see all images for a page together.
@@ -97,6 +110,7 @@ Editors can filter assets in Contentful by tag (e.g. `page:Home`) to see all ima
 Removes only image assets that were synced by the sync script (assets with our page/Icons tags). Does not delete entries or other assets.
 
 ```bash
+# Default: staging. Add --master for production.
 yarn contentful:delete-images
 ```
 

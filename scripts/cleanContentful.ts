@@ -9,10 +9,12 @@
 import contentfulManagement from 'contentful-management'
 import { config } from 'dotenv'
 
+import { getSyncEnvironmentId } from '@/scripts/contentful/getEnvironment'
+
 config({ path: '.env.local' })
 
 const CONTENTFUL_LOCALE = 'en-US'
-const ENVIRONMENT_ID = 'master'
+const ENVIRONMENT_ID = getSyncEnvironmentId()
 
 interface EntryLike {
   fields: Record<string, unknown>
@@ -200,7 +202,7 @@ async function deleteAllContentTypes(
 }
 
 async function main() {
-  console.log('Starting Contentful cleanup...')
+  console.log(`Starting Contentful cleanup [environment: ${ENVIRONMENT_ID}]...`)
   console.log('This will delete ALL entries and ALL content types.')
   console.log('This completely clears the Contentful space.\n')
 

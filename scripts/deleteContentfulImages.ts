@@ -10,9 +10,11 @@
 import contentfulManagement from 'contentful-management'
 import { config } from 'dotenv'
 
+import { getSyncEnvironmentId } from '@/scripts/contentful/getEnvironment'
+
 config({ path: '.env.local' })
 
-const ENVIRONMENT_ID = 'master'
+const ENVIRONMENT_ID = getSyncEnvironmentId()
 const CONCURRENT_BATCH_SIZE = 6
 
 const SYNC_TAG_IDS =
@@ -97,7 +99,9 @@ async function processInBatches<T, R>(
 }
 
 async function main(): Promise<void> {
-  console.log('Fetching image assets (by sync tags)...\n')
+  console.log(
+    `Fetching image assets (by sync tags) [environment: ${ENVIRONMENT_ID}]...\n`
+  )
 
   const environment = await getEnvironment()
   const assets = await fetchAllAssetsByTags(environment)

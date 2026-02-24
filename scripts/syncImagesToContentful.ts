@@ -13,10 +13,12 @@ import { join, relative } from 'path'
 import contentfulManagement from 'contentful-management'
 import { config } from 'dotenv'
 
+import { getSyncEnvironmentId } from '@/scripts/contentful/getEnvironment'
+
 config({ path: '.env.local' })
 
 const CONTENTFUL_LOCALE = 'en-US'
-const ENVIRONMENT_ID = 'master'
+const ENVIRONMENT_ID = getSyncEnvironmentId()
 const CONCURRENT_BATCH_SIZE = 4
 const MAX_RETRIES = 4
 const INITIAL_RETRY_DELAY_MS = 2000
@@ -295,7 +297,9 @@ async function processInBatches<T, R>(
 }
 
 async function main(): Promise<void> {
-  console.log('Starting Contentful images sync...\n')
+  console.log(
+    `Starting Contentful images sync [environment: ${ENVIRONMENT_ID}]...\n`
+  )
 
   const publicDir = join(process.cwd(), 'public')
   const imagesDir = join(publicDir, 'images')
