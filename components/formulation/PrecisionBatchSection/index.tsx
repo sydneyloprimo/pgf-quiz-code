@@ -1,6 +1,7 @@
 import { useTranslations } from 'next-intl'
 
 import { ContentfulImage } from '@/components/common/ContentfulImage'
+import { FORMULATION_SECTION_PADDING_Y } from '@/constants'
 import { cn } from '@/utils/cn'
 
 const PrecisionBatchSection = () => {
@@ -50,7 +51,8 @@ const PrecisionBatchSection = () => {
         <div
           className={cn(
             'relative flex flex-col',
-            'px-5 py-16 lg:pl-40 lg:pt-31 lg:pr-50 lg:pb-25',
+            'px-5 lg:pl-40 lg:pr-50',
+            FORMULATION_SECTION_PADDING_Y,
             'w-full max-w-full'
           )}
         >

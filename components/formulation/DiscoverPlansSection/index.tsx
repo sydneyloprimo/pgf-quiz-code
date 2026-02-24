@@ -2,13 +2,24 @@ import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
 import { ContentfulImage } from '@/components/common/ContentfulImage'
+import {
+  FORMULATION_SECTION_PADDING_X,
+  FORMULATION_SECTION_PADDING_Y,
+} from '@/constants'
 import { Routes } from '@/types/enums/routes'
+import { cn } from '@/utils/cn'
 
 const DiscoverPlansSection = () => {
   const t = useTranslations('Formulation.DiscoverPlans')
 
   return (
-    <section className="w-full py-16 lg:py-20 px-5 lg:px-24 flex flex-col items-center justify-center">
+    <section
+      className={cn(
+        'w-full flex flex-col items-center justify-center',
+        FORMULATION_SECTION_PADDING_X,
+        FORMULATION_SECTION_PADDING_Y
+      )}
+    >
       <div className="flex max-w-screen-2xl flex-col justify-center items-center gap-16 self-stretch w-full">
         <div className="relative flex flex-col items-start justify-end lg:justify-around h-80 lg:h-[500px] w-full">
           {/* Background Image */}

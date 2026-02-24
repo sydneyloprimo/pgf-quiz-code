@@ -1,6 +1,10 @@
 import { useTranslations } from 'next-intl'
 
 import { ContentfulImage } from '@/components/common/ContentfulImage'
+import {
+  FORMULATION_SECTION_PADDING_X,
+  FORMULATION_SECTION_PADDING_Y,
+} from '@/constants'
 import { cn } from '@/utils/cn'
 
 const IntroductionSection = () => {
@@ -10,8 +14,8 @@ const IntroductionSection = () => {
     <section
       className={cn(
         'relative w-full',
-        'px-5 md:px-24 desktop:px-32',
-        'py-16 md:py-[100px]',
+        FORMULATION_SECTION_PADDING_X,
+        FORMULATION_SECTION_PADDING_Y,
         'bg-neutral-400',
         'overflow-hidden'
       )}
