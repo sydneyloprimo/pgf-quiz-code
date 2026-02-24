@@ -107,7 +107,6 @@ const MainNav = () => {
     <nav
       className={cn(
         'w-full group',
-        'lg:overflow-hidden',
         isHome && !isScrolled
           ? 'fixed top-0 left-0 right-0 z-50 bg-secondary-950 lg:bg-transparent'
           : isHome && isScrolled
@@ -142,7 +141,7 @@ const MainNav = () => {
       </Link>
 
       {/* Desktop Navigation Links */}
-      <div className="hidden lg:flex items-center justify-center flex-1 gap-8">
+      <div className="hidden lg:flex items-center justify-center flex-1 min-w-0 gap-6">
         {navLinks.map((link) => (
           <NavLink
             key={link.key}
