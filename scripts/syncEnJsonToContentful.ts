@@ -34,6 +34,12 @@ const ENVIRONMENT_ID = 'master'
 const SECTION_CONTENT_TYPE_ID = 'section'
 const PAGE_CONTENT_TYPE_ID = 'page'
 const RICH_TEXT_PAGE_CONTENT_TYPE_ID = 'richTextPage'
+const FEATURE_FLAG_CONTENT_TYPE_ID = 'featureFlag'
+
+/** Feature flags to ensure exist when syncing. Default enabled: true. */
+const FEATURE_FLAGS_TO_SYNC: Array<{ key: string; enabled: boolean }> = [
+  { key: 'waitlistFlip', enabled: true },
+]
 
 const PAGE_KEYS = [
   'Home',
@@ -334,6 +340,67 @@ async function ensureRichTextPageContentType(
   console.log(`Created content type: ${RICH_TEXT_PAGE_CONTENT_TYPE_ID}`)
 }
 
+async function ensureFeatureFlagContentType(
+  environment: EnvironmentLike
+): Promise<void> {
+  const existing = await environment.getContentTypes()
+  const exists = existing.items.some(
+    (ct) => ct.sys.id === FEATURE_FLAG_CONTENT_TYPE_ID
+  )
+  if (exists) return
+
+  const ct = await environment.createContentTypeWithId(
+    FEATURE_FLAG_CONTENT_TYPE_ID,
+    {
+      name: 'Feature Flag',
+      displayField: 'key',
+      fields: [
+        { id: 'key', name: 'Key', type: 'Symbol', required: true },
+        { id: 'enabled', name: 'Enabled', type: 'Boolean', required: true },
+      ],
+    }
+  )
+  await ct.publish()
+  console.log(`Created content type: ${FEATURE_FLAG_CONTENT_TYPE_ID}`)
+}
+
+async function ensureFeatureFlagEntry(
+  environment: EnvironmentLike,
+  key: string,
+  enabled: boolean
+): Promise<void> {
+  const entryId = key.toLowerCase().replace(/[^a-z0-9]/g, '') + 'flag'
+
+  const existing = await environment.getEntries({
+    content_type: FEATURE_FLAG_CONTENT_TYPE_ID,
+    'fields.key': key,
+    limit: 1,
+  })
+
+  const fields: Record<string, Record<string, unknown>> = {
+    key: { [CONTENTFUL_LOCALE]: key },
+    enabled: { [CONTENTFUL_LOCALE]: enabled },
+  }
+
+  if (existing.items.length > 0) {
+    const entry = await environment.getEntry(existing.items[0].sys.id)
+    entry.fields.key = { [CONTENTFUL_LOCALE]: key }
+    entry.fields.enabled = { [CONTENTFUL_LOCALE]: enabled }
+    const updated = await entry.update()
+    await updated.publish()
+    console.log(`Updated feature flag: ${key} (enabled: ${enabled})`)
+    return
+  }
+
+  const entry = await environment.createEntryWithId(
+    FEATURE_FLAG_CONTENT_TYPE_ID,
+    entryId,
+    { fields }
+  )
+  await entry.publish()
+  console.log(`Created feature flag: ${key} (enabled: ${enabled})`)
+}
+
 /**
  * Recursively creates Section entries from an en.json object. Skips rich text document under PrivacyPolicy.content / TermsAndConditions.content.
  * Returns the entry ID of the created section, or null if this node should be skipped.
@@ -556,6 +623,7 @@ async function main(): Promise<void> {
   await ensureSectionContentType(environment)
   await ensurePageContentType(environment)
   await ensureRichTextPageContentType(environment)
+  await ensureFeatureFlagContentType(environment)
 
   const rootSectionIds = new Map<string, string>()
 
@@ -592,6 +660,11 @@ async function main(): Promise<void> {
   for (const pageKey of PAGE_KEYS) {
     const sectionId = rootSectionIds.get(pageKey) ?? null
     await createPageEntry(environment, pageKey, sectionId)
+  }
+
+  console.log('\nCreating feature flags...')
+  for (const flag of FEATURE_FLAGS_TO_SYNC) {
+    await ensureFeatureFlagEntry(environment, flag.key, flag.enabled)
   }
 
   console.log('\nSync complete.')

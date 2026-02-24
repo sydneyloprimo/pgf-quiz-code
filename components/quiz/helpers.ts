@@ -47,6 +47,32 @@ export const clearFormData = () => {
   }
 }
 
+export const formatQuizFormDataAsNote = (
+  data: Partial<QuizFormData>
+): string => {
+  const lines: string[] = []
+  if (data.name) lines.push(`Dog name: ${data.name}`)
+  if (data.gender) lines.push(`Gender: ${data.gender}`)
+  if (data.age) lines.push(`Age: ${data.age} years`)
+  if (data.weight) lines.push(`Weight: ${data.weight} lbs`)
+  if (data.zipCode) lines.push(`ZIP code: ${data.zipCode}`)
+  if (data.neuteredStatus) lines.push(`Neutered status: ${data.neuteredStatus}`)
+  if (data.breed) lines.push(`Breed: ${data.breed}`)
+  if (data.bodyShape) lines.push(`Body condition: ${data.bodyShape}`)
+  if (data.mainFood) lines.push(`Main food: ${data.mainFood}`)
+  if (data.treatFrequency) lines.push(`Treat frequency: ${data.treatFrequency}`)
+  if (data.mealtimeBehavior) {
+    lines.push(`Mealtime behavior: ${data.mealtimeBehavior}`)
+  }
+  if (data.activityLevel) {
+    lines.push(`Activity level: ${data.activityLevel}`)
+  }
+  if (data.subscriptionType) {
+    lines.push(`Subscription type: ${data.subscriptionType}`)
+  }
+  return lines.join('\n')
+}
+
 export const formatAgeText = (age: string): string => {
   return `${age}-year-old`
 }

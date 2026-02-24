@@ -1,7 +1,7 @@
 'use client'
 
 import { useLocale, useTranslations } from 'next-intl'
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
 import { Controller, useWatch, UseFormReturn } from 'react-hook-form'
 
 import { BreedDropdown } from '@/components/quiz/QuizBreedSelection/BreedDropdown'
@@ -29,7 +29,7 @@ const QuizBreedSelection = ({
   const locale = useLocale()
   const t = useTranslations('Quiz.breedSelection')
   const tQuiz = useTranslations('Quiz')
-  const { control, watch } = formMethods
+  const { control } = formMethods
   const contentfulBreeds = useQuizBreedOptions(locale)
   const breeds = useMemo(
     () =>
@@ -49,11 +49,11 @@ const QuizBreedSelection = ({
       name: 'name',
     }) || ''
 
-  const selectedBreed = watch('breed')
+  const selectedBreed = useWatch({ control, name: 'breed' })
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     goToStep(QuizStep.Step5)
-  }
+  }, [goToStep])
 
   return (
     <div
