@@ -10,7 +10,7 @@ interface CommitmentCardProps {
 const CommitmentCard = ({ text, hasBorder = false }: CommitmentCardProps) => (
   <div
     className={cn(
-      'px-5 flex flex-col lg:flex-row flex-1 gap-10 items-center lg:items-center lg:pl-5 lg:pr-14 py-16 lg:py-5 min-w-0 w-full relative',
+      'px-5 flex flex-col lg:flex-row flex-1 gap-10 items-center lg:items-center lg:pl-5 lg:px-14 py-16 lg:py-5 min-w-0 w-full relative',
       hasBorder && 'lg:border-r border-r-0 lg:border-r-quaternary-200'
     )}
   >
