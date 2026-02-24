@@ -129,7 +129,6 @@ const GLOBAL_NAMESPACES = new Set([
   'Footer',
   'MainNav',
   'Navigation',
-  'AnnouncementToast',
 ])
 
 const PAGE_SLUG_MAP: Record<string, string> = {
