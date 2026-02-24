@@ -306,6 +306,12 @@
     "ourFormulation": "Our Formulation",
     "ourRecipes": "Our Recipes"
   },
+  "NotFound": {
+    "ctaButton": "Go back to the Home",
+    "dogBowlAlt": "Monochrome etched illustration of a dog bowl filled with kibble",
+    "subtitle": "This page couldn't be found",
+    "title": "404"
+  },
   "Recipes": {
     "Hero": {
       "backgroundAlt": "Decorative background for recipes page",
