@@ -8,7 +8,7 @@ const CTASection = () => {
   const t = useTranslations('About.CTA')
 
   return (
-    <section className="w-full flex flex-col items-center justify-center px-5 md:px-24 py-20 relative bg-quaternary-800 overflow-hidden">
+    <section className="w-full flex flex-col items-center justify-center px-5 md:px-24 lg:py-45 py-20 relative bg-quaternary-800 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div className="absolute inset-0 bg-quaternary-800" />
         <div className="absolute inset-0 mix-blend-overlay opacity-50 overflow-hidden">
@@ -21,16 +21,20 @@ const CTASection = () => {
           />
         </div>
       </div>
-      <div className="relative z-10 flex flex-col gap-10 items-center w-full">
-        <div className="flex flex-col gap-10 items-center px-12 py-0 w-full">
-          <p className="font-display font-normal italic text-3xl md:text-4xl leading-10 tracking-tight text-neutral-white text-center w-full">
+      <div className="relative z-10 flex flex-col gap-5 items-center w-full">
+        <div className="flex flex-col gap-6 items-center px-12 py-0 w-full">
+          <p className="font-display font-normal text-3xl leading-10 tracking-tight text-neutral-white text-center w-full">
             {t('quote')}
+          </p>
+          <p className="font-sans text-lg leading-normal text-neutral-white text-center w-full max-w-2xl">
+            {t('body')}
           </p>
         </div>
         <Button
           variant="tertiary"
+          size="medium"
           href={Routes.formulation}
-          className="max-w-md px-4 py-4"
+          className="max-w-sm"
         >
           {t('button')}
         </Button>

@@ -1,32 +1,15 @@
 import { useTranslations } from 'next-intl'
-import type { ReactElement } from 'react'
 
 import { ValueCard } from '@/components/about/ValuesSection/ValueCard'
+import { Button } from '@/components/common/Button'
 import { ContentfulImage } from '@/components/common/ContentfulImage'
-import {
-  FeaturePharmIcon,
-  GraduationCapIcon,
-  PawPrintIcon,
-} from '@/components/common/Icon'
-import { VALUE_ITEMS, type ValueIconType } from '@/constants'
-
-const getValueIcon = (iconType: ValueIconType): ReactElement => {
-  const iconProps = { className: 'size-11' }
-  switch (iconType) {
-    case 'featurePharm':
-      return <FeaturePharmIcon {...iconProps} />
-    case 'graduationCap':
-      return <GraduationCapIcon {...iconProps} />
-    case 'pawPrint':
-      return <PawPrintIcon {...iconProps} />
-  }
-}
+import { VALUE_ITEMS } from '@/constants'
+import { Routes } from '@/types/enums/routes'
 
 const ValuesSection = () => {
   const t = useTranslations('About.Values')
 
   const values = VALUE_ITEMS.map((item) => ({
-    icon: getValueIcon(item.iconType),
     title: t(item.titleKey),
     description: t(item.descriptionKey),
   }))
@@ -47,11 +30,15 @@ const ValuesSection = () => {
         {values.map((value) => (
           <ValueCard
             key={value.title}
-            icon={value.icon}
             title={value.title}
             description={value.description}
           />
         ))}
+      </div>
+      <div className="relative z-10 flex justify-center pt-6 pb-10 md:pt-10 md:pb-12">
+        <Button variant="tertiary" href={Routes.formulation}>
+          {t('ctaButton')}
+        </Button>
       </div>
     </section>
   )

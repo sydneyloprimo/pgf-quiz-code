@@ -611,24 +611,19 @@ export const GALLERY_IMAGES: GalleryImage[] = [
 ] as const
 
 // About page - Commitment section
-export type CommitmentIconType = 'featurePharm' | 'graduationCap' | 'pawPrint'
 
 export interface CommitmentItem {
-  iconType: CommitmentIconType
   textKey: string
 }
 
 export const COMMITMENT_ITEMS: CommitmentItem[] = [
   {
-    iconType: 'featurePharm',
     textKey: 'card1',
   },
   {
-    iconType: 'graduationCap',
     textKey: 'card2',
   },
   {
-    iconType: 'pawPrint',
     textKey: 'card3',
   },
 ] as const
@@ -670,24 +665,20 @@ export const EXPERT_ITEMS: ExpertItem[] = [
 export type ValueIconType = 'featurePharm' | 'graduationCap' | 'pawPrint'
 
 export interface ValueItem {
-  iconType: ValueIconType
   titleKey: string
   descriptionKey: string
 }
 
 export const VALUE_ITEMS: ValueItem[] = [
   {
-    iconType: 'featurePharm',
     titleKey: 'card1Title',
     descriptionKey: 'card1Description',
   },
   {
-    iconType: 'graduationCap',
     titleKey: 'card2Title',
     descriptionKey: 'card2Description',
   },
   {
-    iconType: 'pawPrint',
     titleKey: 'card3Title',
     descriptionKey: 'card3Description',
   },

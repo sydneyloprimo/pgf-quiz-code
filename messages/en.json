@@ -1234,21 +1234,24 @@
   "About": {
     "Hero": {
       "title": "About us",
-      "subtitle": "Discover who we are and what drives us."
+      "subtitle": "The science, standards, and clinical logic behind how our food is formulated."
     },
     "Values": {
+      "card1Description": "True care begins with precision. Every formulation is developed using clinical nutrition principles, measured inputs, and documented processes. Pharmaceutical-grade discipline, applied to fresh food.",
       "card1Title": "Pharmaceutical-grade standards",
-      "card1Description": "We believe that true care blends precision and compassion. Every recipe is guided by clinical research and crafted with heartfelt intention, proving that nourishment can be intelligent and deeply felt, combining quality with the warmth of genuine love for animals.",
+      "card2Description": "Nutrition should be grounded in evidence, not assumption. Our formulation decisions are guided by controlled clinical research at Cornell University, where digestive tolerance, palatability, and physiological markers are assessed under standardized conditions.",
       "card2Title": "University-validated research",
-      "card2Description": "Our mission is to transform pet nutrition through pharmaceutical-grade standards and thoughtful innovation. Each meal is designed to support the health and happiness of pets while honoring the planet we all share, turning daily feeding into an act of care.",
+      "card3Description": "Small breeds don't simply eat less. They metabolize differently. Faster digestive transit. Higher stool variability. Narrower margins for nutrient error. Our formulations are engineered for their specific physiology, not scaled down from larger breeds.",
       "card3Title": "Small-breed-specific formulation",
-      "card3Description": "Integrity and empathy guide everything we do, from our founder's devotion to her own dogs to every partnership we form. We hold ourselves to uncompromising standards because pets deserve the same level of care and intention we give ourselves."
+      "ctaButton": "Explore Our Formulation"
     },
     "Leadership": {
+      "founder": "Founder",
       "imageAlt": "Irene Ou, Founder & CEO",
-      "paragraph1": "At our dedicated dog food company, we are deeply committed to enhancing the lives of animals through exceptional nutrition that is specifically tailored to meet their unique needs. Our passion drives us to actively collaborate with local shelters and rescue organizations, allowing us to create a meaningful and lasting impact within our community.",
-      "paragraph2": "By joining forces with these vital organizations, we aim not only to provide nutritious meals that promote health and vitality but also to host engaging and fun adoption events that help pets find their forever homes. Through these initiatives, we believe we can make a significant difference in the lives of these animals, ensuring they receive the love, care, and attention they truly deserve. Together, we can foster a compassionate environment where every pet has the opportunity to thrive and be cherished.",
-      "signature": "Irene Ou, Founder & CEO"
+      "paragraph1": "Purely Golden Foods didn't start as a business idea. It started as a practice of paying closer attention. Over time, I became less interested in quick answers and more interested in how bodies actually respond. Slowly. Unevenly. With far more nuance than most systems account for. That shift changed how I think about care, nourishment, and responsibility.",
+      "paragraph2": "PGF reflects that mindset. We take our time. We measure what matters. We don't rush outcomes or simplify complexity to make something easier to sell. This is food made with respect—for dogs, for their physiology, and for the people who care deeply about doing things right.",
+      "signature": "Irene Ou",
+      "subhead": "A letter from our founder"
     },
     "Gallery": {
       "image1Alt": "Gallery image 1",
@@ -1260,36 +1263,37 @@
       "image2Alt": "Mission image 2",
       "image3Alt": "Mission image 3",
       "image4Alt": "Mission image 4",
-      "paragraph1": "At Purely Golden Foods, our incredible journey began with a simple yet profound goal: to bring wholesome, pumpkin-powered nutrition to every beloved furry friend, ensuring they thrive and enjoy a vibrant, healthy life.",
-      "paragraph2": "We embarked on an amazing adventure driven by a heartfelt mission: to deliver nutritious, pumpkin-infused meals to every cherished pet, helping them flourish and live a lively, healthy life.",
-      "subsectionText": "Integrity and empathy guide everything we do, from our founder's devotion to her own dogs to every partnership we form. We hold ourselves to uncompromising standards because pets deserve the same level of care and intention we give ourselves.  Our commitment extends beyond just providing services; we strive to create a community where pet owners feel supported and understood. By fostering relationships built on trust and compassion, we ensure that every pet receives the love and attention they truly deserve.",
-      "subsectionTitle": "Science Behind our Selection",
-      "title": "The Art of our \n Ingredients"
+      "paragraph1": "Ingredients are selected for function, not trend.",
+      "paragraph2": "Digestible proteins for amino acid adequacy. Soluble fibers for gut motility. Targeted omega-3s for fatty acid balance. Each component earns its place through formulation architecture and evidence. Nothing is included for marketing appeal.",
+      "subsectionText": "Nutrition is only meaningful if the body responds. Stool consistency, sustained energy levels, inflammatory markers moving in the right direction. We formulate for outcomes that can be seen, measured, and verified—not benefits that exist only as advertising copy.",
+      "subsectionTitle": "The Outcomes We Measure",
+      "title": "The Inputs We Control"
     },
     "Commitment": {
-      "card1": "We believe that true care blends precision and compassion.",
-      "card2": "Each meal is designed to support the health and happiness of pets.",
-      "card3": "We hold ourselves to uncompromising standards because pets deserve the same level of care as we.",
+      "card1": "<bold>Evidence over trend.</bold> Every decision is guided by nutritional science and documented standards.",
+      "card2": "<bold>Measured care.</bold> Meals designed to support physiological outcomes, not marketing claims.",
+      "card3": "<bold>Uncompromising integrity.</bold> We hold ourselves to the same standard expected in human medicine.",
       "title": "Our Commitment"
     },
     "Experts": {
+      "academicBody": "Academic collaborators do not commercially endorse products.",
+      "academicSubtitle": "Cornell University conducted a preclinical feeding evaluation under controlled research conditions.",
+      "academicTitle": "Academic Research Collaboration",
       "ecvcnParagraph1": "We're excited about our active collaboration with ",
       "ecvcnParagraph2": "ECVCN",
       "ecvcnParagraph3": ", a partnership aimed at improving the quality of pet nutrition. Together, we're working on innovative solutions that focus on health and sustainability for pets.",
-      "expert1Description": "Dr. Willis-Mahn brings nearly two decades of clinical experience in small animal internal medicine and nutrition.",
-      "expert1ImageAlt": "Dr. Christine Willis-Mahn",
-      "expert1Name": "Dr. Christine Willis-Mahn DVM, DACVIM",
-      "expert2Description": "Dr. Samuel Thompson has nearly 20 years of experience in small animal internal medicine and nutrition.",
-      "expert2ImageAlt": "Dr. Samuel Thompson",
-      "expert2Name": "Dr. Samuel Thompson DVM, DACVIM",
-      "expert3Description": "Dr. Emily Hartman has nearly three decades of experience in small animal internal medicine and nutrition.",
-      "expert3ImageAlt": "Dr. Emily Hartman",
-      "expert3Name": "Dr. Emily Hartman DVM, DACVIM",
-      "title": "Meet the Experts"
+      "expert1Description": "Board-certified veterinary nutritionist. Reviewed and contributed to the formulation protocols of Purely Golden Foods.",
+      "expert1ImageAlt": "Dr. Caitlin Grant",
+      "expert1Name": "Dr. Caitlin Grant, DVM, ECVCN",
+      "expert2Description": "Practicing veterinarian with extensive clinical experience. Advises on a physiology-first approach to animal health and nutrition.",
+      "expert2ImageAlt": "Dr. Barbara Royal",
+      "expert2Name": "Dr. Barbara Royal, DVM",
+      "title": "Clinical Advisors"
     },
     "CTA": {
-      "button": "Explore more about Our Formulation",
-      "quote": "Clinically crafted, Purposefully formulated"
+      "body": "",
+      "button": "Explore Our Formulation",
+      "quote": "See what clinical-grade nutrition looks like in practice"
     }
   }
 }
