@@ -44,7 +44,7 @@ const RecipeTabsSection = () => {
                   'border-b-2 -mb-px',
                   'transition-colors duration-200',
                   isActive
-                    ? 'text-secondary-600 border-secondary-600 text-xl md:text-2xl'
+                    ? 'text-secondary-600 border-secondary-600 text-2xl md:text-4xl'
                     : 'text-neutral-700 border-transparent hover:text-secondary-500 text-lg md:text-xl'
                 )}
               >
