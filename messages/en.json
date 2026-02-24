@@ -1,10 +1,4 @@
 {
-  "AnnouncementToast": {
-    "ctaLink": "Join our waitlist",
-    "dismissAria": "Dismiss announcement",
-    "message": "Boston, we're here—founding members get 20% off + free consultation",
-    "messageMobile": "We're live in Boston!"
-  },
   "Auth": {
     "email": "Email",
     "emailPlaceholder": "Type your email",
