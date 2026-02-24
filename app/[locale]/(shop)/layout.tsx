@@ -27,12 +27,10 @@ export default function RootLayout({
         localeGroup={[
           'About',
           'BlogIndex',
-          'BlogPost',
           'BlogPostPage',
           'Common',
           'Formulation',
           'Home',
-          'MeetTheContributors',
           'Recipes',
         ]}
       >
