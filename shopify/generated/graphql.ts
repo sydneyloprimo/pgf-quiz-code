@@ -7300,14 +7300,63 @@ export type GetOrdersQuery = {
           __typename?: 'Order'
           id: string
           orderNumber: number
+          name: string
+          processedAt: any
+          currencyCode: CurrencyCode
           fulfillmentStatus: OrderFulfillmentStatus
           financialStatus?: OrderFinancialStatus | null
-          name: string
           statusUrl: any
           totalPrice: {
             __typename?: 'MoneyV2'
             amount: any
             currencyCode: CurrencyCode
+          }
+          subtotalPrice?: {
+            __typename?: 'MoneyV2'
+            amount: any
+            currencyCode: CurrencyCode
+          } | null
+          totalShippingPrice: {
+            __typename?: 'MoneyV2'
+            amount: any
+            currencyCode: CurrencyCode
+          }
+          totalTax?: {
+            __typename?: 'MoneyV2'
+            amount: any
+            currencyCode: CurrencyCode
+          } | null
+          currentTotalPrice: {
+            __typename?: 'MoneyV2'
+            amount: any
+            currencyCode: CurrencyCode
+          }
+          shippingAddress?: {
+            __typename?: 'MailingAddress'
+            name?: string | null
+            address1?: string | null
+            address2?: string | null
+            formattedArea?: string | null
+          } | null
+          lineItems: {
+            __typename?: 'OrderLineItemConnection'
+            edges: Array<{
+              __typename?: 'OrderLineItemEdge'
+              node: {
+                __typename?: 'OrderLineItem'
+                title: string
+                quantity: number
+                discountedTotalPrice: {
+                  __typename?: 'MoneyV2'
+                  amount: any
+                  currencyCode: CurrencyCode
+                }
+                variant?: {
+                  __typename?: 'ProductVariant'
+                  image?: { __typename?: 'Image'; url: any } | null
+                } | null
+              }
+            }>
           }
         }
       }>
@@ -8627,14 +8676,55 @@ export const GetOrdersDocument = /*#__PURE__*/ `
         node {
           id
           orderNumber
+          name
+          processedAt
+          currencyCode
+          fulfillmentStatus
+          financialStatus
+          statusUrl
           totalPrice {
             amount
             currencyCode
           }
-          fulfillmentStatus
-          financialStatus
-          name
-          statusUrl
+          subtotalPrice {
+            amount
+            currencyCode
+          }
+          totalShippingPrice {
+            amount
+            currencyCode
+          }
+          totalTax {
+            amount
+            currencyCode
+          }
+          currentTotalPrice {
+            amount
+            currencyCode
+          }
+          shippingAddress {
+            name
+            address1
+            address2
+            formattedArea
+          }
+          lineItems(first: 50) {
+            edges {
+              node {
+                title
+                quantity
+                discountedTotalPrice {
+                  amount
+                  currencyCode
+                }
+                variant {
+                  image {
+                    url
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

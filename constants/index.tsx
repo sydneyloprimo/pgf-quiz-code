@@ -29,6 +29,8 @@ export const MediaQuery = {
   mobile: `(max-width: ${MOBILE_WIDTH}px)`,
 }
 
+export const RECHARGE_API_URL = 'https://api.rechargeapps.com'
+
 export const instagramUrl = 'https://www.instagram.com/rootstrap'
 
 export const linkedinUrl = 'https://www.linkedin.com/company/rootstrap-it'

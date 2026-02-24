@@ -3,12 +3,15 @@
 import { useTranslations } from 'next-intl'
 import { useCallback, useId, useState } from 'react'
 
-import { Button } from '@/components/common/Button'
 import { ChevronIcon } from '@/components/common/Icon'
+import { CancelSubscriptionModal } from '@/components/profile/CancelSubscriptionModal'
+import { SubscriptionPetRow } from '@/components/profile/PetsCard/SubscriptionPetRow'
 import { ProfileCard } from '@/components/profile/ProfileCard'
-import { cn } from '@/utils/cn'
+import { ReactivateSubscriptionModal } from '@/components/profile/ReactivateSubscriptionModal'
+import { useModal } from '@/hooks/useModal'
 
 interface Pet {
+  id: string
   name: string
   subscriptionStatus: 'active' | 'expired'
   deliveryFrequency: string
@@ -18,49 +21,79 @@ interface Pet {
 
 interface PetsCardProps {
   pets?: Pet[]
+  onCancelSubscription?: (
+    subscriptionId: string
+  ) => Promise<{ success: boolean; error?: string }>
+  onReactivateSubscription?: (
+    subscriptionId: string
+  ) => Promise<{ success: boolean; error?: string }>
 }
 
-const getSubscriptionBadgeClasses = (
-  subscriptionStatus: 'active' | 'expired'
-) => {
-  if (subscriptionStatus === 'active') {
-    return 'bg-secondary-500 text-secondary-950'
-  }
-  return 'bg-neutral-white border border-neutral-900 text-neutral-900'
-}
-
-const getSubscriptionBadgeText = (
-  subscriptionStatus: 'active' | 'expired',
-  t: ReturnType<typeof useTranslations<'Profile.PetsCard'>>
-) => {
-  if (subscriptionStatus === 'active') {
-    return t('activeSubscription')
-  }
-  return t('expiredSubscription')
-}
-
-const getActionButtonText = (
-  subscriptionStatus: 'active' | 'expired',
-  t: ReturnType<typeof useTranslations<'Profile.PetsCard'>>
-) => {
-  if (subscriptionStatus === 'active') {
-    return t('editPlan')
-  }
-  return t('subscribeAgain')
-}
-
-const PetsCard = ({ pets = [] }: PetsCardProps) => {
+const PetsCard = ({
+  pets = [],
+  onCancelSubscription,
+  onReactivateSubscription,
+}: PetsCardProps) => {
   const t = useTranslations('Profile.PetsCard')
   const [isOpen, setIsOpen] = useState(true)
+  const [selectedPet, setSelectedPet] = useState<Pet | null>(null)
+  const [selectedPetForReactivate, setSelectedPetForReactivate] =
+    useState<Pet | null>(null)
   const contentId = useId()
+  const {
+    isOpen: isCancelModalOpen,
+    openModal: openCancelModal,
+    closeModal: closeCancelModal,
+  } = useModal()
+  const {
+    isOpen: isReactivateModalOpen,
+    openModal: openReactivateModal,
+    closeModal: closeReactivateModal,
+  } = useModal()
 
   const handleToggle = useCallback(() => {
     setIsOpen((prev) => !prev)
   }, [])
 
-  const handleCancelSubscription = useCallback((petName: string) => {
-    // TODO: Implement cancel subscription logic
-  }, [])
+  const handleCancelClick = useCallback(
+    (pet: Pet) => {
+      setSelectedPet(pet)
+      openCancelModal()
+    },
+    [openCancelModal]
+  )
+
+  const handleConfirmCancel = useCallback(async () => {
+    if (selectedPet && onCancelSubscription) {
+      return await onCancelSubscription(selectedPet.id)
+    }
+    return { success: false }
+  }, [selectedPet, onCancelSubscription])
+
+  const handleCloseCancelModal = useCallback(() => {
+    closeCancelModal()
+    setSelectedPet(null)
+  }, [closeCancelModal])
+
+  const handleReactivateClick = useCallback(
+    (pet: Pet) => {
+      setSelectedPetForReactivate(pet)
+      openReactivateModal()
+    },
+    [openReactivateModal]
+  )
+
+  const handleConfirmReactivate = useCallback(async () => {
+    if (selectedPetForReactivate && onReactivateSubscription) {
+      return await onReactivateSubscription(selectedPetForReactivate.id)
+    }
+    return { success: false }
+  }, [selectedPetForReactivate, onReactivateSubscription])
+
+  const handleCloseReactivateModal = useCallback(() => {
+    closeReactivateModal()
+    setSelectedPetForReactivate(null)
+  }, [closeReactivateModal])
 
   return (
     <ProfileCard className="w-full bg-neutral-white border border-quaternary-800 p-6 flex flex-col gap-8">
@@ -87,53 +120,32 @@ const PetsCard = ({ pets = [] }: PetsCardProps) => {
             <p className="text-body-m text-secondary-950">{t('emptyState')}</p>
           ) : (
             pets.map((pet) => (
-              <div
-                key={pet.name}
-                className="bg-neutral-200 p-6 flex flex-col md:flex-row gap-3 md:items-center"
-              >
-                <div className="flex flex-col gap-3 flex-1">
-                  <div className="flex gap-3 items-center">
-                    <h3 className="heading-h5 text-secondary-950">
-                      {pet.name}
-                    </h3>
-                    <span
-                      className={cn(
-                        'px-3 py-1 rounded-2xxl text-xs font-bold',
-                        getSubscriptionBadgeClasses(pet.subscriptionStatus)
-                      )}
-                    >
-                      {getSubscriptionBadgeText(pet.subscriptionStatus, t)}
-                    </span>
-                  </div>
-                  <p className="text-sm text-neutral-black">
-                    {pet.deliveryFrequency}
-                    {pet.renewalDate &&
-                      ` - ${t('renewsOn', { date: pet.renewalDate })}`}
-                  </p>
-                </div>
-                <div className="flex flex-col gap-3 md:items-center">
-                  <Button variant="tertiary" size="large">
-                    {getActionButtonText(pet.subscriptionStatus, t)}
-                  </Button>
-                  {pet.subscriptionStatus === 'active' ? (
-                    <button
-                      type="button"
-                      onClick={() => handleCancelSubscription(pet.name)}
-                      className="text-sm font-bold text-neutral-black"
-                      aria-label={t('cancelSubscription')}
-                    >
-                      {t('cancelSubscription')}
-                    </button>
-                  ) : (
-                    <p className="text-sm font-bold text-neutral-black">
-                      {t('pendingPayment')}
-                    </p>
-                  )}
-                </div>
-              </div>
+              <SubscriptionPetRow
+                key={pet.id}
+                pet={pet}
+                onCancelClick={handleCancelClick}
+                onReactivateClick={handleReactivateClick}
+                t={t}
+              />
             ))
           )}
         </div>
+      )}
+      {selectedPet && (
+        <CancelSubscriptionModal
+          isOpen={isCancelModalOpen}
+          onClose={handleCloseCancelModal}
+          onConfirm={handleConfirmCancel}
+          petName={selectedPet.name}
+        />
+      )}
+      {selectedPetForReactivate && (
+        <ReactivateSubscriptionModal
+          isOpen={isReactivateModalOpen}
+          onClose={handleCloseReactivateModal}
+          onConfirm={handleConfirmReactivate}
+          petName={selectedPetForReactivate.name}
+        />
       )}
     </ProfileCard>
   )
