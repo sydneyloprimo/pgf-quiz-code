@@ -10,6 +10,7 @@
  * Run: yarn contentful:sync
  */
 
+import { createHash } from 'crypto'
 import { readFileSync } from 'fs'
 import { resolve } from 'path'
 
@@ -30,6 +31,9 @@ config({ path: '.env.local' })
 
 const CONTENTFUL_LOCALE = 'en-US'
 const ENVIRONMENT_ID = 'master'
+
+/** Contentful entry IDs must be ≤64 characters. */
+const CONTENTFUL_MAX_ENTRY_ID_LENGTH = 64
 
 const SECTION_CONTENT_TYPE_ID = 'section'
 const PAGE_CONTENT_TYPE_ID = 'page'
@@ -74,14 +78,26 @@ function keyToName(key: string): string {
 
 /**
  * Builds a stable entry ID from the key path (e.g. ["Home", "Hero"] → "homeHero").
+ * When the ID exceeds Contentful's 64-char limit, truncates and appends an 8-char
+ * hash of the full path to ensure uniqueness.
  */
 function keyPathToEntryId(path: string[]): string {
-  return (
+  const base =
     path
       .map((p) => p.replace(/([A-Z])/g, (m) => m.toLowerCase()))
       .join('')
       .replace(/[^a-z0-9]/g, '') || 'section'
-  )
+
+  if (base.length <= CONTENTFUL_MAX_ENTRY_ID_LENGTH) {
+    return base
+  }
+
+  const hash = createHash('md5')
+    .update(path.join('.'))
+    .digest('hex')
+    .slice(0, 8)
+  const truncated = base.slice(0, CONTENTFUL_MAX_ENTRY_ID_LENGTH - hash.length)
+  return truncated + hash
 }
 
 /** Keys we skip syncing to Contentful (a11y: aria, alt, etc.). */

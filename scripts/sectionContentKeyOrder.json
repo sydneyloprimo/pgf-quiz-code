@@ -51,7 +51,7 @@
     "heroHeading",
     "heroDescription"
   ],
-  "BlogPost": [
+  "BlogPostPage": [
     "authorImageAlt",
     "reviewedBy",
     "clinicalTakeaway"
@@ -79,15 +79,13 @@
     "contributorRole"
   ],
   "AnnouncementToast": [
+    "messageMobile",
     "message",
     "ctaLink",
     "dismissAria"
   ],
   "Home.ExploreCategories": [
-    "alt",
-    "subtitle",
-    "title",
-    "button"
+    "alt"
   ],
   "Footer": [
     "newsletterTitle",
@@ -126,7 +124,6 @@
     "ourFormulation",
     "aboutUs",
     "ourRecipes",
-    "blog",
     "ariaLabel",
     "logoAria",
     "profileAria",
@@ -210,16 +207,16 @@
   "Formulation.Research": [
     "title",
     "description1",
-    "description2",
-    "expandableDisclaimerTrigger",
-    "expandableDisclaimer",
-    "footerDisclaimer"
+    "disclaimer"
   ],
   "Formulation.DiscoverPlans": [
     "backgroundAlt",
     "title",
     "description",
     "ctaButton"
+  ],
+  "Formulation.UnderstandingFormulation": [
+    "title"
   ],
   "Formulation.Hero": [
     "backgroundAlt",
@@ -229,9 +226,6 @@
   ],
   "Formulation.Ingredients": [
     "title",
-    "descriptionBefore",
-    "linkText",
-    "descriptionAfter",
     "toggleAria"
   ],
   "Formulation.Introduction": [
@@ -248,7 +242,7 @@
     "box4Title",
     "box4Description",
     "title",
-    "subhead"
+    "subtitle"
   ],
   "Formulation.Precision": [
     "imageAlt",
@@ -257,7 +251,6 @@
   ],
   "Home.Benefits": [
     "title",
-    "description",
     "imageAlt",
     "benefit1Title",
     "benefit1Description",
@@ -283,12 +276,23 @@
     "ctaButton"
   ],
   "Home.ClinicallyApproved": [
-    "stat1",
-    "stat2",
-    "stat3",
-    "stat4",
+    "item1Title",
+    "item1Description",
+    "item2Title",
+    "item2Description",
+    "item3Title",
+    "item3Description",
+    "item4Title",
+    "item4Description",
+    "item5Title",
+    "item5Description",
+    "item6Title",
+    "item6Description",
     "imageAlt",
     "title",
+    "description",
+    "disclaimerLabel",
+    "disclaimerText",
     "ctaButton"
   ],
   "Home.FAQ": [
@@ -305,19 +309,23 @@
     "faq3Question",
     "faq3Answer",
     "faq4Question",
-    "faq4Answer"
+    "faq4Answer",
+    "faq5Question",
+    "faq5Answer",
+    "faq6Question",
+    "faq6Answer"
   ],
   "Home.Features": [
-    "clinicalTitle",
-    "clinicalDescription",
-    "pharmTitle",
-    "pharmDescription",
-    "transparentTitle",
-    "transparentDescription",
-    "communityTitle",
-    "communityDescription",
-    "environmentTitle",
-    "environmentDescription"
+    "feature1Title",
+    "feature1Description",
+    "feature2Title",
+    "feature2Description",
+    "feature3Title",
+    "feature3Description",
+    "feature4Title",
+    "feature4Description",
+    "feature5Title",
+    "feature5Description"
   ],
   "Home.GoldenMeals": [
     "imageAlt",
@@ -325,15 +333,10 @@
     "description",
     "ctaButton"
   ],
-  "Home.HeroBanner": [
-    "subtitle",
-    "title",
-    "button",
-    "alt"
-  ],
   "Home.Hero": [
     "imageAlt",
     "headline",
+    "subheadline",
     "ctaButton",
     "ctaLink"
   ],
@@ -345,11 +348,6 @@
     "step2Description",
     "step3Title",
     "step3Description"
-  ],
-  "Home.LatestProducts": [
-    "title",
-    "description",
-    "button"
   ],
   "Home.Reviews": [
     "title",
@@ -382,6 +380,16 @@
     "linkText",
     "ctaButton"
   ],
+  "Profile.CancelSubscriptionModal": [
+    "errorMessage",
+    "closeButtonLabel",
+    "ariaLabel",
+    "heading",
+    "description",
+    "cancelButton",
+    "loading",
+    "confirmButton"
+  ],
   "Profile.ChangePasswordModal": [
     "errors",
     "closeButtonLabel",
@@ -412,6 +420,12 @@
     "confirmButton"
   ],
   "Profile.OrderDetailsModal": [
+    "statusFulfilled",
+    "statusPartiallyFulfilled",
+    "statusUnfulfilled",
+    "statusInProgress",
+    "statusUnknown",
+    "orderDisplayName",
     "closeButtonLabel",
     "ariaLabel",
     "orderSummary",
@@ -419,11 +433,10 @@
     "date",
     "status",
     "items",
-    "itemImageAlt",
     "quantity",
     "shippingAddress",
-    "billingAddress",
     "paymentMethod",
+    "paymentCompleted",
     "subtotal",
     "shipping",
     "tax",
@@ -433,24 +446,27 @@
     "title",
     "description",
     "emptyState",
-    "details"
+    "orderDisplayName"
   ],
   "Profile.PetsCard": [
-    "activeSubscription",
-    "expiredSubscription",
-    "editPlan",
-    "subscribeAgain",
     "title",
     "description",
-    "emptyState",
-    "renewsOn",
-    "cancelSubscription",
-    "pendingPayment"
+    "emptyState"
   ],
   "Profile": [
     "accountCreated",
     "changePassword",
     "logOut"
+  ],
+  "Profile.ReactivateSubscriptionModal": [
+    "errorMessage",
+    "closeButtonLabel",
+    "ariaLabel",
+    "heading",
+    "description",
+    "cancelButton",
+    "loading",
+    "confirmButton"
   ],
   "Common.FloatingCartButton": [
     "openCartAriaLabel",
@@ -464,6 +480,11 @@
     "heading",
     "description",
     "placeholder"
+  ],
+  "Quiz.confirmationBeta": [
+    "heading",
+    "description",
+    "backToHome"
   ],
   "Quiz.diet": [
     "heading",
@@ -486,6 +507,18 @@
     "heading",
     "description",
     "placeholder"
+  ],
+  "Quiz.location": [
+    "heading",
+    "invalidZipMessage",
+    "emailLabel",
+    "emailPlaceholder",
+    "notifyMeButton",
+    "changeZipButton",
+    "checkBackButton",
+    "description",
+    "zipLabel",
+    "zipPlaceholder"
   ],
   "Quiz.neuteredStatus": [
     "options",
@@ -510,6 +543,14 @@
     "subscribeButtonSwitchToTopper",
     "tryRecipeBeforeMembership",
     "purchaseAlaCarteHeading"
+  ],
+  "Quiz.resultsBeta": [
+    "heading",
+    "description",
+    "firstNameLabel",
+    "lastNameLabel",
+    "emailLabel",
+    "submitButton"
   ],
   "Quiz.results.footer": [
     "title",
@@ -551,6 +592,10 @@
     "description",
     "changeAgeButton",
     "joinWaitlistButton"
+  ],
+  "Quiz.subscriptionType": [
+    "heading",
+    "description"
   ],
   "Recipes.CTA": [
     "ctaImageAlt",
