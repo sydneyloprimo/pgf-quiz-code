@@ -1,0 +1,14 @@
+query getVariantPrices($variantIds: [ID!]!) {
+  nodes(ids: $variantIds) {
+    ... on ProductVariant {
+      id
+      price {
+        amount
+        currencyCode
+      }
+      product {
+        title
+      }
+    }
+  }
+}

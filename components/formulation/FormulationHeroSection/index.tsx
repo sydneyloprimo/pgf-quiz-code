@@ -28,9 +28,12 @@ const FormulationHeroSection = () => {
         aria-hidden="true"
       />
 
+      {/* Soft white overlay */}
+      <div className="absolute inset-0 bg-white/15" />
+
       {/* Content */}
       <div className="relative z-10 flex flex-col gap-10 items-center text-center px-5 md:px-24 desktop:px-32 max-w-2xl mx-auto">
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-4">
           <h1 className="heading-h1 font-display tracking-wide text-neutral-100 [text-shadow:0_4px_4px_rgba(0,0,0,0.25)] text-center">
             {t('title')}
           </h1>

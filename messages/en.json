@@ -11,6 +11,10 @@
     "password": "Password",
     "passwordPlaceholder": "Type your password"
   },
+  "Detail": {
+    "errorMessage": "Something went wrong. Please try again.",
+    "successMessage": "Added to cart successfully."
+  },
   "Common": {
     "ConciergeLink": {
       "emailAriaLabel": "Send an email to our concierge",
@@ -129,16 +133,16 @@
   },
   "Home": {
     "Benefits": {
-      "benefit1Description": "Fresh, whole-food ingredients crafted to support steady energy and overall wellness.",
-      "benefit1Title": "Balanced Nutrition",
-      "benefit2Description": "Quality proteins and healthy fats designed to fuel your dog's active lifestyle and maintain steady energy.",
-      "benefit2Title": "Sustained Energy",
-      "benefit3Description": "Antioxidant-rich ingredients and essential vitamins to strengthen natural defenses and support immune health.",
-      "benefit3Title": "Immune Support",
-      "benefit4Description": "Omega fatty acids and essential nutrients that promote a shiny, healthy coat and support overall skin wellness.",
-      "benefit4Title": "Coat Wellness",
-      "benefit5Description": "Fiber and prebiotics combined with digestive enzymes to support optimal gut health and nutrient absorption.",
-      "benefit5Title": "Digestive Health",
+      "benefit1Description": "Soluble fibers and digestible proteins selected to promote nutrient absorption and gastrointestinal tolerance.",
+      "benefit1Title": "Digestive Stability",
+      "benefit2Description": "Fiber composition selected to deliver firm, predictable stools—an observable marker of digestive function.",
+      "benefit2Title": "Stool Quality",
+      "benefit3Description": "Fermentable fibers and polyphenols selected to encourage microbial balance and short-chain fatty acid production.",
+      "benefit3Title": "Microbiome Diversity",
+      "benefit4Description": "Macronutrient ratios selected to enable slow, steady glucose release and prevent energy fluctuation.",
+      "benefit4Title": "Sustained Energy",
+      "benefit5Description": "Targeted fatty acid profiles selected to maintain barrier integrity, dermal health, and coat quality.",
+      "benefit5Title": "Skin and Coat Condition",
       "description": "Human-grade, pumpkin-based meals for your furry friends. Includes one puree and pre-portioned, tailored ingredients to easily cook up fresh, nutritious meals.",
       "imageAlt": "Golden retriever enjoying the benefits of our food",
       "pointerCoat": "COAT",
@@ -146,23 +150,34 @@
       "pointerEnergy": "ENERGY",
       "pointerImmunity": "IMMUNITY",
       "pointerNutrition": "BALANCED NUTRITION",
-      "title": "Benefits"
+      "title": "What balanced nutrition delivers"
     },
     "BostonAnnouncement": {
       "backgroundImageAlt": "Decorative background image for Boston announcement section",
-      "ctaButton": "Join the Waitlist",
-      "description1": "We're thrilled to bring wholesome, vet-crafted meals to Boston.",
-      "description2": "Make sure to join the waitlist to be the first to know when we expand to your area.",
-      "title": "We're now live in Boston!"
+      "ctaButton": "Request enrollment",
+      "description1": "Clinical-grade nutrition, launching first in Boston. We’re enrolling a limited number of dogs into our founding cohort to ensure careful oversight and quality control.",
+      "description2": "",
+      "title": "Founding Cohort: Now Enrolling in Boston"
     },
     "ClinicallyApproved": {
-      "ctaButton": "Learn more about Our Recipe",
+      "ctaButton": "Explore our formulation",
+      "disclaimerLabel": "Research disclaimer",
+      "disclaimerText": "IACUC (Institutional Animal Care and Use Committee) is the oversight body responsible for reviewing and approving research protocols involving animals. AAALAC (Association for Assessment and Accreditation of Laboratory Animal Care) is an independent organization that accredits institutions meeting the highest standards of animal care and welfare in research settings.",
       "imageAlt": "Dog enjoying clinically approved meal",
-      "stat1": "Lorem ipsum dolor sit amet this is a text example or sentence example.",
-      "stat2": "Lorem ipsum dolor sit amet this is a text example or sentence example.",
-      "stat3": "Lorem ipsum dolor sit amet this is a text example or sentence example.",
-      "stat4": "Lorem ipsum dolor sit amet this is a text example or sentence example.",
-      "title": "Clinically approved by veterinary and food specialists."
+      "title": "Clinically evaluated in Cornell University-led research",
+      "description": "Our formulation underwent an eight-week preclinical feeding evaluation at Cornell University to understand how our formulation interacts with digestion, metabolism, and physiological markers in adult dogs.",
+      "item1Title": "Digestive tolerance and stool quality",
+      "item1Description": "Daily fecal scoring conducted using the Purina 1–7 scale. Consistency and gastrointestinal tolerance tracked across the full eight-week period.",
+      "item2Title": "Palatability and consumption",
+      "item2Description": "Food acceptance measured twice daily. Monitored both immediate intake and total consumption to assess real-world feeding behavior.",
+      "item3Title": "Body weight and condition",
+      "item3Description": "Weekly assessments of body weight, body condition (AAHA 9-point scale), and muscle condition (WSAVA) completed. All evaluations conducted by veterinary staff blinded to diet group.",
+      "item4Title": "Clinical pathology and biomarkers",
+      "item4Description": "Bloodwork performed at study start and conclusion. Complete blood count, chemistry panel, CRP, fructosamine, and serum IL-6 were measured.",
+      "item5Title": "Skin, coat, and oral health",
+      "item5Description": "Skin, coat, oral health, and aural cytology evaluated at multiple timepoints. Standardized veterinary scoring systems used for objectivity.",
+      "item6Title": "Research oversight and compliance",
+      "item6Description": "Conducted under an approved IACUC protocol at Cornell's AAALAC-accredited Preclinical Services Core. Full compliance with animal welfare and research standards."
     },
     "ExploreCategories": {
       "alt": "Category image",
@@ -176,39 +191,44 @@
       "decorativeLeftVeggieAlt": "Decorative vegetable illustration on the left",
       "decorativeRightPepperAlt": "Decorative pepper illustration on the right",
       "decorativeRightVeggieAlt": "Decorative vegetable illustration on the right",
-      "faq1Answer": "Follow the feeding guide on the package and adjust based on your dog's weight and activity. Ask your vet if unsure.",
-      "faq1Question": "How can I determine the right portion size for my dog?",
-      "faq2Answer": "Gradually mix the new food with the old over 7-10 days, increasing the new food ratio each day.",
-      "faq2Question": "What is the best way to transition my dog to a new food?",
-      "faq3Answer": "Watch for symptoms like itching, digestive issues, or ear infections. Consult your vet for allergy testing.",
-      "faq3Question": "How can I tell if my dog is allergic to certain ingredients?",
-      "faq4Answer": "Try warming the food, adding toppers, or establishing a consistent feeding schedule. If issues persist, consult your vet.",
-      "faq4Question": "What should I do if my dog refuses to eat?",
+      "faq1Question": "How is PGF different from other fresh dog foods?",
+      "faq1Answer": "PGF is a clinical nutrition platform, not a lifestyle brand. Formulations are developed with board-certified veterinary nutritionists, validated through controlled research at Cornell, and verified at the batch level. We measure physiological outcomes, not just ingredient quality.",
+      "faq2Question": "Is PGF nutritionally complete?",
+      "faq2Answer": "Yes. Every recipe meets or exceeds AAFCO adult maintenance standards, meaning it’s suitable for long-term feeding. But we go further: each production batch is tested against vitamin and mineral targets to confirm nutritional adequacy in the finished food.",
+      "faq3Question": "Which dogs is PGF formulated for?",
+      "faq3Answer": "PGF is currently formulated specifically for small-breed dogs under 20 lbs. Small breeds have faster digestive transit, higher stool variability, and greater nutrient sensitivity. Our recipes are calibrated for this physiology, not scaled down from larger-breed formulations.",
+      "faq4Question": "Is a veterinary prescription required for PGF?",
+      "faq4Answer": "No. PGF is formulated for adult maintenance, not therapeutic use. We recommend discussing any dietary change with your veterinarian, and our nutrition team is available for consultation.",
+      "faq5Question": "What changes do owners typically observe first?",
+      "faq5Answer": "Improved stool consistency, energy stability, coat condition, and digestive tolerance.",
+      "faq6Question": "How flexible is the feeding schedule?",
+      "faq6Answer": "Fully. Adjust delivery cadence, pause, or modify your protocol at any time. No lock-ins.",
       "title": "Frequently Asked Questions"
     },
     "Features": {
-      "clinicalDescription": "Developed in partnership with university-led research to target gut health and long-term wellness.",
-      "clinicalTitle": "Clinically Validated Recipes",
-      "communityDescription": "Access expert workshops, wellness guides, and research updates to become your dog's healthiest ally.",
-      "communityTitle": "Community & Education",
-      "environmentDescription": "We craft every meal with a low-impact philosophy: responsibly sourced ingredients, reduced waste, and packaging designed to protect both your dog's health and the planet's future.",
-      "environmentTitle": "Environmental Commitment",
-      "pharmDescription": "We apply pharmaceutical quality control to every meal, from measured ingredients to batch testing.",
-      "pharmTitle": "Pharmaceutical-Grade Standards",
-      "transparentDescription": "Our kitchen is always visible, and our food is always fresh — made on-site and delivered same day.",
-      "transparentTitle": "Transparent Preparation"
+      "feature1Title": "Verified Nutrient Content in Every Meal",
+      "feature1Description": "We validate every recipe at the finished-food level, using laboratory testing to confirm vitamin and mineral targets are repeatedly met—not just assumed.",
+      "feature2Title": "Batch-level testing against AAFCO standards",
+      "feature2Description": "Every batch we produce is tested against AAFCO vitamin and mineral requirements, ensuring a consistent nutritional profile despite natural variation in sourcing, seasonality, and raw material composition.",
+      "feature3Title": "End-to-End veterinary nutritionist oversight",
+      "feature3Description": "Our formulation development and review are led by a board-certified veterinary nutritionist (ECVCN), ensuring that each decision is guided by established clinical nutrition principles.",
+      "feature4Title": "Designed for small-breed physiology",
+      "feature4Description": "Small breeds don’t just eat less, they metabolize differently—our recipes are engineered for their faster digestive transit, higher stool variability, and greater nutrient sensitivity.",
+      "feature5Title": "Responsible sourcing and packaging",
+      "feature5Description": "We responsibly source our ingredients and select our packaging to balance food safety, nutritional protection, and environmental impact without compromising formulation integrity."
     },
     "GoldenMeals": {
-      "ctaButton": "Learn more about Our Recipe",
-      "description": "Lorem ipsum dolor sit amet. This is an example of a text box.",
+      "ctaButton": "Learn about our recipes",
+      "description": "A protein rationale that accounts for different tolerances, sensitivities, and requirements.",
       "imageAlt": "Golden meals background with fresh ingredients",
-      "title": "Golden Meals"
+      "title": "Nutrition that recognizes physiological nuance"
     },
     "Hero": {
       "ctaButton": "Build your Dog's Plan",
       "ctaLink": "Speak directly to our Concierge",
-      "headline": "Vet-Formulated, Kitchen-Fresh Meals for Dogs.",
-      "imageAlt": "Fresh dog food preparation"
+      "headline": "Clinical-grade nutrition for small-breed digestive health",
+      "imageAlt": "Fresh dog food preparation",
+      "subheadline": "Balanced meals formulated for your dog’s physiology. Limited enrollment now open for our founding cohort."
     },
     "HeroBanner": {
       "alt": "Banner image",
@@ -217,12 +237,12 @@
       "title": "Top brands affordable prices"
     },
     "HowItWorks": {
-      "step1Description": "Every great meal begins with understanding. We take the time to learn about your dog's personality, preferences, and needs — because true nourishment starts with knowing who we're feeding.",
-      "step1Title": "We meet your dog",
-      "step2Description": "With this insight, we design a personalized meal plan, curated from the finest ingredients. Each recipe is tailored to complement your dog's lifestyle, ensuring balance, flavor, and genuine well-being.",
-      "step2Title": "Craft a unique plan for him",
-      "step3Description": "Finally, we prepare and deliver each meal with care and precision. Fresh, wholesome, and beautifully crafted — ready to delight your dog and bring peace of mind to you.",
-      "step3Title": "Deliver his perfect meal",
+      "step1Title": "We assess your dog's needs",
+      "step1Description": "We start with your dog's physiology, not preferences. Small-breed dogs metabolize differently, meaning our formulation decisions must begin there. We consider size, age, activity level, and digestive sensitivity.",
+      "step2Title": "We build a calibrated plan",
+      "step2Description": "We translate your dog’s needs into a feeding plan grounded in clinical nutrition standards. We map nutrient ratios and portions to support balanced nutrition, digestive stability, and sustained energy.",
+      "step3Title": "Your dog receives precision nutrition in every meal",
+      "step3Description": "Every meal is prepared under strict protocols. We use measured inputs, controlled cooking, and batch-level nutrient verification to ensure that what we formulated is exactly what gets delivered each time.",
       "title": "How it Works"
     },
     "LatestProducts": {
@@ -242,7 +262,7 @@
       "review3Name": "Sarah T.",
       "review3Quote": "Best decision for my dog's health.",
       "review3Text": "After years of trying different brands, I finally found what works for my sensitive golden. No more digestive issues, and his coat has never looked better! The quality is unmatched, and I can tell he feels great. Worth every penny for the peace of mind and visible results.",
-      "title": "Trusted by Devoted Dog Parents"
+      "title": "What dog owners observe"
     },
     "ShopProducts": {
       "button": "Shop products",
@@ -256,10 +276,10 @@
       "title": "Elegant & Affordable"
     },
     "VetNutritionist": {
-      "ctaButton": "Chat with Our Clinical Nutrition Concierge",
-      "description": "Speak with a veterinary nutrition expert for tailored insights into your dog's diet, wellness goals, and daily habits. Together, we'll ensure their meals are balanced, purposeful, and crafted with the care they deserve.",
+      "ctaButton": "Consult a nutritionist",
+      "description": "Consult directly with a credentialed animal nutritionist for guidance on your dog's dietary requirements, physiological needs, and feeding protocol.",
       "linkText": "Build your dog's plan",
-      "title": "Talk to a Vet-Nutritionist"
+      "title": "Speak with a nutritionist"
     }
   },
   "MainNav": {
@@ -268,15 +288,139 @@
     "cartAria": "Shopping cart",
     "closeMenuAria": "Close menu",
     "home": "Home",
+    "itemCountAriaLabel": "{count} items in cart",
     "logoAria": "Go to homepage",
     "openMenuAria": "Open menu",
     "ourFormulation": "Our Formulation",
-    "profileAria": "User profile"
+    "ourRecipes": "Our Recipes",
+    "profileAria": "User profile",
+    "searchAria": "Search"
   },
   "Navigation": {
     "about": "About",
     "home": "Home",
-    "ourFormulation": "Our Formulation"
+    "ourFormulation": "Our Formulation",
+    "ourRecipes": "Our Recipes"
+  },
+  "Recipes": {
+    "Hero": {
+      "backgroundAlt": "Decorative background for recipes page",
+      "clinicallyApprovedAlt": "Clinically approved certification badge",
+      "logoAlt": "Purely Golden Foods decorative logo",
+      "title": "Recipe Science"
+    },
+    "Tabs": {
+      "lamb": "Lamb",
+      "recipeTabs": "Recipe tabs",
+      "seafood": "Seafood",
+      "turkey": "Turkey"
+    },
+    "Detail": {
+      "benefits": {
+        "benefit1": "Oatmeal is great for dogs with wheat sensitivities or allergies, and will help your pup feel full all day long.",
+        "benefit2": "Made with restaurant-grade, extra-lean beef, and good for fat-restricted diets.",
+        "benefit3": "Organic white quinoa is a gluten-free pseudo-grain and healthy carbohydrate. Helps support metabolism, blood sugar levels and brain function."
+      },
+      "benefitsTitle": "Benefits",
+      "ingredientsTitle": "Ingredients",
+      "lambDescription": "Our Lamb Recipe features premium New Zealand lamb as the primary protein source, paired with easily digestible carbohydrates and essential nutrients for dogs with sensitivities or those who prefer a novel protein.",
+      "lambImageAlt": "Lamb recipe food bowl",
+      "lambIngredientsList": "Premium New Zealand lamb, easily digestible carbohydrates, essential nutrients, and carefully selected supplements.",
+      "lambTitle": "Lamb Recipe",
+      "seafoodDescription": "Our Seafood Recipe combines wild-caught salmon and whitefish to deliver exceptional omega-3 fatty acids, supporting cognitive function, joint health, and a lustrous coat.",
+      "seafoodImageAlt": "Seafood recipe food bowl",
+      "seafoodIngredientsList": "Wild-caught salmon, whitefish, omega-3 rich ingredients, and carefully selected supplements.",
+      "seafoodTitle": "Seafood Recipe",
+      "subtitle": "A complete and balanced formula",
+      "turkeyDescription": "Our Turkey Recipe is crafted with premium, human-grade turkey as the first ingredient, combined with nutrient-dense vegetables and carefully selected supplements to provide complete and balanced nutrition for adult dogs.",
+      "turkeyImageAlt": "Turkey recipe food bowl",
+      "turkeyIngredientsList": "Lean ground turkey, 100% whole grain oats, spinach, wild blueberries, blackberries, beef liver, goji berries, omega-3 fish oil (anchovy), supplement blend.",
+      "turkeyTitle": "Turkey Recipe"
+    },
+    "GuaranteedAnalysis": {
+      "calories": "Calories",
+      "caloriesValue": "1,200 kcal/kg",
+      "crudeCarbs": "Crude Carbohydrates",
+      "crudeFat": "Crude Fat",
+      "crudeFiber": "Crude Fiber",
+      "crudeProtein": "Crude Protein",
+      "maxLabel": "Max %",
+      "minLabel": "Min %",
+      "moisture": "Moisture",
+      "nutrientLabel": "Nutrient",
+      "title": "Guaranteed Analysis"
+    },
+    "NutritionPanel": {
+      "aminoAcidProfile": "Amino Acid Profile",
+      "aminoContent": "Complete amino acid profile including essential amino acids for muscle maintenance and overall health.",
+      "collapseAriaLabel": "Collapse {section}",
+      "efasContent": "Balanced omega-3 and omega-6 fatty acids for skin, coat, and cognitive health.",
+      "essentialFattyAcids": "Essential Fatty Acids EFAs",
+      "expandAriaLabel": "Expand {section}",
+      "micronutrients": "Micronutrients",
+      "micronutrientsContent": "Essential micronutrients including vitamins and minerals for optimal health.",
+      "title": "Detailed Nutrition Panel",
+      "vitaminsAndMinerals": "Micronutrients | Vitamins and Minerals",
+      "vitaminsContent": "Comprehensive vitamin and mineral blend to support immune function and vitality."
+    },
+    "FormulationLogic": {
+      "bioavailableMicronutrients": {
+        "description": "Chelated minerals and bioactive vitamin forms ensure maximum absorption and utilization by your dog's body.",
+        "title": "Bioavailable Micronutrients"
+      },
+      "controlledCarbohydrates": {
+        "description": "Low-glycemic vegetables and fiber-rich ingredients support stable energy levels and healthy digestion.",
+        "title": "Controlled Carbohydrate Sources"
+      },
+      "functionalIngredients": {
+        "description": "Targeted additions like probiotics, joint-supporting compounds, and antioxidants address specific health needs.",
+        "title": "Functional Ingredients"
+      },
+      "highBiologicalValue": {
+        "description": "We select proteins with complete amino acid profiles that closely match your dog's biological needs for optimal muscle maintenance and cellular repair.",
+        "title": "High Biological Value Protein"
+      },
+      "optimizedFatProfile": {
+        "description": "Carefully balanced omega-3 and omega-6 fatty acids support skin health, coat shine, and anti-inflammatory responses.",
+        "title": "Optimized Fat Profile"
+      },
+      "title": "Formulation Logic"
+    },
+    "AAFCOStatement": {
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "subtitle": "Complete and Balanced Formula",
+      "title": "AAFCO Statement"
+    },
+    "ServingStorage": {
+      "feedingGuide": {
+        "description": "Feed according to your dog's weight and activity level. Adjust portions as needed to maintain ideal body condition.",
+        "title": "Feeding Guide"
+      },
+      "storageDelivered": {
+        "description": "Meals arrive fresh and should be refrigerated immediately upon delivery.",
+        "title": "Delivered"
+      },
+      "storageFrozen": {
+        "description": "For extended storage, freeze unopened portions for up to 6 months.",
+        "title": "Frozen"
+      },
+      "storageOpened": {
+        "description": "Once opened, consume within 5-7 days. Keep refrigerated at 40°F or below.",
+        "title": "Opened"
+      },
+      "storageTitle": "Storage Instructions",
+      "title": "Serving and Storage Guidelines"
+    },
+    "CTA": {
+      "buildPlanButton": "Build Your Dog's Plan",
+      "callNowLink": "Call Now",
+      "conciergeDescription": "Our nutrition concierge can help create a custom feeding plan tailored to your dog's unique needs.",
+      "conciergeLink": "Speak with Our Concierge",
+      "ctaImageAlt": "Happy dog enjoying our recipes",
+      "personalizedDescription": "Talk to our concierge team today for consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "personalizedHeadline": "Want a more personalized approach?",
+      "title": "Ready to Build Your Dog's Plan?"
+    }
   },
   "Profile": {
     "accountCreated": "Account created on {date}",
@@ -825,10 +969,6 @@
       "previousPage": "Previous Page",
       "previousPageAria": "Go to previous page"
     },
-    "BlogPostCTA": {
-      "description": "Take our quiz where we get to know your dog to recommend the perfect meal plan according to their unique profile.",
-      "title": "Ready to Optimize Your Dog's Nutrition?"
-    },
     "BrowseByTopic": {
       "all": "All",
       "filterByCategoryAria": "Filter blog posts by category {name}",
@@ -846,7 +986,11 @@
     "heroHeadline": "Clinical Notes from the Kitchen Lab",
     "heroSubheadline": "Unpacking canine nutrition—the physiology, the science and the\nstandards most labels don't explain."
   },
+  "BlogPost": {
+    "titleNotFound": "Blog Post Not Found"
+  },
   "BlogPostPage": {
+    "authorImageAlt": "Profile picture of {name}",
     "backToBlog": "Back to Blog",
     "buildPlanButton": "Build Your Dog's Plan",
     "clinicalTakeaway": "Clinical Takeaway",
@@ -857,6 +1001,7 @@
     "reviewedBy": "Reviewed {date}",
     "showReferences": "Show references",
     "talkToNutritionists": "Talk to Our Vet Nutritionists",
+    "titleNotFound": "Blog Post Not Found",
     "writtenBy": "Written by"
   },
   "PromiseOfCareAlert": {
@@ -866,88 +1011,180 @@
   "Formulation": {
     "Hero": {
       "title": "Our Formulation",
-      "subtitle": "Science-led nutrition",
-      "ctaButton": "Talk to a vet nutritionist",
+      "subtitle": "Nutrition guided by clinical reasoning",
+      "ctaButton": "Build your dog’s protocol",
       "backgroundAlt": "Freshly prepared dog food ingredients"
     },
     "Introduction": {
-      "column1": "Crafted with insights from the European College of Veterinary and Comparative Nutrition, our approach merges science with culinary expertise. Each formula is based on in-depth research into canine health, emphasizing digestion and nutrient impact. This collaboration elevates nutrition to a luxurious, clinically sound care strategy.",
-      "column2": "Our recipes reflect a commitment to precise nutrient calibration, evaluating each ingredient for purity and bioavailability. This ensures optimal ratios of amino acids, fatty acids, and antioxidants, creating meals that nourish the microbiome and support long-term wellness."
+      "column1": "Developed with board-certified veterinary nutritionists and validated through controlled clinical research at Cornell, Purely Golden Foods delivers carefully prepared meals formulated with evidence, not trend.",
+      "column2": "We calibrate at the nutrient level, ensuring consistent amino acid ratios, fatty acid balance, and micronutrient density in every recipe. Nothing is incidental."
     },
     "Standards": {
       "title": "Our Standards",
-      "clinicallyBacked": "Clinically Backed Nutrition",
-      "humanGrade": "Human-Grade Ingredients",
-      "noAdditives": "No Artificial Additives",
-      "measuredPortions": "Carefully Measured Portions"
+      "subtitle": "These standards govern every step of our formulation, production, and verification.",
+      "box1Title": "Validated at the finished-food level",
+      "box1Description": "We verify nutrient content through testing each finished batch of food, ensuring every bowl meets the nutritional targets set out in our formulation model.",
+      "box2Title": "Batch-level nutrient testing",
+      "box2Description": "Every production run is tested for nutrient density, confirming consistency from formulation to bowl.",
+      "box3Title": "Oversight led by board-certified nutritionists",
+      "box3Description": "Our recipes are developed and reviewed by board-certified veterinary nutritionists, applying clinical reasoning to every decision.",
+      "box4Title": "Pharmaceutical-grade preparation and handling",
+      "box4Description": "From sourcing to cooking, we apply strict quality controls that include pathogen screening, temperature management, and full traceability."
     },
     "DiscoverPlans": {
-      "title": "Discover our Plans",
-      "description": "Take our quick quiz to get a meal plan tailored to your dog's unique needs.",
-      "ctaButton": "Build your dog's Feeding Plan",
+      "title": "Learn from the experts",
+      "description": "Receive educational content written by practicing veterinarians about digestion, nutrition, and physiology.",
+      "ctaButton": "Join the list",
       "backgroundAlt": "Happy dog with personalized meal"
     },
     "Ingredients": {
       "title": "Ingredient Library",
-      "description": "Our carefully selected ingredients are chosen for their nutritional benefits and digestibility.",
-      "basil": {
-        "name": "Basil",
-        "description": "Basil is a versatile herb that brings a vibrant flavor to a variety of dishes. Packed with antioxidants, it helps fight free radicals in the body. Moreover, basil possesses anti-inflammatory properties and supports digestive health. Its fragrant leaves elevate the taste of sauces, salads, and even drinks, making it an excellent choice for both cooking and garnishing. We source our basil from local organic farms from Boston to ensure the highest quality."
-      },
-      "pumpkin": {
-        "name": "Pumpkin",
-        "description": "Pumpkin is a nutrient-dense ingredient that provides essential vitamins and minerals for your dog's well-being. High in fiber and beta-carotene, it supports digestive health and immune function. The natural fiber content helps maintain healthy digestion and can aid in weight management. Rich in antioxidants, pumpkin also contributes to overall cellular health and helps protect against oxidative stress. We carefully select fresh, organic pumpkins to provide the best nutritional benefits."
-      },
-      "turmeric": {
-        "name": "Turmeric",
-        "description": "Turmeric is a powerful spice known for its remarkable health benefits. It contains curcumin, a potent anti-inflammatory and antioxidant compound that helps reduce inflammation throughout the body. This golden spice supports joint health, promotes healthy digestion, and contributes to overall wellness. Turmeric's natural properties make it an excellent addition to your dog's diet, helping to maintain mobility and support the body's natural healing processes. We use premium-grade turmeric to ensure maximum potency and effectiveness."
-      },
-      "avocado": {
-        "name": "Avocado",
-        "description": "Avocado is a nutrient-rich superfood that offers numerous health benefits for your dog. Rich in healthy monounsaturated fats and vitamin E, it supports skin and coat health, giving your pet a shiny, healthy appearance. The high fiber content aids in digestion and helps maintain a healthy weight. Avocados also contain essential vitamins and minerals that support overall wellness, including potassium, folate, and various B vitamins. We source only the finest, perfectly ripe avocados to provide optimal nutrition."
-      },
-      "raspberry": {
-        "name": "Raspberries",
-        "description": "Raspberries are a delicious and nutritious fruit packed with vitamins, minerals, and powerful antioxidants. These vibrant berries support immune function and help protect cells from damage caused by free radicals. Rich in vitamin C, manganese, and dietary fiber, raspberries contribute to overall health and well-being. The natural antioxidants found in raspberries, including ellagic acid and anthocyanins, provide anti-inflammatory benefits and support cardiovascular health. We select only the freshest, organic raspberries to ensure your dog receives the highest quality nutrition."
-      },
-      "lamb": {
-        "name": "Lamb",
-        "description": "Lamb is a high-quality protein source that provides essential amino acids and B vitamins crucial for your dog's health. This lean meat is rich in iron, zinc, and selenium, supporting muscle development and overall vitality. Lamb is particularly beneficial for dogs with food sensitivities, as it's less commonly used in commercial pet foods. The complete amino acid profile supports healthy muscle maintenance, while B vitamins help maintain energy levels and support metabolic function. We source our lamb from trusted, sustainable farms that prioritize animal welfare and quality."
-      },
-      "soybeans": {
-        "name": "Soy Beans",
-        "description": "Soybeans are a complete plant protein that provides all essential amino acids your dog needs for optimal health. These versatile legumes are rich in isoflavones, which have been shown to support heart health and provide antioxidant benefits. Soybeans are an excellent source of fiber, supporting digestive health and helping to maintain healthy cholesterol levels. They also contain essential minerals like iron, calcium, and magnesium, contributing to strong bones and overall wellness. We use only non-GMO, organic soybeans to ensure the highest quality and nutritional value for your pet."
-      },
-      "toggleAria": "Toggle ingredient details"
+      "description": "Each recipe uses a specific selection of these ingredients. To learn more, view our detailed <recipeBreakdowns>recipe breakdowns</recipeBreakdowns>.",
+      "toggleAria": "Toggle ingredient details",
+      "categories": {
+        "proteinsOrgans": {
+          "title": "Proteins & Organs",
+          "items": {
+            "turkey": {
+              "name": "Turkey",
+              "description": "A lean, highly digestible protein serving as a primary amino acid source. Favorable fat profile, suited for adult maintenance and controlled fat intake."
+            },
+            "lamb": {
+              "name": "Lamb",
+              "description": "A nutrient-dense red meat contributing essential amino acids, iron, and zinc. Supports protein diversity and palatability while maintaining controlled macronutrient ratios."
+            },
+            "cod": {
+              "name": "Cod",
+              "description": "A low-fat, highly digestible fish protein. Selected for formulations requiring precise lipid control and fat tolerance."
+            },
+            "beefLiver": {
+              "name": "Beef liver",
+              "description": "A concentrated source of fat-soluble vitamins and trace minerals. Included in measured amounts to support micronutrient adequacy without exceeding safe upper limits."
+            },
+            "chickenLiver": {
+              "name": "Chicken liver",
+              "description": "A functional organ providing bioavailable vitamins and minerals. Used selectively for micronutrient balance and formulation completeness."
+            },
+            "egg": {
+              "name": "Egg",
+              "description": "A highly bioavailable protein containing all essential amino acids. Supports protein quality and digestibility within mixed-ingredient formulations."
+            }
+          }
+        },
+        "carbohydratesFiber": {
+          "title": "Carbohydrates & Fiber",
+          "items": {
+            "pumpkin": {
+              "name": "Pumpkin",
+              "description": "A soluble fiber source supporting stool consistency and digestive tolerance. Contributes fermentable fiber without altering macronutrient balance."
+            },
+            "sweetPotato": {
+              "name": "Sweet potato",
+              "description": "A complex carbohydrate providing dietary fiber and sustained energy. Supports caloric structure and texture while maintaining digestibility."
+            },
+            "brownRice": {
+              "name": "Brown rice",
+              "description": "A digestible carbohydrate used in select formulations. Contributes structured energy and supports dietary tolerance in balanced proportions."
+            },
+            "butternutSquash": {
+              "name": "Butternut squash",
+              "description": "A carbohydrate and fiber source contributing natural beta-carotene. Included for functional diversity rather than caloric density."
+            }
+          }
+        },
+        "vegetablesProduce": {
+          "title": "Vegetables & Produce",
+          "items": {
+            "spinach": {
+              "name": "Spinach",
+              "description": "A low-inclusion leafy green providing trace micronutrients. Used for nutrient diversity, not as a primary fiber or calorie source."
+            },
+            "blueberries": {
+              "name": "Blueberries",
+              "description": "A natural source of polyphenols, included in small quantities. Added for compositional diversity, not therapeutic effect."
+            },
+            "cucumber": {
+              "name": "Cucumber",
+              "description": "A low-calorie, high-moisture vegetable supporting hydration and texture without materially altering macronutrient balance."
+            },
+            "parsley": {
+              "name": "Parsley",
+              "description": "Included in small amounts for micronutrient diversity and aromatic balance."
+            },
+            "dill": {
+              "name": "Dill",
+              "description": "A culinary herb at low inclusion, contributing aroma and palatability without impacting nutritional targets."
+            }
+          }
+        },
+        "fatsFunctionalAdditions": {
+          "title": "Fats & Functional Additions",
+          "items": {
+            "omega3FishOil": {
+              "name": "Omega-3 fish oil",
+              "description": "A purified source of long-chain omega-3 fatty acids. Added in measured amounts to support fatty acid balance and formulation consistency."
+            },
+            "canolaOil": {
+              "name": "Canola oil",
+              "description": "A neutral fat source used to calibrate total dietary fat levels. Supports precise lipid balance where lower overall fat is required."
+            },
+            "flaxseedChiaSeed": {
+              "name": "Flaxseed and chia seed",
+              "description": "Plant-based sources of fiber and alpha-linolenic acid (ALA). Used in small amounts to contribute to fiber diversity and fatty acid balance."
+            }
+          }
+        }
+      }
     },
     "Precision": {
-      "title": "Precision\nin Every Batch",
-      "description": "Every recipe begins with meticulous batch weighing, ensuring each nutrient-rich ingredient is measured with absolute precision before it enters our kitchens. Throughout preparation, detailed temperature logs are maintained to safeguard nutrient integrity and preserve optimal enzymatic activity. From sourcing to plating, every step follows a rigorously controlled prep process—uniting culinary craftsmanship with scientific discipline to deliver nutrition at its most pure, consistent, and elevated.",
+      "title": "Precision in Every Batch",
+      "description": "Fresh ingredients are variable by nature. Protein content differs. Produce changes with the season. Even when a formulation is fixed, raw inputs are not. For a company that refuses to compromise on precision, the work doesn't stop at formulation. Every batch is tested to verify that meals meet Association of American Feed Control Officials (AAFCO) vitamin and mineral requirements—not just on paper, but in the food itself. This is how we deliver consistency where it matters most: in what your dog actually consumes.",
       "imageAlt": "Freshly prepared nutritious meal with measuring spoon"
     },
     "Research": {
-      "title": "Clinical Research",
-      "description1": "By analyzing feeding rhythm and gut response, we can reduce bloating, stomach sensitivity, and stool irregularities. Better digestion leads to better behavior, comfort, and mood — transforming mealtime into a predictable and enjoyable experience.",
-      "description2": "We selected Cornell University for our clinical research due to its renowned expertise in nutrition and digestive health. The university's cutting-edge facilities and commitment to innovative research ensure that our findings are based on the latest scientific advancements. Additionally, Cornell's collaborative environment fosters interdisciplinary studies, allowing us to explore the intricate connections between diet, digestion, and overall well-being.",
+      "title": "Clinical Validation",
+      "description1": "Every formulation decision is informed by controlled preclinical research conducted with Cornell University. Our research set out to observe how nutrition interacts with digestion, metabolism, and inflammatory balance.",
       "valueProp1Title": "Digestive Tolerance\n& Stool Quality",
-      "valueProp1Description": "Evaluated via stool frequency, and ease of passage to monitor digestive tolerance and efficiency.",
-      "valueProp2Title": "Metabolic\nMarkers",
-      "valueProp2Description": "Tracked using blood glucose, lipid profile, and key metabolic enzymes to quantify systemic nutritional impact.",
-      "valueProp3Title": "Coat & Skin\nVitality",
-      "valueProp3Description": "Measured through coat density, shedding rate, and skin hydration scores to assess barrier function.",
+      "valueProp1Description": "Assessed through daily fecal scoring (Purina 1–7 scale), monitoring consistency, variability, and digestive tolerance over time.",
+      "valueProp2Title": "Metabolic & Inflammatory Markers",
+      "valueProp2Description": "Screening for diet-responsive physiological signals performed via diagnostic bloodwork, including serum chemistry, C-reactive protein (CRP), fructosamine, and IL-6.",
+      "valueProp3Title": "Skin & Coat\nVitality",
+      "valueProp3Description": "Monitored using standardized veterinary scoring systems to assess notable changes throughout the feeding period.",
       "step1Number": "12%",
-      "step1Title": "Increase in Positive Dog Interactions",
-      "step1Description1": "Understanding a dog's behavior is key to building a nutrition plan that truly fits their needs. Studies show a 12% increase in positive interactions when feeding routines align with their temperament and daily habits. Dogs who feel understood and engaged show clearer signs of satisfaction and emotional stability.",
-      "step1Description2": "By observing interaction patterns, we can better predict feeding preferences and stress triggers. This insight helps shape customized plans that support not just physical nourishment, but emotional wellness as well — building stronger bonds between dogs and their humans.",
+      "step1Title": "Verified, Not Assumed",
+      "step1Description1": "Nutritional balance starts with formulation, but that alone doesn't guarantee what reaches the bowl.",
+      "step1Description2": "We test every batch against Association of American Feed Control Officials (AAFCO) vitamin and mineral standards before it ships.",
       "step2Number": "42%",
-      "step2Title": "Better Nutritional Balance Achieved",
-      "step2Description1": "Clinical data reveals that 42% of dogs reach a healthier nutritional balance when their diets are adapted according to age, breed, weight, and metabolic status. Personalized feeding transforms nutrition from generic to precision-based, helping each dog reach their ideal condition.",
-      "step2Description2": "These improvements are often seen in coat quality, energy levels, digestion, and weight management. By adjusting macronutrients and portion sizes, we can create a plan that supports long-term vitality and overall health — without guesswork.",
+      "step2Title": "Engineered for Consistency",
+      "step2Description1": "Same formulation. Same nutritional profile. Every batch, every bowl.",
+      "step2Description2": "We use controlled nutrient calibration, portion guidance, and batch-level verification to account for natural variation in sourcing, seasonality, and production.",
       "step3Number": "22%",
-      "step3Title": "Fewer Digestive Upset Episodes",
-      "step3Description1": "A 22% reduction in digestive issues was observed when portion timing and meal formats were optimized. Factors like consistency, ingredient sourcing, and digestion rate play a major role in how a dog absorbs nutrients and feels after meals.",
-      "step3Description2": "By analyzing feeding rhythm and gut response, we can reduce bloating, stomach sensitivity, and stool irregularities. Better digestion leads to better behavior, comfort, and mood — transforming mealtime into a predictable and enjoyable experience.",
+      "step3Title": "Informed by Evidence",
+      "step3Description1": "Fiber content, ingredient selection, and preparation methods are all engineered to support digestive stability.",
+      "step3Description2": "Each formulation decision is guided by what we've learned through our research with Cornell, validating digestive outcomes with standardized scoring and clinical observation.",
+      "disclaimer": "Observations from this evaluation inform formulation development and do not constitute therapeutic or disease-related claims.",
       "backgroundAlt": "Research and clinical testing background"
+    },
+    "UnderstandingFormulation": {
+      "title": "Understanding the Formulation",
+      "formulationFaq1Question": "What does \"clinical validation\" mean for PGF?",
+      "formulationFaq1Answer": "Controlled preclinical research conducted at Cornell University under standardized conditions. Our eight-week feeding evaluation assessed palatability, digestive tolerance, and physiological markers in adult dogs—generating objective data to inform formulation decisions. This is observational research, not an establishment therapeutic efficacy.",
+      "formulationFaq2Question": "Which biomarkers are measured, and why?",
+      "formulationFaq2Answer": "CRP and IL-6 as indicators of inflammatory balance. Daily fecal scoring for digestive tolerance. Microbiome sequencing for microbial diversity. These markers reflect measurable physiological responses to diet.",
+      "formulationFaq3Question": "How is stool quality assessed?",
+      "formulationFaq3Answer": "Using the Purina Fecal Scoring System, a standardized 1–7 scale used in veterinary research. A score of 2 indicates ideal consistency. Daily scoring allows us to track digestive tolerance and variability over time.",
+      "formulationFaq4Question": "What does microbiome diversity indicate?",
+      "formulationFaq4Answer": "A diverse gut microbiome is associated with more efficient digestion, nutrient synthesis, and balanced immune signaling. Our formulations include fermentable fibers and polyphenols to promote microbial diversity and short-chain fatty acid production. We do not claim to treat or prevent disease.",
+      "formulationFaq5Question": "Why measure inflammation in healthy dogs?",
+      "formulationFaq5Answer": "Low-grade systemic inflammation is common and often diet-influenced. Monitoring CRP and IL-6 allows us to observe whether formulation correlates with shifts in inflammatory balance.",
+      "formulationFaq6Question": "How does PGF differ from prescription diets?",
+      "formulationFaq6Answer": "Prescription diets manage diagnosed conditions and require veterinary authorization. PGF is formulated for adult maintenance in healthy dogs; we optimize for digestibility, gut stability, and nutrient adequacy, not to treat a specific disease.",
+      "formulationFaq7Question": "How is batch-level consistency ensured?",
+      "formulationFaq7Answer": "Fresh ingredients vary. Every production batch is tested after preparation against AAFCO vitamin and mineral standards, confirming that finished meals meet nutrient targets regardless of seasonal or sourcing variation.",
+      "formulationFaq8Question": "Who oversees formulation development?",
+      "formulationFaq8Answer": "Board-certified veterinary nutritionists (ECVCN-credentialed). Research protocols are conducted under IACUC approval at Cornell, ensuring compliance with animal welfare and research governance standards.",
+      "formulationFaq9Question": "Will research findings be published?",
+      "formulationFaq9Answer": "Yes. We intend to share findings through appropriate channels as analysis is completed. Academic collaborators do not commercially endorse products, and we are committed to transparent reporting regardless of outcome."
     }
   },
   "About": {

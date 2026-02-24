@@ -2,18 +2,20 @@ import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
 import { ContentfulImage } from '@/components/common/ContentfulImage'
+import { ChevronIcon } from '@/components/common/Icon'
 import { Routes } from '@/types/enums/routes'
+import { cn } from '@/utils/cn'
 
 interface StatItemProps {
-  percentage: string
+  title: string
   description: string
 }
 
-const StatItem = ({ percentage, description }: StatItemProps) => (
-  <div className="flex items-center gap-6">
-    <span className="font-display text-4xl md:text-5xl leading-tight md:leading-14 tracking-tight text-quaternary-800 shrink-0">
-      {percentage}
-    </span>
+const StatItem = ({ title, description }: StatItemProps) => (
+  <div className="flex flex-col gap-2 md:gap-3">
+    <h3 className="font-display text-xl md:text-2xl leading-tight md:leading-10 tracking-tight text-quaternary-800">
+      {title}
+    </h3>
     <p className="text-base leading-6 text-secondary-950">{description}</p>
   </div>
 )
@@ -22,17 +24,19 @@ const ClinicallyApprovedSection = () => {
   const t = useTranslations('Home.ClinicallyApproved')
 
   const stats = [
-    { percentage: '86%', description: t('stat1') },
-    { percentage: '45%', description: t('stat2') },
-    { percentage: '75%', description: t('stat3') },
-    { percentage: '25%', description: t('stat4') },
+    { title: t('item1Title'), description: t('item1Description') },
+    { title: t('item2Title'), description: t('item2Description') },
+    { title: t('item3Title'), description: t('item3Description') },
+    { title: t('item4Title'), description: t('item4Description') },
+    { title: t('item5Title'), description: t('item5Description') },
+    { title: t('item6Title'), description: t('item6Description') },
   ]
 
   return (
     <section className="w-full px-5 md:px-11 pt-4 pb-0 md:py-32 relative overflow-hidden bg-[url(/images/home/clinically-approved-bg.svg)] bg-no-repeat bg-right bg-size-[auto_100%]">
       <div className="w-full flex flex-col lg:flex-row items-center">
         {/* Image */}
-        <div className="w-full lg:w-5/12 relative aspect-square lg:aspect-auto lg:h-[750px] shrink-0">
+        <div className="w-full lg:w-5/12 relative aspect-[3/4] md:aspect-square lg:aspect-auto lg:h-[750px] shrink-0">
           <ContentfulImage
             src="/images/home/clinically-approved-dog.jpg"
             alt={t('imageAlt')}
@@ -51,16 +55,37 @@ const ClinicallyApprovedSection = () => {
             <h2 className="font-display text-3xl md:text-4xl leading-tight md:leading-12 text-secondary-950">
               {t('title')}
             </h2>
-
+            <p className="font-sans text-lg leading-7 text-secondary-950">
+              {t('description')}
+            </p>
             <div className="flex flex-col gap-6">
               {stats.map((stat, index) => (
                 <StatItem
                   key={index}
-                  percentage={stat.percentage}
+                  title={stat.title}
                   description={stat.description}
                 />
               ))}
             </div>
+
+            <details
+              className={cn(
+                'text-secondary-950 border-b border-neutral-600',
+                '[&[open]_.disclaimer-chevron]:rotate-180'
+              )}
+            >
+              <summary className="cursor-pointer list-none py-3 flex items-center gap-2 font-sans text-base font-medium text-secondary-950 outline-none [&::-webkit-details-marker]:hidden">
+                <ChevronIcon
+                  direction="down"
+                  className="disclaimer-chevron size-5 shrink-0 text-secondary-950 transition-transform"
+                  aria-hidden="true"
+                />
+                <span>{t('disclaimerLabel')}</span>
+              </summary>
+              <p className="pb-3 pl-7 text-sm leading-6 text-secondary-950">
+                {t('disclaimerText')}
+              </p>
+            </details>
           </div>
 
           <Button

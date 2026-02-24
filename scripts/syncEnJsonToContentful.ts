@@ -1,6 +1,8 @@
 /**
  * Syncs en.json structure to Contentful using Page / Section / RichTextPage model:
- * - Section: one node of the en.json tree (key, name, content, sections).
+ * - Section: one node of the en.json tree (key, name, sections, copy1-copy45, contentKeyMapping).
+ *   Content keys are mapped to copy1-copy45 in component order (from sectionContentKeyOrder.json);
+ *   contentKeyMapping stores the key->slot mapping. Falls back to alphabetical when no order exists.
  * - Page: app page with key and sections (no slug).
  * - RichTextPage: Privacy Policy and Terms & Conditions (key + rich text content).
  *
@@ -13,6 +15,16 @@ import { resolve } from 'path'
 
 import contentfulManagement from 'contentful-management'
 import { config } from 'dotenv'
+
+/** Section content key order from components (run sectionContentKeyOrder.ts to regenerate). */
+const SECTION_KEY_ORDER: Record<string, string[]> = (() => {
+  try {
+    const p = resolve(process.cwd(), 'scripts/sectionContentKeyOrder.json')
+    return JSON.parse(readFileSync(p, 'utf-8')) as Record<string, string[]>
+  } catch {
+    return {}
+  }
+})()
 
 config({ path: '.env.local' })
 
@@ -74,7 +86,35 @@ function isA11yKey(key: string): boolean {
   )
 }
 
+/**
+ * Returns content keys in component order when available, else alphabetical.
+ * Ensures all keys in contentKeys are included (config order first, extras appended).
+ */
+function getOrderedContentKeys(
+  path: string[],
+  contentKeys: string[]
+): string[] {
+  const pathKey = path.join('.')
+  const ordered = SECTION_KEY_ORDER[pathKey]
+  if (!ordered) return [...contentKeys].sort()
+  const seen = new Set<string>()
+  const result: string[] = []
+  for (const k of ordered) {
+    if (contentKeys.includes(k) && !seen.has(k)) {
+      seen.add(k)
+      result.push(k)
+    }
+  }
+  for (const k of contentKeys) {
+    if (!seen.has(k)) result.push(k)
+  }
+  return result
+}
+
 const SECTION_TAG_ROOT = 'root'
+
+/** Number of generic copy fields (Copy 1 through Copy 45). */
+const COPY_FIELD_COUNT = 45
 
 interface EnvironmentLike {
   getContentTypes(): Promise<{
@@ -125,6 +165,47 @@ async function getEnvironment(): Promise<EnvironmentLike> {
   return space.getEnvironment(ENVIRONMENT_ID) as Promise<EnvironmentLike>
 }
 
+/** Builds Section content type fields: key, name, sections, copy1-copy45, contentKeyMapping, sectionTag. */
+function buildSectionContentTypeFields(): Array<Record<string, unknown>> {
+  const copyFields: Array<Record<string, unknown>> = []
+  for (let i = 1; i <= COPY_FIELD_COUNT; i++) {
+    copyFields.push({
+      id: `copy${i}`,
+      name: `Copy ${i}`,
+      type: 'Text',
+      required: false,
+    })
+  }
+  return [
+    { id: 'key', name: 'Key', type: 'Symbol', required: true },
+    { id: 'name', name: 'Name', type: 'Symbol', required: true },
+    {
+      id: 'sections',
+      name: 'Sections',
+      type: 'Array',
+      required: false,
+      items: {
+        type: 'Link',
+        linkType: 'Entry',
+        validations: [{ linkContentType: [SECTION_CONTENT_TYPE_ID] }],
+      },
+    },
+    ...copyFields,
+    {
+      id: 'contentKeyMapping',
+      name: 'Content Key Mapping',
+      type: 'Object',
+      required: false,
+    },
+    {
+      id: 'sectionTag',
+      name: 'Section Tag',
+      type: 'Symbol',
+      required: false,
+    },
+  ]
+}
+
 async function ensureSectionContentType(
   environment: EnvironmentLike
 ): Promise<void> {
@@ -142,27 +223,38 @@ async function ensureSectionContentType(
     }
     if (typeof env.getContentType === 'function') {
       const ct = await env.getContentType(SECTION_CONTENT_TYPE_ID)
-      const hasTag = ct.fields.some((f) => f.id === 'sectionTag')
-      if (!hasTag) {
-        ;(
-          ct.fields as Array<{
-            id: string
-            name: string
-            type: string
-            required: boolean
-            localized?: boolean
-          }>
-        ).push({
-          id: 'sectionTag',
-          name: 'Section Tag',
-          type: 'Symbol',
-          required: false,
-          localized: false,
-        })
+      const hasCopy1 = ct.fields.some((f) => f.id === 'copy1')
+      const hasContentKeyMapping = ct.fields.some(
+        (f) => f.id === 'contentKeyMapping'
+      )
+      if (!hasCopy1 || !hasContentKeyMapping) {
+        const baseFields = (ct.fields as Array<{ id: string }>).filter(
+          (f) =>
+            f.id !== 'content' &&
+            !f.id.startsWith('copy') &&
+            f.id !== 'contentKeyMapping'
+        )
+        const copyFields = buildSectionContentTypeFields().filter(
+          (f) =>
+            (f.id as string).startsWith('copy') || f.id === 'contentKeyMapping'
+        )
+        const sectionsField = baseFields.filter((f) => f.id === 'sections')
+        const keyNameFields = baseFields.filter(
+          (f) => f.id === 'key' || f.id === 'name'
+        )
+        const restFields = baseFields.filter(
+          (f) => f.id !== 'key' && f.id !== 'name' && f.id !== 'sections'
+        )
+        ;(ct.fields as unknown[]) = [
+          ...keyNameFields,
+          ...sectionsField,
+          ...copyFields,
+          ...restFields,
+        ]
         await ct.update()
         await ct.publish()
         console.log(
-          `Added sectionTag field to content type: ${SECTION_CONTENT_TYPE_ID}`
+          `Migrated Section content type: added copy1-copy${COPY_FIELD_COUNT} and contentKeyMapping`
         )
       }
     }
@@ -174,28 +266,7 @@ async function ensureSectionContentType(
     {
       name: 'Section',
       displayField: 'name',
-      fields: [
-        { id: 'key', name: 'Key', type: 'Symbol', required: true },
-        { id: 'name', name: 'Name', type: 'Symbol', required: true },
-        { id: 'content', name: 'Content', type: 'Object', required: false },
-        {
-          id: 'sections',
-          name: 'Sections',
-          type: 'Array',
-          items: {
-            type: 'Link',
-            linkType: 'Entry',
-            validations: [{ linkContentType: [SECTION_CONTENT_TYPE_ID] }],
-          },
-          required: false,
-        },
-        {
-          id: 'sectionTag',
-          name: 'Section Tag',
-          type: 'Symbol',
-          required: false,
-        },
-      ],
+      fields: buildSectionContentTypeFields(),
     }
   )
   await ct.publish()
@@ -329,10 +400,22 @@ async function createSectionFromObject(
   const entryId = keyPathToEntryId(path)
   const name = keyToName(key)
   const isRootSection = path.length === 1
+
+  const contentKeys = Object.keys(content)
+  const sortedKeys = getOrderedContentKeys(path, contentKeys)
+  const contentKeyMapping: Record<string, string> = {}
+  const copyFields: Record<string, Record<string, unknown>> = {}
+  for (let i = 0; i < sortedKeys.length && i < COPY_FIELD_COUNT; i++) {
+    const copyId = `copy${i + 1}`
+    contentKeyMapping[copyId] = sortedKeys[i]
+    copyFields[copyId] = { [CONTENTFUL_LOCALE]: content[sortedKeys[i]] }
+  }
+
   const fields: Record<string, Record<string, unknown>> = {
     key: { [CONTENTFUL_LOCALE]: key },
     name: { [CONTENTFUL_LOCALE]: name },
-    content: { [CONTENTFUL_LOCALE]: content },
+    ...copyFields,
+    contentKeyMapping: { [CONTENTFUL_LOCALE]: contentKeyMapping },
     sections: {
       [CONTENTFUL_LOCALE]: sectionLinks.map((link) => ({ sys: link.sys })),
     },
@@ -352,7 +435,12 @@ async function createSectionFromObject(
       const entry = await environment.getEntry(entryId)
       entry.fields.key = { [CONTENTFUL_LOCALE]: key }
       entry.fields.name = { [CONTENTFUL_LOCALE]: name }
-      entry.fields.content = { [CONTENTFUL_LOCALE]: content }
+      for (const [copyId, value] of Object.entries(copyFields)) {
+        entry.fields[copyId] = value
+      }
+      entry.fields.contentKeyMapping = {
+        [CONTENTFUL_LOCALE]: contentKeyMapping,
+      }
       entry.fields.sections = {
         [CONTENTFUL_LOCALE]: sectionLinks.map((link) => ({ sys: link.sys })),
       }

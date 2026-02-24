@@ -21,7 +21,7 @@ const ExpertsSection = ({ content }: ExpertsSectionProps) => {
   const experts = fromContentful
     ? content.experts.map((expert, index) => ({
         id: `contentful-${index}`,
-        imageSrc: expert.imageUrl ?? '',
+        imageSrc: expert.imageUrl ?? undefined,
         imageAlt: expert.imageAlt,
         name: expert.name,
         description: expert.description,

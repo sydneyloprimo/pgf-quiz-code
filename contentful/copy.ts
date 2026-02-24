@@ -37,8 +37,56 @@ interface SectionEntry {
     key?: unknown
     name?: unknown
     content?: unknown
+    contentKeyMapping?: unknown
+    copy1?: unknown
+    [key: string]: unknown
     sections?: unknown
   }
+}
+
+/**
+ * Builds content object from copy1-copy45 + contentKeyMapping, or falls back to content (Object) for legacy entries.
+ */
+function getSectionContent(
+  entry: SectionEntry,
+  contentfulLocale: string
+): Record<string, unknown> {
+  const mapping = getLocalizedField(
+    entry.fields.contentKeyMapping,
+    contentfulLocale
+  )
+  if (mapping && typeof mapping === 'object' && !Array.isArray(mapping)) {
+    const result: Record<string, unknown> = {}
+    for (const [copyId, key] of Object.entries(mapping)) {
+      if (typeof key !== 'string') continue
+      const copyField = entry.fields[copyId]
+      const value = getLocalizedField(copyField, contentfulLocale)
+      if (
+        typeof value === 'string' ||
+        typeof value === 'number' ||
+        typeof value === 'boolean'
+      ) {
+        result[key] = value
+      }
+    }
+    return result
+  }
+
+  const content = getLocalizedField(entry.fields.content, contentfulLocale)
+  if (content && typeof content === 'object' && !Array.isArray(content)) {
+    const result: Record<string, unknown> = {}
+    for (const [k, v] of Object.entries(content)) {
+      if (
+        typeof v === 'string' ||
+        typeof v === 'number' ||
+        typeof v === 'boolean'
+      ) {
+        result[k] = v
+      }
+    }
+    return result
+  }
+  return {}
 }
 
 /**
@@ -52,21 +100,13 @@ function sectionToNestedObject(
   contentfulLocale: string
 ): Record<string, unknown> {
   const key = getLocalizedField(entry.fields.key, contentfulLocale)
-  const content = getLocalizedField(entry.fields.content, contentfulLocale)
+  const content = getSectionContent(entry, contentfulLocale)
   const sections = getLocalizedField(entry.fields.sections, contentfulLocale)
 
   const result: Record<string, unknown> = {}
 
-  if (content && typeof content === 'object' && !Array.isArray(content)) {
-    for (const [k, v] of Object.entries(content)) {
-      if (
-        typeof v === 'string' ||
-        typeof v === 'number' ||
-        typeof v === 'boolean'
-      ) {
-        result[k] = v
-      }
-    }
+  for (const [k, v] of Object.entries(content)) {
+    result[k] = v
   }
 
   if (sections && Array.isArray(sections)) {

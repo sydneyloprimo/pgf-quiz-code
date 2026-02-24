@@ -22,9 +22,10 @@ const OurStandardsSection = () => {
           />
         </div>
       ),
-      title: t('clinicallyBacked'),
+      title: t('box1Title'),
       titleClassName,
       orderClassName: 'order-1 md:order-1',
+      description: t('box1Description'),
     },
     {
       icon: (
@@ -39,9 +40,10 @@ const OurStandardsSection = () => {
           />
         </div>
       ),
-      title: t('humanGrade'),
+      title: t('box2Title'),
       titleClassName,
       orderClassName: 'order-2 md:order-2',
+      description: t('box2Description'),
     },
     {
       icon: (
@@ -56,9 +58,10 @@ const OurStandardsSection = () => {
           />
         </div>
       ),
-      title: t('noAdditives'),
+      title: t('box3Title'),
       titleClassName,
       orderClassName: 'order-4 md:order-3',
+      description: t('box3Description'),
     },
     {
       icon: (
@@ -73,9 +76,10 @@ const OurStandardsSection = () => {
           />
         </div>
       ),
-      title: t('measuredPortions'),
+      title: t('box4Title'),
       titleClassName,
       orderClassName: 'order-3 md:order-4',
+      description: t('box4Description'),
     },
   ]
 
@@ -84,6 +88,9 @@ const OurStandardsSection = () => {
       <h2 className="heading-h2 text-secondary-950 text-center tracking-[-0.4px] mb-8">
         {t('title')}
       </h2>
+      <p className="font-sans text-lg text-quaternary-800 text-center mb-12">
+        {t('subtitle')}
+      </p>
       <FeatureGrid features={features} columns={2} />
     </section>
   )

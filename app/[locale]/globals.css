@@ -125,16 +125,25 @@
 
   /* Semantic Colors - Elevations */
   --elevation-primary: #4f5e7112;
+  --elevation-floating:
+    0px 32px 64px 0px rgba(79, 94, 113, 0.07),
+    0px 16px 32px 0px rgba(79, 94, 113, 0.08),
+    0px 8px 16px 0px rgba(79, 94, 113, 0.09),
+    0px 4px 8px 0px rgba(79, 94, 113, 0.1),
+    0px 2px 4px 0px rgba(79, 94, 113, 0.11),
+    0px 0px 2px 0px rgba(79, 94, 113, 0.12);
 
   /* Image Overlay */
   --image-overlay: #44342469;
 
   /* Gradients */
-  --gradient-hero-overlay: linear-gradient(
-    0deg,
-    rgba(204, 204, 204, 0) -36.31%,
-    rgba(106, 43, 0, 0.6) 100%
-  );
+  --gradient-hero-overlay:
+    linear-gradient(
+      0deg,
+      rgba(204, 204, 204, 0) -36.31%,
+      rgba(106, 43, 0, 0.6) 100%
+    ),
+    rgba(68, 52, 36, 0.41);
 
   /* Breakpoints - Mobile */
   --breakpoint-mobile-min: 375px;

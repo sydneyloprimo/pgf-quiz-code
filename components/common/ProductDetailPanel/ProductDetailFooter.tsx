@@ -21,7 +21,7 @@ const ProductDetailFooter = ({
   const t = useTranslations('Common.ProductDetailPanel')
 
   return (
-    <div className="bg-neutral-white w-full px-5 py-6 border-t border-neutral-300 mt-auto">
+    <div className="bg-neutral-white w-full px-5 py-6 border-t border-neutral-300 shrink-0">
       <div className="flex gap-3 items-center w-full">
         <InputNumber
           value={quantity}
@@ -36,7 +36,7 @@ const ProductDetailFooter = ({
             variant="primary"
             onClick={onAddToCart}
             className="w-full h-full"
-            disabled
+            disabled={quantity === 0}
           >
             {t('addToCartButton')}
           </Button>

@@ -1,9 +1,9 @@
 import type { Document } from '@contentful/rich-text-types'
+import { getMessages } from 'next-intl/server'
 
 import { PageHero } from '@/components/common/PageHero'
 import { RichTextRenderer } from '@/components/common/RichTextRenderer'
 import { getRichTextCopy } from '@/contentful/copy'
-import enMessages from '@/messages/en.json'
 
 type PrivacyPolicyPageProps = {
   params: Promise<{ locale: string }>
@@ -17,8 +17,10 @@ export default async function PrivacyPolicyPage({
     'PrivacyPolicy.content',
     locale
   )
-  const privacyPolicy = (enMessages as Record<string, unknown>)
-    .PrivacyPolicy as { content?: Document } | undefined
+  const messages = await getMessages()
+  const privacyPolicy = (messages as Record<string, unknown>).PrivacyPolicy as
+    | { content?: Document }
+    | undefined
   const content = (contentfulContent ?? privacyPolicy?.content) as Document
 
   return (

@@ -31,17 +31,20 @@ const BenefitItem = ({
   >
     <span
       className={cn(
-        'font-bold text-xl leading-8',
-        isActive ? 'text-secondary-700' : 'text-secondary-900'
+        'font-bold text-xl leading-8 text-secondary-900',
+        isActive ? 'lg:text-secondary-700' : 'lg:text-secondary-900'
       )}
     >
       {number}. {title}
     </span>
-    {isActive && (
-      <p className="font-sans text-base leading-6 text-secondary-950 pl-7">
-        {description}
-      </p>
-    )}
+    <p
+      className={cn(
+        'block font-sans text-base leading-6 text-secondary-950 pl-7',
+        isActive ? 'lg:block' : 'lg:hidden'
+      )}
+    >
+      {description}
+    </p>
   </button>
 )
 
@@ -93,14 +96,11 @@ const BenefitsSection = () => {
     <section className="w-full px-5 md:px-11 py-8">
       <div className="w-full flex flex-col lg:flex-row items-stretch">
         {/* Left Content - Accordion */}
-        <div className="w-full lg:w-1/2 bg-neutral-400 px-8 md:px-16 py-16 md:py-20 flex flex-col gap-12 order-2 lg:order-1">
+        <div className="w-full lg:w-1/2 bg-neutral-400 px-8 md:px-16 py-16 md:py-20 flex flex-col gap-12 order-1 lg:order-1">
           <div className="flex flex-col gap-4">
             <h2 className="font-display text-3xl md:text-4xl leading-tight md:leading-12 text-secondary-950">
               {t('title')}
             </h2>
-            <p className="font-sans text-lg leading-7 text-secondary-950">
-              {t('description')}
-            </p>
           </div>
 
           <div className="flex flex-col gap-4">
@@ -118,9 +118,9 @@ const BenefitsSection = () => {
         </div>
 
         {/* Right Content - Image with Pointers */}
-        <div className="w-full lg:w-1/2 relative min-h-96 lg:min-h-0 overflow-hidden order-1 lg:order-2">
+        <div className="w-full lg:w-1/2 relative aspect-[3/4] lg:aspect-[4/3] lg:min-h-[360px] overflow-hidden order-2 lg:order-2">
           <ContentfulImage
-            src="/images/home/benefits-dog.jpg"
+            src="/images/home/benefit-dog.jpg"
             alt={t('imageAlt')}
             fill
             className="object-cover"
@@ -130,8 +130,8 @@ const BenefitsSection = () => {
             aria-hidden="true"
           />
 
-          {/* Pointers - Hidden on mobile */}
-          <div className="hidden lg:block absolute inset-16 md:inset-24">
+          {/* Pointers */}
+          <div className="absolute inset-8 md:inset-16 lg:inset-24">
             {pointers.map((pointer, index) => (
               <ImagePointer
                 key={index}
