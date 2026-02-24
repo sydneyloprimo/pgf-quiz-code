@@ -62,14 +62,14 @@ const ClinicalResearchSection = () => {
       </div>
 
       {/* Step Cards + Disclaimer: same tight spacing between boxes and before disclaimer */}
-      <div className="relative z-10 flex flex-col gap-5 pt-6 items-start w-full">
-        <div className="flex flex-col gap-5 items-start w-full">
+      <div className="relative z-10 flex flex-col gap-8 pt-6 items-start w-full">
+        <div className="flex flex-col gap-8 items-start w-full">
           {steps.map((step, index) => (
             <StepCard key={index} {...step} />
           ))}
         </div>
         <div className="w-full px-5 lg:px-0">
-          <p className="font-sans text-lg leading-7 text-neutral-950 italic text-left lg:text-quaternary-800">
+          <p className="font-sans text-lg leading-7 text-neutral-950 lg:text-quaternary-800">
             {t('disclaimer')}
           </p>
         </div>

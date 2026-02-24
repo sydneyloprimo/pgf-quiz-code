@@ -42,7 +42,7 @@ const IntroductionSection = () => {
           'grid grid-cols-1 md:grid-cols-2',
           'gap-8 md:gap-16',
           'max-w-6xl mx-auto',
-          'py-12'
+          'lg:py-12'
         )}
       >
         <p
