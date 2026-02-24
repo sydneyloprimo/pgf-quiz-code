@@ -129,10 +129,14 @@ export const getQuizBenefitsAlaCarte = (
   ]
 }
 
+export const isAllowedAgeInput = (val: string): boolean =>
+  val === '' ||
+  (!val.includes('-') && (Number.isNaN(Number(val)) || Number(val) >= 0))
+
 export const getNextQuizStep = (age: string, weight: string): QuizStep => {
   const ageNum = parseInt(age, 10)
   const weightNum = parseInt(weight, 10)
-  if (ageNum <= PUPPY_MAX_AGE_YEARS) {
+  if (ageNum < PUPPY_MAX_AGE_YEARS) {
     return QuizStep.UnderAge
   }
   if (weightNum > MAX_DOG_WEIGHT_LBS) {

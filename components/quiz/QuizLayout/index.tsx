@@ -9,7 +9,6 @@ import { z } from 'zod'
 
 import { getStoredFormData, saveFormData } from '@/components/quiz/helpers'
 import { QuizHeader } from '@/components/quiz/QuizHeader'
-import { FEATURE_FLAG_WAITLIST } from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 import {
@@ -23,12 +22,7 @@ const createQuizFormSchema = (t: (key: string) => string) =>
   z.object({
     name: z.string().min(1, t('validation.nameRequired')),
     gender: z.enum(['male', 'female']),
-    age: z
-      .string()
-      .min(1, t('validation.ageRequired'))
-      .refine((val) => !isNaN(Number(val)) && Number(val) > 0, {
-        message: t('validation.ageMustBePositive'),
-      }),
+    age: z.string().min(1, t('validation.ageRequired')),
     weight: z
       .string()
       .min(1, t('validation.weightRequired'))
@@ -63,6 +57,7 @@ interface QuizLayoutProps {
 
 const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
   const t = useTranslations('Quiz')
+  const tFlags = useTranslations('FeatureFlags')
   const router = useRouter()
   const pathname = usePathname()
   const quizFormSchema = useMemo(() => createQuizFormSchema(t), [t])
@@ -162,15 +157,8 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
 
     // Results page: go back to SubscriptionType (flag ON) or HowActive (flag OFF)
     if (currentStep === QuizStep.Results) {
-      fetch(
-        `/api/feature-flags?key=${encodeURIComponent(FEATURE_FLAG_WAITLIST)}`
-      )
-        .then((res) => (res.ok ? res.json() : { enabled: false }))
-        .then((json) =>
-          json.enabled
-            ? goToStep(QuizStep.SubscriptionType)
-            : goToStep(QuizStep.Step7)
-        )
+      const waitlistFlipEnabled = Boolean(tFlags('waitlistFlip'))
+      goToStep(waitlistFlipEnabled ? QuizStep.SubscriptionType : QuizStep.Step7)
       return
     }
 
@@ -195,7 +183,7 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
       // Fallback to browser back if we can't determine previous step
       router.back()
     }
-  }, [currentStep, goToStep, router])
+  }, [currentStep, goToStep, router, tFlags])
 
   const canGoBack = useMemo(
     () => currentStep !== QuizStep.Welcome,

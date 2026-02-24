@@ -6,7 +6,7 @@ import { Controller, useWatch, UseFormReturn } from 'react-hook-form'
 
 import Input from '@/components/common/Input'
 import { InputDropdown } from '@/components/common/InputDropdown'
-import { getNextQuizStep } from '@/components/quiz/helpers'
+import { getNextQuizStep, isAllowedAgeInput } from '@/components/quiz/helpers'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
 import {
@@ -161,8 +161,13 @@ const QuizStep2 = ({
                   <Input
                     ref={ref}
                     type="number"
+                    min={0}
                     value={value}
-                    onChange={onChange}
+                    onChange={(e) => {
+                      if (isAllowedAgeInput(e.target.value)) {
+                        onChange(e)
+                      }
+                    }}
                     onBlur={(e) => {
                       onBlur()
                       setFocusedField(null)

@@ -8,13 +8,8 @@ import { InputDropdown } from '@/components/common/InputDropdown'
 import { FoodAnimation } from '@/components/quiz/FoodAnimation'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
-import {
-  ACTIVITY_LEVEL_OPTIONS,
-  FEATURE_FLAG_WAITLIST,
-  QUIZ_LOADING_DURATION_MS,
-} from '@/constants'
-import { QuizStep } from '@/types/enums/constants'
-import { InputDropdownState } from '@/types/enums/constants'
+import { ACTIVITY_LEVEL_OPTIONS, QUIZ_LOADING_DURATION_MS } from '@/constants'
+import { InputDropdownState, QuizStep } from '@/types/enums/constants'
 import { getTranslatedOptions } from '@/utils/helpers'
 
 interface QuizHowActiveProps {
@@ -33,6 +28,7 @@ const QuizHowActive = ({
   const t = useTranslations('Quiz.howActive')
   const tQuiz = useTranslations('Quiz')
   const tLoading = useTranslations('Quiz.loading')
+  const tFlags = useTranslations('FeatureFlags')
   const { control } = formMethods
   const [isLoading, setIsLoading] = useState(false)
 
@@ -40,28 +36,21 @@ const QuizHowActive = ({
   const activityLevel = useWatch({ control, name: 'activityLevel' })
 
   const handleNext = useCallback(() => {
-    setIsLoading(true)
-  }, [])
+    const waitlistFlipEnabled = Boolean(tFlags('waitlistFlip'))
+    if (waitlistFlipEnabled) {
+      goToStep(QuizStep.SubscriptionType)
+    } else {
+      setIsLoading(true)
+    }
+  }, [goToStep, tFlags])
 
   useEffect(() => {
     if (!isLoading) return
 
     let cancelled = false
-
-    const flagPromise = fetch(
-      `/api/feature-flags?key=${encodeURIComponent(FEATURE_FLAG_WAITLIST)}`
-    )
-      .then((res) => (res.ok ? res.json() : { enabled: false }))
-      .then((json) => Boolean(json.enabled))
-      .catch(() => false)
-
-    const timer = window.setTimeout(async () => {
-      const waitlistFlipEnabled = await flagPromise
+    const timer = window.setTimeout(() => {
       if (!cancelled) {
-        const nextStep = waitlistFlipEnabled
-          ? QuizStep.SubscriptionType
-          : QuizStep.Results
-        goToStep(nextStep)
+        goToStep(QuizStep.Results)
       }
     }, QUIZ_LOADING_DURATION_MS)
 

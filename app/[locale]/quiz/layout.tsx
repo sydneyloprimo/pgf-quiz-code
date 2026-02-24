@@ -12,7 +12,14 @@ export default function QuizLayout({
   return (
     <LocaleWrapper
       params={params}
-      localeGroup={['Quiz', 'PromiseOfCareAlert', 'Common', 'Detail', 'Cart']}
+      localeGroup={[
+        'Quiz',
+        'PromiseOfCareAlert',
+        'Common',
+        'Detail',
+        'Cart',
+        'FeatureFlags',
+      ]}
     >
       {children}
     </LocaleWrapper>

@@ -648,7 +648,6 @@
     "validation": {
       "nameRequired": "Name is required",
       "ageRequired": "Age is required",
-      "ageMustBePositive": "Age must be a positive number",
       "weightRequired": "Weight is required",
       "weightMustBePositive": "Weight must be a positive number"
     },
@@ -656,7 +655,6 @@
       "heading": "Build your dog's feeding protocol.",
       "description": "We'll use age, size, and physiological factors to calibrate a feeding protocol grounded in clinical standards.",
       "button": "Build your dog's protocol",
-      "imageAlt": "Dog illustration",
       "link": "Consult our Nutrition Concierge"
     },
     "location": {
@@ -690,7 +688,7 @@
       "heading": "Is {name} neutered/spayed or intact?",
       "description": "Hormonal status affects metabolic rate and caloric requirements, which we account for in your dog's feeding protocol.",
       "options": {
-        "neutered": "Neutered",
+        "neutered": "Neutered/Spayed",
         "intact": "Intact"
       }
     },
@@ -732,8 +730,7 @@
       "heading": "Our current formulations are engineered for adult maintenance.",
       "description": "A growth-stage protocol for puppies is in development. Would you like to be notified when it becomes available?",
       "changeAgeButton": "Change age",
-      "joinWaitlistButton": "Yes, notify me",
-      "imageAlt": "Dog illustration"
+      "joinWaitlistButton": "Yes, notify me"
     },
     "howActive": {
       "heading": "How active is {name} day-to-day?",

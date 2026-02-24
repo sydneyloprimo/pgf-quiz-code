@@ -2,13 +2,8 @@
 
 import { useTranslations } from 'next-intl'
 
-import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { Link } from '@/components/common/Link'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
-import {
-  QUIZ_DOG_ILLUSTRATION_HEIGHT,
-  QUIZ_DOG_ILLUSTRATION_WIDTH,
-} from '@/constants'
 import { useConciergeContact } from '@/hooks/useConciergeContact'
 import { QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
@@ -33,16 +28,6 @@ const QuizStep1 = ({ goToStep, goBack, canGoBack }: QuizStep1Props) => {
       className={cn('flex flex-col items-center justify-center', 'pt-0 w-full')}
     >
       <div className="flex flex-col gap-4 items-center w-full pb-[60px]">
-        <div className="relative shrink-0">
-          <ContentfulImage
-            src="/images/quiz-dog-illustration.png"
-            alt={t('imageAlt')}
-            width={QUIZ_DOG_ILLUSTRATION_WIDTH}
-            height={QUIZ_DOG_ILLUSTRATION_HEIGHT}
-            className="object-contain"
-            priority
-          />
-        </div>
         <div
           className={cn(
             'flex flex-col gap-6 items-center',
