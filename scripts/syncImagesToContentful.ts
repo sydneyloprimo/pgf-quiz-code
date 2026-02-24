@@ -17,7 +17,20 @@ config({ path: '.env.local' })
 
 const CONTENTFUL_LOCALE = 'en-US'
 const ENVIRONMENT_ID = 'master'
-const CONCURRENT_BATCH_SIZE = 6
+const CONCURRENT_BATCH_SIZE = 4
+const MAX_RETRIES = 4
+const INITIAL_RETRY_DELAY_MS = 2000
+const BATCH_DELAY_MS = 1500
+
+/** Transient errors that warrant a retry. */
+const RETRYABLE_ERROR_CODES = new Set([
+  'EPIPE',
+  'ECONNRESET',
+  'ETIMEDOUT',
+  'ECONNREFUSED',
+  'ENOTFOUND',
+  'EAI_AGAIN',
+])
 
 const IMAGE_EXTENSIONS = new Set(['png', 'jpg', 'jpeg', 'svg', 'webp', 'gif'])
 
@@ -68,6 +81,50 @@ function pathToAssetId(relativePath: string): string {
 
 function pathToCanonicalTitle(relativePath: string): string {
   return '/' + relativePath.replace(/\\/g, '/')
+}
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => globalThis.setTimeout(resolve, ms))
+}
+
+function isRetryableError(err: unknown): boolean {
+  if (err instanceof Error) {
+    const code = (err as Error & { code?: string }).code
+    if (code && RETRYABLE_ERROR_CODES.has(code)) return true
+    const msg = err.message.toLowerCase()
+    if (
+      msg.includes('rate limit') ||
+      msg.includes('429') ||
+      msg.includes('epipe') ||
+      msg.includes('socket hang up') ||
+      msg.includes('network')
+    )
+      return true
+  }
+  return false
+}
+
+async function withRetry<T>(fn: () => Promise<T>, context: string): Promise<T> {
+  let lastErr: unknown
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      return await fn()
+    } catch (err) {
+      lastErr = err
+      if (attempt < MAX_RETRIES && isRetryableError(err)) {
+        const delay =
+          INITIAL_RETRY_DELAY_MS * Math.pow(2, attempt) + Math.random() * 500
+        console.warn(
+          `[warning] ${context}: ${err instanceof Error ? err.message : err}. ` +
+            `Retrying in ${Math.round(delay).toString()}ms (attempt ${attempt + 2}/${MAX_RETRIES + 1})...`
+        )
+        await sleep(delay)
+      } else {
+        throw err
+      }
+    }
+  }
+  throw lastErr
 }
 
 function walkDir(
@@ -206,20 +263,33 @@ async function uploadOne(
 async function processInBatches<T, R>(
   items: T[],
   processor: (item: T) => Promise<R>,
-  batchSize: number
+  batchSize: number,
+  getContext: (item: T, index: number) => string
 ): Promise<R[]> {
   const results: R[] = []
   for (let i = 0; i < items.length; i += batchSize) {
+    if (i > 0) {
+      await sleep(BATCH_DELAY_MS)
+    }
     const batch = items.slice(i, i + batchSize)
     const batchResults = await Promise.all(
-      batch.map((item) =>
-        processor(item).catch((err) => {
-          console.error(err instanceof Error ? err.message : String(err))
-          throw err
-        })
-      )
+      batch.map((item, batchIdx) => {
+        const idx = i + batchIdx
+        return withRetry(
+          () =>
+            processor(item).catch((err) => {
+              console.error(err instanceof Error ? err.message : String(err))
+              throw err
+            }),
+          getContext(item, idx)
+        )
+      })
     )
     results.push(...batchResults)
+    const done = Math.min(i + batchSize, items.length)
+    if (done % 20 === 0 || done === items.length) {
+      console.log(`  Processed ${done}/${items.length}`)
+    }
   }
   return results
 }
@@ -258,7 +328,8 @@ async function main(): Promise<void> {
   const results = await processInBatches(
     items,
     (item) => uploadOne(environment, item),
-    CONCURRENT_BATCH_SIZE
+    CONCURRENT_BATCH_SIZE,
+    (item, idx) => `asset ${idx + 1}/${items.length} (${item.relative})`
   )
   uploaded = results.filter(Boolean).length
   console.log(
