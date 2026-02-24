@@ -8,7 +8,7 @@ const CTASection = () => {
   const t = useTranslations('About.CTA')
 
   return (
-    <section className="w-full flex flex-col items-center justify-center px-5 md:px-24 py-20 relative bg-quaternary-800 overflow-hidden">
+    <section className="w-full flex flex-col items-center justify-center px-5 md:px-24 lg:py-45 py-20 relative bg-quaternary-800 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div className="absolute inset-0 bg-quaternary-800" />
         <div className="absolute inset-0 mix-blend-overlay opacity-50 overflow-hidden">
