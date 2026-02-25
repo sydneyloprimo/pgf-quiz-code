@@ -6,6 +6,7 @@ import { Controller, useWatch, UseFormReturn } from 'react-hook-form'
 
 import { Button } from '@/components/common/Button'
 import Input from '@/components/common/Input'
+import { clearFormData } from '@/components/quiz/helpers'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { useQuizEnrollment } from '@/hooks/useQuizEnrollment'
 import { QuizStep } from '@/types/enums/constants'
@@ -28,6 +29,7 @@ const QuizResultsBeta = ({
   const { control, handleSubmit: rhfHandleSubmit, getValues } = formMethods
 
   const handleSuccess = useCallback(() => {
+    clearFormData()
     goToStep(QuizStep.ConfirmationBeta)
   }, [goToStep])
 
