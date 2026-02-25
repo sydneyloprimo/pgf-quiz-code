@@ -62,7 +62,7 @@ const QuizLocation = ({
   const handleEmailSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
-      createEmailCustomer(notifyEmail)
+      createEmailCustomer({ email: notifyEmail })
     },
     [notifyEmail, createEmailCustomer]
   )

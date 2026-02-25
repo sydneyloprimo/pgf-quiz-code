@@ -43,7 +43,7 @@ const FooterJoinWaitlist = () => {
   const handleSubscribe = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault()
-      await createEmailCustomer(email)
+      await createEmailCustomer({ email })
     },
     [email, createEmailCustomer]
   )

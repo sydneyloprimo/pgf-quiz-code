@@ -19,6 +19,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
   const t = useTranslations('Common.WaitlistModal')
   const tErrors = useTranslations('Common.EmailCustomer.errors')
 
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [isSuccess, setIsSuccess] = useState(false)
 
@@ -28,6 +29,13 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
 
   const { createEmailCustomer, isLoading, error, reset } =
     useEmailCustomer(handleSuccess)
+
+  const handleNameChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setName(event.target.value)
+    },
+    []
+  )
 
   const handleEmailChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,12 +47,16 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
   const handleSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
-      await createEmailCustomer(email)
+      await createEmailCustomer({
+        email,
+        firstName: name.trim() || undefined,
+      })
     },
-    [email, createEmailCustomer]
+    [email, name, createEmailCustomer]
   )
 
   const handleClose = useCallback(() => {
+    setName('')
     setEmail('')
     setIsSuccess(false)
     reset()
@@ -74,6 +86,16 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
           </p>
         </div>
         <form onSubmit={handleSubmit} className="w-full flex flex-col gap-6">
+          <Input
+            id="waitlist-name"
+            name="waitlist-name"
+            type="text"
+            value={name}
+            onChange={handleNameChange}
+            label={t('nameLabel')}
+            labelClassName="text-secondary-900 font-body text-base font-bold leading-5 text-left"
+            disabled={isLoading}
+          />
           <Input
             id="waitlist-email"
             name="waitlist-email"

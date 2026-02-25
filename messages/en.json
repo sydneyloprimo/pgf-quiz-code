@@ -98,6 +98,7 @@
       "emailPlaceholder": "Enter your email address",
       "heading": "Join Our Waitlist",
       "imageAlt": "Dog illustration",
+      "nameLabel": "Name:",
       "submitButton": "Join Waitlist",
       "submittingButton": "Joining...",
       "successAriaLabel": "Waitlist signup successful",
