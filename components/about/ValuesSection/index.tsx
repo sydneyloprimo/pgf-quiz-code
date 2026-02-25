@@ -35,7 +35,7 @@ const ValuesSection = () => {
           />
         ))}
       </div>
-      <div className="relative z-10 flex justify-center pt-6 pb-10 md:pt-10 md:pb-12">
+      <div className="relative z-10 flex justify-center pb-10 md:pt-10 md:pb-12">
         <Button variant="tertiary" href={Routes.formulation}>
           {t('ctaButton')}
         </Button>
