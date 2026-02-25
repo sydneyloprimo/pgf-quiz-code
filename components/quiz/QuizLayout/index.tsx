@@ -9,6 +9,8 @@ import { z } from 'zod'
 
 import { getStoredFormData, saveFormData } from '@/components/quiz/helpers'
 import { QuizHeader } from '@/components/quiz/QuizHeader'
+import { FEATURE_FLAG_WAITLIST } from '@/constants'
+import { useFeatureFlag } from '@/hooks/useFeatureFlag'
 import { QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 import {
@@ -57,7 +59,7 @@ interface QuizLayoutProps {
 
 const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
   const t = useTranslations('Quiz')
-  const tFlags = useTranslations('FeatureFlags')
+  const waitlistFlipEnabled = useFeatureFlag(FEATURE_FLAG_WAITLIST)
   const router = useRouter()
   const pathname = usePathname()
   const quizFormSchema = useMemo(() => createQuizFormSchema(t), [t])
@@ -157,7 +159,6 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
 
     // Results page: go back to SubscriptionType (flag ON) or Diet (flag OFF)
     if (currentStep === QuizStep.Results) {
-      const waitlistFlipEnabled = Boolean(tFlags('waitlistFlip'))
       goToStep(waitlistFlipEnabled ? QuizStep.SubscriptionType : QuizStep.Step6)
       return
     }
@@ -183,7 +184,7 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
       // Fallback to browser back if we can't determine previous step
       router.back()
     }
-  }, [currentStep, goToStep, router, tFlags])
+  }, [currentStep, goToStep, router, waitlistFlipEnabled])
 
   const canGoBack = useMemo(
     () => currentStep !== QuizStep.Welcome,

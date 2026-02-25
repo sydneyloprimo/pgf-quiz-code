@@ -9,9 +9,11 @@ import { FoodAnimation } from '@/components/quiz/FoodAnimation'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
 import {
+  FEATURE_FLAG_WAITLIST,
   QUIZ_LOADING_DURATION_MS,
   SUBSCRIPTION_TYPE_OPTIONS,
 } from '@/constants'
+import { useFeatureFlag } from '@/hooks/useFeatureFlag'
 import { QuizStep } from '@/types/enums/constants'
 import { getTranslatedOptions } from '@/utils/helpers'
 
@@ -31,17 +33,16 @@ const QuizSubscriptionType = ({
   const t = useTranslations('Quiz.subscriptionType')
   const tQuiz = useTranslations('Quiz')
   const tLoading = useTranslations('Quiz.loading')
-  const tFlags = useTranslations('FeatureFlags')
+  const waitlistFlipEnabled = useFeatureFlag(FEATURE_FLAG_WAITLIST)
   const { control } = formMethods
   const [isLoading, setIsLoading] = useState(false)
 
   // Redirect to Results when flag is OFF (subscription step only for flag ON)
   useEffect(() => {
-    const waitlistFlipEnabled = Boolean(tFlags('waitlistFlip'))
     if (!waitlistFlipEnabled) {
       goToStep(QuizStep.Results)
     }
-  }, [goToStep, tFlags])
+  }, [goToStep, waitlistFlipEnabled])
 
   const dogName = useWatch({ control, name: 'name' }) || ''
   const subscriptionType = useWatch({ control, name: 'subscriptionType' })
@@ -54,7 +55,6 @@ const QuizSubscriptionType = ({
     if (!isLoading) return
 
     let cancelled = false
-    const waitlistFlipEnabled = Boolean(tFlags('waitlistFlip'))
     const timer = window.setTimeout(() => {
       if (!cancelled) {
         const nextStep = waitlistFlipEnabled
@@ -68,7 +68,7 @@ const QuizSubscriptionType = ({
       cancelled = true
       window.clearTimeout(timer)
     }
-  }, [isLoading, goToStep, tFlags])
+  }, [isLoading, goToStep, waitlistFlipEnabled])
 
   const translatedOptions = getTranslatedOptions(SUBSCRIPTION_TYPE_OPTIONS, t)
 

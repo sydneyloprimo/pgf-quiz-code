@@ -9,11 +9,13 @@ import { FoodAnimation } from '@/components/quiz/FoodAnimation'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
 import {
+  FEATURE_FLAG_WAITLIST,
   MAIN_FOOD_OPTIONS,
   MEALTIME_BEHAVIOR_OPTIONS,
   QUIZ_LOADING_DURATION_MS,
   TREAT_FREQUENCY_OPTIONS,
 } from '@/constants'
+import { useFeatureFlag } from '@/hooks/useFeatureFlag'
 import { InputDropdownState, QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
 import { getTranslatedOptions } from '@/utils/helpers'
@@ -34,7 +36,7 @@ const QuizDiet = ({
   const t = useTranslations('Quiz.diet')
   const tQuiz = useTranslations('Quiz')
   const tLoading = useTranslations('Quiz.loading')
-  const tFlags = useTranslations('FeatureFlags')
+  const waitlistFlipEnabled = useFeatureFlag(FEATURE_FLAG_WAITLIST)
   const { control } = formMethods
   const [isLoading, setIsLoading] = useState(false)
 
@@ -60,13 +62,12 @@ const QuizDiet = ({
   })
 
   const handleNext = useCallback(() => {
-    const waitlistFlipEnabled = Boolean(tFlags('waitlistFlip'))
     if (waitlistFlipEnabled) {
       goToStep(QuizStep.SubscriptionType)
     } else {
       setIsLoading(true)
     }
-  }, [goToStep, tFlags])
+  }, [goToStep, waitlistFlipEnabled])
 
   useEffect(() => {
     if (!isLoading) return
