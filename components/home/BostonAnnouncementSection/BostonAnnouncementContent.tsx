@@ -25,7 +25,7 @@ const BostonAnnouncementContent = ({
       className={cn(
         'flex flex-col gap-8',
         isMobile
-          ? 'w-full px-5 py-12 items-center text-center'
+          ? 'w-full px-5 py-6 items-center text-center'
           : 'absolute inset-0 z-10 px-20 py-16 items-start justify-center'
       )}
     >

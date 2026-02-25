@@ -19,7 +19,7 @@ const HeroSection = () => {
   useVideoAutoPlay(videoRef)
 
   return (
-    <section className="relative w-full md:min-h-180 h-96 md:max-h-none flex items-end overflow-hidden">
+    <section className="relative w-full h-150 md:min-h-96 lg:min-h-160 flex items-end overflow-hidden">
       {/* Video Background */}
       <video
         ref={videoRef}
@@ -48,7 +48,7 @@ const HeroSection = () => {
       <div
         className={cn(
           'relative z-10',
-          'flex flex-col gap-2 md:gap-8',
+          'flex flex-col gap-2 md:gap-6',
           'px-5 md:px-11 py-6 md:py-12',
           'md:px-12',
           'desktop:px-32',
