@@ -1,7 +1,9 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { useCallback, useState } from 'react'
+import type { CSSProperties } from 'react'
+import { useCallback, useMemo, useState } from 'react'
+import { useMediaQuery } from 'usehooks-ts'
 
 import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { BenefitPointerIcon } from '@/components/common/Icon'
@@ -48,26 +50,66 @@ const BenefitItem = ({
   </button>
 )
 
+/**
+ * Posición del pointer por breakpoint. Definir las claves que necesites:
+ * - mobile: viewport &lt; 768px
+ * - md: 768px ≤ viewport &lt; 1024px
+ * - lg: viewport ≥ 1024px
+ * Cada valor es un objeto con top/right/left/bottom (ej: { top: '46%', right: '35%' }).
+ * Si falta un breakpoint, se usa el siguiente disponible como fallback.
+ */
+type PositionBreakpoints = {
+  mobile?: { top?: string; right?: string; left?: string; bottom?: string }
+  md?: { top?: string; right?: string; left?: string; bottom?: string }
+  lg?: { top?: string; right?: string; left?: string; bottom?: string }
+}
+
 interface ImagePointerProps {
   label: string
-  position: { top?: string; bottom?: string; left?: string; right?: string }
+  position: PositionBreakpoints
+  labelSide: 'left' | 'right'
   onClick: () => void
 }
 
-const ImagePointer = ({ label, position, onClick }: ImagePointerProps) => (
-  <button
-    type="button"
-    onClick={onClick}
-    className="absolute flex flex-col items-center gap-4 cursor-pointer transition-transform hover:scale-110 focus:scale-110 focus:outline-none rounded-md"
-    style={position}
-    aria-label={label}
-  >
-    <BenefitPointerIcon className="size-5 text-secondary-500" />
-    <span className="font-bold text-sm leading-tight text-neutral-100 text-center tracking-widest uppercase drop-shadow-md">
-      {label}
-    </span>
-  </button>
-)
+const useResolvedPosition = (position: PositionBreakpoints) => {
+  const isLg = useMediaQuery('(min-width: 1024px)')
+  const isMd = useMediaQuery('(min-width: 768px)')
+  return useMemo(() => {
+    const resolved = isLg
+      ? (position.lg ?? position.md ?? position.mobile)
+      : isMd
+        ? (position.md ?? position.mobile ?? position.lg)
+        : (position.mobile ?? position.md ?? position.lg)
+    return (resolved ?? {}) as CSSProperties
+  }, [position, isLg, isMd])
+}
+
+const ImagePointer = ({
+  label,
+  position,
+  labelSide,
+  onClick,
+}: ImagePointerProps) => {
+  const style = useResolvedPosition(position)
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        'absolute flex items-center gap-2 cursor-pointer transition-transform',
+        'hover:scale-110 focus:scale-110 focus:outline-none rounded-md',
+        labelSide === 'left' ? 'flex-row-reverse' : 'flex-row'
+      )}
+      style={style}
+      aria-label={label}
+    >
+      <BenefitPointerIcon className="size-5 shrink-0 text-secondary-500" />
+      <span className="font-bold text-sm leading-tight text-neutral-100 whitespace-nowrap tracking-widest uppercase drop-shadow-md">
+        {label}
+      </span>
+    </button>
+  )
+}
 
 const BenefitsSection = () => {
   const t = useTranslations('Home.Benefits')
@@ -89,6 +131,7 @@ const BenefitsSection = () => {
   ).map((benefit) => ({
     label: t(benefit.pointerLabelKey!),
     position: benefit.pointerPosition!,
+    labelSide: benefit.labelSide,
     benefitIndex: benefit.benefitIndex,
   }))
 
@@ -118,25 +161,22 @@ const BenefitsSection = () => {
         </div>
 
         {/* Right Content - Image with Pointers */}
-        <div className="w-full lg:w-1/2 relative aspect-[3/4] lg:aspect-[4/3] lg:min-h-[360px] overflow-hidden order-2 lg:order-2">
+        <div className="w-full lg:w-1/2 relative aspect-[2/3] lg:max-h-[700px] overflow-hidden order-2 lg:order-2">
           <ContentfulImage
-            src="/images/home/benefit-dog.jpg"
+            src="/images/home/new-benefit-dog.jpg"
             alt={t('imageAlt')}
             fill
             className="object-cover"
           />
-          <div
-            className="absolute inset-0 bg-tertiary-800-70 mix-blend-color"
-            aria-hidden="true"
-          />
 
           {/* Pointers */}
-          <div className="absolute inset-8 md:inset-16 lg:inset-24">
+          <div className="absolute inset-0">
             {pointers.map((pointer, index) => (
               <ImagePointer
                 key={index}
                 label={pointer.label}
                 position={pointer.position}
+                labelSide={pointer.labelSide}
                 onClick={() => handleBenefitClick(pointer.benefitIndex)}
               />
             ))}
