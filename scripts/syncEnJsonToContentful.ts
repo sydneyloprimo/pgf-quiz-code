@@ -17,6 +17,8 @@ import { resolve } from 'path'
 import contentfulManagement from 'contentful-management'
 import { config } from 'dotenv'
 
+import { getSyncEnvironmentId } from '@/scripts/contentful/getEnvironment'
+
 /** Section content key order from components (run sectionContentKeyOrder.ts to regenerate). */
 const SECTION_KEY_ORDER: Record<string, string[]> = (() => {
   try {
@@ -30,7 +32,7 @@ const SECTION_KEY_ORDER: Record<string, string[]> = (() => {
 config({ path: '.env.local' })
 
 const CONTENTFUL_LOCALE = 'en-US'
-const ENVIRONMENT_ID = 'master'
+const ENVIRONMENT_ID = getSyncEnvironmentId()
 
 /** Contentful entry IDs must be ≤64 characters. */
 const CONTENTFUL_MAX_ENTRY_ID_LENGTH = 64
@@ -626,7 +628,8 @@ async function createPageEntry(
 
 async function main(): Promise<void> {
   console.log(
-    'Starting Contentful sync (Page / Section / RichTextPage model)...\n'
+    `Starting Contentful sync (Page / Section / RichTextPage model) ` +
+      `[environment: ${ENVIRONMENT_ID}]...\n`
   )
 
   const enJsonPath = resolve(process.cwd(), 'messages/en.json')
