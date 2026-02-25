@@ -472,15 +472,17 @@ export const HOW_IT_WORKS_STEPS: HowItWorksStep[] = [
 ] as const
 
 // Benefits section data
+export interface pointerPosition {
+  mobile?: { top?: string; right?: string; left?: string; bottom?: string }
+  md?: { top?: string; right?: string; left?: string; bottom?: string }
+  lg?: { top?: string; right?: string; left?: string; bottom?: string }
+}
+
 export interface BenefitData {
   titleKey: string
   descriptionKey: string
   pointerLabelKey?: string
-  pointerPosition: {
-    mobile?: { top?: string; right?: string; left?: string; bottom?: string }
-    md?: { top?: string; right?: string; left?: string; bottom?: string }
-    lg?: { top?: string; right?: string; left?: string; bottom?: string }
-  }
+  pointerPosition: pointerPosition
   labelSide: 'left' | 'right'
   benefitIndex: number
 }
@@ -490,7 +492,10 @@ export const BENEFITS_DATA: BenefitData[] = [
     titleKey: 'benefit1Title',
     descriptionKey: 'benefit1Description',
     pointerLabelKey: 'pointerSkin',
-    pointerPosition: { lg: { top: '44%', right: '50%' } },
+    pointerPosition: {
+      mobile: { top: '38%', right: '16%' },
+      lg: { top: '44%', right: '50%' },
+    },
     labelSide: 'left',
     benefitIndex: 0,
   },
@@ -498,7 +503,10 @@ export const BENEFITS_DATA: BenefitData[] = [
     titleKey: 'benefit2Title',
     descriptionKey: 'benefit2Description',
     pointerLabelKey: 'pointerQuality',
-    pointerPosition: { lg: { bottom: '15%', right: '66%' } },
+    pointerPosition: {
+      mobile: { bottom: '15%', right: '56%' },
+      lg: { bottom: '15%', right: '66%' },
+    },
     labelSide: 'left',
     benefitIndex: 1,
   },
@@ -507,7 +515,7 @@ export const BENEFITS_DATA: BenefitData[] = [
     descriptionKey: 'benefit3Description',
     pointerLabelKey: 'pointerMicrobiome',
     pointerPosition: {
-      mobile: { top: '64%', right: '68%' },
+      mobile: { top: '64%', right: '39%' },
       lg: { top: '70%', left: '6%' },
     },
     labelSide: 'left',
@@ -518,7 +526,7 @@ export const BENEFITS_DATA: BenefitData[] = [
     descriptionKey: 'benefit4Description',
     pointerLabelKey: 'pointerEnergy',
     pointerPosition: {
-      mobile: { top: '48%', left: '70%' },
+      mobile: { top: '48%', left: '50%' },
       lg: { top: '48%', left: '65%' },
     },
     labelSide: 'right',
@@ -529,7 +537,7 @@ export const BENEFITS_DATA: BenefitData[] = [
     descriptionKey: 'benefit5Description',
     pointerLabelKey: 'pointerDigestive',
     pointerPosition: {
-      mobile: { top: '59%', left: '68%' }, // mobile
+      mobile: { top: '59%', left: '40%' }, // mobile
       md: { top: '46%', right: '35%' },
       lg: { bottom: '30%', left: '60%' },
     },

@@ -2,12 +2,12 @@
 
 import { useTranslations } from 'next-intl'
 import type { CSSProperties } from 'react'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 
 import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { BenefitPointerIcon } from '@/components/common/Icon'
-import { BENEFITS_DATA } from '@/constants'
+import { BENEFITS_DATA, pointerPosition } from '@/constants'
 import { cn } from '@/utils/cn'
 
 interface BenefitItemProps {
@@ -58,22 +58,21 @@ const BenefitItem = ({
  * Cada valor es un objeto con top/right/left/bottom (ej: { top: '46%', right: '35%' }).
  * Si falta un breakpoint, se usa el siguiente disponible como fallback.
  */
-type PositionBreakpoints = {
-  mobile?: { top?: string; right?: string; left?: string; bottom?: string }
-  md?: { top?: string; right?: string; left?: string; bottom?: string }
-  lg?: { top?: string; right?: string; left?: string; bottom?: string }
-}
 
 interface ImagePointerProps {
   label: string
-  position: PositionBreakpoints
+  position: pointerPosition
   labelSide: 'left' | 'right'
   onClick: () => void
 }
 
-const useResolvedPosition = (position: PositionBreakpoints) => {
-  const isLg = useMediaQuery('(min-width: 1024px)')
-  const isMd = useMediaQuery('(min-width: 768px)')
+const useResolvedPosition = (position: pointerPosition) => {
+  const isLgQuery = useMediaQuery('(min-width: 1024px)')
+  const isMdQuery = useMediaQuery('(min-width: 768px)')
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+  const isLg = mounted ? isLgQuery : true
+  const isMd = mounted ? isMdQuery : true
   return useMemo(() => {
     const resolved = isLg
       ? (position.lg ?? position.md ?? position.mobile)
@@ -96,15 +95,15 @@ const ImagePointer = ({
       type="button"
       onClick={onClick}
       className={cn(
-        'absolute flex items-center gap-2 cursor-pointer transition-transform',
+        'absolute flex flex-col items-center gap-2 cursor-pointer transition-transform',
         'hover:scale-110 focus:scale-110 focus:outline-none rounded-md',
-        labelSide === 'left' ? 'flex-row-reverse' : 'flex-row'
+        labelSide === 'left' ? 'lg:flex-row-reverse' : 'lg:flex-row'
       )}
       style={style}
       aria-label={label}
     >
       <BenefitPointerIcon className="size-5 shrink-0 text-secondary-500" />
-      <span className="font-bold text-sm leading-tight text-neutral-100 whitespace-nowrap tracking-widest uppercase drop-shadow-md">
+      <span className="font-bold text-sm leading-tight text-neutral-100 whitespace-nowrap tracking-widest uppercase drop-shadow-md text-center">
         {label}
       </span>
     </button>
@@ -139,7 +138,7 @@ const BenefitsSection = () => {
     <section className="w-full px-5 md:px-11 py-8">
       <div className="w-full flex flex-col lg:flex-row items-stretch">
         {/* Left Content - Accordion */}
-        <div className="w-full lg:w-1/2 bg-neutral-400 px-8 md:px-16 py-16 md:py-20 flex flex-col gap-12 order-1 lg:order-1">
+        <div className="w-full lg:w-1/2 bg-neutral-400 px-8 md:px-16 py-16 md:py-20 flex flex-col gap-12 order-1">
           <div className="flex flex-col gap-4">
             <h2 className="font-display text-3xl md:text-4xl leading-tight md:leading-12 text-secondary-950">
               {t('title')}
@@ -161,7 +160,7 @@ const BenefitsSection = () => {
         </div>
 
         {/* Right Content - Image with Pointers */}
-        <div className="w-full lg:w-1/2 relative aspect-[2/3] lg:max-h-[700px] overflow-hidden order-2 lg:order-2">
+        <div className="w-full lg:w-1/2 relative aspect-[2/3] lg:max-h-[700px] overflow-hidden order-2">
           <ContentfulImage
             src="/images/home/new-benefit-dog.jpg"
             alt={t('imageAlt')}
