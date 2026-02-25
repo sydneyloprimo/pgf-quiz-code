@@ -33,7 +33,7 @@ const PrecisionBatchSection = () => {
         <div
           className={cn(
             'relative flex flex-col',
-            'px-5 pt-14 lg:pl-30 lg:pr-50',
+            'px-5 pt-14 lg:pl-32 lg:pr-52',
             'w-full max-w-full order-2'
           )}
         >
