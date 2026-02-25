@@ -686,11 +686,13 @@
       "weightSuffix": "lbs."
     },
     "neuteredStatus": {
-      "heading": "Is {name} neutered/spayed or intact?",
       "description": "Hormonal status affects metabolic rate and caloric requirements, which we account for in your dog's feeding protocol.",
+      "headingFemale": "Is {name} spayed or intact?",
+      "headingMale": "Is {name} neutered or intact?",
       "options": {
-        "neutered": "Neutered/Spayed",
-        "intact": "Intact"
+        "intact": "Intact",
+        "neutered": "Neutered",
+        "spayed": "Spayed"
       }
     },
     "bodyShape": {
@@ -721,11 +723,10 @@
     },
     "title": "Purely Golden Foods",
     "plus25Lbs": {
-      "heading": "Our formulations are currently engineered for small breeds under 20 lbs.",
-      "description": "Protocols for larger breeds are in development. Would you like to be notified when they become available?",
       "changeWeightsButton": "Change weight",
-      "joinWaitlistButton": "Yes, notify me",
-      "imageAlt": "Dog illustration"
+      "description": "Protocols for larger breeds are in development. Would you like to be notified when they become available?",
+      "heading": "Our formulations are currently engineered for small breeds under 20 lbs.",
+      "joinWaitlistButton": "Yes, notify me"
     },
     "underAge": {
       "heading": "Our current formulations are engineered for adult maintenance.",

@@ -27,13 +27,21 @@ const QuizNeuteredStatus = ({
   const { control, watch } = formMethods
 
   const dogName = watch('name') || ''
+  const gender = watch('gender') as 'male' | 'female' | undefined
   const selectedNeuteredStatus = useWatch({
     control,
     name: 'neuteredStatus',
   })
 
+  const neuteredLabel =
+    gender === 'female' ? t('options.spayed') : t('options.neutered')
+  const heading =
+    gender === 'female'
+      ? t('headingFemale', { name: dogName })
+      : t('headingMale', { name: dogName })
+
   const options = [
-    { label: t('options.neutered'), value: 'neutered' },
+    { label: neuteredLabel, value: 'neutered' },
     { label: t('options.intact'), value: 'intact' },
   ]
 
@@ -60,7 +68,7 @@ const QuizNeuteredStatus = ({
               'w-full'
             )}
           >
-            {t('heading', { name: dogName })}
+            {heading}
           </h2>
           <p className={cn('font-body text-lg leading-8', 'w-full')}>
             {t('description', { name: dogName })}

@@ -42,12 +42,6 @@ export const instagramUrl = 'https://www.instagram.com/rootstrap'
 
 export const linkedinUrl = 'https://www.linkedin.com/company/rootstrap-it'
 
-export const QUIZ_DOG_ILLUSTRATION_WIDTH = 268
-export const QUIZ_DOG_ILLUSTRATION_HEIGHT = 266
-
-export const QUIZ_DOG_ILLUSTRATION_SOURCE_WIDTH = 1536
-export const QUIZ_DOG_ILLUSTRATION_SOURCE_HEIGHT = 1024
-
 export const QUIZ_RESULTS_ILLUSTRATION_WIDTH = 167
 export const QUIZ_RESULTS_ILLUSTRATION_HEIGHT = 103
 
