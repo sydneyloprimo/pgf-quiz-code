@@ -38,7 +38,7 @@ const QuizHowActive = ({
   const handleNext = useCallback(() => {
     const waitlistFlipEnabled = Boolean(tFlags('waitlistFlip'))
     if (waitlistFlipEnabled) {
-      goToStep(QuizStep.SubscriptionType)
+      goToStep(QuizStep.Step6)
     } else {
       setIsLoading(true)
     }

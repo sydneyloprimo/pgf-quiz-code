@@ -32,7 +32,7 @@ const QuizBodyShape = ({
   })
 
   const handleNext = () => {
-    goToStep(QuizStep.Step6)
+    goToStep(QuizStep.Step7)
   }
 
   return (

@@ -62,11 +62,11 @@ export const STEP_ORDER: QuizStep[] = [
   QuizStep.Welcome,
   QuizStep.Location,
   QuizStep.PetInfo,
-  QuizStep.NeuteredStatus,
   QuizStep.BreedSelection,
+  QuizStep.NeuteredStatus,
   QuizStep.Step5,
-  QuizStep.Step6,
   QuizStep.Step7,
+  QuizStep.Step6,
   QuizStep.SubscriptionType,
   // Step8 (loading) is not in the order - shown inline, not a separate step
 ]

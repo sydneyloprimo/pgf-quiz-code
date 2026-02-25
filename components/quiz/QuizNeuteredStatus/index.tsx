@@ -46,7 +46,7 @@ const QuizNeuteredStatus = ({
   ]
 
   const handleNext = () => {
-    goToStep(QuizStep.BreedSelection)
+    goToStep(QuizStep.Step5)
   }
 
   return (
