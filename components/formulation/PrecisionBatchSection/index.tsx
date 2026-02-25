@@ -1,7 +1,6 @@
 import { useTranslations } from 'next-intl'
 
 import { ContentfulImage } from '@/components/common/ContentfulImage'
-import { FORMULATION_SECTION_PADDING_Y } from '@/constants'
 import { cn } from '@/utils/cn'
 
 const PrecisionBatchSection = () => {
@@ -12,48 +11,30 @@ const PrecisionBatchSection = () => {
       <div
         className={cn(
           'relative z-10',
-          'grid grid-cols-1 lg:grid-cols-[1fr_1.5fr]',
-          'items-center',
-          'w-full max-w-full'
+          'grid grid-cols-1 lg:grid-cols-[35fr_65fr]',
+          'items-stretch pb-14 lg:py-36',
+          'w-full max-w-full',
+          'lg:min-h-[32rem]'
         )}
       >
-        {/* Image side - image has its own background */}
-        <div
-          className={cn(
-            'relative w-full',
-            'h-auto lg:h-[850px]',
-            'overflow-hidden lg:overflow-visible'
-          )}
-        >
-          {/* Mobile/Tablet: natural image sizing */}
-          <div className="relative w-full aspect-[3/4] lg:hidden">
+        {/* Image - left side, fills container */}
+        <div className="relative w-full order-1 min-h-64 lg:min-h-0 px-0">
+          <div className="relative w-full h-full min-h-64 lg:min-h-0 lg:h-full aspect-[4/3] lg:aspect-auto">
             <ContentfulImage
-              src="/images/formulation/precision-batch-image-mobile.png"
+              src="/images/formulation/precision-batch.jpg"
               alt={t('imageAlt')}
               fill
               className="object-cover"
             />
           </div>
-          {/* Desktop: fixed height with overflow */}
-          <div className="hidden lg:block absolute inset-0 overflow-visible">
-            <div className="relative h-full w-[200%] overflow-visible pointer-events-none">
-              <ContentfulImage
-                src="/images/formulation/precision-batch-image.png"
-                alt={t('imageAlt')}
-                fill
-                className="object-contain object-left"
-              />
-            </div>
-          </div>
         </div>
 
-        {/* Text side */}
+        {/* Text - right side, aligned with image */}
         <div
           className={cn(
             'relative flex flex-col',
-            'px-5 lg:pl-40 lg:pr-50',
-            FORMULATION_SECTION_PADDING_Y,
-            'w-full max-w-full'
+            'px-5 pt-14 lg:pl-30 lg:pr-50',
+            'w-full max-w-full order-2'
           )}
         >
           {/* Vertical line divider - extends from top, stops above body text */}
