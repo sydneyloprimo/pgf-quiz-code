@@ -2,11 +2,7 @@
 
 import { useTranslations } from 'next-intl'
 
-import {
-  AlertSuccessIcon,
-  Garlic1Icon,
-  Garlic2Icon,
-} from '@/components/common/Icon'
+import { Garlic1Icon, Garlic2Icon } from '@/components/common/Icon'
 import { Link } from '@/components/common/Link'
 import { clearFormData } from '@/components/quiz/helpers'
 import { QUIZ_RESULTS_FOOTER_BENEFITS } from '@/constants'
@@ -45,15 +41,9 @@ const QuizResultsFooter = ({ dogName }: QuizResultsFooterProps) => {
             key={benefit.titleKey}
             className="flex flex-col items-center gap-2"
           >
-            <div className="flex flex-row gap-2 items-center justify-center">
-              <AlertSuccessIcon
-                className="size-5 text-secondary-600 shrink-0 self-center"
-                aria-hidden="true"
-              />
-              <h5 className="heading-h5 font-display font-normal text-secondary-900 text-center self-center">
-                {t(benefit.titleKey)}
-              </h5>
-            </div>
+            <h5 className="heading-h5 font-display font-normal text-secondary-900 text-center">
+              {t(benefit.titleKey)}
+            </h5>
             <p className="text-body-m font-sans text-secondary-950 text-center">
               {t(benefit.descriptionKey, { name: dogName })}
             </p>

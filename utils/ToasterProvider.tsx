@@ -15,7 +15,7 @@ export default function ToastProvider({ children }: ToastProviderProps) {
         transition={Slide}
         hideProgressBar
         limit={1}
-        autoClose={5000}
+        autoClose={2000}
       />
     </>
   )

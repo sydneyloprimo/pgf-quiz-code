@@ -155,10 +155,10 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
       return
     }
 
-    // Results page: go back to SubscriptionType (flag ON) or HowActive (flag OFF)
+    // Results page: go back to SubscriptionType (flag ON) or Diet (flag OFF)
     if (currentStep === QuizStep.Results) {
       const waitlistFlipEnabled = Boolean(tFlags('waitlistFlip'))
-      goToStep(waitlistFlipEnabled ? QuizStep.SubscriptionType : QuizStep.Step7)
+      goToStep(waitlistFlipEnabled ? QuizStep.SubscriptionType : QuizStep.Step6)
       return
     }
 

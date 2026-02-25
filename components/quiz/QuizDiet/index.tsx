@@ -1,14 +1,17 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
+import { useCallback, useEffect, useState } from 'react'
 import { Controller, useWatch, UseFormReturn } from 'react-hook-form'
 
 import { InputDropdown } from '@/components/common/InputDropdown'
+import { FoodAnimation } from '@/components/quiz/FoodAnimation'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
 import {
   MAIN_FOOD_OPTIONS,
   MEALTIME_BEHAVIOR_OPTIONS,
+  QUIZ_LOADING_DURATION_MS,
   TREAT_FREQUENCY_OPTIONS,
 } from '@/constants'
 import { InputDropdownState, QuizStep } from '@/types/enums/constants'
@@ -30,7 +33,10 @@ const QuizDiet = ({
 }: QuizDietProps) => {
   const t = useTranslations('Quiz.diet')
   const tQuiz = useTranslations('Quiz')
+  const tLoading = useTranslations('Quiz.loading')
+  const tFlags = useTranslations('FeatureFlags')
   const { control } = formMethods
+  const [isLoading, setIsLoading] = useState(false)
 
   const dogName =
     useWatch({
@@ -53,9 +59,30 @@ const QuizDiet = ({
     name: 'mealtimeBehavior',
   })
 
-  const handleNext = () => {
-    goToStep(QuizStep.Step7)
-  }
+  const handleNext = useCallback(() => {
+    const waitlistFlipEnabled = Boolean(tFlags('waitlistFlip'))
+    if (waitlistFlipEnabled) {
+      goToStep(QuizStep.SubscriptionType)
+    } else {
+      setIsLoading(true)
+    }
+  }, [goToStep, tFlags])
+
+  useEffect(() => {
+    if (!isLoading) return
+
+    let cancelled = false
+    const timer = window.setTimeout(() => {
+      if (!cancelled) {
+        goToStep(QuizStep.Results)
+      }
+    }, QUIZ_LOADING_DURATION_MS)
+
+    return () => {
+      cancelled = true
+      window.clearTimeout(timer)
+    }
+  }, [isLoading, goToStep])
 
   const isFormValid = Boolean(mainFood && treatFrequency && mealtimeBehavior)
 
@@ -68,6 +95,24 @@ const QuizDiet = ({
     MEALTIME_BEHAVIOR_OPTIONS,
     t
   )
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center pt-0 px-0 w-full">
+        <div className="flex flex-col gap-16 items-center w-full py-12">
+          <FoodAnimation />
+          <div className="flex flex-col gap-6 items-center text-center w-full text-secondary-950">
+            <h2 className="font-display text-4xl leading-12 tracking-tight w-full">
+              {tLoading('heading', { name: dogName })}
+            </h2>
+            <p className="font-body text-xl leading-8 w-full">
+              {tLoading('description')}
+            </p>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div
