@@ -9,7 +9,7 @@ const SectionDivider = () => {
     <div className="flex items-center justify-center w-full gap-4 md:gap-6">
       <div className="flex-1 h-px bg-secondary-300" />
       <ContentfulImage
-        src="/icons/faq-divider.svg"
+        src="/icons/faqs-divider.svg"
         alt={t('decorativeDividerAlt')}
         width={43}
         height={47}
