@@ -51,68 +51,69 @@ const BenefitItem = ({
 )
 
 /**
- * Posición del pointer por breakpoint. Definir las claves que necesites:
- * - mobile: viewport &lt; 768px
- * - md: 768px ≤ viewport &lt; 1024px
- * - lg: viewport ≥ 1024px
- * Cada valor es un objeto con top/right/left/bottom (ej: { top: '46%', right: '35%' }).
- * Si falta un breakpoint, se usa el siguiente disponible como fallback.
+ * Returns a resolver that turns pointerPosition (mobile/md/lg breakpoints) into
+ * CSS top/right/left/bottom for the current viewport. Called once in the parent
+ * so all pointers share the same media queries instead of one per pointer.
  */
+const useBreakpointPosition = () => {
+  const isLgQuery = useMediaQuery('(min-width: 1024px)')
+  const isMdQuery = useMediaQuery('(min-width: 768px)')
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => setMounted(true), [])
+  // Before mount (SSR/first paint) assume desktop so lg positions apply correctly
+  const isLg = mounted ? isLgQuery : true
+  const isMd = mounted ? isMdQuery : true
+
+  return useCallback(
+    (position: pointerPosition): CSSProperties => {
+      // Pick the breakpoint object for current viewport; fallback to next available
+      const resolved = isLg
+        ? (position.lg ?? position.md ?? position.mobile)
+        : isMd
+          ? (position.md ?? position.mobile ?? position.lg)
+          : (position.mobile ?? position.md ?? position.lg)
+      return (resolved ?? {}) as CSSProperties
+    },
+    [isLg, isMd]
+  )
+}
 
 interface ImagePointerProps {
   label: string
-  position: pointerPosition
+  style: CSSProperties
   labelSide: 'left' | 'right'
   onClick: () => void
 }
 
-const useResolvedPosition = (position: pointerPosition) => {
-  const isLgQuery = useMediaQuery('(min-width: 1024px)')
-  const isMdQuery = useMediaQuery('(min-width: 768px)')
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
-  const isLg = mounted ? isLgQuery : true
-  const isMd = mounted ? isMdQuery : true
-  return useMemo(() => {
-    const resolved = isLg
-      ? (position.lg ?? position.md ?? position.mobile)
-      : isMd
-        ? (position.md ?? position.mobile ?? position.lg)
-        : (position.mobile ?? position.md ?? position.lg)
-    return (resolved ?? {}) as CSSProperties
-  }, [position, isLg, isMd])
-}
-
 const ImagePointer = ({
   label,
-  position,
+  style,
   labelSide,
   onClick,
-}: ImagePointerProps) => {
-  const style = useResolvedPosition(position)
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={cn(
-        'absolute flex flex-col items-center gap-2 cursor-pointer transition-transform',
-        'hover:scale-110 focus:scale-110 focus:outline-none rounded-md',
-        labelSide === 'left' ? 'lg:flex-row-reverse' : 'lg:flex-row'
-      )}
-      style={style}
-      aria-label={label}
-    >
-      <BenefitPointerIcon className="size-5 shrink-0 text-secondary-500" />
-      <span className="font-bold text-sm leading-tight text-neutral-100 whitespace-nowrap tracking-widest uppercase drop-shadow-md text-center">
-        {label}
-      </span>
-    </button>
-  )
-}
+}: ImagePointerProps) => (
+  <button
+    type="button"
+    onClick={onClick}
+    className={cn(
+      'absolute flex flex-col items-center gap-2 cursor-pointer transition-transform',
+      'hover:scale-110 focus:scale-110 focus:outline-none rounded-md',
+      labelSide === 'left' ? 'lg:flex-row-reverse' : 'lg:flex-row'
+    )}
+    style={style}
+    aria-label={label}
+  >
+    <BenefitPointerIcon className="size-5 shrink-0 text-secondary-500" />
+    <span className="font-bold text-sm leading-tight text-neutral-100 whitespace-nowrap tracking-widest uppercase drop-shadow-md text-center">
+      {label}
+    </span>
+  </button>
+)
 
 const BenefitsSection = () => {
   const t = useTranslations('Home.Benefits')
   const [activeIndex, setActiveIndex] = useState(0)
+  const resolvePosition = useBreakpointPosition() // one resolver for all pointers
 
   const handleBenefitClick = useCallback((index: number) => {
     setActiveIndex(index)
@@ -125,14 +126,19 @@ const BenefitsSection = () => {
       description: t(benefit.descriptionKey),
     }))
 
-  const pointers = BENEFITS_DATA.filter(
-    (benefit) => benefit.pointerLabelKey && benefit.pointerPosition
-  ).map((benefit) => ({
-    label: t(benefit.pointerLabelKey!),
-    position: benefit.pointerPosition!,
-    labelSide: benefit.labelSide,
-    benefitIndex: benefit.benefitIndex,
-  }))
+  // Resolve each benefit's pointerPosition (mobile/md/lg) to CSS for current viewport
+  const pointers = useMemo(
+    () =>
+      BENEFITS_DATA.filter(
+        (benefit) => benefit.pointerLabelKey && benefit.pointerPosition
+      ).map((benefit) => ({
+        label: t(benefit.pointerLabelKey!),
+        style: resolvePosition(benefit.pointerPosition!),
+        labelSide: benefit.labelSide,
+        benefitIndex: benefit.benefitIndex,
+      })),
+    [t, resolvePosition]
+  )
 
   return (
     <section className="w-full px-5 md:px-11 py-8">
@@ -168,13 +174,13 @@ const BenefitsSection = () => {
             className="object-cover"
           />
 
-          {/* Pointers */}
+          {/* Pointers: */}
           <div className="absolute inset-0">
-            {pointers.map((pointer, index) => (
+            {pointers.map((pointer) => (
               <ImagePointer
-                key={index}
+                key={pointer.benefitIndex}
                 label={pointer.label}
-                position={pointer.position}
+                style={pointer.style}
                 labelSide={pointer.labelSide}
                 onClick={() => handleBenefitClick(pointer.benefitIndex)}
               />
