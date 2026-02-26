@@ -3,6 +3,7 @@ import { getMessages } from 'next-intl/server'
 
 import { PageHero } from '@/components/common/PageHero'
 import { RichTextRenderer } from '@/components/common/RichTextRenderer'
+import { MAIN_CONTENT_ID } from '@/constants'
 import { getRichTextCopy } from '@/contentful/copy'
 
 type PrivacyPolicyPageProps = {
@@ -24,7 +25,11 @@ export default async function PrivacyPolicyPage({
   const content = (contentfulContent ?? privacyPolicy?.content) as Document
 
   return (
-    <main className="flex flex-col items-center w-full bg-neutral-300">
+    <main
+      id={MAIN_CONTENT_ID}
+      tabIndex={-1}
+      className="flex flex-col items-center w-full bg-neutral-300"
+    >
       <PageHero translationKey="PrivacyPolicy.Hero" />
       <section className="w-full max-w-3xl px-5 py-16 md:py-24">
         <RichTextRenderer content={content} />

@@ -1,6 +1,7 @@
 import Footer from '@/components/common/Footer'
 import LocaleWrapper from '@/components/common/LocaleWrapper'
 import { MainNav } from '@/components/common/MainNav'
+import { SkipLink } from '@/components/common/SkipLink'
 import { Locale } from '@/i18n'
 
 export default function RootLayout({
@@ -12,7 +13,11 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <LocaleWrapper params={params} localeGroup={['MainNav', 'Common']}>
+      <LocaleWrapper
+        params={params}
+        localeGroup={['Accessibility', 'MainNav', 'Common']}
+      >
+        <SkipLink />
         <div className="w-full top-0 z-50">
           <MainNav />
         </div>

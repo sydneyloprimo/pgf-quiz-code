@@ -49,7 +49,7 @@ const FeaturedBlogPost = ({ post, imageSrc }: FeaturedBlogPostProps) => {
         <div className="relative aspect-21/9 w-full min-h-64">
           <Image
             src={imageSrc}
-            alt=""
+            alt={t('featuredImageAlt', { title })}
             fill
             className="object-cover"
             sizes="(min-width: 1024px) 1152px, 100vw"

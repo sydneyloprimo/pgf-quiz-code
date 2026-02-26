@@ -5,7 +5,7 @@ import { ComponentProps, PropsWithChildren, ReactNode } from 'react'
 import { cn } from '@/utils/cn'
 
 const buttonVariants = cva(
-  'flex items-center justify-center gap-2 font-bold font-sans cursor-pointer disabled:cursor-not-allowed',
+  'flex items-center justify-center gap-2 font-bold font-sans cursor-pointer disabled:cursor-not-allowed min-h-11',
   {
     variants: {
       variant: {

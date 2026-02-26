@@ -10,6 +10,7 @@ import { MeetTheContributors } from '@/components/blog/MeetTheContributors'
 import {
   BLOG_FEATURED_IMAGE_PATH,
   BLOG_INDEX_POSTS_PER_PAGE,
+  MAIN_CONTENT_ID,
 } from '@/constants'
 import {
   getAuthors,
@@ -60,7 +61,11 @@ export default async function BlogIndexPage({
   const t = await getTranslations('BlogIndex')
 
   return (
-    <main className="min-h-screen w-full bg-neutral-300">
+    <main
+      id={MAIN_CONTENT_ID}
+      tabIndex={-1}
+      className="min-h-screen w-full bg-neutral-300"
+    >
       <BlogIndexHero
         headline={t('heroHeadline')}
         subheadline={t('heroSubheadline')}

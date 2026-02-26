@@ -1,4 +1,7 @@
 {
+  "Accessibility": {
+    "skipToMainContent": "Skip to main content"
+  },
   "Auth": {
     "email": "Email",
     "emailPlaceholder": "Type your email",
@@ -1012,6 +1015,7 @@
     },
     "FeaturedBlogPost": {
       "featured": "Featured",
+      "featuredImageAlt": "Featured blog post: {title}",
       "readPostAria": "Read featured post: {title}"
     },
     "MeetTheContributors": {
