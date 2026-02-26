@@ -78,12 +78,6 @@
     "title",
     "contributorRole"
   ],
-  "AnnouncementToast": [
-    "messageMobile",
-    "message",
-    "ctaLink",
-    "dismissAria"
-  ],
   "Home.ExploreCategories": [
     "alt"
   ],

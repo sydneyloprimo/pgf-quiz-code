@@ -55,7 +55,7 @@ const StepCard = ({
           'font-display',
           'text-2xl md:text-3xl',
           'leading-tight md:leading-10',
-          'tracking-tight',
+          'tracking-normal',
           'text-neutral-white'
         )}
       >

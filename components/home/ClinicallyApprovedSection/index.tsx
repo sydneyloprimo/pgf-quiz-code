@@ -13,7 +13,7 @@ interface StatItemProps {
 
 const StatItem = ({ title, description }: StatItemProps) => (
   <div className="flex flex-col gap-2 md:gap-3">
-    <h3 className="font-display text-xl md:text-2xl leading-tight md:leading-10 tracking-tight text-quaternary-800">
+    <h3 className="font-display text-xl md:text-2xl md:leading-10 tracking-tight text-quaternary-800">
       {title}
     </h3>
     <p className="text-base leading-6 text-secondary-950">{description}</p>
@@ -33,24 +33,20 @@ const ClinicallyApprovedSection = () => {
   ]
 
   return (
-    <section className="w-full px-5 md:px-11 pt-4 pb-0 md:py-32 relative overflow-hidden bg-[url(/images/home/clinically-approved-bg.svg)] bg-no-repeat bg-right bg-size-[auto_100%]">
-      <div className="w-full flex flex-col lg:flex-row items-center">
+    <section className="w-full px-5 md:px-11 pt-4 pb-0 md:py-32 relative overflow-hidden bg-[url(/images/home/clinically-approved-bg.svg)] bg-no-repeat bg-right-top bg-size-[25%]">
+      <div className="w-full flex flex-col lg:flex-row items-center lg:items-start">
         {/* Image */}
         <div className="w-full lg:w-5/12 relative aspect-[3/4] md:aspect-square lg:aspect-auto lg:h-[750px] shrink-0">
           <ContentfulImage
             src="/images/home/clinically-approved-dog.jpg"
             alt={t('imageAlt')}
             fill
-            className="object-cover"
-          />
-          <div
-            className="absolute inset-0 bg-tertiary-800-70 mix-blend-color"
-            aria-hidden="true"
+            className="object-cover object-[center_25%]"
           />
         </div>
 
         {/* Content */}
-        <div className="w-full lg:flex-1 flex flex-col gap-14 md:gap-16 py-16 lg:px-35">
+        <div className="w-full lg:flex-1 flex flex-col gap-14 md:gap-16 py-16 lg:px-10">
           <div className="flex flex-col gap-10">
             <h2 className="font-display text-3xl md:text-4xl leading-tight md:leading-12 text-secondary-950">
               {t('title')}

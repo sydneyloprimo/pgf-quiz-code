@@ -34,6 +34,11 @@ const GoldenMealsSection = () => {
             className="object-cover md:object-center"
           />
         </div>
+        {/* Black overlay for text contrast (ADA) */}
+        <div
+          className="absolute inset-0 bg-neutral-950/50"
+          aria-hidden="true"
+        />
         <div
           className="absolute inset-0 mix-blend-color"
           style={{
@@ -48,8 +53,8 @@ const GoldenMealsSection = () => {
           className={cn(
             'relative z-10',
             'w-full md:w-auto md:max-w-md',
-            'px-8 md:px-10 py-12',
-            'flex flex-col gap-8 items-start'
+            'px-8 md:px-10 pt-20 lg:py-12',
+            'flex flex-col gap-18 lg:gap-8 items-start'
           )}
         >
           <div className="flex flex-col gap-3 text-neutral-white">

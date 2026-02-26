@@ -28,7 +28,7 @@ const FeatureGrid = ({
 
   return (
     <div className={cn('w-full', className)}>
-      <div className={cn('grid grid-cols-1 w-full', gridColsClass)}>
+      <div className={cn('grid w-full grid-cols-1', gridColsClass)}>
         {features.map((feature, index) => {
           const isEven =
             columns === 2
