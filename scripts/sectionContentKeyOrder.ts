@@ -7,12 +7,7 @@
 import { readdirSync, readFileSync, writeFileSync } from 'fs'
 import { join, resolve } from 'path'
 
-import {
-  BENEFITS_DATA,
-  FAQS_DATA,
-  HOW_IT_WORKS_STEPS,
-  REVIEWS_DATA,
-} from '@/constants'
+import { BENEFITS_DATA, FAQS_DATA, HOW_IT_WORKS_STEPS } from '@/constants'
 
 const COMPONENTS_DIR = resolve(process.cwd(), 'components')
 
@@ -52,11 +47,6 @@ const CONSTANT_KEY_SOURCES: Record<
   HOW_IT_WORKS_STEPS: HOW_IT_WORKS_STEPS as Array<{
     titleKey: string
     descriptionKey: string
-  }>,
-  REVIEWS_DATA: REVIEWS_DATA as Array<{
-    quoteKey: string
-    reviewKey: string
-    nameKey: string
   }>,
 }
 
@@ -136,20 +126,6 @@ function extractKeyOrderFromFile(
       }
     }
   }
-  if (content.includes('REVIEWS_DATA')) {
-    const reviewKeys = getKeysFromConstant('REVIEWS_DATA', [
-      'quoteKey',
-      'reviewKey',
-      'nameKey',
-    ])
-    for (const k of reviewKeys) {
-      if (!seen.has(k)) {
-        seen.add(k)
-        keys.push(k)
-      }
-    }
-  }
-
   if (keys.length > 0) {
     const existing = result.get(namespace) ?? []
     const merged = [...existing]

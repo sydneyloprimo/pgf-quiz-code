@@ -15,6 +15,7 @@
     "contentful:clean": "npx tsx scripts/cleanContentful.ts",
     "contentful:delete-images": "npx tsx scripts/deleteContentfulImages.ts",
     "contentful:sync": "npx tsx scripts/sectionContentKeyOrder.ts && npx tsx scripts/syncEnJsonToContentful.ts",
+    "contentful:seed-reviews": "npx tsx scripts/seedCustomerReviews.ts",
     "contentful:sync-images": "npx tsx scripts/syncImagesToContentful.ts",
     "contentful:sync:master": "npx tsx scripts/sectionContentKeyOrder.ts && npx tsx scripts/syncEnJsonToContentful.ts --master",
     "contentful:sync-images:master": "npx tsx scripts/syncImagesToContentful.ts --master"

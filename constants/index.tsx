@@ -112,6 +112,7 @@ export const MIN_ZIP_CODE_LENGTH = 5
 export const QUIZ_LOADING_DURATION_MS = 5000
 export const FEATURE_FLAG_LAMB = 'LambEnabled'
 export const FEATURE_FLAG_PANCREATIC = 'PancreaticEnabled'
+export const FEATURE_FLAG_REVIEWS = 'ReviewsEnabled'
 export const FEATURE_FLAG_WAITLIST = 'waitlistFlip'
 export const QUIZ_ENROLLMENT_TAGS = ['quiz-enrollment', 'beta-cohort'] as const
 export const QUIZ_RESULTS_NOTE_LABEL = 'Results link'
@@ -605,35 +606,6 @@ export const FAQS_DATA: FAQData[] = [
   {
     questionKey: 'faq6Question',
     answerKey: 'faq6Answer',
-  },
-] as const
-
-// Reviews section data
-export interface ReviewData {
-  image: string
-  quoteKey: string
-  reviewKey: string
-  nameKey: string
-}
-
-export const REVIEWS_DATA: ReviewData[] = [
-  {
-    image: '/images/home/reviews-david.jpg',
-    quoteKey: 'review1Quote',
-    reviewKey: 'review1Text',
-    nameKey: 'review1Name',
-  },
-  {
-    image: '/images/home/reviews-mark.jpg',
-    quoteKey: 'review2Quote',
-    reviewKey: 'review2Text',
-    nameKey: 'review2Name',
-  },
-  {
-    image: '/images/home/reviews-david.jpg',
-    quoteKey: 'review3Quote',
-    reviewKey: 'review3Text',
-    nameKey: 'review3Name',
   },
 ] as const
 

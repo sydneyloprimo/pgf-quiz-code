@@ -11,7 +11,14 @@ import { HeroSection } from '@/components/home/HeroSection'
 import { HowItWorksSection } from '@/components/home/HowItWorksSection'
 import { ReviewsSection } from '@/components/home/ReviewsSection'
 import { VetNutritionistCTA } from '@/components/home/VetNutritionistCTA'
-import { FAQS_DATA, MAIN_CONTENT_ID, SITE_URL } from '@/constants'
+import {
+  FAQS_DATA,
+  FEATURE_FLAG_REVIEWS,
+  MAIN_CONTENT_ID,
+  SITE_URL,
+} from '@/constants'
+import { getFeatureFlag } from '@/contentful/featureFlags'
+import { getCustomerReviews } from '@/contentful/reviews'
 
 export default async function Home() {
   const t = await getTranslations('Home.FAQ')
@@ -20,6 +27,11 @@ export default async function Home() {
     question: t(faq.questionKey),
     answer: t(faq.answerKey),
   }))
+
+  const [reviewsEnabled, reviews] = await Promise.all([
+    getFeatureFlag(FEATURE_FLAG_REVIEWS),
+    getCustomerReviews(),
+  ])
 
   return (
     <main
@@ -36,7 +48,9 @@ export default async function Home() {
       <BenefitsSection />
       <ClinicallyApprovedSection />
       <VetNutritionistCTA />
-      <ReviewsSection />
+      {reviewsEnabled && reviews.length > 0 && (
+        <ReviewsSection reviews={reviews} />
+      )}
       <FAQSection />
       <BostonAnnouncementSection />
     </main>

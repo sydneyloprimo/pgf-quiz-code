@@ -4,10 +4,17 @@
  */
 
 export const CONTENTFUL_CONTENT_TYPES = {
+  author: 'author',
   blogPost: 'blogPost',
   category: 'category',
-  author: 'author',
+  customerReview: 'customerReview',
   featureFlag: 'featureFlag',
+} as const
+
+export const CONTENTFUL_LOCALE = 'en-US' as const
+
+export const CONTENTFUL_TAGS = {
+  pageHome: { id: 'pageHome', name: 'page:Home' },
 } as const
 
 export const CONTENTFUL_FIELDS = {

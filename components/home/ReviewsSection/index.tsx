@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl'
 import { useCallback, useMemo, useState } from 'react'
 
 import { ArrowLeftIcon, ArrowRightIcon } from '@/components/common/Icon'
-import { REVIEWS_DATA } from '@/constants'
+import type { CustomerReview } from '@/contentful/reviews'
 import { cn } from '@/utils/cn'
 
 interface ReviewCardProps {
@@ -32,33 +32,41 @@ const ReviewCard = ({ image, quote, review, name }: ReviewCardProps) => (
   </div>
 )
 
-const ReviewsSection = () => {
+interface ReviewsSectionProps {
+  reviews: CustomerReview[]
+}
+
+const ReviewsSection = ({ reviews }: ReviewsSectionProps) => {
   const t = useTranslations('Home.Reviews')
   const [currentIndex, setCurrentIndex] = useState(0)
 
-  const reviews = useMemo(
+  const reviewsForDisplay = useMemo(
     () =>
-      REVIEWS_DATA.map((review) => ({
-        image: review.image,
-        quote: t(review.quoteKey),
-        review: t(review.reviewKey),
-        name: t(review.nameKey),
+      reviews.map((r) => ({
+        image: r.profilePictureUrl,
+        quote: r.heading,
+        review: r.content,
+        name: r.clientName,
       })),
-    [t]
+    [reviews]
   )
 
   const visibleReviews = useMemo(() => {
-    const nextIndex = (currentIndex + 1) % reviews.length
-    return [reviews[currentIndex], reviews[nextIndex]]
-  }, [currentIndex, reviews])
+    const nextIndex = (currentIndex + 1) % reviewsForDisplay.length
+    return [reviewsForDisplay[currentIndex], reviewsForDisplay[nextIndex]]
+  }, [currentIndex, reviewsForDisplay])
 
   const handlePrev = useCallback(() => {
-    setCurrentIndex((prev) => (prev === 0 ? reviews.length - 1 : prev - 1))
-  }, [reviews.length])
+    setCurrentIndex((prev) =>
+      prev === 0 ? reviewsForDisplay.length - 1 : prev - 1
+    )
+  }, [reviewsForDisplay.length])
 
   const handleNext = useCallback(() => {
-    setCurrentIndex((prev) => (prev === reviews.length - 1 ? 0 : prev + 1))
-  }, [reviews.length])
+    setCurrentIndex((prev) =>
+      prev === reviewsForDisplay.length - 1 ? 0 : prev + 1
+    )
+  }, [reviewsForDisplay.length])
 
   return (
     <section
@@ -87,7 +95,7 @@ const ReviewsSection = () => {
 
         {/* Mobile: Show one review at a time */}
         <div className="md:hidden w-full">
-          <ReviewCard {...reviews[currentIndex]} />
+          <ReviewCard {...reviewsForDisplay[currentIndex]} />
         </div>
 
         {/* Navigation Arrows */}
