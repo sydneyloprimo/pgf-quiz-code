@@ -16,7 +16,7 @@ const LeadershipSection = () => {
           sizes="(max-width: 1024px) 100vw, 40vw"
         />
       </div>
-      <div className="w-full lg:w-3/5 lg:h-[765px] bg-neutral-400 px-10 lg:px-24 flex flex-col justify-center gap-4 lg:gap-8 relative py-10 lg:py-0">
+      <div className="w-full lg:w-3/5 lg:h-[765px] bg-neutral-400 px-10 lg:px-24 flex flex-col justify-center gap-4 lg:gap-2 relative py-10 lg:py-0">
         <div className="flex flex-col gap-4">
           <h2 className="font-display text-xl leading-8 font-normal text-secondary-950">
             {t('subhead')}
@@ -28,7 +28,7 @@ const LeadershipSection = () => {
             {t('paragraph2')}
           </p>
         </div>
-        <div className="flex flex-col items-end mt-8 gap-1">
+        <div className="flex flex-col items-end gap-1">
           <p className="font-sans font-bold text-base leading-6 text-secondary-950 text-right wrap-break-word">
             {t('signature')}
           </p>
