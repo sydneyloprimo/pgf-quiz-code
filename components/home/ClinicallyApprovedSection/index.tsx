@@ -98,8 +98,8 @@ const ClinicallyApprovedSection = () => {
           <ContentfulImage
             src="/icons/clinically-approved-decoration.svg"
             alt=""
-            width={250}
-            height={250}
+            width={150}
+            height={150}
             aria-hidden="true"
           />
         </div>
