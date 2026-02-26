@@ -18,7 +18,7 @@ export const NAV_LINKS: NavLink[] = [
 ]
 
 // 404 Not Found page
-export const NOT_FOUND_DOG_BOWL_IMAGE = '/images/quiz-loading/frame-3.svg'
+export const NOT_FOUND_DOG_BOWL_IMAGE = '/images/404-dog-bowl.svg'
 
 // Blog index
 export const BLOG_FEATURED_IMAGE_PATH = '/images/blog-featured.jpg'
