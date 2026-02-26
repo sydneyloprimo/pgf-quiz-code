@@ -46,7 +46,7 @@ const ClinicallyApprovedSection = () => {
         </div>
 
         {/* Content */}
-        <div className="w-full lg:flex-1 flex flex-col gap-14 md:gap-16 py-16 lg:px-10">
+        <div className="w-full lg:flex-1 flex flex-col gap-14 md:gap-16 py-16 lg:pt-0 lg:pb-0 lg:px-10">
           <div className="flex flex-col gap-10">
             <h2 className="font-display text-3xl md:text-4xl leading-tight md:leading-12 text-secondary-950">
               {t('title')}
