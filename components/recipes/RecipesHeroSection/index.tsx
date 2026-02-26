@@ -9,7 +9,7 @@ const RecipesHeroSection = () => {
       {/* Clinically Approved Decoration */}
       <div className="flex justify-center mb-6 relative w-40 h-14">
         <Image
-          src="/icons/clinically-approved-decoration.svg"
+          src="/icons/recipes-decoration.svg"
           alt={t('clinicallyApprovedAlt')}
           width={160}
           height={55}
