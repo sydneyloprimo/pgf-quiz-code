@@ -989,15 +989,6 @@ export const RECIPE_TABS: RecipeTabType[] = [
   'seafood',
 ] as const
 
-// Benefit translation keys used on the recipe page
-export const BENEFIT_KEYS = [
-  'benefits.benefit1',
-  'benefits.benefit2',
-  'benefits.benefit3',
-] as const
-
-export const BENEFITS_COUNT = BENEFIT_KEYS.length
-
 export interface FormulationCard {
   id: string
   titleKey: string
@@ -1006,128 +997,57 @@ export interface FormulationCard {
 
 export const FORMULATION_CARDS: FormulationCard[] = [
   {
-    id: 'protein',
-    titleKey: 'highBiologicalValue.title',
-    descriptionKey: 'highBiologicalValue.description',
+    id: '1',
+    titleKey: 'FormulationLogicTitle1',
+    descriptionKey: 'FormulationLogicDescription1',
   },
   {
-    id: 'fat',
-    titleKey: 'optimizedFatProfile.title',
-    descriptionKey: 'optimizedFatProfile.description',
+    id: '2',
+    titleKey: 'FormulationLogicTitle2',
+    descriptionKey: 'FormulationLogicDescription2',
   },
   {
-    id: 'carbs',
-    titleKey: 'controlledCarbohydrates.title',
-    descriptionKey: 'controlledCarbohydrates.description',
+    id: '3',
+    titleKey: 'FormulationLogicTitle3',
+    descriptionKey: 'FormulationLogicDescription3',
   },
   {
-    id: 'micronutrients',
-    titleKey: 'bioavailableMicronutrients.title',
-    descriptionKey: 'bioavailableMicronutrients.description',
+    id: '4',
+    titleKey: 'FormulationLogicTitle4',
+    descriptionKey: 'FormulationLogicDescription4',
   },
   {
-    id: 'functional',
-    titleKey: 'functionalIngredients.title',
-    descriptionKey: 'functionalIngredients.description',
+    id: '5',
+    titleKey: 'FormulationLogicTitle5',
+    descriptionKey: 'FormulationLogicDescription5',
   },
-] as const
+]
 
-export interface NutrientRow {
-  id: string
-  nutrientKey: string
-  minValue: string
-  maxValue: string
-}
-
-export const NUTRIENT_DATA: Record<RecipeTabType, NutrientRow[]> = {
-  turkey: [
-    {
-      id: 'protein',
-      nutrientKey: 'crudeProtein',
-      minValue: '46%',
-      maxValue: '—',
-    },
-    {
-      id: 'fat',
-      nutrientKey: 'crudeFat',
-      minValue: '15%',
-      maxValue: '—',
-    },
-    {
-      id: 'carbs',
-      nutrientKey: 'crudeCarbs',
-      minValue: '—',
-      maxValue: '4%',
-    },
-    {
-      id: 'fiber',
-      nutrientKey: 'crudeFiber',
-      minValue: '15%',
-      maxValue: '—',
-    },
-  ],
-  lamb: [
-    {
-      id: 'protein',
-      nutrientKey: 'crudeProtein',
-      minValue: '44%',
-      maxValue: '—',
-    },
-    {
-      id: 'fat',
-      nutrientKey: 'crudeFat',
-      minValue: '14%',
-      maxValue: '—',
-    },
-    {
-      id: 'carbs',
-      nutrientKey: 'crudeCarbs',
-      minValue: '—',
-      maxValue: '5%',
-    },
-    {
-      id: 'fiber',
-      nutrientKey: 'crudeFiber',
-      minValue: '14%',
-      maxValue: '—',
-    },
-  ],
-  seafood: [
-    {
-      id: 'protein',
-      nutrientKey: 'crudeProtein',
-      minValue: '48%',
-      maxValue: '—',
-    },
-    {
-      id: 'fat',
-      nutrientKey: 'crudeFat',
-      minValue: '12%',
-      maxValue: '—',
-    },
-    {
-      id: 'carbs',
-      nutrientKey: 'crudeCarbs',
-      minValue: '—',
-      maxValue: '3%',
-    },
-    {
-      id: 'fiber',
-      nutrientKey: 'crudeFiber',
-      minValue: '12%',
-      maxValue: '—',
-    },
-  ],
-} as const
-
-export interface AccordionItem {
-  id: string
+export interface NutritionPanelSectionConfig {
+  id: 'minerals' | 'vitamins' | 'fats' | 'aminoAcids'
   titleKey: string
+  subheadKey: string
 }
 
-export const NUTRITION_PANEL_ACCORDION_ITEMS: AccordionItem[] = [
-  { id: 'micronutrients', titleKey: 'micronutrients' },
-  { id: 'vitamins', titleKey: 'vitaminsAndMinerals' },
-  { id: 'efas', titleKey: 'essentialFattyAcids' },
-  { id: 'amino', titleKey: 'aminoAcidProfile' },
+export const NUTRITION_PANEL_SECTIONS: NutritionPanelSectionConfig[] = [
+  {
+    id: 'minerals',
+    titleKey: 'minerals',
+    subheadKey: 'mineralsSubhead',
+  },
+  {
+    id: 'vitamins',
+    titleKey: 'vitamins',
+    subheadKey: 'vitaminsSubhead',
+  },
+  {
+    id: 'fats',
+    titleKey: 'fats',
+    subheadKey: 'fatsSubhead',
+  },
+  {
+    id: 'aminoAcids',
+    titleKey: 'aminoAcids',
+    subheadKey: 'aminoAcidsSubhead',
+  },
 ] as const
