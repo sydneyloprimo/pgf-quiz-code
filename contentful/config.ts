@@ -11,6 +11,12 @@ export const CONTENTFUL_CONTENT_TYPES = {
   featureFlag: 'featureFlag',
 } as const
 
+export const CONTENTFUL_LOCALE = 'en-US' as const
+
+export const CONTENTFUL_TAGS = {
+  pageHome: { id: 'pageHome', name: 'page:Home' },
+} as const
+
 export const CONTENTFUL_FIELDS = {
   slug: 'slug',
 } as const

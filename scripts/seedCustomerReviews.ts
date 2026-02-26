@@ -15,15 +15,14 @@ import { join, resolve } from 'path'
 import contentfulManagement from 'contentful-management'
 import { config } from 'dotenv'
 
+import {
+  CONTENTFUL_CONTENT_TYPES,
+  CONTENTFUL_LOCALE,
+  CONTENTFUL_TAGS,
+} from '@/contentful/config'
 import { getSyncEnvironmentId } from '@/scripts/contentful/getEnvironment'
 
 config({ path: '.env.local' })
-
-const CONTENTFUL_LOCALE = 'en-US'
-const CUSTOMER_REVIEW_CONTENT_TYPE_ID = 'customerReview'
-const FEATURE_FLAG_CONTENT_TYPE_ID = 'featureFlag'
-const PAGE_HOME_TAG_ID = 'pageHome'
-const PAGE_HOME_TAG_NAME = 'page:Home'
 
 const MIME_TYPES: Record<string, string> = {
   jpg: 'image/jpeg',
@@ -178,7 +177,7 @@ async function ensureAsset(
     sys: {
       type: 'Link' as const,
       linkType: 'Tag' as const,
-      id: PAGE_HOME_TAG_ID,
+      id: CONTENTFUL_TAGS.pageHome.id,
     },
   }
 
@@ -217,12 +216,14 @@ async function ensureCustomerReviewContentType(
 ): Promise<void> {
   const existing = await environment.getContentTypes()
   if (
-    existing.items.some((ct) => ct.sys.id === CUSTOMER_REVIEW_CONTENT_TYPE_ID)
+    existing.items.some(
+      (ct) => ct.sys.id === CONTENTFUL_CONTENT_TYPES.customerReview
+    )
   )
     return
 
   const ct = await environment.createContentTypeWithId(
-    CUSTOMER_REVIEW_CONTENT_TYPE_ID,
+    CONTENTFUL_CONTENT_TYPES.customerReview,
     {
       name: 'Customer Review',
       displayField: 'heading',
@@ -256,7 +257,9 @@ async function ensureCustomerReviewContentType(
     }
   )
   await ct.publish()
-  console.log(`Created content type: ${CUSTOMER_REVIEW_CONTENT_TYPE_ID}`)
+  console.log(
+    `Created content type: ${CONTENTFUL_CONTENT_TYPES.customerReview}`
+  )
 }
 
 async function ensureFeatureFlagEntry(
@@ -267,7 +270,7 @@ async function ensureFeatureFlagEntry(
   const entryId = key.toLowerCase().replace(/[^a-z0-9]/g, '') + 'flag'
 
   const existing = await environment.getEntries({
-    content_type: FEATURE_FLAG_CONTENT_TYPE_ID,
+    content_type: CONTENTFUL_CONTENT_TYPES.featureFlag,
     'fields.key': key,
     limit: 1,
   })
@@ -288,7 +291,7 @@ async function ensureFeatureFlagEntry(
   }
 
   const entry = await environment.createEntryWithId(
-    FEATURE_FLAG_CONTENT_TYPE_ID,
+    CONTENTFUL_CONTENT_TYPES.featureFlag,
     entryId,
     { fields }
   )
@@ -307,7 +310,7 @@ async function ensureCustomerReviewEntry(
   const entryId = `customer-review-${index + 1}`
 
   const existing = await environment.getEntries({
-    content_type: CUSTOMER_REVIEW_CONTENT_TYPE_ID,
+    content_type: CONTENTFUL_CONTENT_TYPES.customerReview,
     'sys.id': entryId,
     limit: 1,
   })
@@ -336,7 +339,7 @@ async function ensureCustomerReviewEntry(
   }
 
   const entry = await environment.createEntryWithId(
-    CUSTOMER_REVIEW_CONTENT_TYPE_ID,
+    CONTENTFUL_CONTENT_TYPES.customerReview,
     entryId,
     { fields }
   )
@@ -352,7 +355,11 @@ async function main(): Promise<void> {
   const environment = await getEnvironment()
 
   console.log('Ensuring page:Home tag exists...')
-  await ensureTag(environment, PAGE_HOME_TAG_ID, PAGE_HOME_TAG_NAME)
+  await ensureTag(
+    environment,
+    CONTENTFUL_TAGS.pageHome.id,
+    CONTENTFUL_TAGS.pageHome.name
+  )
 
   console.log('\nEnsuring assets exist...')
   const assetIds = new Map<string, string>()
