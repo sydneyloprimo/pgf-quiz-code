@@ -8,16 +8,9 @@ interface MissionImageProps {
   alt: string
   className?: string
   sizes: string
-  showOverlay?: boolean
 }
 
-const MissionImage = ({
-  src,
-  alt,
-  className,
-  sizes,
-  showOverlay = true,
-}: MissionImageProps) => (
+const MissionImage = ({ src, alt, className, sizes }: MissionImageProps) => (
   <div className={cn('relative', 'overflow-hidden', className)}>
     <ContentfulImage
       src={src}
@@ -26,12 +19,6 @@ const MissionImage = ({
       className="object-cover"
       sizes={sizes}
     />
-    {showOverlay && (
-      <div
-        className="absolute inset-0 bg-secondary-950 opacity-41 mix-blend-color"
-        aria-hidden="true"
-      />
-    )}
   </div>
 )
 
@@ -127,7 +114,6 @@ const MissionSecondRow = ({
       alt={image2Alt}
       className="w-lg h-160 shrink-0"
       sizes="514px"
-      showOverlay={false}
     />
   </div>
 )

@@ -27,10 +27,6 @@ const GallerySection = () => {
               className="object-cover object-center"
               sizes="80vw"
             />
-            <div
-              className="absolute inset-0 bg-secondary-950 opacity-40 mix-blend-color"
-              aria-hidden="true"
-            />
           </div>
         ))}
         {/* Spacer to show peek of last image */}
@@ -47,10 +43,6 @@ const GallerySection = () => {
               fill
               className="object-cover object-center"
               sizes="388px"
-            />
-            <div
-              className="absolute inset-0 bg-secondary-950 opacity-40 mix-blend-color"
-              aria-hidden="true"
             />
           </div>
         ))}
