@@ -37,7 +37,7 @@ const LeadershipSection = () => {
           </p>
         </div>
         <div
-          className="absolute right-0 bottom-0 w-40 h-28 rotate-110"
+          className="absolute right-0 bottom-0 w-40 h-28 rotate-110 hidden lg:block"
           aria-hidden="true"
         >
           <ContentfulImage
