@@ -84,14 +84,9 @@ const HeroSection = () => {
           </Button>
 
           <Link
-            href={conciergeHref}
+            href={Routes.recipes}
             size="large"
             className="font-normal text-base md:text-md text-neutral-white hover:text-neutral-200"
-            aria-label={
-              isTabletOrLarger
-                ? tConcierge('emailAriaLabel')
-                : tConcierge('phoneAriaLabel')
-            }
           >
             {t('ctaLink')}
           </Link>
