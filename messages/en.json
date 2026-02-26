@@ -148,10 +148,10 @@
       "benefit5Title": "Skin and Coat Condition",
       "description": "Human-grade, pumpkin-based meals for your furry friends. Includes one puree and pre-portioned, tailored ingredients to easily cook up fresh, nutritious meals.",
       "imageAlt": "Golden retriever enjoying the benefits of our food",
-      "pointerEnergy": "SUSTAINED ENERGY",
       "pointerDigestive": "DIGESTIVE STABILITY",
-      "pointerQuality": "STOOL QUALITY",
+      "pointerEnergy": "SUSTAINED ENERGY",
       "pointerMicrobiome": "MICROBIOME DIVERSITY",
+      "pointerQuality": "STOOL QUALITY",
       "pointerSkin": "SKIN AND COAT CONDITION",
       "title": "What balanced nutrition delivers"
     },

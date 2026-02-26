@@ -7,7 +7,7 @@ import { useMediaQuery } from 'usehooks-ts'
 
 import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { BenefitPointerIcon } from '@/components/common/Icon'
-import { BENEFITS_DATA, pointerPosition } from '@/constants'
+import { BENEFITS_DATA, type PointerPosition } from '@/constants'
 import { cn } from '@/utils/cn'
 
 interface BenefitItemProps {
@@ -66,7 +66,7 @@ const useBreakpointPosition = () => {
   const isMd = mounted ? isMdQuery : true
 
   return useCallback(
-    (position: pointerPosition): CSSProperties => {
+    (position: PointerPosition): CSSProperties => {
       // Pick the breakpoint object for current viewport; fallback to next available
       const resolved = isLg
         ? (position.lg ?? position.md ?? position.mobile)

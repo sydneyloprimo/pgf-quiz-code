@@ -472,7 +472,7 @@ export const HOW_IT_WORKS_STEPS: HowItWorksStep[] = [
 ] as const
 
 // Benefits section data
-export interface pointerPosition {
+export interface PointerPosition {
   mobile?: { top?: string; right?: string; left?: string; bottom?: string }
   md?: { top?: string; right?: string; left?: string; bottom?: string }
   lg?: { top?: string; right?: string; left?: string; bottom?: string }
@@ -482,7 +482,7 @@ export interface BenefitData {
   titleKey: string
   descriptionKey: string
   pointerLabelKey?: string
-  pointerPosition: pointerPosition
+  pointerPosition: PointerPosition
   labelSide: 'left' | 'right'
   benefitIndex: number
 }
