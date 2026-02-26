@@ -19,7 +19,7 @@ const HeroSection = () => {
   useVideoAutoPlay(videoRef)
 
   return (
-    <section className="relative w-full h-150 md:min-h-96 lg:min-h-160 flex items-end overflow-hidden">
+    <section className="relative w-full h-150 md:min-h-96 lg:min-h-160 flex items-end justify-center md:justify-start overflow-hidden">
       {/* Video Background */}
       <video
         ref={videoRef}
@@ -49,6 +49,8 @@ const HeroSection = () => {
         className={cn(
           'relative z-10',
           'flex flex-col gap-2 md:gap-6',
+          'items-center md:items-start',
+          'text-center md:text-left',
           'px-5 md:px-11 py-6 md:py-12',
           'md:px-12',
           'desktop:px-32',
@@ -58,17 +60,17 @@ const HeroSection = () => {
         <h1
           className={cn(
             'font-display',
-            'text-xl md:text-5xl desktop:text-6xl',
+            'text-3xl md:text-5xl desktop:text-6xl',
             'leading-tight',
             'tracking-tight',
             'text-neutral-white',
-            'w-4/5 md:w-full'
+            'w-full'
           )}
         >
           {t('headline')}
         </h1>
 
-        <p className="text-sm md:text-lg text-neutral-white opacity-90 w-4/5 md:w-full">
+        <p className="text-lg md:text-lg text-neutral-white opacity-90 w-full">
           {t('subheadline')}
         </p>
 
