@@ -5,16 +5,12 @@ import { useTranslations } from 'next-intl'
 import readyToBuildPlanImage from 'public/images/recipes/ready-to-build-plan.png'
 
 import { Button } from '@/components/common/Button'
-import { Link } from '@/components/common/Link'
-import { useConciergeContact } from '@/hooks/useConciergeContact'
 import { QuizStep } from '@/types/enums/constants'
 import { getQuizStepPath } from '@/utils/quizRoutes'
 
 const ReadyToBuildYourPlanSection = () => {
   const t = useTranslations('Recipes.CTA')
-  const tConcierge = useTranslations('Common.ConciergeLink')
   const quizPath = getQuizStepPath(QuizStep.Welcome)
-  const { href: conciergeHref, isTabletOrLarger } = useConciergeContact()
 
   return (
     <section className="w-full bg-neutral-300 px-5 md:px-24 py-12 md:py-20">
@@ -36,31 +32,11 @@ const ReadyToBuildYourPlanSection = () => {
               {t('title')}
             </h2>
             <p className="font-sans text-base font-normal leading-normal text-black">
-              {t('conciergeDescription')}
+              {t('description')}
             </p>
             <Button variant="primary" href={quizPath} className="w-fit">
-              {t('buildPlanButton')}
+              {t('ctaButton')}
             </Button>
-            <h3 className="font-display text-2xl font-normal leading-normal text-quaternary-800">
-              {t('personalizedHeadline')}
-            </h3>
-            <p className="font-sans text-base font-normal leading-normal text-black">
-              {t('personalizedDescription')}
-            </p>
-            <Link
-              href={conciergeHref}
-              variant="primary"
-              className="w-fit"
-              aria-label={
-                isTabletOrLarger
-                  ? tConcierge('emailAriaLabel')
-                  : tConcierge('phoneAriaLabel')
-              }
-            >
-              {isTabletOrLarger
-                ? tConcierge('emailAriaLabel')
-                : tConcierge('phoneAriaLabel')}
-            </Link>
           </div>
         </div>
       </div>

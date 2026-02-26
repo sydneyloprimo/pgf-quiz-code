@@ -9,6 +9,7 @@ export const CONTENTFUL_CONTENT_TYPES = {
   category: 'category',
   customerReview: 'customerReview',
   featureFlag: 'featureFlag',
+  tableRichText: 'tableRichText',
 } as const
 
 export const CONTENTFUL_LOCALE = 'en-US' as const
@@ -18,7 +19,9 @@ export const CONTENTFUL_TAGS = {
 } as const
 
 export const CONTENTFUL_FIELDS = {
+  key: 'key',
   slug: 'slug',
+  table: 'table',
 } as const
 
 export const CONTENTFUL_QUERY_DEFAULTS = {
@@ -33,6 +36,30 @@ export const CONTENTFUL_QUERY_DEFAULTS = {
 export const CONTENTFUL_CLIENT_DEFAULTS = {
   /** CDN host - use preview.contentful.com for draft content */
   host: 'cdn.contentful.com' as const,
+} as const
+
+export const RECIPE_TABLE_KEYS = {
+  turkey: {
+    guaranteedAnalysis: 'turkey-guaranteed-analysis',
+    minerals: 'turkey-minerals',
+    vitamins: 'turkey-vitamins',
+    fats: 'turkey-fats',
+    aminoAcids: 'turkey-amino-acids',
+  },
+  lamb: {
+    guaranteedAnalysis: 'lamb-guaranteed-analysis',
+    minerals: 'lamb-minerals',
+    vitamins: 'lamb-vitamins',
+    fats: 'lamb-fats',
+    aminoAcids: 'lamb-amino-acids',
+  },
+  seafood: {
+    guaranteedAnalysis: 'seafood-guaranteed-analysis',
+    minerals: 'seafood-minerals',
+    vitamins: 'seafood-vitamins',
+    fats: 'seafood-fats',
+    aminoAcids: 'seafood-amino-acids',
+  },
 } as const
 
 export const CONTENTFUL_ENVIRONMENTS = {
