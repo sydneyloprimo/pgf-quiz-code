@@ -5,7 +5,13 @@ import { getTranslations } from 'next-intl/server'
 import { AuthorCard } from '@/components/blog/AuthorCard'
 import { BlogPostCTA } from '@/components/blog/BlogPostCTA'
 import { BlogPostHeader } from '@/components/blog/BlogPostHeader'
+import {
+  blogPostSchema,
+  breadcrumbSchema,
+  JsonLd,
+} from '@/components/common/JsonLd'
 import { RichTextRenderer } from '@/components/common/RichTextRenderer'
+import { SITE_URL } from '@/constants'
 import { getBlogPostBySlug } from '@/contentful/queries'
 
 interface BlogPostPageProps {
@@ -59,9 +65,36 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   )
 
   const isAuthorResolved = author && 'fields' in author
+  const authorName = isAuthorResolved
+    ? (
+        author as {
+          fields: { name?: string }
+        }
+      ).fields?.name
+    : undefined
 
   return (
     <article className="bg-neutral-300 min-h-screen w-full">
+      <JsonLd
+        data={blogPostSchema({
+          title,
+          description: subtitle ?? '',
+          slug,
+          authorName,
+          datePublished: blogPost.sys.createdAt,
+          dateModified: blogPost.sys.updatedAt,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: 'Home', url: SITE_URL },
+          { name: 'Blog', url: `${SITE_URL}/blog` },
+          {
+            name: title,
+            url: `${SITE_URL}/blog/${slug}`,
+          },
+        ])}
+      />
       <BlogPostHeader title={title} subtitle={subtitle} />
 
       {isAuthorResolved && (

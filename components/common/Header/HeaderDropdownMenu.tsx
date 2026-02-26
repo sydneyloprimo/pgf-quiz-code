@@ -75,7 +75,7 @@ const HeaderDropdownMenu = ({
         )}
       >
         <span className="hidden md:inline">{t('myAccount')}</span>
-        <div className="hidden md:block">
+        <div className="hidden md:block" aria-hidden="true">
           {isOpen ? (
             <ContentfulImage
               src="/icons/chevron-up.svg"

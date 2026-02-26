@@ -1,6 +1,8 @@
 import type { BreedOption } from '@/components/quiz/QuizBreedSelection/BreedDropdown'
 import { Routes } from '@/types/enums/routes'
 
+export const SITE_URL = 'https://www.purelygoldenfoods.com'
+
 // Navigation links - centralized for MainNav and Footer
 export interface NavLink {
   href: Routes

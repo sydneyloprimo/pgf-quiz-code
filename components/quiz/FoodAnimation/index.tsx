@@ -57,6 +57,7 @@ const FoodAnimation = ({ className }: FoodAnimationProps) => {
         'relative',
         className
       )}
+      aria-hidden="true"
     >
       <img
         src={FRAME_IMAGES[displayFrame]}

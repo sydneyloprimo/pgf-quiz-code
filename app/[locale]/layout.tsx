@@ -5,20 +5,43 @@ import { PropsWithChildren } from 'react'
 import Providers from 'utils/Providers'
 import Session from 'utils/Session'
 
+import {
+  JsonLd,
+  organizationSchema,
+  websiteSchema,
+} from '@/components/common/JsonLd'
 import { Locale } from '@/i18n'
 import BodyScripts from '@/scripts/BodyScripts'
 import HeadScripts from '@/scripts/HeadScripts'
 
 export const metadata: Metadata = {
+  title: {
+    default: 'Purely Golden Foods',
+    template: '%s | Purely Golden Foods',
+  },
   description:
-    'Discover the best in online shopping at RS Blackmarket! We offer a wide range of products from furniture, tech gadgets to home decor. Enjoy great deals, fast shipping, and top-notch customer service. Explore now and experience effortless shopping at your fingertips.',
+    'Veterinarian-formulated fresh dog food for small breeds. Clinically backed, human-grade recipes with real ingredients. Build your custom meal plan today.',
+  keywords: [
+    'fresh dog food',
+    'small breed dog food',
+    'veterinarian formulated dog food',
+    'human grade dog food',
+    'custom dog meal plan',
+    'healthy dog food',
+    'Purely Golden Foods',
+  ],
   openGraph: {
+    type: 'website',
+    siteName: 'Purely Golden Foods',
     description:
-      'Discover the best in online shopping at RS Blackmarket! We offer a wide range of products from furniture, tech gadgets to home decor. Enjoy great deals, fast shipping, and top-notch customer service. Explore now and experience effortless shopping at your fingertips.',
+      'Veterinarian-formulated fresh dog food for small breeds. Clinically backed, human-grade recipes with real ingredients.',
     images: '/images/temporary-metadata-image.png',
     title: 'Purely Golden Foods',
   },
-  title: 'Purely Golden Foods',
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 type RootLayoutProps = PropsWithChildren<{
@@ -35,6 +58,8 @@ export default async function RootLayout({
     <html className="bg-dark-violet" lang={locale}>
       <head>
         <HeadScripts />
+        <JsonLd data={organizationSchema()} />
+        <JsonLd data={websiteSchema()} />
       </head>
       <body className="flex items-center flex-col">
         <BodyScripts />

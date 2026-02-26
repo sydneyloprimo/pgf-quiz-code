@@ -1012,6 +1012,7 @@
     },
     "FeaturedBlogPost": {
       "featured": "Featured",
+      "featuredImageAlt": "Featured blog post: {title}",
       "readPostAria": "Read featured post: {title}"
     },
     "MeetTheContributors": {
