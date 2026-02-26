@@ -4,9 +4,7 @@ import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
 import { ContentfulImage } from '@/components/common/ContentfulImage'
-import { Link } from '@/components/common/Link'
 import { useConciergeContact } from '@/hooks/useConciergeContact'
-import { Routes } from '@/types/enums/routes'
 
 const VetNutritionistCTA = () => {
   const t = useTranslations('Home.VetNutritionist')
@@ -37,13 +35,6 @@ const VetNutritionistCTA = () => {
         </div>
 
         <div className="flex flex-col items-center gap-11">
-          <Link
-            href={Routes.quiz}
-            className="font-sans text-base leading-4 text-neutral-white underline hover:text-neutral-200"
-          >
-            {t('linkText')}
-          </Link>
-
           <Button variant="secondary" href={href} className="max-w-sm">
             {t('ctaButton')}
           </Button>
