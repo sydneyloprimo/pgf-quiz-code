@@ -5,21 +5,18 @@ import { useRef } from 'react'
 
 import { Button } from '@/components/common/Button'
 import { Link } from '@/components/common/Link'
-import { useConciergeContact } from '@/hooks/useConciergeContact'
 import { useVideoAutoPlay } from '@/hooks/useVideoAutoPlay'
 import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
 
 const HeroSection = () => {
   const t = useTranslations('Home.Hero')
-  const tConcierge = useTranslations('Common.ConciergeLink')
-  const { href: conciergeHref, isTabletOrLarger } = useConciergeContact()
   const videoRef = useRef<HTMLVideoElement | null>(null)
 
   useVideoAutoPlay(videoRef)
 
   return (
-    <section className="relative w-full h-150 md:min-h-96 lg:min-h-160 flex items-end overflow-hidden">
+    <section className="relative w-full h-150 md:min-h-96 lg:min-h-160 flex items-end justify-center md:justify-start overflow-hidden">
       {/* Video Background */}
       <video
         ref={videoRef}
@@ -49,6 +46,8 @@ const HeroSection = () => {
         className={cn(
           'relative z-10',
           'flex flex-col gap-2 md:gap-6',
+          'items-center md:items-start',
+          'text-center md:text-left',
           'px-5 md:px-11 py-6 md:py-12',
           'md:px-12',
           'desktop:px-32',
@@ -58,17 +57,17 @@ const HeroSection = () => {
         <h1
           className={cn(
             'font-display',
-            'text-xl md:text-5xl desktop:text-6xl',
+            'text-3xl md:text-5xl desktop:text-6xl',
             'leading-tight',
             'tracking-tight',
             'text-neutral-white',
-            'w-4/5 md:w-full'
+            'w-full'
           )}
         >
           {t('headline')}
         </h1>
 
-        <p className="text-sm md:text-lg text-neutral-white opacity-90 w-4/5 md:w-full">
+        <p className="text-lg text-neutral-white opacity-90 w-full">
           {t('subheadline')}
         </p>
 
@@ -82,14 +81,9 @@ const HeroSection = () => {
           </Button>
 
           <Link
-            href={conciergeHref}
+            href={Routes.recipes}
             size="large"
             className="font-normal text-base md:text-md text-neutral-white hover:text-neutral-200"
-            aria-label={
-              isTabletOrLarger
-                ? tConcierge('emailAriaLabel')
-                : tConcierge('phoneAriaLabel')
-            }
           >
             {t('ctaLink')}
           </Link>

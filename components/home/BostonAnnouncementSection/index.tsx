@@ -46,6 +46,10 @@ const BostonAnnouncementSection = () => {
             className="object-cover"
             aria-hidden="true"
           />
+          <div
+            className="absolute inset-0 bg-neutral-950/50"
+            aria-hidden="true"
+          />
 
           <BostonAnnouncementContent
             title={t('title')}

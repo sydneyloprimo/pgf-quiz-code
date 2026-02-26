@@ -132,9 +132,9 @@
     "emailPlaceholder": "Type your email here",
     "footerNavAria": "Footer navigation",
     "logoAria": "Go to homepage",
-    "newsletterDescription": "Get early access to clinical updates, expert insights, and exclusive product drops.",
-    "newsletterTitle": "Join our waitlist and newsletter",
-    "subscribeButton": "Subscribe",
+    "newsletterDescription": "Receive educational content written by practicing veterinarians about topics that include digestion, nutrition, and physiology.",
+    "newsletterTitle": "Learn from the experts",
+    "subscribeButton": "Join the list",
     "subscribedButton": "Subscribed!"
   },
   "Header": {
@@ -229,11 +229,11 @@
       "title": "Frequently Asked Questions"
     },
     "Features": {
-      "feature1Title": "Verified Nutrient Content in Every Meal",
+      "feature1Title": "Verified nutrient content in every meal",
       "feature1Description": "We validate every recipe at the finished-food level, using laboratory testing to confirm vitamin and mineral targets are repeatedly met—not just assumed.",
       "feature2Title": "Batch-level testing against AAFCO standards",
       "feature2Description": "Every batch we produce is tested against AAFCO vitamin and mineral requirements, ensuring a consistent nutritional profile despite natural variation in sourcing, seasonality, and raw material composition.",
-      "feature3Title": "End-to-End veterinary nutritionist oversight",
+      "feature3Title": "End-to-end veterinary nutritionist oversight",
       "feature3Description": "Our formulation development and review are led by a board-certified veterinary nutritionist (ECVCN), ensuring that each decision is guided by established clinical nutrition principles.",
       "feature4Title": "Designed for small-breed physiology",
       "feature4Description": "Small breeds don’t just eat less, they metabolize differently—our recipes are engineered for their faster digestive transit, higher stool variability, and greater nutrient sensitivity.",
@@ -247,8 +247,8 @@
       "title": "Nutrition that recognizes physiological nuance"
     },
     "Hero": {
-      "ctaButton": "Build your Dog's Plan",
-      "ctaLink": "Speak directly to our Concierge",
+      "ctaButton": "Request enrollment",
+      "ctaLink": "Learn about our recipes",
       "headline": "Clinical-grade nutrition for small-breed digestive health",
       "imageAlt": "Fresh dog food preparation",
       "subheadline": "Balanced meals formulated for your dog’s physiology. Limited enrollment now open for our founding cohort."
@@ -301,7 +301,6 @@
     "VetNutritionist": {
       "ctaButton": "Consult a nutritionist",
       "description": "Consult directly with a credentialed animal nutritionist for guidance on your dog's dietary requirements, physiological needs, and feeding protocol.",
-      "linkText": "Build your dog's plan",
       "title": "Speak with a nutritionist"
     }
   },
