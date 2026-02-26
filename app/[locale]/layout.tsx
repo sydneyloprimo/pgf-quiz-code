@@ -35,7 +35,6 @@ export const metadata: Metadata = {
     siteName: 'Purely Golden Foods',
     description:
       'Veterinarian-formulated fresh dog food for small breeds. Clinically backed, human-grade recipes with real ingredients.',
-    images: '/images/temporary-metadata-image.png',
     title: 'Purely Golden Foods',
   },
   robots: {
