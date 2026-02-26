@@ -44,6 +44,8 @@ const FEATURE_FLAG_CONTENT_TYPE_ID = 'featureFlag'
 
 /** Feature flags to ensure exist when syncing. Default enabled: true. */
 const FEATURE_FLAGS_TO_SYNC: Array<{ key: string; enabled: boolean }> = [
+  { key: 'LambEnabled', enabled: false },
+  { key: 'PancreaticEnabled', enabled: false },
   { key: 'waitlistFlip', enabled: true },
 ]
 

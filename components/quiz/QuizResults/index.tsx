@@ -31,6 +31,8 @@ import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizResultsFooter } from '@/components/quiz/QuizResultsFooter'
 import { QuizResultsHeader } from '@/components/quiz/QuizResultsHeader'
 import {
+  FEATURE_FLAG_LAMB,
+  FEATURE_FLAG_PANCREATIC,
   MediaQuery,
   PRODUCT_DETAIL_IMAGES,
   PRODUCT_MODE,
@@ -40,6 +42,7 @@ import {
   SHIPMENT_FREQUENCY,
 } from '@/constants'
 import useCartCookie from '@/hooks/useCartCookie'
+import { useFeatureFlag } from '@/hooks/useFeatureFlag'
 import { useProductConfigs } from '@/hooks/useProductConfigs'
 import useShoppingCartPanel from '@/hooks/useShoppingCartPanel'
 import { QuizStep } from '@/types/enums/constants'
@@ -87,28 +90,48 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
   const isMobile = useMediaQuery(MediaQuery.mobile)
   const { configs: productConfigs, isLoading: isLoadingConfigs } =
     useProductConfigs()
+  const lambEnabled = useFeatureFlag(FEATURE_FLAG_LAMB)
+  const pancreaticEnabled = useFeatureFlag(FEATURE_FLAG_PANCREATIC)
 
   useEffect(() => {
     openCart()
   }, [openCart])
 
-  const recipeOptions = useMemo(
-    () => [
-      {
-        label: t('recipes.turkey'),
-        value: RECIPE_TYPE.turkey,
-      },
-      {
-        label: t('recipes.lamb'),
-        value: RECIPE_TYPE.lamb,
-      },
-      {
-        label: t('recipes.pancreatic'),
-        value: 'pancreatic',
-      },
-    ],
-    [t]
-  )
+  const recipeOptions = useMemo(() => {
+    const options = [
+      { label: t('recipes.turkey'), value: RECIPE_TYPE.turkey },
+      { label: t('recipes.lamb'), value: RECIPE_TYPE.lamb },
+      { label: t('recipes.pancreatic'), value: 'pancreatic' as const },
+    ]
+    return options.filter(
+      (opt) =>
+        (opt.value !== RECIPE_TYPE.lamb || lambEnabled) &&
+        (opt.value !== 'pancreatic' || pancreaticEnabled)
+    )
+  }, [t, lambEnabled, pancreaticEnabled])
+
+  useEffect(() => {
+    setRecipes((prev) => {
+      const needsReset = (r: Recipe) =>
+        (r === 'lamb' && !lambEnabled) ||
+        (r === 'pancreatic' && !pancreaticEnabled)
+      const topper = needsReset(prev.topper) ? RECIPE_TYPE.turkey : prev.topper
+      const fullMeal = needsReset(prev.fullMeal)
+        ? RECIPE_TYPE.turkey
+        : prev.fullMeal
+      const alaCarte = needsReset(prev.alaCarte)
+        ? RECIPE_TYPE.turkey
+        : prev.alaCarte
+      if (
+        topper !== prev.topper ||
+        fullMeal !== prev.fullMeal ||
+        alaCarte !== prev.alaCarte
+      ) {
+        return { topper, fullMeal, alaCarte }
+      }
+      return prev
+    })
+  }, [lambEnabled, pancreaticEnabled])
 
   const shipmentFrequencyOptions = useMemo(
     () => [

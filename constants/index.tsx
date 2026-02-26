@@ -106,6 +106,8 @@ export const BOSTON_AREA_ZIP_CODES: ReadonlySet<string> = new Set([
 
 export const MIN_ZIP_CODE_LENGTH = 5
 export const QUIZ_LOADING_DURATION_MS = 5000
+export const FEATURE_FLAG_LAMB = 'LambEnabled'
+export const FEATURE_FLAG_PANCREATIC = 'PancreaticEnabled'
 export const FEATURE_FLAG_WAITLIST = 'waitlistFlip'
 export const QUIZ_ENROLLMENT_TAGS = ['quiz-enrollment', 'beta-cohort'] as const
 
