@@ -1,15 +1,41 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { useCallback } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 
 import { RecipeType, useRecipes } from '@/components/recipes/RecipesContext'
-import { RECIPE_TABS } from '@/constants'
+import {
+  FEATURE_FLAG_LAMB,
+  FEATURE_FLAG_PANCREATIC,
+  RECIPE_TABS,
+} from '@/constants'
+import { useFeatureFlag } from '@/hooks/useFeatureFlag'
 import { cn } from '@/utils/cn'
 
 const RecipeTabsSection = () => {
   const t = useTranslations('Recipes.Tabs')
   const { activeRecipe, setActiveRecipe } = useRecipes()
+  const lambEnabled = useFeatureFlag(FEATURE_FLAG_LAMB)
+  const pancreaticEnabled = useFeatureFlag(FEATURE_FLAG_PANCREATIC)
+
+  const visibleTabs = useMemo(
+    () =>
+      RECIPE_TABS.filter(
+        (r) =>
+          (r !== 'lamb' || lambEnabled) &&
+          (r !== 'seafood' || pancreaticEnabled)
+      ),
+    [lambEnabled, pancreaticEnabled]
+  )
+
+  useEffect(() => {
+    if (
+      (activeRecipe === 'lamb' && !lambEnabled) ||
+      (activeRecipe === 'seafood' && !pancreaticEnabled)
+    ) {
+      setActiveRecipe('turkey')
+    }
+  }, [activeRecipe, lambEnabled, pancreaticEnabled, setActiveRecipe])
 
   const handleTabClick = useCallback(
     (recipe: RecipeType) => {
@@ -26,7 +52,7 @@ const RecipeTabsSection = () => {
           role="tablist"
           aria-label={t('recipeTabs')}
         >
-          {RECIPE_TABS.map((recipe) => {
+          {visibleTabs.map((recipe) => {
             const isActive = activeRecipe === recipe
             const handleClick = () => handleTabClick(recipe)
             return (

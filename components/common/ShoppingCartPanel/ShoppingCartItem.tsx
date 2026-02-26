@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 
 import {
   DecrementIcon,
@@ -12,6 +12,8 @@ import {
 import { InputDropdown } from '@/components/common/InputDropdown'
 import { InputDropdownProvider } from '@/components/common/InputDropdown/InputDropdownContext'
 import { InputNumber } from '@/components/common/InputNumber'
+import { FEATURE_FLAG_LAMB, FEATURE_FLAG_PANCREATIC } from '@/constants'
+import { useFeatureFlag } from '@/hooks/useFeatureFlag'
 import {
   ProductVariant,
   Attribute,
@@ -54,6 +56,8 @@ const ShoppingCartItem = ({
   cost,
 }: ShoppingCartItemProps) => {
   const t = useTranslations('Common.ShoppingCartPanel')
+  const lambEnabled = useFeatureFlag(FEATURE_FLAG_LAMB)
+  const pancreaticEnabled = useFeatureFlag(FEATURE_FLAG_PANCREATIC)
 
   const dogNameAttribute = attributes.find(
     (attr) => attr.key === 'Dog Name'
@@ -163,11 +167,18 @@ const ShoppingCartItem = ({
         }`
       : productTitle
 
-  const recipeOptions = [
-    { label: t('recipeTurkey'), value: 'turkey' },
-    { label: t('recipeLamb'), value: 'lamb' },
-    { label: t('recipePancreatic'), value: 'pancreatic' },
-  ]
+  const recipeOptions = useMemo(() => {
+    const options = [
+      { label: t('recipeTurkey'), value: 'turkey' },
+      { label: t('recipeLamb'), value: 'lamb' },
+      { label: t('recipePancreatic'), value: 'pancreatic' },
+    ]
+    return options.filter(
+      (opt) =>
+        (opt.value !== 'lamb' || lambEnabled) &&
+        (opt.value !== 'pancreatic' || pancreaticEnabled)
+    )
+  }, [t, lambEnabled, pancreaticEnabled])
 
   const frequencyOptions = [
     { label: t('frequencyWeekly'), value: 'weekly' },
