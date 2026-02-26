@@ -1,8 +1,9 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 
 import { PGFTextLogo } from '@/components/common/Icon'
-import { NAV_LINKS } from '@/constants'
+import { FOOTER_SOCIAL_LINKS, NAV_LINKS } from '@/constants'
 import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
 
@@ -49,6 +50,32 @@ const FooterLinks = () => {
           </Link>
         ))}
       </nav>
+
+      <div className="flex gap-6">
+        {FOOTER_SOCIAL_LINKS.map((social) => {
+          const isExternal = !social.href.startsWith('mailto:')
+          return (
+            <Link
+              key={social.id}
+              href={social.href}
+              {...(isExternal && {
+                target: '_blank',
+                rel: 'noopener noreferrer',
+              })}
+              aria-label={tFooter(social.ariaLabelKey)}
+              className="text-neutral-white hover:opacity-80"
+            >
+              <Image
+                src={social.iconPath}
+                alt=""
+                width={24}
+                height={24}
+                aria-hidden
+              />
+            </Link>
+          )
+        })}
+      </div>
     </div>
   )
 }

@@ -42,9 +42,32 @@ export const MediaQuery = {
 
 export const RECHARGE_API_URL = 'https://api.rechargeapps.com'
 
-export const instagramUrl = 'https://www.instagram.com/rootstrap'
+export const facebookUrl =
+  'https://www.facebook.com/profile.php?id=61588102861917'
 
-export const linkedinUrl = 'https://www.linkedin.com/company/rootstrap-it'
+export const instagramUrl = 'https://www.instagram.com/purelygoldenfoods/'
+
+export interface FooterSocialLink {
+  id: string
+  href: string
+  iconPath: string
+  ariaLabelKey: string
+}
+
+export const FOOTER_SOCIAL_LINKS: FooterSocialLink[] = [
+  {
+    id: 'facebook',
+    href: facebookUrl,
+    iconPath: '/icons/facebook.svg',
+    ariaLabelKey: 'socialFacebookAria',
+  },
+  {
+    id: 'instagram',
+    href: instagramUrl,
+    iconPath: '/icons/instagram.svg',
+    ariaLabelKey: 'socialInstagramAria',
+  },
+]
 
 export const QUIZ_RESULTS_ILLUSTRATION_WIDTH = 167
 export const QUIZ_RESULTS_ILLUSTRATION_HEIGHT = 103
