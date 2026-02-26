@@ -2,9 +2,18 @@
 
 import { useCallback, useState } from 'react'
 
-import { formatQuizFormDataAsNote } from '@/components/quiz/helpers'
+import {
+  buildQuizResultsUrl,
+  calculateDailyFoodAndPrice,
+  formatQuizFormDataAsNote,
+} from '@/components/quiz/helpers'
 import type { QuizFormData } from '@/components/quiz/QuizLayout'
-import { QUIZ_ENROLLMENT_TAGS } from '@/constants'
+import {
+  QUIZ_ENROLLMENT_TAGS,
+  QUIZ_PACK_CALCULATION_DEFAULTS,
+  QUIZ_RESULTS_NOTE_LABEL,
+} from '@/constants'
+import { calculateWeeklyPacks } from '@/utils/cartHelpers'
 
 export type QuizEnrollmentErrorCode =
   | 'EMAIL_REQUIRED'
@@ -74,7 +83,17 @@ export const useQuizEnrollment = (
       setError(null)
 
       try {
-        const note = formatQuizFormDataAsNote(formData)
+        const { dailyFoodGrams } = calculateDailyFoodAndPrice(
+          formData as QuizFormData,
+          QUIZ_PACK_CALCULATION_DEFAULTS.recipe,
+          QUIZ_PACK_CALCULATION_DEFAULTS.mode
+        )
+        const packs = calculateWeeklyPacks(dailyFoodGrams)
+        const resultsUrl = buildQuizResultsUrl(formData, packs)
+        const formattedNote = formatQuizFormDataAsNote(formData)
+        const note = resultsUrl
+          ? `${formattedNote}\n${QUIZ_RESULTS_NOTE_LABEL}: ${resultsUrl}`
+          : formattedNote
         const response = await fetch('/api/customers', {
           method: 'POST',
           headers: {

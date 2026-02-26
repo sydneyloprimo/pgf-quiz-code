@@ -114,6 +114,26 @@ export const FEATURE_FLAG_LAMB = 'LambEnabled'
 export const FEATURE_FLAG_PANCREATIC = 'PancreaticEnabled'
 export const FEATURE_FLAG_WAITLIST = 'waitlistFlip'
 export const QUIZ_ENROLLMENT_TAGS = ['quiz-enrollment', 'beta-cohort'] as const
+export const QUIZ_RESULTS_NOTE_LABEL = 'Results link'
+export const QUIZ_PACK_CALCULATION_DEFAULTS = {
+  recipe: 'turkey' as const,
+  mode: 'full' as const,
+}
+export const QUIZ_RESULTS_PARAM_KEYS = [
+  'name',
+  'gender',
+  'age',
+  'weight',
+  'zipCode',
+  'neuteredStatus',
+  'breed',
+  'bodyShape',
+  'mainFood',
+  'treatFrequency',
+  'mealtimeBehavior',
+  'activityLevel',
+  'subscriptionType',
+] as const
 
 // Quiz calculation constants
 export const RER_BASE = 70
