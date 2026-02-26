@@ -688,14 +688,14 @@ export interface ExpertItem {
 export const EXPERT_ITEMS: ExpertItem[] = [
   {
     id: 'expert-1',
-    imageSrc: '/images/about/expert-1.jpg',
+    imageSrc: '/images/about/expert-1.png',
     imageAltKey: 'expert1ImageAlt',
     nameKey: 'expert1Name',
     descriptionKey: 'expert1Description',
   },
   {
     id: 'expert-2',
-    imageSrc: '/images/about/expert-2.jpg',
+    imageSrc: '/images/about/expert-2.png',
     imageAltKey: 'expert2ImageAlt',
     nameKey: 'expert2Name',
     descriptionKey: 'expert2Description',

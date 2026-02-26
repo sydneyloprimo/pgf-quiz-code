@@ -61,10 +61,6 @@ const ExpertsSection = ({ content }: ExpertsSectionProps) => {
                       className="object-cover"
                       sizes="(max-width: 768px) 100vw, 288px"
                     />
-                    <div
-                      className="absolute inset-0 bg-secondary-950 opacity-41 mix-blend-color"
-                      aria-hidden="true"
-                    />
                   </div>
                 ) : null}
                 <div className="flex flex-col gap-4 items-start justify-center max-w-full md:max-w-lg w-full z-10">
