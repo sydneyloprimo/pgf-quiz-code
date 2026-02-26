@@ -4,9 +4,10 @@
  */
 
 export const CONTENTFUL_CONTENT_TYPES = {
+  author: 'author',
   blogPost: 'blogPost',
   category: 'category',
-  author: 'author',
+  customerReview: 'customerReview',
   featureFlag: 'featureFlag',
 } as const
 

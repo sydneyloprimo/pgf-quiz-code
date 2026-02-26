@@ -46,6 +46,7 @@ const FEATURE_FLAG_CONTENT_TYPE_ID = 'featureFlag'
 const FEATURE_FLAGS_TO_SYNC: Array<{ key: string; enabled: boolean }> = [
   { key: 'LambEnabled', enabled: false },
   { key: 'PancreaticEnabled', enabled: false },
+  { key: 'ReviewsEnabled', enabled: false },
   { key: 'waitlistFlip', enabled: true },
 ]
 
