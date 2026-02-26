@@ -1,13 +1,17 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter, usePathname } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useForm, UseFormReturn } from 'react-hook-form'
 import { z } from 'zod'
 
-import { getStoredFormData, saveFormData } from '@/components/quiz/helpers'
+import {
+  getStoredFormData,
+  parseQuizParamsFromUrl,
+  saveFormData,
+} from '@/components/quiz/helpers'
 import { QuizHeader } from '@/components/quiz/QuizHeader'
 import { FEATURE_FLAG_WAITLIST, MAIN_CONTENT_ID } from '@/constants'
 import { useFeatureFlag } from '@/hooks/useFeatureFlag'
@@ -62,6 +66,7 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
   const waitlistFlipEnabled = useFeatureFlag(FEATURE_FLAG_WAITLIST)
   const router = useRouter()
   const pathname = usePathname()
+  const searchParams = useSearchParams()
   const quizFormSchema = useMemo(() => createQuizFormSchema(t), [t])
 
   const [isHydrated, setIsHydrated] = useState(false)
@@ -99,7 +104,11 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
   // Load stored values on mount after hydration
   useEffect(() => {
     setIsHydrated(true)
-    const stored = getStoredFormData()
+    const paramsData = parseQuizParamsFromUrl(searchParams)
+    const stored = paramsData ?? getStoredFormData()
+    if (paramsData) {
+      saveFormData(paramsData)
+    }
     setStoredFormData(stored)
     if (stored) {
       formMethods.reset({
@@ -121,7 +130,7 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
         email: stored.email,
       })
     }
-  }, [formMethods])
+  }, [formMethods, searchParams])
 
   // Save form values to localStorage whenever they change
   useEffect(() => {

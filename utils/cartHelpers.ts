@@ -1,6 +1,8 @@
 import { CartLineInput } from 'shopify/generated/graphql'
 
 import {
+  PACKS_CLARIFICATION_ATTRIBUTE_KEY,
+  PACKS_CLARIFICATION_MESSAGE_FORMAT,
   PACK_SIZE_GRAMS,
   PRODUCT_CONFIGS,
   type ProductConfig,
@@ -59,11 +61,20 @@ export const generateCartPayload = ({
     },
   ]
 
-  // Only include "Dog Name" attribute for subscriptions (not A La Carte)
-  if (frequency !== 'ONETIME' && dogName) {
+  // Only include "Dog Name" and packs clarification for subscriptions (not A La Carte)
+  if (frequency !== 'ONETIME') {
+    if (dogName) {
+      attributes.push({
+        key: 'Dog Name',
+        value: dogName,
+      })
+    }
     attributes.push({
-      key: 'Dog Name',
-      value: dogName,
+      key: PACKS_CLARIFICATION_ATTRIBUTE_KEY,
+      value: PACKS_CLARIFICATION_MESSAGE_FORMAT.replace(
+        '{packs}',
+        String(calculatedWeeklyPacks)
+      ),
     })
   }
 

@@ -7,6 +7,7 @@ import {
   NEUTERED_STATUS_FACTORS,
   PRODUCTS,
   PUPPY_MAX_AGE_YEARS,
+  QUIZ_RESULTS_PARAM_KEYS,
   RER_BASE,
 } from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
@@ -183,4 +184,46 @@ export const calculateDailyFoodAndPrice = (
   const dailyFoodGrams = (dailyCalories / product.kcalPerGram) * modeMultiplier
 
   return { dailyFoodGrams }
+}
+
+export const buildQuizResultsUrl = (
+  formData: Partial<QuizFormData>,
+  packs: number
+): string => {
+  if (typeof window === 'undefined') {
+    return ''
+  }
+  const params = new URLSearchParams()
+  for (const key of QUIZ_RESULTS_PARAM_KEYS) {
+    const value = formData[key as keyof QuizFormData]
+    if (value != null && value !== '') {
+      params.set(key, String(value))
+    }
+  }
+  params.set('packs', String(packs))
+  const pathname = window.location.pathname
+  const resultsPath = pathname.replace(/\/results-beta$/, '/results')
+  return `${window.location.origin}${resultsPath}?${params.toString()}`
+}
+
+interface SearchParamsLike {
+  get: (key: string) => string | null
+}
+
+export const parseQuizParamsFromUrl = (
+  searchParams: URLSearchParams | SearchParamsLike
+): Partial<QuizFormData> | null => {
+  const name = searchParams.get('name')
+  if (!name) {
+    return null
+  }
+  const result: Partial<QuizFormData> = { name }
+  for (const key of QUIZ_RESULTS_PARAM_KEYS) {
+    if (key === 'name') continue
+    const value = searchParams.get(key)
+    if (value != null && value !== '') {
+      ;(result as Record<string, string>)[key] = value
+    }
+  }
+  return result
 }
