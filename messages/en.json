@@ -1,4 +1,7 @@
 {
+  "Accessibility": {
+    "skipToMainContent": "Skip to main content"
+  },
   "Auth": {
     "email": "Email",
     "emailPlaceholder": "Type your email",

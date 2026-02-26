@@ -9,7 +9,7 @@ import { z } from 'zod'
 
 import { getStoredFormData, saveFormData } from '@/components/quiz/helpers'
 import { QuizHeader } from '@/components/quiz/QuizHeader'
-import { FEATURE_FLAG_WAITLIST } from '@/constants'
+import { FEATURE_FLAG_WAITLIST, MAIN_CONTENT_ID } from '@/constants'
 import { useFeatureFlag } from '@/hooks/useFeatureFlag'
 import { QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
@@ -225,6 +225,8 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
       />
 
       <main
+        id={MAIN_CONTENT_ID}
+        tabIndex={-1}
         className={cn(
           'flex-1 flex items-center justify-center',
           'w-full tablet:mx-auto',

@@ -1,7 +1,7 @@
 'use client'
 
 import { cva, type VariantProps } from 'class-variance-authority'
-import { ChangeEvent, InputHTMLAttributes, ReactNode } from 'react'
+import { ChangeEvent, InputHTMLAttributes, ReactNode, useId } from 'react'
 import React from 'react'
 
 import {
@@ -115,6 +115,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ) => {
     const isFilled = Boolean(value)
     const [isFocused, setIsFocused] = React.useState(false)
+    const errorId = useId()
 
     const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
       setIsFocused(true)
@@ -173,6 +174,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               onBlur={handleBlur}
               onFocus={handleFocus}
               disabled={disabled}
+              aria-invalid={Boolean(error)}
+              aria-describedby={error ? errorId : undefined}
               {...props}
             />
             {icon && iconPosition === InputIconPosition.End && (
@@ -184,7 +187,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
         </div>
         {error && (
-          <span role="alert" className="text-secondary-900 text-sm">
+          <span
+            id={errorId}
+            role="alert"
+            className="text-secondary-900 text-sm"
+          >
             {error}
           </span>
         )}

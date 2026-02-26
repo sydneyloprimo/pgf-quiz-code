@@ -11,7 +11,7 @@ import {
   JsonLd,
 } from '@/components/common/JsonLd'
 import { RichTextRenderer } from '@/components/common/RichTextRenderer'
-import { SITE_URL } from '@/constants'
+import { MAIN_CONTENT_ID, SITE_URL } from '@/constants'
 import { getBlogPostBySlug } from '@/contentful/queries'
 
 interface BlogPostPageProps {
@@ -74,7 +74,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     : undefined
 
   return (
-    <article className="bg-neutral-300 min-h-screen w-full">
+    <article
+      id={MAIN_CONTENT_ID}
+      tabIndex={-1}
+      className="bg-neutral-300 min-h-screen w-full"
+    >
       <JsonLd
         data={blogPostSchema({
           title,

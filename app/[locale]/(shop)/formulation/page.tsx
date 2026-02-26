@@ -12,7 +12,7 @@ import {
   OurStandardsSection,
   PrecisionBatchSection,
 } from '@/components/formulation'
-import { FAQ_ITEMS, SITE_URL } from '@/constants'
+import { FAQ_ITEMS, MAIN_CONTENT_ID, SITE_URL } from '@/constants'
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('Formulation')
@@ -35,7 +35,11 @@ export default async function FormulationPage() {
   }))
 
   return (
-    <main className="flex flex-col items-center w-full bg-neutral-300">
+    <main
+      id={MAIN_CONTENT_ID}
+      tabIndex={-1}
+      className="flex flex-col items-center w-full bg-neutral-300"
+    >
       <JsonLd
         data={breadcrumbSchema([
           { name: 'Home', url: SITE_URL },

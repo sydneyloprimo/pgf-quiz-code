@@ -10,7 +10,7 @@ import { LeadershipSection } from '@/components/about/LeadershipSection'
 import { MissionSection } from '@/components/about/MissionSection'
 import { ValuesSection } from '@/components/about/ValuesSection'
 import { breadcrumbSchema, JsonLd } from '@/components/common/JsonLd'
-import { SITE_URL } from '@/constants'
+import { MAIN_CONTENT_ID, SITE_URL } from '@/constants'
 import { getExpertsSection } from '@/contentful/experts'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -34,7 +34,11 @@ export default async function AboutPage({ params }: AboutPageProps) {
   const expertsSectionContent = await getExpertsSection(locale)
 
   return (
-    <main className="flex flex-col items-center w-full bg-neutral-300">
+    <main
+      id={MAIN_CONTENT_ID}
+      tabIndex={-1}
+      className="flex flex-col items-center w-full bg-neutral-300"
+    >
       <JsonLd
         data={breadcrumbSchema([
           { name: 'Home', url: SITE_URL },

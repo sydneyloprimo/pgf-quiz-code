@@ -11,7 +11,7 @@ import { HeroSection } from '@/components/home/HeroSection'
 import { HowItWorksSection } from '@/components/home/HowItWorksSection'
 import { ReviewsSection } from '@/components/home/ReviewsSection'
 import { VetNutritionistCTA } from '@/components/home/VetNutritionistCTA'
-import { FAQS_DATA, SITE_URL } from '@/constants'
+import { FAQS_DATA, MAIN_CONTENT_ID, SITE_URL } from '@/constants'
 
 export default async function Home() {
   const t = await getTranslations('Home.FAQ')
@@ -22,7 +22,11 @@ export default async function Home() {
   }))
 
   return (
-    <main className="flex flex-col items-center w-full bg-neutral-300">
+    <main
+      id={MAIN_CONTENT_ID}
+      tabIndex={-1}
+      className="flex flex-col items-center w-full bg-neutral-300"
+    >
       <JsonLd data={breadcrumbSchema([{ name: 'Home', url: SITE_URL }])} />
       <JsonLd data={faqSchema(faqItems)} />
       <HeroSection />
