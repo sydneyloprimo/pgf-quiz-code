@@ -7,9 +7,9 @@ const RecipeServingStorage = () => {
 
   return (
     <div className="mb-8">
-      <h3 className="font-display text-2xl font-normal leading-normal text-tertiary-800 mb-6">
+      <h2 className="font-display text-2xl font-normal leading-normal text-tertiary-800 mb-6">
         {t('title')}
-      </h3>
+      </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Feeding Guide */}

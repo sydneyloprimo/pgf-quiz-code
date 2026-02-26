@@ -14,9 +14,9 @@ const RecipeHeading = () => {
 
   return (
     <div className="mb-8 text-center">
-      <h2 className="font-display text-4xl font-normal leading-normal text-tertiary-800">
+      <h1 className="font-display text-4xl font-normal leading-normal text-tertiary-800">
         {recipeTitle}
-      </h2>
+      </h1>
     </div>
   )
 }

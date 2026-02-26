@@ -7,9 +7,9 @@ const RecipeAAFCOStatement = () => {
 
   return (
     <div className="mb-8">
-      <h3 className="font-display text-2xl font-normal leading-normal text-tertiary-800 mb-4">
+      <h2 className="font-display text-2xl font-normal leading-normal text-tertiary-800 mb-4">
         {t('title')}
-      </h3>
+      </h2>
       <p className="font-sans text-base font-normal leading-normal text-black">
         <span className="font-bold block mb-2">{t('subtitle')}</span>
         {t('content')}

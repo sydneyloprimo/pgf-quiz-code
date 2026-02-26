@@ -3,39 +3,30 @@ import { useTranslations } from 'next-intl'
 import { useMemo } from 'react'
 
 import { useRecipes } from '@/components/recipes/RecipesContext'
-import { BENEFIT_KEYS } from '@/constants'
+
+const RECIPE_BLOCK_INDICES = [1, 2, 3] as const
 
 const RecipeDetails = () => {
   const t = useTranslations('Recipes.Detail')
   const { activeRecipe } = useRecipes()
-
-  const recipeDescription = useMemo(() => {
-    const descriptionKey = `${activeRecipe}Description` as const
-    return t(descriptionKey)
-  }, [activeRecipe, t])
 
   const recipeImageAlt = useMemo(() => {
     const imageAltKey = `${activeRecipe}ImageAlt` as const
     return t(imageAltKey)
   }, [activeRecipe, t])
 
-  const recipeIngredientsList = useMemo(() => {
-    const ingredientsKey = `${activeRecipe}IngredientsList` as const
-    return t(ingredientsKey)
-  }, [activeRecipe, t])
-
-  const benefits = useMemo(
+  const blocks = useMemo(
     () =>
-      BENEFIT_KEYS.map((key, i) => ({
-        id: `benefit-${i + 1}`,
-        text: t(key),
+      RECIPE_BLOCK_INDICES.map((i) => ({
+        id: i,
+        heading: t(`${activeRecipe}Heading${i}` as const),
+        paragraph: t(`${activeRecipe}Paragraph${i}` as const),
       })),
-    [t]
+    [activeRecipe, t]
   )
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-8">
-      {/* Left Column - Recipe Image */}
       <div className="flex items-center justify-center">
         <div className="relative w-full max-w-md aspect-square">
           <Image
@@ -47,48 +38,18 @@ const RecipeDetails = () => {
         </div>
       </div>
 
-      {/* Right Column - Recipe Info */}
       <div className="flex flex-col gap-6">
-        {/* Complete and Balanced Formula */}
-        <div className="flex flex-col gap-3">
-          <h3 className="font-display text-2xl font-normal leading-normal text-tertiary-800">
-            {t('subtitle')}
-          </h3>
-          <p className="font-sans text-base leading-relaxed text-neutral-800">
-            {recipeDescription}
-          </p>
-        </div>
-
-        <hr className="border-tertiary-800" />
-
-        {/* Benefits */}
-        <div className="flex flex-col gap-3">
-          <h3 className="font-display text-2xl font-normal leading-normal text-tertiary-800">
-            {t('benefitsTitle')}
-          </h3>
-          <div className="flex flex-col gap-2">
-            {benefits.map((benefit) => (
-              <p
-                key={benefit.id}
-                className="font-sans text-sm text-neutral-800 leading-relaxed"
-              >
-                {benefit.text}
-              </p>
-            ))}
+        {blocks.map((block, index) => (
+          <div key={block.id} className="flex flex-col gap-3">
+            {index > 0 && <hr className="border-tertiary-800" />}
+            <h2 className="font-display text-2xl font-normal leading-normal text-tertiary-800">
+              {block.heading}
+            </h2>
+            <p className="font-sans text-base leading-relaxed text-neutral-800">
+              {block.paragraph}
+            </p>
           </div>
-        </div>
-
-        <hr className="border-tertiary-800" />
-
-        {/* Ingredients */}
-        <div className="flex flex-col gap-3">
-          <h3 className="font-display text-2xl font-normal leading-normal text-tertiary-800">
-            {t('ingredientsTitle')}
-          </h3>
-          <p className="font-sans text-sm text-neutral-800 leading-relaxed">
-            {recipeIngredientsList}
-          </p>
-        </div>
+        ))}
       </div>
     </div>
   )
