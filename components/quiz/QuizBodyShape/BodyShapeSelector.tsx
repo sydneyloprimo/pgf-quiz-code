@@ -68,7 +68,7 @@ const BodyShapeSelector = ({
               </div>
             </div>
             <div className="flex flex-col gap-2 items-center w-full text-secondary-950">
-              <p className="font-display font-bold text-2xl leading-8 w-full">
+              <p className="font-display text-2xl leading-8 w-full">
                 {t(option.titleKey)}
               </p>
               <p className="font-body text-base leading-6 w-full">
