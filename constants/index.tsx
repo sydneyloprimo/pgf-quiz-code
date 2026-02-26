@@ -472,16 +472,18 @@ export const HOW_IT_WORKS_STEPS: HowItWorksStep[] = [
 ] as const
 
 // Benefits section data
+export interface PointerPosition {
+  mobile?: { top?: string; right?: string; left?: string; bottom?: string }
+  md?: { top?: string; right?: string; left?: string; bottom?: string }
+  lg?: { top?: string; right?: string; left?: string; bottom?: string }
+}
+
 export interface BenefitData {
   titleKey: string
   descriptionKey: string
   pointerLabelKey?: string
-  pointerPosition?: {
-    top?: string
-    bottom?: string
-    left?: string
-    right?: string
-  }
+  pointerPosition: PointerPosition
+  labelSide: 'left' | 'right'
   benefitIndex: number
 }
 
@@ -489,36 +491,57 @@ export const BENEFITS_DATA: BenefitData[] = [
   {
     titleKey: 'benefit1Title',
     descriptionKey: 'benefit1Description',
-    pointerLabelKey: 'pointerNutrition',
-    pointerPosition: { top: '0', right: '30%' },
+    pointerLabelKey: 'pointerSkin',
+    pointerPosition: {
+      mobile: { top: '38%', right: '16%' },
+      lg: { top: '44%', right: '50%' },
+    },
+    labelSide: 'left',
     benefitIndex: 0,
   },
   {
     titleKey: 'benefit2Title',
     descriptionKey: 'benefit2Description',
-    pointerLabelKey: 'pointerEnergy',
-    pointerPosition: { bottom: '10%', left: '0' },
+    pointerLabelKey: 'pointerQuality',
+    pointerPosition: {
+      mobile: { bottom: '15%', right: '56%' },
+      lg: { bottom: '15%', right: '66%' },
+    },
+    labelSide: 'left',
     benefitIndex: 1,
   },
   {
     titleKey: 'benefit3Title',
     descriptionKey: 'benefit3Description',
-    pointerLabelKey: 'pointerImmunity',
-    pointerPosition: { top: '40%', left: '0' },
+    pointerLabelKey: 'pointerMicrobiome',
+    pointerPosition: {
+      mobile: { top: '64%', right: '39%' },
+      lg: { top: '70%', left: '6%' },
+    },
+    labelSide: 'left',
     benefitIndex: 2,
   },
   {
     titleKey: 'benefit4Title',
     descriptionKey: 'benefit4Description',
-    pointerLabelKey: 'pointerCoat',
-    pointerPosition: { top: '50%', right: '0' },
+    pointerLabelKey: 'pointerEnergy',
+    pointerPosition: {
+      mobile: { top: '48%', left: '50%' },
+      lg: { top: '48%', left: '65%' },
+    },
+    labelSide: 'right',
     benefitIndex: 3,
   },
   {
     titleKey: 'benefit5Title',
     descriptionKey: 'benefit5Description',
-    pointerLabelKey: 'pointerDigestion',
-    pointerPosition: { bottom: '5%', right: '25%' },
+    pointerLabelKey: 'pointerDigestive',
+    pointerPosition: {
+      mobile: { top: '59%', left: '40%' }, // mobile
+      md: { top: '46%', right: '35%' },
+      lg: { bottom: '30%', left: '60%' },
+    },
+    labelSide: 'right',
     benefitIndex: 4,
   },
 ] as const
