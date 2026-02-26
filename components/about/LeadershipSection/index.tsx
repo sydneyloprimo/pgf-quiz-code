@@ -15,10 +15,6 @@ const LeadershipSection = () => {
           className="object-cover"
           sizes="(max-width: 1024px) 100vw, 40vw"
         />
-        <div
-          className="absolute inset-0 bg-secondary-950 opacity-40 mix-blend-color"
-          aria-hidden="true"
-        />
       </div>
       <div className="w-full lg:w-3/5 lg:h-[765px] bg-neutral-400 px-10 lg:px-24 flex flex-col justify-center gap-4 lg:gap-8 relative py-10 lg:py-0">
         <div className="flex flex-col gap-4">

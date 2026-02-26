@@ -56,7 +56,6 @@ const MissionSection = () => {
           alt={t('image2Alt')}
           className="w-full max-w-2xl mx-auto aspect-[4/5] shrink-0 order-6 lg:hidden"
           sizes="(max-width: 768px) 100vw, 672px"
-          showOverlay={false}
         />
       </div>
     </section>
