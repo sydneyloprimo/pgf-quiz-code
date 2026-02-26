@@ -41,7 +41,7 @@ const ClinicallyApprovedSection = () => {
             src="/images/home/clinically-approved-dog.jpg"
             alt={t('imageAlt')}
             fill
-            className="object-cover pt-16"
+            className="object-cover object-[center_25%]"
           />
         </div>
 
