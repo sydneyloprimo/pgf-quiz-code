@@ -12,7 +12,7 @@ const PrecisionBatchSection = () => {
         className={cn(
           'relative z-10',
           'grid grid-cols-1 lg:grid-cols-[35fr_65fr]',
-          'items-stretch pb-14 lg:py-36',
+          'items-stretch pb-14 lg:pb-0',
           'w-full max-w-full',
           'lg:min-h-[32rem]'
         )}
@@ -44,7 +44,7 @@ const PrecisionBatchSection = () => {
           />
 
           {/* Content */}
-          <div className="flex flex-col gap-6 lg:gap-8 relative z-10">
+          <div className="flex flex-col gap-6 lg:gap-8 lg:pb-36 lg:pt-36 relative z-10">
             {/* Vertical divider before heading */}
             <div
               className={cn(
