@@ -16,7 +16,7 @@ interface BlogPostCTAProps {
 
 const BlogPostCTA = ({ variant = 'index' }: BlogPostCTAProps) => {
   const tCTA = useTranslations('BlogPostCTA')
-  const tBlog = useTranslations('BlogPost')
+  const tBlog = useTranslations('BlogPostPage')
   const { href } = useConciergeContact()
   const bgClass = variant === 'post' ? 'bg-neutral-300' : 'bg-neutral-white'
 
@@ -35,7 +35,7 @@ const BlogPostCTA = ({ variant = 'index' }: BlogPostCTAProps) => {
             className="px-5 py-3"
             href={getQuizStepPath(QuizStep.Welcome)}
           >
-            {tBlog('buildPlanButton')}
+            {tCTA('ctaButton')}
           </Button>
           <Link
             href={href}

@@ -1014,7 +1014,7 @@
       "all": "All",
       "filterByCategoryAria": "Filter blog posts by category {name}",
       "selectAllAria": "Show all blog posts",
-      "title": "Browse by Topic"
+      "title": "Learn by Topic"
     },
     "FeaturedBlogPost": {
       "featured": "Featured",
@@ -1024,8 +1024,8 @@
       "contributorRole": "Contributor and Clinical Advisor",
       "title": "Meet the Contributors"
     },
-    "heroHeadline": "Clinical Notes from the Kitchen Lab",
-    "heroSubheadline": "Unpacking canine nutrition—the physiology, the science and the\nstandards most labels don't explain."
+    "heroHeadline": "The Journal",
+    "heroSubheadline": "Evidence-led perspectives on canine nutrition, physiology, and the standards behind what most labels don’t explain."
   },
   "BlogPost": {
     "titleNotFound": "Blog Post Not Found"
@@ -1044,6 +1044,11 @@
     "talkToNutritionists": "Talk to Our Vet Nutritionists",
     "titleNotFound": "Blog Post Not Found",
     "writtenBy": "Written by"
+  },
+  "BlogPostCTA": {
+    "title": "Founding Cohort: Now Enrolling in Boston",
+    "description": "Clinical-grade nutrition, launching first in Boston. We’re enrolling a limited number of dogs into our founding cohort to ensure careful oversight, measured rollout,  and quality control.",
+    "ctaButton": "Request enrollment"
   },
   "PromiseOfCareAlert": {
     "closeButton": "Close alert",
