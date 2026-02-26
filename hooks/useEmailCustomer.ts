@@ -18,8 +18,15 @@ interface CreateEmailCustomerResponse {
   error?: EmailCustomerErrorCode
 }
 
+interface CreateEmailCustomerParams {
+  email: string
+  firstName?: string
+}
+
 interface UseEmailCustomerReturn {
-  createEmailCustomer: (email: string) => Promise<CreateEmailCustomerResponse>
+  createEmailCustomer: (
+    params: CreateEmailCustomerParams
+  ) => Promise<CreateEmailCustomerResponse>
   isLoading: boolean
   error: EmailCustomerErrorCode | null
   customerId: number | null
@@ -45,7 +52,10 @@ export const useEmailCustomer = (
   }, [])
 
   const createEmailCustomer = useCallback(
-    async (email: string): Promise<CreateEmailCustomerResponse> => {
+    async ({
+      email,
+      firstName,
+    }: CreateEmailCustomerParams): Promise<CreateEmailCustomerResponse> => {
       setIsLoading(true)
       setError(null)
 
@@ -55,7 +65,7 @@ export const useEmailCustomer = (
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ email }),
+          body: JSON.stringify({ email, firstName }),
         })
 
         const data: CreateEmailCustomerResponse = await response.json()

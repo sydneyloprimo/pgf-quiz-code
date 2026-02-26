@@ -142,7 +142,7 @@ export const getNextQuizStep = (age: string, weight: string): QuizStep => {
   if (weightNum > MAX_DOG_WEIGHT_LBS) {
     return QuizStep.Plus25Lbs
   }
-  return QuizStep.NeuteredStatus
+  return QuizStep.BreedSelection
 }
 
 export const calculateDailyFoodAndPrice = (

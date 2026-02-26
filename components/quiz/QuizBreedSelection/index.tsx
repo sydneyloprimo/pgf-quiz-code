@@ -52,7 +52,7 @@ const QuizBreedSelection = ({
   const selectedBreed = useWatch({ control, name: 'breed' })
 
   const handleNext = useCallback(() => {
-    goToStep(QuizStep.Step5)
+    goToStep(QuizStep.NeuteredStatus)
   }, [goToStep])
 
   return (

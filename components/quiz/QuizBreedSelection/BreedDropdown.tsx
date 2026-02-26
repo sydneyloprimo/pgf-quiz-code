@@ -2,7 +2,7 @@
 
 import { cva, type VariantProps } from 'class-variance-authority'
 import { useTranslations } from 'next-intl'
-import { ReactNode, useCallback, useId, useState } from 'react'
+import { ReactNode, useCallback, useId, useRef, useState } from 'react'
 
 import { CheckIcon, ChevronIcon } from '@/components/common/Icon'
 import { getInputDropdownDisplayState } from '@/components/common/Input'
@@ -15,11 +15,11 @@ const inputDropdownVariants = cva(
     variants: {
       state: {
         [InputDropdownState.Default]:
-          'bg-neutral-white border border-neutral-950 text-neutral-800',
+          'bg-neutral-white border border-neutral-950',
         [InputDropdownState.Filled]:
-          'bg-neutral-white border border-secondary-900 text-secondary-950',
+          'bg-neutral-white border border-secondary-900',
         [InputDropdownState.Open]:
-          'bg-neutral-white border border-primary-800 shadow-[0_0_0_1px_#094452] text-neutral-800',
+          'bg-neutral-white border border-primary-800 shadow-[0_0_0_1px_#094452]',
       },
     },
     defaultVariants: {
@@ -70,6 +70,7 @@ const BreedDropdown = ({
   const t = useTranslations('Quiz.breedSelection')
   const [isOpen, setIsOpen] = useState(false)
   const dropdownId = useId()
+  const containerRef = useRef<HTMLDivElement>(null)
   const selectedBreed = breeds.find((breed) => breed.value === value)
   const displayState = getInputDropdownDisplayState(
     disabled,
@@ -86,16 +87,22 @@ const BreedDropdown = ({
     [onSelect]
   )
 
-  const handleToggle = () => {
+  const handleToggle = useCallback(() => {
     if (disabled) return
     const newIsOpen = !isOpen
     setIsOpen(newIsOpen)
     if (newIsOpen) {
       onOpen?.()
+      window.requestAnimationFrame(() => {
+        containerRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        })
+      })
     } else {
       onClose?.()
     }
-  }
+  }, [disabled, isOpen, onOpen, onClose])
 
   const getLabel = useCallback(
     (breed: BreedOption) => {
@@ -129,7 +136,7 @@ const BreedDropdown = ({
   const categories = Object.keys(breedsByCategory)
 
   return (
-    <div className={cn('relative flex flex-col', className)}>
+    <div ref={containerRef} className={cn('relative flex flex-col', className)}>
       <button
         type="button"
         className={cn(inputDropdownVariants({ state: displayState }))}
@@ -143,12 +150,9 @@ const BreedDropdown = ({
         <p
           className={cn(
             'flex-1 min-w-0 font-body font-semibold leading-6 text-base',
-            'text-neutral-800 overflow-ellipsis overflow-hidden',
+            'overflow-ellipsis overflow-hidden',
             'whitespace-nowrap text-left',
-            {
-              'text-secondary-950':
-                selectedBreed && displayState === InputDropdownState.Filled,
-            },
+            selectedBreed ? 'text-secondary-950' : 'text-neutral-800',
             textClassName
           )}
         >
@@ -182,7 +186,7 @@ const BreedDropdown = ({
                     'bg-neutral-white flex gap-2 items-center',
                     'px-4 py-3 w-full cursor-pointer',
                     'hover:bg-secondary-100',
-                    'text-base font-body leading-6 text-neutral-800'
+                    'text-base font-body leading-6 text-secondary-950'
                   )}
                   onClick={() => handleOptionSelect(breed.value)}
                 >
