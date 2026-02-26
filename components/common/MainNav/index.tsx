@@ -15,7 +15,9 @@ import {
   ShoppingCartIcon,
   UserIcon,
 } from '@/components/common/Icon'
+import { FEATURE_FLAG_WAITLIST } from '@/constants'
 import useCartCookie from '@/hooks/useCartCookie'
+import { useFeatureFlag } from '@/hooks/useFeatureFlag'
 import { QuizStep } from '@/types/enums/constants'
 import { Cookies } from '@/types/enums/cookies'
 import { Routes } from '@/types/enums/routes'
@@ -51,6 +53,7 @@ const MainNav = () => {
   const isLoggedIn = !!cookies[Cookies.customerAccessToken]
   const profileHref = isLoggedIn ? Routes.profile : Routes.signin
   const { cartId } = useCartCookie()
+  const waitlistFlipEnabled = useFeatureFlag(FEATURE_FLAG_WAITLIST)
 
   const { data } = useGetCartQuery(
     client,
@@ -154,37 +157,41 @@ const MainNav = () => {
 
       {/* User Actions */}
       <div className="flex items-center gap-1">
-        <Link
-          href={profileHref}
-          className="p-3 text-neutral-white hover:text-secondary-400"
-          aria-label={t('profileAria')}
-        >
-          <UserIcon className="size-5" />
-        </Link>
-        <Link
-          href={quizResultsPath}
-          className="p-3 text-neutral-white hover:text-secondary-400 relative"
-          aria-label={t('cartAria')}
-        >
-          <ShoppingCartIcon className="size-5" />
-          {hasItems && (
-            <span
-              className={cn(
-                'absolute top-0 left-0',
-                'bg-feedback-error-500',
-                'text-neutral-white',
-                'text-[10px] font-bold',
-                'rounded-full',
-                'min-w-[16px] h-4',
-                'flex items-center justify-center',
-                'px-1'
-              )}
-              aria-label={t('itemCountAriaLabel', { count: totalQuantity })}
+        {!waitlistFlipEnabled && (
+          <>
+            <Link
+              href={profileHref}
+              className="p-3 text-neutral-white hover:text-secondary-400"
+              aria-label={t('profileAria')}
             >
-              {totalQuantity > 99 ? '99+' : totalQuantity}
-            </span>
-          )}
-        </Link>
+              <UserIcon className="size-5" />
+            </Link>
+            <Link
+              href={quizResultsPath}
+              className="p-3 text-neutral-white hover:text-secondary-400 relative"
+              aria-label={t('cartAria')}
+            >
+              <ShoppingCartIcon className="size-5" />
+              {hasItems && (
+                <span
+                  className={cn(
+                    'absolute top-0 left-0',
+                    'bg-feedback-error-500',
+                    'text-neutral-white',
+                    'text-[10px] font-bold',
+                    'rounded-full',
+                    'min-w-[16px] h-4',
+                    'flex items-center justify-center',
+                    'px-1'
+                  )}
+                  aria-label={t('itemCountAriaLabel', { count: totalQuantity })}
+                >
+                  {totalQuantity > 99 ? '99+' : totalQuantity}
+                </span>
+              )}
+            </Link>
+          </>
+        )}
 
         {/* Mobile Menu Toggle */}
         <button

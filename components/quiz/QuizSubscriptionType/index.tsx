@@ -112,6 +112,7 @@ const QuizSubscriptionType = ({
                 value={value || ''}
                 onSelect={onChange}
                 className="w-full"
+                buttonClassName="text-base leading-6 md:text-xl md:leading-8"
               />
             )}
           />

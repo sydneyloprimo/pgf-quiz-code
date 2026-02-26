@@ -214,6 +214,10 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
         }
         showBackButton={
           currentStep === QuizStep.Results ||
+          currentStep === QuizStep.ResultsBeta
+        }
+        hideBackButtonOnMobile={currentStep === QuizStep.ResultsBeta}
+        hideCloseButtonOnMobile={
           currentStep === QuizStep.ResultsBeta ||
           currentStep === QuizStep.ConfirmationBeta
         }

@@ -13,6 +13,7 @@ interface OptionSelectProps {
   value?: string
   onSelect: (value: string) => void
   className?: string
+  buttonClassName?: string
 }
 
 const OptionSelect = ({
@@ -20,6 +21,7 @@ const OptionSelect = ({
   value,
   onSelect,
   className,
+  buttonClassName,
 }: OptionSelectProps) => {
   return (
     <div className={cn('flex flex-col gap-4 w-full', className)}>
@@ -33,10 +35,11 @@ const OptionSelect = ({
             onClick={() => onSelect(option.value)}
             className={cn(
               'w-full justify-center',
-              'font-semibold text-xl leading-8',
+              'text-xl leading-8',
               isSelected
-                ? 'bg-secondary-100 border-2 border-secondary-600 text-secondary-600'
-                : 'bg-neutral-white border border-tertiary-300 text-tertiary-800 hover:bg-secondary-200 hover:border-tertiary-300 hover:text-tertiary-800 focus:bg-secondary-200 focus:border-tertiary-300 focus:text-tertiary-800 active:bg-secondary-200 active:border-tertiary-300 active:text-tertiary-800'
+                ? 'font-semibold bg-secondary-100 border-2 border-secondary-600 text-secondary-600'
+                : 'font-normal bg-neutral-white border border-tertiary-300 text-tertiary-800 hover:bg-secondary-200 hover:border-tertiary-300 hover:text-tertiary-800 focus:bg-secondary-200 focus:border-tertiary-300 focus:text-tertiary-800 active:bg-secondary-200 active:border-tertiary-300 active:text-tertiary-800',
+              buttonClassName
             )}
             variant="ghost"
           >

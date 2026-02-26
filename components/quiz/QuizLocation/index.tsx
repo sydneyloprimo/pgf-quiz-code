@@ -205,6 +205,7 @@ const QuizLocation = ({
                   onChange={handleZipInputChange}
                   onBlur={onBlur}
                   label={t('zipLabel')}
+                  labelClassName="text-secondary-950"
                   placeholder={t('zipPlaceholder')}
                   error={error?.message}
                   inputMode="numeric"

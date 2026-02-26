@@ -16,11 +16,11 @@ const inputDropdownVariants = cva(
     variants: {
       state: {
         [InputDropdownState.Default]:
-          'bg-neutral-white border border-neutral-950 text-neutral-800',
+          'bg-neutral-white border border-neutral-950 text-neutral-black',
         [InputDropdownState.Filled]:
-          'bg-neutral-white border border-secondary-900 text-secondary-950',
+          'bg-neutral-white border border-secondary-900 text-neutral-black',
         [InputDropdownState.Open]:
-          'bg-neutral-white border border-primary-800 shadow-focus-primary text-neutral-800',
+          'bg-neutral-white border border-primary-800 shadow-focus-primary text-neutral-black',
       },
     },
     defaultVariants: {
@@ -115,6 +115,12 @@ const InputDropdown = ({
     toggleDropdown(dropdownInstanceId)
     if (willBeOpen) {
       onOpen?.()
+      window.requestAnimationFrame(() => {
+        containerRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        })
+      })
     } else {
       onClose?.()
     }
@@ -135,12 +141,8 @@ const InputDropdown = ({
         <p
           className={cn(
             'flex-1 min-w-0 font-body font-semibold leading-6 text-base',
-            'text-neutral-800 overflow-ellipsis overflow-hidden',
+            'text-neutral-black overflow-ellipsis overflow-hidden',
             'whitespace-nowrap text-left',
-            {
-              'text-secondary-950':
-                selectedOption && displayState === InputDropdownState.Filled,
-            },
             textClassName
           )}
         >
@@ -167,7 +169,7 @@ const InputDropdown = ({
                 'bg-neutral-white flex gap-2 items-center',
                 'px-4 py-3 w-full cursor-pointer',
                 'hover:bg-secondary-100',
-                'text-base font-body font-semibold leading-6 text-neutral-800'
+                'text-base font-body font-semibold leading-6 text-neutral-black'
               )}
               onClick={() => handleOptionSelect(option.value)}
             >

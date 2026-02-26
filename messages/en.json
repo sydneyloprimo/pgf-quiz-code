@@ -674,7 +674,7 @@
       "heading": "Let's start with the fundamentals.",
       "description": "This information allows us to determine nutrient ratios, portion size, and caloric needs based on your dog's physiology.",
       "namePrefix": "My dog's name is",
-      "nameSuffix": "a",
+      "nameSuffix": ", a",
       "gender": {
         "male": "Male",
         "female": "Female"

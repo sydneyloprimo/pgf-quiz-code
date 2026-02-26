@@ -2,7 +2,7 @@
 
 import { cva, type VariantProps } from 'class-variance-authority'
 import { useTranslations } from 'next-intl'
-import { ReactNode, useCallback, useId, useState } from 'react'
+import { ReactNode, useCallback, useId, useRef, useState } from 'react'
 
 import { CheckIcon, ChevronIcon } from '@/components/common/Icon'
 import { getInputDropdownDisplayState } from '@/components/common/Input'
@@ -70,6 +70,7 @@ const BreedDropdown = ({
   const t = useTranslations('Quiz.breedSelection')
   const [isOpen, setIsOpen] = useState(false)
   const dropdownId = useId()
+  const containerRef = useRef<HTMLDivElement>(null)
   const selectedBreed = breeds.find((breed) => breed.value === value)
   const displayState = getInputDropdownDisplayState(
     disabled,
@@ -86,16 +87,22 @@ const BreedDropdown = ({
     [onSelect]
   )
 
-  const handleToggle = () => {
+  const handleToggle = useCallback(() => {
     if (disabled) return
     const newIsOpen = !isOpen
     setIsOpen(newIsOpen)
     if (newIsOpen) {
       onOpen?.()
+      window.requestAnimationFrame(() => {
+        containerRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        })
+      })
     } else {
       onClose?.()
     }
-  }
+  }, [disabled, isOpen, onOpen, onClose])
 
   const getLabel = useCallback(
     (breed: BreedOption) => {
@@ -129,7 +136,7 @@ const BreedDropdown = ({
   const categories = Object.keys(breedsByCategory)
 
   return (
-    <div className={cn('relative flex flex-col', className)}>
+    <div ref={containerRef} className={cn('relative flex flex-col', className)}>
       <button
         type="button"
         className={cn(inputDropdownVariants({ state: displayState }))}

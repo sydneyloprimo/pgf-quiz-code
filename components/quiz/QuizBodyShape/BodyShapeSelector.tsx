@@ -37,6 +37,7 @@ const BodyShapeSelector = ({
             className={cn(
               'flex flex-col gap-2 items-center',
               'bg-neutral-white border border-primary-950',
+              'text-secondary-950',
               'max-h-96 max-w-59',
               'px-4 py-5',
               'text-center',
@@ -66,7 +67,7 @@ const BodyShapeSelector = ({
                 />
               </div>
             </div>
-            <div className="flex flex-col gap-2 items-center w-full">
+            <div className="flex flex-col gap-2 items-center w-full text-secondary-950">
               <p className="font-display font-bold text-2xl leading-8 w-full">
                 {t(option.titleKey)}
               </p>

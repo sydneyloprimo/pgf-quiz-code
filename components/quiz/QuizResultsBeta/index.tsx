@@ -5,6 +5,7 @@ import { useCallback } from 'react'
 import { Controller, useWatch, UseFormReturn } from 'react-hook-form'
 
 import { Button } from '@/components/common/Button'
+import { ArrowLeftIcon } from '@/components/common/Icon'
 import Input from '@/components/common/Input'
 import { clearFormData } from '@/components/quiz/helpers'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
@@ -25,6 +26,7 @@ const QuizResultsBeta = ({
   formMethods,
 }: QuizResultsBetaProps) => {
   const t = useTranslations('Quiz.resultsBeta')
+  const tQuiz = useTranslations('Quiz')
   const tErrors = useTranslations('Common.EmailCustomer.errors')
   const { control, handleSubmit: rhfHandleSubmit, getValues } = formMethods
 
@@ -55,7 +57,7 @@ const QuizResultsBeta = ({
           <h2 className="font-display text-4xl leading-12 tracking-tight w-full">
             {t('heading', { name: dogName })}
           </h2>
-          <p className="font-body text-xl leading-8 w-full">
+          <p className="font-body text-base leading-6 md:text-xl md:leading-8 w-full">
             {t('description', { name: dogName })}
           </p>
         </div>
@@ -75,6 +77,7 @@ const QuizResultsBeta = ({
                 onChange={onChange}
                 onBlur={onBlur}
                 label={t('firstNameLabel')}
+                labelClassName="text-secondary-950"
                 error={fieldError?.message}
               />
             )}
@@ -93,6 +96,7 @@ const QuizResultsBeta = ({
                 onChange={onChange}
                 onBlur={onBlur}
                 label={t('lastNameLabel')}
+                labelClassName="text-secondary-950"
                 error={fieldError?.message}
               />
             )}
@@ -112,6 +116,7 @@ const QuizResultsBeta = ({
                 onChange={onChange}
                 onBlur={onBlur}
                 label={t('emailLabel')}
+                labelClassName="text-secondary-950"
                 error={fieldError?.message}
               />
             )}
@@ -131,6 +136,15 @@ const QuizResultsBeta = ({
           className="w-full"
         >
           {t('submitButton')}
+        </Button>
+        <Button
+          type="button"
+          variant="tertiary"
+          onClick={goBack}
+          leftIcon={<ArrowLeftIcon className="size-3" />}
+          className="w-full md:hidden"
+        >
+          {tQuiz('backButton')}
         </Button>
       </form>
     </div>

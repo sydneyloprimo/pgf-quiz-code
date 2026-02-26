@@ -13,6 +13,8 @@ interface QuizHeaderProps {
   showProgressBar?: boolean
   centerLogo?: boolean
   showBackButton?: boolean
+  hideBackButtonOnMobile?: boolean
+  hideCloseButtonOnMobile?: boolean
   onBack?: () => void
 }
 
@@ -21,6 +23,8 @@ const QuizHeader = ({
   showProgressBar = true,
   centerLogo = false,
   showBackButton = false,
+  hideBackButtonOnMobile = false,
+  hideCloseButtonOnMobile = false,
   onBack,
 }: QuizHeaderProps) => {
   const t = useTranslations('Quiz')
@@ -47,21 +51,24 @@ const QuizHeader = ({
             leftIcon={<ArrowLeftIcon className="size-3.5" />}
             className={cn(
               'h-10 w-10 p-0 cursor-pointer',
-              'absolute left-5 sm:left-24'
+              'absolute left-5 sm:left-24',
+              hideBackButtonOnMobile && 'hidden md:flex'
             )}
             aria-label={t('backButton')}
           />
         ) : (
-          <Link
-            href={Routes.home}
-            className="flex items-center"
-            data-qa="quiz-logo"
-          >
-            <PGFTextLogo
-              className="h-auto w-full text-neutral-950"
-              aria-label={t('title')}
-            />
-          </Link>
+          !centerLogo && (
+            <Link
+              href={Routes.home}
+              className="flex items-center"
+              data-qa="quiz-logo"
+            >
+              <PGFTextLogo
+                className="h-auto w-full text-neutral-950"
+                aria-label={t('title')}
+              />
+            </Link>
+          )
         )}
         {centerLogo && (
           <Link href={Routes.home} data-qa="quiz-logo">
@@ -78,7 +85,8 @@ const QuizHeader = ({
           leftIcon={<CloseIcon className="size-3.5" />}
           className={cn(
             'h-10 w-10 p-0',
-            centerLogo && 'absolute right-5 sm:right-24'
+            centerLogo && 'absolute right-5 sm:right-24',
+            hideCloseButtonOnMobile && 'hidden md:flex'
           )}
           aria-label={t('closeButton')}
         />
