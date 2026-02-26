@@ -1,4 +1,5 @@
 import { Button } from '@/components/common/Button'
+import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
 
 interface BostonAnnouncementContentProps {
@@ -51,7 +52,7 @@ const BostonAnnouncementContent = ({
         </div>
       </div>
 
-      <Button variant="secondary" onClick={onCtaClick}>
+      <Button variant="secondary" href={Routes.quiz}>
         {ctaLabel}
       </Button>
     </div>

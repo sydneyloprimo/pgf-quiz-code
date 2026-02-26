@@ -89,12 +89,12 @@ const MainNav = () => {
 
   const navLinks = [
     { key: 'home', href: Routes.home, label: t('home') },
+    { key: 'about', href: Routes.about, label: t('aboutUs') },
     {
       key: 'ourFormulation',
       href: Routes.formulation,
       label: t('ourFormulation'),
     },
-    { key: 'about', href: Routes.about, label: t('aboutUs') },
     { key: 'ourRecipes', href: Routes.recipes, label: t('ourRecipes') },
     { key: 'blog', href: Routes.blog, label: t('blog') },
   ]
