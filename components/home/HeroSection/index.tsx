@@ -5,15 +5,12 @@ import { useRef } from 'react'
 
 import { Button } from '@/components/common/Button'
 import { Link } from '@/components/common/Link'
-import { useConciergeContact } from '@/hooks/useConciergeContact'
 import { useVideoAutoPlay } from '@/hooks/useVideoAutoPlay'
 import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
 
 const HeroSection = () => {
   const t = useTranslations('Home.Hero')
-  const tConcierge = useTranslations('Common.ConciergeLink')
-  const { href: conciergeHref, isTabletOrLarger } = useConciergeContact()
   const videoRef = useRef<HTMLVideoElement | null>(null)
 
   useVideoAutoPlay(videoRef)
@@ -70,7 +67,7 @@ const HeroSection = () => {
           {t('headline')}
         </h1>
 
-        <p className="text-lg md:text-lg text-neutral-white opacity-90 w-full">
+        <p className="text-lg text-neutral-white opacity-90 w-full">
           {t('subheadline')}
         </p>
 
