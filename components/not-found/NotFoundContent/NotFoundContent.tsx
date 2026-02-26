@@ -14,9 +14,9 @@ const NotFoundContent = () => {
         <Image
           src={NOT_FOUND_DOG_BOWL_IMAGE}
           alt={t('dogBowlAlt')}
-          width={383}
-          height={161}
-          className="w-36 md:w-96 h-auto"
+          width={100}
+          height={100}
+          className="w-24 md:w-36 h-auto"
           priority
           unoptimized
         />
