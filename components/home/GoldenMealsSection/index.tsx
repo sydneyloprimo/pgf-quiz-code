@@ -71,7 +71,7 @@ const GoldenMealsSection = () => {
             <p className="font-sans text-lg leading-7">{t('description')}</p>
           </div>
 
-          <Button variant="secondary" href={Routes.formulation}>
+          <Button variant="secondary" href={Routes.recipes}>
             {t('ctaButton')}
           </Button>
         </div>
