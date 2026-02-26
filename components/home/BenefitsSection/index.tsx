@@ -28,7 +28,7 @@ const BenefitItem = ({
   <button
     type="button"
     onClick={onClick}
-    className="w-full text-left flex flex-col gap-2 py-2"
+    className="w-full text-left flex flex-col gap-2 py-2 cursor-pointer"
     aria-expanded={isActive}
   >
     <span
