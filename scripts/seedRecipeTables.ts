@@ -1,13 +1,10 @@
 /**
  * Seeds TableRichText entries in Contentful for recipe tables.
- * Uses the existing Turkey data from constants + en.json translations.
+ * Uses the existing Turkey data from constants + inline table labels.
  *
  * Requires: CONTENTFUL_SPACE_ID, CONTENTFUL_MANAGEMENT_TOKEN in env.
  * Run: yarn contentful:seed-tables
  */
-
-import { readFileSync } from 'fs'
-import { resolve } from 'path'
 
 import contentfulManagement from 'contentful-management'
 import { config } from 'dotenv'
@@ -123,22 +120,79 @@ function buildRichTextTable(
   }
 }
 
-const messages = JSON.parse(
-  readFileSync(resolve(process.cwd(), 'messages/en.json'), 'utf-8')
-) as Record<string, unknown>
-
-function getTranslation(path: string): string {
-  const parts = path.split('.')
-  let current: unknown = messages
-  for (const part of parts) {
-    if (current && typeof current === 'object' && part in current) {
-      current = (current as Record<string, unknown>)[part]
-    } else {
-      return path
-    }
-  }
-  return typeof current === 'string' ? current : path
-}
+const SEED_TABLE_LABELS = {
+  guaranteedAnalysis: {
+    nutrientLabel: 'Nutrient',
+    percentLabel: '%',
+    crudeProtein: 'Crude Protein',
+    crudeFat: 'Crude Fat',
+    crudeFiber: 'Crude Fiber',
+    moisture: 'Moisture',
+    ash: 'Ash',
+  },
+  nutritionPanel: {
+    unitLabel: 'Unit',
+    recipeLabel: 'Recipe',
+    dmLabel: 'DM',
+    mineralLabel: 'Mineral',
+    vitaminLabel: 'Vitamin',
+    fatLabel: 'Fat',
+    aminoAcidLabel: 'Amino Acid',
+    nutrients: {
+      aa: 'AA',
+      ala: 'ALA',
+      arginine: 'Arginine',
+      biotin: 'Biotin',
+      b6Pyridoxine: 'B6 (Pyridoxine)',
+      calcium: 'Calcium (Ca)',
+      choline: 'Choline',
+      copper: 'Copper (Cu)',
+      dha: 'DHA',
+      dpa: 'DPA',
+      epa: 'EPA',
+      epaDha: 'EPA + DHA',
+      folicAcid: 'Folic Acid',
+      histidine: 'Histidine',
+      iodine: 'Iodine (I)',
+      iron: 'Iron (Fe)',
+      isoleucine: 'Isoleucine',
+      la: 'LA',
+      leucine: 'Leucine',
+      lysine: 'Lysine',
+      magnesium: 'Magnesium (Mg)',
+      manganese: 'Manganese (Mn)',
+      methionine: 'Methionine',
+      methionineCystine: 'Methionine - Cystine',
+      monounsaturated: 'Monounsaturated',
+      niacinB3: 'Niacin, B3',
+      pantothenicAcidB5: 'Pantothenic Acid, B5',
+      phenylalanine: 'Phenylalanine',
+      phenylalanineTyrosine: 'Phenylalanine - Tyrosine',
+      phosphorous: 'Phosphorous (P)',
+      polyunsaturated: 'Polyunsaturated',
+      potassium: 'Potassium (K)',
+      purines: 'Purines',
+      riboflavinB2: 'Riboflavin, B2',
+      saturated: 'Saturated',
+      selenium: 'Selenium (Se)',
+      sodium: 'Sodium (Na)',
+      taurine: 'Taurine',
+      thiamineB1: 'Thiamine, B1',
+      threonine: 'Threonine',
+      total: 'Total',
+      totalProtein: 'Total protein',
+      tryptophan: 'Tryptophan',
+      valine: 'Valine',
+      vitaminA: 'Vitamin A',
+      vitaminB12: 'Vitamin B12',
+      vitaminC: 'Vitamin C',
+      vitaminD: 'Vitamin D',
+      vitaminE: 'Vitamin E',
+      vitaminK1: 'Vitamin K1',
+      zinc: 'Zinc (Zn)',
+    },
+  },
+} as const
 
 const GUARANTEED_ANALYSIS_DATA = [
   {
@@ -470,15 +524,14 @@ const AMINO_ACIDS_DATA = [
 ]
 
 function buildGuaranteedAnalysisDoc(): RichTextDocument {
-  const nutrientLabel = getTranslation(
-    'Recipes.GuaranteedAnalysis.nutrientLabel'
-  )
-  const percentLabel = getTranslation('Recipes.GuaranteedAnalysis.percentLabel')
+  const { nutrientLabel, percentLabel } = SEED_TABLE_LABELS.guaranteedAnalysis
 
   return buildRichTextTable(
     [nutrientLabel, percentLabel],
     GUARANTEED_ANALYSIS_DATA.map((row) => [
-      getTranslation(`Recipes.GuaranteedAnalysis.${row.nutrientKey}`),
+      SEED_TABLE_LABELS.guaranteedAnalysis[
+        row.nutrientKey as keyof typeof SEED_TABLE_LABELS.guaranteedAnalysis
+      ],
       row.value,
     ])
   )
@@ -493,14 +546,14 @@ function build4ColDoc(
     dm: string
   }>
 ): RichTextDocument {
-  const unitLabel = getTranslation('Recipes.NutritionPanel.unitLabel')
-  const recipeLabel = getTranslation('Recipes.NutritionPanel.recipeLabel')
-  const dmLabel = getTranslation('Recipes.NutritionPanel.dmLabel')
+  const { unitLabel, recipeLabel, dmLabel } = SEED_TABLE_LABELS.nutritionPanel
 
   return buildRichTextTable(
     [column1Label, unitLabel, recipeLabel, dmLabel],
     data.map((row) => [
-      getTranslation(`Recipes.NutritionPanel.nutrients.${row.nameKey}`),
+      SEED_TABLE_LABELS.nutritionPanel.nutrients[
+        row.nameKey as keyof typeof SEED_TABLE_LABELS.nutritionPanel.nutrients
+      ],
       row.unit,
       row.recipe,
       row.dm,
@@ -514,10 +567,8 @@ interface TableEntry {
 }
 
 function buildTurkeyEntries(): TableEntry[] {
-  const mineralLabel = getTranslation('Recipes.NutritionPanel.mineralLabel')
-  const vitaminLabel = getTranslation('Recipes.NutritionPanel.vitaminLabel')
-  const fatLabel = getTranslation('Recipes.NutritionPanel.fatLabel')
-  const aminoAcidLabel = getTranslation('Recipes.NutritionPanel.aminoAcidLabel')
+  const { mineralLabel, vitaminLabel, fatLabel, aminoAcidLabel } =
+    SEED_TABLE_LABELS.nutritionPanel
 
   return [
     {

@@ -27,7 +27,7 @@ const RecipeDetails = () => {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-8">
-      <div className="flex items-center justify-center">
+      <div className="flex items-start justify-center">
         <div className="relative w-full max-w-md aspect-square">
           <Image
             src={`/images/recipes/recipe-bowl-${activeRecipe}.png`}
