@@ -18,7 +18,7 @@ const OurStandardsSection = () => {
       icon: (
         <div className="h-12 w-auto">
           <ContentfulImage
-            src="/images/formulation/icon-cauliflower.svg"
+            src="/images/formulation/board.svg"
             alt=""
             width={40}
             height={48}
@@ -29,14 +29,14 @@ const OurStandardsSection = () => {
       ),
       title: t('box1Title'),
       titleClassName,
-      orderClassName: 'order-1 md:order-1',
+      orderClassName: 'order-1',
       description: t('box1Description'),
     },
     {
       icon: (
         <div className="h-12 w-auto">
           <ContentfulImage
-            src="/images/formulation/icon-carrot.svg"
+            src="/images/formulation/list.svg"
             alt=""
             width={43}
             height={48}
@@ -47,14 +47,14 @@ const OurStandardsSection = () => {
       ),
       title: t('box2Title'),
       titleClassName,
-      orderClassName: 'order-2 md:order-2',
+      orderClassName: 'order-2',
       description: t('box2Description'),
     },
     {
       icon: (
         <div className="h-12 w-auto">
           <ContentfulImage
-            src="/images/formulation/icon-leaf.svg"
+            src="/images/formulation/certified.svg"
             alt=""
             width={49}
             height={48}
@@ -72,7 +72,7 @@ const OurStandardsSection = () => {
       icon: (
         <div className="h-12 w-auto">
           <ContentfulImage
-            src="/images/formulation/icon-garlic2.svg"
+            src="/images/formulation/validated.svg"
             alt=""
             width={38}
             height={48}

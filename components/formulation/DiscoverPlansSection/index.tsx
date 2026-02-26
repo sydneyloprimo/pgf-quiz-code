@@ -51,7 +51,7 @@ const DiscoverPlansSection = () => {
               <h2 className="font-display text-xl leading-7 lg:text-5xl lg:leading-[1.167] tracking-[-0.48px] w-full">
                 {t('title')}
               </h2>
-              <p className="font-sans text-base leading-6 w-full">
+              <p className="font-sans text-base pt-4 leading-6 w-full">
                 {t('description')}
               </p>
             </div>
