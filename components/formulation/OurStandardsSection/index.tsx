@@ -91,7 +91,7 @@ const OurStandardsSection = () => {
   return (
     <section
       className={cn(
-        'w-full',
+        'w-full bg-neutral-100',
         FORMULATION_SECTION_PADDING_X,
         FORMULATION_SECTION_PADDING_Y
       )}

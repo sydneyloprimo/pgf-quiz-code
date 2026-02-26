@@ -29,7 +29,7 @@ export const FAQItem = ({
         <div className={'flex items-center'}>
           <h4
             className={
-              'font-sans text-xl leading-8 font-semibold text-quaternary-800'
+              'font-sans text-lg lg:text-xl leading-8 font-semibold text-quaternary-800'
             }
           >
             {question}
