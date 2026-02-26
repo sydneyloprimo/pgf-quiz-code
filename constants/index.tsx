@@ -51,7 +51,7 @@ export const QUIZ_RESULTS_ILLUSTRATION_HEIGHT = 103
 
 // Quiz thresholds
 export const PUPPY_MAX_AGE_YEARS = 1
-export const MAX_DOG_WEIGHT_LBS = 25
+export const MAX_DOG_WEIGHT_LBS = 20
 
 // Boston-area ZIP codes for quiz location step (founding cohort enrollment)
 export const BOSTON_AREA_ZIP_CODES: ReadonlySet<string> = new Set([
