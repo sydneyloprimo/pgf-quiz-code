@@ -92,17 +92,6 @@ const ClinicallyApprovedSection = () => {
             {t('ctaButton')}
           </Button>
         </div>
-
-        {/* Decoration - Desktop/Tablet: bottom right */}
-        <div className="block self-end md:absolute bottom-0 md:bottom-8 right-2 md:right-8 lg:bottom-12 lg:right-12">
-          <ContentfulImage
-            src="/icons/clinically-approved-decoration.svg"
-            alt=""
-            width={150}
-            height={150}
-            aria-hidden="true"
-          />
-        </div>
       </div>
     </section>
   )
