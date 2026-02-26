@@ -93,10 +93,6 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
   const lambEnabled = useFeatureFlag(FEATURE_FLAG_LAMB)
   const pancreaticEnabled = useFeatureFlag(FEATURE_FLAG_PANCREATIC)
 
-  useEffect(() => {
-    openCart()
-  }, [openCart])
-
   const recipeOptions = useMemo(() => {
     const options = [
       { label: t('recipes.turkey'), value: RECIPE_TYPE.turkey },

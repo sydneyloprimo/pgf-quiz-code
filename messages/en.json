@@ -74,7 +74,29 @@
       "topperTitle": "Topper"
     },
     "ShoppingCartPanel": {
-      "oneTimePurchase": "One-time purchase"
+      "badgeFullMeal": "Full Meal",
+      "badgeSingleMeal": "Single Meal",
+      "badgeTopper": "Topper",
+      "checkoutButton": "Checkout",
+      "closeButton": "Continue Shopping",
+      "closeButtonAriaLabel": "Close shopping cart",
+      "decreaseQuantity": "Decrease quantity",
+      "deleteButtonAriaLabel": "Remove {title} from cart",
+      "emptyState": "Your cart is empty",
+      "frequencyBiWeekly": "Every 2 weeks",
+      "frequencyWeekly": "Weekly",
+      "increaseQuantity": "Increase quantity",
+      "oneTimePurchase": "One-time purchase",
+      "panelAriaLabel": "Shopping cart",
+      "packsClarification": "{packs} packs per delivery (not multiple subscriptions)",
+      "productDescriptionPlaceholder": "Fresh, vet-formulated meals",
+      "productImageAlt": "Product image for {title}",
+      "recipeLamb": "Lamb",
+      "recipePancreatic": "Pancreatic",
+      "recipeTurkey": "Turkey",
+      "subscriptionDisplayFullMeal": " | Full Meal",
+      "subscriptionDisplayTopper": " | Topper",
+      "title": "Your Shopping Cart"
     },
     "Toast": {
       "Error": {
@@ -845,13 +867,19 @@
     },
     "results": {
       "recipes": {
-        "turkey": "Turkey",
-        "lamb": "Lamb"
+        "lamb": "Lamb",
+        "pancreatic": "Pancreatic",
+        "turkey": "Turkey"
       },
       "shipmentFrequencies": {
         "everyWeek": "Every Week",
         "everyTwoWeeks": "Every Two Weeks"
       },
+      "subscribeButtonAlreadyInCart": "Already in cart",
+      "subscribeButtonSwitchToFullMeal": "Switch to Full Meal Plan for {price} a day",
+      "subscribeButtonSwitchToTopper": "Switch to Topper Plan for {price} a day",
+      "purchaseAlaCarteHeading": "Purchase à la carte",
+      "tryRecipeBeforeMembership": "Want to try a recipe before joining the membership?",
       "products": {
         "alaCarte": {
           "title": "Single Meal, A la Carte",

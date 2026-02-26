@@ -209,6 +209,12 @@ const ShoppingCartItem = ({
 
   const currentRecipe = getCurrentRecipe()
 
+  // Calculate weekly packs for subscription display (biweekly quantity is doubled)
+  const calculatedWeeklyPacks =
+    isSubscription && currentFrequency === 'bi-weekly'
+      ? Math.ceil(quantity / 2)
+      : quantity
+
   return (
     <div className="bg-neutral-50 flex flex-col gap-6 py-6 w-full">
       <div className="flex gap-3 items-start w-full">
@@ -261,6 +267,13 @@ const ShoppingCartItem = ({
                 <p className="font-sans font-normal w-full">
                   {t('productDescriptionPlaceholder')}
                 </p>
+                {isSubscription && (
+                  <p className="font-sans font-normal text-sm w-full text-neutral-700">
+                    {t('packsClarification', {
+                      packs: String(calculatedWeeklyPacks),
+                    })}
+                  </p>
+                )}
               </div>
               <p className="font-sans font-bold text-lg w-full">{price}</p>
             </div>
