@@ -21,7 +21,10 @@ export const NAV_LINKS: NavLink[] = [
 export const NOT_FOUND_DOG_BOWL_IMAGE = '/images/404-dog-bowl.svg'
 
 // Blog index
-export const BLOG_FEATURED_IMAGE_PATH = '/images/blog-featured.jpg'
+export const BLOG_FEATURED_IMAGE_DESKTOP_PATH =
+  '/images/blog-featured-desktop.png'
+export const BLOG_FEATURED_IMAGE_MOBILE_PATH =
+  '/images/blog-featured-mobile.png'
 export const BLOG_INDEX_POSTS_PER_PAGE = 4
 
 // Tailwind default md breakpoint is 768px

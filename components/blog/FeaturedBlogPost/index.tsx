@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 
@@ -17,10 +19,15 @@ function isResolvedCategory(cat: unknown): cat is CategoryEntry {
 
 interface FeaturedBlogPostProps {
   post: BlogPostEntry
-  imageSrc: string
+  imageDesktopSrc: string
+  imageMobileSrc: string
 }
 
-const FeaturedBlogPost = ({ post, imageSrc }: FeaturedBlogPostProps) => {
+const FeaturedBlogPost = ({
+  post,
+  imageDesktopSrc,
+  imageMobileSrc,
+}: FeaturedBlogPostProps) => {
   const t = useTranslations('BlogIndex.FeaturedBlogPost')
   const { title, slug, author, categories } = post.fields
   const authorResolved =
@@ -46,13 +53,21 @@ const FeaturedBlogPost = ({ post, imageSrc }: FeaturedBlogPostProps) => {
   return (
     <section className="w-full px-5 py-8 lg:px-24">
       <div className="relative mx-auto max-w-6xl overflow-hidden">
-        <div className="relative aspect-21/9 w-full min-h-64">
+        <div className="relative aspect-[21/9] w-full min-h-64">
           <Image
-            src={imageSrc}
+            src={imageDesktopSrc}
             alt={t('featuredImageAlt', { title })}
             fill
-            className="object-cover"
-            sizes="(min-width: 1024px) 1152px, 100vw"
+            className="absolute inset-0 hidden object-cover md:block"
+            sizes="100vw"
+            priority
+          />
+          <Image
+            src={imageMobileSrc}
+            alt={t('featuredImageAlt', { title })}
+            fill
+            className="absolute inset-0 object-cover md:hidden"
+            sizes="100vw"
             priority
           />
           <div
