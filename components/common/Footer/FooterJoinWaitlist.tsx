@@ -62,7 +62,7 @@ const FooterJoinWaitlist = () => {
       <div className="flex flex-col gap-5 text-neutral-100">
         <h3
           className={cn(
-            'font-display font-semibold',
+            'font-display',
             'text-3xl md:text-4xl',
             'leading-tight md:leading-12',
             'tracking-tight'
@@ -108,7 +108,7 @@ const FooterJoinWaitlist = () => {
             type="submit"
             variant="primary"
             className="px-4 py-3"
-            disabled={isLoading || !email.trim() || isSubscribed}
+            disabled={isLoading || isSubscribed}
           >
             {isSubscribed ? t('subscribedButton') : t('subscribeButton')}
           </Button>
