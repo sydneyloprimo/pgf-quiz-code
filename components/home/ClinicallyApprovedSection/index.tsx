@@ -2,7 +2,10 @@ import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
 import { ContentfulImage } from '@/components/common/ContentfulImage'
-import { ChevronIcon } from '@/components/common/Icon'
+import {
+  ChevronIcon,
+  ClinicallyApprovedDecorationIcon,
+} from '@/components/common/Icon'
 import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
 
@@ -94,13 +97,9 @@ const ClinicallyApprovedSection = () => {
         </div>
         {/* Decoration - Desktop/Tablet: bottom right */}
         <div className="block self-end md:absolute bottom-0 md:bottom-8 right-2 md:right-8 lg:bottom-12 lg:right-12 size-36">
-          <ContentfulImage
-            src="/icons/clinically-approved-decoration.svg"
-            alt=""
-            width={150}
-            height={150}
-            className="h-full w-full object-contain"
+          <ClinicallyApprovedDecorationIcon
             aria-hidden="true"
+            className="text-tertiary-900"
           />
         </div>
       </div>
