@@ -27,14 +27,14 @@ interface MissionTitleProps extends PropsWithChildren {
 }
 
 const MissionTitle = ({ children, className }: MissionTitleProps) => (
-  <h2
+  <h3
     className={cn(
-      'font-display font-normal heading-h1 leading-14 tracking-[-0.03rem] text-secondary-950',
+      'font-display font-medium heading-h5 text-2xl leading-14 tracking-[-0.03rem] text-secondary-950',
       className
     )}
   >
     {children}
-  </h2>
+  </h3>
 )
 
 interface MissionSubsectionTitleProps extends PropsWithChildren {
@@ -47,7 +47,7 @@ const MissionSubsectionTitle = ({
 }: MissionSubsectionTitleProps) => (
   <h3
     className={cn(
-      'font-display italic font-medium heading-h5 text-2xl text-secondary-950',
+      'font-display font-medium heading-h5 text-2xl text-secondary-950',
       className
     )}
   >
