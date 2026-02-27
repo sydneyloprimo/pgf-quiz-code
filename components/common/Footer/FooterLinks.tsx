@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useTranslations } from 'next-intl'
 
-import { PGFTextLogo } from '@/components/common/Icon'
 import { FOOTER_SOCIAL_LINKS, NAV_LINKS } from '@/constants'
 import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
@@ -29,7 +28,14 @@ const FooterLinks = () => {
       )}
     >
       <Link href={Routes.home} aria-label={tFooter('logoAria')}>
-        <PGFTextLogo className="h-11 lg:h-14 w-auto text-neutral-white" />
+        <Image
+          src="/icons/footer-logo.svg"
+          alt=""
+          width={194}
+          height={24}
+          className="w-80 h-auto"
+          priority
+        />
       </Link>
 
       <nav
