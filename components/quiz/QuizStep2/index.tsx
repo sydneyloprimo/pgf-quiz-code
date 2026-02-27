@@ -7,6 +7,7 @@ import { Controller, useWatch, UseFormReturn } from 'react-hook-form'
 import Input from '@/components/common/Input'
 import { InputDropdown } from '@/components/common/InputDropdown'
 import { getNextQuizStep, isAllowedAgeInput } from '@/components/quiz/helpers'
+import { useQuizDropdownContext } from '@/components/quiz/QuizDropdownContext'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
 import {
@@ -33,6 +34,7 @@ const QuizStep2 = ({
   const tQuiz = useTranslations('Quiz')
   const { control } = formMethods
   const [focusedField, setFocusedField] = useState<string | null>(null)
+  const { setDropdownOpen } = useQuizDropdownContext() ?? {}
 
   const name = useWatch({ control, name: 'name' })
   const gender = useWatch({ control, name: 'gender' })
@@ -133,8 +135,14 @@ const QuizStep2 = ({
                     className="w-full"
                     state={InputDropdownState.Filled}
                     textClassName="font-semibold text-secondary-950"
-                    onOpen={() => setFocusedField('gender')}
-                    onClose={() => setFocusedField(null)}
+                    onOpen={() => {
+                      setFocusedField('gender')
+                      setDropdownOpen?.(true)
+                    }}
+                    onClose={() => {
+                      setFocusedField(null)
+                      setDropdownOpen?.(false)
+                    }}
                   />
                 )}
               />

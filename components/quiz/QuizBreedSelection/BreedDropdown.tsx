@@ -19,7 +19,7 @@ const inputDropdownVariants = cva(
         [InputDropdownState.Filled]:
           'bg-neutral-white border border-secondary-900',
         [InputDropdownState.Open]:
-          'bg-neutral-white border border-primary-800 shadow-[0_0_0_1px_#094452]',
+          'bg-neutral-white border border-primary-800 shadow-focus-primary',
       },
     },
     defaultVariants: {
@@ -96,7 +96,7 @@ const BreedDropdown = ({
       window.requestAnimationFrame(() => {
         containerRef.current?.scrollIntoView({
           behavior: 'smooth',
-          block: 'start',
+          block: 'nearest',
         })
       })
     } else {
@@ -136,7 +136,10 @@ const BreedDropdown = ({
   const categories = Object.keys(breedsByCategory)
 
   return (
-    <div ref={containerRef} className={cn('relative flex flex-col', className)}>
+    <div
+      ref={containerRef}
+      className={cn('relative flex flex-col scroll-mb-10', className)}
+    >
       <button
         type="button"
         className={cn(inputDropdownVariants({ state: displayState }))}
@@ -167,7 +170,7 @@ const BreedDropdown = ({
         <div
           id={dropdownId}
           role="listbox"
-          className="absolute top-12 left-0 right-0 z-10 bg-neutral-white border border-primary-800 shadow-[0_0_0_1px_#094452] flex flex-col max-h-60 overflow-y-auto gap-1"
+          className="absolute top-12 left-0 right-0 z-10 bg-neutral-white border border-primary-800 shadow-focus-primary flex flex-col max-h-60 overflow-y-auto gap-1"
         >
           {categories.map((category) => (
             <div key={category} className="flex flex-col">

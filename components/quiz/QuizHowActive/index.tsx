@@ -5,6 +5,7 @@ import { useCallback } from 'react'
 import { Controller, useWatch, UseFormReturn } from 'react-hook-form'
 
 import { InputDropdown } from '@/components/common/InputDropdown'
+import { useQuizDropdownContext } from '@/components/quiz/QuizDropdownContext'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
 import { ACTIVITY_LEVEL_OPTIONS } from '@/constants'
@@ -27,6 +28,7 @@ const QuizHowActive = ({
   const t = useTranslations('Quiz.howActive')
   const tQuiz = useTranslations('Quiz')
   const { control } = formMethods
+  const { setDropdownOpen } = useQuizDropdownContext() ?? {}
 
   const dogName = useWatch({ control, name: 'name' }) || ''
   const activityLevel = useWatch({ control, name: 'activityLevel' })
@@ -71,6 +73,8 @@ const QuizHowActive = ({
                       ? InputDropdownState.Filled
                       : InputDropdownState.Default
                   }
+                  onOpen={() => setDropdownOpen?.(true)}
+                  onClose={() => setDropdownOpen?.(false)}
                 />
               )}
             />

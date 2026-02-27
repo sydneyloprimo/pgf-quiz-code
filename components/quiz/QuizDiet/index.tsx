@@ -6,6 +6,7 @@ import { Controller, useWatch, UseFormReturn } from 'react-hook-form'
 
 import { InputDropdown } from '@/components/common/InputDropdown'
 import { FoodAnimation } from '@/components/quiz/FoodAnimation'
+import { useQuizDropdownContext } from '@/components/quiz/QuizDropdownContext'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
 import {
@@ -37,6 +38,7 @@ const QuizDiet = ({
   const tQuiz = useTranslations('Quiz')
   const tLoading = useTranslations('Quiz.loading')
   const waitlistFlipEnabled = useFeatureFlag(FEATURE_FLAG_WAITLIST)
+  const { setDropdownOpen } = useQuizDropdownContext() ?? {}
   const { control } = formMethods
   const [isLoading, setIsLoading] = useState(false)
 
@@ -162,6 +164,8 @@ const QuizDiet = ({
                         ? InputDropdownState.Filled
                         : InputDropdownState.Default
                     }
+                    onOpen={() => setDropdownOpen?.(true)}
+                    onClose={() => setDropdownOpen?.(false)}
                   />
                 )}
               />
@@ -188,6 +192,8 @@ const QuizDiet = ({
                         ? InputDropdownState.Filled
                         : InputDropdownState.Default
                     }
+                    onOpen={() => setDropdownOpen?.(true)}
+                    onClose={() => setDropdownOpen?.(false)}
                   />
                 )}
               />
@@ -217,6 +223,8 @@ const QuizDiet = ({
                         ? InputDropdownState.Filled
                         : InputDropdownState.Default
                     }
+                    onOpen={() => setDropdownOpen?.(true)}
+                    onClose={() => setDropdownOpen?.(false)}
                   />
                 )}
               />
