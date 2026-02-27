@@ -15,13 +15,19 @@ const MissionSection = () => {
   return (
     <section className="w-full px-5 lg:px-24 py-10 lg:py-20 flex flex-col gap-20 lg:gap-48">
       <div className="w-full flex flex-col lg:contents gap-10">
-        <MissionTitle className="w-full order-1 lg:hidden">
-          {t('title')}
-        </MissionTitle>
+        <div className="w-full flex flex-col gap-2 lg:hidden">
+          <MissionTitle className="w-full order-1 pb-6">
+            {t('title')}
+          </MissionTitle>
 
-        <MissionParagraph className="w-full lg:w-86 order-2 lg:hidden">
-          {t('paragraph1')}
-        </MissionParagraph>
+          <MissionParagraph className="w-full lg:w-86 order-2">
+            {t('paragraph1')}
+          </MissionParagraph>
+
+          <MissionParagraph className="w-full lg:w-86 order-2">
+            {t('paragraph2')}
+          </MissionParagraph>
+        </div>
 
         <MissionFirstRow
           title={t('title')}

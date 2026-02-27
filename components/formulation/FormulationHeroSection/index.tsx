@@ -4,12 +4,10 @@ import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
 import { ContentfulImage } from '@/components/common/ContentfulImage'
-import { useConciergeContact } from '@/hooks/useConciergeContact'
+import { Routes } from '@/types/enums/routes'
 
 const FormulationHeroSection = () => {
   const t = useTranslations('Formulation.Hero')
-  const tConcierge = useTranslations('Common.ConciergeLink')
-  const { href: conciergeHref, isTabletOrLarger } = useConciergeContact()
 
   return (
     <section className="relative w-full h-96 md:h-120 flex items-center">
@@ -42,16 +40,7 @@ const FormulationHeroSection = () => {
           </p>
         </div>
 
-        <Button
-          variant="primary"
-          href={conciergeHref}
-          className="w-fit"
-          aria-label={
-            isTabletOrLarger
-              ? tConcierge('emailAriaLabel')
-              : tConcierge('phoneAriaLabel')
-          }
-        >
+        <Button variant="primary" href={Routes.quiz} className="w-fit">
           {t('ctaButton')}
         </Button>
       </div>

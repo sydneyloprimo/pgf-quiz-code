@@ -46,7 +46,7 @@ const ClinicallyApprovedSection = () => {
         </div>
 
         {/* Content */}
-        <div className="w-full lg:flex-1 flex flex-col gap-14 md:gap-16 py-16 lg:pt-0 lg:pb-0 lg:px-10">
+        <div className="w-full lg:flex-1 flex flex-col gap-14 md:gap-16 pt-16 pb-2 lg:pt-0 lg:pb-0 lg:px-10">
           <div className="flex flex-col gap-10">
             <h2 className="font-display text-3xl md:text-4xl leading-tight md:leading-12 text-secondary-950">
               {t('title')}
@@ -91,6 +91,17 @@ const ClinicallyApprovedSection = () => {
           >
             {t('ctaButton')}
           </Button>
+        </div>
+        {/* Decoration - Desktop/Tablet: bottom right */}
+        <div className="block self-end md:absolute bottom-0 md:bottom-8 right-2 md:right-8 lg:bottom-12 lg:right-12 size-36">
+          <ContentfulImage
+            src="/icons/clinically-approved-decoration.svg"
+            alt=""
+            width={150}
+            height={150}
+            className="h-full w-full object-contain"
+            aria-hidden="true"
+          />
         </div>
       </div>
     </section>

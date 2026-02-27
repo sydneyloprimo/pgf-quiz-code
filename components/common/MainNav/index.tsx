@@ -110,14 +110,13 @@ const MainNav = () => {
     <nav
       className={cn(
         'w-full group',
-        isHome && !isScrolled
-          ? 'fixed top-0 left-0 right-0 z-50 bg-transparent'
-          : isHome && isScrolled
-            ? 'fixed top-0 left-0 right-0 z-50 bg-secondary-950'
-            : 'relative bg-secondary-950',
+        'fixed top-0 left-0 right-0 z-50',
+        isHome && !isScrolled && !isMobileMenuOpen
+          ? 'bg-transparent'
+          : 'bg-secondary-950',
         'px-5 md:px-24 py-3',
         'flex items-center justify-between',
-        isHome && !isScrolled ? 'shadow-none' : 'shadow-sm'
+        isHome && !isScrolled && !isMobileMenuOpen ? 'shadow-none' : 'shadow-sm'
       )}
       aria-label={t('ariaLabel')}
     >

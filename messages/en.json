@@ -158,16 +158,16 @@
   },
   "Home": {
     "Benefits": {
-      "benefit1Description": "Soluble fibers and digestible proteins selected to promote nutrient absorption and gastrointestinal tolerance.",
-      "benefit1Title": "Digestive Stability",
+      "benefit1Description": "Targeted fatty acid profiles selected to maintain barrier integrity, dermal health, and coat quality.",
+      "benefit1Title": "Skin and Coat Condition",
       "benefit2Description": "Fiber composition selected to deliver firm, predictable stools—an observable marker of digestive function.",
       "benefit2Title": "Stool Quality",
       "benefit3Description": "Fermentable fibers and polyphenols selected to encourage microbial balance and short-chain fatty acid production.",
       "benefit3Title": "Microbiome Diversity",
       "benefit4Description": "Macronutrient ratios selected to enable slow, steady glucose release and prevent energy fluctuation.",
       "benefit4Title": "Sustained Energy",
-      "benefit5Description": "Targeted fatty acid profiles selected to maintain barrier integrity, dermal health, and coat quality.",
-      "benefit5Title": "Skin and Coat Condition",
+      "benefit5Description": "Soluble fibers and digestible proteins selected to promote nutrient absorption and gastrointestinal tolerance.",
+      "benefit5Title": "Digestive Stability",
       "description": "Human-grade, pumpkin-based meals for your furry friends. Includes one puree and pre-portioned, tailored ingredients to easily cook up fresh, nutritious meals.",
       "imageAlt": "Golden retriever enjoying the benefits of our food",
       "pointerDigestive": "DIGESTIVE STABILITY",
@@ -1214,7 +1214,7 @@
       }
     },
     "Precision": {
-      "title": "Precision in Every Batch",
+      "title": "Precision\nin Every Batch",
       "description": "Fresh ingredients are variable by nature. Protein content differs. Produce changes with the season. Even when a formulation is fixed, raw inputs are not. For a company that refuses to compromise on precision, the work doesn't stop at formulation. Every batch is tested to verify that meals meet Association of American Feed Control Officials (AAFCO) vitamin and mineral requirements—not just on paper, but in the food itself. This is how we deliver consistency where it matters most: in what your dog actually consumes.",
       "imageAlt": "Freshly prepared nutritious meal with measuring spoon"
     },
@@ -1266,7 +1266,7 @@
   },
   "About": {
     "Hero": {
-      "title": "About us",
+      "title": "About Us",
       "subtitle": "The science, standards, and clinical logic behind how our food is formulated."
     },
     "Values": {
@@ -1276,7 +1276,7 @@
       "card2Title": "University-validated research",
       "card3Description": "Small breeds don't simply eat less. They metabolize differently. Faster digestive transit. Higher stool variability. Narrower margins for nutrient error. Our formulations are engineered for their specific physiology, not scaled down from larger breeds.",
       "card3Title": "Small-breed-specific formulation",
-      "ctaButton": "Explore Our Formulation"
+      "ctaButton": "Explore our formulation"
     },
     "Leadership": {
       "founder": "Founder",
@@ -1325,7 +1325,7 @@
     },
     "CTA": {
       "body": "",
-      "button": "Explore Our Formulation",
+      "button": "Explore our formulation",
       "quote": "See what clinical-grade nutrition looks like in practice"
     }
   }
