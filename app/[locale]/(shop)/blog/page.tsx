@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 
+import { BlogEmptyState } from '@/components/blog/BlogEmptyState'
 import { BlogIndexHero } from '@/components/blog/BlogIndexHero'
 import { BlogList } from '@/components/blog/BlogList'
 import { BlogPostCTA } from '@/components/blog/BlogPostCTA'
@@ -62,31 +63,33 @@ export default async function BlogIndexPage({
   const t = await getTranslations('BlogIndex')
 
   return (
-    <main
-      id={MAIN_CONTENT_ID}
-      tabIndex={-1}
-      className="min-h-screen w-full bg-neutral-300"
-    >
+    <main id={MAIN_CONTENT_ID} tabIndex={-1} className="w-full bg-neutral-300">
       <BlogIndexHero
         headline={t('heroHeadline')}
         subheadline={t('heroSubheadline')}
       />
-      <BrowseByTopic categories={categories} currentSlug={categorySlug} />
-      {featuredPost && (
-        <FeaturedBlogPost
-          post={featuredPost}
-          imageDesktopSrc={BLOG_FEATURED_IMAGE_DESKTOP_PATH}
-          imageMobileSrc={BLOG_FEATURED_IMAGE_MOBILE_PATH}
-        />
+      {allPosts.length === 0 ? (
+        <BlogEmptyState />
+      ) : (
+        <>
+          <BrowseByTopic categories={categories} currentSlug={categorySlug} />
+          {featuredPost && (
+            <FeaturedBlogPost
+              post={featuredPost}
+              imageDesktopSrc={BLOG_FEATURED_IMAGE_DESKTOP_PATH}
+              imageMobileSrc={BLOG_FEATURED_IMAGE_MOBILE_PATH}
+            />
+          )}
+          <BlogList
+            posts={listPosts}
+            currentPage={safePage}
+            totalPages={totalPages}
+            categorySlug={categorySlug}
+          />
+          <MeetTheContributors authors={authors} />
+          <BlogPostCTA />
+        </>
       )}
-      <BlogList
-        posts={listPosts}
-        currentPage={safePage}
-        totalPages={totalPages}
-        categorySlug={categorySlug}
-      />
-      <MeetTheContributors authors={authors} />
-      <BlogPostCTA />
     </main>
   )
 }
