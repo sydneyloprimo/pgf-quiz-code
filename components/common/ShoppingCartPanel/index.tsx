@@ -308,6 +308,14 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
         }
         return
       }
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[ShoppingCartPanel] Updating line frequency - IDs:', {
+          lineId: line.node.id,
+          sellingPlanId,
+          recipeSlug,
+          frequency,
+        })
+      }
       updateLine({
         cartId,
         lines: [

@@ -33,9 +33,16 @@ export const generateCartPayload = ({
   dogName,
   productConfig,
 }: GenerateCartPayloadParams): CartLineInput => {
-  // Use provided config or fallback to hardcoded constant
+  // Use provided config or fallback to PRODUCT_CONFIGS (from env vars)
   const config =
     productConfig || (PRODUCT_CONFIGS[recipeSlug] as unknown as ProductConfig)
+
+  // Prefer selling plan IDs from productConfig (API); fallback to PRODUCT_CONFIGS (env)
+  const envConfig = PRODUCT_CONFIGS[recipeSlug] as unknown as ProductConfig
+  const sellingPlanWeekly =
+    config.sellingPlanIds.weekly ?? envConfig.sellingPlanIds.weekly
+  const sellingPlanBiweekly =
+    config.sellingPlanIds.biweekly ?? envConfig.sellingPlanIds.biweekly
 
   let quantity = calculatedWeeklyPacks
 
@@ -49,9 +56,9 @@ export const generateCartPayload = ({
 
   const sellingPlanId =
     frequency === 'WEEKLY'
-      ? config.sellingPlanIds.weekly || null
+      ? sellingPlanWeekly || null
       : frequency === 'BIWEEKLY'
-        ? config.sellingPlanIds.biweekly || null
+        ? sellingPlanBiweekly || null
         : null
 
   const attributes: Array<{ key: string; value: string }> = [
@@ -87,6 +94,21 @@ export const generateCartPayload = ({
   // Only include sellingPlanId if it's not null (for subscriptions)
   if (sellingPlanId) {
     payload.sellingPlanId = sellingPlanId
+  }
+
+  if (process.env.NODE_ENV === 'development') {
+    console.log('[generateCartPayload] Cart line IDs being sent:', {
+      recipeSlug,
+      merchandiseId: payload.merchandiseId,
+      sellingPlanId: payload.sellingPlanId ?? null,
+      quantity: payload.quantity,
+      frequency,
+      configSource: productConfig ? 'productConfig (API)' : 'PRODUCT_CONFIGS',
+      envSellingPlans: {
+        weekly: envConfig.sellingPlanIds.weekly,
+        biweekly: envConfig.sellingPlanIds.biweekly,
+      },
+    })
   }
 
   return payload

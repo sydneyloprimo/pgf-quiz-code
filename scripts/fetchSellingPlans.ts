@@ -1,4 +1,9 @@
+import { config } from 'dotenv'
 import { GraphQLClient, gql } from 'graphql-request'
+
+import { PRODUCT_CONFIGS } from '@/constants'
+
+config({ path: '.env.local' })
 
 const API_URL = `https://${process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN}/api/${process.env.NEXT_PUBLIC_SHOPIFY_API_VERSION}/graphql.json`
 
@@ -40,10 +45,10 @@ const query = gql`
 
 async function fetchSellingPlans() {
   const variantIds = [
-    'gid://shopify/ProductVariant/47241921626333', // Turkey
-    'gid://shopify/ProductVariant/47241925918941', // Lamb
-    'gid://shopify/ProductVariant/47241926344925', // Pancreatic
-  ]
+    PRODUCT_CONFIGS.turkey.variantId,
+    PRODUCT_CONFIGS.lamb.variantId,
+    PRODUCT_CONFIGS.pancreatic.variantId,
+  ].filter(Boolean)
 
   try {
     const data = await client.request(query, { variantIds })

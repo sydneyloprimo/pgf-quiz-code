@@ -1,13 +1,22 @@
 import { request, gql } from 'graphql-request'
 import { NextResponse } from 'next/server'
 
+import { PRODUCT_CONFIGS } from '@/constants'
+
 export async function GET() {
   try {
     const variantIds = [
-      'gid://shopify/ProductVariant/47241921626333', // Turkey
-      'gid://shopify/ProductVariant/47241925918941', // Lamb
-      'gid://shopify/ProductVariant/47241926344925', // Pancreatic
-    ]
+      PRODUCT_CONFIGS.turkey.variantId,
+      PRODUCT_CONFIGS.lamb.variantId,
+      PRODUCT_CONFIGS.pancreatic.variantId,
+    ].filter(Boolean)
+
+    if (variantIds.length === 0) {
+      return NextResponse.json(
+        { error: 'No variant IDs configured in environment variables' },
+        { status: 500 }
+      )
+    }
 
     const query = gql`
       query getVariantSellingPlans($variantIds: [ID!]!) {
