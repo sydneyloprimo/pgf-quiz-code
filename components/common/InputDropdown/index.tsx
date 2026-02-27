@@ -118,7 +118,7 @@ const InputDropdown = ({
       window.requestAnimationFrame(() => {
         containerRef.current?.scrollIntoView({
           behavior: 'smooth',
-          block: 'start',
+          block: 'nearest',
         })
       })
     } else {
@@ -127,7 +127,10 @@ const InputDropdown = ({
   }, [disabled, isOpen, toggleDropdown, dropdownInstanceId, onOpen, onClose])
 
   return (
-    <div ref={containerRef} className={cn('relative flex flex-col', className)}>
+    <div
+      ref={containerRef}
+      className={cn('relative flex flex-col scroll-mb-10', className)}
+    >
       <button
         type="button"
         className={cn(inputDropdownVariants({ state: displayState }))}

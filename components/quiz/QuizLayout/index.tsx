@@ -13,6 +13,10 @@ import {
   parseQuizParamsFromUrl,
   saveFormData,
 } from '@/components/quiz/helpers'
+import {
+  QuizDropdownProvider,
+  useQuizDropdownContext,
+} from '@/components/quiz/QuizDropdownContext'
 import { QuizHeader } from '@/components/quiz/QuizHeader'
 import { FEATURE_FLAG_WAITLIST, MAIN_CONTENT_ID } from '@/constants'
 import { useFeatureFlag } from '@/hooks/useFeatureFlag'
@@ -211,6 +215,34 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
   )
 
   return (
+    <QuizDropdownProvider>
+      <QuizLayoutContent
+        currentStep={currentStep}
+        waitlistFlipEnabled={waitlistFlipEnabled}
+        visitedSteps={visitedSteps}
+        goBack={goBack}
+        renderedStep={renderedStep}
+      />
+    </QuizDropdownProvider>
+  )
+}
+
+const QuizLayoutContent = ({
+  currentStep,
+  waitlistFlipEnabled,
+  visitedSteps,
+  goBack,
+  renderedStep,
+}: {
+  currentStep: QuizStep
+  waitlistFlipEnabled: boolean
+  visitedSteps: number
+  goBack: () => void
+  renderedStep: React.ReactNode
+}) => {
+  const { isDropdownOpen = false } = useQuizDropdownContext() ?? {}
+
+  return (
     <div className="flex flex-col h-screen bg-neutral-300 w-full overflow-y-auto">
       <QuizHeader
         visitedSteps={visitedSteps}
@@ -248,7 +280,9 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
           }
         )}
       >
-        <div className="w-full pb-8">{renderedStep}</div>
+        <div className={cn('w-full', isDropdownOpen ? 'pb-20' : 'pb-8')}>
+          {renderedStep}
+        </div>
       </main>
     </div>
   )

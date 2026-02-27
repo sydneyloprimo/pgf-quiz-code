@@ -5,6 +5,7 @@ import { useCallback, useMemo } from 'react'
 import { Controller, useWatch, UseFormReturn } from 'react-hook-form'
 
 import { BreedDropdown } from '@/components/quiz/QuizBreedSelection/BreedDropdown'
+import { useQuizDropdownContext } from '@/components/quiz/QuizDropdownContext'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
 import { BREEDS } from '@/constants'
@@ -30,6 +31,7 @@ const QuizBreedSelection = ({
   const t = useTranslations('Quiz.breedSelection')
   const tQuiz = useTranslations('Quiz')
   const { control } = formMethods
+  const { setDropdownOpen } = useQuizDropdownContext() ?? {}
   const contentfulBreeds = useQuizBreedOptions(locale)
   const breeds = useMemo(
     () =>
@@ -101,6 +103,8 @@ const QuizBreedSelection = ({
                       ? InputDropdownState.Filled
                       : InputDropdownState.Default
                   }
+                  onOpen={() => setDropdownOpen?.(true)}
+                  onClose={() => setDropdownOpen?.(false)}
                 />
               )}
             />
