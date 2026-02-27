@@ -8,6 +8,7 @@ import { useForm, UseFormReturn } from 'react-hook-form'
 import { z } from 'zod'
 
 import {
+  getPersonalData,
   getStoredFormData,
   parseQuizParamsFromUrl,
   saveFormData,
@@ -106,29 +107,31 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
     setIsHydrated(true)
     const paramsData = parseQuizParamsFromUrl(searchParams)
     const stored = paramsData ?? getStoredFormData()
+    const personalData = getPersonalData()
     if (paramsData) {
       saveFormData(paramsData)
     }
     setStoredFormData(stored)
-    if (stored) {
-      formMethods.reset({
-        name: stored.name || '',
-        gender: (stored.gender as 'male' | 'female') || 'male',
-        age: stored.age || '',
-        weight: stored.weight || '',
-        neuteredStatus: stored.neuteredStatus,
-        breed: stored.breed,
-        bodyShape: stored.bodyShape,
-        mainFood: stored.mainFood,
-        treatFrequency: stored.treatFrequency,
-        mealtimeBehavior: stored.mealtimeBehavior,
-        activityLevel: stored.activityLevel,
-        zipCode: stored.zipCode,
-        subscriptionType: stored.subscriptionType,
-        firstName: stored.firstName,
-        lastName: stored.lastName,
-        email: stored.email,
-      })
+    const merged = {
+      name: stored?.name || '',
+      gender: (stored?.gender as 'male' | 'female') || 'male',
+      age: stored?.age || '',
+      weight: stored?.weight || '',
+      neuteredStatus: stored?.neuteredStatus,
+      breed: stored?.breed,
+      bodyShape: stored?.bodyShape,
+      mainFood: stored?.mainFood,
+      treatFrequency: stored?.treatFrequency,
+      mealtimeBehavior: stored?.mealtimeBehavior,
+      activityLevel: stored?.activityLevel,
+      zipCode: stored?.zipCode ?? personalData?.zipCode ?? '',
+      subscriptionType: stored?.subscriptionType,
+      firstName: stored?.firstName ?? personalData?.firstName ?? '',
+      lastName: stored?.lastName ?? personalData?.lastName ?? '',
+      email: stored?.email ?? personalData?.email ?? '',
+    }
+    if (stored || personalData) {
+      formMethods.reset(merged)
     }
   }, [formMethods, searchParams])
 
