@@ -1046,6 +1046,10 @@
       "selectAllAria": "Show all blog posts",
       "title": "Learn by Topic"
     },
+    "EmptyState": {
+      "ariaLabel": "Blog coming soon",
+      "comingSoon": "Coming Soon"
+    },
     "FeaturedBlogPost": {
       "featured": "Featured",
       "featuredImageAlt": "Featured blog post: {title}",
