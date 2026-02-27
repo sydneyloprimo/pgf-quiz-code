@@ -29,7 +29,7 @@ const FooterLinks = () => {
       )}
     >
       <Link href={Routes.home} aria-label={tFooter('logoAria')}>
-        <PGFTextLogo className="h-11 w-auto text-neutral-white" />
+        <PGFTextLogo className="h-11 lg:h-14 w-auto text-neutral-white" />
       </Link>
 
       <nav

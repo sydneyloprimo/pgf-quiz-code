@@ -29,19 +29,14 @@ const categories = [
 // Author data
 const authors = [
   {
-    name: 'Dr. Sarah Chen',
-    title: 'DVM, PhD in Veterinary Nutrition',
+    name: 'Dr. Corinne Wigfall',
+    title: 'BVMBVS(Hons) BVMedSci(Hons) MRCVS',
     imageUrl: 'https://i.pravatar.cc/300?img=47',
   },
   {
-    name: 'Dr. Michael Rodriguez',
-    title: 'DVM, Board Certified Veterinary Nutritionist',
+    name: 'Dr. Shannon Barrett',
+    title: 'DVM',
     imageUrl: 'https://i.pravatar.cc/300?img=12',
-  },
-  {
-    name: 'Dr. Emily Thompson',
-    title: 'DVM, DACVIM (Nutrition)',
-    imageUrl: 'https://i.pravatar.cc/300?img=44',
   },
 ]
 
