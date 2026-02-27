@@ -45,7 +45,7 @@ const RecipeDetails = () => {
             <h2 className="font-display text-2xl font-normal leading-normal text-tertiary-800">
               {block.heading}
             </h2>
-            <p className="font-sans text-base leading-relaxed text-neutral-800">
+            <p className="font-sans text-base leading-relaxed text-black">
               {block.paragraph}
             </p>
           </div>

@@ -32,7 +32,7 @@ const RecipeGuaranteedAnalysis = () => {
       <h2 className="font-display text-2xl font-normal leading-normal text-tertiary-800 mb-4">
         {t('title')}
       </h2>
-      <p className="font-sans text-base leading-relaxed text-neutral-800 mb-6">
+      <p className="font-sans text-base leading-relaxed text-black mb-6">
         {t(INTRO_KEYS[activeRecipe])}
       </p>
 

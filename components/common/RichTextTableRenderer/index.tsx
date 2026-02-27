@@ -46,12 +46,12 @@ function createOptions(): Options {
         )
       },
       [BLOCKS.TABLE_HEADER_CELL]: (_node, children) => (
-        <th className="py-3 px-4 text-left font-sans text-sm font-semibold text-tertiary-800 first:text-left not-first:text-center">
+        <th className="py-3 px-4 text-left font-sans text-sm font-semibold text-black first:text-left not-first:text-center">
           {children}
         </th>
       ),
       [BLOCKS.TABLE_CELL]: (_node, children) => (
-        <td className="py-3 px-4 font-sans text-sm text-tertiary-800 first:text-left not-first:text-center">
+        <td className="py-3 px-4 font-sans text-sm text-black first:text-left not-first:text-center">
           {children}
         </td>
       ),
