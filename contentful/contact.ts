@@ -49,9 +49,12 @@ export async function getContactInformation(
   }
 }
 
+const CONCIERGE_KEYS = Object.values(CONTACT_INFORMATION_KEYS)
+
 /**
  * Fetches all contact information entries and returns a map of key -> value.
- * Used for concierge email and phone.
+ * Used for concierge email and phone. Only fetches concierge-related keys to
+ * reduce payload and avoid scaling issues if more keys get added.
  */
 export async function getContactInformationMap(): Promise<
   Record<string, string>
@@ -64,7 +67,8 @@ export async function getContactInformationMap(): Promise<
     const response = await contentfulClient.getEntries({
       content_type: CONTENTFUL_CONTENT_TYPES.contactInformation,
       locale: CONTENTFUL_LOCALE,
-      limit: 100,
+      [`fields.${CONTENTFUL_FIELDS.key}[in]`]: CONCIERGE_KEYS.join(','),
+      limit: CONCIERGE_KEYS.length,
     })
 
     const result: Record<string, string> = {}
