@@ -92,7 +92,7 @@ const RecipeNutritionPanel = () => {
               </div>
               {isOpen && (
                 <div id={panelId} className="pb-4" aria-labelledby={headingId}>
-                  <p className="font-sans text-base leading-relaxed text-neutral-800 mb-4">
+                  <p className="font-sans text-base leading-relaxed text-black mb-4">
                     {t(section.subheadKey)}
                   </p>
                   {tableDoc && <RichTextTableRenderer content={tableDoc} />}
