@@ -13,6 +13,14 @@ import {
 import { QuizStep } from '@/types/enums/constants'
 
 const QUIZ_FORM_STORAGE_KEY = 'quiz-form-data'
+const QUIZ_PERSONAL_DATA_KEY = 'quiz-personal-data'
+
+export interface QuizPersonalData {
+  firstName?: string
+  lastName?: string
+  email?: string
+  zipCode?: string
+}
 
 export const getStoredFormData = (): Partial<QuizFormData> | null => {
   if (typeof window === 'undefined') {
@@ -43,6 +51,37 @@ export const clearFormData = () => {
   }
   try {
     window.localStorage.removeItem(QUIZ_FORM_STORAGE_KEY)
+  } catch {
+    // Ignore localStorage errors
+  }
+}
+
+export const getPersonalData = (): QuizPersonalData | null => {
+  if (typeof window === 'undefined') {
+    return null
+  }
+  try {
+    const stored = window.localStorage.getItem(QUIZ_PERSONAL_DATA_KEY)
+    return stored ? JSON.parse(stored) : null
+  } catch {
+    return null
+  }
+}
+
+export const savePersonalData = (data: QuizPersonalData) => {
+  if (typeof window === 'undefined') {
+    return
+  }
+  try {
+    window.localStorage.setItem(
+      QUIZ_PERSONAL_DATA_KEY,
+      JSON.stringify({
+        firstName: data.firstName?.trim() || undefined,
+        lastName: data.lastName?.trim() || undefined,
+        email: data.email?.trim() || undefined,
+        zipCode: data.zipCode?.trim() || undefined,
+      })
+    )
   } catch {
     // Ignore localStorage errors
   }

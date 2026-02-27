@@ -7,7 +7,7 @@ import { Controller, useWatch, UseFormReturn } from 'react-hook-form'
 import { Button } from '@/components/common/Button'
 import { ArrowLeftIcon } from '@/components/common/Icon'
 import Input from '@/components/common/Input'
-import { clearFormData } from '@/components/quiz/helpers'
+import { clearFormData, savePersonalData } from '@/components/quiz/helpers'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { useQuizEnrollment } from '@/hooks/useQuizEnrollment'
 import { QuizStep } from '@/types/enums/constants'
@@ -31,9 +31,16 @@ const QuizResultsBeta = ({
   const { control, handleSubmit: rhfHandleSubmit, getValues } = formMethods
 
   const handleSuccess = useCallback(() => {
+    const values = getValues()
     clearFormData()
+    savePersonalData({
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      zipCode: values.zipCode,
+    })
     goToStep(QuizStep.ConfirmationBeta)
-  }, [goToStep])
+  }, [getValues, goToStep])
 
   const { submitQuizEnrollment, isLoading, error } =
     useQuizEnrollment(handleSuccess)
