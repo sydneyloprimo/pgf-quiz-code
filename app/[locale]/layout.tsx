@@ -1,6 +1,7 @@
 import './globals.css'
 
 import { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import { PropsWithChildren } from 'react'
 import Providers from 'utils/Providers'
 import Session from 'utils/Session'
@@ -52,12 +53,14 @@ export default async function RootLayout({
   params,
 }: RootLayoutProps) {
   const { locale } = await params
+  const t = await getTranslations('ContactInfo')
+  const conciergeEmail = t('conciergeEmail')?.trim() || undefined
 
   return (
     <html className="bg-dark-violet" lang={locale}>
       <head>
         <HeadScripts />
-        <JsonLd data={organizationSchema()} />
+        <JsonLd data={organizationSchema({ email: conciergeEmail })} />
         <JsonLd data={websiteSchema()} />
       </head>
       <body className="flex items-center flex-col">

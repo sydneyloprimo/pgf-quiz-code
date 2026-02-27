@@ -41,6 +41,13 @@ const SECTION_CONTENT_TYPE_ID = 'section'
 const PAGE_CONTENT_TYPE_ID = 'page'
 const RICH_TEXT_PAGE_CONTENT_TYPE_ID = 'richTextPage'
 const FEATURE_FLAG_CONTENT_TYPE_ID = 'featureFlag'
+const CONTACT_INFORMATION_CONTENT_TYPE_ID = 'contactInformation'
+
+/** Contact information entries to ensure exist when syncing. */
+const CONTACT_INFORMATION_TO_SYNC: Array<{ key: string; value: string }> = [
+  { key: 'ConciergeEmail', value: 'concierge@purelygoldenfoods.com' },
+  { key: 'ConciergePhone', value: '+1 111 111 1111' },
+]
 
 /** Feature flags to ensure exist when syncing. Default enabled: true. */
 const FEATURE_FLAGS_TO_SYNC: Array<{ key: string; enabled: boolean }> = [
@@ -422,6 +429,67 @@ async function ensureFeatureFlagEntry(
   console.log(`Created feature flag: ${key} (enabled: ${enabled})`)
 }
 
+async function ensureContactInformationContentType(
+  environment: EnvironmentLike
+): Promise<void> {
+  const existing = await environment.getContentTypes()
+  const exists = existing.items.some(
+    (ct) => ct.sys.id === CONTACT_INFORMATION_CONTENT_TYPE_ID
+  )
+  if (exists) return
+
+  const ct = await environment.createContentTypeWithId(
+    CONTACT_INFORMATION_CONTENT_TYPE_ID,
+    {
+      name: 'Contact Information',
+      displayField: 'key',
+      fields: [
+        { id: 'key', name: 'Key', type: 'Symbol', required: true },
+        { id: 'value', name: 'Value', type: 'Text', required: true },
+      ],
+    }
+  )
+  await ct.publish()
+  console.log(`Created content type: ${CONTACT_INFORMATION_CONTENT_TYPE_ID}`)
+}
+
+async function ensureContactInformationEntry(
+  environment: EnvironmentLike,
+  key: string,
+  value: string
+): Promise<void> {
+  const entryId = key.toLowerCase().replace(/[^a-z0-9-]/g, '')
+
+  const existing = await environment.getEntries({
+    content_type: CONTACT_INFORMATION_CONTENT_TYPE_ID,
+    'fields.key': key,
+    limit: 1,
+  })
+
+  const fields: Record<string, Record<string, unknown>> = {
+    key: { [CONTENTFUL_LOCALE]: key },
+    value: { [CONTENTFUL_LOCALE]: value },
+  }
+
+  if (existing.items.length > 0) {
+    const entry = await environment.getEntry(existing.items[0].sys.id)
+    entry.fields.key = { [CONTENTFUL_LOCALE]: key }
+    entry.fields.value = { [CONTENTFUL_LOCALE]: value }
+    const updated = await entry.update()
+    await updated.publish()
+    console.log(`Updated contact information: ${key}`)
+    return
+  }
+
+  const entry = await environment.createEntryWithId(
+    CONTACT_INFORMATION_CONTENT_TYPE_ID,
+    entryId,
+    { fields }
+  )
+  await entry.publish()
+  console.log(`Created contact information: ${key}`)
+}
+
 /**
  * Recursively creates Section entries from an en.json object. Skips rich text document under PrivacyPolicy.content / TermsAndConditions.content.
  * Returns the entry ID of the created section, or null if this node should be skipped.
@@ -646,6 +714,7 @@ async function main(): Promise<void> {
   await ensurePageContentType(environment)
   await ensureRichTextPageContentType(environment)
   await ensureFeatureFlagContentType(environment)
+  await ensureContactInformationContentType(environment)
 
   const rootSectionIds = new Map<string, string>()
 
@@ -687,6 +756,11 @@ async function main(): Promise<void> {
   console.log('\nCreating feature flags...')
   for (const flag of FEATURE_FLAGS_TO_SYNC) {
     await ensureFeatureFlagEntry(environment, flag.key, flag.enabled)
+  }
+
+  console.log('\nCreating contact information...')
+  for (const item of CONTACT_INFORMATION_TO_SYNC) {
+    await ensureContactInformationEntry(environment, item.key, item.value)
   }
 
   console.log('\nSync complete.')

@@ -31,6 +31,7 @@ export default function RootLayout({
           'BlogPostCTA',
           'BlogPostPage',
           'Common',
+          'ContactInfo',
           'Formulation',
           'Home',
           'Recipes',
