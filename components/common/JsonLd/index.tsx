@@ -15,7 +15,14 @@ const JsonLd = ({ data }: JsonLdProps) => (
   />
 )
 
-const organizationSchema = (): JsonLdData => ({
+interface OrganizationSchemaOptions {
+  /** Concierge email from Contentful. Falls back to constant if not provided. */
+  email?: string
+}
+
+const organizationSchema = (
+  options?: OrganizationSchemaOptions
+): JsonLdData => ({
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Purely Golden Foods',
@@ -24,7 +31,7 @@ const organizationSchema = (): JsonLdData => ({
   sameAs: ['https://www.instagram.com/purelygoldenfoods'],
   contactPoint: {
     '@type': 'ContactPoint',
-    email: CONCIERGE_EMAIL,
+    email: options?.email ?? CONCIERGE_EMAIL,
     contactType: 'customer service',
   },
 })

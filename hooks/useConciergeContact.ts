@@ -1,5 +1,6 @@
 'use client'
 
+import { useTranslations } from 'next-intl'
 import { useEffect, useState } from 'react'
 
 import { CONCIERGE_EMAIL, CONCIERGE_PHONE, MediaQuery } from '@/constants'
@@ -15,8 +16,15 @@ interface ConciergeContact {
  *
  * - Tablet/Desktop (>= 768px): Returns mailto: link
  * - Mobile (< 768px): Returns tel: link
+ *
+ * Contact info is sourced from Contentful (ContactInfo) with fallback to
+ * constants when Contentful is unavailable.
  */
 export const useConciergeContact = (): ConciergeContact => {
+  const t = useTranslations('ContactInfo')
+  const email = t('conciergeEmail') || CONCIERGE_EMAIL
+  const phone = t('conciergePhone') || CONCIERGE_PHONE
+
   const [isTabletOrLarger, setIsTabletOrLarger] = useState(true)
 
   useEffect(() => {
@@ -32,8 +40,8 @@ export const useConciergeContact = (): ConciergeContact => {
   }, [])
 
   const href = isTabletOrLarger
-    ? `mailto:${CONCIERGE_EMAIL}`
-    : `tel:${CONCIERGE_PHONE.replace(/\s/g, '')}`
+    ? `mailto:${email}`
+    : `tel:${phone.replace(/\s/g, '')}`
 
   return { href, isTabletOrLarger }
 }

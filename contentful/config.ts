@@ -7,6 +7,7 @@ export const CONTENTFUL_CONTENT_TYPES = {
   author: 'author',
   blogPost: 'blogPost',
   category: 'category',
+  contactInformation: 'contactInformation',
   customerReview: 'customerReview',
   featureFlag: 'featureFlag',
   tableRichText: 'tableRichText',
@@ -22,6 +23,12 @@ export const CONTENTFUL_FIELDS = {
   key: 'key',
   slug: 'slug',
   table: 'table',
+  value: 'value',
+} as const
+
+export const CONTACT_INFORMATION_KEYS = {
+  conciergeEmail: 'ConciergeEmail',
+  conciergePhone: 'ConciergePhone',
 } as const
 
 export const CONTENTFUL_QUERY_DEFAULTS = {
