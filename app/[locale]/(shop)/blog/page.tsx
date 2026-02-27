@@ -8,7 +8,8 @@ import { BrowseByTopic } from '@/components/blog/BrowseByTopic'
 import { FeaturedBlogPost } from '@/components/blog/FeaturedBlogPost'
 import { MeetTheContributors } from '@/components/blog/MeetTheContributors'
 import {
-  BLOG_FEATURED_IMAGE_PATH,
+  BLOG_FEATURED_IMAGE_DESKTOP_PATH,
+  BLOG_FEATURED_IMAGE_MOBILE_PATH,
   BLOG_INDEX_POSTS_PER_PAGE,
   MAIN_CONTENT_ID,
 } from '@/constants'
@@ -74,7 +75,8 @@ export default async function BlogIndexPage({
       {featuredPost && (
         <FeaturedBlogPost
           post={featuredPost}
-          imageSrc={BLOG_FEATURED_IMAGE_PATH}
+          imageDesktopSrc={BLOG_FEATURED_IMAGE_DESKTOP_PATH}
+          imageMobileSrc={BLOG_FEATURED_IMAGE_MOBILE_PATH}
         />
       )}
       <BlogList

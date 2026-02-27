@@ -1,7 +1,10 @@
-import Image from 'next/image'
+'use client'
+
 import { useTranslations } from 'next-intl'
+import { useEffect, useState } from 'react'
 
 import { Link } from '@/components/common/Link'
+import { MOBILE_WIDTH } from '@/constants'
 import { BlogPostEntry } from '@/contentful/types'
 import { CategoryEntry } from '@/contentful/types'
 import { Routes } from '@/types/enums/routes'
@@ -17,11 +20,27 @@ function isResolvedCategory(cat: unknown): cat is CategoryEntry {
 
 interface FeaturedBlogPostProps {
   post: BlogPostEntry
-  imageSrc: string
+  imageDesktopSrc: string
+  imageMobileSrc: string
 }
 
-const FeaturedBlogPost = ({ post, imageSrc }: FeaturedBlogPostProps) => {
+const FeaturedBlogPost = ({
+  post,
+  imageDesktopSrc,
+  imageMobileSrc,
+}: FeaturedBlogPostProps) => {
   const t = useTranslations('BlogIndex.FeaturedBlogPost')
+  const [imageSrc, setImageSrc] = useState(imageDesktopSrc)
+
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${MOBILE_WIDTH}px)`)
+    const updateSrc = () => {
+      setImageSrc(mq.matches ? imageMobileSrc : imageDesktopSrc)
+    }
+    updateSrc()
+    mq.addEventListener('change', updateSrc)
+    return () => mq.removeEventListener('change', updateSrc)
+  }, [imageDesktopSrc, imageMobileSrc])
   const { title, slug, author, categories } = post.fields
   const authorResolved =
     author && typeof author === 'object' && 'fields' in author
@@ -47,13 +66,11 @@ const FeaturedBlogPost = ({ post, imageSrc }: FeaturedBlogPostProps) => {
     <section className="w-full px-5 py-8 lg:px-24">
       <div className="relative mx-auto max-w-6xl overflow-hidden">
         <div className="relative aspect-21/9 w-full min-h-64">
-          <Image
+          <img
             src={imageSrc}
             alt={t('featuredImageAlt', { title })}
-            fill
-            className="object-cover"
-            sizes="(min-width: 1024px) 1152px, 100vw"
-            priority
+            className="absolute inset-0 size-full object-cover"
+            fetchPriority="high"
           />
           <div
             className="absolute inset-0 bg-gradient-to-b from-neutral-950/85 via-neutral-950/50 to-neutral-950/60"
