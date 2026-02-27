@@ -104,6 +104,9 @@ const FooterJoinWaitlist = () => {
             )}
             aria-label={t('emailAria')}
           />
+          {/* Intentionally omit !email.trim() per product requirements:
+              footer CTA should stay enabled for lower friction signup.
+              HTML5 type="email" provides basic validation on submit. */}
           <Button
             type="submit"
             variant="primary"
