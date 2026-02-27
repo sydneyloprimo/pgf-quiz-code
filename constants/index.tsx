@@ -745,7 +745,7 @@ export const PRODUCT_DETAIL_IMAGES = {
 // Pack size constant (8oz in grams)
 export const PACK_SIZE_GRAMS = 226.796 // 8 * 28.3495
 
-// Product configuration for cart operations
+// Product configuration for cart operations (from env vars)
 export interface ProductConfig {
   variantId: string
   sellingPlanIds: {
@@ -754,10 +754,8 @@ export interface ProductConfig {
   }
 }
 
-export const PRODUCT_CONFIGS: Record<
-  'turkey' | 'lamb' | 'pancreatic',
-  ProductConfig
-> = {
+// Default IDs when env vars are not set (e.g. .env.local not loaded)
+const DEFAULTS = {
   turkey: {
     variantId: 'gid://shopify/ProductVariant/47241921626333',
     sellingPlanIds: {
@@ -780,6 +778,51 @@ export const PRODUCT_CONFIGS: Record<
     },
   },
 } as const
+
+const getProductConfigs = (): Record<
+  'turkey' | 'lamb' | 'pancreatic',
+  ProductConfig
+> => ({
+  turkey: {
+    variantId:
+      process.env.NEXT_PUBLIC_TURKEY_VARIANT_ID || DEFAULTS.turkey.variantId,
+    sellingPlanIds: {
+      weekly:
+        process.env.NEXT_PUBLIC_TURKEY_SELLING_PLAN_WEEKLY ||
+        DEFAULTS.turkey.sellingPlanIds.weekly,
+      biweekly:
+        process.env.NEXT_PUBLIC_TURKEY_SELLING_PLAN_BIWEEKLY ||
+        DEFAULTS.turkey.sellingPlanIds.biweekly,
+    },
+  },
+  lamb: {
+    variantId:
+      process.env.NEXT_PUBLIC_LAMB_VARIANT_ID || DEFAULTS.lamb.variantId,
+    sellingPlanIds: {
+      weekly:
+        process.env.NEXT_PUBLIC_LAMB_SELLING_PLAN_WEEKLY ||
+        DEFAULTS.lamb.sellingPlanIds.weekly,
+      biweekly:
+        process.env.NEXT_PUBLIC_LAMB_SELLING_PLAN_BIWEEKLY ||
+        DEFAULTS.lamb.sellingPlanIds.biweekly,
+    },
+  },
+  pancreatic: {
+    variantId:
+      process.env.NEXT_PUBLIC_PANCREATIC_VARIANT_ID ||
+      DEFAULTS.pancreatic.variantId,
+    sellingPlanIds: {
+      weekly:
+        process.env.NEXT_PUBLIC_PANCREATIC_SELLING_PLAN_WEEKLY ||
+        DEFAULTS.pancreatic.sellingPlanIds.weekly,
+      biweekly:
+        process.env.NEXT_PUBLIC_PANCREATIC_SELLING_PLAN_BIWEEKLY ||
+        DEFAULTS.pancreatic.sellingPlanIds.biweekly,
+    },
+  },
+})
+
+export const PRODUCT_CONFIGS = getProductConfigs()
 
 // Side panel width (design-specific)
 export const SIDE_PANEL_WIDTH = 500
