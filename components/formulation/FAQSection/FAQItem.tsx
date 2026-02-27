@@ -18,7 +18,7 @@ export const FAQItem = ({
   toggleAriaLabel,
 }: FAQItemProps) => {
   return (
-    <div className={'w-full border-b-2 border-tertiary-400'}>
+    <div className="w-full border-b-2 border-neutral-black">
       <button
         type="button"
         onClick={onToggle}
@@ -35,7 +35,7 @@ export const FAQItem = ({
             {question}
           </h4>
         </div>
-        <span className="flex flex-col items-center justify-center border-b border-tertiary-400 pb-1">
+        <span className="flex flex-col items-center justify-center border-b border-neutral-black pb-1">
           {isOpen ? (
             <MinusIcon className="w-6 h-6 text-quaternary-800 cursor-pointer" />
           ) : (
