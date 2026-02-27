@@ -12,7 +12,7 @@ const GallerySection = () => {
   }))
 
   return (
-    <section className="w-full px-5 lg:px-24 py-0 my-14 flex justify-center">
+    <section className="w-full pl-5 lg:px-24 py-0 my-14 flex justify-center">
       {/* Mobile/Tablet: Horizontal scrollable carousel with peek */}
       <div className="flex lg:hidden overflow-x-auto snap-x snap-mandatory gap-6 w-full -mx-5 pl-5 pr-0">
         {images.map((image, index) => (
