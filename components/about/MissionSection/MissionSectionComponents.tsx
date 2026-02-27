@@ -112,8 +112,8 @@ const MissionSecondRow = ({
     <MissionImage
       src="/images/about/mission-2.jpg"
       alt={image2Alt}
-      className="w-lg h-160 shrink-0"
-      sizes="514px"
+      className="w-110 h-144 shrink-0"
+      sizes="440px"
     />
   </div>
 )
