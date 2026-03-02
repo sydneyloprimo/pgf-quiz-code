@@ -7,7 +7,7 @@ const FooterImage = () => {
         src="/images/home/footer-dog.png"
         alt=""
         fill
-        className="object-cover"
+        className="object-cover object-top"
         aria-hidden="true"
       />
     </div>
