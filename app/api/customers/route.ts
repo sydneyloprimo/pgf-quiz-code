@@ -180,10 +180,11 @@ export async function POST(request: NextRequest) {
     const data: ShopifyCustomerResponse = await response.json()
 
     if (!response.ok) {
-      if (
-        data.errors?.email?.includes('has already been taken') &&
-        note?.trim()
-      ) {
+      const isEmailAlreadyTaken = data.errors?.email?.some((msg) =>
+        msg.toLowerCase().includes('already been taken')
+      )
+
+      if (isEmailAlreadyTaken && note?.trim()) {
         const updateResult = await updateExistingCustomerWithQuizData({
           adminToken,
           email,
@@ -195,6 +196,13 @@ export async function POST(request: NextRequest) {
         if (updateResult) {
           return NextResponse.json(updateResult)
         }
+      }
+
+      if (isEmailAlreadyTaken) {
+        return NextResponse.json(
+          { error: 'EMAIL_ALREADY_EXISTS' },
+          { status: 409 }
+        )
       }
 
       console.error('Shopify Admin API error:', data.errors)
