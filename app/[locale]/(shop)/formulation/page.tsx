@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 
 import { breadcrumbSchema, faqSchema, JsonLd } from '@/components/common/JsonLd'
 import {
@@ -13,8 +13,17 @@ import {
   PrecisionBatchSection,
 } from '@/components/formulation'
 import { FAQ_ITEMS, MAIN_CONTENT_ID, SITE_URL } from '@/constants'
+import { Locale } from '@/i18n'
 
-export async function generateMetadata(): Promise<Metadata> {
+type FormulationPageMetadataProps = {
+  params: Promise<{ locale: Locale }>
+}
+
+export async function generateMetadata({
+  params,
+}: FormulationPageMetadataProps): Promise<Metadata> {
+  const { locale } = await params
+  setRequestLocale(locale)
   const t = await getTranslations('Formulation')
   return {
     title: t('Hero.title'),
@@ -26,7 +35,15 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default async function FormulationPage() {
+type FormulationPageProps = {
+  params: Promise<{ locale: Locale }>
+}
+
+export default async function FormulationPage({
+  params,
+}: FormulationPageProps) {
+  const { locale } = await params
+  setRequestLocale(locale)
   const t = await getTranslations('Formulation.FAQ')
 
   const faqItems = FAQ_ITEMS.map((faq) => ({

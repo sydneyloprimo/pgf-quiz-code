@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 
 import { CommitmentSection } from '@/components/about/CommitmentSection'
 import { CTASection } from '@/components/about/CTASection'
@@ -12,8 +12,17 @@ import { ValuesSection } from '@/components/about/ValuesSection'
 import { breadcrumbSchema, JsonLd } from '@/components/common/JsonLd'
 import { MAIN_CONTENT_ID, SITE_URL } from '@/constants'
 import { getExpertsSection } from '@/contentful/experts'
+import { Locale } from '@/i18n'
 
-export async function generateMetadata(): Promise<Metadata> {
+type AboutPageMetadataProps = {
+  params: Promise<{ locale: Locale }>
+}
+
+export async function generateMetadata({
+  params,
+}: AboutPageMetadataProps): Promise<Metadata> {
+  const { locale } = await params
+  setRequestLocale(locale)
   const t = await getTranslations('About')
   return {
     title: t('Hero.title'),
@@ -26,11 +35,12 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 type AboutPageProps = {
-  params: Promise<{ locale: string }>
+  params: Promise<{ locale: Locale }>
 }
 
 export default async function AboutPage({ params }: AboutPageProps) {
   const { locale } = await params
+  setRequestLocale(locale)
   const expertsSectionContent = await getExpertsSection(locale)
 
   return (

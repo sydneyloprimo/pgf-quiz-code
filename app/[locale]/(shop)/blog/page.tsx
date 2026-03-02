@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 
 import { BlogEmptyState } from '@/components/blog/BlogEmptyState'
 import { BlogIndexHero } from '@/components/blog/BlogIndexHero'
@@ -19,15 +19,25 @@ import {
   getBlogPostsForIndex,
   getCategories,
 } from '@/contentful/queries'
+import { Locale } from '@/i18n'
 
 interface BlogIndexPageProps {
+  params: Promise<{ locale: Locale }>
   searchParams: Promise<{
     category?: string
     page?: string
   }>
 }
 
-export async function generateMetadata(): Promise<Metadata> {
+type BlogIndexMetadataProps = {
+  params: Promise<{ locale: Locale }>
+}
+
+export async function generateMetadata({
+  params,
+}: BlogIndexMetadataProps): Promise<Metadata> {
+  const { locale } = await params
+  setRequestLocale(locale)
   const t = await getTranslations('BlogIndex')
   const headline = t('heroHeadline')
   return {
@@ -41,11 +51,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function BlogIndexPage({
+  params,
   searchParams,
 }: BlogIndexPageProps) {
-  const params = await searchParams
-  const categorySlug = params.category ?? null
-  const pageRaw = params.page
+  const { locale } = await params
+  setRequestLocale(locale)
+  const searchParamsResolved = await searchParams
+  const categorySlug = searchParamsResolved.category ?? null
+  const pageRaw = searchParamsResolved.page
   const currentPage = Math.max(1, Number.parseInt(String(pageRaw), 10) || 1)
 
   const [categories, authors, allPosts] = await Promise.all([

@@ -1,4 +1,4 @@
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 
 import { breadcrumbSchema, faqSchema, JsonLd } from '@/components/common/JsonLd'
 import { BenefitsSection } from '@/components/home/BenefitsSection'
@@ -19,8 +19,15 @@ import {
 } from '@/constants'
 import { getFeatureFlag } from '@/contentful/featureFlags'
 import { getCustomerReviews } from '@/contentful/reviews'
+import { Locale } from '@/i18n'
 
-export default async function Home() {
+type HomePageProps = {
+  params: Promise<{ locale: Locale }>
+}
+
+export default async function Home({ params }: HomePageProps) {
+  const { locale } = await params
+  setRequestLocale(locale)
   const t = await getTranslations('Home.FAQ')
 
   const faqItems = FAQS_DATA.map((faq) => ({

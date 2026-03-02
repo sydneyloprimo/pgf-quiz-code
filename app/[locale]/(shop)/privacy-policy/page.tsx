@@ -1,19 +1,21 @@
 import type { Document } from '@contentful/rich-text-types'
-import { getMessages } from 'next-intl/server'
+import { getMessages, setRequestLocale } from 'next-intl/server'
 
 import { PageHero } from '@/components/common/PageHero'
 import { RichTextRenderer } from '@/components/common/RichTextRenderer'
 import { MAIN_CONTENT_ID } from '@/constants'
 import { getRichTextCopy } from '@/contentful/copy'
+import { Locale } from '@/i18n'
 
 type PrivacyPolicyPageProps = {
-  params: Promise<{ locale: string }>
+  params: Promise<{ locale: Locale }>
 }
 
 export default async function PrivacyPolicyPage({
   params,
 }: PrivacyPolicyPageProps) {
   const { locale } = await params
+  setRequestLocale(locale)
   const contentfulContent = await getRichTextCopy(
     'PrivacyPolicy.content',
     locale

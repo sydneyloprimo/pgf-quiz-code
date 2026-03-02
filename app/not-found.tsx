@@ -1,5 +1,6 @@
 import './[locale]/globals.css'
 
+import { setRequestLocale } from 'next-intl/server'
 import Providers from 'utils/Providers'
 
 import { NotFoundPage } from '@/components/not-found/NotFoundPage'
@@ -8,6 +9,7 @@ import { Locale } from '@/i18n'
 const localeParams = Promise.resolve({ locale: Locale.EN })
 
 export default function NotFound() {
+  setRequestLocale(Locale.EN)
   return (
     <Providers params={localeParams}>
       <NotFoundPage params={localeParams} />
