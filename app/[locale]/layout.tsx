@@ -42,6 +42,32 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: [
+      {
+        url: '/icons/favicon-16.svg',
+        sizes: '16x16',
+        type: 'image/svg+xml',
+      },
+      {
+        url: '/icons/favicon-32.svg',
+        sizes: '32x32',
+        type: 'image/svg+xml',
+      },
+      {
+        url: '/icons/android-chrome-192.svg',
+        sizes: '192x192',
+        type: 'image/svg+xml',
+      },
+    ],
+    apple: [
+      {
+        url: '/icons/apple-touch-icon.svg',
+        sizes: '180x180',
+        type: 'image/svg+xml',
+      },
+    ],
+  },
 }
 
 type RootLayoutProps = PropsWithChildren<{
