@@ -556,30 +556,6 @@ export const BENEFITS_DATA: BenefitData[] = [
   {
     titleKey: 'benefit2Title',
     descriptionKey: 'benefit2Description',
-    pointerLabelKey: 'pointerQuality',
-    pointerPosition: {
-      mobile: { bottom: '11%', right: '56%' },
-      md: { bottom: '15%', right: '68%' },
-      lg: { bottom: '15%', right: '66%' },
-    },
-    labelSide: 'left',
-    benefitIndex: 1,
-  },
-  {
-    titleKey: 'benefit3Title',
-    descriptionKey: 'benefit3Description',
-    pointerLabelKey: 'pointerMicrobiome',
-    pointerPosition: {
-      mobile: { top: '68%', right: '39%' },
-      md: { top: '70%', right: '53%' },
-      lg: { top: '70%', left: '6%' },
-    },
-    labelSide: 'left',
-    benefitIndex: 2,
-  },
-  {
-    titleKey: 'benefit4Title',
-    descriptionKey: 'benefit4Description',
     pointerLabelKey: 'pointerEnergy',
     pointerPosition: {
       mobile: { top: '48%', left: '50%' },
@@ -587,11 +563,11 @@ export const BENEFITS_DATA: BenefitData[] = [
       lg: { top: '48%', left: '65%' },
     },
     labelSide: 'right',
-    benefitIndex: 3,
+    benefitIndex: 1,
   },
   {
-    titleKey: 'benefit5Title',
-    descriptionKey: 'benefit5Description',
+    titleKey: 'benefit3Title',
+    descriptionKey: 'benefit3Description',
     pointerLabelKey: 'pointerDigestive',
     pointerPosition: {
       mobile: { top: '59%', left: '46%' },
@@ -599,6 +575,30 @@ export const BENEFITS_DATA: BenefitData[] = [
       lg: { bottom: '30%', left: '60%' },
     },
     labelSide: 'right',
+    benefitIndex: 2,
+  },
+  {
+    titleKey: 'benefit4Title',
+    descriptionKey: 'benefit4Description',
+    pointerLabelKey: 'pointerMicrobiome',
+    pointerPosition: {
+      mobile: { top: '68%', right: '39%' },
+      md: { top: '70%', right: '53%' },
+      lg: { top: '70%', left: '6%' },
+    },
+    labelSide: 'left',
+    benefitIndex: 3,
+  },
+  {
+    titleKey: 'benefit5Title',
+    descriptionKey: 'benefit5Description',
+    pointerLabelKey: 'pointerQuality',
+    pointerPosition: {
+      mobile: { bottom: '11%', right: '56%' },
+      md: { bottom: '15%', right: '68%' },
+      lg: { bottom: '15%', right: '66%' },
+    },
+    labelSide: 'left',
     benefitIndex: 4,
   },
 ] as const
