@@ -24,10 +24,10 @@ const QuizNeuteredStatus = ({
 }: QuizNeuteredStatusProps) => {
   const t = useTranslations('Quiz.neuteredStatus')
   const tQuiz = useTranslations('Quiz')
-  const { control, watch } = formMethods
+  const { control } = formMethods
 
-  const dogName = watch('name') || ''
-  const gender = watch('gender') as 'male' | 'female' | undefined
+  const dogName = useWatch({ control, name: 'name' })
+  const gender = useWatch({ control, name: 'gender' }) as 'male' | 'female'
   const selectedNeuteredStatus = useWatch({
     control,
     name: 'neuteredStatus',
