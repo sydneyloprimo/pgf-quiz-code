@@ -104,6 +104,7 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
     resolver: zodResolver(quizFormSchema),
     defaultValues,
     mode: 'onChange',
+    shouldUnregister: false,
   })
 
   // Load stored values on mount after hydration
