@@ -2,13 +2,15 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 import { z } from 'zod'
 
 import { Button } from '@/components/common/Button'
 import Input from '@/components/common/Input'
 import { Modal } from '@/components/common/Modal'
+import Toast, { ToastTypes } from '@/components/common/Toast'
 
 interface EditProfileModalProps {
   isOpen: boolean
@@ -45,7 +47,7 @@ const EditProfileModal = ({
 
   const {
     control,
-    formState: { errors },
+    formState: { errors, isDirty, dirtyFields },
     handleSubmit: rhfHandleSubmit,
     reset,
   } = useForm<FormData>({
@@ -58,6 +60,8 @@ const EditProfileModal = ({
     resolver: zodResolver(validationSchema),
   })
 
+  const [hasSubmitError, setHasSubmitError] = useState(false)
+
   useEffect(() => {
     if (isOpen) {
       reset({
@@ -65,22 +69,52 @@ const EditProfileModal = ({
         lastName: initialLastName,
         birthdate: initialBirthdate,
       })
+      setHasSubmitError(false)
     }
   }, [isOpen, initialFirstName, initialLastName, initialBirthdate, reset])
 
   const handleClose = useCallback(() => {
     reset()
+    setHasSubmitError(false)
     onClose()
   }, [reset, onClose])
 
   const onSubmitForm: SubmitHandler<FormData> = async (data) => {
-    try {
-      await onUpdateName(data.firstName, data.lastName)
-      await onUpdateBirthdate(data.birthdate)
+    const [nameResult, birthdateResult] = await Promise.allSettled([
+      onUpdateName(data.firstName, data.lastName),
+      onUpdateBirthdate(data.birthdate),
+    ])
+
+    const nameFailed = nameResult.status === 'rejected'
+    const birthdateFailed = birthdateResult.status === 'rejected'
+
+    if (nameFailed || birthdateFailed) {
+      setHasSubmitError(true)
+
+      const errorKey =
+        nameFailed && birthdateFailed
+          ? 'errors.updateFailed'
+          : nameFailed
+            ? 'errors.nameUpdateFailed'
+            : 'errors.birthdateUpdateFailed'
+
+      toast(
+        <Toast
+          type={ToastTypes.error}
+          title={t(errorKey)}
+          iconAlt={t('errors.updateFailedIconAlt')}
+        />
+      )
+    } else {
+      setHasSubmitError(false)
+    }
+
+    if (!nameFailed || !birthdateFailed) {
       onSaveSuccess()
+    }
+
+    if (!nameFailed && !birthdateFailed) {
       handleClose()
-    } catch (error) {
-      console.error('Error updating profile', error)
     }
   }
 
@@ -172,6 +206,7 @@ const EditProfileModal = ({
           <Button
             type="submit"
             variant="primary"
+            disabled={!isDirty && !hasSubmitError}
             className="w-full md:w-auto md:flex-1"
           >
             {t('saveButton')}

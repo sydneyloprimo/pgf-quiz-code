@@ -503,7 +503,11 @@
         "birthdateInvalid": "Enter a valid date (YYYY-MM-DD)",
         "birthdateRequired": "Birthdate is required",
         "firstNameRequired": "First name is required",
-        "lastNameRequired": "Last name is required"
+        "lastNameRequired": "Last name is required",
+        "birthdateUpdateFailed": "Could not update your birthdate. Please try again.",
+        "nameUpdateFailed": "Could not update your name. Please try again.",
+        "updateFailed": "Could not update your profile. Please try again.",
+        "updateFailedIconAlt": "Error icon"
       },
       "firstNameLabel": "First name",
       "heading": "Update your profile",
