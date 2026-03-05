@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useCallback, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 
@@ -20,6 +20,7 @@ import { Routes } from '@/types/enums/routes'
 
 const ProfileHeader = () => {
   const t = useTranslations('Profile')
+  const locale = useLocale()
   const router = useRouter()
   const [cookies, , removeCookie] = useCookies([Cookies.customerAccessToken])
 
@@ -58,7 +59,7 @@ const ProfileHeader = () => {
   const firstName = customer?.firstName || ''
   const lastName = customer?.lastName || ''
   const createdAt = customer?.createdAt
-    ? new Date(customer.createdAt).toLocaleDateString('en-US', {
+    ? new Date(customer.createdAt).toLocaleDateString(locale, {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
@@ -149,11 +150,14 @@ const ProfileHeader = () => {
           {birthdate && (
             <p className="text-body-m text-quaternary-100">
               {t('birthdate')}:{' '}
-              {new Date(birthdate).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
+              {new Date(`${birthdate}T00:00:00`).toLocaleDateString(
+                locale ?? 'en-US',
+                {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                }
+              )}
             </p>
           )}
           <p className="text-sm md:text-body-m text-quaternary-100 md:hidden">
