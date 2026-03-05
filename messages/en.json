@@ -460,6 +460,7 @@
   "Profile": {
     "accountCreated": "Account created on {date}",
     "address": "Address",
+    "birthdate": "Birthdate",
     "ChangePasswordModal": {
       "ariaLabel": "Change password form",
       "cancelButton": "Cancel",
@@ -491,6 +492,23 @@
       "confirmButton": "Delete Account",
       "description": "Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently removed.",
       "heading": "Delete Account"
+    },
+    "editProfile": "Edit profile",
+    "EditProfileModal": {
+      "ariaLabel": "Edit profile form",
+      "birthdateLabel": "Birthdate",
+      "cancelButton": "Cancel",
+      "closeButtonLabel": "Close edit profile modal",
+      "errors": {
+        "birthdateInvalid": "Enter a valid date (YYYY-MM-DD)",
+        "birthdateRequired": "Birthdate is required",
+        "firstNameRequired": "First name is required",
+        "lastNameRequired": "Last name is required"
+      },
+      "firstNameLabel": "First name",
+      "heading": "Update your profile",
+      "lastNameLabel": "Last name",
+      "saveButton": "Save"
     },
     "logOut": "Log out",
     "LogoutModal": {
@@ -961,8 +979,12 @@
     "emailRequired": "Email is required",
     "formHeading": "Create your Account",
     "formSubHeading": "Offer your dog refined, ethically crafted nourishment.",
+    "firstNamePlaceholder": "First name",
+    "firstNameRequired": "First name is required",
     "heroDescription": "Prepared with timeless craftsmanship, guided by science, tailored to their needs.",
     "heroHeading": "Offer your dog refined, ethically crafted nourishment.",
+    "lastNamePlaceholder": "Last name",
+    "lastNameRequired": "Last name is required",
     "logoAlt": "Purely Golden Foods logo",
     "passwordLength": "Password must be at least 8 characters",
     "passwordPattern": "Password should have at least one number, one uppercase letter and one lowercase letter",
