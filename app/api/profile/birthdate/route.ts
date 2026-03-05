@@ -102,17 +102,19 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json()
-    const { customerAccessToken, birthdate } = body as {
-      customerAccessToken?: string
-      birthdate?: string
-    }
+    const authHeader = request.headers.get('Authorization')
+    const customerAccessToken = authHeader?.replace(/^Bearer\s+/i, '')?.trim()
 
-    if (!customerAccessToken || typeof customerAccessToken !== 'string') {
+    if (!customerAccessToken) {
       return NextResponse.json(
         { error: 'CUSTOMER_ACCESS_TOKEN_REQUIRED' },
-        { status: 400 }
+        { status: 401 }
       )
+    }
+
+    const body = await request.json()
+    const { birthdate } = body as {
+      birthdate?: string
     }
 
     const trimmedBirthdate =

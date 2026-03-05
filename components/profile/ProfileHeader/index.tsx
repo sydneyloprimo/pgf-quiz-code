@@ -103,9 +103,11 @@ const ProfileHeader = () => {
     async (birthdateValue: string) => {
       const res = await fetch('/api/profile/birthdate', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${customerAccessToken}`,
+        },
         body: JSON.stringify({
-          customerAccessToken,
           birthdate: birthdateValue,
         }),
       })

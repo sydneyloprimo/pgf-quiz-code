@@ -500,7 +500,7 @@
       "cancelButton": "Cancel",
       "closeButtonLabel": "Close edit profile modal",
       "errors": {
-        "birthdateInvalid": "Enter a valid date (YYYY-MM-DD)",
+        "birthdateInvalid": "Please select a valid date",
         "birthdateRequired": "Birthdate is required",
         "firstNameRequired": "First name is required",
         "lastNameRequired": "Last name is required",

@@ -47,7 +47,7 @@ const EditProfileModal = ({
 
   const {
     control,
-    formState: { errors, isDirty, dirtyFields },
+    formState: { isDirty },
     handleSubmit: rhfHandleSubmit,
     reset,
   } = useForm<FormData>({
@@ -190,6 +190,7 @@ const EditProfileModal = ({
                 onChange={onChange}
                 onBlur={onBlur}
                 error={error?.message}
+                autoComplete="bday"
               />
             )}
           />
