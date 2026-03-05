@@ -30,7 +30,7 @@ const FooterLinks = () => {
       <Link href={Routes.home} aria-label={tFooter('logoAria')}>
         <Image
           src="/icons/footer-logo.svg"
-          alt=""
+          alt={tFooter('logoAlt')}
           width={194}
           height={24}
           className="w-80 h-auto"

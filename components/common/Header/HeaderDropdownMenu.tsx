@@ -75,18 +75,18 @@ const HeaderDropdownMenu = ({
         )}
       >
         <span className="hidden md:inline">{t('myAccount')}</span>
-        <div className="hidden md:block" aria-hidden="true">
+        <div className="hidden md:block">
           {isOpen ? (
             <ContentfulImage
               src="/icons/chevron-up.svg"
-              alt=""
+              alt={t('chevronUpAlt')}
               width={14}
               height={8}
             />
           ) : (
             <ContentfulImage
               src="/icons/chevron-down.svg"
-              alt=""
+              alt={t('chevronDownAlt')}
               width={14}
               height={8}
             />
