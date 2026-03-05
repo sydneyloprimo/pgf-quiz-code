@@ -1,40 +1,37 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const STOREFRONT_URL = `https://${process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN}/api/${process.env.NEXT_PUBLIC_SHOPIFY_API_VERSION}/graphql.json`
-const ADMIN_URL = `https://${process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN}/admin/api/${process.env.NEXT_PUBLIC_SHOPIFY_API_VERSION}/graphql.json`
+import { client } from '@/shopify/client'
+import { GetCustomerDocument } from '@/shopify/generated/graphql'
+
+const SHOPIFY_STORE_DOMAIN = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN
+const SHOPIFY_API_VERSION = process.env.NEXT_PUBLIC_SHOPIFY_API_VERSION
+const ADMIN_URL = `https://${SHOPIFY_STORE_DOMAIN}/admin/api/${SHOPIFY_API_VERSION}/graphql.json`
 
 const BIRTHDATE_NAMESPACE = 'custom'
 const BIRTHDATE_KEY = 'birthdate'
 
+const BIRTHDATE_DATE_REGEX = /^\d{4}-\d{2}-\d{2}$/
+
+interface BirthdatePostBody {
+  birthdate?: string
+}
+
 async function resolveCustomerGid(
   customerAccessToken: string
 ): Promise<string | null> {
-  const storefrontToken =
-    process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN
-  if (!storefrontToken) return null
-
-  const res = await fetch(STOREFRONT_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Shopify-Storefront-Access-Token': storefrontToken,
-    },
-    body: JSON.stringify({
-      query: `query getCustomerId($token: String!) {
-        customer(customerAccessToken: $token) { id }
-      }`,
-      variables: { token: customerAccessToken },
-    }),
-  })
-
-  if (!res.ok) return null
-  const json = await res.json()
-  return json?.data?.customer?.id ?? null
+  try {
+    const data = await client.request(GetCustomerDocument, {
+      customerAccessToken,
+    })
+    return data?.customer?.id ?? null
+  } catch {
+    return null
+  }
 }
 
 export async function GET(request: NextRequest) {
   try {
-    const authHeader = request.headers.get('Authorization')
+    const authHeader = request.headers.get('authorization')
     const customerAccessToken = authHeader?.replace(/^Bearer\s+/i, '')?.trim()
 
     if (!customerAccessToken) {
@@ -102,7 +99,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const authHeader = request.headers.get('Authorization')
+    const authHeader = request.headers.get('authorization')
     const customerAccessToken = authHeader?.replace(/^Bearer\s+/i, '')?.trim()
 
     if (!customerAccessToken) {
@@ -112,10 +109,8 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const body = await request.json()
-    const { birthdate } = body as {
-      birthdate?: string
-    }
+    const body = (await request.json()) as BirthdatePostBody
+    const { birthdate } = body
 
     const trimmedBirthdate =
       typeof birthdate === 'string' ? birthdate.trim() : ''
@@ -123,8 +118,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'BIRTHDATE_REQUIRED' }, { status: 400 })
     }
 
-    const dateRegex = /^\d{4}-\d{2}-\d{2}$/
-    if (!dateRegex.test(trimmedBirthdate)) {
+    if (!BIRTHDATE_DATE_REGEX.test(trimmedBirthdate)) {
       return NextResponse.json(
         { error: 'BIRTHDATE_INVALID_FORMAT' },
         { status: 400 }
