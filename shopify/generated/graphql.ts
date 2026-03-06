@@ -6995,6 +6995,30 @@ export type CustomerAccessTokenCreateMutation = {
   } | null
 }
 
+export type CustomerUpdateMutationVariables = Exact<{
+  customerAccessToken: Scalars['String']['input']
+  customer: CustomerUpdateInput
+}>
+
+export type CustomerUpdateMutation = {
+  __typename?: 'Mutation'
+  customerUpdate?: {
+    __typename?: 'CustomerUpdatePayload'
+    customer?: {
+      __typename?: 'Customer'
+      id: string
+      firstName?: string | null
+      lastName?: string | null
+    } | null
+    customerUserErrors: Array<{
+      __typename?: 'CustomerUserError'
+      code?: CustomerErrorCode | null
+      field?: Array<string> | null
+      message: string
+    }>
+  } | null
+}
+
 export type CartLinesRemoveMutationVariables = Exact<{
   cartId: Scalars['ID']['input']
   lineIds: Array<Scalars['ID']['input']> | Scalars['ID']['input']
@@ -7197,6 +7221,7 @@ export type GetCustomerQuery = {
     __typename?: 'Customer'
     id: string
     firstName?: string | null
+    lastName?: string | null
     acceptsMarketing: boolean
     email?: string | null
     phone?: string | null
@@ -7995,6 +8020,63 @@ useCustomerAccessTokenCreateMutation.fetcher = (
     CustomerAccessTokenCreateMutationVariables
   >(client, CustomerAccessTokenCreateDocument, variables, headers)
 
+export const CustomerUpdateDocument = /*#__PURE__*/ `
+    mutation customerUpdate($customerAccessToken: String!, $customer: CustomerUpdateInput!) {
+  customerUpdate(customerAccessToken: $customerAccessToken, customer: $customer) {
+    customer {
+      id
+      firstName
+      lastName
+    }
+    customerUserErrors {
+      code
+      field
+      message
+    }
+  }
+}
+    `
+
+export const useCustomerUpdateMutation = <TError = unknown, TContext = unknown>(
+  client: GraphQLClient,
+  options?: UseMutationOptions<
+    CustomerUpdateMutation,
+    TError,
+    CustomerUpdateMutationVariables,
+    TContext
+  >,
+  headers?: RequestInit['headers']
+) => {
+  return useMutation<
+    CustomerUpdateMutation,
+    TError,
+    CustomerUpdateMutationVariables,
+    TContext
+  >({
+    mutationKey: ['customerUpdate'],
+    mutationFn: (variables?: CustomerUpdateMutationVariables) =>
+      fetcher<CustomerUpdateMutation, CustomerUpdateMutationVariables>(
+        client,
+        CustomerUpdateDocument,
+        variables,
+        headers
+      )(),
+    ...options,
+  })
+}
+
+useCustomerUpdateMutation.fetcher = (
+  client: GraphQLClient,
+  variables: CustomerUpdateMutationVariables,
+  headers?: RequestInit['headers']
+) =>
+  fetcher<CustomerUpdateMutation, CustomerUpdateMutationVariables>(
+    client,
+    CustomerUpdateDocument,
+    variables,
+    headers
+  )
+
 export const CartLinesRemoveDocument = /*#__PURE__*/ `
     mutation cartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
   cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
@@ -8413,6 +8495,7 @@ export const GetCustomerDocument = /*#__PURE__*/ `
   customer(customerAccessToken: $customerAccessToken) {
     id
     firstName
+    lastName
     acceptsMarketing
     email
     phone
