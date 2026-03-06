@@ -142,25 +142,6 @@
     "subscribeButton": "Join the list",
     "subscribedButton": "Subscribed!"
   },
-  "Header": {
-    "cartIcon": "cart icon",
-    "chevronDownAlt": "Collapse menu",
-    "chevronUpAlt": "Expand menu",
-    "errorIconAlt": "Error icon",
-    "errorTitle": "Error",
-    "failedLogout": "Logout failed. Please try again",
-    "hamburgerIcon": "hamburger icon",
-    "logoDesktop": "logo desktop",
-    "logoMobile": "logo mobile",
-    "logout": "Log out",
-    "myAccount": "My Account",
-    "myProfile": "My Profile",
-    "searchPlaceholder": "Search for products",
-    "shoppingCart": "Shopping cart",
-    "successIconAlt": "Success icon",
-    "successTitle": "Success",
-    "successfulLogout": "You have been logged out successfully"
-  },
   "Home": {
     "Benefits": {
       "benefit1Description": "Targeted fatty acid profiles selected to maintain barrier integrity, dermal health, and coat quality.",

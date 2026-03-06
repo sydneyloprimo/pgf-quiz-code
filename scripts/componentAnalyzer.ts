@@ -123,13 +123,7 @@ export interface GlobalContent {
   data: Record<string, unknown>
 }
 
-const GLOBAL_NAMESPACES = new Set([
-  'Common',
-  'Header',
-  'Footer',
-  'MainNav',
-  'Navigation',
-])
+const GLOBAL_NAMESPACES = new Set(['Common', 'Footer', 'MainNav', 'Navigation'])
 
 const PAGE_SLUG_MAP: Record<string, string> = {
   Home: '/',

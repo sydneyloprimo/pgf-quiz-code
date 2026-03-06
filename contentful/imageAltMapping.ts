@@ -34,12 +34,6 @@ export const IMAGE_ALT_MAPPING: Record<string, string> = {
   '/icons/logo-black.svg': 'Auth.logoAlt',
   '/icons/cross.svg': 'Auth.closeIconAlt',
   '/images/login-logo-full.svg': 'Auth.logoAlt',
-  // Header
-  '/icons/logo-white.svg': 'Header.logoDesktop',
-  '/icons/cart.svg': 'Header.cartIcon',
-  '/icons/chevron-up.svg': 'Header.chevronUpAlt',
-  '/icons/chevron-down.svg': 'Header.chevronDownAlt',
-  '/icons/hamburger.svg': 'Header.hamburgerIcon',
   // Footer
   '/icons/footer-logo.svg': 'Footer.logoAlt',
   // Common
