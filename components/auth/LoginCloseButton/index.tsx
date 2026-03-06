@@ -22,7 +22,7 @@ const LoginCloseButton = ({
       <div className="relative size-6">
         <ContentfulImage
           src="/icons/cross.svg"
-          alt=""
+          alt={t('closeIconAlt')}
           width={24}
           height={24}
           className="brightness-0 invert w-6 h-6"

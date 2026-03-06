@@ -2,17 +2,19 @@
  * Syncs all images from public/images and public/icons to Contentful.
  * Groups assets by page using Tags (page:Home, page:About, …, Icons).
  * Sets asset title to canonical public path for app lookup.
+ * Sets asset description from en.json image alt text when mapped.
  *
  * Requires: CONTENTFUL_SPACE_ID, CONTENTFUL_MANAGEMENT_TOKEN in env.
  * Run: yarn contentful:sync-images
  */
 
 import { existsSync as fsExistsSync, readFileSync, readdirSync } from 'fs'
-import { join, relative } from 'path'
+import { join, relative, resolve } from 'path'
 
 import contentfulManagement from 'contentful-management'
 import { config } from 'dotenv'
 
+import { IMAGE_ALT_MAPPING } from '@/contentful/imageAltMapping'
 import { getSyncEnvironmentId } from '@/scripts/contentful/getEnvironment'
 
 config({ path: '.env.local' })
@@ -83,6 +85,23 @@ function pathToAssetId(relativePath: string): string {
 
 function pathToCanonicalTitle(relativePath: string): string {
   return '/' + relativePath.replace(/\\/g, '/')
+}
+
+/** Resolves nested value from obj using dot-notation key (e.g. Home.Benefits.imageAlt). */
+function getNestedValue(
+  obj: Record<string, unknown>,
+  keyPath: string
+): string | undefined {
+  const parts = keyPath.split('.')
+  let current: unknown = obj
+  for (const p of parts) {
+    if (current && typeof current === 'object' && p in current) {
+      current = (current as Record<string, unknown>)[p]
+    } else {
+      return undefined
+    }
+  }
+  return typeof current === 'string' ? current : undefined
 }
 
 function sleep(ms: number): Promise<void> {
@@ -156,6 +175,7 @@ interface FileItem {
   tagId: string
   title: string
   contentType: string
+  description?: string
 }
 
 type Environment = {
@@ -212,12 +232,35 @@ async function uploadOne(
   environment: Environment,
   item: FileItem
 ): Promise<boolean> {
+  const fields: Record<string, unknown> = {
+    title: { [CONTENTFUL_LOCALE]: item.title },
+  }
+  if (item.description) {
+    fields.description = { [CONTENTFUL_LOCALE]: item.description }
+  }
+
   try {
-    await environment.getAsset(item.assetId)
+    const existing = await environment.getAsset(item.assetId)
+    if (item.description) {
+      const existingAsset = existing as {
+        fields: { description?: Record<string, string> }
+        update: () => Promise<{ publish: () => Promise<unknown> }>
+      }
+      const currentDesc = existingAsset.fields?.description?.[CONTENTFUL_LOCALE]
+      if (currentDesc !== item.description) {
+        existingAsset.fields.description = {
+          [CONTENTFUL_LOCALE]: item.description,
+        }
+        const updated = await existingAsset.update()
+        await updated.publish()
+        console.log(`  Updated description: ${item.relative}`)
+      }
+    }
     return false
   } catch {
     // Asset does not exist, proceed to create
   }
+
   const buffer = readFileSync(item.absolute)
   const ext = item.relative.split('.').pop()?.toLowerCase() ?? 'png'
   const contentType = MIME_TYPES[ext] ?? 'image/png'
@@ -236,7 +279,7 @@ async function uploadOne(
 
   const asset = await environment.createAssetWithId(item.assetId, {
     fields: {
-      title: { [CONTENTFUL_LOCALE]: item.title },
+      ...fields,
       file: {
         [CONTENTFUL_LOCALE]: {
           contentType,
@@ -301,6 +344,12 @@ async function main(): Promise<void> {
     `Starting Contentful images sync [environment: ${ENVIRONMENT_ID}]...\n`
   )
 
+  const enJsonPath = resolve(process.cwd(), 'messages/en.json')
+  const enJson = JSON.parse(readFileSync(enJsonPath, 'utf-8')) as Record<
+    string,
+    unknown
+  >
+
   const publicDir = join(process.cwd(), 'public')
   const imagesDir = join(publicDir, 'images')
   const iconsDir = join(publicDir, 'icons')
@@ -309,18 +358,41 @@ async function main(): Promise<void> {
   if (fsExistsSync(imagesDir)) walkDir(imagesDir, publicDir, files)
   if (fsExistsSync(iconsDir)) walkDir(iconsDir, publicDir, files)
 
-  const items: FileItem[] = files.map((f) => {
+  const allItems: FileItem[] = files.map((f) => {
     const ext = f.relative.split('.').pop()?.toLowerCase() ?? 'png'
+    const title = pathToCanonicalTitle(f.relative)
+    const altKey = IMAGE_ALT_MAPPING[title]
+    const description = altKey ? getNestedValue(enJson, altKey) : undefined
     return {
       ...f,
       assetId: pathToAssetId(f.relative),
       tagId: pathToTag(f.relative),
-      title: pathToCanonicalTitle(f.relative),
+      title,
       contentType: MIME_TYPES[ext] ?? 'image/png',
+      description,
     }
   })
 
-  console.log(`Discovered ${items.length} image files.\n`)
+  /** Dedupe by assetId - pathToAssetId strips extension, so .svg and .png share IDs. */
+  const seenIds = new Set<string>()
+  const items = allItems.filter((item) => {
+    if (seenIds.has(item.assetId)) return false
+    seenIds.add(item.assetId)
+    return true
+  })
+
+  const withDescription = items.filter((i) => i.description).length
+  const firstWithDesc = items.find((i) => i.description)
+  console.log(
+    `Discovered ${items.length} image assets (${allItems.length} files). ` +
+      `${withDescription} have alt text for description.`
+  )
+  if (firstWithDesc) {
+    console.log(
+      `  Example: ${firstWithDesc.relative} -> "${firstWithDesc.description?.slice(0, 50)}..."`
+    )
+  }
+  console.log('')
 
   const environment = await getEnvironment()
 

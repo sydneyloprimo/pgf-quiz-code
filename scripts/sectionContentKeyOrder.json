@@ -89,23 +89,6 @@
     "subscribedButton",
     "subscribeButton"
   ],
-  "Header": [
-    "successfulLogout",
-    "failedLogout",
-    "successIconAlt",
-    "errorIconAlt",
-    "successTitle",
-    "errorTitle",
-    "myAccount",
-    "hamburgerIcon",
-    "myProfile",
-    "logout",
-    "logoDesktop",
-    "logoMobile",
-    "searchPlaceholder",
-    "shoppingCart",
-    "cartIcon"
-  ],
   "Common.EmailCustomer.errors": [
     "EMAIL_REQUIRED",
     "INVALID_EMAIL",

@@ -3,6 +3,7 @@
     "skipToMainContent": "Skip to main content"
   },
   "Auth": {
+    "closeIconAlt": "Close",
     "email": "Email",
     "emailPlaceholder": "Type your email",
     "logoAlt": "Logo black",
@@ -130,7 +131,9 @@
   "Footer": {
     "emailAria": "Enter your email address",
     "emailPlaceholder": "Type your email here",
+    "footerImageAlt": "Dog enjoying fresh food",
     "footerNavAria": "Footer navigation",
+    "logoAlt": "Purely Golden Foods logo",
     "logoAria": "Go to homepage",
     "newsletterDescription": "Receive educational content written by practicing veterinarians about topics that include digestion, nutrition, and physiology.",
     "newsletterTitle": "Learn from the experts.",
@@ -138,23 +141,6 @@
     "socialInstagramAria": "Follow us on Instagram",
     "subscribeButton": "Join the list",
     "subscribedButton": "Subscribed!"
-  },
-  "Header": {
-    "cartIcon": "cart icon",
-    "errorIconAlt": "Error icon",
-    "errorTitle": "Error",
-    "failedLogout": "Logout failed. Please try again",
-    "hamburgerIcon": "hamburger icon",
-    "logoDesktop": "logo desktop",
-    "logoMobile": "logo mobile",
-    "logout": "Log out",
-    "myAccount": "My Account",
-    "myProfile": "My Profile",
-    "searchPlaceholder": "Search for products",
-    "shoppingCart": "Shopping cart",
-    "successIconAlt": "Success icon",
-    "successTitle": "Success",
-    "successfulLogout": "You have been logged out successfully"
   },
   "Home": {
     "Benefits": {
@@ -231,6 +217,7 @@
       "title": "Frequently Asked Questions"
     },
     "Features": {
+      "dogStandingAlt": "Dog standing illustration",
       "feature1Title": "Verified nutrient content in every meal",
       "feature1Description": "We validate every recipe at the finished-food level, using laboratory testing to confirm vitamin and mineral targets are repeatedly met—not just assumed.",
       "feature2Title": "Batch-level testing against AAFCO standards",
@@ -942,6 +929,7 @@
     "accountQuestion": "You don't have an account?",
     "buttonText": "Log In",
     "closeButtonAriaLabel": "Close login page",
+    "closeIconAlt": "Close",
     "createAccountLink": "Create Account",
     "emailRequired": "Email is required",
     "forgotPasswordLink": "Forgot your password?",
@@ -957,6 +945,7 @@
     "accountQuestion": "Do you have an account?",
     "buttonText": "Sign up",
     "closeButtonAriaLabel": "Close sign up page",
+    "closeIconAlt": "Close",
     "emailPattern": "Must be a valid email",
     "emailRequired": "Email is required",
     "formHeading": "Create your Account",
