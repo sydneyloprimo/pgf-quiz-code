@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { z } from 'zod'
@@ -35,13 +35,22 @@ const EditProfileModal = ({
 }: EditProfileModalProps) => {
   const t = useTranslations('Profile.EditProfileModal')
 
-  const validationSchema = z.object({
-    firstName: z.string().min(1, { message: t('errors.firstNameRequired') }),
-    lastName: z.string().min(1, { message: t('errors.lastNameRequired') }),
-    birthdate: z
-      .string()
-      .regex(/^\d{4}-\d{2}-\d{2}$/, { message: t('errors.birthdateInvalid') }),
-  })
+  const validationSchema = useMemo(
+    () =>
+      z.object({
+        firstName: z
+          .string()
+          .min(1, { message: t('errors.firstNameRequired') }),
+        lastName: z.string().min(1, { message: t('errors.lastNameRequired') }),
+        birthdate: z
+          .string()
+          .min(1, { message: t('errors.birthdateRequired') })
+          .regex(/^\d{4}-\d{2}-\d{2}$/, {
+            message: t('errors.birthdateInvalid'),
+          }),
+      }),
+    [t]
+  )
 
   type FormData = z.infer<typeof validationSchema>
 
@@ -80,13 +89,36 @@ const EditProfileModal = ({
   }, [reset, onClose])
 
   const onSubmitForm: SubmitHandler<FormData> = async (data) => {
-    const [nameResult, birthdateResult] = await Promise.allSettled([
-      onUpdateName(data.firstName, data.lastName),
-      onUpdateBirthdate(data.birthdate),
-    ])
+    const hasChangesName =
+      data.firstName !== initialFirstName || data.lastName !== initialLastName
+    const hasChangesBirthdate = data.birthdate !== initialBirthdate
 
-    const nameFailed = nameResult.status === 'rejected'
-    const birthdateFailed = birthdateResult.status === 'rejected'
+    const promises: { type: 'name' | 'birthdate'; promise: Promise<void> }[] =
+      []
+    if (hasChangesName) {
+      promises.push({
+        type: 'name',
+        promise: onUpdateName(data.firstName, data.lastName),
+      })
+    }
+    if (hasChangesBirthdate) {
+      promises.push({
+        type: 'birthdate',
+        promise: onUpdateBirthdate(data.birthdate),
+      })
+    }
+    const results = await Promise.allSettled(promises.map((p) => p.promise))
+
+    let nameFailed = false
+    let birthdateFailed = false
+
+    results.forEach((result, index) => {
+      if (result.status === 'rejected') {
+        const type = promises[index].type
+        if (type === 'name') nameFailed = true
+        if (type === 'birthdate') birthdateFailed = true
+      }
+    })
 
     if (nameFailed || birthdateFailed) {
       setHasSubmitError(true)

@@ -3,9 +3,12 @@ import { NextRequest, NextResponse } from 'next/server'
 import { client } from '@/shopify/client'
 import { GetCustomerDocument } from '@/shopify/generated/graphql'
 
-const SHOPIFY_STORE_DOMAIN = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN
-const SHOPIFY_API_VERSION = process.env.NEXT_PUBLIC_SHOPIFY_API_VERSION
-const ADMIN_URL = `https://${SHOPIFY_STORE_DOMAIN}/admin/api/${SHOPIFY_API_VERSION}/graphql.json`
+function getAdminUrl(): string | null {
+  const domain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN
+  const version = process.env.NEXT_PUBLIC_SHOPIFY_API_VERSION
+  if (!domain || !version) return null
+  return `https://${domain}/admin/api/${version}/graphql.json`
+}
 
 const BIRTHDATE_NAMESPACE = 'custom'
 const BIRTHDATE_KEY = 'birthdate'
@@ -46,6 +49,14 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'CUSTOMER_NOT_FOUND' }, { status: 404 })
     }
 
+    const adminUrl = getAdminUrl()
+    if (!adminUrl) {
+      return NextResponse.json(
+        { error: 'SERVER_CONFIGURATION_ERROR' },
+        { status: 500 }
+      )
+    }
+
     const adminToken = process.env.SHOPIFY_ADMIN_API_ACCESS_TOKEN
     if (!adminToken) {
       return NextResponse.json(
@@ -54,7 +65,7 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    const res = await fetch(ADMIN_URL, {
+    const res = await fetch(adminUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -130,6 +141,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'CUSTOMER_NOT_FOUND' }, { status: 404 })
     }
 
+    const adminUrl = getAdminUrl()
+    if (!adminUrl) {
+      return NextResponse.json(
+        { error: 'SERVER_CONFIGURATION_ERROR' },
+        { status: 500 }
+      )
+    }
+
     const adminToken = process.env.SHOPIFY_ADMIN_API_ACCESS_TOKEN
     if (!adminToken) {
       return NextResponse.json(
@@ -138,7 +157,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const metafieldsSetResponse = await fetch(ADMIN_URL, {
+    const metafieldsSetResponse = await fetch(adminUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

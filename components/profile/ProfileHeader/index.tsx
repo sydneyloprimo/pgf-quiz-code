@@ -101,6 +101,7 @@ const ProfileHeader = () => {
 
   const handleUpdateBirthdate = useCallback(
     async (birthdateValue: string) => {
+      if (!customerAccessToken) return
       const res = await fetch('/api/profile/birthdate', {
         method: 'POST',
         headers: {
