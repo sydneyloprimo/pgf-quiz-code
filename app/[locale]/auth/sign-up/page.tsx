@@ -38,17 +38,26 @@ export default function SignUp() {
   const { apiError, clearApiError, isLoading, createCustomer, setCredentials } =
     useUserAccess(createSuccessCallback)
 
-  const handleSubmit = async (email: string, password: string) => {
+  const handleSubmit = async (
+    email: string,
+    password: string,
+    firstName?: string,
+    lastName?: string
+  ) => {
     setCredentials({ email, password })
     createCustomer({
       input: {
-        email: email,
-        password: password,
+        email,
+        password,
+        ...(firstName?.trim() && { firstName: firstName.trim() }),
+        ...(lastName?.trim() && { lastName: lastName.trim() }),
       },
     })
   }
 
   const validationSchema = z.object({
+    firstName: z.string().min(1, { message: t('firstNameRequired') }),
+    lastName: z.string().min(1, { message: t('lastNameRequired') }),
     email: z
       .string()
       .min(1, { message: t('emailRequired') })
@@ -79,6 +88,7 @@ export default function SignUp() {
           clearApiError={clearApiError}
           validationSchema={validationSchema}
           redirectLinkHref={Routes.signin}
+          showNameFields
         />
       </SignUpFormCard>
       <LoginDivider />

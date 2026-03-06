@@ -7,10 +7,10 @@ import { useTranslations } from 'next-intl'
 import passwordVisibility from 'public/icons/visibility.svg'
 import passwordVisibilityOff from 'public/icons/visibility_off.svg'
 import { useState, useCallback } from 'react'
-import { useForm, SubmitHandler, Controller } from 'react-hook-form'
+import { Controller, Resolver, SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import { EmailLabel } from './EmailLabel'
+import { FormFieldLabel } from './FormFieldLabel'
 import { PasswordLabel } from './PasswordLabel'
 
 import { Button } from '@/components/common/Button'
@@ -20,19 +20,27 @@ import { InputIconPosition } from '@/types/enums/constants'
 import { Routes } from '@/types/enums/routes'
 
 interface AuthFormProps {
-  handleSubmit: (email: string, password: string) => Promise<void>
+  handleSubmit: (
+    email: string,
+    password: string,
+    firstName?: string,
+    lastName?: string
+  ) => Promise<void>
   isLoading: boolean
   buttonText: string
   apiError?: string
   validationSchema: z.ZodObject<{
     email: z.ZodString
     password: z.ZodString
+    firstName?: z.ZodString
+    lastName?: z.ZodString
   }>
   clearApiError: () => void
   showRedirectLink?: boolean
   redirectLinkHref?: string
   redirectLinkText?: string
   redirectMessage?: string
+  showNameFields?: boolean
 }
 
 const AuthForm = ({
@@ -46,6 +54,7 @@ const AuthForm = ({
   redirectLinkHref = Routes.signup,
   redirectLinkText,
   redirectMessage,
+  showNameFields = false,
 }: AuthFormProps) => {
   const t = useTranslations('Auth')
   const tSignIn = useTranslations('SignIn')
@@ -53,26 +62,35 @@ const AuthForm = ({
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [apiEmail, setApiEmail] = useState<string>('')
 
-  type ValidationSchema = z.infer<typeof validationSchema>
+  type AuthFormValues = {
+    email: string
+    password: string
+    firstName?: string
+    lastName?: string
+  }
 
   const {
     control,
     formState: { errors },
     handleSubmit: rhfHandleSubmit,
     watch,
-  } = useForm<ValidationSchema>({
+  } = useForm<AuthFormValues>({
     defaultValues: {
       email: '',
       password: '',
+      ...(showNameFields && { firstName: '', lastName: '' }),
     },
     mode: 'all',
-    resolver: zodResolver(validationSchema),
+    resolver: zodResolver(
+      validationSchema
+    ) as unknown as Resolver<AuthFormValues>,
   })
 
   const email = watch('email')
 
-  const onSubmit: SubmitHandler<ValidationSchema> = ({ email, password }) => {
-    handleSubmit(email, password)
+  const onSubmit: SubmitHandler<AuthFormValues> = (values) => {
+    const { email, password, firstName, lastName } = values
+    handleSubmit(email, password, firstName, lastName)
     setApiEmail(email)
     clearApiError()
   }
@@ -85,12 +103,56 @@ const AuthForm = ({
     <div className="flex flex-col gap-4 items-start w-full">
       <form onSubmit={rhfHandleSubmit(onSubmit)} className="w-full">
         <div className="flex flex-col gap-4 items-start w-full">
+          {showNameFields && (
+            <>
+              <Controller
+                name="firstName"
+                control={control}
+                render={({ field, fieldState: { error } }) => (
+                  <div className="flex flex-col gap-1 items-start w-full">
+                    <FormFieldLabel
+                      label={tSignUp('firstNamePlaceholder')}
+                      htmlFor="firstName"
+                    />
+                    <Input
+                      {...field}
+                      className="w-full"
+                      placeholder={tSignUp('firstNamePlaceholder')}
+                      autoComplete="given-name"
+                      id="firstName"
+                      error={error?.message}
+                    />
+                  </div>
+                )}
+              />
+              <Controller
+                name="lastName"
+                control={control}
+                render={({ field, fieldState: { error } }) => (
+                  <div className="flex flex-col gap-1 items-start w-full">
+                    <FormFieldLabel
+                      label={tSignUp('lastNamePlaceholder')}
+                      htmlFor="lastName"
+                    />
+                    <Input
+                      {...field}
+                      className="w-full"
+                      placeholder={tSignUp('lastNamePlaceholder')}
+                      autoComplete="family-name"
+                      id="lastName"
+                      error={error?.message}
+                    />
+                  </div>
+                )}
+              />
+            </>
+          )}
           <Controller
             name="email"
             control={control}
             render={({ field, fieldState: { error } }) => (
               <div className="flex flex-col gap-1 items-start w-full">
-                <EmailLabel />
+                <FormFieldLabel label={t('email')} htmlFor="email" />
                 <Input
                   {...field}
                   className="w-full"
@@ -148,7 +210,11 @@ const AuthForm = ({
           className="w-full mt-4 tracking-normal h-11"
           type="submit"
           disabled={
-            !!errors.email?.message || !!errors.password?.message || isLoading
+            !!errors.email?.message ||
+            !!errors.password?.message ||
+            (showNameFields &&
+              (!!errors.firstName?.message || !!errors.lastName?.message)) ||
+            isLoading
           }
         >
           {isLoading ? <Spinner /> : buttonText}
