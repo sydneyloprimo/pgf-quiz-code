@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 
 import { AuthorCard } from '@/components/blog/AuthorCard'
 import { BlogPostCTA } from '@/components/blog/BlogPostCTA'
@@ -12,10 +12,17 @@ import {
 } from '@/components/common/JsonLd'
 import { RichTextRenderer } from '@/components/common/RichTextRenderer'
 import { MAIN_CONTENT_ID, SITE_URL } from '@/constants'
-import { getBlogPostBySlug } from '@/contentful/queries'
+import { getAllBlogSlugs, getBlogPostBySlug } from '@/contentful/queries'
+import { Locale } from '@/i18n'
+
+export async function generateStaticParams() {
+  const slugs = await getAllBlogSlugs()
+  return slugs.map((slug) => ({ locale: Locale.EN, slug }))
+}
 
 interface BlogPostPageProps {
   params: Promise<{
+    locale: Locale
     slug: string
   }>
 }
@@ -23,7 +30,8 @@ interface BlogPostPageProps {
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
-  const { slug } = await params
+  const { locale, slug } = await params
+  setRequestLocale(locale)
   const blogPost = await getBlogPostBySlug(slug)
   const t = await getTranslations('BlogPost')
 
@@ -46,7 +54,8 @@ export async function generateMetadata({
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { slug } = await params
+  const { locale, slug } = await params
+  setRequestLocale(locale)
   const blogPost = await getBlogPostBySlug(slug)
   const t = await getTranslations('BlogPostPage')
 

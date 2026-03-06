@@ -1,3 +1,5 @@
+import { setRequestLocale } from 'next-intl/server'
+
 import Footer from '@/components/common/Footer'
 import LocaleWrapper from '@/components/common/LocaleWrapper'
 import { MainNav } from '@/components/common/MainNav'
@@ -5,13 +7,15 @@ import { NavSpacer } from '@/components/common/MainNav/NavSpacer'
 import { SkipLink } from '@/components/common/SkipLink'
 import { Locale } from '@/i18n'
 
-export default function RootLayout({
+export default async function ShopLayout({
   children,
   params,
 }: {
   children: React.ReactNode
   params: Promise<{ locale: Locale }>
 }) {
+  const { locale } = await params
+  setRequestLocale(locale)
   return (
     <>
       <LocaleWrapper

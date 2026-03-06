@@ -1,3 +1,4 @@
+import { setRequestLocale } from 'next-intl/server'
 import { PropsWithChildren } from 'react'
 
 import LocaleWrapper from '@/components/common/LocaleWrapper'
@@ -7,10 +8,12 @@ type ProfileLayoutProps = PropsWithChildren<{
   params: Promise<{ locale: Locale }>
 }>
 
-export default function ProfileLayout({
+export default async function ProfileLayout({
   children,
   params,
 }: ProfileLayoutProps) {
+  const { locale } = await params
+  setRequestLocale(locale)
   return (
     <LocaleWrapper localeGroup="Profile" params={params}>
       <div className="flex min-h-screen min-w-full flex-col bg-background">

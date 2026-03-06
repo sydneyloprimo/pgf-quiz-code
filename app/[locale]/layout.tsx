@@ -1,7 +1,7 @@
 import './globals.css'
 
 import { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { PropsWithChildren } from 'react'
 import Providers from 'utils/Providers'
 import Session from 'utils/Session'
@@ -14,6 +14,10 @@ import {
 import { Locale } from '@/i18n'
 import BodyScripts from '@/scripts/BodyScripts'
 import HeadScripts from '@/scripts/HeadScripts'
+
+export function generateStaticParams() {
+  return [{ locale: Locale.EN }]
+}
 
 export const metadata: Metadata = {
   title: {
@@ -79,6 +83,7 @@ export default async function RootLayout({
   params,
 }: RootLayoutProps) {
   const { locale } = await params
+  setRequestLocale(locale)
   const t = await getTranslations('ContactInfo')
   const conciergeEmail = t('conciergeEmail')?.trim() || undefined
 

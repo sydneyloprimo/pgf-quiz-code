@@ -1,8 +1,20 @@
 import { Metadata } from 'next'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { PropsWithChildren } from 'react'
 
-export async function generateMetadata(): Promise<Metadata> {
+import { Locale } from '@/i18n'
+
+type RecipesLayoutProps = PropsWithChildren<{
+  params: Promise<{ locale: Locale }>
+}>
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  setRequestLocale(locale)
   const t = await getTranslations('Recipes')
   return {
     title: t('Hero.title'),
@@ -14,6 +26,11 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default function RecipesLayout({ children }: PropsWithChildren) {
+export default async function RecipesLayout({
+  children,
+  params,
+}: RecipesLayoutProps) {
+  const { locale } = await params
+  setRequestLocale(locale)
   return <>{children}</>
 }
