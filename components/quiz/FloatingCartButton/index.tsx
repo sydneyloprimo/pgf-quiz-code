@@ -72,14 +72,12 @@ const FloatingCartButton = ({
               'text-neutral-white',
               'text-xs font-bold',
               'rounded-full',
-              'min-w-[20px] h-5',
+              'min-w-[15px] h-4',
               'flex items-center justify-center',
               'px-1.5'
             )}
             aria-label={t('itemCountAriaLabel', { count: totalQuantity })}
-          >
-            {totalQuantity > 99 ? '99+' : totalQuantity}
-          </span>
+          ></span>
         )}
       </div>
     </button>

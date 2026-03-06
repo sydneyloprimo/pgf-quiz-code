@@ -55,7 +55,7 @@ const OptionSelectProductCTAs = ({
       <Button
         variant="tertiary"
         onClick={handleDetailsClick}
-        className="w-full md:w-auto md:flex"
+        className="w-full md:flex-1"
       >
         {t('detailsButton')}
       </Button>
