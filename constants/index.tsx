@@ -3,6 +3,25 @@ import { Routes } from '@/types/enums/routes'
 
 export const SITE_URL = 'https://www.purelygoldenfoods.com'
 
+export const GTM_ID = 'GTM-K57RTZ79'
+
+export const AI_SEARCH_BOT_USER_AGENTS = [
+  'OAI-SearchBot',
+  'ChatGPT-User',
+  'BingBot',
+  'PerplexityBot',
+  'Perplexity-User',
+  'FirecrawlAgent',
+  'AndiBot',
+  'ExaBot',
+  'PhindBot',
+  'YouBot',
+  'Claude-Web',
+  'ClaudeBot',
+  'GPTBot',
+  'Google-Extended',
+] as const
+
 export const MAIN_CONTENT_ID = 'main-content'
 
 // Navigation links - centralized for MainNav and Footer
