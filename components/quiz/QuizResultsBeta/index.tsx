@@ -1,16 +1,22 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import { Controller, useWatch, UseFormReturn } from 'react-hook-form'
 
 import { Button } from '@/components/common/Button'
 import { ArrowLeftIcon } from '@/components/common/Icon'
 import Input from '@/components/common/Input'
-import { clearFormData, savePersonalData } from '@/components/quiz/helpers'
+import {
+  calculateDailyFoodAndPrice,
+  clearFormData,
+  savePersonalData,
+} from '@/components/quiz/helpers'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
+import { useProductConfigs } from '@/hooks/useProductConfigs'
 import { useQuizEnrollment } from '@/hooks/useQuizEnrollment'
 import { QuizStep } from '@/types/enums/constants'
+import { calculateWeeklyPacks } from '@/utils/cartHelpers'
 
 interface QuizResultsBetaProps {
   goToStep: (step: QuizStep) => void
@@ -46,6 +52,38 @@ const QuizResultsBeta = ({
     useQuizEnrollment(handleSuccess)
 
   const dogName = useWatch({ control, name: 'name' }) || ''
+  const formData = useWatch({ control }) as QuizFormData
+  const subscriptionType = formData.subscriptionType
+  const { configs: productConfigs, isLoading: isLoadingConfigs } =
+    useProductConfigs()
+
+  const pricePerDay = useMemo(() => {
+    if (
+      subscriptionType !== 'complete-protocol' &&
+      subscriptionType !== 'topper-protocol'
+    ) {
+      return 0
+    }
+    if (isLoadingConfigs || !productConfigs?.turkey) {
+      return 0
+    }
+    const mode = subscriptionType === 'topper-protocol' ? 'topper' : 'full'
+    const { dailyFoodGrams } = calculateDailyFoodAndPrice(
+      formData,
+      'turkey',
+      mode
+    )
+    const weeklyPacks = calculateWeeklyPacks(dailyFoodGrams)
+    const sellingPlanPrice = productConfigs.turkey.sellingPlanPrices.weekly
+    if (!sellingPlanPrice) {
+      return 0
+    }
+    const weeklyTotal = sellingPlanPrice.perDeliveryPrice * weeklyPacks
+    return weeklyTotal / 7
+  }, [subscriptionType, formData, productConfigs, isLoadingConfigs])
+
+  const pricePerDayFormatted =
+    pricePerDay > 0 ? `$${pricePerDay.toFixed(2)}` : null
 
   const onSubmit = useCallback(() => {
     const values = getValues()
@@ -66,6 +104,10 @@ const QuizResultsBeta = ({
           </h2>
           <p className="font-body text-base leading-6 md:text-xl md:leading-8 w-full">
             {t('description', { name: dogName })}
+            {pricePerDayFormatted && (
+              <> {t('pricePerDay', { price: pricePerDayFormatted })}</>
+            )}{' '}
+            {t('descriptionSuffix')}
           </p>
         </div>
 

@@ -534,11 +534,13 @@
     "purchaseAlaCarteHeading"
   ],
   "Quiz.resultsBeta": [
-    "heading",
     "description",
-    "firstNameLabel",
-    "lastNameLabel",
+    "descriptionSuffix",
     "emailLabel",
+    "firstNameLabel",
+    "heading",
+    "lastNameLabel",
+    "pricePerDay",
     "submitButton"
   ],
   "Quiz.results.footer": [
