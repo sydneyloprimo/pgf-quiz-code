@@ -10,7 +10,7 @@ import Input from '@/components/common/Input'
 import { Link } from '@/components/common/Link'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
-import { BOSTON_AREA_ZIP_CODES, MIN_ZIP_CODE_LENGTH } from '@/constants'
+import { MASSACHUSETTS_ZIP_CODES, MIN_ZIP_CODE_LENGTH } from '@/constants'
 import { useEmailCustomer } from '@/hooks/useEmailCustomer'
 import { QuizStep } from '@/types/enums/constants'
 import { Routes } from '@/types/enums/routes'
@@ -48,7 +48,7 @@ const QuizLocation = ({
     const zip = formMethods.getValues('zipCode')?.trim() || ''
     const isValid =
       zip.length >= MIN_ZIP_CODE_LENGTH &&
-      BOSTON_AREA_ZIP_CODES.has(zip.slice(0, MIN_ZIP_CODE_LENGTH))
+      MASSACHUSETTS_ZIP_CODES.has(zip.slice(0, MIN_ZIP_CODE_LENGTH))
     setZipValidated(isValid)
     if (isValid) {
       goToStep(QuizStep.PetInfo)
