@@ -8,8 +8,19 @@ import {
   type ProductConfig,
 } from '@/constants'
 
+export const calculatePacksForPeriod = (
+  dailyFoodGrams: number,
+  days: number
+): number => {
+  return Math.ceil((dailyFoodGrams * days) / PACK_SIZE_GRAMS)
+}
+
 export const calculateWeeklyPacks = (dailyFoodGrams: number): number => {
-  return Math.ceil((dailyFoodGrams * 7) / PACK_SIZE_GRAMS)
+  return calculatePacksForPeriod(dailyFoodGrams, 7)
+}
+
+export const calculateBiweeklyPacks = (dailyFoodGrams: number): number => {
+  return calculatePacksForPeriod(dailyFoodGrams, 14)
 }
 
 type RecipeSlug = 'turkey' | 'lamb' | 'pancreatic'
@@ -18,7 +29,7 @@ type Portion = 'FULL_MEAL' | 'TOPPER'
 
 interface GenerateCartPayloadParams {
   recipeSlug: RecipeSlug
-  calculatedWeeklyPacks: number
+  packsPerDelivery: number
   frequency: Frequency
   portion: Portion
   dogName?: string
@@ -27,7 +38,7 @@ interface GenerateCartPayloadParams {
 
 export const generateCartPayload = ({
   recipeSlug,
-  calculatedWeeklyPacks,
+  packsPerDelivery,
   frequency,
   portion,
   dogName,
@@ -44,15 +55,7 @@ export const generateCartPayload = ({
   const sellingPlanBiweekly =
     config.sellingPlanIds.biweekly ?? envConfig.sellingPlanIds.biweekly
 
-  let quantity = calculatedWeeklyPacks
-
-  // Double quantity for biweekly subscriptions
-  if (frequency === 'BIWEEKLY') {
-    quantity = quantity * 2
-  }
-
-  // Ensure quantity is at least 1
-  quantity = Math.max(1, quantity)
+  const quantity = Math.max(1, packsPerDelivery)
 
   const sellingPlanId =
     frequency === 'WEEKLY'
@@ -80,7 +83,7 @@ export const generateCartPayload = ({
       key: PACKS_CLARIFICATION_ATTRIBUTE_KEY,
       value: PACKS_CLARIFICATION_MESSAGE_FORMAT.replace(
         '{packs}',
-        String(calculatedWeeklyPacks)
+        String(packsPerDelivery)
       ),
     })
   }

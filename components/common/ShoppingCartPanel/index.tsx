@@ -382,16 +382,10 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
           sellingPlanName.includes('bi') || sellingPlanName.includes('2')
         const frequency = isBiWeekly ? 'BIWEEKLY' : 'WEEKLY'
 
-        // Calculate weekly packs from quantity
-        // For biweekly, quantity is doubled, so we divide by 2
-        const calculatedWeeklyPacks = isBiWeekly
-          ? Math.ceil(quantity / 2)
-          : quantity
-
         // Generate new payload with the new recipe
         const newPayload = generateCartPayload({
           recipeSlug: recipe,
-          calculatedWeeklyPacks,
+          packsPerDelivery: quantity,
           frequency,
           portion,
           dogName,
@@ -399,16 +393,18 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
         })
 
         if (process.env.NODE_ENV === 'development') {
-          console.log('Changing subscription recipe - adding new line first:', {
-            cartLineId,
-            recipe,
-            quantity,
-            calculatedWeeklyPacks,
-            frequency,
-            portion,
-            dogName,
-            newPayload,
-          })
+          console.log(
+            'Changing subscription recipe' + ' - adding new line first:',
+            {
+              cartLineId,
+              recipe,
+              packsPerDelivery: quantity,
+              frequency,
+              portion,
+              dogName,
+              newPayload,
+            }
+          )
         }
 
         // Mark this line as updating to show loading state

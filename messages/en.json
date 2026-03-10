@@ -851,11 +851,13 @@
       }
     },
     "resultsBeta": {
-      "heading": "{name}'s Recommended Feeding Protocol",
-      "description": "Based on the information you provided, we've identified a feeding protocol calibrated to {name}'s physiology and daily nutritional requirements. To complete your request for enrollment in our founding cohort, please share your contact information.",
-      "firstNameLabel": "First name",
-      "lastNameLabel": "Last name",
+      "description": "Based on the information you provided, we've identified a feeding protocol calibrated to {name}'s physiology and daily nutritional requirements.",
+      "descriptionSuffix": "To complete your request for enrollment in our founding cohort, please share your contact information.",
       "emailLabel": "Email",
+      "firstNameLabel": "First name",
+      "heading": "{name}'s Recommended Feeding Protocol",
+      "lastNameLabel": "Last name",
+      "pricePerDay": "Your subscription would be approximately {price} per day.",
       "submitButton": "Submit"
     },
     "confirmationBeta": {

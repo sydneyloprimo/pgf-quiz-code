@@ -46,7 +46,11 @@ import { useFeatureFlag } from '@/hooks/useFeatureFlag'
 import { useProductConfigs } from '@/hooks/useProductConfigs'
 import useShoppingCartPanel from '@/hooks/useShoppingCartPanel'
 import { QuizStep } from '@/types/enums/constants'
-import { calculateWeeklyPacks, generateCartPayload } from '@/utils/cartHelpers'
+import {
+  calculateBiweeklyPacks,
+  calculateWeeklyPacks,
+  generateCartPayload,
+} from '@/utils/cartHelpers'
 import { cn } from '@/utils/cn'
 
 interface QuizResultsProps {
@@ -202,20 +206,19 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
         return 0
       }
 
-      // Calculate weekly packs needed
+      // Calculate packs per delivery (period-based: 7 days weekly, 14 biweekly)
       const { dailyFoodGrams } = calculateDailyFoodAndPrice(
         formData,
         calculationRecipe,
         calculationMode
       )
-      const calculatedWeeklyPacks = calculateWeeklyPacks(dailyFoodGrams)
+      const packsPerDelivery = isWeekly
+        ? calculateWeeklyPacks(dailyFoodGrams)
+        : calculateBiweeklyPacks(dailyFoodGrams)
+      const daysInPeriod = isWeekly ? 7 : 14
 
-      // Calculate weekly total: perDeliveryPrice × quantity
-      const weeklyTotal =
-        sellingPlanPrice.perDeliveryPrice * calculatedWeeklyPacks
-
-      // Calculate daily price: weeklyTotal / 7
-      const pricePerDay = weeklyTotal / 7
+      const periodTotal = sellingPlanPrice.perDeliveryPrice * packsPerDelivery
+      const pricePerDay = periodTotal / daysInPeriod
 
       return pricePerDay
     },
@@ -496,18 +499,22 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
         calculationRecipe,
         calculationMode
       )
-      const calculatedWeeklyPacks = calculateWeeklyPacks(dailyFoodGrams)
 
       const frequency =
         shipmentFrequencies[mode] === 'everyWeek' ? 'WEEKLY' : 'BIWEEKLY'
       const portion = mode === 'topper' ? 'TOPPER' : 'FULL_MEAL'
+
+      const packsPerDelivery =
+        frequency === 'BIWEEKLY'
+          ? calculateBiweeklyPacks(dailyFoodGrams)
+          : calculateWeeklyPacks(dailyFoodGrams)
 
       const productConfig =
         productConfigs?.[recipe as 'turkey' | 'lamb' | 'pancreatic'] || null
 
       const payload = generateCartPayload({
         recipeSlug: recipe as 'turkey' | 'lamb' | 'pancreatic',
-        calculatedWeeklyPacks,
+        packsPerDelivery,
         frequency,
         portion,
         dogName,
@@ -606,7 +613,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
 
     const payload = generateCartPayload({
       recipeSlug: recipe as 'turkey' | 'lamb' | 'pancreatic',
-      calculatedWeeklyPacks: 1,
+      packsPerDelivery: 1,
       frequency: 'ONETIME',
       portion: 'FULL_MEAL',
       dogName,
