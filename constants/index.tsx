@@ -104,60 +104,17 @@ export const QUIZ_RESULTS_ILLUSTRATION_HEIGHT = 103
 export const PUPPY_MAX_AGE_YEARS = 1
 export const MAX_DOG_WEIGHT_LBS = 20
 
-// Boston-area ZIP codes for quiz location step (founding cohort enrollment)
-export const BOSTON_AREA_ZIP_CODES: ReadonlySet<string> = new Set([
-  '02108',
-  '02109',
-  '02110',
-  '02111',
-  '02112',
-  '02113',
-  '02114',
-  '02115',
-  '02116',
-  '02117',
-  '02118',
-  '02119',
-  '02120',
-  '02121',
-  '02122',
-  '02123',
-  '02124',
-  '02125',
-  '02126',
-  '02127',
-  '02128',
-  '02129',
-  '02130',
-  '02131',
-  '02132',
-  '02133',
-  '02134',
-  '02135',
-  '02136',
-  '02163',
-  '02196',
-  '02199',
-  '02201',
-  '02203',
-  '02204',
-  '02205',
-  '02206',
-  '02210',
-  '02211',
-  '02212',
-  '02215',
-  '02217',
-  '02222',
-  '02241',
-  '02266',
-  '02283',
-  '02284',
-  '02293',
-  '02295',
-  '02297',
-  '02298',
-])
+// Massachusetts ZIP code validation for quiz location step (founding cohort)
+// Uses prefix check: 01xxx (western/central MA), 02xxx 020-027 (eastern MA),
+// 055xx (IRS/federal codes in Andover, MA). Excludes 028xx/029xx (Rhode Island).
+export const isMassachusettsZipCode = (zip: string): boolean => {
+  const code = zip.trim().slice(0, 5)
+  if (code.length < 5 || !/^\d{5}$/.test(code)) return false
+  if (code.startsWith('01')) return true
+  if (code.startsWith('02') && code >= '02001' && code <= '02799') return true
+  if (code.startsWith('055')) return true
+  return false
+}
 
 export const MIN_ZIP_CODE_LENGTH = 5
 export const QUIZ_LOADING_DURATION_MS = 5000
