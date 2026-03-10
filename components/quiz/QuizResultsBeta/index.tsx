@@ -52,8 +52,11 @@ const QuizResultsBeta = ({
     useQuizEnrollment(handleSuccess)
 
   const dogName = useWatch({ control, name: 'name' }) || ''
-  const formData = useWatch({ control }) as QuizFormData
-  const subscriptionType = formData.subscriptionType
+  const subscriptionType = useWatch({ control, name: 'subscriptionType' })
+  const weight = useWatch({ control, name: 'weight' })
+  const neuteredStatus = useWatch({ control, name: 'neuteredStatus' })
+  const activityLevel = useWatch({ control, name: 'activityLevel' })
+  const bodyShape = useWatch({ control, name: 'bodyShape' })
   const { configs: productConfigs, isLoading: isLoadingConfigs } =
     useProductConfigs()
 
@@ -68,8 +71,14 @@ const QuizResultsBeta = ({
       return 0
     }
     const mode = subscriptionType === 'topper-protocol' ? 'topper' : 'full'
+    const formDataSubset = {
+      weight,
+      neuteredStatus,
+      activityLevel,
+      bodyShape,
+    } as QuizFormData
     const { dailyFoodGrams } = calculateDailyFoodAndPrice(
-      formData,
+      formDataSubset,
       'turkey',
       mode
     )
@@ -80,7 +89,15 @@ const QuizResultsBeta = ({
     }
     const weeklyTotal = sellingPlanPrice.perDeliveryPrice * weeklyPacks
     return weeklyTotal / 7
-  }, [subscriptionType, formData, productConfigs, isLoadingConfigs])
+  }, [
+    subscriptionType,
+    weight,
+    neuteredStatus,
+    activityLevel,
+    bodyShape,
+    productConfigs,
+    isLoadingConfigs,
+  ])
 
   const pricePerDayFormatted =
     pricePerDay > 0 ? `$${pricePerDay.toFixed(2)}` : null

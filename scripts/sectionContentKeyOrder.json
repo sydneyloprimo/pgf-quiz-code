@@ -1,6 +1,7 @@
 {
   "About.CTA": [
     "quote",
+    "body",
     "button"
   ],
   "About.Commitment": [
@@ -8,9 +9,9 @@
   ],
   "About.Experts": [
     "title",
-    "ecvcnParagraph1",
-    "ecvcnParagraph2",
-    "ecvcnParagraph3"
+    "academicTitle",
+    "academicSubtitle",
+    "academicBody"
   ],
   "About.Hero": [
     "title",
@@ -18,9 +19,11 @@
   ],
   "About.Leadership": [
     "imageAlt",
+    "subhead",
     "paragraph1",
     "paragraph2",
-    "signature"
+    "signature",
+    "founder"
   ],
   "About.Mission": [
     "title",
@@ -31,10 +34,13 @@
     "subsectionText",
     "image2Alt"
   ],
+  "About.Values": [
+    "ctaButton"
+  ],
   "Auth": [
     "logoAlt",
-    "email",
     "password",
+    "email",
     "emailPlaceholder",
     "passwordPlaceholder"
   ],
@@ -56,6 +62,10 @@
     "reviewedBy",
     "clinicalTakeaway"
   ],
+  "BlogIndex.EmptyState": [
+    "ariaLabel",
+    "comingSoon"
+  ],
   "BlogIndex.BlogList": [
     "paginationAria",
     "previousPageAria",
@@ -71,6 +81,7 @@
     "filterByCategoryAria"
   ],
   "BlogIndex.FeaturedBlogPost": [
+    "featuredImageAlt",
     "featured",
     "readPostAria"
   ],
@@ -81,25 +92,27 @@
   "Home.ExploreCategories": [
     "alt"
   ],
+  "Home.Features": [
+    "dogStandingAlt",
+    "feature1Title",
+    "feature1Description",
+    "feature2Title",
+    "feature2Description",
+    "feature3Title",
+    "feature3Description",
+    "feature4Title",
+    "feature4Description",
+    "feature5Title",
+    "feature5Description"
+  ],
   "Footer": [
+    "footerImageAlt",
     "newsletterTitle",
     "newsletterDescription",
     "emailPlaceholder",
     "emailAria",
     "subscribedButton",
     "subscribeButton"
-  ],
-  "Common.EmailCustomer.errors": [
-    "EMAIL_REQUIRED",
-    "INVALID_EMAIL",
-    "EMAIL_ALREADY_EXISTS",
-    "FIRST_NAME_REQUIRED",
-    "LAST_NAME_REQUIRED",
-    "CUSTOMER_CREATION_FAILED",
-    "SERVER_CONFIGURATION_ERROR",
-    "INTERNAL_SERVER_ERROR",
-    "NETWORK_ERROR",
-    "UNEXPECTED_RESPONSE"
   ],
   "Common.InputDropdown": [
     "selectOption"
@@ -110,9 +123,10 @@
   ],
   "MainNav": [
     "home",
-    "ourFormulation",
     "aboutUs",
+    "ourFormulation",
     "ourRecipes",
+    "blog",
     "ariaLabel",
     "logoAria",
     "profileAria",
@@ -170,6 +184,7 @@
     "badgeSingleMeal",
     "productImageAlt",
     "productDescriptionPlaceholder",
+    "packsClarification",
     "decreaseQuantity",
     "increaseQuantity",
     "deleteButtonAriaLabel",
@@ -177,6 +192,9 @@
     "title",
     "closeButtonAriaLabel",
     "emptyState"
+  ],
+  "Accessibility": [
+    "skipToMainContent"
   ],
   "Common.WaitlistModal": [
     "closeButtonLabel",
@@ -188,6 +206,7 @@
     "ariaLabel",
     "heading",
     "description",
+    "nameLabel",
     "emailLabel",
     "cancelButton",
     "submittingButton",
@@ -246,16 +265,16 @@
     "pointerSkin",
     "benefit2Title",
     "benefit2Description",
-    "pointerQuality",
+    "pointerEnergy",
     "benefit3Title",
     "benefit3Description",
-    "pointerMicrobiome",
+    "pointerDigestive",
     "benefit4Title",
     "benefit4Description",
-    "pointerEnergy",
+    "pointerMicrobiome",
     "benefit5Title",
     "benefit5Description",
-    "pointerDigestive"
+    "pointerQuality"
   ],
   "Home.BostonAnnouncement": [
     "backgroundImageAlt",
@@ -286,10 +305,6 @@
   ],
   "Home.FAQ": [
     "decorativeDividerAlt",
-    "decorativeRightVeggieAlt",
-    "decorativeRightPepperAlt",
-    "decorativeLeftPepperAlt",
-    "decorativeLeftVeggieAlt",
     "title",
     "faq1Question",
     "faq1Answer",
@@ -303,18 +318,6 @@
     "faq5Answer",
     "faq6Question",
     "faq6Answer"
-  ],
-  "Home.Features": [
-    "feature1Title",
-    "feature1Description",
-    "feature2Title",
-    "feature2Description",
-    "feature3Title",
-    "feature3Description",
-    "feature4Title",
-    "feature4Description",
-    "feature5Title",
-    "feature5Description"
   ],
   "Home.GoldenMeals": [
     "imageAlt",
@@ -341,16 +344,7 @@
   "Home.Reviews": [
     "title",
     "prevAria",
-    "nextAria",
-    "review1Quote",
-    "review1Text",
-    "review1Name",
-    "review2Quote",
-    "review2Text",
-    "review2Name",
-    "review3Quote",
-    "review3Text",
-    "review3Name"
+    "nextAria"
   ],
   "Home.ShopProducts": [
     "image_alt",
@@ -366,7 +360,12 @@
   "Home.VetNutritionist": [
     "title",
     "description",
-    "linkText",
+    "ctaButton"
+  ],
+  "NotFound": [
+    "dogBowlAlt",
+    "title",
+    "subtitle",
     "ctaButton"
   ],
   "Profile.CancelSubscriptionModal": [
@@ -399,6 +398,17 @@
     "description",
     "cancelButton",
     "confirmButton"
+  ],
+  "Profile.EditProfileModal": [
+    "errors",
+    "closeButtonLabel",
+    "ariaLabel",
+    "heading",
+    "firstNameLabel",
+    "lastNameLabel",
+    "birthdateLabel",
+    "cancelButton",
+    "saveButton"
   ],
   "Profile.LogoutModal": [
     "closeButtonLabel",
@@ -443,7 +453,9 @@
     "emptyState"
   ],
   "Profile": [
+    "birthdate",
     "accountCreated",
+    "editProfile",
     "changePassword",
     "logOut"
   ],
@@ -511,11 +523,11 @@
   ],
   "Quiz.neuteredStatus": [
     "options",
-    "heading",
+    "headingFemale",
+    "headingMale",
     "description"
   ],
   "Quiz.plus25Lbs": [
-    "imageAlt",
     "heading",
     "description",
     "changeWeightsButton",
@@ -529,18 +541,16 @@
     "Success",
     "subscribeButtonAlreadyInCart",
     "subscribeButtonSwitchToFullMeal",
-    "subscribeButtonSwitchToTopper",
-    "tryRecipeBeforeMembership",
-    "purchaseAlaCarteHeading"
+    "subscribeButtonSwitchToTopper"
   ],
   "Quiz.resultsBeta": [
-    "description",
-    "descriptionSuffix",
-    "emailLabel",
-    "firstNameLabel",
     "heading",
-    "lastNameLabel",
+    "description",
     "pricePerDay",
+    "descriptionSuffix",
+    "firstNameLabel",
+    "lastNameLabel",
+    "emailLabel",
     "submitButton"
   ],
   "Quiz.results.footer": [
@@ -559,7 +569,6 @@
     "descriptionSuffix"
   ],
   "Quiz.step1": [
-    "imageAlt",
     "heading",
     "description",
     "button",
@@ -578,7 +587,6 @@
     "weightSuffix"
   ],
   "Quiz.underAge": [
-    "imageAlt",
     "heading",
     "description",
     "changeAgeButton",
@@ -589,87 +597,28 @@
     "description"
   ],
   "Recipes.CTA": [
-    "ctaButton",
     "ctaImageAlt",
+    "title",
     "description",
-    "title"
+    "ctaButton"
   ],
   "Recipes.AAFCOStatement": [
     "title",
     "subtitle",
     "content"
   ],
-  "Recipes.Detail": [
-    "lambHeading1",
-    "lambHeading2",
-    "lambHeading3",
-    "lambParagraph1",
-    "lambParagraph2",
-    "lambParagraph3",
-    "seafoodHeading1",
-    "seafoodHeading2",
-    "seafoodHeading3",
-    "seafoodParagraph1",
-    "seafoodParagraph2",
-    "seafoodParagraph3",
-    "turkeyHeading1",
-    "turkeyHeading2",
-    "turkeyHeading3",
-    "turkeyParagraph1",
-    "turkeyParagraph2",
-    "turkeyParagraph3"
+  "Recipes.EnrollmentCTA": [
+    "sentence",
+    "ctaButton"
   ],
   "Recipes.FormulationLogic": [
-    "title",
-    "lamb.FormulationLogicDescription1",
-    "lamb.FormulationLogicDescription2",
-    "lamb.FormulationLogicDescription3",
-    "lamb.FormulationLogicDescription4",
-    "lamb.FormulationLogicDescription5",
-    "lamb.FormulationLogicTitle1",
-    "lamb.FormulationLogicTitle2",
-    "lamb.FormulationLogicTitle3",
-    "lamb.FormulationLogicTitle4",
-    "lamb.FormulationLogicTitle5",
-    "seafood.FormulationLogicDescription1",
-    "seafood.FormulationLogicDescription2",
-    "seafood.FormulationLogicDescription3",
-    "seafood.FormulationLogicDescription4",
-    "seafood.FormulationLogicDescription5",
-    "seafood.FormulationLogicTitle1",
-    "seafood.FormulationLogicTitle2",
-    "seafood.FormulationLogicTitle3",
-    "seafood.FormulationLogicTitle4",
-    "seafood.FormulationLogicTitle5",
-    "turkey.FormulationLogicDescription1",
-    "turkey.FormulationLogicDescription2",
-    "turkey.FormulationLogicDescription3",
-    "turkey.FormulationLogicDescription4",
-    "turkey.FormulationLogicDescription5",
-    "turkey.FormulationLogicTitle1",
-    "turkey.FormulationLogicTitle2",
-    "turkey.FormulationLogicTitle3",
-    "turkey.FormulationLogicTitle4",
-    "turkey.FormulationLogicTitle5"
+    "title"
   ],
   "Recipes.GuaranteedAnalysis": [
-    "lambIntro",
-    "seafoodIntro",
-    "title",
-    "turkeyIntro"
+    "title"
   ],
   "Recipes.NutritionPanel": [
-    "aminoAcids",
-    "aminoAcidsSubhead",
-    "collapseAriaLabel",
-    "expandAriaLabel",
-    "fats",
-    "fatsSubhead",
-    "minerals",
-    "mineralsSubhead",
-    "title",
-    "vitamins",
-    "vitaminsSubhead"
+    "title"
   ],
   "Recipes.ServingStorage": [
     "title",
