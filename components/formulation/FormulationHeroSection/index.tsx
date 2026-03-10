@@ -13,21 +13,12 @@ const FormulationHeroSection = () => {
     <section className="relative w-full h-96 md:h-120 flex items-center">
       {/* Background Image */}
       <ContentfulImage
-        src="/images/formulation/hero-bg.jpg"
+        src="/images/formulation/hero-bg.png"
         alt={t('backgroundAlt')}
-        fill
+        fillVariant="native"
         className="object-cover object-[center_25%]"
         priority
       />
-
-      {/* Gradient Overlay */}
-      <div
-        className="absolute inset-0 gradient-hero-overlay"
-        aria-hidden="true"
-      />
-
-      {/* Soft white overlay */}
-      <div className="absolute inset-0 bg-white/15" />
 
       {/* Content */}
       <div className="relative z-10 flex flex-col gap-10 items-center text-center px-5 md:px-24 desktop:px-32 max-w-2xl mx-auto">
