@@ -144,6 +144,7 @@ export default function QuizStepPage() {
               goToStep={goToStep}
               goBack={goBack}
               canGoBack={canGoBack}
+              formMethods={formMethods}
             />
           )
         case QuizStep.UnderAge:
@@ -152,6 +153,7 @@ export default function QuizStepPage() {
               goToStep={goToStep}
               goBack={goBack}
               canGoBack={canGoBack}
+              formMethods={formMethods}
             />
           )
         default:

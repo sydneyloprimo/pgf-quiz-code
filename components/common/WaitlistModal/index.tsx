@@ -8,14 +8,26 @@ import { WaitlistSuccessModal } from './WaitlistSuccessModal'
 import { Button } from '@/components/common/Button'
 import Input from '@/components/common/Input'
 import { Modal } from '@/components/common/Modal'
+import { formatQuizFormDataAsNote } from '@/components/quiz/helpers'
+import type { QuizFormData } from '@/components/quiz/QuizLayout'
+import { QUIZ_WAITLIST_NOTE_PREFIX, QUIZ_WAITLIST_TAGS } from '@/constants'
 import { useEmailCustomer } from '@/hooks/useEmailCustomer'
+
+export type WaitlistSegment = 'location' | 'weight' | 'age'
 
 interface WaitlistModalProps {
   isOpen: boolean
   onClose: () => void
+  quizFormData?: Partial<QuizFormData>
+  waitlistSegment?: WaitlistSegment
 }
 
-const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
+const WaitlistModal = ({
+  isOpen,
+  onClose,
+  quizFormData,
+  waitlistSegment,
+}: WaitlistModalProps) => {
   const t = useTranslations('Common.WaitlistModal')
   const tErrors = useTranslations('Common.EmailCustomer.errors')
 
@@ -47,12 +59,33 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
   const handleSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
-      await createEmailCustomer({
+      const trimmedName = name.trim()
+      const baseParams = {
         email,
-        firstName: name.trim() || undefined,
-      })
+        firstName: trimmedName || undefined,
+      }
+      if (waitlistSegment) {
+        const segment = waitlistSegment
+        const segmentTag = `quiz-waitlist-${segment}`
+        let note: string
+        if (quizFormData && Object.keys(quizFormData).length > 0) {
+          const quizNote = formatQuizFormDataAsNote(quizFormData)
+          note = quizNote
+            ? `${QUIZ_WAITLIST_NOTE_PREFIX} - ${segment}\n\n${quizNote}`
+            : `${QUIZ_WAITLIST_NOTE_PREFIX} - ${segment}`
+        } else {
+          note = `${QUIZ_WAITLIST_NOTE_PREFIX} - ${segment}`
+        }
+        await createEmailCustomer({
+          ...baseParams,
+          note,
+          tags: [...QUIZ_WAITLIST_TAGS, segmentTag],
+        })
+      } else {
+        await createEmailCustomer(baseParams)
+      }
     },
-    [email, name, createEmailCustomer]
+    [email, name, quizFormData, waitlistSegment, createEmailCustomer]
   )
 
   const handleClose = useCallback(() => {
@@ -120,7 +153,7 @@ const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
             <Button
               type="submit"
               variant="primary"
-              disabled={isLoading || !email.trim()}
+              disabled={isLoading || !name.trim() || !email.trim()}
               className="flex-1"
             >
               {isLoading ? t('submittingButton') : t('submitButton')}

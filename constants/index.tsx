@@ -123,7 +123,9 @@ export const FEATURE_FLAG_PANCREATIC = 'PancreaticEnabled'
 export const FEATURE_FLAG_REVIEWS = 'ReviewsEnabled'
 export const FEATURE_FLAG_WAITLIST = 'waitlistFlip'
 export const QUIZ_ENROLLMENT_TAGS = ['quiz-enrollment', 'beta-cohort'] as const
+export const QUIZ_WAITLIST_TAGS = ['quiz-waitlist', 'beta-cohort'] as const
 export const QUIZ_RESULTS_NOTE_LABEL = 'Results link'
+export const QUIZ_WAITLIST_NOTE_PREFIX = 'Quiz Waitlist'
 export const DOG_PROFILE_SEPARATOR = '\n\n--- Dog Profile ---\n\n'
 
 // Cart line attribute for subscription packs clarification (shown on Shopify checkout)
