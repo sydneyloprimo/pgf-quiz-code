@@ -3,7 +3,13 @@ import { Routes } from '@/types/enums/routes'
 
 export const SITE_URL = 'https://www.purelygoldenfoods.com'
 
-export const GTM_ID = 'GTM-K57RTZ79'
+const gtmId = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID
+if (!gtmId?.trim()) {
+  throw new Error(
+    'NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID is required. Set it in .env.local'
+  )
+}
+export const GTM_ID = gtmId.trim()
 
 export const AI_SEARCH_BOT_USER_AGENTS = [
   'OAI-SearchBot',
