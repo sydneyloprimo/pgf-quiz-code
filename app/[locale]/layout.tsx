@@ -11,6 +11,7 @@ import {
   organizationSchema,
   websiteSchema,
 } from '@/components/common/JsonLd'
+import { GTM_ID } from '@/constants'
 import { Locale } from '@/i18n'
 import BodyScripts from '@/scripts/BodyScripts'
 import HeadScripts from '@/scripts/HeadScripts'
@@ -95,6 +96,14 @@ export default async function RootLayout({
         <JsonLd data={websiteSchema()} />
       </head>
       <body className="flex items-center flex-col">
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
         <BodyScripts />
         <Providers params={params}>
           <Session>{children}</Session>
