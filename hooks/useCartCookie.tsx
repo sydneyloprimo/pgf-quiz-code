@@ -3,6 +3,7 @@ import { useCookies } from 'react-cookie'
 import { client } from 'shopify/client'
 import {
   useCartCreateMutation,
+  useCartBuyerIdentityUpdateMutation,
   useGetCartQuery,
 } from 'shopify/generated/graphql'
 
@@ -10,24 +11,38 @@ import { Cookies } from '@/types/enums/cookies'
 
 const useCartCookie = () => {
   const [cookies, setCookie] = useCookies([Cookies.cart])
+  const [tokenCookies] = useCookies([Cookies.customerAccessToken])
+
+  const { mutate: updateCartIdentity } =
+    useCartBuyerIdentityUpdateMutation(client)
 
   const { mutate: createCart } = useCartCreateMutation(client, {
     onSuccess: (data) => {
-      setCookie(Cookies.cart, data.cartCreate?.cart?.id, {
-        path: '/',
-      })
+      const newCartId = data.cartCreate?.cart?.id
+      if (newCartId) {
+        setCookie(Cookies.cart, newCartId, { path: '/' })
+        const token = tokenCookies[Cookies.customerAccessToken]
+        if (token) {
+          updateCartIdentity({
+            buyerIdentity: { customerAccessToken: token },
+            cartId: newCartId,
+          })
+        }
+      }
     },
   })
 
-  const { data } = useGetCartQuery(client, { id: cookies[Cookies.cart] })
+  const cartCookie = cookies[Cookies.cart]
+
+  const { data } = useGetCartQuery(client, { id: cartCookie })
 
   useEffect(() => {
-    if (!cookies?.cart || (cookies?.cart && data?.cart === null)) {
+    if (!cartCookie || (cartCookie && data?.cart === null)) {
       createCart({})
     }
-  }, [cookies, createCart, data])
+  }, [cartCookie, createCart, data])
 
-  return { cartId: cookies[Cookies.cart] || '' }
+  return { cartId: cartCookie || '' }
 }
 
 export default useCartCookie

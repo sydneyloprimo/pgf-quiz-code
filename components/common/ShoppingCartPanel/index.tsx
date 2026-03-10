@@ -3,9 +3,11 @@
 import { useQueryClient } from '@tanstack/react-query'
 import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useState } from 'react'
+import { useCookies } from 'react-cookie'
 import { client } from 'shopify/client'
 import {
   useGetCartQuery,
+  useCartBuyerIdentityUpdateMutation,
   useCartLinesUpdateMutation,
   useCartLinesRemoveMutation,
   useCartLinesAddMutation,
@@ -19,6 +21,7 @@ import { CloseIcon } from '@/components/common/Icon'
 import { SidePanel } from '@/components/common/SidePanel'
 import { PRODUCT_CONFIGS } from '@/constants'
 import useCartCookie from '@/hooks/useCartCookie'
+import { Cookies } from '@/types/enums/cookies'
 import {
   isProductVariant,
   isSellingPlanAllocation,
@@ -36,6 +39,8 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
   const t = useTranslations('Common.ShoppingCartPanel')
   const { cartId } = useCartCookie()
   const queryClient = useQueryClient()
+  const [cookies] = useCookies([Cookies.customerAccessToken])
+  const customerAccessToken = cookies[Cookies.customerAccessToken]
 
   const {
     data,
@@ -117,6 +122,11 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
     }
   }, [data, cartId, isGetCartLoading, isOpen, isCartError, cartError])
 
+  const {
+    mutate: updateCartIdentityForCheckout,
+    isPending: isCheckoutLoading,
+  } = useCartBuyerIdentityUpdateMutation(client)
+
   const { mutate: updateLine, isPending: isUpdateLoading } =
     useCartLinesUpdateMutation(client, {
       onSuccess: () => {
@@ -183,9 +193,12 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
     isRemoveLoading ||
     isUpdateLoading ||
     isAddLineLoading ||
-    isRecipeSwapInProgress
+    isRecipeSwapInProgress ||
+    isCheckoutLoading
 
   const handleCheckoutClick = useCallback(() => {
+    if (isCheckoutLoading) return
+
     if (!cart?.checkoutUrl) {
       if (process.env.NODE_ENV === 'development') {
         console.error('Checkout URL is not available')
@@ -200,9 +213,52 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
       return
     }
 
-    // Redirect to Shopify checkout
-    window.location.assign(cart.checkoutUrl)
-  }, [cart, isEmpty])
+    const redirectToCheckout = (url: string) => {
+      window.location.assign(url)
+    }
+
+    if (customerAccessToken && cartId) {
+      updateCartIdentityForCheckout(
+        {
+          buyerIdentity: { customerAccessToken },
+          cartId,
+        },
+        {
+          onSuccess: (response) => {
+            const buyerIdentityUpdate = response.cartBuyerIdentityUpdate
+            const userErrors = buyerIdentityUpdate?.userErrors
+
+            if (userErrors && userErrors.length > 0) {
+              if (process.env.NODE_ENV === 'development') {
+                console.error(
+                  'Failed to update cart buyer identity before checkout',
+                  userErrors
+                )
+              }
+              redirectToCheckout(cart.checkoutUrl)
+              return
+            }
+
+            const url =
+              buyerIdentityUpdate?.cart?.checkoutUrl ?? cart.checkoutUrl
+            if (url) redirectToCheckout(url)
+          },
+          onError: () => {
+            redirectToCheckout(cart.checkoutUrl)
+          },
+        }
+      )
+    } else {
+      redirectToCheckout(cart.checkoutUrl)
+    }
+  }, [
+    cart,
+    cartId,
+    customerAccessToken,
+    isCheckoutLoading,
+    isEmpty,
+    updateCartIdentityForCheckout,
+  ])
 
   const handleDeleteClick = useCallback(
     (productId: string) => {
