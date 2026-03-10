@@ -179,19 +179,22 @@
     "emptyState"
   ],
   "Common.WaitlistModal": [
-    "closeButtonLabel",
-    "successAriaLabel",
-    "successHeading",
-    "successDescription",
-    "successImageAlt",
-    "successButton",
     "ariaLabel",
-    "heading",
+    "cancelButton",
+    "closeButtonLabel",
     "description",
     "emailLabel",
-    "cancelButton",
+    "emailPlaceholder",
+    "heading",
+    "imageAlt",
+    "nameLabel",
+    "submitButton",
     "submittingButton",
-    "submitButton"
+    "successAriaLabel",
+    "successButton",
+    "successDescription",
+    "successHeading",
+    "successImageAlt"
   ],
   "Formulation.Research": [
     "title",
@@ -498,14 +501,16 @@
     "placeholder"
   ],
   "Quiz.location": [
-    "heading",
-    "invalidZipMessage",
-    "emailLabel",
-    "emailPlaceholder",
-    "notifyMeButton",
     "changeZipButton",
     "checkBackButton",
     "description",
+    "emailLabel",
+    "emailPlaceholder",
+    "heading",
+    "invalidZipMessage",
+    "nameLabel",
+    "namePlaceholder",
+    "notifyMeButton",
     "zipLabel",
     "zipPlaceholder"
   ],

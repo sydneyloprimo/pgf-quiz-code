@@ -701,7 +701,9 @@
       "checkBackButton": "I'll check back later",
       "changeZipButton": "Change ZIP code",
       "emailLabel": "Email",
-      "emailPlaceholder": "Enter email address"
+      "emailPlaceholder": "Enter email address",
+      "nameLabel": "Name",
+      "namePlaceholder": "Enter your name"
     },
     "step2": {
       "heading": "Let's start with the fundamentals.",

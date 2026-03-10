@@ -1,10 +1,13 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
+import { useCallback } from 'react'
+import { UseFormReturn } from 'react-hook-form'
 
 import { Button } from '@/components/common/Button'
 import { ArrowLeftIcon } from '@/components/common/Icon'
 import { WaitlistModal } from '@/components/common/WaitlistModal'
+import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { useModal } from '@/hooks/useModal'
 import { QuizStep } from '@/types/enums/constants'
 import { cn } from '@/utils/cn'
@@ -13,15 +16,22 @@ interface QuizStepUnderAgeProps {
   goToStep: (step: QuizStep) => void
   goBack: () => void
   canGoBack: boolean
+  formMethods: UseFormReturn<QuizFormData>
 }
 
 const QuizStepUnderAge = ({
   goToStep,
   goBack,
   canGoBack,
+  formMethods,
 }: QuizStepUnderAgeProps) => {
   const t = useTranslations('Quiz.underAge')
   const { isOpen, openModal, closeModal } = useModal()
+  const quizFormData = formMethods.getValues()
+
+  const handleChangeAge = useCallback(() => {
+    goToStep(QuizStep.PetInfo)
+  }, [goToStep])
 
   return (
     <>
@@ -49,7 +59,7 @@ const QuizStepUnderAge = ({
         >
           <Button
             type="button"
-            onClick={() => goToStep(QuizStep.PetInfo)}
+            onClick={handleChangeAge}
             variant="tertiary"
             leftIcon={<ArrowLeftIcon className="size-5" />}
             className="w-full md:w-auto md:order-1 order-2"
@@ -66,7 +76,12 @@ const QuizStepUnderAge = ({
           </Button>
         </div>
       </div>
-      <WaitlistModal isOpen={isOpen} onClose={closeModal} />
+      <WaitlistModal
+        isOpen={isOpen}
+        onClose={closeModal}
+        quizFormData={quizFormData}
+        waitlistSegment="age"
+      />
     </>
   )
 }

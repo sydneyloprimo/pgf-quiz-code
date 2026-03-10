@@ -8,9 +8,15 @@ import { Controller, UseFormReturn, useWatch } from 'react-hook-form'
 import { Button } from '@/components/common/Button'
 import Input from '@/components/common/Input'
 import { Link } from '@/components/common/Link'
+import { formatQuizFormDataAsNote } from '@/components/quiz/helpers'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
-import { BOSTON_AREA_ZIP_CODES, MIN_ZIP_CODE_LENGTH } from '@/constants'
+import {
+  BOSTON_AREA_ZIP_CODES,
+  MIN_ZIP_CODE_LENGTH,
+  QUIZ_WAITLIST_NOTE_PREFIX,
+  QUIZ_WAITLIST_TAGS,
+} from '@/constants'
 import { useEmailCustomer } from '@/hooks/useEmailCustomer'
 import { QuizStep } from '@/types/enums/constants'
 import { Routes } from '@/types/enums/routes'
@@ -35,6 +41,7 @@ const QuizLocation = ({
   const { control } = formMethods
   const [zipValidated, setZipValidated] = useState<boolean | null>(null)
   const [showEmailInput, setShowEmailInput] = useState(false)
+  const [notifyName, setNotifyName] = useState('')
   const [notifyEmail, setNotifyEmail] = useState('')
 
   const handleSuccess = useCallback(() => {
@@ -62,9 +69,19 @@ const QuizLocation = ({
   const handleEmailSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
-      createEmailCustomer({ email: notifyEmail })
+      const formData = formMethods.getValues()
+      const quizNote = formatQuizFormDataAsNote(formData)
+      const note = quizNote
+        ? `${QUIZ_WAITLIST_NOTE_PREFIX} - location\n\n${quizNote}`
+        : `${QUIZ_WAITLIST_NOTE_PREFIX} - location`
+      createEmailCustomer({
+        email: notifyEmail,
+        firstName: notifyName.trim() || undefined,
+        note,
+        tags: [...QUIZ_WAITLIST_TAGS, 'quiz-waitlist-location'],
+      })
     },
-    [notifyEmail, createEmailCustomer]
+    [notifyEmail, notifyName, formMethods, createEmailCustomer]
   )
 
   const zipCode = useWatch({ control, name: 'zipCode', defaultValue: '' })
@@ -76,7 +93,16 @@ const QuizLocation = ({
   const handleChangeZip = useCallback(() => {
     setZipValidated(null)
     setShowEmailInput(false)
+    setNotifyName('')
+    setNotifyEmail('')
   }, [])
+
+  const handleNotifyNameChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setNotifyName(event.target.value)
+    },
+    []
+  )
 
   const handleNotifyEmailChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,6 +128,17 @@ const QuizLocation = ({
             className="flex flex-col gap-6 w-full"
           >
             <Input
+              id="location-notify-name"
+              name="location-notify-name"
+              type="text"
+              value={notifyName}
+              onChange={handleNotifyNameChange}
+              label={t('nameLabel')}
+              placeholder={t('namePlaceholder')}
+              labelClassName="text-secondary-900 font-body text-base font-bold"
+              disabled={isLoading}
+            />
+            <Input
               id="location-notify-email"
               name="location-notify-email"
               type="email"
@@ -116,7 +153,7 @@ const QuizLocation = ({
             <Button
               type="submit"
               variant="primary"
-              disabled={isLoading || !notifyEmail.trim()}
+              disabled={isLoading || !notifyName.trim() || !notifyEmail.trim()}
               className="w-full"
             >
               {t('notifyMeButton')}

@@ -21,6 +21,9 @@ interface CreateEmailCustomerResponse {
 interface CreateEmailCustomerParams {
   email: string
   firstName?: string
+  lastName?: string
+  note?: string
+  tags?: string[]
 }
 
 interface UseEmailCustomerReturn {
@@ -55,17 +58,26 @@ export const useEmailCustomer = (
     async ({
       email,
       firstName,
+      lastName,
+      note,
+      tags,
     }: CreateEmailCustomerParams): Promise<CreateEmailCustomerResponse> => {
       setIsLoading(true)
       setError(null)
 
       try {
+        const body: Record<string, unknown> = { email }
+        if (firstName) body.firstName = firstName
+        if (lastName) body.lastName = lastName
+        if (note) body.note = note
+        if (tags && tags.length > 0) body.tags = tags
+
         const response = await fetch('/api/customers', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ email, firstName }),
+          body: JSON.stringify(body),
         })
 
         const data: CreateEmailCustomerResponse = await response.json()
