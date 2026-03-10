@@ -27,7 +27,11 @@ import {
 } from '@/constants'
 import useCartCookie from '@/hooks/useCartCookie'
 import { useProductConfigs } from '@/hooks/useProductConfigs'
-import { calculateWeeklyPacks, generateCartPayload } from '@/utils/cartHelpers'
+import {
+  calculateBiweeklyPacks,
+  calculateWeeklyPacks,
+  generateCartPayload,
+} from '@/utils/cartHelpers'
 import { cn } from '@/utils/cn'
 
 const isRecipe = (value: string): value is 'turkey' | 'lamb' | 'pancreatic' => {
@@ -239,7 +243,7 @@ const ProductDetailPanel = ({
 
       const payload = generateCartPayload({
         recipeSlug: selectedRecipe as 'turkey' | 'lamb' | 'pancreatic',
-        calculatedWeeklyPacks: quantity,
+        packsPerDelivery: quantity,
         frequency: 'ONETIME',
         portion: 'FULL_MEAL',
         dogName,
@@ -254,7 +258,7 @@ const ProductDetailPanel = ({
           cartId,
           payload,
           recipeSlug: selectedRecipe,
-          calculatedWeeklyPacks: quantity,
+          packsPerDelivery: quantity,
           frequency: 'ONETIME',
           portion: 'FULL_MEAL',
           dogName,
@@ -280,11 +284,15 @@ const ProductDetailPanel = ({
       calculationRecipe,
       mode
     )
-    const calculatedWeeklyPacks = calculateWeeklyPacks(dailyFoodGrams)
 
     const frequency =
       shipmentFrequency === 'everyTwoWeeks' ? 'BIWEEKLY' : 'WEEKLY'
     const portion = productData.mode === 'topper' ? 'TOPPER' : 'FULL_MEAL'
+
+    const packsPerDelivery =
+      frequency === 'BIWEEKLY'
+        ? calculateBiweeklyPacks(dailyFoodGrams)
+        : calculateWeeklyPacks(dailyFoodGrams)
 
     const productConfig =
       productConfigs?.[selectedRecipe as 'turkey' | 'lamb' | 'pancreatic'] ||
@@ -292,7 +300,7 @@ const ProductDetailPanel = ({
 
     const payload = generateCartPayload({
       recipeSlug: selectedRecipe as 'turkey' | 'lamb' | 'pancreatic',
-      calculatedWeeklyPacks,
+      packsPerDelivery,
       frequency,
       portion,
       dogName,
@@ -303,11 +311,11 @@ const ProductDetailPanel = ({
 
     // Debug: Log payload being sent
     if (process.env.NODE_ENV === 'development') {
-      console.log('Adding to cart (Subscription from Panel) - Payload:', {
+      console.log('Adding to cart (Subscription from Panel)' + ' - Payload:', {
         cartId,
         payload,
         recipeSlug: selectedRecipe,
-        calculatedWeeklyPacks,
+        packsPerDelivery,
         frequency,
         portion,
         dogName,

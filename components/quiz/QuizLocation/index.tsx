@@ -12,7 +12,7 @@ import { formatQuizFormDataAsNote } from '@/components/quiz/helpers'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizNavigationFooter } from '@/components/quiz/QuizNavigationFooter'
 import {
-  BOSTON_AREA_ZIP_CODES,
+  isMassachusettsZipCode,
   MIN_ZIP_CODE_LENGTH,
   QUIZ_WAITLIST_NOTE_PREFIX,
   QUIZ_WAITLIST_TAGS,
@@ -54,8 +54,7 @@ const QuizLocation = ({
   const handleContinue = useCallback(() => {
     const zip = formMethods.getValues('zipCode')?.trim() || ''
     const isValid =
-      zip.length >= MIN_ZIP_CODE_LENGTH &&
-      BOSTON_AREA_ZIP_CODES.has(zip.slice(0, MIN_ZIP_CODE_LENGTH))
+      zip.length >= MIN_ZIP_CODE_LENGTH && isMassachusettsZipCode(zip)
     setZipValidated(isValid)
     if (isValid) {
       goToStep(QuizStep.PetInfo)

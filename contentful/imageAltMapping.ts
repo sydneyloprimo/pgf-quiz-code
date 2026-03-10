@@ -62,7 +62,7 @@ export const IMAGE_ALT_MAPPING: Record<string, string> = {
   '/images/recipes/recipe-bowl-turkey.png': 'Recipes.Detail.turkeyImageAlt',
   '/images/recipes/cta-dog.jpg': 'Recipes.CTA.ctaImageAlt',
   // Formulation
-  '/images/formulation/hero-bg.jpg': 'Formulation.Hero.backgroundAlt',
+  '/images/formulation/hero-bg.png': 'Formulation.Hero.backgroundAlt',
   '/images/formulation/precision-batch.jpg': 'Formulation.Precision.imageAlt',
   '/images/formulation/discover-plans-bg-new.jpg':
     'Formulation.DiscoverPlans.backgroundAlt',

@@ -5,8 +5,11 @@ import { useCallback, useMemo, useState } from 'react'
 
 import { useContentfulImageResolve } from './ContentfulImageContext'
 
+import { cn } from '@/utils/cn'
+
 export type ContentfulImageProps = Omit<ImageProps, 'src'> & {
   src: string
+  fillVariant?: 'native'
 }
 
 const normalizedPath = (p: string) => (p.startsWith('/') ? p : `/${p}`)
@@ -14,8 +17,18 @@ const normalizedPath = (p: string) => (p.startsWith('/') ? p : `/${p}`)
 /**
  * Renders an image using Contentful URL when available, otherwise the local path.
  * On Contentful URL load error, falls back to the local path (public/).
+ * Use fillVariant="native" for fill-style images without Next.js Image inline styles.
  */
-function ContentfulImage({ src, alt, onError, ...rest }: ContentfulImageProps) {
+function ContentfulImage({
+  src,
+  alt,
+  onError,
+  fillVariant,
+  fill,
+  priority,
+  className,
+  ...rest
+}: ContentfulImageProps) {
   const resolve = useContentfulImageResolve()
   const resolvedSrc = useMemo(() => resolve(src), [resolve, src])
   const [useFallback, setUseFallback] = useState(false)
@@ -30,7 +43,32 @@ function ContentfulImage({ src, alt, onError, ...rest }: ContentfulImageProps) {
   )
 
   const displaySrc = useFallback && isContentfulUrl ? src : resolvedSrc
-  return <Image src={displaySrc} alt={alt} onError={handleError} {...rest} />
+
+  if (fillVariant === 'native') {
+    return (
+      <div className="absolute inset-0">
+        <img
+          src={displaySrc}
+          alt={alt}
+          className={cn('size-full', className)}
+          loading={priority ? 'eager' : 'lazy'}
+          onError={handleError}
+        />
+      </div>
+    )
+  }
+
+  return (
+    <Image
+      src={displaySrc}
+      alt={alt}
+      fill={fill}
+      priority={priority}
+      className={className}
+      onError={handleError}
+      {...rest}
+    />
+  )
 }
 
 export {

@@ -853,11 +853,13 @@
       }
     },
     "resultsBeta": {
-      "heading": "{name}'s Recommended Feeding Protocol",
-      "description": "Based on the information you provided, we've identified a feeding protocol calibrated to {name}'s physiology and daily nutritional requirements. To complete your request for enrollment in our founding cohort, please share your contact information.",
-      "firstNameLabel": "First name",
-      "lastNameLabel": "Last name",
+      "description": "Based on the information you provided, we've identified a feeding protocol calibrated to {name}'s physiology and daily nutritional requirements.",
+      "descriptionSuffix": "To complete your request for enrollment in our founding cohort, please share your contact information.",
       "emailLabel": "Email",
+      "firstNameLabel": "First name",
+      "heading": "{name}'s Recommended Feeding Protocol",
+      "lastNameLabel": "Last name",
+      "pricePerDay": "Your subscription would be approximately {price} per day.",
       "submitButton": "Submit"
     },
     "confirmationBeta": {
@@ -1111,7 +1113,7 @@
       "title": "Our Formulation",
       "subtitle": "Nutrition guided by clinical reasoning",
       "ctaButton": "Build your dog’s protocol",
-      "backgroundAlt": "Freshly prepared dog food ingredients"
+      "backgroundAlt": "Raw natural ingredients: poultry, egg, pumpkin, meat, ginger, and leafy greens arranged on a light background"
     },
     "Introduction": {
       "column1": "Developed with board-certified veterinary nutritionists and validated through controlled clinical research at Cornell, Purely Golden Foods delivers carefully prepared meals formulated with evidence, not trend.",
@@ -1339,10 +1341,7 @@
       "expert1Description": "Board-certified veterinary nutritionist who reviewed and contributed to the formulation ofselectPurely Golden Foods recipes.",
       "expert1ImageAlt": "Dr. Caitlin Grant",
       "expert1Name": "Dr. Caitlin Grant, DVM, ECVCN",
-      "expert2Description": "Practicing veterinarian with decades of clinical experience, offering a holistic, physiology-first perspective on animal health.",
-      "expert2ImageAlt": "Dr. Barbara Royal",
-      "expert2Name": "Dr. Barbara Royal, DVM",
-      "title": "Clinical Advisors"
+      "title": "Clinical Advisor"
     },
     "CTA": {
       "body": "",
