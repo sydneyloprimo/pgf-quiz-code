@@ -168,7 +168,7 @@ const MainNav = () => {
             <Link
               href={quizResultsPath}
               className="p-3 text-neutral-white hover:text-secondary-400 relative"
-              aria-label={t('cartAria')}
+              aria-label={hasItems ? t('cartHasItemsAria') : t('cartAria')}
             >
               <ShoppingCartIcon className="size-5" />
               {hasItems && (
@@ -183,10 +183,8 @@ const MainNav = () => {
                     'flex items-center justify-center',
                     'px-1'
                   )}
-                  aria-label={t('itemCountAriaLabel', { count: totalQuantity })}
-                >
-                  {totalQuantity > 99 ? '99+' : totalQuantity}
-                </span>
+                  aria-hidden
+                />
               )}
             </Link>
           </>

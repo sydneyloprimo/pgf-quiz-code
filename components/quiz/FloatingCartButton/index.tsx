@@ -60,7 +60,9 @@ const FloatingCartButton = ({
         'cursor-pointer',
         className
       )}
-      aria-label={t('openCartAriaLabel')}
+      aria-label={
+        hasItems ? t('openCartHasItemsAriaLabel') : t('openCartAriaLabel')
+      }
     >
       <div className="relative">
         <ShoppingCartIcon className="size-6 text-neutral-white" />
@@ -76,8 +78,8 @@ const FloatingCartButton = ({
               'flex items-center justify-center',
               'px-1.5'
             )}
-            aria-label={t('itemCountAriaLabel', { count: totalQuantity })}
-          ></span>
+            aria-hidden
+          />
         )}
       </div>
     </button>
