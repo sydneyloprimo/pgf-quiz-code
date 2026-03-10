@@ -649,9 +649,20 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
   const getBenefits = useCallback(
     (mode: 'topper' | 'fullMeal') => {
       const shipmentFrequency = shipmentFrequencies[mode]
-      return getQuizBenefits(shipmentFrequency, dogName, t)
+      const calculationMode = mode === 'topper' ? 'topper' : 'full'
+      const selectedRecipe = recipes[mode]
+      const calculationRecipe =
+        selectedRecipe === 'pancreatic' ? 'turkey' : selectedRecipe
+      const { dailyFoodGrams } = calculateDailyFoodAndPrice(
+        formData,
+        calculationRecipe,
+        calculationMode
+      )
+      const weeklyPacks = calculateWeeklyPacks(dailyFoodGrams)
+
+      return getQuizBenefits(shipmentFrequency, dogName, weeklyPacks, t)
     },
-    [shipmentFrequencies, dogName, t]
+    [shipmentFrequencies, dogName, recipes, formData, t]
   )
 
   return (

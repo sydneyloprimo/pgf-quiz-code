@@ -120,7 +120,8 @@ export const formatAgeText = (age: string): string => {
 export const getQuizBenefits = (
   shipmentFrequency: string | undefined,
   dogName: string,
-  t: (key: string, values?: Record<string, string>) => string
+  weeklyPacks: number,
+  t: (key: string, values?: Record<string, string | number>) => string
 ): Array<{ icon: 'check' | 'shipping'; text: string }> => {
   const benefits: Array<{ icon: 'check' | 'shipping'; text: string }> = []
   if (shipmentFrequency) {
@@ -134,6 +135,13 @@ export const getQuizBenefits = (
     })
   }
   benefits.push(
+    {
+      icon: 'check',
+      text: t('products.benefits.packRecommendationReason', {
+        name: dogName,
+        packs: weeklyPacks,
+      }),
+    },
     {
       icon: 'check',
       text: t('products.benefits.saveOverheads', { name: dogName }),
