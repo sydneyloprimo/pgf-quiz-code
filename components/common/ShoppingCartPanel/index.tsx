@@ -197,6 +197,8 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
     isCheckoutLoading
 
   const handleCheckoutClick = useCallback(() => {
+    if (isCheckoutLoading) return
+
     if (!cart?.checkoutUrl) {
       if (process.env.NODE_ENV === 'development') {
         console.error('Checkout URL is not available')
@@ -223,9 +225,22 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
         },
         {
           onSuccess: (response) => {
+            const buyerIdentityUpdate = response.cartBuyerIdentityUpdate
+            const userErrors = buyerIdentityUpdate?.userErrors
+
+            if (userErrors && userErrors.length > 0) {
+              if (process.env.NODE_ENV === 'development') {
+                console.error(
+                  'Failed to update cart buyer identity before checkout',
+                  userErrors
+                )
+              }
+              redirectToCheckout(cart.checkoutUrl)
+              return
+            }
+
             const url =
-              response.cartBuyerIdentityUpdate?.cart?.checkoutUrl ??
-              cart.checkoutUrl
+              buyerIdentityUpdate?.cart?.checkoutUrl ?? cart.checkoutUrl
             if (url) redirectToCheckout(url)
           },
           onError: () => {
@@ -240,6 +255,7 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
     cart,
     cartId,
     customerAccessToken,
+    isCheckoutLoading,
     isEmpty,
     updateCartIdentityForCheckout,
   ])
