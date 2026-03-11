@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -11,9 +11,11 @@ import { VisibilityIcon, VisibilityOffIcon } from '@/components/common/Icon'
 import Input from '@/components/common/Input'
 import { Modal } from '@/components/common/Modal'
 import { InputIconPosition } from '@/types/enums/constants'
+import { passwordRegExp } from '@/utils/utils'
 
 interface ChangePasswordModalProps {
   isOpen: boolean
+  isLoading?: boolean
   onClose: () => void
   onSubmit: (data: {
     currentPassword: string
@@ -24,6 +26,7 @@ interface ChangePasswordModalProps {
 
 const ChangePasswordModal = ({
   isOpen,
+  isLoading,
   onClose,
   onSubmit,
 }: ChangePasswordModalProps) => {
@@ -49,6 +52,12 @@ const ChangePasswordModal = ({
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: t('errors.newPasswordMinLength'),
+          })
+        }
+        if (!passwordRegExp.test(val)) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: t('errors.newPasswordPattern'),
           })
         }
       }),
@@ -84,13 +93,17 @@ const ChangePasswordModal = ({
       newPassword: data.newPassword,
       confirmPassword: data.confirmPassword,
     })
-    reset()
   }
 
+  useEffect(() => {
+    if (!isOpen) {
+      reset()
+    }
+  }, [isOpen, reset])
+
   const handleClose = useCallback(() => {
-    reset()
     onClose()
-  }, [reset, onClose])
+  }, [onClose])
 
   const toggleCurrentPassword = useCallback(() => {
     setShowCurrentPassword((prev) => !prev)
@@ -245,6 +258,7 @@ const ChangePasswordModal = ({
           <Button
             type="submit"
             variant="primary"
+            disabled={isLoading}
             className="w-full md:w-auto md:flex-1"
           >
             {t('submitButton')}

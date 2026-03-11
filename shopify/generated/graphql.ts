@@ -6995,6 +6995,24 @@ export type CustomerAccessTokenCreateMutation = {
   } | null
 }
 
+export type CustomerAccessTokenDeleteMutationVariables = Exact<{
+  customerAccessToken: Scalars['String']['input']
+}>
+
+export type CustomerAccessTokenDeleteMutation = {
+  __typename?: 'Mutation'
+  customerAccessTokenDelete?: {
+    __typename?: 'CustomerAccessTokenDeletePayload'
+    deletedAccessToken?: string | null
+    deletedCustomerAccessTokenId?: string | null
+    userErrors: Array<{
+      __typename?: 'UserError'
+      field?: Array<string> | null
+      message: string
+    }>
+  } | null
+}
+
 export type CustomerRecoverMutationVariables = Exact<{
   email: Scalars['String']['input']
 }>
@@ -7049,6 +7067,11 @@ export type CustomerUpdateMutation = {
       id: string
       firstName?: string | null
       lastName?: string | null
+    } | null
+    customerAccessToken?: {
+      __typename?: 'CustomerAccessToken'
+      accessToken: string
+      expiresAt: any
     } | null
     customerUserErrors: Array<{
       __typename?: 'CustomerUserError'
@@ -8060,6 +8083,58 @@ useCustomerAccessTokenCreateMutation.fetcher = (
     CustomerAccessTokenCreateMutationVariables
   >(client, CustomerAccessTokenCreateDocument, variables, headers)
 
+export const CustomerAccessTokenDeleteDocument = /*#__PURE__*/ `
+    mutation customerAccessTokenDelete($customerAccessToken: String!) {
+  customerAccessTokenDelete(customerAccessToken: $customerAccessToken) {
+    deletedAccessToken
+    deletedCustomerAccessTokenId
+    userErrors {
+      field
+      message
+    }
+  }
+}
+    `
+
+export const useCustomerAccessTokenDeleteMutation = <
+  TError = unknown,
+  TContext = unknown,
+>(
+  client: GraphQLClient,
+  options?: UseMutationOptions<
+    CustomerAccessTokenDeleteMutation,
+    TError,
+    CustomerAccessTokenDeleteMutationVariables,
+    TContext
+  >,
+  headers?: RequestInit['headers']
+) => {
+  return useMutation<
+    CustomerAccessTokenDeleteMutation,
+    TError,
+    CustomerAccessTokenDeleteMutationVariables,
+    TContext
+  >({
+    mutationKey: ['customerAccessTokenDelete'],
+    mutationFn: (variables?: CustomerAccessTokenDeleteMutationVariables) =>
+      fetcher<
+        CustomerAccessTokenDeleteMutation,
+        CustomerAccessTokenDeleteMutationVariables
+      >(client, CustomerAccessTokenDeleteDocument, variables, headers)(),
+    ...options,
+  })
+}
+
+useCustomerAccessTokenDeleteMutation.fetcher = (
+  client: GraphQLClient,
+  variables: CustomerAccessTokenDeleteMutationVariables,
+  headers?: RequestInit['headers']
+) =>
+  fetcher<
+    CustomerAccessTokenDeleteMutation,
+    CustomerAccessTokenDeleteMutationVariables
+  >(client, CustomerAccessTokenDeleteDocument, variables, headers)
+
 export const CustomerRecoverDocument = /*#__PURE__*/ `
     mutation customerRecover($email: String!) {
   customerRecover(email: $email) {
@@ -8178,6 +8253,10 @@ export const CustomerUpdateDocument = /*#__PURE__*/ `
       id
       firstName
       lastName
+    }
+    customerAccessToken {
+      accessToken
+      expiresAt
     }
     customerUserErrors {
       code

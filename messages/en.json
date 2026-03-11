@@ -476,6 +476,7 @@
         "confirmPasswordRequired": "Please confirm your new password",
         "currentPasswordRequired": "Please enter your current password",
         "newPasswordMinLength": "Password must be at least 8 characters",
+        "newPasswordPattern": "Password should have at least one number, one uppercase letter and one lowercase letter",
         "newPasswordRequired": "Please enter a new password",
         "passwordsDoNotMatch": "Passwords do not match"
       },
@@ -486,6 +487,11 @@
       "submitButton": "Save"
     },
     "changePassword": "Change Password",
+    "passwordChangeCurrentInvalid": "Current password is incorrect",
+    "passwordChangeErrorIconAlt": "Error icon",
+    "passwordChangeFailed": "Failed to change password. Please try again.",
+    "passwordChangeSuccess": "Password changed successfully",
+    "passwordChangeSuccessIconAlt": "Success icon",
     "deleteAccountLink": {
       "text": "Delete My Account",
       "url": "/profile/delete"

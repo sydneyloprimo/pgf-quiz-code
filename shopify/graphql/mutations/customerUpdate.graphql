@@ -11,6 +11,10 @@ mutation customerUpdate(
       firstName
       lastName
     }
+    customerAccessToken {
+      accessToken
+      expiresAt
+    }
     customerUserErrors {
       code
       field
