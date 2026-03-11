@@ -13,7 +13,16 @@ export default async function AuthLayout({
   const { locale } = await params
   setRequestLocale(locale)
   return (
-    <LocaleWrapper params={params} localeGroup={['Auth', 'SignIn', 'SignUp']}>
+    <LocaleWrapper
+      params={params}
+      localeGroup={[
+        'Auth',
+        'ForgotPassword',
+        'ResetPassword',
+        'SignIn',
+        'SignUp',
+      ]}
+    >
       <div className="w-full flex justify-center">{children}</div>
     </LocaleWrapper>
   )

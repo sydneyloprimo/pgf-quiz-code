@@ -6995,6 +6995,46 @@ export type CustomerAccessTokenCreateMutation = {
   } | null
 }
 
+export type CustomerRecoverMutationVariables = Exact<{
+  email: Scalars['String']['input']
+}>
+
+export type CustomerRecoverMutation = {
+  __typename?: 'Mutation'
+  customerRecover?: {
+    __typename?: 'CustomerRecoverPayload'
+    customerUserErrors: Array<{
+      __typename?: 'CustomerUserError'
+      code?: CustomerErrorCode | null
+      field?: Array<string> | null
+      message: string
+    }>
+  } | null
+}
+
+export type CustomerResetMutationVariables = Exact<{
+  id: Scalars['ID']['input']
+  input: CustomerResetInput
+}>
+
+export type CustomerResetMutation = {
+  __typename?: 'Mutation'
+  customerReset?: {
+    __typename?: 'CustomerResetPayload'
+    customerAccessToken?: {
+      __typename?: 'CustomerAccessToken'
+      accessToken: string
+      expiresAt: any
+    } | null
+    customerUserErrors: Array<{
+      __typename?: 'CustomerUserError'
+      code?: CustomerErrorCode | null
+      field?: Array<string> | null
+      message: string
+    }>
+  } | null
+}
+
 export type CustomerUpdateMutationVariables = Exact<{
   customerAccessToken: Scalars['String']['input']
   customer: CustomerUpdateInput
@@ -8019,6 +8059,117 @@ useCustomerAccessTokenCreateMutation.fetcher = (
     CustomerAccessTokenCreateMutation,
     CustomerAccessTokenCreateMutationVariables
   >(client, CustomerAccessTokenCreateDocument, variables, headers)
+
+export const CustomerRecoverDocument = /*#__PURE__*/ `
+    mutation customerRecover($email: String!) {
+  customerRecover(email: $email) {
+    customerUserErrors {
+      code
+      field
+      message
+    }
+  }
+}
+    `
+
+export const useCustomerRecoverMutation = <
+  TError = unknown,
+  TContext = unknown,
+>(
+  client: GraphQLClient,
+  options?: UseMutationOptions<
+    CustomerRecoverMutation,
+    TError,
+    CustomerRecoverMutationVariables,
+    TContext
+  >,
+  headers?: RequestInit['headers']
+) => {
+  return useMutation<
+    CustomerRecoverMutation,
+    TError,
+    CustomerRecoverMutationVariables,
+    TContext
+  >({
+    mutationKey: ['customerRecover'],
+    mutationFn: (variables?: CustomerRecoverMutationVariables) =>
+      fetcher<CustomerRecoverMutation, CustomerRecoverMutationVariables>(
+        client,
+        CustomerRecoverDocument,
+        variables,
+        headers
+      )(),
+    ...options,
+  })
+}
+
+useCustomerRecoverMutation.fetcher = (
+  client: GraphQLClient,
+  variables: CustomerRecoverMutationVariables,
+  headers?: RequestInit['headers']
+) =>
+  fetcher<CustomerRecoverMutation, CustomerRecoverMutationVariables>(
+    client,
+    CustomerRecoverDocument,
+    variables,
+    headers
+  )
+
+export const CustomerResetDocument = /*#__PURE__*/ `
+    mutation customerReset($id: ID!, $input: CustomerResetInput!) {
+  customerReset(id: $id, input: $input) {
+    customerAccessToken {
+      accessToken
+      expiresAt
+    }
+    customerUserErrors {
+      code
+      field
+      message
+    }
+  }
+}
+    `
+
+export const useCustomerResetMutation = <TError = unknown, TContext = unknown>(
+  client: GraphQLClient,
+  options?: UseMutationOptions<
+    CustomerResetMutation,
+    TError,
+    CustomerResetMutationVariables,
+    TContext
+  >,
+  headers?: RequestInit['headers']
+) => {
+  return useMutation<
+    CustomerResetMutation,
+    TError,
+    CustomerResetMutationVariables,
+    TContext
+  >({
+    mutationKey: ['customerReset'],
+    mutationFn: (variables?: CustomerResetMutationVariables) =>
+      fetcher<CustomerResetMutation, CustomerResetMutationVariables>(
+        client,
+        CustomerResetDocument,
+        variables,
+        headers
+      )(),
+    ...options,
+  })
+}
+
+useCustomerResetMutation.fetcher = (
+  client: GraphQLClient,
+  variables: CustomerResetMutationVariables,
+  headers?: RequestInit['headers']
+) =>
+  fetcher<CustomerResetMutation, CustomerResetMutationVariables>(
+    client,
+    CustomerResetDocument,
+    variables,
+    headers
+  )
 
 export const CustomerUpdateDocument = /*#__PURE__*/ `
     mutation customerUpdate($customerAccessToken: String!, $customer: CustomerUpdateInput!) {

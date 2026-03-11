@@ -146,6 +146,20 @@
     "subscribeButton": "Join the list",
     "subscribedButton": "Subscribed!"
   },
+  "ForgotPassword": {
+    "backToLoginLink": "Back to Log In",
+    "buttonText": "Send Reset Link",
+    "closeButtonAriaLabel": "Close forgot password page",
+    "closeIconAlt": "Close",
+    "emailRequired": "Email is required",
+    "formHeading": "Forgot Your Password?",
+    "formSubHeading": "Enter the email address associated with your account and we'll send you a link to reset your password.",
+    "heroDescription": "Prepared with timeless craftsmanship, guided by science, tailored to their needs.",
+    "logoAlt": "Purely Golden Foods logo",
+    "successHeading": "Check Your Email",
+    "successMessage": "If an account exists with that email, you'll receive a password reset link shortly.",
+    "submitAriaLabel": "Send password reset link"
+  },
   "Home": {
     "Benefits": {
       "benefit1Description": "Targeted fatty acid profiles selected to maintain barrier integrity, dermal health, and coat quality.",
@@ -955,6 +969,30 @@
         }
       }
     }
+  },
+  "ResetPassword": {
+    "backToForgotPasswordLink": "Request a new reset link",
+    "buttonText": "Reset Password",
+    "closeButtonAriaLabel": "Close reset password page",
+    "closeIconAlt": "Close",
+    "confirmPasswordLabel": "Confirm New Password",
+    "confirmPasswordRequired": "Please confirm your new password",
+    "errors": {
+      "expired": "This password reset link has expired or is invalid.",
+      "generic": "Something went wrong. Please try again."
+    },
+    "formHeading": "Reset Your Password",
+    "formSubHeading": "Enter your new password below.",
+    "heroDescription": "Prepared with timeless craftsmanship, guided by science, tailored to their needs.",
+    "hidePassword": "Hide password",
+    "logoAlt": "Purely Golden Foods logo",
+    "newPasswordLabel": "New Password",
+    "newPasswordMinLength": "Password must be at least 8 characters",
+    "newPasswordRequired": "Please enter a new password",
+    "passwordPattern": "Password should have at least one number, one uppercase letter and one lowercase letter",
+    "passwordsDoNotMatch": "Passwords do not match",
+    "showPassword": "Show password",
+    "submitAriaLabel": "Reset your password"
   },
   "SignIn": {
     "accountQuestion": "You don't have an account?",

@@ -8,10 +8,15 @@ import { cn } from '@/utils/cn'
 
 interface LoginFormCardProps extends PropsWithChildren {
   className?: string
+  translationNamespace?: string
 }
 
-const LoginFormCard = ({ children, className }: LoginFormCardProps) => {
-  const t = useTranslations('SignIn')
+const LoginFormCard = ({
+  children,
+  className,
+  translationNamespace = 'SignIn',
+}: LoginFormCardProps) => {
+  const t = useTranslations(translationNamespace)
 
   return (
     <div

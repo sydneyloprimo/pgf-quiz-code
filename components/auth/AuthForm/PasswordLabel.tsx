@@ -16,7 +16,7 @@ const PasswordLabel = () => {
         <span className="text-body-m text-feedback-error-500">*</span>
       </div>
       <Link
-        href={Routes.home}
+        href={Routes.forgotPassword}
         className="text-body-s text-secondary-900 underline"
       >
         {tSignIn('forgotPasswordLink')}

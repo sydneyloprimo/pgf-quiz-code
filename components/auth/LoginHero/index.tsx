@@ -2,8 +2,12 @@ import { useTranslations } from 'next-intl'
 
 import { ContentfulImage } from '@/components/common/ContentfulImage'
 
-const LoginHero = () => {
-  const t = useTranslations('SignIn')
+interface LoginHeroProps {
+  translationNamespace?: string
+}
+
+const LoginHero = ({ translationNamespace = 'SignIn' }: LoginHeroProps) => {
+  const t = useTranslations(translationNamespace)
 
   return (
     <div className="hidden lg:flex flex-1 flex-col items-center justify-center max-w-xl min-w-[335px] px-9 py-24 gap-12 bg-quaternary-800 relative z-2">
