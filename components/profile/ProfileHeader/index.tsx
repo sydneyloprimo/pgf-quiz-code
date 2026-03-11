@@ -9,6 +9,7 @@ import { Button } from '@/components/common/Button'
 import { ChangePasswordModal } from '@/components/profile/ChangePasswordModal'
 import { EditProfileModal } from '@/components/profile/EditProfileModal'
 import { LogoutModal } from '@/components/profile/LogoutModal'
+import { clearFormData, clearPersonalData } from '@/components/quiz/storage'
 import { useModal } from '@/hooks/useModal'
 import { client } from '@/shopify/client'
 import {
@@ -22,7 +23,10 @@ const ProfileHeader = () => {
   const t = useTranslations('Profile')
   const locale = useLocale()
   const router = useRouter()
-  const [cookies, , removeCookie] = useCookies([Cookies.customerAccessToken])
+  const [cookies, , removeCookie] = useCookies([
+    Cookies.customerAccessToken,
+    Cookies.cart,
+  ])
 
   const customerAccessToken = cookies[Cookies.customerAccessToken]
 
@@ -127,6 +131,9 @@ const ProfileHeader = () => {
 
   const handleLogout = useCallback(() => {
     removeCookie(Cookies.customerAccessToken, { path: '/', secure: true })
+    removeCookie(Cookies.cart, { path: '/', secure: true })
+    clearFormData()
+    clearPersonalData()
     router.push(Routes.home)
   }, [removeCookie, router])
 

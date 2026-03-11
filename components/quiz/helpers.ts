@@ -1,5 +1,11 @@
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import {
+  clearFormData,
+  clearPersonalData,
+  QUIZ_FORM_STORAGE_KEY,
+  QUIZ_PERSONAL_DATA_KEY,
+} from '@/components/quiz/storage'
+import {
   ACTIVITY_LEVEL_FACTORS,
   BODY_SHAPE_FACTORS,
   MAX_DOG_WEIGHT_LBS,
@@ -12,8 +18,7 @@ import {
 } from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
 
-const QUIZ_FORM_STORAGE_KEY = 'quiz-form-data'
-const QUIZ_PERSONAL_DATA_KEY = 'quiz-personal-data'
+export { clearFormData, clearPersonalData }
 
 export interface QuizPersonalData {
   firstName?: string
@@ -40,17 +45,6 @@ export const saveFormData = (data: Partial<QuizFormData>) => {
   }
   try {
     window.localStorage.setItem(QUIZ_FORM_STORAGE_KEY, JSON.stringify(data))
-  } catch {
-    // Ignore localStorage errors
-  }
-}
-
-export const clearFormData = () => {
-  if (typeof window === 'undefined') {
-    return
-  }
-  try {
-    window.localStorage.removeItem(QUIZ_FORM_STORAGE_KEY)
   } catch {
     // Ignore localStorage errors
   }
