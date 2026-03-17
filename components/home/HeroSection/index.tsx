@@ -1,13 +1,15 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { useRef } from 'react'
+import { useCallback, useRef } from 'react'
 
 import { Button } from '@/components/common/Button'
 import { Link } from '@/components/common/Link'
 import { QUIZ_RETURN_PATH_KEY } from '@/constants'
 import { useVideoAutoPlay } from '@/hooks/useVideoAutoPlay'
+import { CtaLocation, CtaName } from '@/types/enums/events'
 import { Routes } from '@/types/enums/routes'
+import { trackCtaClick } from '@/utils/analytics'
 import { cn } from '@/utils/cn'
 import { safeSessionStorage } from '@/utils/safeSessionStorage'
 
@@ -16,6 +18,11 @@ const HeroSection = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null)
 
   useVideoAutoPlay(videoRef)
+
+  const handleTakeQuiz = useCallback(() => {
+    trackCtaClick(CtaName.takeQuiz, CtaLocation.homeHero)
+    safeSessionStorage.setItem(QUIZ_RETURN_PATH_KEY, Routes.home)
+  }, [])
 
   return (
     <section className="relative w-full h-150 md:min-h-96 lg:min-h-160 flex items-end justify-center md:justify-start overflow-hidden">
@@ -78,9 +85,7 @@ const HeroSection = () => {
             variant="primary"
             href={Routes.quiz}
             className="w-full md:w-auto px-4 py-4"
-            onClick={() => {
-              safeSessionStorage.setItem(QUIZ_RETURN_PATH_KEY, Routes.home)
-            }}
+            onClick={handleTakeQuiz}
           >
             {t('ctaButton')}
           </Button>

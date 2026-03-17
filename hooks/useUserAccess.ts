@@ -2,7 +2,6 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useCookies } from 'react-cookie'
 
-import event from '@/scripts/GoogleTagManager/event'
 import { client } from '@/shopify/client'
 import {
   useCartBuyerIdentityUpdateMutation,
@@ -10,8 +9,9 @@ import {
   useCustomerCreateMutation,
 } from '@/shopify/generated/graphql'
 import { Cookies } from '@/types/enums/cookies'
-import { Events, AuthenticationMethods } from '@/types/enums/events'
+import { AuthenticationMethods, Events } from '@/types/enums/events'
 import { Routes } from '@/types/enums/routes'
+import { trackEvent } from '@/utils/analytics'
 
 export const useUserAccess = (createSuccessCallback?: () => void) => {
   const [apiError, setApiError] = useState<string>('')
@@ -60,7 +60,7 @@ export const useUserAccess = (createSuccessCallback?: () => void) => {
   const { mutate: createCustomer, isPending: isSignUpLoading } =
     useCustomerCreateMutation(client, {
       onSuccess: (data) => {
-        event(Events.signUp, { method: AuthenticationMethods.email })
+        trackEvent(Events.signUp, { method: AuthenticationMethods.email })
         if (data.customerCreate?.customer?.id) {
           setApiError('')
           if (credentials) {

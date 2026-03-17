@@ -3,17 +3,25 @@
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import readyToBuildPlanImage from 'public/images/recipes/ready-to-build-plan.png'
+import { useCallback } from 'react'
 
 import { Button } from '@/components/common/Button'
 import { QUIZ_RETURN_PATH_KEY } from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
+import { CtaLocation, CtaName } from '@/types/enums/events'
 import { Routes } from '@/types/enums/routes'
+import { trackCtaClick } from '@/utils/analytics'
 import { getQuizStepPath } from '@/utils/quizRoutes'
 import { safeSessionStorage } from '@/utils/safeSessionStorage'
 
 const ReadyToBuildYourPlanSection = () => {
   const t = useTranslations('Recipes.CTA')
   const quizPath = getQuizStepPath(QuizStep.Welcome)
+
+  const handleStartBuildingPlan = useCallback(() => {
+    trackCtaClick(CtaName.startBuildingPlan, CtaLocation.recipesBottom)
+    safeSessionStorage.setItem(QUIZ_RETURN_PATH_KEY, Routes.recipes)
+  }, [])
 
   return (
     <section className="w-full bg-neutral-300 px-5 md:px-24 py-12 md:py-20">
@@ -41,9 +49,7 @@ const ReadyToBuildYourPlanSection = () => {
               variant="primary"
               href={quizPath}
               className="w-fit"
-              onClick={() => {
-                safeSessionStorage.setItem(QUIZ_RETURN_PATH_KEY, Routes.recipes)
-              }}
+              onClick={handleStartBuildingPlan}
             >
               {t('ctaButton')}
             </Button>

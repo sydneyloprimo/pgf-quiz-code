@@ -9,8 +9,8 @@ import { LoginDivider } from '@/components/auth/LoginDivider'
 import { LoginFormCard } from '@/components/auth/LoginFormCard'
 import { LoginHero } from '@/components/auth/LoginHero'
 import { useUserAccess } from '@/hooks/useUserAccess'
-import event from '@/scripts/GoogleTagManager/event'
-import { Events, AuthenticationMethods } from '@/types/enums/events'
+import { AuthenticationMethods, Events } from '@/types/enums/events'
+import { trackEvent } from '@/utils/analytics'
 
 export default function SignIn() {
   const t = useTranslations('SignIn')
@@ -18,7 +18,7 @@ export default function SignIn() {
     useUserAccess()
 
   const handleSubmit = async (email: string, password: string) => {
-    event(Events.login, { method: AuthenticationMethods.email })
+    trackEvent(Events.login, { method: AuthenticationMethods.email })
     createAccessToken({
       input: {
         email: email,

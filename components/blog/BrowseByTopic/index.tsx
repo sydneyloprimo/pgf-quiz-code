@@ -5,7 +5,9 @@ import { useCallback } from 'react'
 
 import { Link } from '@/components/common/Link'
 import { CategoryEntry } from '@/contentful/types'
+import { CtaLocation, CtaName } from '@/types/enums/events'
 import { Routes } from '@/types/enums/routes'
+import { trackCtaClick } from '@/utils/analytics'
 import { cn } from '@/utils/cn'
 
 interface BrowseByTopicProps {
@@ -20,6 +22,10 @@ const BrowseByTopic = ({ categories, currentSlug }: BrowseByTopicProps) => {
     const base = Routes.blog
     if (!slug) return base
     return `${base}?category=${encodeURIComponent(slug)}`
+  }, [])
+
+  const handleCategoryFilter = useCallback((category: string) => {
+    trackCtaClick(CtaName.categoryFilter, CtaLocation.blogBrowse, { category })
   }, [])
 
   return (
@@ -49,6 +55,7 @@ const BrowseByTopic = ({ categories, currentSlug }: BrowseByTopicProps) => {
             const slug = cat.fields.slug ?? ''
             const name = cat.fields.name ?? ''
             const isSelected = currentSlug === slug
+            const handleClick = () => handleCategoryFilter(slug)
             return (
               <Link
                 key={cat.sys.id}
@@ -61,6 +68,7 @@ const BrowseByTopic = ({ categories, currentSlug }: BrowseByTopicProps) => {
                 )}
                 aria-label={t('filterByCategoryAria', { name })}
                 aria-pressed={isSelected}
+                onClick={handleClick}
               >
                 {name}
               </Link>

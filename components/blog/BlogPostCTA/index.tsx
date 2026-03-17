@@ -1,11 +1,14 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
+import { useCallback } from 'react'
 
 import { Button } from '@/components/common/Button'
 import { Link } from '@/components/common/Link'
 import { useConciergeContact } from '@/hooks/useConciergeContact'
 import { QuizStep } from '@/types/enums/constants'
+import { CtaLocation, CtaName } from '@/types/enums/events'
+import { trackCtaClick } from '@/utils/analytics'
 import { cn } from '@/utils/cn'
 import { getQuizStepPath } from '@/utils/quizRoutes'
 
@@ -19,6 +22,14 @@ const BlogPostCTA = ({ variant = 'index' }: BlogPostCTAProps) => {
   const tBlog = useTranslations('BlogPostPage')
   const { href } = useConciergeContact()
   const bgClass = variant === 'post' ? 'bg-neutral-300' : 'bg-neutral-white'
+
+  const handleStartQuiz = useCallback(() => {
+    trackCtaClick(CtaName.startQuiz, CtaLocation.blogCta)
+  }, [])
+
+  const handleTalkToNutritionists = useCallback(() => {
+    trackCtaClick(CtaName.talkToNutritionists, CtaLocation.blogCta)
+  }, [])
 
   return (
     <section className={cn('w-full px-5 py-16 lg:px-24 lg:py-20', bgClass)}>
@@ -34,12 +45,14 @@ const BlogPostCTA = ({ variant = 'index' }: BlogPostCTAProps) => {
             variant="primary"
             className="px-5 py-3"
             href={getQuizStepPath(QuizStep.Welcome)}
+            onClick={handleStartQuiz}
           >
             {tCTA('ctaButton')}
           </Button>
           <Link
             href={href}
             className="font-sans text-xs font-bold underline text-black"
+            onClick={handleTalkToNutritionists}
           >
             {tBlog('talkToNutritionists')}
           </Link>

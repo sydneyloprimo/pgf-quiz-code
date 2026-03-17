@@ -1,11 +1,20 @@
+'use client'
+
 import { useTranslations } from 'next-intl'
+import { useCallback } from 'react'
 
 import { Button } from '@/components/common/Button'
 import { ContentfulImage } from '@/components/common/ContentfulImage'
+import { CtaLocation, CtaName } from '@/types/enums/events'
 import { Routes } from '@/types/enums/routes'
+import { trackCtaClick } from '@/utils/analytics'
 
 const CTASection = () => {
   const t = useTranslations('About.CTA')
+
+  const handleLearnMore = useCallback(() => {
+    trackCtaClick(CtaName.learnMore, CtaLocation.aboutCta)
+  }, [])
 
   return (
     <section className="w-full flex flex-col items-center justify-center px-5 md:px-24 lg:py-45 py-20 relative bg-quaternary-800 overflow-hidden">
@@ -35,6 +44,7 @@ const CTASection = () => {
           size="medium"
           href={Routes.formulation}
           className="max-w-sm"
+          onClick={handleLearnMore}
         >
           {t('button')}
         </Button>

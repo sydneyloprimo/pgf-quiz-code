@@ -1,8 +1,13 @@
+'use client'
+
 import { useTranslations } from 'next-intl'
+import { useCallback } from 'react'
 
 import { Link } from '@/components/common/Link'
 import { BlogPostEntry } from '@/contentful/types'
+import { CtaLocation, CtaName } from '@/types/enums/events'
 import { Routes } from '@/types/enums/routes'
+import { trackCtaClick } from '@/utils/analytics'
 
 interface BlogListCardProps {
   post: BlogPostEntry
@@ -29,11 +34,16 @@ const BlogListCard = ({ post }: BlogListCardProps) => {
 
   const postHref = `${Routes.blog}/${slug}`
 
+  const handleBlogPostClick = useCallback(() => {
+    trackCtaClick(CtaName.blogPostClick, CtaLocation.blogList, { slug })
+  }, [slug])
+
   return (
     <article className="flex flex-col gap-2">
       <Link
         href={postHref}
         className="font-display text-2xl font-normal leading-normal text-quaternary-800 underline decoration-solid underline-offset-auto hover:opacity-90"
+        onClick={handleBlogPostClick}
       >
         {title}
       </Link>

@@ -1,6 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
+import { useCallback } from 'react'
 
 import { Button } from '@/components/common/Button'
 import { ContentfulImage } from '@/components/common/ContentfulImage'
@@ -9,12 +10,19 @@ import {
   FORMULATION_SECTION_PADDING_Y,
   QUIZ_RETURN_PATH_KEY,
 } from '@/constants'
+import { CtaLocation, CtaName } from '@/types/enums/events'
 import { Routes } from '@/types/enums/routes'
+import { trackCtaClick } from '@/utils/analytics'
 import { cn } from '@/utils/cn'
 import { safeSessionStorage } from '@/utils/safeSessionStorage'
 
 const DiscoverPlansSection = () => {
   const t = useTranslations('Formulation.DiscoverPlans')
+
+  const handleStartQuiz = useCallback(() => {
+    trackCtaClick(CtaName.startQuiz, CtaLocation.formulationDiscoverPlans)
+    safeSessionStorage.setItem(QUIZ_RETURN_PATH_KEY, Routes.formulation)
+  }, [])
 
   return (
     <section
@@ -64,12 +72,7 @@ const DiscoverPlansSection = () => {
               variant="primary"
               href={Routes.quiz}
               className="w-full lg:w-auto"
-              onClick={() => {
-                safeSessionStorage.setItem(
-                  QUIZ_RETURN_PATH_KEY,
-                  Routes.formulation
-                )
-              }}
+              onClick={handleStartQuiz}
             >
               {t('ctaButton')}
             </Button>

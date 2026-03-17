@@ -2,10 +2,7 @@ import { useTranslations } from 'next-intl'
 
 import { formatAgeText } from '@/components/quiz/helpers'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
-import {
-  MEALTIME_BEHAVIOR_OPTIONS,
-  TREAT_FREQUENCY_OPTIONS,
-} from '@/constants'
+import { MEALTIME_BEHAVIOR_OPTIONS, TREAT_FREQUENCY_OPTIONS } from '@/constants'
 import { cn } from '@/utils/cn'
 import { getTranslatedOptions } from '@/utils/helpers'
 

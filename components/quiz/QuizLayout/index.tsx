@@ -21,6 +21,8 @@ import { QuizHeader } from '@/components/quiz/QuizHeader'
 import { FEATURE_FLAG_WAITLIST, MAIN_CONTENT_ID } from '@/constants'
 import { useFeatureFlag } from '@/hooks/useFeatureFlag'
 import { QuizStep } from '@/types/enums/constants'
+import { Events } from '@/types/enums/events'
+import { trackEvent, trackQuizStep } from '@/utils/analytics'
 import { cn } from '@/utils/cn'
 import {
   getQuizStepPath,
@@ -59,7 +61,7 @@ export type QuizFormData = z.infer<ReturnType<typeof createQuizFormSchema>>
 interface QuizLayoutProps {
   renderStep: (
     currentStep: QuizStep,
-    goToStep: (step: QuizStep) => void,
+    goToStep: (step: QuizStep, track?: boolean) => void,
     goBack: () => void,
     canGoBack: boolean,
     formMethods: UseFormReturn<QuizFormData>
@@ -158,10 +160,29 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
   }, [pathname])
 
   const goToStep = useCallback(
-    (step: QuizStep) => {
+    (step: QuizStep, track = true) => {
+      const {
+        email: _email,
+        firstName: _firstName,
+        lastName: _lastName,
+        name: _name,
+        zipCode: _zipCode,
+        ...quizResponses
+      } = formMethods.getValues()
+      if (track) {
+        const isResultsStep =
+          step === QuizStep.Results || step === QuizStep.ResultsBeta
+        const stepIndex = isResultsStep
+          ? STEP_ORDER.length + 1
+          : getStepNumber(step)
+        trackQuizStep(step, stepIndex, quizResponses)
+        if (isResultsStep) {
+          trackEvent(Events.quizComplete, quizResponses)
+        }
+      }
       router.push(getQuizStepPath(step))
     },
-    [router]
+    [formMethods, router]
   )
 
   const goBack = useCallback(() => {
@@ -170,25 +191,28 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
       currentStep === QuizStep.Plus25Lbs ||
       currentStep === QuizStep.UnderAge
     ) {
-      goToStep(QuizStep.PetInfo)
+      goToStep(QuizStep.PetInfo, false)
       return
     }
 
     // Results page: go back to SubscriptionType (flag ON) or Diet (flag OFF)
     if (currentStep === QuizStep.Results) {
-      goToStep(waitlistFlipEnabled ? QuizStep.SubscriptionType : QuizStep.Step6)
+      goToStep(
+        waitlistFlipEnabled ? QuizStep.SubscriptionType : QuizStep.Step6,
+        false
+      )
       return
     }
 
     // ResultsBeta should go back to SubscriptionType
     if (currentStep === QuizStep.ResultsBeta) {
-      goToStep(QuizStep.SubscriptionType)
+      goToStep(QuizStep.SubscriptionType, false)
       return
     }
 
     // ConfirmationBeta should go back to ResultsBeta
     if (currentStep === QuizStep.ConfirmationBeta) {
-      goToStep(QuizStep.ResultsBeta)
+      goToStep(QuizStep.ResultsBeta, false)
       return
     }
 
@@ -196,7 +220,7 @@ const QuizLayout = ({ renderStep }: QuizLayoutProps) => {
     const currentIndex = STEP_ORDER.indexOf(currentStep)
     if (currentIndex > 0) {
       const previousStep = STEP_ORDER[currentIndex - 1]
-      goToStep(previousStep)
+      goToStep(previousStep, false)
     } else {
       // Fallback to browser back if we can't determine previous step
       router.back()

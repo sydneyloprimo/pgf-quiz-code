@@ -1,13 +1,22 @@
+'use client'
+
 import { useTranslations } from 'next-intl'
+import { useCallback } from 'react'
 
 import { ValueCard } from '@/components/about/ValuesSection/ValueCard'
 import { Button } from '@/components/common/Button'
 import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { VALUE_ITEMS } from '@/constants'
+import { CtaLocation, CtaName } from '@/types/enums/events'
 import { Routes } from '@/types/enums/routes'
+import { trackCtaClick } from '@/utils/analytics'
 
 const ValuesSection = () => {
   const t = useTranslations('About.Values')
+
+  const handleDiscoverPlans = useCallback(() => {
+    trackCtaClick(CtaName.discoverPlans, CtaLocation.aboutValues)
+  }, [])
 
   const values = VALUE_ITEMS.map((item) => ({
     title: t(item.titleKey),
@@ -36,7 +45,11 @@ const ValuesSection = () => {
         ))}
       </div>
       <div className="relative z-10 flex justify-center pb-10 md:pt-10 md:pb-12">
-        <Button variant="tertiary" href={Routes.formulation}>
+        <Button
+          variant="tertiary"
+          href={Routes.formulation}
+          onClick={handleDiscoverPlans}
+        >
           {t('ctaButton')}
         </Button>
       </div>

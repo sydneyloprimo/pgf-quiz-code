@@ -10,6 +10,8 @@ import {
   RECIPE_TABS,
 } from '@/constants'
 import { useFeatureFlag } from '@/hooks/useFeatureFlag'
+import { CtaLocation, CtaName } from '@/types/enums/events'
+import { trackCtaClick } from '@/utils/analytics'
 import { cn } from '@/utils/cn'
 
 const RecipeTabsSection = () => {
@@ -40,6 +42,7 @@ const RecipeTabsSection = () => {
   const handleTabClick = useCallback(
     (recipe: RecipeType) => {
       setActiveRecipe(recipe)
+      trackCtaClick(CtaName.recipeTab, CtaLocation.recipesTabs, { recipe })
     },
     [setActiveRecipe]
   )
