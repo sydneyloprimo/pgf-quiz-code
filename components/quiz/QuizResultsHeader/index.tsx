@@ -1,12 +1,9 @@
 import { useTranslations } from 'next-intl'
 
-import { ContentfulImage } from '@/components/common/ContentfulImage'
 import { formatAgeText } from '@/components/quiz/helpers'
 import { QuizFormData } from '@/components/quiz/QuizLayout'
 import {
   MEALTIME_BEHAVIOR_OPTIONS,
-  QUIZ_RESULTS_ILLUSTRATION_HEIGHT,
-  QUIZ_RESULTS_ILLUSTRATION_WIDTH,
   TREAT_FREQUENCY_OPTIONS,
 } from '@/constants'
 import { cn } from '@/utils/cn'
@@ -55,16 +52,6 @@ const QuizResultsHeader = ({ formData }: QuizResultsHeaderProps) => {
         'text-secondary-950'
       )}
     >
-      <div className="relative shrink-0">
-        <ContentfulImage
-          src="/images/quiz-results-illustration.svg"
-          alt={t('imageAlt')}
-          width={QUIZ_RESULTS_ILLUSTRATION_WIDTH}
-          height={QUIZ_RESULTS_ILLUSTRATION_HEIGHT}
-          className="object-contain"
-          priority
-        />
-      </div>
       <div className="flex flex-col gap-4 items-center w-full">
         <h2
           className={cn(
