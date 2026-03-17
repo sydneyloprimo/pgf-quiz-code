@@ -5,9 +5,11 @@ import { useRef } from 'react'
 
 import { Button } from '@/components/common/Button'
 import { Link } from '@/components/common/Link'
+import { QUIZ_RETURN_PATH_KEY } from '@/constants'
 import { useVideoAutoPlay } from '@/hooks/useVideoAutoPlay'
 import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
+import { safeSessionStorage } from '@/utils/safeSessionStorage'
 
 const HeroSection = () => {
   const t = useTranslations('Home.Hero')
@@ -76,6 +78,9 @@ const HeroSection = () => {
             variant="primary"
             href={Routes.quiz}
             className="w-full md:w-auto px-4 py-4"
+            onClick={() => {
+              safeSessionStorage.setItem(QUIZ_RETURN_PATH_KEY, Routes.home)
+            }}
           >
             {t('ctaButton')}
           </Button>

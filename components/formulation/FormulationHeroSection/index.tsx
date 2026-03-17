@@ -4,7 +4,9 @@ import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
 import { ContentfulImage } from '@/components/common/ContentfulImage'
+import { QUIZ_RETURN_PATH_KEY } from '@/constants'
 import { Routes } from '@/types/enums/routes'
+import { safeSessionStorage } from '@/utils/safeSessionStorage'
 
 const FormulationHeroSection = () => {
   const t = useTranslations('Formulation.Hero')
@@ -31,7 +33,14 @@ const FormulationHeroSection = () => {
           </p>
         </div>
 
-        <Button variant="primary" href={Routes.quiz} className="w-fit">
+        <Button
+          variant="primary"
+          href={Routes.quiz}
+          className="w-fit"
+          onClick={() => {
+            safeSessionStorage.setItem(QUIZ_RETURN_PATH_KEY, Routes.formulation)
+          }}
+        >
           {t('ctaButton')}
         </Button>
       </div>

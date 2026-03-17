@@ -99,6 +99,7 @@ export const FOOTER_SOCIAL_LINKS: FooterSocialLink[] = [
 
 export const QUIZ_RESULTS_ILLUSTRATION_WIDTH = 167
 export const QUIZ_RESULTS_ILLUSTRATION_HEIGHT = 103
+export const QUIZ_RETURN_PATH_KEY = 'quiz-return-path'
 
 // Quiz thresholds
 export const PUPPY_MAX_AGE_YEARS = 1

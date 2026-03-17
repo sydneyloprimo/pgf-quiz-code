@@ -1,6 +1,8 @@
 import { Button } from '@/components/common/Button'
+import { QUIZ_RETURN_PATH_KEY } from '@/constants'
 import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
+import { safeSessionStorage } from '@/utils/safeSessionStorage'
 
 interface BostonAnnouncementContentProps {
   title: string
@@ -52,7 +54,13 @@ const BostonAnnouncementContent = ({
         </div>
       </div>
 
-      <Button variant="secondary" href={Routes.quiz}>
+      <Button
+        variant="secondary"
+        href={Routes.quiz}
+        onClick={() => {
+          safeSessionStorage.setItem(QUIZ_RETURN_PATH_KEY, Routes.home)
+        }}
+      >
         {ctaLabel}
       </Button>
     </div>

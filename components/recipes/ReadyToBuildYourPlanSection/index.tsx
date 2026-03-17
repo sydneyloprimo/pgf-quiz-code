@@ -5,8 +5,11 @@ import { useTranslations } from 'next-intl'
 import readyToBuildPlanImage from 'public/images/recipes/ready-to-build-plan.png'
 
 import { Button } from '@/components/common/Button'
+import { QUIZ_RETURN_PATH_KEY } from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
+import { Routes } from '@/types/enums/routes'
 import { getQuizStepPath } from '@/utils/quizRoutes'
+import { safeSessionStorage } from '@/utils/safeSessionStorage'
 
 const ReadyToBuildYourPlanSection = () => {
   const t = useTranslations('Recipes.CTA')
@@ -34,7 +37,14 @@ const ReadyToBuildYourPlanSection = () => {
             <p className="font-sans text-base font-normal leading-normal text-black">
               {t('description')}
             </p>
-            <Button variant="primary" href={quizPath} className="w-fit">
+            <Button
+              variant="primary"
+              href={quizPath}
+              className="w-fit"
+              onClick={() => {
+                safeSessionStorage.setItem(QUIZ_RETURN_PATH_KEY, Routes.recipes)
+              }}
+            >
               {t('ctaButton')}
             </Button>
           </div>

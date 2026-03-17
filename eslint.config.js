@@ -44,6 +44,7 @@ export default [
         process: 'readonly',
         React: 'readonly',
         requestAnimationFrame: 'readonly',
+        sessionStorage: 'readonly',
         URLSearchParams: 'readonly',
         window: 'readonly',
       },

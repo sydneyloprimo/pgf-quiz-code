@@ -1,3 +1,5 @@
+'use client'
+
 import { useTranslations } from 'next-intl'
 
 import { Button } from '@/components/common/Button'
@@ -5,9 +7,11 @@ import { ContentfulImage } from '@/components/common/ContentfulImage'
 import {
   FORMULATION_SECTION_PADDING_X,
   FORMULATION_SECTION_PADDING_Y,
+  QUIZ_RETURN_PATH_KEY,
 } from '@/constants'
 import { Routes } from '@/types/enums/routes'
 import { cn } from '@/utils/cn'
+import { safeSessionStorage } from '@/utils/safeSessionStorage'
 
 const DiscoverPlansSection = () => {
   const t = useTranslations('Formulation.DiscoverPlans')
@@ -60,6 +64,12 @@ const DiscoverPlansSection = () => {
               variant="primary"
               href={Routes.quiz}
               className="w-full lg:w-auto"
+              onClick={() => {
+                safeSessionStorage.setItem(
+                  QUIZ_RETURN_PATH_KEY,
+                  Routes.formulation
+                )
+              }}
             >
               {t('ctaButton')}
             </Button>
