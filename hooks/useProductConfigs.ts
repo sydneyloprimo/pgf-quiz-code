@@ -4,8 +4,17 @@ import {
   GetVariantSellingPlansQuery,
   useGetVariantSellingPlansQuery,
 } from 'shopify/generated/graphql'
+import { isBiweeklyPlan } from 'utils/sellingPlanHelpers'
 
 import { PRODUCT_CONFIGS } from '@/constants'
+
+export interface SellingPlanOption {
+  id: string
+  name: string
+  perDeliveryPrice: number
+  currencyCode: string
+  daysInPeriod: number
+}
 
 export interface ProductConfig {
   variantId: string
@@ -15,9 +24,16 @@ export interface ProductConfig {
     biweekly: string | null
   }
   sellingPlanPrices: {
-    weekly: { perDeliveryPrice: number; currencyCode: string } | null
-    biweekly: { perDeliveryPrice: number; currencyCode: string } | null
+    weekly: {
+      perDeliveryPrice: number
+      currencyCode: string
+    } | null
+    biweekly: {
+      perDeliveryPrice: number
+      currencyCode: string
+    } | null
   }
+  sellingPlanOptions: SellingPlanOption[]
   images: Array<{
     url: string
     altText: string | null
@@ -31,6 +47,8 @@ export interface ProductConfigsData {
   lamb: ProductConfig | null
   pancreatic: ProductConfig | null
 }
+
+const DAYS_PER_WEEK = 7
 
 /**
  * Hook to fetch product configurations (variant IDs, selling plan IDs, images)
@@ -117,13 +135,21 @@ export const useProductConfigs = () => {
         perDeliveryPrice: number
         currencyCode: string
       } | null = null
+      const sellingPlanOptions: SellingPlanOption[] = []
 
       sellingPlans.forEach(
         (planEdge: {
           node: {
-            sellingPlan: { id: string; name: string; options: Array<unknown> }
+            sellingPlan: {
+              id: string
+              name: string
+              options: Array<unknown>
+            }
             priceAdjustments: Array<{
-              perDeliveryPrice: { amount: string; currencyCode: string }
+              perDeliveryPrice: {
+                amount: string
+                currencyCode: string
+              }
             }>
           }
         }) => {
@@ -156,12 +182,9 @@ export const useProductConfigs = () => {
           // Determine if weekly or biweekly based on name
           // Selling plan names: "1 week subscription" or "2 week subscription"
           if (planName.includes('week') || planName.includes('weekly')) {
-            // Check for biweekly indicators first
-            const isBiweekly =
-              planName.includes('bi') ||
-              planName.includes('2') ||
-              planName.includes('two') ||
-              planName.includes('every 2')
+            const isBiweekly = isBiweeklyPlan(planName)
+
+            const daysInPeriod = isBiweekly ? DAYS_PER_WEEK * 2 : DAYS_PER_WEEK
 
             if (isBiweekly) {
               biweekly = planId
@@ -174,9 +197,21 @@ export const useProductConfigs = () => {
                 weeklyPrice = priceData
               }
             }
+
+            sellingPlanOptions.push({
+              id: planId,
+              name: plan.name || '',
+              perDeliveryPrice: perDeliveryPriceAmount,
+              currencyCode,
+              daysInPeriod,
+            })
           }
         }
       )
+
+      // Sort by daysInPeriod ascending so weekly is first. plans[0] is used as
+      // default in QuizResults and ShoppingCartPanel - Weekly is the default frequency
+      sellingPlanOptions.sort((a, b) => a.daysInPeriod - b.daysInPeriod)
 
       // Get images from variant or product
       const images: Array<{
@@ -235,6 +270,7 @@ export const useProductConfigs = () => {
           weekly: weeklyPrice,
           biweekly: biweeklyPrice,
         },
+        sellingPlanOptions,
         images: images.length > 0 ? images : [],
       }
 
@@ -244,10 +280,20 @@ export const useProductConfigs = () => {
     return result
   }, [variantsData])
 
+  const availableRecipes = useMemo(() => {
+    return (
+      Object.keys(configs) as Array<keyof ProductConfigsData>
+    ).filter((key) => {
+      const cfg = configs[key]
+      return cfg && cfg.sellingPlanOptions.length > 0
+    })
+  }, [configs])
+
   const isLoading = isLoadingVariants
 
   return {
     configs,
+    availableRecipes,
     isLoading,
   }
 }

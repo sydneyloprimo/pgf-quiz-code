@@ -28,8 +28,7 @@ import {
 import useCartCookie from '@/hooks/useCartCookie'
 import { useProductConfigs } from '@/hooks/useProductConfigs'
 import {
-  calculateBiweeklyPacks,
-  calculateWeeklyPacks,
+  calculatePacksForPeriod,
   generateCartPayload,
 } from '@/utils/cartHelpers'
 import { cn } from '@/utils/cn'
@@ -66,7 +65,7 @@ interface ProductDetailPanelProps {
   onRecipeChange?: (recipe: 'turkey' | 'lamb' | 'pancreatic') => void
   onAddToCartClick?: () => void
   formData?: QuizFormData
-  shipmentFrequency?: string
+  sellingPlanId?: string | null
   dogName?: string
 }
 
@@ -78,7 +77,7 @@ const ProductDetailPanel = ({
   onRecipeChange,
   onAddToCartClick,
   formData,
-  shipmentFrequency,
+  sellingPlanId,
   dogName = '',
 }: ProductDetailPanelProps) => {
   const t = useTranslations('Common.ProductDetailPanel')
@@ -244,7 +243,6 @@ const ProductDetailPanel = ({
       const payload = generateCartPayload({
         recipeSlug: selectedRecipe as 'turkey' | 'lamb' | 'pancreatic',
         packsPerDelivery: quantity,
-        frequency: 'ONETIME',
         portion: 'FULL_MEAL',
         dogName,
         productConfig,
@@ -259,7 +257,6 @@ const ProductDetailPanel = ({
           payload,
           recipeSlug: selectedRecipe,
           packsPerDelivery: quantity,
-          frequency: 'ONETIME',
           portion: 'FULL_MEAL',
           dogName,
         })
@@ -285,38 +282,40 @@ const ProductDetailPanel = ({
       mode
     )
 
-    const frequency =
-      shipmentFrequency === 'everyTwoWeeks' ? 'BIWEEKLY' : 'WEEKLY'
     const portion = productData.mode === 'topper' ? 'TOPPER' : 'FULL_MEAL'
-
-    const packsPerDelivery =
-      frequency === 'BIWEEKLY'
-        ? calculateBiweeklyPacks(dailyFoodGrams)
-        : calculateWeeklyPacks(dailyFoodGrams)
 
     const productConfig =
       productConfigs?.[selectedRecipe as 'turkey' | 'lamb' | 'pancreatic'] ||
       null
 
+    const plan = productConfig?.sellingPlanOptions.find(
+      (p) => p.id === sellingPlanId
+    )
+    const daysInPeriod = plan?.daysInPeriod ?? 7
+    const packsPerDelivery = calculatePacksForPeriod(
+      dailyFoodGrams,
+      daysInPeriod
+    )
+
     const payload = generateCartPayload({
       recipeSlug: selectedRecipe as 'turkey' | 'lamb' | 'pancreatic',
       packsPerDelivery,
-      frequency,
       portion,
       dogName,
       productConfig,
+      sellingPlanId: sellingPlanId ?? null,
     })
 
     toast.dismiss()
 
     // Debug: Log payload being sent
     if (process.env.NODE_ENV === 'development') {
-      console.log('Adding to cart (Subscription from Panel)' + ' - Payload:', {
+      console.log('Adding to cart (Subscription from Panel):', {
         cartId,
         payload,
         recipeSlug: selectedRecipe,
         packsPerDelivery,
-        frequency,
+        sellingPlanId,
         portion,
         dogName,
       })
@@ -332,7 +331,7 @@ const ProductDetailPanel = ({
     selectedRecipe,
     dogName,
     formData,
-    shipmentFrequency,
+    sellingPlanId,
     cartId,
     productConfigs,
     addLine,

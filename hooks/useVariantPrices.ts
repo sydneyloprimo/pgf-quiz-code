@@ -5,6 +5,7 @@ import { useGetVariantPricesQuery } from 'shopify/generated/graphql'
 import { useProductConfigs } from './useProductConfigs'
 
 import { PACK_SIZE_GRAMS } from '@/constants'
+import { type RecipeSlug } from '@/utils/cartHelpers'
 
 interface VariantPriceData {
   pricePerGram: number
@@ -55,10 +56,9 @@ export const useVariantPrices = () => {
 
       const variantId = node.id
       const priceAmount = parseFloat(node.price?.amount || '0')
-      const productTitle = node.product?.title?.toLowerCase() || ''
 
       // Determine recipe slug from variant ID or product title
-      let recipeSlug: 'turkey' | 'lamb' | 'pancreatic' | null = null
+      let recipeSlug: RecipeSlug | null = null
 
       // Match by variant ID first (most reliable)
       if (productConfigs?.turkey?.variantId === variantId) {
@@ -67,12 +67,8 @@ export const useVariantPrices = () => {
         recipeSlug = 'lamb'
       } else if (productConfigs?.pancreatic?.variantId === variantId) {
         recipeSlug = 'pancreatic'
-      } else if (productTitle.includes('turkey')) {
-        recipeSlug = 'turkey'
-      } else if (productTitle.includes('lamb')) {
-        recipeSlug = 'lamb'
-      } else if (productTitle.includes('pancreatic')) {
-        recipeSlug = 'pancreatic'
+      } else {
+        recipeSlug = null
       }
 
       if (recipeSlug && priceAmount > 0) {

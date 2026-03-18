@@ -7225,7 +7225,11 @@ export type GetCartQuery = {
           }
           sellingPlanAllocation?: {
             __typename?: 'SellingPlanAllocation'
-            sellingPlan: { __typename?: 'SellingPlan'; name: string }
+            sellingPlan: {
+              __typename?: 'SellingPlan'
+              id: string
+              name: string
+            }
           } | null
           cost: {
             __typename?: 'CartLineCost'
@@ -8602,6 +8606,7 @@ export const GetCartDocument = /*#__PURE__*/ `
           quantity
           sellingPlanAllocation {
             sellingPlan {
+              id
               name
             }
           }

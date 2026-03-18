@@ -47,6 +47,8 @@ export default [
         sessionStorage: 'readonly',
         URLSearchParams: 'readonly',
         window: 'readonly',
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
       },
     },
     rules: {

@@ -819,12 +819,6 @@ export const RECIPE_TYPE = {
   seafood: 'seafood',
 } as const
 
-// Shipment frequencies
-export const SHIPMENT_FREQUENCY = {
-  everyWeek: 'everyWeek',
-  everyTwoWeeks: 'everyTwoWeeks',
-} as const
-
 // Product detail panel default values
 export const PRODUCT_DETAIL_DEFAULTS = {
   recipe: RECIPE_TYPE.turkey,
@@ -836,7 +830,6 @@ export const PRODUCT_DETAIL_DEFAULTS = {
 export const QUIZ_RESULTS_DEFAULTS = {
   productMode: PRODUCT_MODE.fullMeal,
   recipe: RECIPE_TYPE.turkey,
-  shipmentFrequency: SHIPMENT_FREQUENCY.everyWeek,
 } as const
 
 // Product detail panel section structure

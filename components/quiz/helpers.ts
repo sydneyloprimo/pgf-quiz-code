@@ -17,6 +17,7 @@ import {
   RER_BASE,
 } from '@/constants'
 import { QuizStep } from '@/types/enums/constants'
+import { isWeeklyPlan } from '@/utils/sellingPlanHelpers'
 
 export { clearFormData, clearPersonalData }
 
@@ -112,22 +113,28 @@ export const formatAgeText = (age: string): string => {
 }
 
 export const getQuizBenefits = (
-  shipmentFrequency: string | undefined,
+  sellingPlanName: string | null | undefined,
   dogName: string,
   weeklyPacks: number,
   t: (key: string, values?: Record<string, string | number>) => string
 ): Array<{ icon: 'check' | 'shipping'; text: string }> => {
-  const benefits: Array<{ icon: 'check' | 'shipping'; text: string }> = []
-  if (shipmentFrequency) {
-    const whatYoullGetKey =
-      shipmentFrequency === 'everyWeek'
-        ? 'products.whatYoullGet.everyWeek'
-        : 'products.whatYoullGet.everyTwoWeeks'
+  const benefits: Array<{
+    icon: 'check' | 'shipping'
+    text: string
+  }> = []
+
+  if (sellingPlanName) {
+    const whatYoullGetKey = isWeeklyPlan(sellingPlanName)
+      ? 'products.whatYoullGet.everyWeek'
+      : 'products.whatYoullGet.everyTwoWeeks'
     benefits.push({
       icon: 'shipping',
-      text: t(whatYoullGetKey, { name: dogName }),
+      text: t(whatYoullGetKey, {
+        name: dogName,
+      }),
     })
   }
+
   benefits.push(
     {
       icon: 'check',
@@ -138,15 +145,21 @@ export const getQuizBenefits = (
     },
     {
       icon: 'check',
-      text: t('products.benefits.saveOverheads', { name: dogName }),
+      text: t('products.benefits.saveOverheads', {
+        name: dogName,
+      }),
     },
     {
       icon: 'check',
-      text: t('products.benefits.freshlyPortioned', { name: dogName }),
+      text: t('products.benefits.freshlyPortioned', {
+        name: dogName,
+      }),
     },
     {
       icon: 'check',
-      text: t('products.benefits.flexibleSchedule', { name: dogName }),
+      text: t('products.benefits.flexibleSchedule', {
+        name: dogName,
+      }),
     }
   )
   return benefits

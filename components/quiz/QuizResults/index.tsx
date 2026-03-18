@@ -31,25 +31,23 @@ import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { QuizResultsFooter } from '@/components/quiz/QuizResultsFooter'
 import { QuizResultsHeader } from '@/components/quiz/QuizResultsHeader'
 import {
-  FEATURE_FLAG_LAMB,
-  FEATURE_FLAG_PANCREATIC,
   MediaQuery,
   PRODUCT_DETAIL_IMAGES,
   PRODUCT_MODE,
   QUIZ_RESULT_PRODUCTS,
   QUIZ_RESULTS_DEFAULTS,
   RECIPE_TYPE,
-  SHIPMENT_FREQUENCY,
 } from '@/constants'
 import useCartCookie from '@/hooks/useCartCookie'
-import { useFeatureFlag } from '@/hooks/useFeatureFlag'
-import { useProductConfigs } from '@/hooks/useProductConfigs'
+import { SellingPlanOption, useProductConfigs } from '@/hooks/useProductConfigs'
 import useShoppingCartPanel from '@/hooks/useShoppingCartPanel'
 import { QuizStep } from '@/types/enums/constants'
 import {
-  calculateBiweeklyPacks,
-  calculateWeeklyPacks,
+  calculatePacksForPeriod,
   generateCartPayload,
+  calculateWeeklyPacks,
+  type RecipeSlug,
+  type ProductMode,
 } from '@/utils/cartHelpers'
 import { cn } from '@/utils/cn'
 
@@ -60,9 +58,6 @@ interface QuizResultsProps {
   formMethods: UseFormReturn<QuizFormData>
 }
 
-type ProductMode = 'topper' | 'fullMeal' | 'alaCarte'
-type Recipe = 'turkey' | 'lamb' | 'pancreatic'
-
 const QuizResults = ({ formMethods }: QuizResultsProps) => {
   const { control } = formMethods
   const t = useTranslations('Quiz.results')
@@ -71,11 +66,10 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
   const tDetail = useTranslations('Detail')
 
   const formData = useWatch({ control }) as QuizFormData
-
   const [selectedProductMode, setSelectedProductMode] = useState<ProductMode>(
     QUIZ_RESULTS_DEFAULTS.productMode
   )
-  const [recipes, setRecipes] = useState<Record<ProductMode, Recipe>>({
+  const [recipes, setRecipes] = useState<Record<ProductMode, RecipeSlug>>({
     topper: QUIZ_RESULTS_DEFAULTS.recipe,
     fullMeal: QUIZ_RESULTS_DEFAULTS.recipe,
     alaCarte: QUIZ_RESULTS_DEFAULTS.recipe,
@@ -83,8 +77,8 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
   const [shipmentFrequencies, setShipmentFrequencies] = useState<
     Record<'topper' | 'fullMeal', string>
   >({
-    topper: QUIZ_RESULTS_DEFAULTS.shipmentFrequency,
-    fullMeal: QUIZ_RESULTS_DEFAULTS.shipmentFrequency,
+    topper: '',
+    fullMeal: '',
   })
   const [isPanelOpen, setIsPanelOpen] = useState(false)
   const [panelProductData, setPanelProductData] =
@@ -92,36 +86,37 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
   const { isOpen: isCartOpen, openCart, closeCart } = useShoppingCartPanel()
   const { cartId } = useCartCookie()
   const isMobile = useMediaQuery(MediaQuery.mobile)
-  const { configs: productConfigs, isLoading: isLoadingConfigs } =
-    useProductConfigs()
-  const lambEnabled = useFeatureFlag(FEATURE_FLAG_LAMB)
-  const pancreaticEnabled = useFeatureFlag(FEATURE_FLAG_PANCREATIC)
+  const {
+    configs: productConfigs,
+    availableRecipes,
+    isLoading: isLoadingConfigs,
+  } = useProductConfigs()
 
   const recipeOptions = useMemo(() => {
     const options = [
       { label: t('recipes.turkey'), value: RECIPE_TYPE.turkey },
       { label: t('recipes.lamb'), value: RECIPE_TYPE.lamb },
-      { label: t('recipes.pancreatic'), value: 'pancreatic' as const },
+      {
+        label: t('recipes.pancreatic'),
+        value: 'pancreatic' as const,
+      },
     ]
-    return options.filter(
-      (opt) =>
-        (opt.value !== RECIPE_TYPE.lamb || lambEnabled) &&
-        (opt.value !== 'pancreatic' || pancreaticEnabled)
+    return options.filter((opt) =>
+      availableRecipes.includes(opt.value as 'turkey' | 'lamb' | 'pancreatic')
     )
-  }, [t, lambEnabled, pancreaticEnabled])
+  }, [t, availableRecipes])
 
   useEffect(() => {
+    if (availableRecipes.length === 0) {
+      return
+    }
+    const defaultRecipe = (availableRecipes[0] ??
+      RECIPE_TYPE.turkey) as RecipeSlug
     setRecipes((prev) => {
-      const needsReset = (r: Recipe) =>
-        (r === 'lamb' && !lambEnabled) ||
-        (r === 'pancreatic' && !pancreaticEnabled)
-      const topper = needsReset(prev.topper) ? RECIPE_TYPE.turkey : prev.topper
-      const fullMeal = needsReset(prev.fullMeal)
-        ? RECIPE_TYPE.turkey
-        : prev.fullMeal
-      const alaCarte = needsReset(prev.alaCarte)
-        ? RECIPE_TYPE.turkey
-        : prev.alaCarte
+      const needsReset = (r: RecipeSlug) => !availableRecipes.includes(r)
+      const topper = needsReset(prev.topper) ? defaultRecipe : prev.topper
+      const fullMeal = needsReset(prev.fullMeal) ? defaultRecipe : prev.fullMeal
+      const alaCarte = needsReset(prev.alaCarte) ? defaultRecipe : prev.alaCarte
       if (
         topper !== prev.topper ||
         fullMeal !== prev.fullMeal ||
@@ -131,41 +126,92 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
       }
       return prev
     })
-  }, [lambEnabled, pancreaticEnabled])
+  }, [availableRecipes])
 
-  const shipmentFrequencyOptions = useMemo(
-    () => [
-      {
-        label: t('shipmentFrequencies.everyWeek'),
-        value: SHIPMENT_FREQUENCY.everyWeek,
-      },
-      {
-        label: t('shipmentFrequencies.everyTwoWeeks'),
-        value: SHIPMENT_FREQUENCY.everyTwoWeeks,
-      },
-    ],
-    [t]
+  const getSellingPlanOptionsForRecipe = useCallback(
+    (recipe: RecipeSlug): SellingPlanOption[] => {
+      const config = productConfigs?.[recipe]
+      return config?.sellingPlanOptions ?? []
+    },
+    [productConfigs]
   )
+
+  const shipmentFrequencyOptions = useMemo(() => {
+    const recipe =
+      recipes[
+        selectedProductMode === PRODUCT_MODE.alaCarte
+          ? 'fullMeal'
+          : (selectedProductMode as 'topper' | 'fullMeal')
+      ]
+    const plans = getSellingPlanOptionsForRecipe(recipe)
+    return plans.map((plan) => ({
+      label: plan.name,
+      value: plan.id,
+    }))
+  }, [getSellingPlanOptionsForRecipe, recipes, selectedProductMode])
+
+  useEffect(() => {
+    if (isLoadingConfigs || !productConfigs) {
+      return
+    }
+    setShipmentFrequencies((prev) => {
+      const getDefault = (mode: 'topper' | 'fullMeal'): string => {
+        const recipe = recipes[mode]
+        const plans = productConfigs[recipe]?.sellingPlanOptions ?? []
+        if (plans.length === 0) {
+          return prev[mode]
+        }
+        const currentValid =
+          prev[mode] !== '' && plans.some((p) => p.id === prev[mode])
+        return currentValid ? prev[mode] : plans[0].id
+      }
+      const topper = getDefault('topper')
+      const fullMeal = getDefault('fullMeal')
+      if (topper !== prev.topper || fullMeal !== prev.fullMeal) {
+        return { topper, fullMeal }
+      }
+      return prev
+    })
+  }, [productConfigs, isLoadingConfigs, recipes])
 
   const handleProductModeSelect = useCallback((mode: ProductMode) => {
     setSelectedProductMode(mode)
   }, [])
 
   const handleRecipeSelect = useCallback((mode: ProductMode, value: string) => {
-    setRecipes((prev) => ({ ...prev, [mode]: value as Recipe }))
+    setRecipes((prev) => ({
+      ...prev,
+      [mode]: value as RecipeSlug,
+    }))
   }, [])
 
-  const handleShipmentFrequencySelect = useCallback(
-    (mode: 'topper' | 'fullMeal', value: string) => {
-      setShipmentFrequencies((prev) => ({ ...prev, [mode]: value }))
-    },
-    []
-  )
+  const handleShipmentFrequencySelect = (
+    mode: 'topper' | 'fullMeal',
+    value: string
+  ) => {
+    setShipmentFrequencies((prev) => ({ ...prev, [mode]: value }))
+  }
 
   const dogName = formData.name || ''
 
+  const getSelectedPlan = useCallback(
+    (
+      mode: 'topper' | 'fullMeal',
+      recipeOverride?: RecipeSlug
+    ): SellingPlanOption | null => {
+      const recipe = recipeOverride ?? recipes[mode]
+      const config = productConfigs?.[recipe]
+      if (!config) {
+        return null
+      }
+      const planId = shipmentFrequencies[mode]
+      return config.sellingPlanOptions.find((p) => p.id === planId) ?? null
+    },
+    [recipes, productConfigs, shipmentFrequencies]
+  )
+
   const getPricePerDay = useCallback(
-    (mode: ProductMode, recipeOverride?: Recipe): number => {
+    (mode: ProductMode, recipeOverride?: RecipeSlug): number => {
       if (mode === PRODUCT_MODE.alaCarte) {
         return 0
       }
@@ -180,29 +226,11 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
       // Use turkey for daily food calculation when pancreatic (same formula)
       const calculationRecipe = recipe === 'pancreatic' ? 'turkey' : recipe
 
-      // Get product config for this recipe (pancreatic has its own config)
-      const productConfig = productConfigs?.[recipe] || productConfigs?.turkey
-
-      if (!productConfig) {
-        // Fallback: return 0 if config not loaded (prices will show as $0.00)
-        // This prevents errors while data is loading
-        return 0
-      }
-
-      // Get shipment frequency for this mode
-      const frequency = shipmentFrequencies[mode]
-      // Check if frequency is 'everyWeek' (from SHIPMENT_FREQUENCY enum)
-      const isWeekly =
-        frequency === 'everyWeek' || frequency === SHIPMENT_FREQUENCY.everyWeek
-
-      // Get perDeliveryPrice from selling plan
-      const sellingPlanPrice = isWeekly
-        ? productConfig.sellingPlanPrices.weekly
-        : productConfig.sellingPlanPrices.biweekly
-
-      if (!sellingPlanPrice) {
-        // Fallback: return 0 if selling plan price not available
-        // This prevents errors while data is loading
+      const plan = getSelectedPlan(
+        mode as 'topper' | 'fullMeal',
+        recipeOverride
+      )
+      if (!plan || plan.perDeliveryPrice <= 0) {
         return 0
       }
 
@@ -212,21 +240,26 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
         calculationRecipe,
         calculationMode
       )
-      const packsPerDelivery = isWeekly
-        ? calculateWeeklyPacks(dailyFoodGrams)
-        : calculateBiweeklyPacks(dailyFoodGrams)
-      const daysInPeriod = isWeekly ? 7 : 14
+      const packsPerDelivery = calculatePacksForPeriod(
+        dailyFoodGrams,
+        plan.daysInPeriod
+      )
+      const periodTotal = plan.perDeliveryPrice * packsPerDelivery
 
-      const periodTotal = sellingPlanPrice.perDeliveryPrice * packsPerDelivery
-      const pricePerDay = periodTotal / daysInPeriod
-
-      return pricePerDay
+      return periodTotal / plan.daysInPeriod
     },
-    [recipes, formData, productConfigs, shipmentFrequencies, isLoadingConfigs]
+    [
+      recipes,
+      formData,
+      productConfigs,
+      shipmentFrequencies,
+      isLoadingConfigs,
+      getSelectedPlan,
+    ]
   )
 
   const getProductDescription = useCallback(
-    (recipeType: Recipe): string => {
+    (recipeType: RecipeSlug): string => {
       if (recipeType === RECIPE_TYPE.turkey) {
         return t('products.turkeyDescription')
       }
@@ -239,7 +272,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
   )
 
   const getProductPrice = useCallback(
-    (productMode: ProductMode, recipeOverride?: Recipe): string => {
+    (productMode: ProductMode, recipeOverride?: RecipeSlug): string => {
       if (productMode === PRODUCT_MODE.alaCarte) {
         const recipe = recipeOverride ?? recipes.alaCarte
         const config = productConfigs?.[recipe] || productConfigs?.turkey
@@ -330,7 +363,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
         ...panelProductData,
         recipe,
         images: { main: mainImage, thumbnails },
-        price: getProductPrice(panelProductData.mode, recipe as Recipe),
+        price: getProductPrice(panelProductData.mode, recipe as RecipeSlug),
         description:
           recipe === 'pancreatic'
             ? t('products.turkeyDescription')
@@ -340,7 +373,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
       setPanelProductData(updatedData)
       setRecipes((prev) => ({
         ...prev,
-        [panelProductData.mode]: recipe as Recipe,
+        [panelProductData.mode]: recipe as RecipeSlug,
       }))
     },
     [
@@ -500,14 +533,13 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
         calculationMode
       )
 
-      const frequency =
-        shipmentFrequencies[mode] === 'everyWeek' ? 'WEEKLY' : 'BIWEEKLY'
+      const plan = getSelectedPlan(mode)
       const portion = mode === 'topper' ? 'TOPPER' : 'FULL_MEAL'
-
-      const packsPerDelivery =
-        frequency === 'BIWEEKLY'
-          ? calculateBiweeklyPacks(dailyFoodGrams)
-          : calculateWeeklyPacks(dailyFoodGrams)
+      const daysInPeriod = plan?.daysInPeriod ?? 7
+      const packsPerDelivery = calculatePacksForPeriod(
+        dailyFoodGrams,
+        daysInPeriod
+      )
 
       const productConfig =
         productConfigs?.[recipe as 'turkey' | 'lamb' | 'pancreatic'] || null
@@ -515,10 +547,10 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
       const payload = generateCartPayload({
         recipeSlug: recipe as 'turkey' | 'lamb' | 'pancreatic',
         packsPerDelivery,
-        frequency,
         portion,
         dogName,
         productConfig,
+        sellingPlanId: plan?.id ?? null,
       })
 
       if (isAddingToCart || isAddLineLoading) {
@@ -568,7 +600,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
     [
       recipes,
       formData,
-      shipmentFrequencies,
+      getSelectedPlan,
       dogName,
       cartId,
       addLine,
@@ -614,7 +646,6 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
     const payload = generateCartPayload({
       recipeSlug: recipe as 'turkey' | 'lamb' | 'pancreatic',
       packsPerDelivery: 1,
-      frequency: 'ONETIME',
       portion: 'FULL_MEAL',
       dogName,
       productConfig,
@@ -648,7 +679,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
 
   const getBenefits = useCallback(
     (mode: 'topper' | 'fullMeal') => {
-      const shipmentFrequency = shipmentFrequencies[mode]
+      const plan = getSelectedPlan(mode)
       const calculationMode = mode === 'topper' ? 'topper' : 'full'
       const selectedRecipe = recipes[mode]
       const calculationRecipe =
@@ -659,10 +690,9 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
         calculationMode
       )
       const weeklyPacks = calculateWeeklyPacks(dailyFoodGrams)
-
-      return getQuizBenefits(shipmentFrequency, dogName, weeklyPacks, t)
+      return getQuizBenefits(plan?.name ?? null, dogName, weeklyPacks, t)
     },
-    [shipmentFrequencies, dogName, recipes, formData, t]
+    [getSelectedPlan, dogName, recipes, formData, t]
   )
 
   return (
@@ -774,17 +804,22 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
         onRecipeChange={handlePanelRecipeChange}
         onAddToCartClick={openCart}
         formData={formData}
-        shipmentFrequency={
+        sellingPlanId={
           panelProductData?.mode === 'topper'
             ? shipmentFrequencies.topper
             : panelProductData?.mode === 'fullMeal'
               ? shipmentFrequencies.fullMeal
-              : undefined
+              : null
         }
         dogName={dogName}
       />
 
-      <ShoppingCartPanel isOpen={isCartOpen} onClose={closeCart} />
+      <ShoppingCartPanel
+        isOpen={isCartOpen}
+        onClose={closeCart}
+        formData={formData}
+        mode={selectedProductMode}
+      />
       <FloatingCartButton onOpenCart={openCart} isCartOpen={isCartOpen} />
     </div>
   )

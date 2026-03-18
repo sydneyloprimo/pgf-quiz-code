@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import {
   DecrementIcon,
@@ -12,8 +12,7 @@ import {
 import { InputDropdown } from '@/components/common/InputDropdown'
 import { InputDropdownProvider } from '@/components/common/InputDropdown/InputDropdownContext'
 import { InputNumber } from '@/components/common/InputNumber'
-import { FEATURE_FLAG_LAMB, FEATURE_FLAG_PANCREATIC } from '@/constants'
-import { useFeatureFlag } from '@/hooks/useFeatureFlag'
+import { useProductConfigs } from '@/hooks/useProductConfigs'
 import {
   ProductVariant,
   Attribute,
@@ -21,8 +20,17 @@ import {
   CurrencyCode,
 } from '@/shopify/generated/graphql'
 import { InputDropdownState } from '@/types/enums/constants'
+import { getRecipeSlugFromVariantId } from '@/utils/cartHelpers'
 import { cn } from '@/utils/cn'
 import { formatCurrency } from '@/utils/helpers'
+import { isBiweeklyPlan } from '@/utils/sellingPlanHelpers'
+
+interface FrequencyOption {
+  label: string
+  value: string
+}
+
+const PENDING_FREQUENCY_TIMEOUT_MS = 15000
 
 interface ShoppingCartItemProps {
   productVariant: ProductVariant
@@ -30,15 +38,21 @@ interface ShoppingCartItemProps {
   onDecreaseClick: () => void
   onDeleteClick: () => void
   onIncreaseClick: () => void
-  onFrequencyChange?: (frequency: 'weekly' | 'bi-weekly') => void
+  onFrequencyChange?: (sellingPlanId: string) => void
   onRecipeChange?: (recipe: 'turkey' | 'lamb' | 'pancreatic') => void
   disabled: boolean
   attributes?: Attribute[]
   sellingPlanAllocation?: SellingPlanAllocation | null
   cartLineId?: string
   cost?: {
-    totalAmount?: { amount: string; currencyCode: string } | null
+    totalAmount?: {
+      amount: string
+      currencyCode: string
+    } | null
   } | null
+  failedFrequencyLineId?: string | null
+  frequencyOptions?: FrequencyOption[]
+  recipeOptions?: Array<{ label: string; value: string }>
 }
 
 const ShoppingCartItem = ({
@@ -54,10 +68,13 @@ const ShoppingCartItem = ({
   sellingPlanAllocation,
   cartLineId,
   cost,
+  failedFrequencyLineId,
+  frequencyOptions: frequencyOptionsProp,
+  recipeOptions: recipeOptionsProp,
 }: ShoppingCartItemProps) => {
   const t = useTranslations('Common.ShoppingCartPanel')
-  const lambEnabled = useFeatureFlag(FEATURE_FLAG_LAMB)
-  const pancreaticEnabled = useFeatureFlag(FEATURE_FLAG_PANCREATIC)
+
+  const { configs } = useProductConfigs()
 
   const dogNameAttribute = attributes.find(
     (attr) => attr.key === 'Dog Name'
@@ -74,15 +91,10 @@ const ShoppingCartItem = ({
       return t('oneTimePurchase')
     }
 
-    const nameLower = sellingPlanName.toLowerCase()
-    if (
-      nameLower.includes('2 week') ||
-      nameLower.includes('bi-weekly') ||
-      nameLower.includes('biweekly')
-    ) {
+    if (isBiweeklyPlan(sellingPlanName)) {
       return t('frequencyBiWeekly')
     }
-    if (nameLower.includes('1 week') || nameLower.includes('weekly')) {
+    if (sellingPlanName.toLowerCase().includes('week')) {
       return t('frequencyWeekly')
     }
 
@@ -114,7 +126,8 @@ const ShoppingCartItem = ({
   const handleFrequencyChange = useCallback(
     (value: string) => {
       if (!disabled && onFrequencyChange) {
-        onFrequencyChange(value as 'weekly' | 'bi-weekly')
+        setPendingFrequency(value)
+        onFrequencyChange(value)
       }
     },
     [disabled, onFrequencyChange]
@@ -167,53 +180,63 @@ const ShoppingCartItem = ({
         }`
       : productTitle
 
-  const recipeOptions = useMemo(() => {
-    const options = [
+  const fallbackRecipeOptions = useMemo(
+    () => [
       { label: t('recipeTurkey'), value: 'turkey' },
       { label: t('recipeLamb'), value: 'lamb' },
       { label: t('recipePancreatic'), value: 'pancreatic' },
-    ]
-    return options.filter(
-      (opt) =>
-        (opt.value !== 'lamb' || lambEnabled) &&
-        (opt.value !== 'pancreatic' || pancreaticEnabled)
-    )
-  }, [t, lambEnabled, pancreaticEnabled])
+    ],
+    [t]
+  )
 
-  const frequencyOptions = [
-    { label: t('frequencyWeekly'), value: 'weekly' },
-    { label: t('frequencyBiWeekly'), value: 'bi-weekly' },
-  ]
+  const recipeOptions =
+    recipeOptionsProp && recipeOptionsProp.length > 0
+      ? recipeOptionsProp
+      : fallbackRecipeOptions
 
-  // Determine current frequency from selling plan name
+  // Use only real Shopify selling plan IDs from parent. No fallback — fake
+  // values like 'weekly'/'biweekly' would cause cart update API errors.
+  const frequencyOptions = frequencyOptionsProp ?? []
+
+  const currentFrequencyFromServer = useMemo(() => {
+    if (frequencyOptions.length > 0) {
+      return sellingPlanAllocation?.sellingPlan?.id ?? frequencyOptions[0].value
+    }
+    return sellingPlanAllocation?.sellingPlan?.id ?? null
+  }, [frequencyOptions, sellingPlanAllocation?.sellingPlan?.id])
+
+  const [pendingFrequency, setPendingFrequency] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (pendingFrequency === null) return
+    if (pendingFrequency === currentFrequencyFromServer) {
+      setPendingFrequency(null)
+    }
+  }, [pendingFrequency, currentFrequencyFromServer])
+
+  useEffect(() => {
+    if (
+      cartLineId &&
+      failedFrequencyLineId &&
+      cartLineId === failedFrequencyLineId
+    ) {
+      setPendingFrequency(null)
+    }
+  }, [cartLineId, failedFrequencyLineId])
+
+  useEffect(() => {
+    if (pendingFrequency === null) return
+    const tId = setTimeout(() => {
+      setPendingFrequency(null)
+    }, PENDING_FREQUENCY_TIMEOUT_MS)
+    return () => clearTimeout(tId)
+  }, [pendingFrequency])
+
   const currentFrequency =
-    sellingPlanAllocation?.sellingPlan?.name?.toLowerCase().includes('bi') ||
-    sellingPlanAllocation?.sellingPlan?.name?.toLowerCase().includes('2')
-      ? 'bi-weekly'
-      : sellingPlanAllocation?.sellingPlan?.name
-        ? 'weekly'
-        : 'weekly'
+    pendingFrequency !== null ? pendingFrequency : currentFrequencyFromServer
 
-  // Determine current recipe from product title
-  const getCurrentRecipe = (): 'turkey' | 'lamb' | 'pancreatic' => {
-    const productTitle = productVariant.product?.title?.toLowerCase() || ''
-    if (productTitle.includes('pancreatic')) {
-      return 'pancreatic'
-    }
-    if (productTitle.includes('lamb')) {
-      return 'lamb'
-    }
-    // Default to turkey
-    return 'turkey'
-  }
-
-  const currentRecipe = getCurrentRecipe()
-
-  // Calculate weekly packs for subscription display (biweekly quantity is doubled)
-  const calculatedWeeklyPacks =
-    isSubscription && currentFrequency === 'bi-weekly'
-      ? Math.ceil(quantity / 2)
-      : quantity
+  const currentRecipe =
+    getRecipeSlugFromVariantId(productVariant.id, configs) ?? ''
 
   return (
     <div className="bg-neutral-50 flex flex-col gap-6 py-6 w-full">
@@ -270,7 +293,7 @@ const ShoppingCartItem = ({
                 {isSubscription && (
                   <p className="font-sans font-normal text-sm w-full text-neutral-700">
                     {t('packsClarification', {
-                      packs: String(calculatedWeeklyPacks),
+                      packs: quantity,
                     })}
                   </p>
                 )}
@@ -285,16 +308,18 @@ const ShoppingCartItem = ({
         <div className="flex gap-3 items-center w-full">
           {isSubscription ? (
             <>
-              <InputDropdownProvider>
-                <InputDropdown
-                  value={currentFrequency}
-                  options={frequencyOptions}
-                  onSelect={handleFrequencyChange}
-                  className="flex-1"
-                  state={InputDropdownState.Filled}
-                  disabled={disabled}
-                />
-              </InputDropdownProvider>
+              {frequencyOptions.length > 0 && (
+                <InputDropdownProvider>
+                  <InputDropdown
+                    value={currentFrequency ?? frequencyOptions[0].value}
+                    options={frequencyOptions}
+                    onSelect={handleFrequencyChange}
+                    className="flex-1"
+                    state={InputDropdownState.Filled}
+                    disabled={disabled}
+                  />
+                </InputDropdownProvider>
+              )}
               <InputDropdownProvider>
                 <InputDropdown
                   value={currentRecipe}

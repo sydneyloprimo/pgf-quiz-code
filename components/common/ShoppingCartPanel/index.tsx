@@ -2,8 +2,9 @@
 
 import { useQueryClient } from '@tanstack/react-query'
 import { useTranslations } from 'next-intl'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useCookies } from 'react-cookie'
+import { toast } from 'react-toastify'
 import { client } from 'shopify/client'
 import {
   useGetCartQuery,
@@ -19,26 +20,95 @@ import { ShoppingCartItem } from './ShoppingCartItem'
 
 import { CloseIcon } from '@/components/common/Icon'
 import { SidePanel } from '@/components/common/SidePanel'
+import Toast, { ToastTypes } from '@/components/common/Toast'
+import { calculateDailyFoodAndPrice } from '@/components/quiz/helpers'
+import { QuizFormData } from '@/components/quiz/QuizLayout'
 import { PRODUCT_CONFIGS } from '@/constants'
 import useCartCookie from '@/hooks/useCartCookie'
+import { useProductConfigs, SellingPlanOption } from '@/hooks/useProductConfigs'
 import { Cookies } from '@/types/enums/cookies'
 import {
   isProductVariant,
   isSellingPlanAllocation,
 } from '@/types/guards/products'
-import { generateCartPayload } from '@/utils/cartHelpers'
+import {
+  generateCartPayload,
+  getRecipeSlugFromTitle,
+  RecipeSlug,
+  calculatePacksForPeriod,
+  getRecipeSlugFromVariantId,
+  type ProductMode,
+} from '@/utils/cartHelpers'
 import { cn } from '@/utils/cn'
 import { findProductLine } from '@/utils/utils'
 
 interface ShoppingCartPanelProps {
   isOpen: boolean
   onClose: () => void
+  formData: QuizFormData
+  mode: ProductMode
 }
 
-const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
+function getPacksPerDelivery(
+  formData: QuizFormData,
+  recipeSlug: RecipeSlug,
+  mode: 'topper' | 'full',
+  daysInPeriod: number
+): number {
+  const calculationRecipe =
+    recipeSlug === 'pancreatic' ? 'turkey' : (recipeSlug as 'turkey' | 'lamb')
+  const calculationMode = mode
+  const { dailyFoodGrams } = calculateDailyFoodAndPrice(
+    formData,
+    calculationRecipe,
+    calculationMode
+  )
+  return calculatePacksForPeriod(dailyFoodGrams, daysInPeriod)
+}
+
+const ShoppingCartPanel = ({
+  isOpen,
+  onClose,
+  formData,
+  mode,
+}: ShoppingCartPanelProps) => {
   const t = useTranslations('Common.ShoppingCartPanel')
+  const tToast = useTranslations('Common.Toast')
   const { cartId } = useCartCookie()
   const queryClient = useQueryClient()
+  const { configs: productConfigs, availableRecipes } = useProductConfigs()
+  const planOptionsByRecipe = useMemo(() => {
+    if (!productConfigs) {
+      return {}
+    }
+
+    return Object.fromEntries(
+      Object.entries(productConfigs).map(([recipe, config]) => [
+        recipe,
+        (config?.sellingPlanOptions ?? []).map(
+          (product: SellingPlanOption) => ({
+            label: product.name,
+            value: product.id,
+          })
+        ),
+      ])
+    )
+  }, [productConfigs])
+
+  const recipeOptionsForCart = useMemo(
+    () =>
+      (
+        [
+          { label: t('recipeTurkey'), value: 'turkey' },
+          { label: t('recipeLamb'), value: 'lamb' },
+          { label: t('recipePancreatic'), value: 'pancreatic' },
+        ] as Array<{ label: string; value: string }>
+      ).filter((opt) =>
+        availableRecipes.includes(opt.value as 'turkey' | 'lamb' | 'pancreatic')
+      ),
+    [t, availableRecipes]
+  )
+
   const [cookies] = useCookies([Cookies.customerAccessToken])
   const customerAccessToken = cookies[Cookies.customerAccessToken]
 
@@ -60,6 +130,9 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
 
   const [hasMounted, setHasMounted] = useState(false)
   const [updatingLineId, setUpdatingLineId] = useState<string | null>(null)
+  const [failedFrequencyLineId, setFailedFrequencyLineId] = useState<
+    string | null
+  >(null)
   // Track if we're doing a recipe swap (add new + remove old)
   // This prevents refetching cart between add and remove operations
   const [isRecipeSwapInProgress, setIsRecipeSwapInProgress] = useState(false)
@@ -80,6 +153,7 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
   useEffect(() => {
     if (!isOpen) {
       setUpdatingLineId(null)
+      setFailedFrequencyLineId(null)
       setIsRecipeSwapInProgress(false)
     }
   }, [isOpen])
@@ -131,6 +205,10 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
     useCartLinesUpdateMutation(client, {
       onSuccess: () => {
         getCartRefetch()
+        setUpdatingLineId(null)
+      },
+      onError: () => {
+        setUpdatingLineId(null)
       },
     })
 
@@ -309,84 +387,78 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
   )
 
   const handleFrequencyChange = useCallback(
-    (cartLineId: string, frequency: 'weekly' | 'bi-weekly') => {
+    (cartLineId: string, sellingPlanId: string) => {
       const line = edges?.find(({ node: { id } }) => id === cartLineId)
 
       if (!line) {
         return
       }
 
-      const merchandise = line.node.merchandise
-      if (!isProductVariant(merchandise)) {
-        if (process.env.NODE_ENV === 'development') {
-          console.error('Merchandise is not a ProductVariant')
-        }
-        return
-      }
-
-      const productTitle = merchandise?.product?.title?.toLowerCase() || ''
-
-      // Determine recipe slug from product title
-      let recipeSlug: 'turkey' | 'lamb' | 'pancreatic' | null = null
-      if (productTitle.includes('turkey')) {
-        recipeSlug = 'turkey'
-      } else if (productTitle.includes('lamb')) {
-        recipeSlug = 'lamb'
-      } else if (productTitle.includes('pancreatic')) {
-        recipeSlug = 'pancreatic'
-      }
-
-      if (!recipeSlug) {
-        if (process.env.NODE_ENV === 'development') {
-          console.error(
-            'Could not determine recipe from product title:',
-            productTitle
-          )
-        }
-        return
-      }
-
-      // Use hardcoded config (productConfigs removed per user changes)
-      const config = PRODUCT_CONFIGS[recipeSlug]
-      const sellingPlanId =
-        frequency === 'weekly'
-          ? config?.sellingPlanIds.weekly || null
-          : config?.sellingPlanIds.biweekly || null
-
       if (!sellingPlanId) {
         if (process.env.NODE_ENV === 'development') {
-          console.error(
-            'No selling plan ID found for recipe:',
-            recipeSlug,
-            'frequency:',
-            frequency
-          )
+          console.error('No selling plan ID provided for frequency change')
         }
         return
       }
-      if (process.env.NODE_ENV === 'development') {
-        console.log('[ShoppingCartPanel] Updating line frequency - IDs:', {
-          lineId: line.node.id,
-          sellingPlanId,
-          recipeSlug,
-          frequency,
-        })
+
+      const recipeSlug =
+        getRecipeSlugFromVariantId(
+          line?.node.merchandise?.id,
+          productConfigs
+        ) ?? ''
+
+      const daysInPeriod =
+        productConfigs?.[
+          recipeSlug as RecipeSlug
+        ]?.sellingPlanOptions.find((p) => p.id === sellingPlanId)
+          ?.daysInPeriod ?? null
+
+      if (!daysInPeriod) {
+        if (process.env.NODE_ENV === 'development') {
+          console.error('No days in period found for frequency change')
+        }
+        toast(
+          <Toast
+            type={ToastTypes.error}
+            title={t('updateProductError')}
+            iconAlt={tToast('Error.iconAlt')}
+          />
+        )
+        return
       }
-      updateLine({
-        cartId,
-        lines: [
-          {
-            id: line.node.id,
-            sellingPlanId,
+
+      const packsPerDelivery = getPacksPerDelivery(
+        formData,
+        recipeSlug as RecipeSlug,
+        mode === 'topper' ? 'topper' : 'full',
+        daysInPeriod
+      )
+
+      setUpdatingLineId(cartLineId)
+      updateLine(
+        {
+          cartId,
+          lines: [
+            {
+              id: line.node.id,
+              sellingPlanId,
+              quantity: packsPerDelivery,
+            },
+          ],
+        },
+        {
+          onError: () => {
+            setFailedFrequencyLineId(cartLineId)
+            setTimeout(() => setFailedFrequencyLineId(null), 2000)
           },
-        ],
-      })
+        }
+      )
     },
-    [cartId, edges, updateLine]
+    [cartId, edges, formData, mode, productConfigs, updateLine]
   )
 
   const handleRecipeChange = useCallback(
-    (cartLineId: string, recipe: 'turkey' | 'lamb' | 'pancreatic') => {
+    (cartLineId: string, recipe: RecipeSlug) => {
       const line = edges?.find(({ node: { id } }) => id === cartLineId)
 
       if (!line) {
@@ -410,7 +482,6 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
         ? line.node.sellingPlanAllocation
         : null
       const attributes = line.node.attributes || []
-      const quantity = line.node.quantity
 
       // Check if this is a subscription
       const isSubscription = !!sellingPlanAllocation
@@ -431,36 +502,64 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
           (portionAttribute?.value as 'FULL_MEAL' | 'TOPPER') || 'FULL_MEAL'
         const dogName = dogNameAttribute?.value as string | undefined
 
-        // Determine frequency from selling plan name
-        const sellingPlanName =
-          sellingPlanAllocation.sellingPlan.name?.toLowerCase() || ''
-        const isBiWeekly =
-          sellingPlanName.includes('bi') || sellingPlanName.includes('2')
-        const frequency = isBiWeekly ? 'BIWEEKLY' : 'WEEKLY'
-
         // Generate new payload with the new recipe
+        const currentPlanId = sellingPlanAllocation.sellingPlan.id
+
+        const newRecipeConfig = productConfigs?.[recipe] ?? null
+
+        const matchingPlan = newRecipeConfig?.sellingPlanOptions.find(
+          (p) => p.id === currentPlanId
+        )
+
+        const newSellingPlanId =
+          matchingPlan?.id ?? newRecipeConfig?.sellingPlanOptions[0]?.id ?? null
+
+        const daysInPeriod =
+          matchingPlan?.daysInPeriod ??
+          newRecipeConfig?.sellingPlanOptions[0]?.daysInPeriod ??
+          null
+
+        if (!daysInPeriod) {
+          if (process.env.NODE_ENV === 'development') {
+            console.error('No days in period found for recipe change')
+          }
+          toast(
+            <Toast
+              type={ToastTypes.error}
+              title={t('updateProductError')}
+              iconAlt={tToast('Error.iconAlt')}
+            />
+          )
+          return
+        }
+
+        const calculationMode = portion === 'TOPPER' ? 'topper' : 'full'
+        const packsPerDelivery = getPacksPerDelivery(
+          formData,
+          recipe,
+          calculationMode,
+          daysInPeriod
+        )
+
         const newPayload = generateCartPayload({
           recipeSlug: recipe,
-          packsPerDelivery: quantity,
-          frequency,
+          packsPerDelivery,
           portion,
           dogName,
-          productConfig: PRODUCT_CONFIGS[recipe],
+          productConfig: newRecipeConfig,
+          sellingPlanId: newSellingPlanId,
         })
 
         if (process.env.NODE_ENV === 'development') {
-          console.log(
-            'Changing subscription recipe' + ' - adding new line first:',
-            {
-              cartLineId,
-              recipe,
-              packsPerDelivery: quantity,
-              frequency,
-              portion,
-              dogName,
-              newPayload,
-            }
-          )
+          console.log('Changing subscription recipe - adding new line first:', {
+            cartLineId,
+            recipe,
+            packsPerDelivery,
+            sellingPlanId: newSellingPlanId,
+            portion,
+            dogName,
+            newPayload,
+          })
         }
 
         // Mark this line as updating to show loading state
@@ -474,9 +573,9 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
           lines: [newPayload],
         })
       } else {
-        // For non-subscriptions, we can update in place
-        const newConfig = PRODUCT_CONFIGS[recipe]
-        const newMerchandiseId = newConfig.variantId
+        const newMerchandiseId =
+          productConfigs?.[recipe]?.variantId ??
+          PRODUCT_CONFIGS[recipe].variantId
 
         // Preserve attributes when changing merchandise
         const preservedAttributes = attributes
@@ -511,7 +610,7 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
         })
       }
     },
-    [cartId, edges, updateLine, removeLine, addLine]
+    [cartId, edges, formData, productConfigs, t, tToast, updateLine, addLine]
   )
 
   if (!hasMounted) {
@@ -577,6 +676,16 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
 
                     const isUpdating = updatingLineId === id
 
+                    const recipeSlug = getRecipeSlugFromTitle(
+                      productVariant.product?.title
+                    )
+
+                    // If the product title doesn't match a known recipe, show
+                    // no frequency options rather than options for the wrong recipe.
+                    const planOptions = recipeSlug
+                      ? planOptionsByRecipe[recipeSlug]
+                      : []
+
                     return (
                       <ShoppingCartItem
                         key={id}
@@ -593,13 +702,16 @@ const ShoppingCartPanel = ({ isOpen, onClose }: ShoppingCartPanelProps) => {
                         onDeleteClick={() => handleDeleteClick(id)}
                         onDecreaseClick={() => handleDecreaseClick(id)}
                         onIncreaseClick={() => handleIncreaseClick(id)}
-                        onFrequencyChange={(frequency) =>
-                          handleFrequencyChange(id, frequency)
+                        onFrequencyChange={(sellingPlanId) =>
+                          handleFrequencyChange(id, sellingPlanId)
                         }
                         onRecipeChange={(recipe) =>
                           handleRecipeChange(id, recipe)
                         }
                         disabled={isDisabled || isUpdating}
+                        failedFrequencyLineId={failedFrequencyLineId}
+                        frequencyOptions={planOptions}
+                        recipeOptions={recipeOptionsForCart}
                       />
                     )
                   }

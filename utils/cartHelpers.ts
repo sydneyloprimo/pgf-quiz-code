@@ -7,6 +7,34 @@ import {
   PRODUCT_CONFIGS,
   type ProductConfig,
 } from '@/constants'
+import { ProductConfigsData } from '@/hooks/useProductConfigs'
+
+export type RecipeSlug = 'turkey' | 'lamb' | 'pancreatic'
+export type ProductMode = 'topper' | 'fullMeal' | 'alaCarte'
+
+// Returns null if the title doesn't match any known recipe, instead of
+// defaulting to 'turkey'. Callers decide how to handle unrecognised products.
+export const getRecipeSlugFromTitle = (
+  productTitle: string | null | undefined
+): RecipeSlug | null => {
+  const title = productTitle?.toLowerCase() ?? ''
+  if (title.includes('pancreatic')) return 'pancreatic'
+  if (title.includes('lamb')) return 'lamb'
+  if (title.includes('turkey')) return 'turkey'
+  return null
+}
+
+export const getRecipeSlugFromVariantId = (
+  variantId: string,
+  configs: ProductConfigsData
+): RecipeSlug | null => {
+  for (const [slug, config] of Object.entries(configs)) {
+    if (config?.variantId === variantId) {
+      return slug as RecipeSlug
+    }
+  }
+  return null
+}
 
 export const calculatePacksForPeriod = (
   dailyFoodGrams: number,
@@ -19,50 +47,30 @@ export const calculateWeeklyPacks = (dailyFoodGrams: number): number => {
   return calculatePacksForPeriod(dailyFoodGrams, 7)
 }
 
-export const calculateBiweeklyPacks = (dailyFoodGrams: number): number => {
-  return calculatePacksForPeriod(dailyFoodGrams, 14)
-}
-
-type RecipeSlug = 'turkey' | 'lamb' | 'pancreatic'
-type Frequency = 'WEEKLY' | 'BIWEEKLY' | 'ONETIME'
 type Portion = 'FULL_MEAL' | 'TOPPER'
 
 interface GenerateCartPayloadParams {
   recipeSlug: RecipeSlug
   packsPerDelivery: number
-  frequency: Frequency
   portion: Portion
   dogName?: string
   productConfig?: ProductConfig | null
+  sellingPlanId?: string | null
 }
 
 export const generateCartPayload = ({
   recipeSlug,
   packsPerDelivery,
-  frequency,
   portion,
   dogName,
   productConfig,
+  sellingPlanId,
 }: GenerateCartPayloadParams): CartLineInput => {
-  // Use provided config or fallback to PRODUCT_CONFIGS (from env vars)
   const config =
     productConfig || (PRODUCT_CONFIGS[recipeSlug] as unknown as ProductConfig)
 
-  // Prefer selling plan IDs from productConfig (API); fallback to PRODUCT_CONFIGS (env)
-  const envConfig = PRODUCT_CONFIGS[recipeSlug] as unknown as ProductConfig
-  const sellingPlanWeekly =
-    config.sellingPlanIds.weekly ?? envConfig.sellingPlanIds.weekly
-  const sellingPlanBiweekly =
-    config.sellingPlanIds.biweekly ?? envConfig.sellingPlanIds.biweekly
-
   const quantity = Math.max(1, packsPerDelivery)
-
-  const sellingPlanId =
-    frequency === 'WEEKLY'
-      ? sellingPlanWeekly || null
-      : frequency === 'BIWEEKLY'
-        ? sellingPlanBiweekly || null
-        : null
+  const isSubscription = Boolean(sellingPlanId)
 
   const attributes: Array<{ key: string; value: string }> = [
     {
@@ -72,7 +80,7 @@ export const generateCartPayload = ({
   ]
 
   // Only include "Dog Name" and packs clarification for subscriptions (not A La Carte)
-  if (frequency !== 'ONETIME') {
+  if (isSubscription) {
     if (dogName) {
       attributes.push({
         key: 'Dog Name',
@@ -105,12 +113,8 @@ export const generateCartPayload = ({
       merchandiseId: payload.merchandiseId,
       sellingPlanId: payload.sellingPlanId ?? null,
       quantity: payload.quantity,
-      frequency,
+      isSubscription,
       configSource: productConfig ? 'productConfig (API)' : 'PRODUCT_CONFIGS',
-      envSellingPlans: {
-        weekly: envConfig.sellingPlanIds.weekly,
-        biweekly: envConfig.sellingPlanIds.biweekly,
-      },
     })
   }
 

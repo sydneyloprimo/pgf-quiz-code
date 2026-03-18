@@ -101,7 +101,8 @@
       "recipeTurkey": "Turkey",
       "subscriptionDisplayFullMeal": " | Full Meal",
       "subscriptionDisplayTopper": " | Topper",
-      "title": "Your Shopping Cart"
+      "title": "Your Shopping Cart",
+      "updateProductError": "An error occurred while updating the product."
     },
     "Toast": {
       "Error": {
