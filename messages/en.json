@@ -590,6 +590,38 @@
       "heading": "Cancel {petName}'s Subscription?",
       "loading": "Cancelling…"
     },
+    "EditSubscriptionModal": {
+      "ariaLabel": "Edit subscription for {petName}",
+      "cancelButton": "Cancel",
+      "closeButtonLabel": "Close edit subscription modal",
+      "confirmButton": "Save Changes",
+      "description": "Choose a new recipe or delivery frequency for your subscription.",
+      "errorMessage": "We couldn't update the subscription. Please try again or contact support.",
+      "errors": {
+        "CUSTOMER_NOT_FOUND": "Account not found. Please sign in again.",
+        "EDIT_FAILED": "We couldn't update the subscription. Please try again or contact support.",
+        "FORBIDDEN": "You don't have permission to edit this subscription.",
+        "INTERNAL_SERVER_ERROR": "Something went wrong. Please try again later.",
+        "INVALID_EDIT_PAYLOAD": "Invalid request. Please try again.",
+        "RECHARGE_CUSTOMER_NOT_FOUND": "Subscription account not found. Please try again.",
+        "SUBSCRIPTION_ID_REQUIRED": "Invalid request. Please try again.",
+        "SUBSCRIPTION_NOT_FOUND": "Subscription not found. Please try again.",
+        "UNAUTHORIZED": "Please sign in to continue."
+      },
+      "frequencies": {
+        "biweekly": "Bi-Weekly (Every 2 Weeks)",
+        "weekly": "Weekly"
+      },
+      "frequencyLabel": "Delivery Frequency",
+      "heading": "Edit {petName}'s Plan",
+      "loading": "Saving…",
+      "recipeLabel": "Recipe",
+      "recipes": {
+        "lamb": "Lamb Recipe",
+        "pancreatic": "Pancreatic Recipe",
+        "turkey": "Turkey Recipe"
+      }
+    },
     "ReactivateSubscriptionModal": {
       "ariaLabel": "Reactivate subscription for {petName}",
       "cancelButton": "Cancel",

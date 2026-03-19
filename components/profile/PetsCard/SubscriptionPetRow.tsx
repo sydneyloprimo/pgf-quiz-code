@@ -14,12 +14,17 @@ interface Pet {
   deliveryFrequency: string
   renewalDate?: string
   paymentStatus?: string
+  productTitle: string
+  shopifyVariantId: number
+  orderIntervalFrequency: number
+  orderIntervalUnit: string
 }
 
 interface SubscriptionPetRowProps {
   pet: Pet
   onCancelClick: (pet: Pet) => void
   onReactivateClick: (pet: Pet) => void
+  onEditClick: (pet: Pet) => void
   t: ReturnType<typeof useTranslations<'Profile.PetsCard'>>
 }
 
@@ -56,11 +61,16 @@ const SubscriptionPetRow = ({
   pet,
   onCancelClick,
   onReactivateClick,
+  onEditClick,
   t,
 }: SubscriptionPetRowProps) => {
   const handleReactivateClick = useCallback(() => {
     onReactivateClick(pet)
   }, [pet, onReactivateClick])
+
+  const handleEditClick = useCallback(() => {
+    onEditClick(pet)
+  }, [pet, onEditClick])
 
   const handleCancelLinkClick = useCallback(
     (e: React.MouseEvent) => {
@@ -96,7 +106,7 @@ const SubscriptionPetRow = ({
           onClick={
             pet.subscriptionStatus === 'expired'
               ? handleReactivateClick
-              : undefined
+              : handleEditClick
           }
         >
           {getActionButtonText(pet.subscriptionStatus, t)}

@@ -281,12 +281,12 @@ export const useProductConfigs = () => {
   }, [variantsData])
 
   const availableRecipes = useMemo(() => {
-    return (
-      Object.keys(configs) as Array<keyof ProductConfigsData>
-    ).filter((key) => {
-      const cfg = configs[key]
-      return cfg && cfg.sellingPlanOptions.length > 0
-    })
+    return (Object.keys(configs) as Array<keyof ProductConfigsData>).filter(
+      (key) => {
+        const cfg = configs[key]
+        return cfg && cfg.sellingPlanOptions.length > 0
+      }
+    )
   }, [configs])
 
   const isLoading = isLoadingVariants

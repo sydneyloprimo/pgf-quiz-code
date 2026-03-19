@@ -408,10 +408,9 @@ const ShoppingCartPanel = ({
         ) ?? ''
 
       const daysInPeriod =
-        productConfigs?.[
-          recipeSlug as RecipeSlug
-        ]?.sellingPlanOptions.find((p) => p.id === sellingPlanId)
-          ?.daysInPeriod ?? null
+        productConfigs?.[recipeSlug as RecipeSlug]?.sellingPlanOptions.find(
+          (p) => p.id === sellingPlanId
+        )?.daysInPeriod ?? null
 
       if (!daysInPeriod) {
         if (process.env.NODE_ENV === 'development') {

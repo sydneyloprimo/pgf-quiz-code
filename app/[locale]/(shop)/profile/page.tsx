@@ -59,6 +59,7 @@ export default function ProfilePage() {
     isLoading: isLoadingPets,
     cancelSubscription,
     reactivateSubscription,
+    editSubscription,
   } = useProfileSubscriptions()
 
   const handleDeleteAccount = useCallback(() => {
@@ -74,6 +75,18 @@ export default function ProfilePage() {
   const handleReactivateSubscription = useCallback(
     (subscriptionId: string) => reactivateSubscription(subscriptionId),
     [reactivateSubscription]
+  )
+
+  const handleEditSubscription = useCallback(
+    (
+      subscriptionId: string,
+      payload: {
+        shopifyVariantId: string
+        orderIntervalFrequency: string
+        orderIntervalUnit: string
+      }
+    ) => editSubscription(subscriptionId, payload),
+    [editSubscription]
   )
 
   const orders = data?.customer?.orders?.edges || []
@@ -107,6 +120,7 @@ export default function ProfilePage() {
             pets={pets}
             onCancelSubscription={handleCancelSubscription}
             onReactivateSubscription={handleReactivateSubscription}
+            onEditSubscription={handleEditSubscription}
           />
         </div>
         <div className="flex-1">

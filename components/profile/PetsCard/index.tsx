@@ -1,14 +1,21 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { useCallback, useId, useState } from 'react'
+import { lazy, Suspense, useCallback, useId, useState } from 'react'
 
 import { ChevronIcon } from '@/components/common/Icon'
+import Spinner from '@/components/common/Spinner'
 import { CancelSubscriptionModal } from '@/components/profile/CancelSubscriptionModal'
 import { SubscriptionPetRow } from '@/components/profile/PetsCard/SubscriptionPetRow'
 import { ProfileCard } from '@/components/profile/ProfileCard'
 import { ReactivateSubscriptionModal } from '@/components/profile/ReactivateSubscriptionModal'
 import { useModal } from '@/hooks/useModal'
+
+const EditSubscriptionModal = lazy(() =>
+  import('@/components/profile/EditSubscriptionModal').then((mod) => ({
+    default: mod.EditSubscriptionModal,
+  }))
+)
 
 interface Pet {
   id: string
@@ -17,6 +24,10 @@ interface Pet {
   deliveryFrequency: string
   renewalDate?: string
   paymentStatus?: string
+  productTitle: string
+  shopifyVariantId: number
+  orderIntervalFrequency: number
+  orderIntervalUnit: string
 }
 
 interface PetsCardProps {
@@ -27,18 +38,28 @@ interface PetsCardProps {
   onReactivateSubscription?: (
     subscriptionId: string
   ) => Promise<{ success: boolean; error?: string }>
+  onEditSubscription?: (
+    subscriptionId: string,
+    payload: {
+      shopifyVariantId: string
+      orderIntervalFrequency: string
+      orderIntervalUnit: string
+    }
+  ) => Promise<{ success: boolean; error?: string }>
 }
 
 const PetsCard = ({
   pets = [],
   onCancelSubscription,
   onReactivateSubscription,
+  onEditSubscription,
 }: PetsCardProps) => {
   const t = useTranslations('Profile.PetsCard')
   const [isOpen, setIsOpen] = useState(true)
   const [selectedPet, setSelectedPet] = useState<Pet | null>(null)
   const [selectedPetForReactivate, setSelectedPetForReactivate] =
     useState<Pet | null>(null)
+  const [selectedPetForEdit, setSelectedPetForEdit] = useState<Pet | null>(null)
   const contentId = useId()
   const {
     isOpen: isCancelModalOpen,
@@ -49,6 +70,11 @@ const PetsCard = ({
     isOpen: isReactivateModalOpen,
     openModal: openReactivateModal,
     closeModal: closeReactivateModal,
+  } = useModal()
+  const {
+    isOpen: isEditModalOpen,
+    openModal: openEditModal,
+    closeModal: closeEditModal,
   } = useModal()
 
   const handleToggle = useCallback(() => {
@@ -95,6 +121,33 @@ const PetsCard = ({
     setSelectedPetForReactivate(null)
   }, [closeReactivateModal])
 
+  const handleEditClick = useCallback(
+    (pet: Pet) => {
+      setSelectedPetForEdit(pet)
+      openEditModal()
+    },
+    [openEditModal]
+  )
+
+  const handleConfirmEdit = useCallback(
+    async (payload: {
+      shopifyVariantId: string
+      orderIntervalFrequency: string
+      orderIntervalUnit: string
+    }) => {
+      if (selectedPetForEdit && onEditSubscription) {
+        return await onEditSubscription(selectedPetForEdit.id, payload)
+      }
+      return { success: false }
+    },
+    [selectedPetForEdit, onEditSubscription]
+  )
+
+  const handleCloseEditModal = useCallback(() => {
+    closeEditModal()
+    setSelectedPetForEdit(null)
+  }, [closeEditModal])
+
   return (
     <ProfileCard className="w-full bg-neutral-white border border-quaternary-800 p-6 flex flex-col gap-8">
       <button
@@ -125,6 +178,7 @@ const PetsCard = ({
                 pet={pet}
                 onCancelClick={handleCancelClick}
                 onReactivateClick={handleReactivateClick}
+                onEditClick={handleEditClick}
                 t={t}
               />
             ))
@@ -146,6 +200,26 @@ const PetsCard = ({
           onConfirm={handleConfirmReactivate}
           petName={selectedPetForReactivate.name}
         />
+      )}
+      {selectedPetForEdit && (
+        <Suspense
+          fallback={
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-neutral-900-50">
+              <Spinner />
+            </div>
+          }
+        >
+          <EditSubscriptionModal
+            isOpen={isEditModalOpen}
+            onClose={handleCloseEditModal}
+            onConfirm={handleConfirmEdit}
+            petName={selectedPetForEdit.name}
+            currentVariantId={selectedPetForEdit.shopifyVariantId}
+            currentProductTitle={selectedPetForEdit.productTitle}
+            currentFrequency={selectedPetForEdit.orderIntervalFrequency}
+            currentFrequencyUnit={selectedPetForEdit.orderIntervalUnit}
+          />
+        </Suspense>
       )}
     </ProfileCard>
   )

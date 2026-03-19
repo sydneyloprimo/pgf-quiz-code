@@ -10,6 +10,16 @@ interface Pet {
   deliveryFrequency: string
   renewalDate?: string
   paymentStatus?: string
+  productTitle: string
+  shopifyVariantId: number
+  orderIntervalFrequency: number
+  orderIntervalUnit: string
+}
+
+interface EditSubscriptionPayload {
+  shopifyVariantId: string
+  orderIntervalFrequency: string
+  orderIntervalUnit: string
 }
 
 interface UseProfileSubscriptionsReturn {
@@ -23,8 +33,13 @@ interface UseProfileSubscriptionsReturn {
   reactivateSubscription: (
     subscriptionId: string
   ) => Promise<{ success: boolean; error?: string }>
+  editSubscription: (
+    subscriptionId: string,
+    payload: EditSubscriptionPayload
+  ) => Promise<{ success: boolean; error?: string }>
   isCancelling: boolean
   isReactivating: boolean
+  isEditing: boolean
 }
 
 export const useProfileSubscriptions = (): UseProfileSubscriptionsReturn => {
@@ -34,6 +49,7 @@ export const useProfileSubscriptions = (): UseProfileSubscriptionsReturn => {
   const [isError, setIsError] = useState(false)
   const [isCancelling, setIsCancelling] = useState(false)
   const [isReactivating, setIsReactivating] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
@@ -197,6 +213,71 @@ export const useProfileSubscriptions = (): UseProfileSubscriptionsReturn => {
     [customerAccessToken, fetchSubscriptions]
   )
 
+  const editSubscription = useCallback(
+    async (
+      subscriptionId: string,
+      payload: EditSubscriptionPayload
+    ): Promise<{
+      success: boolean
+      error?: string
+    }> => {
+      if (!customerAccessToken) {
+        return {
+          success: false,
+          error: 'UNAUTHORIZED',
+        }
+      }
+
+      setIsEditing(true)
+
+      try {
+        const response = await fetch('/api/profile/subscriptions/edit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${customerAccessToken}`,
+          },
+          body: JSON.stringify({
+            subscriptionId,
+            ...payload,
+          }),
+        })
+
+        const errorData = await response.json().catch(() => ({}))
+        const knownCodes = new Set([
+          'UNAUTHORIZED',
+          'EDIT_FAILED',
+          'SUBSCRIPTION_ID_REQUIRED',
+          'INVALID_EDIT_PAYLOAD',
+          'CUSTOMER_NOT_FOUND',
+          'RECHARGE_CUSTOMER_NOT_FOUND',
+          'SUBSCRIPTION_NOT_FOUND',
+          'FORBIDDEN',
+          'INTERNAL_SERVER_ERROR',
+        ])
+        const code = errorData.error
+        const message = knownCodes.has(code)
+          ? code
+          : (errorData.details ?? code ?? 'EDIT_FAILED')
+
+        if (!response.ok) {
+          return { success: false, error: message }
+        }
+
+        await fetchSubscriptions(true)
+        return { success: true }
+      } catch {
+        return {
+          success: false,
+          error: 'INTERNAL_SERVER_ERROR',
+        }
+      } finally {
+        setIsEditing(false)
+      }
+    },
+    [customerAccessToken, fetchSubscriptions]
+  )
+
   return {
     pets,
     isLoading,
@@ -204,7 +285,9 @@ export const useProfileSubscriptions = (): UseProfileSubscriptionsReturn => {
     refetch: fetchSubscriptions,
     cancelSubscription,
     reactivateSubscription,
+    editSubscription,
     isCancelling,
     isReactivating,
+    isEditing,
   }
 }
