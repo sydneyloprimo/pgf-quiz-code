@@ -12,4 +12,5 @@ export enum Routes {
   signin = '/auth/sign-in',
   signup = '/auth/sign-up',
   termsAndConditions = '/terms-and-conditions',
+  thankYou = '/thank-you',
 }

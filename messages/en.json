@@ -1398,5 +1398,17 @@
       "button": "Explore our formulation",
       "quote": "See what clinical-grade nutrition looks like in practice"
     }
+  },
+  "ThankYou": {
+    "backButton": "Go back",
+    "bowlImageAlt": "Dog food bowl illustration",
+    "chatWithConcierge": "Chat with Concierge",
+    "closeButton": "Close",
+    "description": "{name} is now part of PGF Club. Remember you can always chat with our Nutrition Concierge and evacuate any doubts.",
+    "emailAriaLabel": "Email our Nutrition Concierge",
+    "heading": "Thanks for your purchase!",
+    "backToProfile": "Back to Profile",
+    "phoneAriaLabel": "Call our Nutrition Concierge",
+    "title": "Purely Golden Foods"
   }
 }

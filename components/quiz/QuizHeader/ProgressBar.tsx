@@ -1,9 +1,11 @@
+import { TOTAL_QUIZ_STEPS } from '@/constants'
+
 interface ProgressBarProps {
   visitedSteps: number
 }
 
 const ProgressBar = ({ visitedSteps }: ProgressBarProps) => {
-  const percentage = Math.min((visitedSteps / 8) * 100, 100)
+  const percentage = Math.min((visitedSteps / TOTAL_QUIZ_STEPS) * 100, 100)
 
   return (
     <div className="w-full">

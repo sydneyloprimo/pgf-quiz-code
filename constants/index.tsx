@@ -30,6 +30,8 @@ export const AI_SEARCH_BOT_USER_AGENTS = [
 
 export const MAIN_CONTENT_ID = 'main-content'
 
+export const TOTAL_QUIZ_STEPS = 8
+
 // Navigation links - centralized for MainNav and Footer
 export interface NavLink {
   href: Routes
