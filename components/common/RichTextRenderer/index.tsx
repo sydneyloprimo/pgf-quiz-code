@@ -36,7 +36,7 @@ const RichTextRenderer = ({
           <p
             className={
               isBlog
-                ? 'font-sans text-lg leading-none text-black mb-6'
+                ? 'font-sans text-lg leading-normal text-black mb-10'
                 : 'font-sans text-base leading-6 text-secondary-900 text-center mb-6'
             }
           >
@@ -111,7 +111,7 @@ const RichTextRenderer = ({
         <li
           className={
             isBlog
-              ? 'font-sans text-lg leading-none text-black [&>p]:mb-0'
+              ? 'font-sans text-lg leading-normal text-black [&>p]:mb-0'
               : 'mb-2 [&>p]:mb-0'
           }
         >
