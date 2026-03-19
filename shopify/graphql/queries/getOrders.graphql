@@ -73,6 +73,13 @@ query getOrders(
               }
             }
           }
+          successfulFulfillments(first: 50) {
+            trackingCompany
+            trackingInfo(first: 50) {
+              number
+              url
+            }
+          }
         }
       }
     }

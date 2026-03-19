@@ -54,6 +54,16 @@ const OrderDetailsModal = ({
     }
   }
 
+  const getTrackingAriaLabel = (
+    carrier: string | null | undefined,
+    number: string | null | undefined
+  ): string => {
+    if (carrier && number) {
+      return t('trackPackageAriaLabel', { carrier, number })
+    }
+    return t('trackPackage')
+  }
+
   const orderDisplayName = t('orderDisplayName', {
     name: order.name || `#${order.orderNumber}`,
   })
@@ -143,6 +153,69 @@ const OrderDetailsModal = ({
             </div>
           </div>
         )}
+
+        {/* Tracking Information */}
+        {order.successfulFulfillments &&
+          order.successfulFulfillments.length > 0 &&
+          order.successfulFulfillments.some(
+            (f) => f.trackingInfo && f.trackingInfo.length > 0
+          ) && (
+            <div className="flex flex-col gap-3">
+              <h3 className="heading-h5 text-secondary-950">
+                {t('trackingTitle')}
+              </h3>
+              <div className="flex flex-col gap-3">
+                {order.successfulFulfillments.flatMap((fulfillment) =>
+                  (fulfillment.trackingInfo ?? [])
+                    .filter(
+                      (tracking) =>
+                        fulfillment.trackingCompany ||
+                        tracking.number ||
+                        tracking.url
+                    )
+                    .map((tracking) => (
+                      <div
+                        key={`tracking-${tracking.number ?? 'no-number'}-${tracking.url ?? 'no-url'}`}
+                        className="flex flex-col gap-2"
+                      >
+                        {fulfillment.trackingCompany && (
+                          <div className="flex justify-between text-body-m text-secondary-950">
+                            <span>{t('trackingCarrier')}</span>
+                            <span className="font-semibold">
+                              {fulfillment.trackingCompany}
+                            </span>
+                          </div>
+                        )}
+                        {tracking.number && (
+                          <div className="flex justify-between text-body-m text-secondary-950">
+                            <span>{t('trackingNumber')}</span>
+                            <span className="font-semibold">
+                              {tracking.number}
+                            </span>
+                          </div>
+                        )}
+                        {tracking.url && (
+                          <div className="flex justify-end">
+                            <a
+                              href={tracking.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              aria-label={getTrackingAriaLabel(
+                                fulfillment.trackingCompany,
+                                tracking.number
+                              )}
+                              className="text-body-m font-semibold text-primary-600 hover:underline"
+                            >
+                              {t('trackPackage')}
+                            </a>
+                          </div>
+                        )}
+                      </div>
+                    ))
+                )}
+              </div>
+            </div>
+          )}
 
         {/* Payment Method */}
         <div className="flex flex-col gap-3">

@@ -568,7 +568,12 @@
       "subtotal": "Subtotal",
       "tax": "Tax",
       "title": "Order Details",
-      "total": "Total"
+      "total": "Total",
+      "trackPackage": "Track Package",
+      "trackPackageAriaLabel": "Track package with {carrier}, tracking number {number}",
+      "trackingCarrier": "Carrier",
+      "trackingNumber": "Tracking #",
+      "trackingTitle": "Tracking Information"
     },
     "CancelSubscriptionModal": {
       "ariaLabel": "Cancel subscription for {petName}",

@@ -7450,6 +7450,15 @@ export type GetOrdersQuery = {
               }
             }>
           }
+          successfulFulfillments?: Array<{
+            __typename?: 'Fulfillment'
+            trackingCompany?: string | null
+            trackingInfo: Array<{
+              __typename?: 'FulfillmentTrackingInfo'
+              number?: string | null
+              url?: any | null
+            }>
+          }> | null
         }
       }>
     }
@@ -9041,6 +9050,13 @@ export const GetOrdersDocument = /*#__PURE__*/ `
                   }
                 }
               }
+            }
+          }
+          successfulFulfillments(first: 50) {
+            trackingCompany
+            trackingInfo(first: 50) {
+              number
+              url
             }
           }
         }
