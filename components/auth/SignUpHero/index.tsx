@@ -10,12 +10,11 @@ const SignUpHero = () => {
       <div className="flex flex-col items-center gap-12 w-full">
         <div className="flex justify-center">
           <ContentfulImage
-            src="/images/login-logo-full.svg"
+            src="/images/auth-logo.svg"
             alt={t('logoAlt')}
             width={156}
-            height={136}
+            height={166}
             priority
-            className="filter brightness-0 invert"
           />
         </div>
         <div className="flex flex-col gap-4 items-center max-w-2xl w-full text-center">

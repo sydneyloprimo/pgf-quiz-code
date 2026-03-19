@@ -25,11 +25,12 @@ const SignUpFormCard = ({ children, className }: SignUpFormCardProps) => {
           <div className="flex justify-center lg:hidden">
             <Link href={Routes.home}>
               <ContentfulImage
-                src="/images/login-logo-full.svg"
+                src="/images/auth-logo.svg"
                 alt={t('logoAlt')}
                 width={156}
-                height={136}
+                height={166}
                 priority
+                className="[filter:brightness(0.174)_sepia(1)_saturate(2.2)_hue-rotate(-10deg)]"
               />
             </Link>
           </div>
