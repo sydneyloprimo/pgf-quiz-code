@@ -6,10 +6,12 @@ export const SITE_URL = 'https://www.purelygoldenfoods.com'
 const gtmId = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID
 if (!gtmId?.trim()) {
   throw new Error(
-    'NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID is required. Set it in .env.local'
+    'NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID is required.' + ' Set it in .env.local'
   )
 }
 export const GTM_ID = gtmId.trim()
+export const GTM_AUTH = process.env.NEXT_PUBLIC_GTM_AUTH?.trim() || ''
+export const GTM_PREVIEW = process.env.NEXT_PUBLIC_GTM_PREVIEW?.trim() || ''
 
 export const AI_SEARCH_BOT_USER_AGENTS = [
   'OAI-SearchBot',

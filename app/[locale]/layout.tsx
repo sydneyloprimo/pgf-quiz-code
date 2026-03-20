@@ -11,7 +11,7 @@ import {
   organizationSchema,
   websiteSchema,
 } from '@/components/common/JsonLd'
-import { GTM_ID } from '@/constants'
+import { GTM_AUTH, GTM_ID, GTM_PREVIEW } from '@/constants'
 import { Locale } from '@/i18n'
 import BodyScripts from '@/scripts/BodyScripts'
 import HeadScripts from '@/scripts/HeadScripts'
@@ -98,10 +98,20 @@ export default async function RootLayout({
       <body className="flex items-center flex-col">
         <noscript>
           <iframe
-            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            src={
+              `https://www.googletagmanager.com/ns.html` +
+              `?id=${GTM_ID}` +
+              (GTM_AUTH ? `&gtm_auth=${GTM_AUTH}` : '') +
+              (GTM_PREVIEW
+                ? `&gtm_preview=${GTM_PREVIEW}` + `&gtm_cookies_win=x`
+                : '')
+            }
             height="0"
             width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
+            style={{
+              display: 'none',
+              visibility: 'hidden',
+            }}
           />
         </noscript>
         <BodyScripts />
