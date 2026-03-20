@@ -16,7 +16,7 @@ export default async function ProfileLayout({
   setRequestLocale(locale)
   return (
     <LocaleWrapper localeGroup="Profile" params={params}>
-      <div className="flex min-h-screen min-w-full flex-col bg-background">
+      <div className="flex min-h-screen min-w-full flex-col bg-neutral-white">
         <div className="md:mx-28">{children}</div>
       </div>
     </LocaleWrapper>
