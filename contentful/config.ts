@@ -21,6 +21,7 @@ export const CONTENTFUL_TAGS = {
 
 export const CONTENTFUL_FIELDS = {
   key: 'key',
+  references: 'references',
   slug: 'slug',
   table: 'table',
   value: 'value',

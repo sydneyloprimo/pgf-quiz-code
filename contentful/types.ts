@@ -33,6 +33,7 @@ export interface BlogPostSkeleton extends EntrySkeletonType {
     categories?: EntryFieldTypes.Array<
       EntryFieldTypes.EntryLink<CategorySkeleton>
     >
+    references?: EntryFieldTypes.Array<EntryFieldTypes.Symbol>
   }
 }
 
@@ -52,4 +53,5 @@ export interface BlogPostFields {
   slug: string
   author: Entry<AuthorSkeleton, undefined, string>
   content: EntryFieldTypes.RichText
+  references?: string[]
 }

@@ -5,6 +5,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { AuthorCard } from '@/components/blog/AuthorCard'
 import { BlogPostCTA } from '@/components/blog/BlogPostCTA'
 import { BlogPostHeader } from '@/components/blog/BlogPostHeader'
+import { BlogPostReferences } from '@/components/blog/BlogPostReferences'
 import {
   blogPostSchema,
   breadcrumbSchema,
@@ -63,7 +64,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound()
   }
 
-  const { title, subtitle, author, content } = blogPost.fields
+  const { title, subtitle, author, content, references } = blogPost.fields
   const reviewDate = new Date(blogPost.sys.updatedAt).toLocaleDateString(
     'en-US',
     {
@@ -136,22 +137,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
       <hr className="border-t border-neutral-700" />
 
-      <section className="w-full space-y-2 px-5 lg:px-24 py-8">
-        <div className="mx-auto max-w-6xl">
-          <h2 className="font-display text-base leading-normal text-black">
-            {t('references')}
-          </h2>
-          <p className="font-sans text-sm leading-normal text-black">
-            {t('referencesDescription')}
-          </p>
-          <button
-            type="button"
-            className="font-sans text-sm underline text-black"
-          >
-            {t('showReferences')}
-          </button>
-        </div>
-      </section>
+      {references && references.length > 0 && (
+        <BlogPostReferences references={references} />
+      )}
 
       <BlogPostCTA variant="post" />
     </article>
