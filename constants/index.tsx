@@ -12,6 +12,8 @@ if (!gtmId?.trim()) {
 export const GTM_ID = gtmId.trim()
 export const GTM_AUTH = process.env.NEXT_PUBLIC_GTM_AUTH?.trim() || ''
 export const GTM_PREVIEW = process.env.NEXT_PUBLIC_GTM_PREVIEW?.trim() || ''
+export const GA_MEASUREMENT_ID =
+  process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID?.trim() || ''
 
 export const AI_SEARCH_BOT_USER_AGENTS = [
   'OAI-SearchBot',

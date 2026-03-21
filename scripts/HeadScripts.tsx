@@ -1,6 +1,6 @@
 import Script from 'next/script'
 
-import { GTM_AUTH, GTM_ID, GTM_PREVIEW } from '@/constants'
+import { GA_MEASUREMENT_ID, GTM_AUTH, GTM_ID, GTM_PREVIEW } from '@/constants'
 
 const gtmAuthParam = GTM_AUTH ? `&gtm_auth=${GTM_AUTH}` : ''
 const gtmPreviewParam = GTM_PREVIEW
@@ -20,6 +20,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','${GTM_ID}');`,
       }}
     />
+    {GA_MEASUREMENT_ID && (
+      <>
+        <Script
+          id="gtag-js"
+          strategy="afterInteractive"
+          src={
+            'https://www.googletagmanager.com/gtag/js' +
+            `?id=${encodeURIComponent(GA_MEASUREMENT_ID)}`
+          }
+        />
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config',${JSON.stringify(GA_MEASUREMENT_ID)});`,
+          }}
+        />
+      </>
+    )}
     <link rel="stylesheet" href="https://use.typekit.net/dlw0pka.css" />
   </>
 )
