@@ -1,81 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+import {
+  getRechargeCustomerForShopifyCustomer,
+  getShopifyCustomer,
+} from '@/app/api/profile/subscriptions/_helpers'
 import { RECHARGE_API_URL } from '@/constants'
-import { client } from '@/shopify/client'
-import { GetCustomerDocument } from '@/shopify/generated/graphql'
 
 interface RechargeSubscription {
   id: number
   customer_id: number
   status?: string
-}
-
-interface RechargeCustomer {
-  id: number
-  shopify_customer_id: string
-}
-
-interface RechargeCustomersResponse {
-  customers: RechargeCustomer[]
-}
-
-const extractShopifyCustomerId = (gid: string): string | null => {
-  const match = gid.match(/gid:\/\/shopify\/Customer\/(\d+)/)
-  return match ? match[1] : null
-}
-
-const getShopifyCustomerId = async (
-  customerAccessToken: string
-): Promise<string | null> => {
-  try {
-    const data = await client.request(GetCustomerDocument, {
-      customerAccessToken,
-    })
-
-    if (!data?.customer?.id) {
-      return null
-    }
-
-    return extractShopifyCustomerId(data.customer.id)
-  } catch (error) {
-    return null
-  }
-}
-
-const getRechargeCustomer = async (
-  shopifyCustomerId: string
-): Promise<RechargeCustomer | null> => {
-  const rechargeToken = process.env.RECHARGE_ACCESS_TOKEN
-
-  if (!rechargeToken) {
-    return null
-  }
-
-  try {
-    const response = await fetch(
-      `${RECHARGE_API_URL}/customers?shopify_customer_id=${shopifyCustomerId}`,
-      {
-        headers: {
-          'X-Recharge-Access-Token': rechargeToken,
-          'X-Recharge-Version': '2021-11',
-        },
-      }
-    )
-
-    if (!response.ok) {
-      return null
-    }
-
-    const data: RechargeCustomersResponse = await response.json()
-
-    if (data.customers && data.customers.length > 0) {
-      return data.customers[0]
-    }
-
-    return null
-  } catch (error) {
-    return null
-  }
 }
 
 const getRechargeSubscription = async (
@@ -102,10 +36,12 @@ const getRechargeSubscription = async (
       return null
     }
 
-    const data: { subscription: RechargeSubscription } = await response.json()
+    const data: {
+      subscription: RechargeSubscription
+    } = await response.json()
 
     return data.subscription || null
-  } catch (error) {
+  } catch {
     return null
   }
 }
@@ -119,7 +55,10 @@ const hasStatus = (obj: unknown): obj is SubscriptionWithStatus =>
 
 const parseSubscriptionStatus = (
   responseText: string
-): { subscription: unknown; statusUpper: string | null } => {
+): {
+  subscription: unknown
+  statusUpper: string | null
+} => {
   try {
     const data = responseText ? JSON.parse(responseText) : null
     const subscription = data?.subscription
@@ -171,7 +110,10 @@ const reactivateRechargeSubscription = async (
       }
       return {
         success: false,
-        error: `Recharge activate ${activateResponse.status}: ${String(detail).slice(0, 200)}`,
+        error:
+          `Recharge activate` +
+          ` ${activateResponse.status}:` +
+          ` ${String(detail).slice(0, 200)}`,
       }
     }
 
@@ -199,7 +141,8 @@ const reactivateRechargeSubscription = async (
         success: false,
         error:
           `Status after update: ${status ?? 'unknown'}. ` +
-          'Recharge may not support reactivating this subscription via API.',
+          'Recharge may not support reactivating' +
+          ' this subscription via API.',
       }
     }
 
@@ -214,7 +157,9 @@ const reactivateRechargeSubscription = async (
 
     return {
       success: false,
-      error: `Recharge ${response.status}: ${String(errorDetail).slice(0, 200)}`,
+      error:
+        `Recharge ${response.status}:` +
+        ` ${String(errorDetail).slice(0, 200)}`,
     }
   } catch (error) {
     return {
@@ -243,13 +188,18 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const shopifyCustomerId = await getShopifyCustomerId(customerAccessToken)
+    const { shopifyCustomerId, shopifyCustomerGid, email } =
+      await getShopifyCustomer(customerAccessToken)
 
-    if (!shopifyCustomerId) {
+    if (!shopifyCustomerId && !shopifyCustomerGid && !email) {
       return NextResponse.json({ error: 'CUSTOMER_NOT_FOUND' }, { status: 404 })
     }
 
-    const rechargeCustomer = await getRechargeCustomer(shopifyCustomerId)
+    const rechargeCustomer = await getRechargeCustomerForShopifyCustomer(
+      shopifyCustomerId ?? '',
+      shopifyCustomerGid ?? '',
+      email
+    )
 
     if (!rechargeCustomer) {
       return NextResponse.json(
@@ -275,7 +225,10 @@ export async function POST(request: NextRequest) {
 
     if (!result.success) {
       return NextResponse.json(
-        { error: 'REACTIVATION_FAILED', details: result.error },
+        {
+          error: 'REACTIVATION_FAILED',
+          details: result.error,
+        },
         { status: 502 }
       )
     }
@@ -284,7 +237,10 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error'
     return NextResponse.json(
-      { error: 'INTERNAL_SERVER_ERROR', details: message },
+      {
+        error: 'INTERNAL_SERVER_ERROR',
+        details: message,
+      },
       { status: 500 }
     )
   }
