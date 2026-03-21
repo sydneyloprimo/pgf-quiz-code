@@ -15,6 +15,7 @@ import {
   ShoppingCartIcon,
   UserIcon,
 } from '@/components/common/Icon'
+import { getStoredFormData } from '@/components/quiz/helpers'
 import { FEATURE_FLAG_WAITLIST } from '@/constants'
 import useCartCookie from '@/hooks/useCartCookie'
 import { useFeatureFlag } from '@/hooks/useFeatureFlag'
@@ -66,7 +67,9 @@ const MainNav = () => {
 
   const totalQuantity = data?.cart?.totalQuantity ?? 0
   const hasItems = totalQuantity > 0
+  const [hasQuizData, setHasQuizData] = useState(false)
   const quizResultsPath = getQuizStepPath(QuizStep.Results)
+  const showCartIcon = hasItems || hasQuizData
   const isHome = pathname === '/'
 
   const handleToggleMobileMenu = useCallback(() => {
@@ -86,6 +89,29 @@ const MainNav = () => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    const checkQuizData = () => {
+      const quizData = getStoredFormData()
+      setHasQuizData(
+        Boolean(
+          quizData?.name &&
+            quizData?.age &&
+            quizData?.breed &&
+            quizData?.mealtimeBehavior &&
+            quizData?.treatFrequency &&
+            quizData?.weight &&
+            quizData?.neuteredStatus &&
+            quizData?.activityLevel &&
+            quizData?.bodyShape
+        )
+      )
+    }
+
+    checkQuizData()
+    window.addEventListener('storage', checkQuizData)
+    return () => window.removeEventListener('storage', checkQuizData)
+  }, [pathname])
 
   const navLinks = [
     { key: 'home', href: Routes.home, label: t('home') },
@@ -165,28 +191,30 @@ const MainNav = () => {
             >
               <UserIcon className="size-5" />
             </Link>
-            <Link
-              href={quizResultsPath}
-              className="p-3 text-neutral-white hover:text-secondary-400 relative"
-              aria-label={hasItems ? t('cartHasItemsAria') : t('cartAria')}
-            >
-              <ShoppingCartIcon className="size-5" />
-              {hasItems && (
-                <span
-                  className={cn(
-                    'absolute top-0 left-0',
-                    'bg-feedback-error-500',
-                    'text-neutral-white',
-                    'text-[10px] font-bold',
-                    'rounded-full',
-                    'min-w-[16px] h-4',
-                    'flex items-center justify-center',
-                    'px-1'
-                  )}
-                  aria-hidden
-                />
-              )}
-            </Link>
+            {showCartIcon && (
+              <Link
+                href={quizResultsPath}
+                className="p-3 text-neutral-white hover:text-secondary-400 relative"
+                aria-label={hasItems ? t('cartHasItemsAria') : t('cartAria')}
+              >
+                <ShoppingCartIcon className="size-5" />
+                {hasItems && (
+                  <span
+                    className={cn(
+                      'absolute top-0 left-0',
+                      'bg-feedback-error-500',
+                      'text-neutral-white',
+                      'text-[10px] font-bold',
+                      'rounded-full',
+                      'min-w-[16px] h-4',
+                      'flex items-center justify-center',
+                      'px-1'
+                    )}
+                    aria-hidden
+                  />
+                )}
+              </Link>
+            )}
           </>
         )}
 
