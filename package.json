@@ -15,9 +15,11 @@
     "contentful:clean": "npx tsx scripts/cleanContentful.ts",
     "contentful:delete-images": "npx tsx scripts/deleteContentfulImages.ts",
     "contentful:sync": "npx tsx scripts/sectionContentKeyOrder.ts && npx tsx scripts/syncEnJsonToContentful.ts",
+    "contentful:sync:force": "npx tsx scripts/sectionContentKeyOrder.ts && npx tsx scripts/syncEnJsonToContentful.ts --force",
     "contentful:seed-reviews": "npx tsx scripts/seedCustomerReviews.ts",
     "contentful:seed-tables": "npx tsx scripts/seedRecipeTables.ts",
     "contentful:sync-images": "npx tsx scripts/syncImagesToContentful.ts",
+    "contentful:sync-images:force": "npx tsx scripts/syncImagesToContentful.ts --force",
     "contentful:sync:master": "npx tsx scripts/sectionContentKeyOrder.ts && npx tsx scripts/syncEnJsonToContentful.ts --master",
     "contentful:sync-images:master": "npx tsx scripts/syncImagesToContentful.ts --master"
   },

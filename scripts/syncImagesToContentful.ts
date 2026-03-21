@@ -8,7 +8,13 @@
  * Run: yarn contentful:sync-images
  */
 
-import { existsSync as fsExistsSync, readFileSync, readdirSync } from 'fs'
+import { createHash } from 'crypto'
+import {
+  existsSync as fsExistsSync,
+  readFileSync,
+  readdirSync,
+  writeFileSync,
+} from 'fs'
 import { join, relative, resolve } from 'path'
 
 import contentfulManagement from 'contentful-management'
@@ -21,6 +27,7 @@ config({ path: '.env.local' })
 
 const CONTENTFUL_LOCALE = 'en-US'
 const ENVIRONMENT_ID = getSyncEnvironmentId()
+const FORCE_SYNC = process.argv.includes('--force')
 const CONCURRENT_BATCH_SIZE = 4
 const MAX_RETRIES = 4
 const INITIAL_RETRY_DELAY_MS = 2000
@@ -35,6 +42,49 @@ const RETRYABLE_ERROR_CODES = new Set([
   'ENOTFOUND',
   'EAI_AGAIN',
 ])
+
+/** Snapshot file for incremental sync (namespaced by environment). */
+const SNAPSHOT_PATH = resolve(
+  process.cwd(),
+  `scripts/.images-sync-snapshot.${ENVIRONMENT_ID}.json`
+)
+
+type ImagesSnapshot = Record<string, string>
+
+function loadSnapshot(): ImagesSnapshot {
+  try {
+    if (fsExistsSync(SNAPSHOT_PATH)) {
+      return JSON.parse(
+        readFileSync(SNAPSHOT_PATH, 'utf-8')
+      ) as ImagesSnapshot
+    }
+  } catch {
+    // Corrupted snapshot, start fresh
+  }
+  return {}
+}
+
+function saveSnapshot(snapshot: ImagesSnapshot): void {
+  writeFileSync(
+    SNAPSHOT_PATH,
+    JSON.stringify(snapshot, null, 2)
+  )
+}
+
+/**
+ * Computes a hash of the image file content and its
+ * description to detect changes.
+ */
+function computeImageHash(
+  filePath: string,
+  description?: string
+): string {
+  const fileBuffer = readFileSync(filePath)
+  const hash = createHash('md5')
+  hash.update(fileBuffer)
+  if (description) hash.update(description)
+  return hash.digest('hex')
+}
 
 const IMAGE_EXTENSIONS = new Set(['png', 'jpg', 'jpeg', 'svg', 'webp', 'gif'])
 
@@ -340,8 +390,10 @@ async function processInBatches<T, R>(
 }
 
 async function main(): Promise<void> {
+  const mode = FORCE_SYNC ? 'full' : 'incremental'
   console.log(
-    `Starting Contentful images sync [environment: ${ENVIRONMENT_ID}]...\n`
+    `Starting Contentful images sync (${mode}) ` +
+      `[environment: ${ENVIRONMENT_ID}]...\n`
   )
 
   const enJsonPath = resolve(process.cwd(), 'messages/en.json')
@@ -375,43 +427,81 @@ async function main(): Promise<void> {
 
   /** Dedupe by assetId - pathToAssetId strips extension, so .svg and .png share IDs. */
   const seenIds = new Set<string>()
-  const items = allItems.filter((item) => {
+  const dedupedItems = allItems.filter((item) => {
     if (seenIds.has(item.assetId)) return false
     seenIds.add(item.assetId)
     return true
   })
 
+  const previousSnapshot = loadSnapshot()
+  const currentSnapshot: ImagesSnapshot = {}
+
+  /** Compute hashes and filter to only changed items. */
+  const items: FileItem[] = []
+  let skippedCount = 0
+  for (const item of dedupedItems) {
+    const hash = computeImageHash(
+      item.absolute,
+      item.description
+    )
+    currentSnapshot[item.relative] = hash
+
+    if (
+      !FORCE_SYNC &&
+      previousSnapshot[item.relative] === hash
+    ) {
+      skippedCount++
+      continue
+    }
+    items.push(item)
+  }
+
   const withDescription = items.filter((i) => i.description).length
   const firstWithDesc = items.find((i) => i.description)
   console.log(
-    `Discovered ${items.length} image assets (${allItems.length} files). ` +
-      `${withDescription} have alt text for description.`
+    `Discovered ${dedupedItems.length} image assets ` +
+      `(${allItems.length} files). ` +
+      `${items.length} changed, ${skippedCount} unchanged.`
   )
-  if (firstWithDesc) {
+  if (items.length > 0 && withDescription > 0 && firstWithDesc) {
     console.log(
-      `  Example: ${firstWithDesc.relative} -> "${firstWithDesc.description?.slice(0, 50)}..."`
+      `  Example: ${firstWithDesc.relative} -> ` +
+        `"${firstWithDesc.description?.slice(0, 50)}..."`
     )
   }
   console.log('')
+
+  if (items.length === 0) {
+    console.log('No changes detected. Nothing to sync.')
+    saveSnapshot(currentSnapshot)
+    console.log('\nSync complete.')
+    return
+  }
 
   const environment = await getEnvironment()
 
   console.log('Ensuring tags exist...')
   await ensureTags(environment)
 
-  console.log('\nUploading assets (batch size %d)...', CONCURRENT_BATCH_SIZE)
+  console.log(
+    '\nUploading assets (batch size %d)...',
+    CONCURRENT_BATCH_SIZE
+  )
   let uploaded = 0
   const results = await processInBatches(
     items,
     (item) => uploadOne(environment, item),
     CONCURRENT_BATCH_SIZE,
-    (item, idx) => `asset ${idx + 1}/${items.length} (${item.relative})`
+    (item, idx) =>
+      `asset ${idx + 1}/${items.length} (${item.relative})`
   )
   uploaded = results.filter(Boolean).length
   console.log(
-    `  Uploaded ${uploaded} new assets (${items.length - uploaded} already existed).`
+    `  Uploaded ${uploaded} new assets ` +
+      `(${items.length - uploaded} already existed).`
   )
 
+  saveSnapshot(currentSnapshot)
   console.log('\nSync complete.')
 }
 

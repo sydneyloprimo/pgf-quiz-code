@@ -44,12 +44,6 @@
     "emailPlaceholder",
     "passwordPlaceholder"
   ],
-  "SignIn": [
-    "logoAlt",
-    "formHeading",
-    "formSubHeading",
-    "heroDescription"
-  ],
   "SignUp": [
     "logoAlt",
     "formHeading",
@@ -130,8 +124,8 @@
     "ariaLabel",
     "logoAria",
     "profileAria",
+    "cartHasItemsAria",
     "cartAria",
-    "itemCountAriaLabel",
     "closeMenuAria",
     "openMenuAria"
   ],
@@ -188,6 +182,8 @@
     "decreaseQuantity",
     "increaseQuantity",
     "deleteButtonAriaLabel",
+    "updateProductError",
+    "Error",
     "panelAriaLabel",
     "title",
     "closeButtonAriaLabel",
@@ -197,23 +193,20 @@
     "skipToMainContent"
   ],
   "Common.WaitlistModal": [
-    "ariaLabel",
-    "cancelButton",
     "closeButtonLabel",
+    "successAriaLabel",
+    "successHeading",
+    "successDescription",
+    "successImageAlt",
+    "successButton",
+    "ariaLabel",
+    "heading",
     "description",
     "nameLabel",
     "emailLabel",
-    "emailPlaceholder",
-    "heading",
-    "imageAlt",
-    "nameLabel",
-    "submitButton",
+    "cancelButton",
     "submittingButton",
-    "successAriaLabel",
-    "successButton",
-    "successDescription",
-    "successHeading",
-    "successImageAlt"
+    "submitButton"
   ],
   "Formulation.Research": [
     "title",
@@ -413,6 +406,18 @@
     "cancelButton",
     "saveButton"
   ],
+  "Profile.EditSubscriptionModal": [
+    "errorMessage",
+    "closeButtonLabel",
+    "ariaLabel",
+    "heading",
+    "description",
+    "recipeLabel",
+    "frequencyLabel",
+    "cancelButton",
+    "loading",
+    "confirmButton"
+  ],
   "Profile.LogoutModal": [
     "closeButtonLabel",
     "ariaLabel",
@@ -427,6 +432,8 @@
     "statusUnfulfilled",
     "statusInProgress",
     "statusUnknown",
+    "trackPackageAriaLabel",
+    "trackPackage",
     "orderDisplayName",
     "closeButtonLabel",
     "ariaLabel",
@@ -437,6 +444,9 @@
     "items",
     "quantity",
     "shippingAddress",
+    "trackingTitle",
+    "trackingCarrier",
+    "trackingNumber",
     "paymentMethod",
     "paymentCompleted",
     "subtotal",
@@ -456,6 +466,11 @@
     "emptyState"
   ],
   "Profile": [
+    "passwordChangeCurrentInvalid",
+    "passwordChangeErrorIconAlt",
+    "passwordChangeFailed",
+    "passwordChangeSuccess",
+    "passwordChangeSuccessIconAlt",
     "birthdate",
     "accountCreated",
     "editProfile",
@@ -473,8 +488,8 @@
     "confirmButton"
   ],
   "Common.FloatingCartButton": [
-    "openCartAriaLabel",
-    "openCartHasItemsAriaLabel"
+    "openCartHasItemsAriaLabel",
+    "openCartAriaLabel"
   ],
   "Quiz.bodyShape": [
     "heading",
@@ -513,16 +528,16 @@
     "placeholder"
   ],
   "Quiz.location": [
-    "changeZipButton",
-    "checkBackButton",
-    "description",
-    "emailLabel",
-    "emailPlaceholder",
     "heading",
     "invalidZipMessage",
     "nameLabel",
     "namePlaceholder",
+    "emailLabel",
+    "emailPlaceholder",
     "notifyMeButton",
+    "changeZipButton",
+    "checkBackButton",
+    "description",
     "zipLabel",
     "zipPlaceholder"
   ],
@@ -540,7 +555,8 @@
   ],
   "Quiz.results": [
     "recipes",
-    "shipmentFrequencies",
+    "topper",
+    "fullMeal",
     "products",
     "Error",
     "Success",
@@ -559,12 +575,11 @@
     "submitButton"
   ],
   "Quiz.results.footer": [
-    "title",
-    "moreBuddies"
+    "moreBuddies",
+    "title"
   ],
   "Quiz.resultsHeader": [
     "options",
-    "imageAlt",
     "headingPrefix",
     "descriptionPrefix",
     "descriptionIs",
@@ -639,5 +654,14 @@
   "Recipes.Hero": [
     "clinicallyApprovedAlt",
     "title"
+  ],
+  "ThankYou": [
+    "bowlImageAlt",
+    "heading",
+    "description",
+    "emailAriaLabel",
+    "phoneAriaLabel",
+    "chatWithConcierge",
+    "backToProfile"
   ]
 }

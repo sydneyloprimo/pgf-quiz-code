@@ -11,7 +11,11 @@
  */
 
 import { createHash } from 'crypto'
-import { readFileSync } from 'fs'
+import {
+  existsSync,
+  readFileSync,
+  writeFileSync,
+} from 'fs'
 import { resolve } from 'path'
 
 import contentfulManagement from 'contentful-management'
@@ -33,6 +37,52 @@ config({ path: '.env.local' })
 
 const CONTENTFUL_LOCALE = 'en-US'
 const ENVIRONMENT_ID = getSyncEnvironmentId()
+const FORCE_SYNC = process.argv.includes('--force')
+
+/** Snapshot file for incremental sync (namespaced by environment). */
+const SNAPSHOT_PATH = resolve(
+  process.cwd(),
+  `scripts/.copies-sync-snapshot.${ENVIRONMENT_ID}.json`
+)
+
+type CopiesSnapshot = Record<string, string>
+
+function loadSnapshot(): CopiesSnapshot {
+  try {
+    if (existsSync(SNAPSHOT_PATH)) {
+      return JSON.parse(
+        readFileSync(SNAPSHOT_PATH, 'utf-8')
+      ) as CopiesSnapshot
+    }
+  } catch {
+    // Corrupted snapshot, start fresh
+  }
+  return {}
+}
+
+function saveSnapshot(snapshot: CopiesSnapshot): void {
+  writeFileSync(
+    SNAPSHOT_PATH,
+    JSON.stringify(snapshot, null, 2)
+  )
+}
+
+/**
+ * Computes a hash of the section data to detect
+ * changes for incremental sync.
+ */
+function computeSectionHash(
+  content: Record<string, string>,
+  sortedKeys: string[],
+  childEntryIds: (string | null)[]
+): string {
+  const data = JSON.stringify({
+    content,
+    sortedKeys,
+    childEntryIds,
+  })
+  return createHash('md5').update(data).digest('hex')
+}
 
 /** Contentful entry IDs must be ≤64 characters. */
 const CONTENTFUL_MAX_ENTRY_ID_LENGTH = 64
@@ -499,7 +549,9 @@ async function createSectionFromObject(
   key: string,
   obj: Record<string, unknown>,
   path: string[],
-  parentKeyForRichText: string | null
+  parentKeyForRichText: string | null,
+  previousSnapshot: CopiesSnapshot,
+  currentSnapshot: CopiesSnapshot
 ): Promise<string | null> {
   const content: Record<string, string> = {}
   const childKeys: string[] = []
@@ -544,7 +596,9 @@ async function createSectionFromObject(
       childKey,
       childValue as Record<string, unknown>,
       childPath,
-      parentKeyForRichText
+      parentKeyForRichText,
+      previousSnapshot,
+      currentSnapshot
     )
     childIds.push(childId)
   }
@@ -578,6 +632,21 @@ async function createSectionFromObject(
     ...(isRootSection && {
       sectionTag: { [CONTENTFUL_LOCALE]: SECTION_TAG_ROOT },
     }),
+  }
+
+  const pathKey = path.join('.')
+  const hash = computeSectionHash(
+    content,
+    sortedKeys,
+    childIds
+  )
+  currentSnapshot[pathKey] = hash
+
+  if (
+    !FORCE_SYNC &&
+    previousSnapshot[pathKey] === hash
+  ) {
+    return entryId
   }
 
   try {
@@ -698,8 +767,9 @@ async function createPageEntry(
 }
 
 async function main(): Promise<void> {
+  const mode = FORCE_SYNC ? 'full' : 'incremental'
   console.log(
-    `Starting Contentful sync (Page / Section / RichTextPage model) ` +
+    `Starting Contentful sync (${mode}) ` +
       `[environment: ${ENVIRONMENT_ID}]...\n`
   )
 
@@ -715,6 +785,9 @@ async function main(): Promise<void> {
   await ensureRichTextPageContentType(environment)
   await ensureFeatureFlagContentType(environment)
   await ensureContactInformationContentType(environment)
+
+  const previousSnapshot = loadSnapshot()
+  const currentSnapshot: CopiesSnapshot = {}
 
   const rootSectionIds = new Map<string, string>()
 
@@ -733,10 +806,21 @@ async function main(): Promise<void> {
       rootKey,
       value as Record<string, unknown>,
       [rootKey],
-      parentKeyForRichText
+      parentKeyForRichText,
+      previousSnapshot,
+      currentSnapshot
     )
     if (entryId) rootSectionIds.set(rootKey, entryId)
   }
+
+  const totalSections = Object.keys(currentSnapshot).length
+  const changedSections = Object.keys(currentSnapshot).filter(
+    (k) => previousSnapshot[k] !== currentSnapshot[k]
+  ).length
+  console.log(
+    `\nSections: ${changedSections} changed out of ` +
+      `${totalSections} total`
+  )
 
   console.log('\nCreating RichTextPage entries...')
   for (const key of RICH_TEXT_PAGE_KEYS) {
@@ -763,6 +847,7 @@ async function main(): Promise<void> {
     await ensureContactInformationEntry(environment, item.key, item.value)
   }
 
+  saveSnapshot(currentSnapshot)
   console.log('\nSync complete.')
 }
 
