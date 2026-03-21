@@ -45,7 +45,6 @@ import { QuizStep } from '@/types/enums/constants'
 import {
   calculatePacksForPeriod,
   generateCartPayload,
-  calculateWeeklyPacks,
   type RecipeSlug,
   type ProductMode,
 } from '@/utils/cartHelpers'
@@ -681,18 +680,9 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
     (mode: 'topper' | 'fullMeal') => {
       const plan = getSelectedPlan(mode)
       const calculationMode = mode === 'topper' ? 'topper' : 'full'
-      const selectedRecipe = recipes[mode]
-      const calculationRecipe =
-        selectedRecipe === 'pancreatic' ? 'turkey' : selectedRecipe
-      const { dailyFoodGrams } = calculateDailyFoodAndPrice(
-        formData,
-        calculationRecipe,
-        calculationMode
-      )
-      const weeklyPacks = calculateWeeklyPacks(dailyFoodGrams)
-      return getQuizBenefits(plan?.name ?? null, dogName, weeklyPacks, t)
+      return getQuizBenefits(plan?.name ?? null, dogName, t, calculationMode)
     },
-    [getSelectedPlan, dogName, recipes, formData, t]
+    [getSelectedPlan, dogName, t]
   )
 
   return (

@@ -54,9 +54,7 @@ type ImagesSnapshot = Record<string, string>
 function loadSnapshot(): ImagesSnapshot {
   try {
     if (fsExistsSync(SNAPSHOT_PATH)) {
-      return JSON.parse(
-        readFileSync(SNAPSHOT_PATH, 'utf-8')
-      ) as ImagesSnapshot
+      return JSON.parse(readFileSync(SNAPSHOT_PATH, 'utf-8')) as ImagesSnapshot
     }
   } catch {
     // Corrupted snapshot, start fresh
@@ -65,20 +63,14 @@ function loadSnapshot(): ImagesSnapshot {
 }
 
 function saveSnapshot(snapshot: ImagesSnapshot): void {
-  writeFileSync(
-    SNAPSHOT_PATH,
-    JSON.stringify(snapshot, null, 2)
-  )
+  writeFileSync(SNAPSHOT_PATH, JSON.stringify(snapshot, null, 2))
 }
 
 /**
  * Computes a hash of the image file content and its
  * description to detect changes.
  */
-function computeImageHash(
-  filePath: string,
-  description?: string
-): string {
+function computeImageHash(filePath: string, description?: string): string {
   const fileBuffer = readFileSync(filePath)
   const hash = createHash('md5')
   hash.update(fileBuffer)
@@ -440,16 +432,10 @@ async function main(): Promise<void> {
   const items: FileItem[] = []
   let skippedCount = 0
   for (const item of dedupedItems) {
-    const hash = computeImageHash(
-      item.absolute,
-      item.description
-    )
+    const hash = computeImageHash(item.absolute, item.description)
     currentSnapshot[item.relative] = hash
 
-    if (
-      !FORCE_SYNC &&
-      previousSnapshot[item.relative] === hash
-    ) {
+    if (!FORCE_SYNC && previousSnapshot[item.relative] === hash) {
       skippedCount++
       continue
     }
@@ -483,17 +469,13 @@ async function main(): Promise<void> {
   console.log('Ensuring tags exist...')
   await ensureTags(environment)
 
-  console.log(
-    '\nUploading assets (batch size %d)...',
-    CONCURRENT_BATCH_SIZE
-  )
+  console.log('\nUploading assets (batch size %d)...', CONCURRENT_BATCH_SIZE)
   let uploaded = 0
   const results = await processInBatches(
     items,
     (item) => uploadOne(environment, item),
     CONCURRENT_BATCH_SIZE,
-    (item, idx) =>
-      `asset ${idx + 1}/${items.length} (${item.relative})`
+    (item, idx) => `asset ${idx + 1}/${items.length} (${item.relative})`
   )
   uploaded = results.filter(Boolean).length
   console.log(

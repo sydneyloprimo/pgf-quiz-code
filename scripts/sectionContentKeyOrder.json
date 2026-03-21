@@ -44,6 +44,13 @@
     "emailPlaceholder",
     "passwordPlaceholder"
   ],
+  "SignIn": [
+    "logoAlt",
+    "formHeading",
+    "formSubHeading",
+    "heroHeading",
+    "heroDescription"
+  ],
   "SignUp": [
     "logoAlt",
     "formHeading",
@@ -131,6 +138,7 @@
   ],
   "Common.OptionSelectProduct": [
     "whatYoullGetTitle",
+    "recommendedForTitle",
     "detailsButton",
     "addToCartButton",
     "subscribeButton",

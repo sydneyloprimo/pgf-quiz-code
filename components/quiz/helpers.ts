@@ -115,8 +115,8 @@ export const formatAgeText = (age: string): string => {
 export const getQuizBenefits = (
   sellingPlanName: string | null | undefined,
   dogName: string,
-  weeklyPacks: number,
-  t: (key: string, values?: Record<string, string | number>) => string
+  t: (key: string, values?: Record<string, string | number>) => string,
+  mode: 'topper' | 'full' = 'full'
 ): Array<{ icon: 'check' | 'shipping'; text: string }> => {
   const benefits: Array<{
     icon: 'check' | 'shipping'
@@ -135,33 +135,42 @@ export const getQuizBenefits = (
     })
   }
 
-  benefits.push(
-    {
-      icon: 'check',
-      text: t('products.benefits.packRecommendationReason', {
-        name: dogName,
-        packs: weeklyPacks,
-      }),
-    },
-    {
-      icon: 'check',
-      text: t('products.benefits.saveOverheads', {
-        name: dogName,
-      }),
-    },
-    {
-      icon: 'check',
-      text: t('products.benefits.freshlyPortioned', {
-        name: dogName,
-      }),
-    },
-    {
-      icon: 'check',
-      text: t('products.benefits.flexibleSchedule', {
-        name: dogName,
-      }),
-    }
-  )
+  if (mode === 'topper') {
+    benefits.push(
+      {
+        icon: 'check',
+        text: t('products.benefits.topperPartialPortions'),
+      },
+      {
+        icon: 'check',
+        text: t('products.benefits.topperIntegrates'),
+      },
+      {
+        icon: 'check',
+        text: t('products.benefits.topperFormulationRigor'),
+      }
+    )
+  } else {
+    benefits.push(
+      {
+        icon: 'check',
+        text: t('products.benefits.packRecommendationReason', {
+          name: dogName,
+        }),
+      },
+      {
+        icon: 'check',
+        text: t('products.benefits.freshlyPortioned', {
+          name: dogName,
+        }),
+      },
+      {
+        icon: 'check',
+        text: t('products.benefits.flexibleSchedule'),
+      }
+    )
+  }
+
   return benefits
 }
 
@@ -171,11 +180,11 @@ export const getQuizBenefitsAlaCarte = (
   return [
     {
       icon: 'check',
-      text: t('products.benefits.noSubscriptionRequired'),
+      text: t('products.benefits.oneTimeDelivery'),
     },
     {
       icon: 'check',
-      text: t('products.benefits.oneTimeDelivery'),
+      text: t('products.benefits.noSubscriptionRequired'),
     },
     {
       icon: 'check',

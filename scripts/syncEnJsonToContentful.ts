@@ -11,11 +11,7 @@
  */
 
 import { createHash } from 'crypto'
-import {
-  existsSync,
-  readFileSync,
-  writeFileSync,
-} from 'fs'
+import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { resolve } from 'path'
 
 import contentfulManagement from 'contentful-management'
@@ -50,9 +46,7 @@ type CopiesSnapshot = Record<string, string>
 function loadSnapshot(): CopiesSnapshot {
   try {
     if (existsSync(SNAPSHOT_PATH)) {
-      return JSON.parse(
-        readFileSync(SNAPSHOT_PATH, 'utf-8')
-      ) as CopiesSnapshot
+      return JSON.parse(readFileSync(SNAPSHOT_PATH, 'utf-8')) as CopiesSnapshot
     }
   } catch {
     // Corrupted snapshot, start fresh
@@ -61,10 +55,7 @@ function loadSnapshot(): CopiesSnapshot {
 }
 
 function saveSnapshot(snapshot: CopiesSnapshot): void {
-  writeFileSync(
-    SNAPSHOT_PATH,
-    JSON.stringify(snapshot, null, 2)
-  )
+  writeFileSync(SNAPSHOT_PATH, JSON.stringify(snapshot, null, 2))
 }
 
 /**
@@ -635,17 +626,10 @@ async function createSectionFromObject(
   }
 
   const pathKey = path.join('.')
-  const hash = computeSectionHash(
-    content,
-    sortedKeys,
-    childIds
-  )
+  const hash = computeSectionHash(content, sortedKeys, childIds)
   currentSnapshot[pathKey] = hash
 
-  if (
-    !FORCE_SYNC &&
-    previousSnapshot[pathKey] === hash
-  ) {
+  if (!FORCE_SYNC && previousSnapshot[pathKey] === hash) {
     return entryId
   }
 
@@ -818,8 +802,7 @@ async function main(): Promise<void> {
     (k) => previousSnapshot[k] !== currentSnapshot[k]
   ).length
   console.log(
-    `\nSections: ${changedSections} changed out of ` +
-      `${totalSections} total`
+    `\nSections: ${changedSections} changed out of ` + `${totalSections} total`
   )
 
   console.log('\nCreating RichTextPage entries...')

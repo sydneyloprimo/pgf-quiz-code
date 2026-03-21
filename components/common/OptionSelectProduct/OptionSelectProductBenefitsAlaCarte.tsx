@@ -21,7 +21,7 @@ const OptionSelectProductBenefitsAlaCarte = ({
   return (
     <div className="flex flex-col gap-3 bg-tertiary-100 p-4 mt-2">
       <h4 className="text-base font-semibold text-tertiary-900">
-        {t('whatYoullGetTitle')}
+        {t('recommendedForTitle')}
       </h4>
       <ul className="flex flex-col gap-3">
         {benefits.map((benefit, index) => (

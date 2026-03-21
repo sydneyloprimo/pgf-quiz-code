@@ -55,7 +55,8 @@
       "shipmentFrequencyLabel": "Shipment Frequency:",
       "shipmentFrequencyPlaceholder": "Select frequency",
       "subscribeButton": "Subscribe for {price} a day",
-      "whatYoullGetTitle": "What you'll get:"
+      "recommendedForTitle": "Recommended for:",
+      "whatYoullGetTitle": "Protocol includes:"
     },
     "ProductDetailPanel": {
       "addToCartButton": "Add to cart",
@@ -956,35 +957,37 @@
         "everyTwoWeeks": "Every Two Weeks"
       },
       "subscribeButtonAlreadyInCart": "Already in cart",
-      "subscribeButtonSwitchToFullMeal": "Switch to Full Meal Plan for {price} a day",
-      "subscribeButtonSwitchToTopper": "Switch to Topper Plan for {price} a day",
-      "purchaseAlaCarteHeading": "Purchase à la carte",
-      "tryRecipeBeforeMembership": "Want to try a recipe before joining the membership?",
+      "subscribeButtonSwitchToFullMeal": "Switch to Complete Protocol for {price} a day",
+      "subscribeButtonSwitchToTopper": "Switch to Topper Protocol for {price} a day",
+      "purchaseAlaCarteHeading": "Single Meal (Trial)",
+      "tryRecipeBeforeMembership": "One-time delivery of a complete meal, no subscription required.",
       "products": {
         "alaCarte": {
-          "title": "Single Meal, A la Carte",
-          "description": "Perfect if you'd like to try one recipe before committing."
+          "title": "Single Meal (Trial)",
+          "description": "One-time delivery of a complete meal, no subscription required."
         },
         "topper": {
-          "title": "Topper (50%)",
-          "description": "{name}'s favorite meals, delivered automatically — fresh, balanced, and ready to serve."
+          "title": "Topper Protocol (50% daily nutrition)",
+          "description": "Supplement your dog's current diet with precision nutrition. Designed to integrate into existing feeding routines."
         },
         "fullMeal": {
-          "title": "{name}'s Recipe Box",
-          "description": "{name}'s favorite meals, delivered automatically — fresh, balanced, and ready to serve."
+          "title": "{name}'s Complete Nutrition Protocol",
+          "description": "You will receive complete daily meals, calibrated to your dog's requirements and delivered directly to you."
         },
         "whatYoullGet": {
           "everyWeek": "You will get seven meals for {name}, freshly delivered every week.",
           "everyTwoWeeks": "You will get fourteen meals for {name}, freshly delivered every two weeks."
         },
         "benefits": {
-          "bestForFirstTimers": "Best for first-timers or occasional feeding.",
-          "flexibleSchedule": "Flexible schedule — pause, skip, or cancel anytime.",
-          "freshlyPortioned": "Freshly portioned for {name}'s size and activity.",
-          "noSubscriptionRequired": "Same great recipes, no subscription required.",
-          "oneTimeDelivery": "One-time delivery.",
-          "packRecommendationReason": "{packs, plural, one {# pack} other {# packs}} per week (7 meals) — the number of packs depends on {name}'s portion size and is based on daily calorie needs.",
-          "saveOverheads": "Save overheads every month — easiest way to feed healthy and save."
+          "bestForFirstTimers": "Assessing palatability and digestive response",
+          "flexibleSchedule": "Flexible delivery that can be paused, cancelled, or adjusted as needed.",
+          "freshlyPortioned": "Nutrient-verified formulation in every batch",
+          "noSubscriptionRequired": "Occasional supplementation alongside existing diet",
+          "oneTimeDelivery": "Initial trial before transitioning to a full protocol",
+          "packRecommendationReason": "Each weekly delivery is portioned for {name}'s size and caloric needs",
+          "topperFormulationRigor": "Same formulation rigor, scaled for supplementation",
+          "topperIntegrates": "Integrates with kibble or mixed feeding routines",
+          "topperPartialPortions": "Partial portions formulated to provide 50% of daily nutrient requirements"
         },
         "lambDescription": "Customized health benefits that specifically target concerns like dry skin and lackluster fur, ensuring your pet looks and feels their best.",
         "pancreaticDescription": "Customized health benefits that specifically target concerns like dry skin and lackluster fur, ensuring your pet looks and feels their best.",
@@ -995,16 +998,16 @@
         "title": "Benefits",
         "benefits": {
           "improvedDigestion": {
-            "title": "Improved Digestion & Energy",
-            "description": "Gentler on the tummy than kibble — helps {name} absorb more nutrients and stay active."
+            "title": "Digestive stability",
+            "description": "Formulated to support digestibility and gastrointestinal tolerance."
           },
           "allergyWeightControl": {
-            "title": "Allergy & Weight Control",
-            "description": "Supports a healthy weight while easing common sensitivities."
+            "title": "Weight and metabolic support",
+            "description": "Macronutrient ratios and portioning designed to support metabolic balance and body condition."
           },
           "moreMealtimesTogether": {
-            "title": "More Mealtimes Together",
-            "description": "A wholesome diet proven to help dogs live longer, happier lives."
+            "title": "Long-term nutritional adequacy",
+            "description": "Complete formulation verified against AAFCO standards, batch by batch."
           }
         },
         "moreBuddies": {
@@ -1193,7 +1196,7 @@
   },
   "PromiseOfCareAlert": {
     "closeButton": "Close alert",
-    "message": "Our Promise of Care: Every recipe is formulated to meet pharmaceutical grade standards for quality and digestibility. If your dog doesn't respond as expected, our nutrition team will work with you to make it right."
+    "message": "Our Commitment: Every formulation meets clinical-grade standards for quality, digestibility, and nutritional adequacy. If physiological response differs from expectations, our Nutrition Concierge will connect with you to gather the additional information necessary to update the feeding profile accordingly."
   },
   "Formulation": {
     "Hero": {
@@ -1441,7 +1444,7 @@
     "bowlImageAlt": "Dog food bowl illustration",
     "chatWithConcierge": "Chat with Concierge",
     "closeButton": "Close",
-    "description": "{name} is now part of PGF Club. Remember you can always chat with our Nutrition Concierge and evacuate any doubts.",
+    "description": "Thank you. {name}'s feeding protocol is confirmed. Our Nutrition Concierge is available to support the nutritional transition and answer questions as your dog's needs evolve.",
     "emailAriaLabel": "Email our Nutrition Concierge",
     "heading": "Thanks for your purchase!",
     "backToProfile": "Back to Profile",
