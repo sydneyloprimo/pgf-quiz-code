@@ -188,6 +188,7 @@ const MainNav = () => {
               href={profileHref}
               className="p-3 text-neutral-white hover:text-secondary-400"
               aria-label={t('profileAria')}
+              suppressHydrationWarning
             >
               <UserIcon className="size-5" />
             </Link>
