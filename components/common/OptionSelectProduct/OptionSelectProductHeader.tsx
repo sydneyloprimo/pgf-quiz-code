@@ -50,7 +50,9 @@ const OptionSelectProductHeader = ({
         </div>
 
         <div className="flex flex-col flex-1 justify-center md:px-4 text-left">
-          <h3 className="text-2xl mb-2 font-display">{title}</h3>
+          <h3 className="text-2xl mb-2 font-display text-secondary-950">
+            {title}
+          </h3>
           <p className="text-base text-secondary-950 font-sans">
             {description}
           </p>

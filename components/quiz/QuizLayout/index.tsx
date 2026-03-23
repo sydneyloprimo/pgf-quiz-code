@@ -268,7 +268,7 @@ const QuizLayoutContent = ({
   const { isDropdownOpen = false } = useQuizDropdownContext() ?? {}
 
   return (
-    <div className="flex flex-col min-h-screen bg-neutral-300 w-full overflow-y-auto">
+    <div className="flex flex-col min-h-screen bg-neutral-300 text-secondary-950 w-full overflow-y-auto">
       <QuizHeader
         visitedSteps={visitedSteps}
         showProgressBar={

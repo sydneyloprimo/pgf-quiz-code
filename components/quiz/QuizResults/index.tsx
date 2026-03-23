@@ -689,7 +689,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
     <div
       className={cn(
         'flex flex-col items-center justify-center',
-        'md:max-w-2xl mx-auto pb-12 w-full',
+        'md:max-w-2xl mx-auto pt-6 pb-12 w-full',
         'gap-16'
       )}
     >
