@@ -210,6 +210,16 @@
     font-style: normal;
     src: url('/fonts/MillerBanner-Regular.otf') format('opentype');
   }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--color-secondary-950);
+    caret-color: var(--color-secondary-950);
+    -webkit-box-shadow: 0 0 0 1000px var(--color-neutral-white) inset;
+    box-shadow: 0 0 0 1000px var(--color-neutral-white) inset;
+  }
 }
 
 @media (prefers-color-scheme: dark) {

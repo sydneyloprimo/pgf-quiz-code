@@ -115,6 +115,7 @@ const Modal = ({
         aria-label={ariaLabel}
         className={cn(
           'relative',
+          'scheme-light',
           'bg-neutral-white',
           'shadow-lg',
           'max-w-lg w-full mx-4',

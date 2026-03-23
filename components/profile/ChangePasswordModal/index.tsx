@@ -143,6 +143,8 @@ const ChangePasswordModal = ({
               <Input
                 ref={ref}
                 label={t('currentPasswordLabel')}
+                labelClassName="text-body-m font-bold text-secondary-900"
+                autoComplete="current-password"
                 type={showCurrentPassword ? 'text' : 'password'}
                 value={value}
                 name={name}
@@ -181,6 +183,8 @@ const ChangePasswordModal = ({
               <Input
                 ref={ref}
                 label={t('newPasswordLabel')}
+                labelClassName="text-body-m font-bold text-secondary-900"
+                autoComplete="new-password"
                 type={showNewPassword ? 'text' : 'password'}
                 value={value}
                 name={name}
@@ -217,6 +221,8 @@ const ChangePasswordModal = ({
               <Input
                 ref={ref}
                 label={t('confirmPasswordLabel')}
+                labelClassName="text-body-m font-bold text-secondary-900"
+                autoComplete="new-password"
                 type={showConfirmPassword ? 'text' : 'password'}
                 value={value}
                 name={name}
