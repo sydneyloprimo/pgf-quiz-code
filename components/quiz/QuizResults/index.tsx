@@ -810,7 +810,11 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
         formData={formData}
         mode={selectedProductMode}
       />
-      <FloatingCartButton onOpenCart={openCart} isCartOpen={isCartOpen} />
+      <FloatingCartButton
+        onOpenCart={openCart}
+        isCartOpen={isCartOpen}
+        isDetailPanelOpen={isPanelOpen}
+      />
     </div>
   )
 }

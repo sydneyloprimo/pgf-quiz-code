@@ -314,7 +314,7 @@ const ShoppingCartItem = ({
                     value={currentFrequency ?? frequencyOptions[0].value}
                     options={frequencyOptions}
                     onSelect={handleFrequencyChange}
-                    className="flex-1"
+                    className="flex-1 min-w-0"
                     state={InputDropdownState.Filled}
                     disabled={disabled}
                   />
@@ -325,7 +325,7 @@ const ShoppingCartItem = ({
                   value={currentRecipe}
                   options={recipeOptions}
                   onSelect={handleRecipeChange}
-                  className="flex-1"
+                  className="flex-1 min-w-0"
                   state={InputDropdownState.Filled}
                   disabled={disabled}
                 />
@@ -333,7 +333,7 @@ const ShoppingCartItem = ({
             </>
           ) : (
             <>
-              <div className="bg-neutral-white border border-neutral-950 flex flex-1 items-center justify-between px-[18px] shrink-0 h-full">
+              <div className="bg-neutral-white border border-neutral-950 flex flex-1 min-w-0 items-center justify-between px-[18px] h-full">
                 <InputNumber
                   value={quantity}
                   onDecrement={handleDecrease}
@@ -356,7 +356,7 @@ const ShoppingCartItem = ({
                   value={currentRecipe}
                   options={recipeOptions}
                   onSelect={handleRecipeChange}
-                  className="flex-1"
+                  className="flex-1 min-w-0"
                   state={InputDropdownState.Filled}
                   disabled={disabled}
                 />

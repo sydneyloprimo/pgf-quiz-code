@@ -13,12 +13,14 @@ interface FloatingCartButtonProps {
   className?: string
   onOpenCart?: () => void
   isCartOpen?: boolean
+  isDetailPanelOpen?: boolean
 }
 
 const FloatingCartButton = ({
   className,
   onOpenCart,
   isCartOpen = false,
+  isDetailPanelOpen = false,
 }: FloatingCartButtonProps) => {
   const t = useTranslations('Common.FloatingCartButton')
   const { cartId } = useCartCookie()
@@ -49,7 +51,8 @@ const FloatingCartButton = ({
       type="button"
       onClick={handleOpenCart}
       className={cn(
-        'fixed bottom-6 right-6 z-50',
+        'fixed right-6 z-50',
+        isDetailPanelOpen ? 'bottom-28' : 'bottom-6',
         'bg-primary-800 border border-primary-800',
         'flex items-center justify-center',
         'p-3',
