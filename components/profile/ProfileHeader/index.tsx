@@ -12,6 +12,7 @@ import { ChangePasswordModal } from '@/components/profile/ChangePasswordModal'
 import { EditProfileModal } from '@/components/profile/EditProfileModal'
 import { LogoutModal } from '@/components/profile/LogoutModal'
 import { clearFormData, clearPersonalData } from '@/components/quiz/storage'
+import { AUTH_COOKIE_OPTIONS } from '@/constants'
 import { useModal } from '@/hooks/useModal'
 import { client } from '@/shopify/client'
 import {
@@ -139,7 +140,7 @@ const ProfileHeader = () => {
   }, [refetch, fetchBirthdate])
 
   const handleLogout = useCallback(() => {
-    removeCookie(Cookies.customerAccessToken, { path: '/', secure: true })
+    removeCookie(Cookies.customerAccessToken, AUTH_COOKIE_OPTIONS)
     removeCookie(Cookies.cart, { path: '/', secure: true })
     clearFormData()
     clearPersonalData()
@@ -209,8 +210,7 @@ const ProfileHeader = () => {
           updateResult.customerUpdate?.customerAccessToken?.accessToken
         if (!newToken) {
           setCookie(Cookies.customerAccessToken, '', {
-            path: '/',
-            secure: true,
+            ...AUTH_COOKIE_OPTIONS,
             maxAge: 0,
           })
           toast(
@@ -223,10 +223,7 @@ const ProfileHeader = () => {
           return
         }
 
-        setCookie(Cookies.customerAccessToken, newToken, {
-          path: '/',
-          secure: true,
-        })
+        setCookie(Cookies.customerAccessToken, newToken, AUTH_COOKIE_OPTIONS)
 
         toast(
           <Toast

@@ -17,6 +17,7 @@ import { Button } from '@/components/common/Button'
 import { VisibilityIcon, VisibilityOffIcon } from '@/components/common/Icon'
 import Input from '@/components/common/Input'
 import Spinner from '@/components/common/Spinner'
+import { AUTH_COOKIE_OPTIONS } from '@/constants'
 import { client } from '@/shopify/client'
 import {
   CustomerErrorCode,
@@ -112,7 +113,7 @@ export default function ResetPassword() {
             },
             cartId: cookies[Cookies.cart],
           })
-          setCookie(Cookies.customerAccessToken, token, { secure: true })
+          setCookie(Cookies.customerAccessToken, token, AUTH_COOKIE_OPTIONS)
           push(Routes.home)
         } else if (userErrors?.length) {
           const errorCode = userErrors[0]?.code

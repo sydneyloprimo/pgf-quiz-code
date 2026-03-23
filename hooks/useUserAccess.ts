@@ -2,6 +2,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useCookies } from 'react-cookie'
 
+import { AUTH_COOKIE_OPTIONS } from '@/constants'
 import { client } from '@/shopify/client'
 import {
   useCartBuyerIdentityUpdateMutation,
@@ -46,7 +47,7 @@ export const useUserAccess = (createSuccessCallback?: () => void) => {
           setCookie(
             Cookies.customerAccessToken,
             data.customerAccessTokenCreate?.customerAccessToken?.accessToken,
-            { secure: true }
+            AUTH_COOKIE_OPTIONS
           )
           push(Routes.home)
         } else if (data?.customerAccessTokenCreate?.customerUserErrors) {
