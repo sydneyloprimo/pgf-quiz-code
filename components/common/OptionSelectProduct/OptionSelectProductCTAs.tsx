@@ -4,10 +4,11 @@ import { useTranslations } from 'next-intl'
 import { useCallback } from 'react'
 
 import { Button } from '@/components/common/Button'
+import { Routes } from '@/types/enums/routes'
 
 interface OptionSelectProductCTAsProps {
   pricePerDay?: number
-  onDetailsClick?: () => void
+  recipeValue?: string
   onSubscribeClick?: () => void
   onAddToCartClick?: () => void
   isAlaCarte?: boolean
@@ -17,7 +18,7 @@ interface OptionSelectProductCTAsProps {
 
 const OptionSelectProductCTAs = ({
   pricePerDay,
-  onDetailsClick,
+  recipeValue,
   onSubscribeClick,
   onAddToCartClick,
   isAlaCarte = false,
@@ -25,14 +26,6 @@ const OptionSelectProductCTAs = ({
   subscribeButtonText,
 }: OptionSelectProductCTAsProps) => {
   const t = useTranslations('Common.OptionSelectProduct')
-
-  const handleDetailsClick = useCallback(
-    (e: React.MouseEvent) => {
-      e.stopPropagation()
-      onDetailsClick?.()
-    },
-    [onDetailsClick]
-  )
 
   const handleSubscribeClick = useCallback(
     (e: React.MouseEvent) => {
@@ -50,11 +43,14 @@ const OptionSelectProductCTAs = ({
     [onAddToCartClick]
   )
 
+  const recipeHash =
+    recipeValue === 'pancreatic' ? 'seafood' : recipeValue || 'turkey'
+
   return (
     <div className="flex flex-col md:flex-row gap-3 mt-2">
       <Button
         variant="tertiary"
-        onClick={handleDetailsClick}
+        href={`${Routes.recipes}#${recipeHash}`}
         className="w-full md:flex-1"
       >
         {t('detailsButton')}

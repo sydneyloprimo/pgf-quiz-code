@@ -6,9 +6,12 @@ import {
   PropsWithChildren,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from 'react'
+
+import { RECIPE_TABS } from '@/constants'
 
 export type RecipeType = 'turkey' | 'lamb' | 'seafood'
 
@@ -53,6 +56,13 @@ const RecipesProvider = ({
   tables = EMPTY_TABLES,
 }: RecipesProviderProps) => {
   const [activeRecipe, setActiveRecipeState] = useState<RecipeType>('turkey')
+
+  useEffect(() => {
+    const hash = window.location.hash.slice(1)
+    if (hash && RECIPE_TABS.includes(hash as RecipeType)) {
+      setActiveRecipeState(hash as RecipeType)
+    }
+  }, [])
 
   const setActiveRecipe = useCallback((recipe: RecipeType) => {
     setActiveRecipeState(recipe)

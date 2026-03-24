@@ -14,10 +14,6 @@ import {
 import { useMediaQuery } from 'usehooks-ts'
 
 import { OptionSelectProduct } from '@/components/common/OptionSelectProduct'
-import {
-  ProductDetailPanel,
-  ProductDetailPanelData,
-} from '@/components/common/ProductDetailPanel'
 import { PromiseOfCareAlert } from '@/components/common/PromiseOfCareAlert'
 import { ShoppingCartPanel } from '@/components/common/ShoppingCartPanel'
 import Toast, { ToastTypes } from '@/components/common/Toast'
@@ -32,7 +28,6 @@ import { QuizResultsFooter } from '@/components/quiz/QuizResultsFooter'
 import { QuizResultsHeader } from '@/components/quiz/QuizResultsHeader'
 import {
   MediaQuery,
-  PRODUCT_DETAIL_IMAGES,
   PRODUCT_MODE,
   QUIZ_RESULT_PRODUCTS,
   QUIZ_RESULTS_DEFAULTS,
@@ -60,7 +55,6 @@ interface QuizResultsProps {
 const QuizResults = ({ formMethods }: QuizResultsProps) => {
   const { control } = formMethods
   const t = useTranslations('Quiz.results')
-  const tPanel = useTranslations('Common.ProductDetailPanel')
   const tToast = useTranslations('Common.Toast')
   const tDetail = useTranslations('Detail')
 
@@ -79,9 +73,6 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
     topper: '',
     fullMeal: '',
   })
-  const [isPanelOpen, setIsPanelOpen] = useState(false)
-  const [panelProductData, setPanelProductData] =
-    useState<ProductDetailPanelData | null>(null)
   const { isOpen: isCartOpen, openCart, closeCart } = useShoppingCartPanel()
   const { cartId } = useCartCookie()
   const isMobile = useMediaQuery(MediaQuery.mobile)
@@ -257,132 +248,6 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
     ]
   )
 
-  const getProductDescription = useCallback(
-    (recipeType: RecipeSlug): string => {
-      if (recipeType === RECIPE_TYPE.turkey) {
-        return t('products.turkeyDescription')
-      }
-      if (recipeType === 'pancreatic') {
-        return t('products.pancreaticDescription')
-      }
-      return t('products.lambDescription')
-    },
-    [t]
-  )
-
-  const getProductPrice = useCallback(
-    (productMode: ProductMode, recipeOverride?: RecipeSlug): string => {
-      if (productMode === PRODUCT_MODE.alaCarte) {
-        const recipe = recipeOverride ?? recipes.alaCarte
-        const config = productConfigs?.[recipe] || productConfigs?.turkey
-        const unitPrice = config?.unitPrice
-        if (unitPrice?.amount != null) {
-          return unitPrice.currencyCode === 'USD'
-            ? `$${unitPrice.amount.toFixed(2)}`
-            : `${unitPrice.currencyCode} ${unitPrice.amount.toFixed(2)}`
-        }
-        return '-'
-      }
-      const pricePerDay = getPricePerDay(productMode, recipeOverride)
-      return `$${pricePerDay.toFixed(2)} / day`
-    },
-    [getPricePerDay, productConfigs, recipes.alaCarte]
-  )
-
-  const handleDetailsClick = useCallback(
-    (mode: ProductMode) => {
-      const recipe = recipes[mode]
-      const productConfig = productConfigs?.[recipe] || productConfigs?.turkey
-
-      // Use Shopify images if available, fallback to hardcoded
-      const shopifyImages = productConfig?.images || []
-      const mainImage = shopifyImages[0]?.url || PRODUCT_DETAIL_IMAGES.main
-      const thumbnails =
-        shopifyImages.length > 0
-          ? shopifyImages.map((img) => img.url)
-          : [
-              PRODUCT_DETAIL_IMAGES.main,
-              PRODUCT_DETAIL_IMAGES.thumbnail2,
-              PRODUCT_DETAIL_IMAGES.thumbnail3,
-            ]
-
-      const productData: ProductDetailPanelData = {
-        mode,
-        recipe,
-        images: {
-          main: mainImage,
-          thumbnails,
-        },
-        price: getProductPrice(mode),
-        description: getProductDescription(recipe),
-        sections: {
-          analyticalConstituents: {
-            title: tPanel('analyticalConstituentsTitle'),
-            content: tPanel('analyticalConstituentsContent'),
-          },
-          nutritionalFacts: {
-            title: tPanel('nutritionalFactsTitle'),
-            content: tPanel('nutritionalFactsContent'),
-          },
-          ingredients: {
-            title: tPanel('ingredientsTitle'),
-            content: tPanel('ingredientsContent'),
-          },
-        },
-      }
-
-      setPanelProductData(productData)
-      setIsPanelOpen(true)
-    },
-    [recipes, getProductPrice, getProductDescription, tPanel, productConfigs]
-  )
-
-  const handlePanelClose = useCallback(() => {
-    setIsPanelOpen(false)
-  }, [])
-
-  const handlePanelRecipeChange = useCallback(
-    (recipe: 'turkey' | 'lamb' | 'pancreatic') => {
-      if (!panelProductData) return
-
-      const productConfig = productConfigs?.[recipe] || productConfigs?.turkey
-
-      const shopifyImages = productConfig?.images || []
-      const mainImage = shopifyImages[0]?.url || PRODUCT_DETAIL_IMAGES.main
-      const thumbnails =
-        shopifyImages.length > 0
-          ? shopifyImages.map((img) => img.url)
-          : [
-              PRODUCT_DETAIL_IMAGES.main,
-              PRODUCT_DETAIL_IMAGES.thumbnail2,
-              PRODUCT_DETAIL_IMAGES.thumbnail3,
-            ]
-
-      const updatedData: ProductDetailPanelData = {
-        ...panelProductData,
-        recipe,
-        images: { main: mainImage, thumbnails },
-        price: getProductPrice(panelProductData.mode, recipe as RecipeSlug),
-        description:
-          recipe === 'pancreatic'
-            ? t('products.turkeyDescription')
-            : getProductDescription(recipe),
-      }
-
-      setPanelProductData(updatedData)
-      setRecipes((prev) => ({
-        ...prev,
-        [panelProductData.mode]: recipe as RecipeSlug,
-      }))
-    },
-    [
-      panelProductData,
-      productConfigs,
-      getProductPrice,
-      getProductDescription,
-      t,
-    ]
-  )
   const queryClient = useQueryClient()
 
   const [isAddingToCart, setIsAddingToCart] = useState(false)
@@ -755,7 +620,6 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
               }
               benefits={getBenefits(mode)}
               pricePerDay={getPricePerDay(mode)}
-              onDetailsClick={() => handleDetailsClick(product.mode)}
               onSubscribeClick={() => handleSubscribeClick(mode)}
               subscribeButtonDisabled={subscribeButtonDisabled}
               subscribeButtonText={subscribeButtonText}
@@ -780,29 +644,10 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
             handleRecipeSelect(PRODUCT_MODE.alaCarte, value)
           }
           benefits={getQuizBenefitsAlaCarte(t)}
-          onDetailsClick={() => handleDetailsClick(PRODUCT_MODE.alaCarte)}
           onAddToCartClick={handleAddToCartClick}
         />
       </div>
       <QuizResultsFooter dogName={dogName} />
-
-      <ProductDetailPanel
-        isOpen={isPanelOpen}
-        onClose={handlePanelClose}
-        productData={panelProductData}
-        recipeOptions={recipeOptions}
-        onRecipeChange={handlePanelRecipeChange}
-        onAddToCartClick={openCart}
-        formData={formData}
-        sellingPlanId={
-          panelProductData?.mode === 'topper'
-            ? shipmentFrequencies.topper
-            : panelProductData?.mode === 'fullMeal'
-              ? shipmentFrequencies.fullMeal
-              : null
-        }
-        dogName={dogName}
-      />
 
       <ShoppingCartPanel
         isOpen={isCartOpen}
@@ -813,7 +658,7 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
       <FloatingCartButton
         onOpenCart={openCart}
         isCartOpen={isCartOpen}
-        isDetailPanelOpen={isPanelOpen}
+        isDetailPanelOpen={false}
       />
     </div>
   )

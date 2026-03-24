@@ -9,7 +9,6 @@ import { useCartLinesAddMutation } from 'shopify/generated/graphql'
 import { useMediaQuery } from 'usehooks-ts'
 
 import { ProductDetailFooter } from './ProductDetailFooter'
-import { ProductDetailImageGallery } from './ProductDetailImageGallery'
 import { ProductDetailInfo } from './ProductDetailInfo'
 import { ProductDetailPanelSections } from './ProductDetailPanelSections'
 
@@ -97,17 +96,8 @@ const ProductDetailPanel = ({
     }
   }, [productData])
 
-  useEffect(() => {
-    if (productData?.images) {
-      setSelectedImage(PRODUCT_DETAIL_DEFAULTS.selectedImage)
-    }
-  }, [productData?.images])
-
   const [quantity, setQuantity] = useState<number>(
     PRODUCT_DETAIL_DEFAULTS.quantity
-  )
-  const [selectedImage, setSelectedImage] = useState<number>(
-    PRODUCT_DETAIL_DEFAULTS.selectedImage
   )
 
   const { mutate: addLine, isPending: isAddLineLoading } =
@@ -220,10 +210,6 @@ const ProductDetailPanel = ({
 
   const handleQuantityIncrement = useCallback(() => {
     setQuantity((prev) => prev + 1)
-  }, [])
-
-  const handleThumbnailClick = useCallback((index: number) => {
-    setSelectedImage(index)
   }, [])
 
   const handleAddToCart = useCallback(() => {
@@ -392,12 +378,6 @@ const ProductDetailPanel = ({
 
           <div className="flex flex-col gap-6 items-center px-0">
             <div className="flex flex-1 flex-col gap-6 items-start justify-center w-full">
-              <ProductDetailImageGallery
-                images={productData.images}
-                selectedImage={selectedImage}
-                onThumbnailClick={handleThumbnailClick}
-              />
-
               <ProductDetailInfo
                 selectedRecipe={selectedRecipe}
                 recipeOptions={recipeOptions}

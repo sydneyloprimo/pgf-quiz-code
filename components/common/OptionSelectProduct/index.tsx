@@ -32,7 +32,6 @@ interface OptionSelectProductProps {
   onShipmentFrequencySelect?: (value: string) => void
   benefits: Array<{ icon?: 'check' | 'shipping'; text: string }>
   pricePerDay?: number
-  onDetailsClick?: () => void
   onSubscribeClick?: () => void
   onAddToCartClick?: () => void
   subscribeButtonDisabled?: boolean
@@ -57,7 +56,6 @@ const OptionSelectProduct = ({
   onShipmentFrequencySelect,
   benefits,
   pricePerDay,
-  onDetailsClick,
   onSubscribeClick,
   onAddToCartClick,
   subscribeButtonDisabled,
@@ -152,7 +150,7 @@ const OptionSelectProduct = ({
 
             <OptionSelectProductCTAs
               pricePerDay={pricePerDay}
-              onDetailsClick={onDetailsClick}
+              recipeValue={recipeValue}
               onSubscribeClick={onSubscribeClick}
               onAddToCartClick={onAddToCartClick}
               isAlaCarte={isAlaCarte}
