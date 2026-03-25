@@ -4,6 +4,7 @@ import {
   CONTENTFUL_FIELDS,
   CONTENTFUL_QUERY_DEFAULTS,
 } from './config'
+import { HARDCODED_BLOG_POSTS, HARDCODED_BLOG_SLUGS } from './hardcoded-posts'
 import type {
   AuthorEntry,
   AuthorSkeleton,
@@ -12,6 +13,19 @@ import type {
   CategoryEntry,
   CategorySkeleton,
 } from './types'
+
+/**
+ * Merges Contentful posts with hardcoded posts,
+ * avoiding duplicates by slug and placing hardcoded
+ * posts at the end.
+ */
+function mergeWithHardcoded(contentfulPosts: BlogPostEntry[]): BlogPostEntry[] {
+  const existingSlugs = new Set(contentfulPosts.map((p) => p.fields.slug))
+  const missing = HARDCODED_BLOG_POSTS.filter(
+    (p) => !existingSlugs.has(p.fields.slug)
+  )
+  return [...contentfulPosts, ...missing]
+}
 
 function isResolvedCategory(cat: unknown): cat is CategoryEntry {
   return (
@@ -54,31 +68,33 @@ export interface GetBlogPostsForIndexOptions {
 export async function getBlogPostsForIndex(
   options?: GetBlogPostsForIndexOptions
 ): Promise<BlogPostEntry[]> {
+  let posts: BlogPostEntry[]
   try {
     const response = await contentfulClient.getEntries<BlogPostSkeleton>({
       content_type: CONTENTFUL_CONTENT_TYPES.blogPost,
       include: CONTENTFUL_QUERY_DEFAULTS.includeDepth,
       order: [...CONTENTFUL_QUERY_DEFAULTS.blogPostOrder],
     })
-    const posts = response.items
-    const categorySlug = options?.categorySlug
-    if (!categorySlug) return posts
-    return posts.filter((post) => {
-      const categories = post.fields.categories
-      if (!categories || !Array.isArray(categories)) return false
-      return categories.some(
-        (cat) => isResolvedCategory(cat) && cat.fields.slug === categorySlug
-      )
-    })
+    posts = mergeWithHardcoded(response.items)
   } catch (error) {
     console.error('Error fetching blog posts for index:', error)
-    return []
+    posts = HARDCODED_BLOG_POSTS
   }
+  const categorySlug = options?.categorySlug
+  if (!categorySlug) return posts
+  return posts.filter((post) => {
+    const categories = post.fields.categories
+    if (!categories || !Array.isArray(categories)) return false
+    return categories.some(
+      (cat) => isResolvedCategory(cat) && cat.fields.slug === categorySlug
+    )
+  })
 }
 
 export async function getBlogPostBySlug(
   slug: string
 ): Promise<BlogPostEntry | null> {
+  const hardcoded = HARDCODED_BLOG_POSTS.find((p) => p.fields.slug === slug)
   try {
     const response = await contentfulClient.getEntries<BlogPostSkeleton>({
       content_type: CONTENTFUL_CONTENT_TYPES.blogPost,
@@ -87,10 +103,10 @@ export async function getBlogPostBySlug(
       limit: 1,
     })
 
-    return response.items[0] || null
+    return response.items[0] || hardcoded || null
   } catch (error) {
     console.error('Error fetching blog post:', error)
-    return null
+    return hardcoded || null
   }
 }
 
@@ -102,10 +118,10 @@ export async function getAllBlogPosts(): Promise<BlogPostEntry[]> {
       order: [...CONTENTFUL_QUERY_DEFAULTS.blogPostOrder],
     })
 
-    return response.items
+    return mergeWithHardcoded(response.items)
   } catch (error) {
     console.error('Error fetching blog posts:', error)
-    return []
+    return HARDCODED_BLOG_POSTS
   }
 }
 
@@ -116,11 +132,15 @@ export async function getAllBlogSlugs(): Promise<string[]> {
       select: [...CONTENTFUL_QUERY_DEFAULTS.slugSelect],
     })
 
-    return response.items
+    const contentfulSlugs = response.items
       .map((item) => item.fields.slug)
       .filter(Boolean) as string[]
+    const allSlugs = Array.from(
+      new Set([...contentfulSlugs, ...HARDCODED_BLOG_SLUGS])
+    )
+    return allSlugs
   } catch (error) {
     console.error('Error fetching blog slugs:', error)
-    return []
+    return [...HARDCODED_BLOG_SLUGS]
   }
 }
