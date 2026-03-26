@@ -35,7 +35,7 @@ const OptionSelectProductHeader = ({
             src={imageSrc}
             alt={imageAlt}
             fill
-            className="object-contain rounded-full"
+            className="object-cover rounded-full"
             sizes="128px"
           />
           <div className="absolute bottom-0 right-0">
