@@ -643,15 +643,15 @@ export interface GalleryImage {
 
 export const GALLERY_IMAGES: GalleryImage[] = [
   {
-    src: '/images/about/gallery/image1.jpg',
+    src: '/images/about/gallery/image1.webp',
     altKey: 'image1Alt',
   },
   {
-    src: '/images/about/gallery/image2.jpg',
+    src: '/images/about/gallery/image2.webp',
     altKey: 'image2Alt',
   },
   {
-    src: '/images/about/gallery/image3.jpg',
+    src: '/images/about/gallery/image3.webp',
     altKey: 'image3Alt',
   },
 ] as const

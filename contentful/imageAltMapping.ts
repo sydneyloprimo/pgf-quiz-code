@@ -20,9 +20,9 @@ export const IMAGE_ALT_MAPPING: Record<string, string> = {
   '/images/quality-control.png': 'Home.ShopProducts.quality_alt',
   '/images/returns.png': 'Home.ShopProducts.returns_alt',
   // About
-  '/images/about/gallery/image1.jpg': 'About.Gallery.image1Alt',
-  '/images/about/gallery/image2.jpg': 'About.Gallery.image2Alt',
-  '/images/about/gallery/image3.jpg': 'About.Gallery.image3Alt',
+  '/images/about/gallery/image1.webp': 'About.Gallery.image1Alt',
+  '/images/about/gallery/image2.webp': 'About.Gallery.image2Alt',
+  '/images/about/gallery/image3.webp': 'About.Gallery.image3Alt',
   '/images/about/mission-1.jpg': 'About.Mission.image1Alt',
   '/images/about/mission-2.jpg': 'About.Mission.image2Alt',
   '/images/about/leadership.jpg': 'About.Leadership.imageAlt',

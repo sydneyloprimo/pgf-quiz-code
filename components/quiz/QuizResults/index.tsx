@@ -576,8 +576,10 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
               ? t(product.titleKey, { name: dogName })
               : t(product.titleKey)
 
-          // Use hardcoded image path
-          const imageSrc = product.imageSrc
+          // Use Shopify product image when available
+          const selectedRecipe = recipes[product.mode]
+          const imageSrc =
+            productConfigs[selectedRecipe]?.images[0]?.url || product.imageSrc
 
           // Determine subscription button state
           const existingSubscription = getExistingSubscription
@@ -634,7 +636,10 @@ const QuizResults = ({ formMethods }: QuizResultsProps) => {
           onSelect={() => handleProductModeSelect(PRODUCT_MODE.alaCarte)}
           title={t('products.alaCarte.title')}
           description={t('products.alaCarte.description')}
-          imageSrc="/images/product-full-meal.png"
+          imageSrc={
+            productConfigs[recipes.alaCarte]?.images[0]?.url ||
+            '/images/product-full-meal.png'
+          }
           imageAlt={t('products.alaCarte.title')}
           isMostPopular={false}
           isAlaCarte={true}
