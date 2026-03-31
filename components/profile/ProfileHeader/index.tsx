@@ -10,10 +10,7 @@ import { LogoutModal } from '@/components/profile/LogoutModal'
 import { clearFormData, clearPersonalData } from '@/components/quiz/storage'
 import { useModal } from '@/hooks/useModal'
 import { client } from '@/shopify/client'
-import {
-  useCustomerUpdateMutation,
-  useGetCustomerQuery,
-} from '@/shopify/generated/graphql'
+import { useGetCustomerQuery } from '@/shopify/generated/graphql'
 import { Cookies } from '@/types/enums/cookies'
 
 const ProfileHeader = () => {
@@ -26,8 +23,6 @@ const ProfileHeader = () => {
   const { data, refetch } = useGetCustomerQuery(client, {
     customerAccessToken: customerAccessToken ?? '',
   })
-
-  const { mutateAsync: updateCustomer } = useCustomerUpdateMutation(client)
 
   const [birthdate, setBirthdate] = useState('')
 
@@ -78,19 +73,23 @@ const ProfileHeader = () => {
   const handleUpdateName = useCallback(
     async (first: string, last: string) => {
       if (!customerAccessToken) return
-      const result = await updateCustomer({
-        customerAccessToken,
-        customer: {
+      const res = await fetch('/api/profile/name', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${customerAccessToken}`,
+        },
+        body: JSON.stringify({
           firstName: first,
           lastName: last,
-        },
+        }),
       })
-      const errors = result.customerUpdate?.customerUserErrors ?? []
-      if (errors.length > 0) {
-        throw new Error(errors[0]?.message ?? 'Update failed')
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data.error ?? 'Name update failed')
       }
     },
-    [customerAccessToken, updateCustomer]
+    [customerAccessToken]
   )
 
   const handleUpdateBirthdate = useCallback(

@@ -4,13 +4,16 @@ import { useRouter } from 'next/navigation'
 import { useTranslations } from 'next-intl'
 import { useCallback, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
+import { toast } from 'react-toastify'
 
 import { Button } from '@/components/common/Button'
 import Spinner from '@/components/common/Spinner'
+import Toast, { ToastTypes } from '@/components/common/Toast'
 import { DeleteAccountModal } from '@/components/profile/DeleteAccountModal'
 import { OrdersCard } from '@/components/profile/OrdersCard'
 import { PetsCard } from '@/components/profile/PetsCard'
 import { ProfileHeader } from '@/components/profile/ProfileHeader'
+import { clearFormData, clearPersonalData } from '@/components/quiz/storage'
 import { useModal } from '@/hooks/useModal'
 import { useProfileSubscriptions } from '@/hooks/useProfileSubscriptions'
 import { client } from '@/shopify/client'
@@ -62,10 +65,33 @@ export default function ProfilePage() {
     editSubscription,
   } = useProfileSubscriptions()
 
-  const handleDeleteAccount = useCallback(() => {
-    // TODO: Implement delete account logic
-    closeDeleteAccountModal()
-  }, [closeDeleteAccountModal])
+  const handleDeleteAccount = useCallback(async () => {
+    if (!customerAccessToken) return
+    try {
+      const res = await fetch('/api/profile/delete', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${customerAccessToken}`,
+        },
+      })
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data.error ?? 'Delete failed')
+      }
+      clearFormData()
+      clearPersonalData()
+      window.location.href = '/api/auth/logout'
+    } catch {
+      toast(
+        <Toast
+          type={ToastTypes.error}
+          title={t('deleteAccountError')}
+          iconAlt={t('deleteAccountErrorIconAlt')}
+        />
+      )
+      closeDeleteAccountModal()
+    }
+  }, [customerAccessToken, closeDeleteAccountModal, t])
 
   const handleCancelSubscription = useCallback(
     (subscriptionId: string) => cancelSubscription(subscriptionId),

@@ -452,6 +452,8 @@
     "accountCreated": "Account created on {date}",
     "address": "Address",
     "birthdate": "Birthdate",
+    "deleteAccountError": "Could not delete your account. Please try again.",
+    "deleteAccountErrorIconAlt": "Error icon",
     "deleteAccountLink": {
       "text": "Delete My Account",
       "url": "/profile/delete"
