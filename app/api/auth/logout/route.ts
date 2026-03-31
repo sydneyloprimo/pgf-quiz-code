@@ -1,3 +1,4 @@
+import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 
 import { Cookies } from '@/types/enums/cookies'
@@ -7,6 +8,8 @@ export const runtime = 'nodejs'
 
 export async function GET(request: NextRequest) {
   const origin = new URL(request.url).origin
+  const cookieStore = await cookies()
+  const idToken = cookieStore.get(Cookies.authIdToken)?.value
 
   let logoutUrl: string | null = null
   try {
@@ -14,6 +17,9 @@ export async function GET(request: NextRequest) {
     if (config.end_session_endpoint) {
       const url = new URL(config.end_session_endpoint)
       url.searchParams.set('post_logout_redirect_uri', origin)
+      if (idToken) {
+        url.searchParams.set('id_token_hint', idToken)
+      }
       logoutUrl = url.toString()
     }
   } catch {
@@ -31,6 +37,14 @@ export async function GET(request: NextRequest) {
   })
 
   response.cookies.set(Cookies.authRefresh, '', {
+    path: '/',
+    secure: true,
+    httpOnly: true,
+    sameSite: 'lax',
+    maxAge: 0,
+  })
+
+  response.cookies.set(Cookies.authIdToken, '', {
     path: '/',
     secure: true,
     httpOnly: true,

@@ -117,6 +117,15 @@ export async function GET(request: NextRequest) {
     sameSite: 'lax',
   })
 
+  if (typeof tokens.id_token === 'string') {
+    response.cookies.set(Cookies.authIdToken, tokens.id_token, {
+      path: '/',
+      secure: true,
+      httpOnly: true,
+      sameSite: 'lax',
+    })
+  }
+
   response.cookies.set(Cookies.authPkce, '', {
     path: '/',
     maxAge: 0,
