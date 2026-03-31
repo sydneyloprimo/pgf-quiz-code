@@ -1,4 +1,6 @@
 export enum Cookies {
+  authPkce = 'auth_pkce',
+  authRefresh = 'auth_refresh',
   cart = 'cart',
   customerAccessToken = 'token',
 }

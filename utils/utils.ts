@@ -7,8 +7,6 @@ import {
 } from '@/hooks/useProductSearch'
 import { GetCartQuery } from '@/shopify/generated/graphql'
 
-export const passwordRegExp = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])/
-
 type CartLineEdgeFromQuery = NonNullable<
   NonNullable<GetCartQuery['cart']>['lines']
 >['edges'][number]

@@ -45,6 +45,7 @@ export default [
         React: 'readonly',
         requestAnimationFrame: 'readonly',
         sessionStorage: 'readonly',
+        URL: 'readonly',
         URLSearchParams: 'readonly',
         window: 'readonly',
         setTimeout: 'readonly',

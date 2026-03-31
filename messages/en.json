@@ -6,9 +6,7 @@
     "closeIconAlt": "Close",
     "email": "Email",
     "emailPlaceholder": "Type your email",
-    "logoAlt": "Logo black",
-    "password": "Password",
-    "passwordPlaceholder": "Type your password"
+    "logoAlt": "Logo black"
   },
   "Detail": {
     "errorMessage": "Something went wrong. Please try again.",
@@ -147,20 +145,6 @@
     "socialInstagramAria": "Follow us on Instagram",
     "subscribeButton": "Join the list",
     "subscribedButton": "Subscribed!"
-  },
-  "ForgotPassword": {
-    "backToLoginLink": "Back to Log In",
-    "buttonText": "Send Reset Link",
-    "closeButtonAriaLabel": "Close forgot password page",
-    "closeIconAlt": "Close",
-    "emailRequired": "Email is required",
-    "formHeading": "Forgot Your Password?",
-    "formSubHeading": "Enter the email address associated with your account and we'll send you a link to reset your password.",
-    "heroDescription": "Prepared with timeless craftsmanship, guided by science, tailored to their needs.",
-    "logoAlt": "Purely Golden Foods logo",
-    "successHeading": "Check Your Email",
-    "successMessage": "If an account exists with that email, you'll receive a password reset link shortly.",
-    "submitAriaLabel": "Send password reset link"
   },
   "Home": {
     "Benefits": {
@@ -468,32 +452,6 @@
     "accountCreated": "Account created on {date}",
     "address": "Address",
     "birthdate": "Birthdate",
-    "ChangePasswordModal": {
-      "ariaLabel": "Change password form",
-      "cancelButton": "Cancel",
-      "closeButtonLabel": "Close change password modal",
-      "confirmPasswordLabel": "Confirm New Password",
-      "currentPasswordLabel": "Current Password",
-      "errors": {
-        "confirmPasswordRequired": "Please confirm your new password",
-        "currentPasswordRequired": "Please enter your current password",
-        "newPasswordMinLength": "Password must be at least 8 characters",
-        "newPasswordPattern": "Password should have at least one number, one uppercase letter and one lowercase letter",
-        "newPasswordRequired": "Please enter a new password",
-        "passwordsDoNotMatch": "Passwords do not match"
-      },
-      "heading": "Change Password",
-      "hidePassword": "Hide password",
-      "newPasswordLabel": "New Password",
-      "showPassword": "Show password",
-      "submitButton": "Save"
-    },
-    "changePassword": "Change Password",
-    "passwordChangeCurrentInvalid": "Current password is incorrect",
-    "passwordChangeErrorIconAlt": "Error icon",
-    "passwordChangeFailed": "Failed to change password. Please try again.",
-    "passwordChangeSuccess": "Password changed successfully",
-    "passwordChangeSuccessIconAlt": "Success icon",
     "deleteAccountLink": {
       "text": "Delete My Account",
       "url": "/profile/delete"
@@ -1017,30 +975,6 @@
       }
     }
   },
-  "ResetPassword": {
-    "backToForgotPasswordLink": "Request a new reset link",
-    "buttonText": "Reset Password",
-    "closeButtonAriaLabel": "Close reset password page",
-    "closeIconAlt": "Close",
-    "confirmPasswordLabel": "Confirm New Password",
-    "confirmPasswordRequired": "Please confirm your new password",
-    "errors": {
-      "expired": "This password reset link has expired or is invalid.",
-      "generic": "Something went wrong. Please try again."
-    },
-    "formHeading": "Reset Your Password",
-    "formSubHeading": "Enter your new password below.",
-    "heroDescription": "Prepared with timeless craftsmanship, guided by science, tailored to their needs.",
-    "hidePassword": "Hide password",
-    "logoAlt": "Purely Golden Foods logo",
-    "newPasswordLabel": "New Password",
-    "newPasswordMinLength": "Password must be at least 8 characters",
-    "newPasswordRequired": "Please enter a new password",
-    "passwordPattern": "Password should have at least one number, one uppercase letter and one lowercase letter",
-    "passwordsDoNotMatch": "Passwords do not match",
-    "showPassword": "Show password",
-    "submitAriaLabel": "Reset your password"
-  },
   "SignIn": {
     "accountQuestion": "You don't have an account?",
     "buttonText": "Log In",
@@ -1048,12 +982,10 @@
     "closeIconAlt": "Close",
     "createAccountLink": "Create Account",
     "emailRequired": "Email is required",
-    "forgotPasswordLink": "Forgot your password?",
     "formHeading": "Log in to PGF",
     "formSubHeading": "Offer your dog refined, ethically crafted nourishment.",
     "heroDescription": "Prepared with timeless craftsmanship, guided by science, tailored to their needs.",
     "logoAlt": "Purely Golden Foods logo",
-    "passwordRequired": "Password is required",
     "signupRedirectLink": "Sign up",
     "signupRedirectMessage": "Don't have an account?"
   },
@@ -1073,8 +1005,6 @@
     "lastNamePlaceholder": "Last name",
     "lastNameRequired": "Last name is required",
     "logoAlt": "Purely Golden Foods logo",
-    "passwordLength": "Password must be at least 8 characters",
-    "passwordPattern": "Password should have at least one number, one uppercase letter and one lowercase letter",
     "signinRedirectLink": "Log In",
     "signinRedirectMessage": "Already have an account?",
     "successfulRegistration": "Congratulations! Your account has been successfully created.\nWe have sent a confirmation email to your registered email address."

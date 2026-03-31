@@ -1,37 +1,25 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import { useCallback, useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
-import { toast } from 'react-toastify'
 
 import { Button } from '@/components/common/Button'
-import Toast, { ToastTypes } from '@/components/common/Toast'
-import { ChangePasswordModal } from '@/components/profile/ChangePasswordModal'
 import { EditProfileModal } from '@/components/profile/EditProfileModal'
 import { LogoutModal } from '@/components/profile/LogoutModal'
 import { clearFormData, clearPersonalData } from '@/components/quiz/storage'
-import { AUTH_COOKIE_OPTIONS } from '@/constants'
 import { useModal } from '@/hooks/useModal'
 import { client } from '@/shopify/client'
 import {
-  useCustomerAccessTokenCreateMutation,
-  useCustomerAccessTokenDeleteMutation,
   useCustomerUpdateMutation,
   useGetCustomerQuery,
 } from '@/shopify/generated/graphql'
 import { Cookies } from '@/types/enums/cookies'
-import { Routes } from '@/types/enums/routes'
 
 const ProfileHeader = () => {
   const t = useTranslations('Profile')
   const locale = useLocale()
-  const router = useRouter()
-  const [cookies, setCookie, removeCookie] = useCookies([
-    Cookies.customerAccessToken,
-    Cookies.cart,
-  ])
+  const [cookies] = useCookies([Cookies.customerAccessToken, Cookies.cart])
 
   const customerAccessToken = cookies[Cookies.customerAccessToken]
 
@@ -40,13 +28,8 @@ const ProfileHeader = () => {
   })
 
   const { mutateAsync: updateCustomer } = useCustomerUpdateMutation(client)
-  const { mutateAsync: createAccessToken } =
-    useCustomerAccessTokenCreateMutation(client)
-  const { mutateAsync: deleteAccessToken } =
-    useCustomerAccessTokenDeleteMutation(client)
 
   const [birthdate, setBirthdate] = useState('')
-  const [isChangingPassword, setIsChangingPassword] = useState(false)
 
   const customer = data?.customer
 
@@ -81,12 +64,6 @@ const ProfileHeader = () => {
     : ''
 
   const {
-    isOpen: isChangePasswordModalOpen,
-    openModal: openChangePasswordModal,
-    closeModal: closeChangePasswordModal,
-  } = useModal()
-
-  const {
     isOpen: isLogoutModalOpen,
     openModal: openLogoutModal,
     closeModal: closeLogoutModal,
@@ -103,7 +80,10 @@ const ProfileHeader = () => {
       if (!customerAccessToken) return
       const result = await updateCustomer({
         customerAccessToken,
-        customer: { firstName: first, lastName: last },
+        customer: {
+          firstName: first,
+          lastName: last,
+        },
       })
       const errors = result.customerUpdate?.customerUserErrors ?? []
       if (errors.length > 0) {
@@ -140,122 +120,11 @@ const ProfileHeader = () => {
   }, [refetch, fetchBirthdate])
 
   const handleLogout = useCallback(() => {
-    removeCookie(Cookies.customerAccessToken, AUTH_COOKIE_OPTIONS)
-    removeCookie(Cookies.cart, { path: '/', secure: true })
     clearFormData()
     clearPersonalData()
-    router.push(Routes.home)
-  }, [removeCookie, router])
+    window.location.href = '/api/auth/logout'
+  }, [])
 
-  const handleChangePassword = useCallback(
-    async (data: {
-      currentPassword: string
-      newPassword: string
-      confirmPassword: string
-    }) => {
-      const email = customer?.email
-      if (!customerAccessToken || !email) return
-
-      setIsChangingPassword(true)
-      try {
-        const tokenResult = await createAccessToken({
-          input: {
-            email,
-            password: data.currentPassword,
-          },
-        })
-
-        const verificationToken =
-          tokenResult.customerAccessTokenCreate?.customerAccessToken
-            ?.accessToken
-        const tokenErrors =
-          tokenResult.customerAccessTokenCreate?.customerUserErrors ?? []
-
-        if (tokenErrors.length > 0 || !verificationToken) {
-          toast(
-            <Toast
-              type={ToastTypes.error}
-              title={
-                tokenErrors[0]?.message ?? t('passwordChangeCurrentInvalid')
-              }
-              iconAlt={t('passwordChangeErrorIconAlt')}
-            />
-          )
-          return
-        }
-
-        const updateResult = await updateCustomer({
-          customerAccessToken,
-          customer: { password: data.newPassword },
-        })
-
-        await deleteAccessToken({
-          customerAccessToken: verificationToken,
-        })
-
-        const updateErrors =
-          updateResult.customerUpdate?.customerUserErrors ?? []
-        if (updateErrors.length > 0) {
-          toast(
-            <Toast
-              type={ToastTypes.error}
-              title={updateErrors[0]?.message ?? t('passwordChangeFailed')}
-              iconAlt={t('passwordChangeErrorIconAlt')}
-            />
-          )
-          return
-        }
-
-        const newToken =
-          updateResult.customerUpdate?.customerAccessToken?.accessToken
-        if (!newToken) {
-          setCookie(Cookies.customerAccessToken, '', {
-            ...AUTH_COOKIE_OPTIONS,
-            maxAge: 0,
-          })
-          toast(
-            <Toast
-              type={ToastTypes.error}
-              title={t('passwordChangeFailed')}
-              iconAlt={t('passwordChangeErrorIconAlt')}
-            />
-          )
-          return
-        }
-
-        setCookie(Cookies.customerAccessToken, newToken, AUTH_COOKIE_OPTIONS)
-
-        toast(
-          <Toast
-            type={ToastTypes.success}
-            title={t('passwordChangeSuccess')}
-            iconAlt={t('passwordChangeSuccessIconAlt')}
-          />
-        )
-        closeChangePasswordModal()
-      } catch {
-        toast(
-          <Toast
-            type={ToastTypes.error}
-            title={t('passwordChangeFailed')}
-            iconAlt={t('passwordChangeErrorIconAlt')}
-          />
-        )
-      } finally {
-        setIsChangingPassword(false)
-      }
-    },
-    [
-      closeChangePasswordModal,
-      createAccessToken,
-      customer?.email,
-      customerAccessToken,
-      deleteAccessToken,
-      setCookie,
-      t,
-      updateCustomer,
-    ]
-  )
   return (
     <div className="bg-quaternary-800 border border-secondary-200 p-5 md:p-10 flex flex-col gap-6">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
@@ -291,14 +160,6 @@ const ProfileHeader = () => {
           >
             {t('editProfile')}
           </Button>
-          <Button
-            variant="tertiary"
-            size="medium"
-            className="w-full md:w-auto"
-            onClick={openChangePasswordModal}
-          >
-            {t('changePassword')}
-          </Button>
         </div>
       </div>
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
@@ -314,12 +175,6 @@ const ProfileHeader = () => {
           {t('logOut')}
         </button>
       </div>
-      <ChangePasswordModal
-        isOpen={isChangePasswordModalOpen}
-        isLoading={isChangingPassword}
-        onClose={closeChangePasswordModal}
-        onSubmit={handleChangePassword}
-      />
       <LogoutModal
         isOpen={isLogoutModalOpen}
         onClose={closeLogoutModal}
